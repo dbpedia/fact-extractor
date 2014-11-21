@@ -1,6 +1,7 @@
 #!/usr/bin/env python
 # coding: utf-8
 
+import argparse
 import os
 import sys
 import tfidf
@@ -15,7 +16,7 @@ STOPWORDS = ["ad", "al", "allo", "ai", "agli", "all", "agl", "alla", "alle", "co
 
 def compute_tfidf_matrix(corpus_dir):
     t = tfidf.tfidf()
-    for path, subdirs, files in os.walk(sys.argv[1]):
+    for path, subdirs, files in os.walk(corpus_dir):
         for name in files:
             f = os.path.join(path, name)
             with codecs.open(f, 'rb', 'utf-8') as i:
@@ -30,13 +31,22 @@ def compute_tfidf_matrix(corpus_dir):
     return t
 
 
-def get_distributions(lemmas, tfidf_matrix, threshold=0.75):
+def dump_tfidf(ranking, outfile='tfidf.json'):
+    json.dump(ranking, open(outfile, 'wb'), indent=2)
+    return 0
+
+
+def get_distributions(lemmas, tfidf_matrix, threshold, dump_tfidf_ranking=False):
     variances = {}
     stdevs = {}
     threshold_rank = {}
+    tfidf_ranking = {}
     for lemma in lemmas:
         relevance = 0
         ranking = tfidf_matrix.similarities([lemma])
+        non_null = {doc: score for (doc, score) in ranking if score}
+        ordered = OrderedDict(sorted(non_null.items(), key=lambda x: x[1], reverse=True))
+        tfidf_ranking[lemma] = ordered
         scores = [pair[1] for pair in ranking]
         variances[lemma] = numpy.var(scores)
         stdevs[lemma] = numpy.std(scores)
@@ -44,6 +54,8 @@ def get_distributions(lemmas, tfidf_matrix, threshold=0.75):
             if score > threshold:
                 relevance += 1
         threshold_rank[lemma] = relevance
+    if dump_tfidf_ranking:
+        dump_tfidf(tfidf_ranking)
     return OrderedDict(sorted(variances.items(), key=lambda x: x[1], reverse=True)), OrderedDict(sorted(stdevs.items(), key=lambda x: x[1], reverse=True)), OrderedDict(sorted(threshold_rank.items(), key=lambda x: x[1], reverse=True))
 
 
@@ -52,16 +64,31 @@ def parse_tokens(infile):
         return [token.strip() for token in i.readlines()]
 
 
-if __name__ == "__main__":
-    print "Loading tokens from %s ..." % sys.argv[2]
-    tokens = parse_tokens(sys.argv[2])
-    print "Building TF/IDF matrix against corpus %s ..." % sys.argv[1]
-    t = compute_tfidf_matrix(sys.argv[1])
-    print "Computing variance, standard deviation, and ranking with threshold = .75 ..."
-    variances, stdevs, threshold_rank = get_distributions(tokens, t)
-    print "Dumping results to JSON ..."
-    json.dump(variances, open('variances.json', 'wb'), indent = 2)
-    json.dump(stdevs, open('stdevs.json', 'wb'), indent = 2)
-    json.dump(threshold_rank, open('threshold_rank.json', 'wb'), indent = 2)
+def create_cli_parser():
+    parser = argparse.ArgumentParser(description='Compute variance, standard deviation and threshold-based ranking of tokens against a corpus')
+    parser.add_argument('corpus', help='Corpus directory')
+    parser.add_argument('tokens', help='File containing the list of tokens, one per line')
+    parser.add_argument('-t', '--threshold', type=float, default=0.6, help='Threshold float value. Defaults to 0.6')
+    parser.add_argument('--dump', action='store_true', help='Dumps the TF/IDF ranking for each token to a JSON file')
+    return parser
 
+
+if __name__ == "__main__":
+    cli = create_cli_parser()
+    args = cli.parse_args()
+    print "Loading tokens from %s ..." % args.tokens
+    tokens = parse_tokens(args.tokens)
+    print "Building TF/IDF matrix against corpus %s ..." % args.corpus
+    t = compute_tfidf_matrix(args.corpus)
+    if args.dump:
+        print "Computing variance, standard deviation, ranking with threshold = %g ..." % args.threshold
+        print "Also dumping TF/IDF rankings to JSON ..."
+        variances, stdevs, threshold_rank = get_distributions(tokens, t, args.threshold, args.dump)
+    else:
+        print "Computing variance, standard deviation, ranking with threshold = %g ..." % args.threshold
+        variances, stdevs, threshold_rank = get_distributions(tokens, t, args.threshold)
+    print "Dumping results to JSON ..."
+    json.dump(variances, open('variances.json', 'wb'), indent=2)
+    json.dump(stdevs, open('stdevs.json', 'wb'), indent=2)
+    json.dump(threshold_rank, open('threshold_rank.json', 'wb'), indent=2)
 
