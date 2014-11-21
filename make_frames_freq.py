@@ -2,7 +2,8 @@
 from collections import Counter, OrderedDict
 import codecs
 import json
-f = codecs.open('frames', 'rb', 'utf-8')
+import sys
+f = codecs.open(sys.argv[1], 'rb', 'utf-8')
 lines = f.readlines()
 freq = Counter([l.split('\t')[1].strip() for l in lines])
 voc = OrderedDict(sorted(freq.items(), key=lambda x: x[1], reverse=True))

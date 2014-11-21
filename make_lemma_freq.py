@@ -1,8 +1,10 @@
+#!/usr/bin/env python
 # coding: utf-8
 from collections import Counter, OrderedDict
 import codecs
 import json
-f = codecs.open('lemmas.txt', 'rb', 'utf-8')
+import sys
+f = codecs.open(sys.argv[1], 'rb', 'utf-8')
 lines = f.readlines()
 freq = Counter([l.strip() for l in lines])
 voc = OrderedDict(sorted(freq.items(), key=lambda x: x[1], reverse=True))
