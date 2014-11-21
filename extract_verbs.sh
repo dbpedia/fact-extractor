@@ -7,6 +7,8 @@ cd ..
 wget http://download.wikimedia.org/itwiki/latest/itwiki-latest-pages-articles.xml.bz2
 # Extract text
 bzcat itwiki-latest-pages-articles.xml.bz2 | scripts/WikiExtractor.py
+# Split extraction by article
+cat extracted/*/* | csplit --suppress-matched -z -f 'corpus/doc_' - '/</doc>/' {*}
 # Build a single big file
 find extracted -type f -exec cat {} \; > all-extracted.txt
 # Extract verbs with TreeTagger
