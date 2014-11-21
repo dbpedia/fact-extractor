@@ -44,7 +44,7 @@ def get_distributions(lemmas, tfidf_matrix, threshold=0.75):
             if score > threshold:
                 relevance += 1
         threshold_rank[lemma] = relevance
-    return variances, stdevs, threshold_rank
+    return OrderedDict(sorted(variances.items(), key=lambda x: x[1], reverse=True)), OrderedDict(sorted(stdevs.items(), key=lambda x: x[1], reverse=True)), OrderedDict(sorted(threshold_rank.items(), key=lambda x: x[1], reverse=True))
 
 
 def parse_tokens(infile):
@@ -53,7 +53,7 @@ def parse_tokens(infile):
 
 
 if __name__ == "__main__":
-    print "Loading tokens from %s" % sys.argv[2]
+    print "Loading tokens from %s ..." % sys.argv[2]
     tokens = parse_tokens(sys.argv[2])
     print "Building TF/IDF matrix against corpus %s ..." % sys.argv[1]
     t = compute_tfidf_matrix(sys.argv[1])
