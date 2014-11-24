@@ -36,24 +36,24 @@ def dump_tfidf(ranking, outfile='tfidf.json'):
     return 0
 
 
-def get_distributions(lemmas, tfidf_matrix, threshold, dump_tfidf_ranking=False):
+def get_distributions(tokens, tfidf_matrix, threshold, dump_tfidf_ranking=False):
     variances = {}
     stdevs = {}
     threshold_rank = {}
     tfidf_ranking = {}
-    for lemma in lemmas:
+    for token in tokens:
         relevance = 0
-        ranking = tfidf_matrix.similarities([lemma])
+        ranking = tfidf_matrix.similarities([token])
         non_null = {doc: score for (doc, score) in ranking if score}
         ordered = OrderedDict(sorted(non_null.items(), key=lambda x: x[1], reverse=True))
-        tfidf_ranking[lemma] = ordered
+        tfidf_ranking[token] = ordered
         scores = [pair[1] for pair in ranking]
-        variances[lemma] = numpy.var(scores)
-        stdevs[lemma] = numpy.std(scores)
+        variances[token] = numpy.var(scores)
+        stdevs[token] = numpy.std(scores)
         for score in scores:
             if score > threshold:
                 relevance += 1
-        threshold_rank[lemma] = relevance
+        threshold_rank[token] = relevance
     if dump_tfidf_ranking:
         dump_tfidf(tfidf_ranking)
     return OrderedDict(sorted(variances.items(), key=lambda x: x[1], reverse=True)), OrderedDict(sorted(stdevs.items(), key=lambda x: x[1], reverse=True)), OrderedDict(sorted(threshold_rank.items(), key=lambda x: x[1], reverse=True))
