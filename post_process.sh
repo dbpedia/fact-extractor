@@ -1,3 +1,6 @@
+#######################
+# Verb extraction
+#######################
 # A random sample of 1k verbs
 shuf true-positives.txt | head -1000 > 1ktest
 # Cut out entries identified as verbs with unknown lemma (probably errors)
@@ -12,10 +15,12 @@ grep -P '\d{3},' frequencies.json | cut -d '"' -f 2 > over-100-occurrencies
 grep -vP 'avere|essere|fare|potere|volere|dovere' frequencies.json | sed -n '2,52'p > top-50
 # Top 50 lemmas with grep magic
 grep -Po '"\K[^"]+(?=")' top-50 | sort -u > top-50-sorted-lemmas
+# Get tokens from the top 50 lemmas
+grep -wf top-50-sorted-lemmas true-positives | cut -f 1 | perl -ne 'print lc' | sort -u > top-50-sorted-tokens
 
-###
+#######################
 # Intersect with Saccarosio's frame annotation dataset and get what matches
-###
+#######################
 # SRL annotation
 cat ILC/ILC_Sample_*.sem FBK/FBK_Sample.sem >> annotated
 # LUs evoking frames
