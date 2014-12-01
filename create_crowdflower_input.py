@@ -51,14 +51,17 @@ for path, subdirs, files in os.walk(sys.argv[1]):
         frames = mappa[lu].keys()
         for frame in frames:
             fe_names = mappa[lu][frame]
-            for k in xrange(0, len(fe_names)):
-                input_row['fe_name' + str(k)] = fe_names[k]
-            for l in xrange(0, len(np[row_id])):
-                input_row['fe' + str(l)] = np[row_id][l]
-            for i in xrange(0, len(linked_entities)):
-                input_row['entity' + str(i)] = sentence[linked_entities[i]['start']:linked_entities[i]['end']]
-                for j in xrange(0, len(linked_entities[i]['types'])):
-                    input_row['type' + str(i) + '_' + str(j)] = linked_entities[i]['types'][j][28:]
+            for i in xrange(0, len(fe_names)):
+                input_row['fe_name' + str(i)] = fe_names[i]
+            for j in xrange(0, len(np[row_id])):
+                current_np = np[row_id][j]
+                input_row['fe' + str(j)] = current_np
+                for linked in linked_entities:
+                    entity_string = sentence[linked['start']:linked['end']]
+                    if current_np.find(entity_string) != -1:
+                        input_row['entity' + str(j)] = entity_string 
+                        for k in xrange(0, len(linked['types'])):
+                            input_row['type' + str(j) + '_' + str(k)] = linked['types'][k][28:]
         # Prepare input for DictWriter, since it won't write UTF-8
         input_data.append({k:v.encode('utf-8') for k,v in input_row.items()})
 
