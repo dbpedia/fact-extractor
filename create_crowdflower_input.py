@@ -45,12 +45,20 @@ for path, subdirs, files in os.walk(sys.argv[1]):
         input_row['id'] = row_id
         sentence = data.keys()[0]
         input_row['sentence'] = sentence
-        lu = re.search(r'<strong>([^<]+)</strong>', sentence).group(1)
-        input_row['lu'] = lu
+        match = re.search(r'<strong>([^<]+)</strong>', sentence)
+        if match:
+            token = match.group(1)
+        else:
+            print "No match in sentence -> %s" % sentence
+        frames = []
+        for lu in mappa.keys():
+            tokens = mappa[lu].get('tokens')
+            if tokens and token in tokens:
+                input_row['lu'] = lu
+                frames = [frame for frame in mappa[lu].keys() if frame != 'tokens']
         linked_entities = data[sentence]
-        frames = mappa[lu].keys()
         for frame in frames:
-            fe_names = mappa[lu][frame]
+            fe_names = mappa[input_row['lu']][frame]
             for i in xrange(0, len(fe_names)):
                 input_row['fe_name' + str(i)] = fe_names[i]
             for j in xrange(0, len(np[row_id])):
