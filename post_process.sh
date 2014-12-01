@@ -18,8 +18,32 @@ grep -Po '"\K[^"]+(?=")' top-50 | sort -u > top-50-sorted-lemmas
 # Get tokens from the top 50 lemmas
 grep -wf top-50-sorted-lemmas true-positives | cut -f 1 | perl -ne 'print lc' | sort -u > top-50-sorted-tokens
 
+######################
+# Crowdsourcing data building
+######################
+# very rough grep on selected lexical units (infinite tense only)
+for lu in {nascere,dare,uccidere,dire,morire}; do grep -rhw $lu ../../corpus/ | sed "s/$lu/<strong>$lu<\/strong>/gi" > $lu/tagged; done
+# get the token list from a verb
+grep -P '^(mor|muo)' ../../verbs/top-50-sorted-tokens
+# better grep using a token list (all tense occurrencies)
+grep -rhwf tokens ../../../corpus/ > raw-sentences
+# surround lexical units with a <strong> tag
+sed -r 's/(mor[^ ]+|muo[^ ]+)/<strong>\1<\/strong>/gi' raw-sentences > tagged-sentences
+# get sentences with less than 15 words
+while read f; do words=$(echo $f | wc -w); if [ $words -lt 15 ]; then echo $f >> short; fi; done < tagged-sentences
+# gold creation: 10 random sentences for each lexical unit
+for lu in {nascere,dare,uccidere,dire,morire}; do shuf -n 10 $lu/tagged > $lu/gold; cat $lu/gold >> gold; done
+# split into sentences
+python split_sentence.py
+# link entities
+python entity_linking.py ../../training/itwiki/partecipare/clean-gold
+# POS tag sentences
+i=0; while read f; do echo $f | treetagger/cmd/tree-tagger-italian > training/itwiki/pos-tagged-gold/$i; let i++; done < training/itwiki/clean-gold
+# build crowdflower input csv
+python create_crowdflower_input.py ../training/itwiki/partecipare/linked-gold/ ../training/itwiki/partecipare/pos-tagged-gold/
+
 #######################
-# Intersect with Saccarosio's frame annotation dataset and get what matches
+# Intersect with Evalita 2008 frame annotation dataset and get what matches
 #######################
 # SRL annotation
 cat ILC/ILC_Sample_*.sem FBK/FBK_Sample.sem >> annotated
