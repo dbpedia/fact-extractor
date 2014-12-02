@@ -36,7 +36,7 @@ for lu in {nascere,dare,uccidere,dire,morire}; do shuf -n 10 $lu/tagged > $lu/go
 # split into sentences
 python split_sentence.py
 # link entities
-python entity_linking.py ../../training/itwiki/partecipare/clean-gold
+python entity_linking.py ../../training/itwiki/clean-gold && mkdir ../../training/itwiki/linked-gold && mv *.json ../../training/itwiki/linked-gold
 # POS tag sentences
 i=0; while read f; do echo $f | treetagger/cmd/tree-tagger-italian > training/itwiki/pos-tagged-gold/$i; let i++; done < training/itwiki/clean-gold
 # build crowdflower input csv
