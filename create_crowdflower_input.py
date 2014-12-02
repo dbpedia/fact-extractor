@@ -13,7 +13,7 @@ from nltk import RegexpParser
 LU_FRAME_MAP_LOCATION = '../training/mappa.json'
 POS_TAGGED_DATA_LOCATION = '../training/itwiki/pos-tagged-clean-gold'
 
-CHUNKER_GRAMMAR = "SN: {<PRO.*|DET.*>?<ADJ>*<NOM>+<PRE:det>?<PRO:[^r]*|DET.*>?<ADJ>*<NOM>?<NOM>?}"
+CHUNKER_GRAMMAR = "SN: {<PRO.*|DET.*|>?<ADJ>*<NUM>?<NOM|NPR>+<NUM>?<ADJ|VER:pper>*}"
 
 chunker = RegexpParser(CHUNKER_GRAMMAR)
 pos_data = defaultdict(list)
