@@ -46,7 +46,17 @@ for k, v in pos_data.iteritems():
         for t in result.subtrees(lambda result: result.label() == 'CHUNK'):
             for token, pos in t.leaves():
                 if pos.find('VER') != -1 and token in TOKENS: good_one = True
-            if good_one: np[k] = [' '.join([token for token, pos in t.leaves()]) for t in result.subtrees(lambda result: result.label() == 'SN')]
+            if good_one:
+                np[k] = {}
+                np[k]['chunks'] = [' '.join([token for token, pos in t.leaves()]) for t in result.subtrees(lambda result: result.label() == 'SN')]
+                np[k]['tokens'] = {}
+                i = 0
+                for t in result.subtrees(lambda result: result.label() == 'SN'):
+                    for j in xrange(0, len(t.leaves())):
+                        np[k]['tokens']['token' + str(i) + '_' + str(j)], np[k]['tokens']['pos' + str(i) + '_' + str(j)] = t.leaves()[j]
+                    i += 1
+
+#print json.dumps(np, indent=2)
 
 input_data = []
 
@@ -76,8 +86,8 @@ for path, subdirs, files in os.walk(sys.argv[1]):
                 fe_names = MAPPA[input_row['lu']][frame]
                 for i in xrange(0, len(fe_names)):
                     input_row['fe_name' + str(i)] = fe_names[i]
-                for j in xrange(0, len(np[row_id])):
-                    current_np = np[row_id][j]
+                for j in xrange(0, len(np[row_id]['chunks'])):
+                    current_np = np[row_id]['chunks'][j]
                     input_row['fe' + str(j)] = current_np
                     for linked in linked_entities:
                         entity_string = sentence[linked['start']:linked['end']]
@@ -85,6 +95,9 @@ for path, subdirs, files in os.walk(sys.argv[1]):
                             input_row['entity' + str(j)] = entity_string 
                             for k in xrange(0, len(linked['types'])):
                                 input_row['type' + str(j) + '_' + str(k)] = linked['types'][k][28:]
+                for k, v in np[row_id]['tokens'].iteritems():
+                    input_row[k] = v
+                    
             # Prepare input for DictWriter, since it won't write UTF-8
             input_data.append({k:v.encode('utf-8') for k,v in input_row.items()})
 
