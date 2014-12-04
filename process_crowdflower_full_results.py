@@ -15,7 +15,6 @@ with open(sys.argv[1], 'rb') as f:
   print results.fieldnames
   # Skip gold
   regular = [row for row in results if row['_golden'] == 'false']
-
   for riga in regular:
     sentence = riga['_unit_id']
     soup_sent = BeautifulSoup(h.unescape(riga['sentence'].decode('utf-8')))
