@@ -13,7 +13,7 @@ from collections import Counter
 def read_full_results(results_file):
     h = HTMLParser.HTMLParser()
     processed = {}
-    with codecs.open(results_file, 'rb', 'utf-8') as f:
+    with open(results_file, 'rb') as f:
         results = csv.DictReader(f)
         fe_amount = 0
         fields = results.fieldnames
@@ -21,7 +21,7 @@ def read_full_results(results_file):
             if re.match('fe_name[0-9]$', f):
                 fe_amount += 1
         # Skip gold
-        regular = [row for row in results if row['_golden'] == 'false']
+        regular = [row for row in results if row['_golden'] != 'true']
         for row in regular:
             sentence_id = row['id']
             sentence = h.unescape(row['sentence'].decode('utf-8'))
@@ -53,7 +53,7 @@ def read_full_results(results_file):
 def set_majority_vote_answer(results_json):
     for k,v in results_json.iteritems():
         for fe in v.keys():
-            if fe:
+            if fe != 'frame' and fe != 'lu' and fe != 'sentence':
                 answers_count = Counter(v[fe]['answers'])
                 majority = float(v[fe]['judgments'])/2.0
                 for answer,freq in answers_count.iteritems():
@@ -79,7 +79,7 @@ def produce_training_data(annotations, pos_tagged_sentences_dir, output_file):
                     lines[i].append('B-LU')
                 else: lines[i].append('O')
                 for fe in annotations.keys():
-                    if fe != 'frame' and fe != 'lu':
+                    if fe != 'frame' and fe != 'lu' and fe != 'sentence':
                         annotation = annotations[fe]
                         annotation = annotation.get('majority')
                         if annotation:
@@ -91,8 +91,10 @@ def produce_training_data(annotations, pos_tagged_sentences_dir, output_file):
                                 if iob_tag[0] in lines[i]:
                                     lines[i].pop()
                                     lines[i].append(iob_tag[1])
-        for l in lines:
-            output.append(' '.join(l) + '\n')
+            for l in lines:
+                # Skip <strong> tags
+                if '<strong>' not in l and '</strong>' not in l:
+                    output.append(' '.join(l) + '\n')
     with codecs.open(output_file, 'wb', 'utf-8') as o:
         o.writelines(output)
     return 0
@@ -127,4 +129,8 @@ if __name__ == "__main__":
     }
     """
     )
-    produce_training_data(set_majority_vote_answer(read_full_results(sys.argv[1])), sys.argv[2], sys.argv[3])
+    results = read_full_results(sys.argv[1])
+    #print json.dumps(results, indent=2)
+    maj = set_majority_vote_answer(results)
+    #print json.dumps(maj, indent=2)
+    produce_training_data(maj, sys.argv[2], sys.argv[3])
