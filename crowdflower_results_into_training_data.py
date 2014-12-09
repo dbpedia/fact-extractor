@@ -1,6 +1,7 @@
 #!/opt/local/bin/python
 # -*- coding: utf-8 -*-
 
+import codecs
 import re
 import sys
 import csv
@@ -8,10 +9,11 @@ import json
 import HTMLParser
 from collections import Counter
 
+
 def read_full_results(results_file):
     h = HTMLParser.HTMLParser()
     processed = {}
-    with open(results_file, 'rb') as f:
+    with codecs.open(results_file, 'rb', 'utf-8') as f:
         results = csv.DictReader(f)
         fe_amount = 0
         fields = results.fieldnames
@@ -23,7 +25,10 @@ def read_full_results(results_file):
         for row in regular:
             sentence_id = row['id']
             sentence = h.unescape(row['sentence'].decode('utf-8'))
-            if processed.get(sentence_id): 
+            if processed.get(sentence_id):
+                processed[sentence_id]['sentence'] = sentence
+                processed[sentence_id]['frame'] = row['frame']
+                processed[sentence_id]['lu'] = row['lu']
                 for n in xrange(0, fe_amount):
                     answer = row.get('fe_name' + str(n))
                     answers = processed[sentence_id][row['orig_fe_name' + str(n)]].get('answers', [])
@@ -32,6 +37,9 @@ def read_full_results(results_file):
                         answers.append(answer)
             else:
                 processed[sentence_id] = {}
+                processed[sentence_id]['sentence'] = sentence
+                processed[sentence_id]['frame'] = row['frame']
+                processed[sentence_id]['lu'] = row['lu']
                 for n in xrange(0, fe_amount):
                     answer = row.get('fe_name' + str(n))
                     processed[sentence_id][row['orig_fe_name' + str(n)]] = {}
@@ -54,21 +62,69 @@ def set_majority_vote_answer(results_json):
     return results_json
 
 
-# FIXME need lemma info
-def write_training_data(results_json, output_file):
-    with open(output_file, 'wb') as o:
-        writer = csv.DictWriter(o, results_json.keys(), separator=' ')
-        writer.writeheader()
-        writer.writerows(results_json)
+def produce_training_data(annotations, pos_tagged_sentences_dir, output_file):
+    output = []
+    for sentence_id, annotations in annotations.iteritems():
+        with(codecs.open(pos_tagged_sentences_dir + sentence_id, 'rb', 'utf-8')) as i:
+            lines = i.readlines()
+            lines = [l.strip().split('\t') for l in lines]
+            # Each line is a [token, pos, lemma]
+            for i in xrange(0, len(lines)):
+                # sentence_id     token_id     token   pos     lemma   frame   IOB-tag
+                lines[i].insert(0, sentence_id)
+                lines[i].insert(1, str(i))
+                lines[i].append(annotations['frame'])
+# TODO check if LUs can be more than one token
+                if annotations['lu'] in lines[i]:
+                    lines[i].append('B-LU')
+                else: lines[i].append('O')
+                for fe in annotations.keys():
+                    if fe != 'frame' and fe != 'lu':
+                        annotation = annotations[fe]
+                        annotation = annotation.get('majority')
+                        if annotation:
+                            tokens = annotation.split()
+                            iob_tagged = [(tokens[0], 'B-' + fe)]
+                            for token in tokens[1:]:
+                                iob_tagged.append((token, 'I-' + fe))
+                            for iob_tag in iob_tagged:
+                                if iob_tag[0] in lines[i]:
+                                    lines[i].pop()
+                                    lines[i].append(iob_tag[1])
+        for l in lines:
+            output.append(' '.join(l) + '\n')
+    with codecs.open(output_file, 'wb', 'utf-8') as o:
+        o.writelines(output)
     return 0
-
-
-# sid     tid     token   pos     lemma   frame   LU/FE
-# FIXME build an easy-to-parse JSON
-# {sid: ..., tid: ..., token: ...} etc.
-def flatten_json(results_json):
-    return 0
-
 
 if __name__ == "__main__":
-    print json.dumps(set_majority_vote_answer(read_full_results(sys.argv[1])), indent=2)
+    annotazione_test = json.loads("""
+    { "40": {
+        "": {
+        "answers": []
+        },
+        "frame": "Porco_Dio",
+        "lu" : "pubblicare",
+        "Pubblicatore": {
+        "majority": "Fedele anglicano",
+        "judgments": 3,
+        "answers": [
+            "suca",
+            "coglione",
+            "puppa"
+        ]
+        },
+        "Opera": {
+        "majority": "opere a difesa dell' anglicanesimo",
+        "judgments": 3,
+        "answers": [
+        "suca",
+        "coglione",
+        "puppa"
+        ]
+        }
+        }
+    }
+    """
+    )
+    produce_training_data(set_majority_vote_answer(read_full_results(sys.argv[1])), sys.argv[2], sys.argv[3])
