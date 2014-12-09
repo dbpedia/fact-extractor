@@ -83,6 +83,7 @@ for path, subdirs, files in os.walk(sys.argv[1]):
                     frames = [frame for frame in MAPPA[lu].keys() if frame != 'tokens']
             linked_entities = data[sentence]
             for frame in frames:
+                input_row['frame'] = frame
                 fe_names = MAPPA[input_row['lu']][frame]
                 for i in xrange(0, len(fe_names)):
                     input_row['fe_name' + str(i)] = fe_names[i]
@@ -95,8 +96,8 @@ for path, subdirs, files in os.walk(sys.argv[1]):
                             input_row['entity' + str(j)] = entity_string 
                             for k in xrange(0, len(linked['types'])):
                                 input_row['type' + str(j) + '_' + str(k)] = linked['types'][k][28:]
-                for k, v in np[row_id]['tokens'].iteritems():
-                    input_row[k] = v
+                #for k, v in np[row_id]['tokens'].iteritems():
+                #    input_row[k] = v
                     
             # Prepare input for DictWriter, since it won't write UTF-8
             input_data.append({k:v.encode('utf-8') for k,v in input_row.items()})
