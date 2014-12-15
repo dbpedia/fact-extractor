@@ -18,3 +18,5 @@ find extracted -type f -exec bash -c "cat '{}' | treetagger/cmd/tree-tagger-ital
 sort -u verbi.txt > unique-sorted-verbs.txt
 # Extract vocabulary
 python scripts/bag_of_words.py all-extracted.txt
+# POS tagging + chunker with TextPro
+perl textpro.pl -verbose -html -l ita -c token+sentence+pos+chunk -o . ~/srl/training/itwiki/gold
