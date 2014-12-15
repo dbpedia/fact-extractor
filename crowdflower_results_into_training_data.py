@@ -88,7 +88,7 @@ def produce_training_data(annotations, pos_tagged_sentences_dir, output_file):
                             for token in tokens[1:]:
                                 iob_tagged.append((token, 'I-' + fe))
                             for iob_tag in iob_tagged:
-                                if iob_tag[0] in lines[i]:
+                                if iob_tag[0].decode('utf-8') == lines[i][2]:
                                     lines[i].pop()
                                     lines[i].append(iob_tag[1])
             for l in lines:
