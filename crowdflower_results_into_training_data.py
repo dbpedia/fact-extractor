@@ -94,7 +94,7 @@ def produce_training_data(annotations, pos_tagged_sentences_dir, output_file):
             for l in lines:
                 # Skip <strong> tags
                 if '<strong>' not in l and '</strong>' not in l:
-                    output.append(' '.join(l) + '\n')
+                    output.append('\t'.join(l) + '\n')
     with codecs.open(output_file, 'wb', 'utf-8') as o:
         o.writelines(output)
     return 0
