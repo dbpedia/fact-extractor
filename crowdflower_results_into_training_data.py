@@ -14,6 +14,7 @@ def read_full_results(results_file):
     h = HTMLParser.HTMLParser()
     processed = {}
     with open(results_file, 'rb') as f:
+        # TODO Fucking csv lib doesn't handle fucking unicode
         results = csv.DictReader(f)
         fe_amount = 0
         fields = results.fieldnames
@@ -94,6 +95,7 @@ def produce_training_data(annotations, pos_tagged_sentences_dir, output_file):
             for l in lines:
                 # Skip <strong> tags
                 if '<strong>' not in l and '</strong>' not in l:
+                    print l
                     output.append('\t'.join(l) + '\n')
     with codecs.open(output_file, 'wb', 'utf-8') as o:
         o.writelines(output)
@@ -129,8 +131,12 @@ if __name__ == "__main__":
     }
     """
     )
-    results = read_full_results(sys.argv[1])
-    #print json.dumps(results, indent=2)
-    maj = set_majority_vote_answer(results)
-    #print json.dumps(maj, indent=2)
-    produce_training_data(maj, sys.argv[2], sys.argv[3])
+    if len(sys.argv) == 4:
+        results = read_full_results(sys.argv[1])
+        #print json.dumps(results, indent=2)
+        maj = set_majority_vote_answer(results)
+        #print json.dumps(maj, indent=2)
+        produce_training_data(maj, sys.argv[2], sys.argv[3])
+    else:
+        print "Usage: %s <CROWDFLOWER_FULL_RESULTS_CSV> <POS_DATA_DIR> <OUTPUT_FILE>" % __file__
+        sys.exit(1)
