@@ -22,7 +22,7 @@ would produce statements like:
 1. Verb Extraction
   1. [Extract raw text from Wikipedia dump](lib/WikiExtractor.py), forked from [this repo](https://github.com/bwbaugh/wikipedia-extractor)
   2. [Extract a sub-corpus based on Wiki IDs](get_soccer_players_articles.py)
-  3. [Verb Extraction](blob/master/extract_verbs.sh)
+  3. [Verb Extraction](extract_verbs.sh)
 2. Verb Ranking
   1. [Build a frequency dictionary of lemmas](make_lemma_freq.py)
   2. [TF/IDF-based token ranking](tf_idfize.py), using the TF/IDF module forked from [this repo](https://github.com/hrs/python-tf-idf)
