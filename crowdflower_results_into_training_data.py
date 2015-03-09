@@ -72,22 +72,24 @@ def produce_training_data(annotations, pos_tagged_sentences_dir, output_file):
             # Each line is a [token, pos, lemma]
             for i in xrange(0, len(lines)):
                 # sentence_id     token_id     token   pos     lemma   frame   IOB-tag
-                lines[i].insert(0, sentence_id)
-                lines[i].insert(1, str(i))
-                lines[i].append(annotations['frame'])
+                lines[i].insert(0, sentence_id) # Sentence ID
+                lines[i].insert(1, str(i)) # Token ID
+                frame = annotations['frame']
+                lines[i].append(frame) # Frame
 # TODO check if LUs can be more than one token
                 if annotations['lu'] in lines[i]:
-                    lines[i].append('B-LU')
-                else: lines[i].append('O')
+                    lines[i].append('B-LU') # IOB-tag
+                else: lines[i].append('O') # IOB-tag
                 for fe in annotations.keys():
                     if fe != 'frame' and fe != 'lu' and fe != 'sentence':
                         annotation = annotations[fe]
                         annotation = annotation.get('majority')
                         if annotation:
                             tokens = annotation.split()
-                            iob_tagged = [(tokens[0], 'B-' + fe)]
+                            # Unambiguous FE label by attaching the frame label
+                            iob_tagged = [(tokens[0], 'B-%s_%s' % (fe, frame))] # IOB-tag
                             for token in tokens[1:]:
-                                iob_tagged.append((token, 'I-' + fe))
+                                iob_tagged.append((token, 'I-%s_%s' % (fe, frame))) # IOB-tag
                             for iob_tag in iob_tagged:
                                 if iob_tag[0].decode('utf-8') == lines[i][2]:
                                     lines[i].pop()
