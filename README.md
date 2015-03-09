@@ -17,7 +17,7 @@ would produce statements like:
 ```
 
 ## High-level Workflow + Related Code
-**INPUT** = Wikipedia corpus
+**INPUT** = Wikipedia corpus (e.g., [the latest Italian chapter](http://dumps.wikimedia.org/itwiki/latest/itwiki-latest-pages-articles.xml.bz2))
 
 1. Verb Extraction
   1. [Extract raw text from Wikipedia dump](lib/WikiExtractor.py), forked from [this repo](https://github.com/bwbaugh/wikipedia-extractor)
