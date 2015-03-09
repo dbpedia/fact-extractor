@@ -32,7 +32,7 @@ def add_chunk_data(pos_data):
         chunks[sentence_id]['chunks'] = [' '.join([token for token, pos in t.leaves()]) for t in result.subtrees(lambda result: result.label() == 'SN')]
     return chunks
 
-
+# Assumes entity linked sentences have the <strong> tag
 def prepare_crowdflower_input(entity_linked_dir, chunk_data):
     input_data = []
     # Walk into entity linked dir
