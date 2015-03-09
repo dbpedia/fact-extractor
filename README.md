@@ -39,7 +39,7 @@ would produce statements like:
 - [libsvm](http://www.csie.ntu.edu.tw/~cjlin/libsvm/)
 
 ## Warm-up Tasks
-See the [issues](issues).
+See the [issues](../../issues).
 
 ## Development Policy
 Committers should follow the standard team development practices:
