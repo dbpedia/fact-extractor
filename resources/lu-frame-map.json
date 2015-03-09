@@ -64,12 +64,8 @@
       "giocò"
     ],
     "Attività": [
-        // "Partecipante",
         "Competizione",
-        "Squadra",
-        // "Ruolo",
-        // "Luogo",
-        // "Tempo"
+        "Squadra"
     ]
   },
   "nascere": {
@@ -577,12 +573,7 @@
       "perso"
     ],
     "Sconfitta": [
-      //"Competizione",
-      //"Luogo",
-      //"Tempo",
-      //"Perdente", 
-      //"Premio"
-      "Risultato",
+      "Competizione",
       "Avversario"
     ]
   },
@@ -615,12 +606,8 @@
       "segnò"
     ],
     "Fare_gol": [
-      //"Autore",
       "Competizione",
-      "Quantità",
-      //"Squadra",
-      //"Luogo",
-      //"Tempo"
+      "Quantità"
     ]
   },
   "esordire": {
@@ -640,10 +627,7 @@
       "esordiva"
     ],
     "Esordio": [
-      //"Esordiente",
-      //"Competizione",
       "Squadra",
-      //"Luogo",
       "Tempo"
     ]
   },
@@ -708,12 +692,7 @@
       "vinto"
     ], 
     "Vittoria": [
-      // "Competizione",
-      // "Luogo",
-      //"Tempo",
-      //"Vincitore", 
-      //"Premio"
-      "Risultato",
+      "Competizione",
       "Avversario"
     ]
   }
