@@ -109,24 +109,24 @@ if __name__ == "__main__":
         "": {
         "answers": []
         },
-        "frame": "Porco_Dio",
+        "frame": "Bio_Parco",
         "lu" : "pubblicare",
         "Pubblicatore": {
         "majority": "Fedele anglicano",
         "judgments": 3,
         "answers": [
-            "suca",
-            "coglione",
-            "puppa"
+            "tizio",
+            "caio",
+            "sempronio"
         ]
         },
         "Opera": {
         "majority": "opere a difesa dell' anglicanesimo",
         "judgments": 3,
         "answers": [
-        "suca",
-        "coglione",
-        "puppa"
+        "tizio",
+        "caio",
+        "sempronio"
         ]
         }
         }
