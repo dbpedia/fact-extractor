@@ -1,0 +1,15 @@
+Il	DET:def	il
+18	NUM	@card@
+agosto	NOM	agosto
+2013	NUM	@card@
+perde	VER:pres	perdere
+la	DET:def	il
+Supercoppa	NOM	<unknown>
+italiana	ADJ	italiano
+2013	NUM	@card@
+contro	PRE	contro
+la	DET:def	il
+Juventus	NOM	<unknown>
+per	PRE	per
+4-0	NUM	@card@
+.	SENT	.

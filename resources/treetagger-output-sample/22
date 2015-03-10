@@ -1,0 +1,16 @@
+Esordisce	VER:pres	esordire
+in	PRE	in
+Bundesliga	NOM	<unknown>
+nella	PRE:det	nel
+stagione	NOM	stagione
+2012-2013	NUM	@card@
+,	PON	,
+nella	PRE:det	nel
+quale	PRO:rela	quale
+gioca	VER:pres	giocare
+8	NUM	@card@
+partite	NOM	partita
+senza	PRE	senza
+mai	ADV	mai
+segnare	VER:infi	segnare
+.	SENT	.

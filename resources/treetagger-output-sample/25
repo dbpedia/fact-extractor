@@ -1,0 +1,16 @@
+In	PRE	in
+data	NOM	data
+21	NUM	@card@
+settembre	NOM	settembre
+2014	NUM	@card@
+,	PON	,
+all'	PRE:det	al
+esordio	NOM	esordio
+in	PRE	in
+Coppa	NOM	coppa
+Puglia	NPR	Puglia
+,	PON	,
+segna	VER:pres	segnare
+una	DET:indef	una
+tripletta	NOM	tripletta
+.	SENT	.

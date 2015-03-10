@@ -1,0 +1,13 @@
+Con	PRE	con
+l'	DET:def	il
+Club	NOM	club
+América	NOM	<unknown>
+ha	VER:pres	avere
+vinto	VER:pper	vincere
+il	DET:def	il
+campionato	NOM	campionato
+1987-1988	NUM	@card@
+e	CON	e
+quello	PRO:demo	quello
+1988-1989	NUM	@card@
+.	SENT	.

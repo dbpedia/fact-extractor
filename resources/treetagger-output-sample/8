@@ -1,0 +1,15 @@
+Bandiera	NOM	bandiera
+del	PRE:det	del
+Linfield	NOM	<unknown>
+,	PON	,
+nel	PRE:det	nel
+corso	NOM	corso
+della	PRE:det	del
+sua	PRO:poss	suo
+ventennale	ADJ	ventennale
+carriera	NOM	carriera
+ha	VER:pres	avere
+vinto	VER:pper	vincere
+39	NUM	@card@
+titoli	NOM	titolo
+.	SENT	.

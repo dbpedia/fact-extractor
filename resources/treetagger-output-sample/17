@@ -1,0 +1,14 @@
+Gioco	NOM	gioco
+nella	PRE:det	nel
+Fiorentina	NOM	fiorentina|fiorentino
+1970	NUM	@card@
+al	PRE:det	al
+1972	NUM	@card@
+,	PON	,
+perse	VER:pper	perdere
+una	DET:indef	una
+finale	NOM	finale
+di	PRE	di
+Coppa	NOM	coppa
+Mitropa	NOM	<unknown>
+.	SENT	.

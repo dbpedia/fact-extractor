@@ -1,0 +1,11 @@
+Con	PRE	con
+la	DET:def	il
+Nazionale	NOM	nazionale
+polacca	ADJ	polacco
+ha	VER:pres	avere
+vinto	VER:pper	vincere
+i	DET:def	il
+Giochi	NOM	gioco
+olimpici	ADJ	olimpico
+1972	NUM	@card@
+.	SENT	.
