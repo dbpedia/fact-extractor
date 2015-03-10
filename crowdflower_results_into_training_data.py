@@ -14,7 +14,7 @@ def read_full_results(results_file):
     h = HTMLParser.HTMLParser()
     processed = {}
     with open(results_file, 'rb') as f:
-        # TODO Fucking csv lib doesn't handle fucking unicode
+        # TODO csv lib doesn't handle unicode
         results = csv.DictReader(f)
         fe_amount = 0
         fields = results.fieldnames
