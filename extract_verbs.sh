@@ -3,7 +3,7 @@
 set -e
 
 cd ..
-# Download latest Wikipedia dump in language of Chioce
+# Download latest Wikipedia dump in language of choice
 echo "Enter wikipedia dump language e.g. en OR english"
 read LANGCODE
 #convert lnaguge code to lower case
@@ -53,7 +53,7 @@ elif [ "$LANGCODE" = "spanish" ] || [ "$LANGCODE" = "es" ]; then
 	LANGSHORTCODE="es"
 	TAGGER="tree-tagger-spanish"
 else
-	echo "Enterned Languge is not yet supported in this script! EXIT from script"
+	echo "Entered language is not yet supported in this script! EXIT from script"
 	exit
 fi
 
