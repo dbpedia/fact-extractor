@@ -37,6 +37,7 @@ would produce statements like:
 ## Requirements
 - [TreeTagger](http://www.cis.uni-muenchen.de/~schmid/tools/TreeTagger/)
 - [libsvm](http://www.csie.ntu.edu.tw/~cjlin/libsvm/)
+- csplit from [GNU coreutils 8.23](https://www.gnu.org/software/coreutils/) or later
 
 ## Warm-up Tasks
 See the [issues](../../issues).
