@@ -15,7 +15,7 @@ fi
 # Lowercase argument
 LANGCODE="$(echo $1 | tr '[:upper:]' '[:lower:]')"
 
-# Switch-casing to select language
+# Switch statement to select language
 case $LANGCODE in
     "english" | "en" )
 		LANGSHORTCODE="en"
