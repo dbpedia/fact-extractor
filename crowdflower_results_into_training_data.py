@@ -97,11 +97,11 @@ def process_sentence(sentence_id, annotations, lines):
     """ Processes a sentence by merging tagged words, LU and FEs """
 
     processed = list()
-    for token, pos, lemma in lines:
+    for i, (token, pos, lemma) in enumerate(lines):
         # TODO check if LUs can be more than one token
         tag = 'B-LU' if lemma == annotations['lu'] else 'O'
         processed.append([
-            sentence_id, str(sentence_id), token, pos, lemma, annotations['frame'], tag
+            sentence_id, str(i), token, pos, lemma, annotations['frame'], tag
         ])
 
     # find the entities in the sentence and set iob tags accordingly
