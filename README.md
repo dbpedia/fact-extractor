@@ -16,6 +16,10 @@ would produce statements like:
 <defeat, competition, Euro 1992>
 ```
 
+## Have you already?
+Introduced yourself in the [DBpedia GSoC mailing list](https://lists.sourceforge.net/lists/listinfo/dbpedia-gsoc)?
+If not, please do so!
+
 ## High-level Workflow + Related Code
 **INPUT** = Wikipedia corpus (e.g., [the latest Italian chapter](http://dumps.wikimedia.org/itwiki/latest/itwiki-latest-pages-articles.xml.bz2))
 
