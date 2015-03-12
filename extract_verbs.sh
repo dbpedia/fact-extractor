@@ -1,11 +1,18 @@
 #!/bin/bash
-
+# Call this script with wikipedia dump language e.g. en OR english
+# sh extract_verbs.sh english
 set -e
 
 cd ..
 # Download latest Wikipedia dump in language of choice
-echo "Enter wikipedia dump language e.g. en OR english"
-read LANGCODE
+
+if [ "$#" -ne 1 ]; then
+	echo "Usage: sh extract_verbs.sh <language code>"
+	exit
+fi
+
+LANGCODE=$1
+
 #convert lnaguge code to lower case
 LANGCODE="$(echo $LANGCODE | tr '[A-Z]' '[a-z]')"
 
