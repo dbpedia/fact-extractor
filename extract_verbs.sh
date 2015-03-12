@@ -1,24 +1,23 @@
 #!/bin/bash
-# Call this script with wikipedia dump language e.g. en OR english
+# Call this script with the language you want to work with
+# The accepted argument can be a language or a language code, e.g., 'en' OR 'english'
 # sh extract_verbs.sh english
+
 set -e
 
 cd ..
-# Download latest Wikipedia dump in language of choice
 
-if [ "$#" -ne 1 ]; then
-	echo "Usage: sh extract_verbs.sh <language code>"
-	exit
+if [[ $# -ne 1 ]]; then
+    echo "Usage: sh $(basename "$0") <LANGUAGE>"
+	exit 1
 fi
 
-LANGCODE=$1
+# Lowercase argument
+LANGCODE="$(echo $1 | tr '[:upper:]' '[:lower:]')"
 
-#convert lnaguge code to lower case
-LANGCODE="$(echo $LANGCODE | tr '[A-Z]' '[a-z]')"
-
-#Switch-casing to select language
+# Switch-casing to select language
 case $LANGCODE in
-	"english" | "en" )
+    "english" | "en" )
 		LANGSHORTCODE="en"
 		TAGGER="tree-tagger-english"
 		;;
@@ -89,24 +88,23 @@ case $LANGCODE in
 		;;
 
 	*)
-		echo "Entered language is not yet supported in this script! EXIT from script"
-		exit
+		echo "Invalid or not supported language for now! QUITTING ..."
+		exit 1
 		;;
 esac
 
-#forming URL
+# Form Wikipedia dump URL
 URL="http://download.wikimedia.org/"$LANGSHORTCODE"wiki/latest/"$LANGSHORTCODE"wiki-latest-pages-articles.xml.bz2"
 echo "Downloading dump from: $URL"
-#wget [URL]
 wget $URL
 # Extract text
-if [ ! -d "extracted/"]; then
-  mkdir "extracted/"
+if [ ! -d "extracted"]; then
+    mkdir extracted
 fi
-bzcat "$LANGCODE"wiki-latest-pages-articles.xml.bz2 | scripts/lib/WikiExtractor.py -o extracted/
+bzcat "$LANGCODE"wiki-latest-pages-articles.xml.bz2 | scripts/lib/WikiExtractor.py -o extracted
 # Split extraction by article
-if [ ! -d "corpus/"]; then
-  mkdir "corpus/"
+if [ ! -d "corpus"]; then
+    mkdir corpus
 fi
 cat extracted/*/* | csplit --suppress-matched -z -f 'corpus/doc_' - '/</doc>/' {*}
 # Build a single big file
@@ -114,8 +112,8 @@ find extracted -type f -exec cat {} \; > all-extracted.txt
 # Extract verbs with TreeTagger
 # N.B. treetagger segfaults with the single big file, run it over each article instead
 #cat all-extracted.txt | treetagger/cmd/tree-tagger-italian | grep VER | sort -u > verbi.txt
-find extracted -type f -exec bash -c "cat '{}' | treetagger/cmd/$TAGGER | grep VER >> verbi.txt" \;
-sort -u verbi.txt > unique-sorted-verbs.txt
+find extracted -type f -exec bash -c "cat '{}' | treetagger/cmd/$TAGGER | grep VER >> verbs" \;
+sort -u verbs > unique-sorted-verbs
 # Extract vocabulary
 python scripts/bag_of_words.py all-extracted.txt
 # POS tagging + chunker with TextPro
