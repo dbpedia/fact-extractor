@@ -7,45 +7,47 @@ import sys
 import csv
 import json
 import HTMLParser
+import argparse
+import os
 from collections import Counter
 
 
 def read_full_results(results_file):
-    """ Reads and aggregates the results from crowdflower """
+    """ Reads and aggregates the results from an open stream"""
     h = HTMLParser.HTMLParser()
     processed = {}
-    with open(results_file, 'rb') as f:
-        # TODO csv lib doesn't handle unicode
-        results = csv.DictReader(f)
-        fields = results.fieldnames
-        fe_amount = len([f for f in fields if re.match('fe_name[0-9]$', f)])
 
-        # Skip gold
-        regular = [row for row in results if row['_golden'] != 'true']
-        for row in regular:
-            sentence_id = row['id']
-            sentence = h.unescape(row['sentence'].decode('utf-8'))
+    # TODO csv lib doesn't handle unicode
+    results = csv.DictReader(results_file)
+    fields = results.fieldnames
+    fe_amount = len([f for f in fields if re.match('fe_name[0-9]$', f)])
 
-            # initialize data structure with sentence, frame, lu and entity list
-            if not sentence_id in processed:
-                processed[sentence_id] = dict()
-                processed[sentence_id]['sentence'] = sentence
-                processed[sentence_id]['frame'] = row['frame']
-                processed[sentence_id]['lu'] = row['lu']
-                for n in xrange(0, fe_amount):
-                    entity = row['orig_fe_name' + str(n)]
-                    processed[sentence_id][entity] = {
-                        'judgments': 0,
-                        'answers': list()
-                    }
+    # Skip gold
+    regular = [row for row in results if row['_golden'] != 'true']
+    for row in regular:
+        sentence_id = row['id']
+        sentence = h.unescape(row['sentence'].decode('utf-8'))
 
-            # update judgments for each entity
+        # initialize data structure with sentence, frame, lu and entity list
+        if not sentence_id in processed:
+            processed[sentence_id] = dict()
+            processed[sentence_id]['sentence'] = sentence
+            processed[sentence_id]['frame'] = row['frame']
+            processed[sentence_id]['lu'] = row['lu']
             for n in xrange(0, fe_amount):
                 entity = row['orig_fe_name' + str(n)]
-                answer = row.get('fe_name' + str(n))
-                if answer:
-                    processed[sentence_id][entity]['judgments'] += 1
-                    processed[sentence_id][entity]['answers'].append(answer)
+                processed[sentence_id][entity] = {
+                    'judgments': 0,
+                    'answers': list()
+                }
+
+        # update judgments for each entity
+        for n in xrange(0, fe_amount):
+            entity = row['orig_fe_name' + str(n)]
+            answer = row.get('fe_name' + str(n))
+            if answer:
+                processed[sentence_id][entity]['judgments'] += 1
+                processed[sentence_id][entity]['answers'].append(answer)
 
     return processed
 
@@ -118,32 +120,52 @@ def produce_training_data(annotations, pos_tagged_sentences_dir):
 
                 # find part of entity associated with the processed line 
                 for entity, tokens in annotations['entities'].iteritems():
+                    if entity == '__lu__': print 'processing LU', annotations['lu']
                     for token, tag in tokens:
                         if token.decode('utf-8') == lines[i][2]:
                             lines[i][-1] = tag
- 
-            for l in lines:
-                # Skip <strong> tags
-                if '<strong>' not in l and '</strong>' not in l:
-                    print l
-                    output.append('\t'.join(l) + '\n')
 
+        output.extend(lines)
+ 
     return output
 
 
 if __name__ == "__main__":
-    if len(sys.argv) == 4:
-        results = read_full_results(sys.argv[1])
+    parser = argparse.ArgumentParser()
+    parser.add_argument('crowdflower_csv', type=argparse.FileType('r'),
+                        help='CSV file with the results coming from crowdflower')
+    parser.add_argument('pos_data_dir',
+                        help='Directory containing the output of treetagger')
+    parser.add_argument('output_file', type=argparse.FileType('w'),
+                        help='Where to store the produced training data')
+    parser.add_argument('--debug', dest='debug', action='store_true')
+    parser.add_argument('-d', dest='debug', action='store_true')
+    parser.add_argument('--no-debug', dest='debug', action='store_false')
+    args = parser.parse_args()
+    assert os.path.exists(args.pos_data_dir)
+
+    results = read_full_results(args.crowdflower_csv)
+    if args.debug:
+        print 'Results from crowdflower'
         print json.dumps(results, indent=2)
 
-        set_majority_vote_answer(results)
-        tag_entities(results)
-
+    set_majority_vote_answer(results)
+    if args.debug:
+        print 'Computed majority vote'
         print json.dumps(results, indent=2)
-        output = produce_training_data(results, sys.argv[2])
 
-        with codecs.open(sys.argv[3], 'wb', 'utf-8') as o:
-            o.writelines(output)
-    else:
-        print "Usage: %s <CROWDFLOWER_FULL_RESULTS_CSV> <POS_DATA_DIR> <OUTPUT_FILE>" % __file__
-        sys.exit(1)
+    tag_entities(results)
+    if args.debug:
+        print 'Entities tagged'
+        print json.dumps(results, indent=2)
+
+
+    output = produce_training_data(results, args.pos_data_dir)
+    if args.debug:
+        print 'Final Output'
+        print '\n'.join(repr(l) for l in output)
+
+
+    args.output_file.writelines('\t'.join(l).encode('utf-8') + '\n'
+                                for l in output
+                                if '<strong>' not in l and '</strong>' not in l)
