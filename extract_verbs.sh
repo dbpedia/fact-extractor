@@ -17,82 +17,82 @@ LANGUAGE="$(echo $1 | tr '[:upper:]' '[:lower:]')"
 
 # Switch statement to select language
 case $LANGUAGE in
-"bulgarian" | "bg")
-  LANGUAGE="bulgarian"
-  LANGCODE="bg"
-  ;;
-"chinese" | "zh")
-  LANGUAGE="chinese"
-  LANGCODE="zh"
-  ;;
-"dutch" | "nl")
-  LANGUAGE="dutch"
-  LANGCODE="nl"
-  ;;
-"english" | "en")
-  LANGUAGE="english"
-  LANGCODE="en"
-  ;;
-"estonian" | "et")
-  LANGUAGE="estonian"
-  LANGCODE="et"
-  ;;
-"finnish" | "fi")
-  LANGUAGE="finnish"
-  LANGCODE="fi"
-  ;;
-"french" | "fr")
-  LANGUAGE="french"
-  LANGCODE="fr"
-  ;;
-"galician" | "gl")
-  LANGUAGE="galician"
-  LANGCODE="gl"
-  ;;
-"german" | "de")
-  LANGUAGE="german"
-  LANGCODE="de"
-  ;;
-"italian" | "it")
-  LANGUAGE="italian"
-  LANGCODE="it"
-  ;;
-"latin" | "la")
-  LANGUAGE="latin"
-  LANGCODE="la"
-  ;;
-"mongolian" | "mn")
-  LANGUAGE="mongolian"
-  LANGCODE="mn"
-  ;;
-"polish" | "pl")
-  LANGUAGE="polish"
-  LANGCODE="pl"
-  ;;
-"portuguese" | "pt")
-  LANGUAGE="portuguese"
-  LANGCODE="pt"
-  ;;
-"russian" | "ru")
-  LANGUAGE="russian"
-  LANGCODE="ru"
-  ;;
-"slovak" | "sk")
-  LANGUAGE="slovak"
-  LANGCODE="sk"
-  ;;
-"spanish" | "es")
-  LANGUAGE="spanish"
-  LANGCODE="es"
-  ;;
-"swahili" | "sw")
-  LANGUAGE="swahili"
-  LANGCODE="sw"
-  ;;
-*)
-echo "Invalid or not supported language for now! QUITTING ..."
-exit 1
-;;
+	"bulgarian" | "bg")
+  		LANGUAGE="bulgarian"
+  		LANGCODE="bg"
+  		;;
+	"chinese" | "zh")
+  		LANGUAGE="chinese"
+  		LANGCODE="zh"
+  		;;
+	"dutch" | "nl")
+  		LANGUAGE="dutch"
+  		LANGCODE="nl"
+  		;;
+	"english" | "en")
+  		LANGUAGE="english"
+  		LANGCODE="en"
+  		;;
+	"estonian" | "et")
+  		LANGUAGE="estonian"
+  		LANGCODE="et"
+  		;;
+	"finnish" | "fi")
+  		LANGUAGE="finnish"
+  		LANGCODE="fi"
+  		;;
+	"french" | "fr")
+  		LANGUAGE="french"
+  		LANGCODE="fr"
+  		;;
+	"galician" | "gl")
+  		LANGUAGE="galician"
+  		LANGCODE="gl"
+  		;;
+	"german" | "de")
+  		LANGUAGE="german"
+  		LANGCODE="de"
+  		;;
+	"italian" | "it")
+  		LANGUAGE="italian"
+  		LANGCODE="it"
+  		;;
+	"latin" | "la")
+  		LANGUAGE="latin"
+  		LANGCODE="la"
+  		;;
+	"mongolian" | "mn")
+  		LANGUAGE="mongolian"
+  		LANGCODE="mn"
+  		;;
+	"polish" | "pl")
+  		LANGUAGE="polish"
+  		LANGCODE="pl"
+  		;;
+	"portuguese" | "pt")
+  		LANGUAGE="portuguese"
+  		LANGCODE="pt"
+  		;;
+	"russian" | "ru")
+  		LANGUAGE="russian"
+  		LANGCODE="ru"
+  		;;
+	"slovak" | "sk")
+  		LANGUAGE="slovak"
+  		LANGCODE="sk"
+  		;;
+	"spanish" | "es")
+  		LANGUAGE="spanish"
+  		LANGCODE="es"
+  		;;
+	"swahili" | "sw")
+  		LANGUAGE="swahili"
+  		LANGCODE="sw"
+  		;;
+	*)
+		echo "Invalid or not supported language for now! QUITTING ..."
+		exit 1
+		;;
 esac
 
 # Form Wikipedia dump URL
