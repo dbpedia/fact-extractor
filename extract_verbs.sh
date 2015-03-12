@@ -9,7 +9,7 @@ read LANGCODE
 #convert lnaguge code to lower case
 LANGCODE="$(echo $LANGCODE | tr '[A-Z]' '[a-z]')"
 
-#looping to select language
+#Switch-casing to select language
 case $LANGCODE in
 	"english" | "en" )
 		LANGSHORTCODE="en"
