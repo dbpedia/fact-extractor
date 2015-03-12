@@ -120,7 +120,6 @@ def produce_training_data(annotations, pos_tagged_sentences_dir):
 
                 # find part of entity associated with the processed line 
                 for entity, tokens in annotations['entities'].iteritems():
-                    if entity == '__lu__': print 'processing LU', annotations['lu']
                     for token, tag in tokens:
                         if token.decode('utf-8') == lines[i][2]:
                             lines[i][-1] = tag
@@ -129,6 +128,33 @@ def produce_training_data(annotations, pos_tagged_sentences_dir):
  
     return output
 
+
+def main(crowdflower_csv, pos_data_dir, output_file, debug):
+    results = read_full_results(crowdflower_csv)
+    if debug:
+        print 'Results from crowdflower'
+        print json.dumps(results, indent=2)
+
+    set_majority_vote_answer(results)
+    if debug:
+        print 'Computed majority vote'
+        print json.dumps(results, indent=2)
+
+    tag_entities(results)
+    if debug:
+        print 'Entities tagged'
+        print json.dumps(results, indent=2)
+
+
+    output = produce_training_data(results, pos_data_dir)
+    if debug:
+        print 'Final Output'
+        print '\n'.join(repr(l) for l in output)
+
+
+    output_file.writelines('\t'.join(l).encode('utf-8') + '\n'
+                           for l in output
+                           if '<strong>' not in l and '</strong>' not in l)
 
 if __name__ == "__main__":
     parser = argparse.ArgumentParser()
@@ -144,28 +170,4 @@ if __name__ == "__main__":
     args = parser.parse_args()
     assert os.path.exists(args.pos_data_dir)
 
-    results = read_full_results(args.crowdflower_csv)
-    if args.debug:
-        print 'Results from crowdflower'
-        print json.dumps(results, indent=2)
-
-    set_majority_vote_answer(results)
-    if args.debug:
-        print 'Computed majority vote'
-        print json.dumps(results, indent=2)
-
-    tag_entities(results)
-    if args.debug:
-        print 'Entities tagged'
-        print json.dumps(results, indent=2)
-
-
-    output = produce_training_data(results, args.pos_data_dir)
-    if args.debug:
-        print 'Final Output'
-        print '\n'.join(repr(l) for l in output)
-
-
-    args.output_file.writelines('\t'.join(l).encode('utf-8') + '\n'
-                                for l in output
-                                if '<strong>' not in l and '</strong>' not in l)
+    main(args.crowdflower_csv, args.pos_data_dir, args.output_file, args.debug)
