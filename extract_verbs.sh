@@ -13,88 +13,90 @@ if [[ $# -ne 1 ]]; then
 fi
 
 # Lowercase argument
-LANGCODE="$(echo $1 | tr '[:upper:]' '[:lower:]')"
+LANGUAGE="$(echo $1 | tr '[:upper:]' '[:lower:]')"
 
 # Switch statement to select language
-case $LANGCODE in
-    "english" | "en" )
-		LANGSHORTCODE="en"
-		TAGGER="tree-tagger-english"
-		;;
-
-	"french" | "fr" )
-		LANGSHORTCODE="fr"
-		TAGGER="tree-tagger-french"
-		;;
-
-	"german" | "de" )
-		LANGSHORTCODE="de"
-		TAGGER="tree-tagger-german"
-		;;
-
-	"bulgarian" | "bg" )
-		LANGSHORTCODE="bg"
-		TAGGER="tree-tagger-bulgarian"
-		;;
-
-	"dutch" | "nl" )
-		LANGSHORTCODE="nl"
-		TAGGER="tree-tagger-dutch"
-		;;
-
-	"estonian" | "et" )
-		LANGSHORTCODE="et"
-		TAGGER="tree-tagger-estonian"
-		;;
-
-	"finnish" | "fi" )
-		LANGSHORTCODE="fi"
-		TAGGER="tree-tagger-finnish"
-		;;
-
-	"galician" | "gl" )
-		LANGSHORTCODE="gl"
-		TAGGER="tree-tagger-galician"
-		;;
-
-	"italian" | "it" )
-		LANGSHORTCODE="it"
-		TAGGER="tree-tagger-italian"
-		;;
-
-	"latin" | "la" )
-		LANGSHORTCODE="la"
-		TAGGER="tree-tagger-latin"
-		;;
-
-	"polish" | "pl" )
-		LANGSHORTCODE="pl"
-		TAGGER="tree-tagger-polish"
-		;;
-
-	"russian" | "ru" )
-		LANGSHORTCODE="ru"
-		TAGGER="tree-tagger-russian"
-		;;
-
-	"slovak" | "sk" )
-		LANGSHORTCODE="sk"
-		TAGGER="tree-tagger-slovak"
-		;;
-
-	"spanish" | "es" )
-		LANGSHORTCODE="es"
-		TAGGER="tree-tagger-spanish"
-		;;
-
-	*)
-		echo "Invalid or not supported language for now! QUITTING ..."
-		exit 1
-		;;
+case $LANGUAGE in
+"bulgarian" | "bg")
+  LANGUAGE="bulgarian"
+  LANGCODE="bg"
+  ;;
+"chinese" | "zh")
+  LANGUAGE="chinese"
+  LANGCODE="zh"
+  ;;
+"dutch" | "nl")
+  LANGUAGE="dutch"
+  LANGCODE="nl"
+  ;;
+"english" | "en")
+  LANGUAGE="english"
+  LANGCODE="en"
+  ;;
+"estonian" | "et")
+  LANGUAGE="estonian"
+  LANGCODE="et"
+  ;;
+"finnish" | "fi")
+  LANGUAGE="finnish"
+  LANGCODE="fi"
+  ;;
+"french" | "fr")
+  LANGUAGE="french"
+  LANGCODE="fr"
+  ;;
+"galician" | "gl")
+  LANGUAGE="galician"
+  LANGCODE="gl"
+  ;;
+"german" | "de")
+  LANGUAGE="german"
+  LANGCODE="de"
+  ;;
+"italian" | "it")
+  LANGUAGE="italian"
+  LANGCODE="it"
+  ;;
+"latin" | "la")
+  LANGUAGE="latin"
+  LANGCODE="la"
+  ;;
+"mongolian" | "mn")
+  LANGUAGE="mongolian"
+  LANGCODE="mn"
+  ;;
+"polish" | "pl")
+  LANGUAGE="polish"
+  LANGCODE="pl"
+  ;;
+"portuguese" | "pt")
+  LANGUAGE="portuguese"
+  LANGCODE="pt"
+  ;;
+"russian" | "ru")
+  LANGUAGE="russian"
+  LANGCODE="ru"
+  ;;
+"slovak" | "sk")
+  LANGUAGE="slovak"
+  LANGCODE="sk"
+  ;;
+"spanish" | "es")
+  LANGUAGE="spanish"
+  LANGCODE="es"
+  ;;
+"swahili" | "sw")
+  LANGUAGE="swahili"
+  LANGCODE="sw"
+  ;;
+*)
+echo "Invalid or not supported language for now! QUITTING ..."
+exit 1
+;;
 esac
 
 # Form Wikipedia dump URL
-URL="http://download.wikimedia.org/"$LANGSHORTCODE"wiki/latest/"$LANGSHORTCODE"wiki-latest-pages-articles.xml.bz2"
+URL="http://download.wikimedia.org/"$LANGCODE"wiki/latest/"$LANGCODE"wiki-latest-pages-articles.xml.bz2"
 echo "Downloading dump from: $URL"
 wget $URL
 # Extract text
@@ -112,9 +114,9 @@ find extracted -type f -exec cat {} \; > all-extracted.txt
 # Extract verbs with TreeTagger
 # N.B. treetagger segfaults with the single big file, run it over each article instead
 #cat all-extracted.txt | treetagger/cmd/tree-tagger-italian | grep VER | sort -u > verbi.txt
-find extracted -type f -exec bash -c "cat '{}' | treetagger/cmd/$TAGGER | grep VER >> verbs" \;
+find extracted -type f -exec bash -c "cat '{}' | treetagger/cmd/tree-tagger-"$LANGUAGE" | grep VER >> verbs" \;
 sort -u verbs > unique-sorted-verbs
 # Extract vocabulary
 python scripts/bag_of_words.py all-extracted.txt
 # POS tagging + chunker with TextPro
-perl textpro.pl -verbose -html -l ita -c token+sentence+pos+chunk -o . ~/srl/training/"$LANGSHORTCODE"wiki/gold
+perl textpro.pl -verbose -html -l ita -c token+sentence+pos+chunk -o . ~/srl/training/"$LANGCODE"wiki/gold
