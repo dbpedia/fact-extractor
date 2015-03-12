@@ -93,38 +93,56 @@ def tag_entities(results):
             annotations['entities'][fe] = iob_tagged
 
 
-def produce_training_data(annotations, pos_tagged_sentences_dir):
+def process_sentence(sentence_id, annotations, lines):
+    """ Processes a sentence by merging tagged words, LU and FEs """
+
+    processed = list()
+    for token, pos, lemma in lines:
+        # TODO check if LUs can be more than one token
+        tag = 'B-LU' if lemma == annotations['lu'] else 'O'
+        processed.append([
+            sentence_id, str(sentence_id), token, pos, lemma, annotations['frame'], tag
+        ])
+
+    # find the entities in the sentence and set iob tags accordingly
+    # checking for single tokens is not enough, entities have to be matched as a
+    # whole (i.e. all its tokens must appear in sequence)
+    for entity, tokens in annotations['entities'].iteritems():
+        found = False
+        i = j = 0
+        while i < len(processed):
+            if processed[i][2] == tokens[j][0]:
+                j += 1
+                if j == len(tokens):
+                    found = True
+                    break
+            else:
+                j = 0
+            i += 1
+
+        if found:
+            for line, (token, tag) in zip(processed[i-len(tokens) + 1:i + 1], tokens):
+                line[-1] = tag
+
+    return processed
+
+
+def produce_training_data(annotations, pos_tagged_sentences_dir, debug):
     """ Adds to the treetagger output information about frames """
     output = []
     for sentence_id, annotations in annotations.iteritems():
 
         # open treetagger output with tagged words
         with(codecs.open(pos_tagged_sentences_dir + sentence_id, 'rb', 'utf-8')) as i:
-            lines = i.readlines()
-            lines = [l.strip().split('\t') for l in lines]
+            lines = [l.strip().split('\t') for l in i.readlines()]
+            processed = process_sentence(sentence_id, annotations, lines)
+            output.extend(processed)
 
-            # Each line is a [token, pos, lemma]
-            for i in xrange(0, len(lines)):
-                # transform line so that it contains the following fields
-                # sentence_id     token_id     token   pos     lemma   frame   IOB-tag
-
-                lines[i].insert(0, sentence_id)
-                lines[i].insert(1, str(i))
-                lines[i].append(annotations['frame'])
-
-                # TODO check if LUs can be more than one token
-                if annotations['lu'] in lines[i]:
-                    lines[i].append('B-LU') # IOB-tag
-                else:
-                    lines[i].append('O') # IOB-tag
-
-                # find part of entity associated with the processed line 
-                for entity, tokens in annotations['entities'].iteritems():
-                    for token, tag in tokens:
-                        if token.decode('utf-8') == lines[i][2]:
-                            lines[i][-1] = tag
-
-        output.extend(lines)
+            if debug:
+                print 'Annotations'
+                print json.dumps(annotations, indent=2)
+                print 'Result'
+                print '\n'.join(repr(x) for x in processed)
  
     return output
 
@@ -145,10 +163,7 @@ def main(crowdflower_csv, pos_data_dir, output_file, debug):
         print 'Entities tagged'
         print json.dumps(results, indent=2)
 
-    output = produce_training_data(results, pos_data_dir)
-    if debug:
-        print 'Final Output'
-        print '\n'.join(repr(l) for l in output)
+    output = produce_training_data(results, pos_data_dir, debug)
 
     output_file.writelines('\t'.join(l).encode('utf-8') + '\n'
                            for l in output
