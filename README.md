@@ -50,6 +50,9 @@ Committers should follow the standard team development practices:
 3. Commit **frequently** with **clear** messages
 4. Make a pull request
 
+## Coding Style
+Please use 4 spaces (soft tab) for indentation. Pull requests not complying to this will be ignored.
+
 ## References
 - [FrameNet: A Knowledge Base for Natural Language Processing](http://www.aclweb.org/anthology/W/W14/W14-3001.pdf)
 - [Outsourcing FrameNet to the Crowd](http://www.aclweb.org/anthology/P13-2130)
