@@ -145,18 +145,19 @@ def main(crowdflower_csv, pos_data_dir, output_file, debug):
         print 'Entities tagged'
         print json.dumps(results, indent=2)
 
-
     output = produce_training_data(results, pos_data_dir)
     if debug:
         print 'Final Output'
         print '\n'.join(repr(l) for l in output)
 
-
     output_file.writelines('\t'.join(l).encode('utf-8') + '\n'
                            for l in output
                            if '<strong>' not in l and '</strong>' not in l)
 
-if __name__ == "__main__":
+    return 0
+
+
+def create_cli_parser():
     parser = argparse.ArgumentParser()
     parser.add_argument('crowdflower_csv', type=argparse.FileType('r'),
                         help='CSV file with the results coming from crowdflower')
@@ -167,7 +168,13 @@ if __name__ == "__main__":
     parser.add_argument('--debug', dest='debug', action='store_true')
     parser.add_argument('-d', dest='debug', action='store_true')
     parser.add_argument('--no-debug', dest='debug', action='store_false')
+
+    return parser
+
+
+if __name__ == "__main__":
+    parser = create_cli_parser()
     args = parser.parse_args()
     assert os.path.exists(args.pos_data_dir)
 
-    main(args.crowdflower_csv, args.pos_data_dir, args.output_file, args.debug)
+    sys.exit(main(args.crowdflower_csv, args.pos_data_dir, args.output_file, args.debug))
