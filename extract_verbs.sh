@@ -10,52 +10,82 @@ read LANGCODE
 LANGCODE="$(echo $LANGCODE | tr '[A-Z]' '[a-z]')"
 
 #looping to select language
-if [ "$LANGCODE" = "english" ] || [ "$LANGCODE" = "en" ]; then
-	LANGSHORTCODE="en"
-	TAGGER="tree-tagger-english"
-elif [ "$LANGCODE" = "french" ] || [ "$LANGCODE" = "fr" ]; then
-	LANGSHORTCODE="fr"
-	TAGGER="tree-tagger-french"
-elif [ "$LANGCODE" = "german" ] || [ "$LANGCODE" = "de" ]; then
-	LANGSHORTCODE="de"
-	TAGGER="tree-tagger-german"
-elif [ "$LANGCODE" = "bulgarian" ] || [ "$LANGCODE" = "bg" ]; then
-	LANGSHORTCODE="bg"
-	TAGGER="tree-tagger-bulgarian"
-elif [ "$LANGCODE" = "dutch" ] || [ "$LANGCODE" = "nl" ]; then
-	LANGSHORTCODE="nl"
-	TAGGER="tree-tagger-dutch"
-elif [ "$LANGCODE" = "estonian" ] || [ "$LANGCODE" = "et" ]; then
-	LANGSHORTCODE="et"
-	TAGGER="tree-tagger-estonian"
-elif [ "$LANGCODE" = "finnish" ] || [ "$LANGCODE" = "fi" ]; then
-	LANGSHORTCODE="fi"
-	TAGGER="tree-tagger-finnish"
-elif [ "$LANGCODE" = "galician" ] || [ "$LANGCODE" = "gl" ]; then
-	LANGSHORTCODE="gl"
-	TAGGER="tree-tagger-galician"
-elif [ "$LANGCODE" = "italian" ] || [ "$LANGCODE" = "it" ]; then
-	LANGSHORTCODE="it"
-	TAGGER="tree-tagger-italian"
-elif [ "$LANGCODE" = "latin" ] || [ "$LANGCODE" = "la" ]; then
-	LANGSHORTCODE="la"
-	TAGGER="tree-tagger-latin"
-elif [ "$LANGCODE" = "polish" ] || [ "$LANGCODE" = "pl" ]; then
-	LANGSHORTCODE="pl"
-	TAGGER="tree-tagger-polish"
-elif [ "$LANGCODE" = "russian" ] || [ "$LANGCODE" = "ru" ]; then
-	LANGSHORTCODE="ru"
-	TAGGER="tree-tagger-russian"
-elif [ "$LANGCODE" = "slovak" ] || [ "$LANGCODE" = "sk" ]; then
-	LANGSHORTCODE="sk"
-	TAGGER="tree-tagger-slovak"
-elif [ "$LANGCODE" = "spanish" ] || [ "$LANGCODE" = "es" ]; then
-	LANGSHORTCODE="es"
-	TAGGER="tree-tagger-spanish"
-else
-	echo "Entered language is not yet supported in this script! EXIT from script"
-	exit
-fi
+case $LANGCODE in
+	"english" | "en" )
+		LANGSHORTCODE="en"
+		TAGGER="tree-tagger-english"
+		;;
+
+	"french" | "fr" )
+		LANGSHORTCODE="fr"
+		TAGGER="tree-tagger-french"
+		;;
+
+	"german" | "de" )
+		LANGSHORTCODE="de"
+		TAGGER="tree-tagger-german"
+		;;
+
+	"bulgarian" | "bg" )
+		LANGSHORTCODE="bg"
+		TAGGER="tree-tagger-bulgarian"
+		;;
+
+	"dutch" | "nl" )
+		LANGSHORTCODE="nl"
+		TAGGER="tree-tagger-dutch"
+		;;
+
+	"estonian" | "et" )
+		LANGSHORTCODE="et"
+		TAGGER="tree-tagger-estonian"
+		;;
+
+	"finnish" | "fi" )
+		LANGSHORTCODE="fi"
+		TAGGER="tree-tagger-finnish"
+		;;
+
+	"galician" | "gl" )
+		LANGSHORTCODE="gl"
+		TAGGER="tree-tagger-galician"
+		;;
+
+	"italian" | "it" )
+		LANGSHORTCODE="it"
+		TAGGER="tree-tagger-italian"
+		;;
+
+	"latin" | "la" )
+		LANGSHORTCODE="la"
+		TAGGER="tree-tagger-latin"
+		;;
+
+	"polish" | "pl" )
+		LANGSHORTCODE="pl"
+		TAGGER="tree-tagger-polish"
+		;;
+
+	"russian" | "ru" )
+		LANGSHORTCODE="ru"
+		TAGGER="tree-tagger-russian"
+		;;
+
+	"slovak" | "sk" )
+		LANGSHORTCODE="sk"
+		TAGGER="tree-tagger-slovak"
+		;;
+
+	"spanish" | "es" )
+		LANGSHORTCODE="es"
+		TAGGER="tree-tagger-spanish"
+		;;
+
+	*)
+		echo "Entered language is not yet supported in this script! EXIT from script"
+		exit
+		;;
+esac
 
 #forming URL
 URL="http://download.wikimedia.org/"$LANGSHORTCODE"wiki/latest/"$LANGSHORTCODE"wiki-latest-pages-articles.xml.bz2"
