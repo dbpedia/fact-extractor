@@ -7,138 +7,189 @@ import sys
 import csv
 import json
 import HTMLParser
+import argparse
+import os
 from collections import Counter
 
 
 def read_full_results(results_file):
+    """ Reads and aggregates the results from an open stream"""
     h = HTMLParser.HTMLParser()
     processed = {}
-    with open(results_file, 'rb') as f:
-        # TODO csv lib doesn't handle unicode
-        results = csv.DictReader(f)
-        fe_amount = 0
-        fields = results.fieldnames
-        for f in fields:
-            if re.match('fe_name[0-9]$', f):
-                fe_amount += 1
-        # Skip gold
-        regular = [row for row in results if row['_golden'] != 'true']
-        for row in regular:
-            sentence_id = row['id']
-            sentence = h.unescape(row['sentence'].decode('utf-8'))
-            if processed.get(sentence_id):
-                processed[sentence_id]['sentence'] = sentence
-                processed[sentence_id]['frame'] = row['frame']
-                processed[sentence_id]['lu'] = row['lu']
-                for n in xrange(0, fe_amount):
-                    answer = row.get('fe_name' + str(n))
-                    answers = processed[sentence_id][row['orig_fe_name' + str(n)]].get('answers', [])
-                    if answer:
-                        processed[sentence_id][row['orig_fe_name' + str(n)]]['judgments'] += 1
-                        answers.append(answer)
-            else:
-                processed[sentence_id] = {}
-                processed[sentence_id]['sentence'] = sentence
-                processed[sentence_id]['frame'] = row['frame']
-                processed[sentence_id]['lu'] = row['lu']
-                for n in xrange(0, fe_amount):
-                    answer = row.get('fe_name' + str(n))
-                    processed[sentence_id][row['orig_fe_name' + str(n)]] = {}
-                    answers = processed[sentence_id][row['orig_fe_name' + str(n)]]['answers'] = []
-                    if answer:
-                        processed[sentence_id][row['orig_fe_name' + str(n)]]['judgments'] = 1
-                        answers.append(answer)
+
+    # TODO csv lib doesn't handle unicode
+    results = csv.DictReader(results_file)
+    fields = results.fieldnames
+    fe_amount = len([f for f in fields if re.match('fe_name[0-9]$', f)])
+
+    # Skip gold
+    regular = [row for row in results if row['_golden'] != 'true']
+    for row in regular:
+        sentence_id = row['id']
+        sentence = h.unescape(row['sentence'].decode('utf-8'))
+
+        # initialize data structure with sentence, frame, lu and entity list
+        if not sentence_id in processed:
+            processed[sentence_id] = dict()
+            processed[sentence_id]['sentence'] = sentence
+            processed[sentence_id]['frame'] = row['frame']
+            processed[sentence_id]['lu'] = row['lu']
+            for n in xrange(0, fe_amount):
+                entity = row['orig_fe_name' + str(n)]
+                processed[sentence_id][entity] = {
+                    'judgments': 0,
+                    'answers': list()
+                }
+
+        # update judgments for each entity
+        for n in xrange(0, fe_amount):
+            entity = row['orig_fe_name' + str(n)]
+            answer = row.get('fe_name' + str(n))
+            if answer:
+                processed[sentence_id][entity]['judgments'] += 1
+                processed[sentence_id][entity]['answers'].append(answer)
+
     return processed
 
 
 def set_majority_vote_answer(results_json):
+    """ Determine the correct entity which corresponds to a given FE """
+
     for k,v in results_json.iteritems():
         for fe in v.keys():
-            if fe != 'frame' and fe != 'lu' and fe != 'sentence':
-                answers_count = Counter(v[fe]['answers'])
-                majority = float(v[fe]['judgments'])/2.0
-                for answer,freq in answers_count.iteritems():
-                    if freq > majority: v[fe]['majority'] = answer
-                if not v[fe].get('majority'): print "HEADS UP! No majority answer for sentence [%s], FE [%s]" % (k, fe)
-    return results_json
+            if fe in {'frame', 'lu', 'sentence'}:
+                continue
+
+            answers_count = Counter(v[fe]['answers'])
+            majority = v[fe]['judgments'] / 2.0
+            for answer,freq in answers_count.iteritems():
+                if freq > majority:
+                    v[fe]['majority'] = answer
+
+            if not v[fe].get('majority'):
+                print "HEADS UP! No majority answer for sentence [%s], FE [%s]" % (k, fe)
 
 
-def produce_training_data(annotations, pos_tagged_sentences_dir, output_file):
+def tag_entities(results):
+    """ Creates the IOB tag for each entity found. """
+    for annotations in results.values():
+        frame = annotations['frame']
+
+        annotations['entities'] = dict()
+        for fe in annotations.keys():
+            if fe in {'frame', 'lu', 'sentence'}:
+                continue
+
+            # skip uncertain answers
+            annotation = annotations[fe].get('majority')
+            if not annotation:
+                continue
+
+            # build token label using token position, FE and frame
+            label = '%s_%s' % (fe, frame)
+            iob_tagged = [ (token, '%s-%s' % ('B' if i == 0 else 'I', label))
+                for i, token in enumerate(annotation.split())
+            ]
+            annotations['entities'][fe] = iob_tagged
+
+
+def process_sentence(sentence_id, annotations, lines):
+    """ Processes a sentence by merging tagged words, LU and FEs """
+
+    processed = list()
+    for i, (token, pos, lemma) in enumerate(lines):
+        # TODO check if LUs can be more than one token
+        tag = 'B-LU' if lemma == annotations['lu'] else 'O'
+        processed.append([
+            sentence_id, str(i), token, pos, lemma, annotations['frame'], tag
+        ])
+
+    # find the entities in the sentence and set iob tags accordingly
+    # checking for single tokens is not enough, entities have to be matched as a
+    # whole (i.e. all its tokens must appear in sequence)
+    for entity, tokens in annotations['entities'].iteritems():
+        found = False
+        i = j = 0
+        while i < len(processed):
+            if processed[i][2] == tokens[j][0]:
+                j += 1
+                if j == len(tokens):
+                    found = True
+                    break
+            else:
+                j = 0
+            i += 1
+
+        if found:
+            for line, (token, tag) in zip(processed[i-len(tokens) + 1:i + 1], tokens):
+                line[-1] = tag
+
+    return processed
+
+
+def produce_training_data(annotations, pos_tagged_sentences_dir, debug):
+    """ Adds to the treetagger output information about frames """
     output = []
     for sentence_id, annotations in annotations.iteritems():
+
+        # open treetagger output with tagged words
         with(codecs.open(pos_tagged_sentences_dir + sentence_id, 'rb', 'utf-8')) as i:
-            lines = i.readlines()
-            lines = [l.strip().split('\t') for l in lines]
-            # Each line is a [token, pos, lemma]
-            for i in xrange(0, len(lines)):
-                # sentence_id     token_id     token   pos     lemma   frame   IOB-tag
-                lines[i].insert(0, sentence_id) # Sentence ID
-                lines[i].insert(1, str(i)) # Token ID
-                frame = annotations['frame']
-                lines[i].append(frame) # Frame
-# TODO check if LUs can be more than one token
-                if annotations['lu'] in lines[i]:
-                    lines[i].append('B-LU') # IOB-tag
-                else: lines[i].append('O') # IOB-tag
-                for fe in annotations.keys():
-                    if fe != 'frame' and fe != 'lu' and fe != 'sentence':
-                        annotation = annotations[fe]
-                        annotation = annotation.get('majority')
-                        if annotation:
-                            tokens = annotation.split()
-                            # Unambiguous FE label by attaching the frame label
-                            iob_tagged = [(tokens[0], 'B-%s_%s' % (fe, frame))] # IOB-tag
-                            for token in tokens[1:]:
-                                iob_tagged.append((token, 'I-%s_%s' % (fe, frame))) # IOB-tag
-                            for iob_tag in iob_tagged:
-                                if iob_tag[0].decode('utf-8') == lines[i][2]:
-                                    lines[i].pop()
-                                    lines[i].append(iob_tag[1])
-            for l in lines:
-                # Skip <strong> tags
-                if '<strong>' not in l and '</strong>' not in l:
-                    print l
-                    output.append('\t'.join(l) + '\n')
-    with codecs.open(output_file, 'wb', 'utf-8') as o:
-        o.writelines(output)
+            lines = [l.strip().split('\t') for l in i.readlines()]
+            processed = process_sentence(sentence_id, annotations, lines)
+            output.extend(processed)
+
+            if debug:
+                print 'Annotations'
+                print json.dumps(annotations, indent=2)
+                print 'Result'
+                print '\n'.join(repr(x) for x in processed)
+ 
+    return output
+
+
+def main(crowdflower_csv, pos_data_dir, output_file, debug):
+    results = read_full_results(crowdflower_csv)
+    if debug:
+        print 'Results from crowdflower'
+        print json.dumps(results, indent=2)
+
+    set_majority_vote_answer(results)
+    if debug:
+        print 'Computed majority vote'
+        print json.dumps(results, indent=2)
+
+    tag_entities(results)
+    if debug:
+        print 'Entities tagged'
+        print json.dumps(results, indent=2)
+
+    output = produce_training_data(results, pos_data_dir, debug)
+
+    output_file.writelines('\t'.join(l).encode('utf-8') + '\n'
+                           for l in output
+                           if '<strong>' not in l and '</strong>' not in l)
+
     return 0
 
+
+def create_cli_parser():
+    parser = argparse.ArgumentParser()
+    parser.add_argument('crowdflower_csv', type=argparse.FileType('r'),
+                        help='CSV file with the results coming from crowdflower')
+    parser.add_argument('pos_data_dir',
+                        help='Directory containing the output of treetagger')
+    parser.add_argument('output_file', type=argparse.FileType('w'),
+                        help='Where to store the produced training data')
+    parser.add_argument('--debug', dest='debug', action='store_true')
+    parser.add_argument('-d', dest='debug', action='store_true')
+    parser.add_argument('--no-debug', dest='debug', action='store_false')
+
+    return parser
+
+
 if __name__ == "__main__":
-    annotazione_test = json.loads("""
-    { "40": {
-        "": {
-        "answers": []
-        },
-        "frame": "Bio_Parco",
-        "lu" : "pubblicare",
-        "Pubblicatore": {
-        "majority": "Fedele anglicano",
-        "judgments": 3,
-        "answers": [
-            "tizio",
-            "caio",
-            "sempronio"
-        ]
-        },
-        "Opera": {
-        "majority": "opere a difesa dell' anglicanesimo",
-        "judgments": 3,
-        "answers": [
-        "tizio",
-        "caio",
-        "sempronio"
-        ]
-        }
-        }
-    }
-    """
-    )
-    if len(sys.argv) == 4:
-        results = read_full_results(sys.argv[1])
-        #print json.dumps(results, indent=2)
-        maj = set_majority_vote_answer(results)
-        #print json.dumps(maj, indent=2)
-        produce_training_data(maj, sys.argv[2], sys.argv[3])
-    else:
-        print "Usage: %s <CROWDFLOWER_FULL_RESULTS_CSV> <POS_DATA_DIR> <OUTPUT_FILE>" % __file__
-        sys.exit(1)
+    parser = create_cli_parser()
+    args = parser.parse_args()
+    assert os.path.exists(args.pos_data_dir)
+
+    sys.exit(main(args.crowdflower_csv, args.pos_data_dir, args.output_file, args.debug))
