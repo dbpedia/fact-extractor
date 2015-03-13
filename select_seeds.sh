@@ -16,12 +16,14 @@ python entity_linking.py ../../training/itwiki/clean-gold && mkdir ../../trainin
 
 ### BEGIN Distant supervision with DBpedia ###
 # Inspired by http://semantic-web-journal.net/system/files/swj742.pdf
-# 1. Raw properties with subject == Soccer Player and object == SoccerPlayer | SportsTeam | SoccerClub | SportsEvent
-
-# 2. Subject + object entities lexicalizations
-
+# TODO Raw properties with subject == Soccer Player and object == SoccerPlayer | SportsTeam | SoccerClub | SportsEvent
+# TODO Subject + object entities lexicalizations
+# 1. Grep-friendly list of soccer-related entity lexicalizations
+python extract_lexicalizations.py SoccerPlayer SoccerClub SoccerLeague SoccerTournament SoccerLeagueSeason
+sort -u lexicalizations > resources/lexicalizations.sorted
+rm lexicalizations
 # 3. Match lexicalizations against the corpus
-
+grep -rhwf ~/srl/scripts/resources/lexicalizations.sorted ~/srl/corpora/soccer-players > ~/srl/soccer/training/lexicalizations/raw-sentences
 # 4. Positive example: at least 2 entities must match, negative example otherwise
 
 # 5. Ambiguity filtering
