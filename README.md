@@ -55,7 +55,9 @@ Committers should follow the standard team development practices:
 4. Make a pull request
 
 ## Coding Style
-Please use 4 spaces (soft tab) for indentation. Pull requests not complying to this will be ignored.
+Pull requests not complying to these guidelines will be ignored.
+- Use 4 spaces (soft tab) for indentation;
+- Write docstrings according to [PEP 287](https://www.python.org/dev/peps/pep-0287/). IDEs like [PyCharm](https://www.jetbrains.com/pycharm/help/creating-documentation-comments.html) will do the job.
 
 ## References
 - [FrameNet: A Knowledge Base for Natural Language Processing](http://www.aclweb.org/anthology/W/W14/W14-3001.pdf)
