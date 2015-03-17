@@ -92,7 +92,7 @@ def tag_entities(results):
             ]
             annotations['entities'][fe] = iob_tagged
 
-        annotations['entities']['lu'] = [ (token, 'LU-%s' % ('B' if i == 0 else 'I'))
+        annotations['entities']['lu'] = [ (token, '%s-LU' % ('B' if i == 0 else 'I'))
             for i, token in enumerate(annotations['lu'].split())
         ]
 
