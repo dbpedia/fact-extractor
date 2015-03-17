@@ -92,6 +92,10 @@ def tag_entities(results):
             ]
             annotations['entities'][fe] = iob_tagged
 
+        annotations['entities']['lu'] = [ (token, 'LU-%s' % ('B' if i == 0 else 'I'))
+            for i, token in enumerate(annotations['lu'].split())
+        ]
+
 
 def process_sentence(sentence_id, annotations, lines):
     """ Processes a sentence by merging tagged words, LU and FEs """
@@ -99,9 +103,8 @@ def process_sentence(sentence_id, annotations, lines):
     processed = list()
     for i, (token, pos, lemma) in enumerate(lines):
         # TODO check if LUs can be more than one token
-        tag = 'B-LU' if lemma == annotations['lu'] else 'O'
         processed.append([
-            sentence_id, str(i), token, pos, lemma, annotations['frame'], tag
+            sentence_id, str(i), token, pos, lemma, annotations['frame'], 'O'
         ])
 
     # find the entities in the sentence and set iob tags accordingly
@@ -111,7 +114,10 @@ def process_sentence(sentence_id, annotations, lines):
         found = False
         i = j = 0
         while i < len(processed):
-            if processed[i][2] == tokens[j][0]:
+            # if we are tagging the LU then grab the infinitive of the verb instead
+            # of the actual declined verb
+            word = processed[i][2] if entity != 'lu' else processed[i][4]
+            if tokens[j][0] == word:
                 j += 1
                 if j == len(tokens):
                     found = True
