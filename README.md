@@ -60,7 +60,7 @@ Pull requests not complying to these guidelines will be ignored.
 - Naming conventions
   - use an underscore as a word separator (files, variables, functions);
   - constants are UPPERCASE;
-  - anything else is lowercase;
+  - anything else is lowercase.
 - Write docstrings according to [PEP 287](https://www.python.org/dev/peps/pep-0287/), with a special attention to [field lists](http://sphinx-doc.org/domains.html#info-field-lists). IDEs like [PyCharm](https://www.jetbrains.com/pycharm/help/creating-documentation-comments.html) will do the job.
 
 ## References
