@@ -5,31 +5,26 @@ class StopWords(object):
     """
     This module retrieves stop words for a given language
     """
-    def __init__(self):
-        """
-        Constructor to:
-        1. Initialize the language set
-        2. Locate directory under resources to contain stop words
-        """
+    
     #Mapping between languages and the filenames containing stop words for those languages
-        self._language_to_file_mapping = {
-            'bulgarian': 'stop-words_bulgarian.txt',
-            'dutch': 'stop-words_dutch.txt',
-            'english': 'stop-words_english.txt',
-            'french': 'stop-words_french.txt',
-            'german': 'stop-words_german.txt',
-            'italian': 'stop-words_italian.txt',
-            'portugese': 'stop-words_portugese.txt',
-            'russian': 'stop-words_russian.txt',
-            'spanish': 'stop-words_spanish.txt'
-        }
-        #directory containing the above files
-        self._stopword_directory = os.path.join('resources', 'stop-words')
+    _language_to_file_mapping = {
+        'bulgarian': 'stop-words_bulgarian.txt',
+        'dutch': 'stop-words_dutch.txt',
+        'english': 'stop-words_english.txt',
+        'french': 'stop-words_french.txt',
+        'german': 'stop-words_german.txt',
+        'italian': 'stop-words_italian.txt',
+        'portugese': 'stop-words_portugese.txt',
+        'russian': 'stop-words_russian.txt',
+        'spanish': 'stop-words_spanish.txt'
+    }
+    #directory containing the above files
+    _stopword_directory = os.path.join('resources', 'stop-words')
 
     @classmethod
     def words(self,language):
         """
-        Returns a list of stop words for a specifiedlanguage
+        Returns a list of stop words for a specified language
         Args: 
           language(str): the language whose stop words are required
         Returns:
