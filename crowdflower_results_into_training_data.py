@@ -87,7 +87,7 @@ def tag_entities(results):
 
             # build token label using token position, FE and frame
             label = '%s_%s' % (fe, frame)
-            iob_tagged = [ (token, '%s-%s' % ('B' if i == 0 else 'I', label))
+            iob_tagged = [ (token, '%s-%s' % ('B' if i == 0 else 'I', label.decode('utf-8')))
                 for i, token in enumerate(annotation.split())
             ]
             annotations['entities'][fe] = iob_tagged
@@ -104,7 +104,7 @@ def process_sentence(sentence_id, annotations, lines):
     for i, (token, pos, lemma) in enumerate(lines):
         # TODO check if LUs can be more than one token
         processed.append([
-            sentence_id, str(i), token, pos, lemma, annotations['frame'], 'O'
+            sentence_id, str(i), token, pos, lemma, annotations['frame'].decode('utf-8'), 'O'
         ])
 
     # find the entities in the sentence and set iob tags accordingly
