@@ -1,0 +1,59 @@
+<!-- BEGIN sentence -->
+<h2 style="text-align:center">{{lu}}</h2>
+<br />
+<blockquote style="text-align:center">{{sentence}}</blockquote>
+<!-- END sentence -->
+
+<hr />
+
+<!-- BEGIN question 1 -->
+{% if fe_name0 != 'No data available' %}
+<div class="row">
+  <div class="span5">
+    <cml:radios label="{{fe_name0}}" class="rando" name="{{fe_name0}}" validates="required" gold="true">
+          <cml:radio label="Nessuno"></cml:radio>
+          {% if fe0 != 'No data available' %}
+          <cml:radio label="{{fe0}}"></cml:radio>
+          {% endif %}
+          {% if fe1 != 'No data available' %}
+          <cml:radio label="{{fe1}}"></cml:radio>
+          {% endif %}
+          {% if fe2 != 'No data available' %}
+          <cml:radio label="{{fe2}}"></cml:radio>
+          {% endif %}
+          {% if fe3 != 'No data available' %}
+          <cml:radio label="{{fe3}}"></cml:radio>
+          {% endif %}
+    </cml:radios>
+  </div>
+  
+  {% if type0_0 != 'No data available' and type0_1 != 'No data available' and type0_2 != 'No data available' and type0_3 != 'No data available' %}
+  <div class="span5">
+    <div class="alert alert-info">
+      <h3 style="text-align:center"><i class="icon-info-sign"></i> <span style="color:black">SUGGERIMENTI</span><br />{{fe_name0}} potrebbe essere un:</h3>
+      <ul class="inline">
+        {% if type0_0 != 'No data available' %}
+        <li>{{type0_0}}</li>
+        {% endif %}
+        {% if type0_1 != 'No data available' %}
+        <li>{{type0_1}}</li>
+        {% endif %}
+        {% if type0_2 != 'No data available' %}
+        <li>{{type0_2}}</li>
+        {% endif %}
+        {% if type0_3 != 'No data available' %}
+        <li>{{type0_3}}</li>
+        {% endif %}
+        {% if type0_4 != 'No data available' %}
+        <li>{{type0_4}}</li>
+        {% endif %}
+      </ul>
+    </div>
+  </div>
+  {% endif %}
+  
+</div>
+<hr />
+{% endif %}
+<!-- END question 1 -->
+
