@@ -53,6 +53,7 @@ TYPE_TEMPLATE = '''
         <li>{{%(type_field)s}}</li>
         {%% endif %%}'''
 
+
 def generate_crowdflower_interface_template(input_csv, output_html=None):
     """ Generate CrowFlower interface template based on input data spredsheet """
     # Get the filed names of the input data spreadsheet
@@ -66,11 +67,11 @@ def generate_crowdflower_interface_template(input_csv, output_html=None):
     # Generate fe blocks for every fe filed
     fe_blocks = []
     for fe_field in fe_fields:
-        fe_blocks.append(FE_TEMPLATE % {'fe_field':fe_field})
+        fe_blocks.append(FE_TEMPLATE % {'fe_field': fe_field})
     crowdflower_interface_template = TEMPLATE_HEADER
     # Generate fe_name blocks(question blocks) for every fe_name field
     for idx, fe_name_field in enumerate(fe_name_fields):
-        dic = {'question_num':idx+1, 'fe_name_field':fe_name_field}
+        dic = {'question_num': idx+1, 'fe_name_field': fe_name_field}
         # Add fe blocks into template
         dic['fe_blocks'] = ''.join(fe_blocks)
         # Get "typeK_[0-9]" fields for correspongding "fe_nameK" field
@@ -78,7 +79,7 @@ def generate_crowdflower_interface_template(input_csv, output_html=None):
         # Generate type blocks for every type field
         type_blocks = []
         for type_field in type_fields:
-            type_blocks.append(TYPE_TEMPLATE % {'type_field':type_field})
+            type_blocks.append(TYPE_TEMPLATE % {'type_field': type_field})
         # Generate type predicates for all type fields
         type_predicates = ["%s != 'No data available'" % type_field for type_field in type_fields]
         # Add type blocks into template
@@ -92,6 +93,7 @@ def generate_crowdflower_interface_template(input_csv, output_html=None):
     else:
         with open(output_html, 'w') as template_file:
             template_file.write(crowdflower_interface_template)
+
 
 def create_cli_parser():
     """ Create the cli parameters' parser"""
