@@ -3,6 +3,8 @@
 
 import csv
 import re
+import argparse
+import sys
 
 # crowdflower interface template header
 TEMPLATE_HEADER = '''<!-- BEGIN sentence -->
@@ -51,10 +53,10 @@ TYPE_TEMPLATE = '''
         <li>{{%(type_field)s}}</li>
         {%% endif %%}'''
 
-def generate_crowdflower_interface_template(sheet_file_name, template=None):
+def generate_crowdflower_interface_template(input_csv, output_html=None):
     """ Generate CrowFlower interface template based on input data spredsheet """
     # Get the filed names of the input data spreadsheet
-    with open(sheet_file_name) as sheet_file:
+    with open(input_csv) as sheet_file:
         sheet = csv.DictReader(sheet_file)
         fields = sheet.fieldnames
     # Get "fe_name[0-9]" fields
@@ -85,11 +87,22 @@ def generate_crowdflower_interface_template(sheet_file_name, template=None):
         dic['type_predicates'] = ' and '.join(type_predicates)
         # Add current fe_name block or question block into template
         crowdflower_interface_template += (FE_NAME_TEMPLATE % dic)
-    if template is None:
+    if output_html is None:
         return crowdflower_interface_template
     else:
-        with open(template, 'w') as template_file:
+        with open(output_html, 'w') as template_file:
             template_file.write(crowdflower_interface_template)
 
+def create_cli_parser():
+    """ Create the cli parameters' parser"""
+    parser = argparse.ArgumentParser()
+    parser.add_argument('input_csv', type=argparse.FileType('r'),
+                        help='CSV file containing the CrowdFlower data spreadsheet')
+    parser.add_argument('output_html', type=argparse.FileType('w'),
+                        help='html file to store the produced html template')
+    return parser
+
 if __name__ == '__main__':
-    print generate_crowdflower_interface_template('resources/crowdflower-input.sample', 'tmp.html')
+    parser = create_cli_parser()
+    args = parser.parse_args()
+    sys.exit(generate_crowdflower_interface_template(args.input_csv, args.output_html))
