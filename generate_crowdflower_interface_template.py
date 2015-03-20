@@ -102,6 +102,7 @@ def create_cli_parser():
                         help='html file to store the produced html template')
     return parser
 
+
 if __name__ == '__main__':
     parser = create_cli_parser()
     args = parser.parse_args()
