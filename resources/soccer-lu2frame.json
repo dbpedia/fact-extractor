@@ -1,0 +1,234 @@
+[    
+    {
+        "lu": 
+        {
+            "lemma": "giocare",
+            "tokens":
+            [
+              "gioca",
+              "giocai",
+              "giocammo",
+              "giocandoci",
+              "giocando",
+              "giocandogli",
+              "giocandola",
+              "giocandole",
+              "giocandoli",
+              "giocandolo",
+              "giocandone",
+              "giocandosela",
+              "giocandoselo",
+              "giocandosi",
+              "giocandovi",
+              "giocane",
+              "giocano",
+              "giocante",
+              "giocanti",
+              "giocarci",
+              "giocare",
+              "giocar",
+              "giocargli",
+              "giocarla",
+              "giocarle",
+              "giocarli",
+              "giocarlo",
+              "giocarne",
+              "giocarono",
+              "giocarsela",
+              "giocarselo",
+              "giocarsi",
+              "giocarvi",
+              "giocasi",
+              "giocasse",
+              "giocassero",
+              "giocata",
+              "giocate",
+              "giocatesi",
+              "giocatevi",
+              "giocati",
+              "giocato",
+              "giocava",
+              "giocavamo",
+              "giocavano",
+              "giocavi",
+              "giocavo",
+              "giocherà",
+              "giocheranno",
+              "giocherebbe",
+              "giocherebbero",
+              "giocherei",
+              "giocheremo",
+              "giocheresti",
+              "giocherete",
+              "giocherò",
+              "giochiamo",
+              "giochi",
+              "giochino",
+              "gioco",
+              "giocò"
+            ],
+            "frames":
+            [
+                {
+                    "frame": "Attività",
+                    "FEs":
+                    [
+                        { "Competizione": "core" },
+                        { "Squadra": "core" },
+                        { "Agente": "extra" },
+                        { "Durata": "extra" }
+                    ]
+                },
+                {
+                    "frame": "Partita",
+                    "FEs":
+                    [
+                        { "Squadra_1": "core" },
+                        { "Squadra_2": "core" },
+                        { "Competizione": "extra"},
+                        { "Luogo": "extra" },
+                        { "Tempo": "extra" },
+                        { "Punteggio": "extra" },
+                        { "Classifica": "extra" }
+                    ]
+                }
+            ]
+        }
+    },
+    {
+        "lu":
+        {
+            "lemma": "perdere",
+            "tokens":
+            [
+              "perda",
+              "perde",
+              "perdemmo",
+              "perdendo",
+              "perdendola",
+              "perdendole",
+              "perdendoli",
+              "perdendolo",
+              "perdendone",
+              "perderà",
+              "perderanno",
+              "perdere",
+              "perderla",
+              "perderlo",
+              "perderne",
+              "perdersi",
+              "perdesse",
+              "perdessero",
+              "perdessimo",
+              "perdete",
+              "perdeva",
+              "perdevano",
+              "perdilo",
+              "perdono",
+              "persa",
+              "perse",
+              "persero",
+              "persi",
+              "perso"
+            ],
+            "frames":
+            [
+                {
+                    "frame": "Sconfitta",
+                    "FEs":
+                    [
+                        { "Vincente": "core" },
+                        { "Perdente": "core" },
+                        { "Competizione": "extra"},
+                        { "Luogo": "extra" },
+                        { "Tempo": "extra" },
+                        { "Punteggio": "extra" },
+                        { "Classifica": "extra" }
+                    ]
+                }
+            ]
+        }
+    },
+    {
+        "lu":
+        {
+            "lemma": "vincere",
+            "tokens":
+            [
+              "vincano", 
+              "vinca", 
+              "vincemmo", 
+              "vincendoci", 
+              "vincendogli", 
+              "vincendola", 
+              "vincendole", 
+              "vincendoli", 
+              "vincendolo", 
+              "vincendone", 
+              "vincendosi", 
+              "vincendo", 
+              "vincendovi", 
+              "vincente", 
+              "vincenti", 
+              "vincerai", 
+              "vinceranno", 
+              "vincerà", 
+              "vincerci", 
+              "vincerebbero", 
+              "vincerebbe", 
+              "vincerei", 
+              "vinceremo", 
+              "vincerete", 
+              "vincere", 
+              "vincergli", 
+              "vincerla", 
+              "vincerle", 
+              "vincerli", 
+              "vincerlo", 
+              "vincermi", 
+              "vincerne", 
+              "vincerò", 
+              "vincersi", 
+              "vincer", 
+              "vincervi", 
+              "vincessero", 
+              "vincesse", 
+              "vincessi", 
+              "vincesti", 
+              "vincete", 
+              "vincevano", 
+              "vinceva", 
+              "vince", 
+              "vincevo", 
+              "vinciamo", 
+              "vinciate", 
+              "vinci", 
+              "vincono", 
+              "vinco", 
+              "vinsero", 
+              "vinse", 
+              "vinsi", 
+              "vinta", 
+              "vinte", 
+              "vinti", 
+              "vinto"
+            ],
+            "frames":
+            [
+                {
+                    "frame": "Vittoria",
+                    "FEs":
+                    [
+                        { "Vincitore": "core" },
+                        { "Perdente": "core" },
+                        { "Competizione": "extra"},
+                        { "Luogo": "extra" },
+                        { "Tempo": "extra" },
+                        { "Punteggio": "extra" },
+                        { "Classifica": "extra" }
+                    ]
+                }
+            ]
+        }
+    }
+]
