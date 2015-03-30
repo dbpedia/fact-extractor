@@ -1,5 +1,5 @@
 #!/usr/bin/env python
-# encoding: utf-8
+# -*- coding: utf-8 -*-
 
 import csv
 import re
@@ -18,6 +18,7 @@ HEADER = '''<!-- BEGIN sentence -->
 <div class="row">
 '''
 
+# closing row div
 FOOTER = "</div>"
 
 # token block template
@@ -40,12 +41,6 @@ FE_TEMPLATE = '''
           <cml:radio label="{{%(fe_name_field)s}}"></cml:radio>
           {%% endif %%}'''
 
-# type block template
-# TYPE_TEMPLATE = '''
-#         {%% if %(type_field)s != 'No data available' %%}
-#         <li>{{%(type_field)s}}</li>
-#         {%% endif %%}'''
-
 
 def generate_crowdflower_interface_template(input_csv, output_html=None):
     """ Generate CrowFlower interface template based on input data spredsheet """
@@ -66,20 +61,6 @@ def generate_crowdflower_interface_template(input_csv, output_html=None):
         dic = {'question_num': idx+1, 'fe_field': fe_field}
         # Add fe blocks into template
         dic['fe_blocks'] = ''.join(fe_blocks)
-        
-        # # Get "typeK_[0-9]" fields for correspongding "fe_nameK" field
-        # type_fields = [f for f in fields if re.match('type%d_[0-9]$' % idx, f)]
-        # # Generate type blocks for every type field
-        # type_blocks = []
-        # for type_field in type_fields:
-        #     type_blocks.append(TYPE_TEMPLATE % {'type_field': type_field})
-        # # Generate type predicates for all type fields
-        # type_predicates = ["%s != 'No data available'" % type_field for type_field in type_fields]
-        # # Add type blocks into template
-        # dic['type_blocks'] = ''.join(type_blocks)
-        # Add type predicates into template
-        # dic['type_predicates'] = ' and '.join(type_predicates)
-        
         # Add current fe_name block or question block into template
         crowdflower_interface_template += (TOKEN_TEMPLATE % dic)
     crowdflower_interface_template += FOOTER
