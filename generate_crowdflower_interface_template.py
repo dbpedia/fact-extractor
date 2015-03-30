@@ -6,13 +6,8 @@ import re
 import argparse
 import sys
 
-# crowdflower interface template header
-HEADER = '''<!-- BEGIN sentence -->
-<h2 style="text-align:center">{{lu}}</h2>
-<br />
-<blockquote style="text-align:center">{{sentence}}</blockquote>
-<!-- END sentence -->
-
+# header with sentence
+HEADER = '''<blockquote style="text-align:center">{{sentence}}</blockquote>
 <hr />
 
 <div class="row">
