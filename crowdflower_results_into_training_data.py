@@ -1,4 +1,4 @@
-#!/opt/local/bin/python
+#!/usr/bin/env python
 # -*- coding: utf-8 -*-
 
 import codecs
@@ -20,7 +20,8 @@ def read_full_results(results_file):
     # TODO csv lib doesn't handle unicode
     results = csv.DictReader(results_file)
     fields = results.fieldnames
-    fe_amount = len([f for f in fields if re.match('fe_name[0-9]$', f)])
+    # fe_amount = len([f for f in fields if re.match(r'fe[0-9]{2}$', f)])
+    token_amount = len([f for f in fields if re.match(r'token[0-9]{2}$', f)])
 
     # Skip gold
     regular = [row for row in results if row['_golden'] != 'true']
@@ -28,23 +29,23 @@ def read_full_results(results_file):
         sentence_id = row['id']
         sentence = h.unescape(row['sentence'].decode('utf-8'))
 
-        # initialize data structure with sentence, frame, lu and entity list
+        # initialize data structure with sentence, frame, lu and token list
         if not sentence_id in processed:
             processed[sentence_id] = dict()
             processed[sentence_id]['sentence'] = sentence
             processed[sentence_id]['frame'] = row['frame']
             processed[sentence_id]['lu'] = row['lu']
-            for n in xrange(0, fe_amount):
-                entity = row['orig_fe_name' + str(n)]
+            for n in xrange(0, token_amount):
+                entity = row['orig_token%02d' % n]
                 processed[sentence_id][entity] = {
                     'judgments': 0,
                     'answers': list()
                 }
 
-        # update judgments for each entity
-        for n in xrange(0, fe_amount):
-            entity = row['orig_fe_name' + str(n)]
-            answer = row.get('fe_name' + str(n))
+        # update judgments for each token
+        for n in xrange(0, token_amount):
+            entity = row['orig_token%02d' % n]
+            answer = row.get('token%02d' % n)
             if answer:
                 processed[sentence_id][entity]['judgments'] += 1
                 processed[sentence_id][entity]['answers'].append(answer)
