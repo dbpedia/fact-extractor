@@ -76,7 +76,8 @@
                         { "Competizione": "core" },
                         { "Squadra": "core" },
                         { "Agente": "extra" },
-                        { "Durata": "extra" }
+                        { "Durata": "extra" },
+                        { "Tempo": "extra" }
                     ]
                 },
                 {
