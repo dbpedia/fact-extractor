@@ -14,19 +14,28 @@ python get_meaningful_sentences soccer/training/giocare/pos-tagged soccer/traini
 python entity_linking.py ../../training/itwiki/clean-gold && mkdir ../../training/itwiki/linked-gold && mv *.json ../../training/itwiki/linked-gold
 ### END baseline ###
 
-### BEGIN Distant supervision with DBpedia ###
+### BEGIN DBpedia lexicalizations ###
 # Inspired by http://semantic-web-journal.net/system/files/swj742.pdf
+# A)
 # TODO Raw properties with subject == Soccer Player and object == SoccerPlayer | SportsTeam | SoccerClub | SportsEvent
 # TODO Subject + object entities lexicalizations
 # 1. Grep-friendly list of soccer-related entity lexicalizations
 python extract_lexicalizations.py SoccerPlayer SoccerClub SoccerLeague SoccerTournament SoccerLeagueSeason
 sort -u lexicalizations > resources/lexicalizations.sorted
 rm lexicalizations
-# 3. Match lexicalizations against the corpus
-grep -rhwf ~/srl/scripts/resources/lexicalizations.sorted ~/srl/corpora/soccer-players > ~/srl/soccer/training/lexicalizations/raw-sentences
+# 3. Match lexicalizations against the corpus (case insensitive)
+grep -irhwf ~/srl/scripts/resources/lexicalizations.sorted ~/srl/corpora/soccer-players > ~/srl/soccer/training/lexicalizations/raw-sentences
 # 4. Positive example: at least 2 entities must match, negative example otherwise
 
 # 5. Ambiguity filtering
+
+# B)
+# Positive examples MUST contain:
+# 1 subject entity corresponding to the corpus subset selection (e.g., SoccerPlayer)
+# LU
+# more object entities
+python extract_lexicalizations SoccerPlayer
+sort -u
 
 ### END DBpedia lexicalizations ###
 
