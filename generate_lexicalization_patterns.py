@@ -41,18 +41,28 @@ def process_response(endpoint_response):
     return processed
 
 
-def write_lexicalizations_list(results, outfile):
-    """Write a grep-friendly list of lexicalizations, one per line"""
+def write_lexicalizations_patterns(subjects, lus, objects, outfile):
+    """Write a grep-friendly file containing lexicalization patterns, one per line"""
     with codecs.open(outfile, 'wb', 'utf-8') as o:
-        for entity, lexicalizations in results.iteritems():
-            o.writelines([l + '\n' for l in lexicalizations])
+        for subj_entity, subj_lexicalizations in subjects.iteritems():
+            for lu in lus:
+                for obj_entity, obj_lexicalizations in objects.iteritems():
+                    for subj in subj_lexicalizations:
+                        for obj in obj_lexicalizations:
+                            # Each lexicalization is separated by '.*' for matching purposes
+                            o.write('%s.*%s.*%s\n' % (subj, lu, obj))
     return 0
 
 
 if __name__ == "__main__":
-    all_results = {}
-    for entity_type in sys.argv[1:]:
+    objects = {}
+    with codecs.open(sys.argv[1], 'rb', 'utf-8') as i:
+        lus = [lu.strip() for lu in i.readlines()]
+    subject_type = sys.argv[2]
+    object_types = sys.argv[3:]
+    subjects = process_response(query_endpoint(QUERY, subject_type))
+    for entity_type in object_types:
         response = query_endpoint(QUERY, entity_type)
-        all_results.update(process_response(response))
-    write_lexicalizations_list(all_results, 'lexicalizations')
+        objects.update(process_response(response))
+    write_lexicalizations_patterns(subjects, lus, objects, 'lexicalizations')
 
