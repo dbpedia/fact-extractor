@@ -6,47 +6,63 @@ import json
 import os
 import sys
 
+debug = True
+# all_links = all_ngrams = all_tp = {}
+all_chunks = {}
+
+# Loop over the dirs containing the chunks
 for path, subdirs, files in os.walk(sys.argv[1]):
-  for name in files:
-    f = os.path.join(path, name)
-    DO STUFF
+    for name in files:
+        f = os.path.join(path, name)
+        # Standard sentence ID
+        sentence_id = '%02d' % int(os.path.splitext(name)[0])
+        # links
+        if 'twm-links' in path:
+            links = json.load(codecs.open(f, 'rb', 'utf-8'))
+            link_chunks = set()
+            for val in links.values():
+                for diz in val:
+                    link_chunks.add(diz['chunk'])
+            if debug:
+                print 'LINKS'
+                print link_chunks
+            all_chunks[sentence_id] = {'twm-links': link_chunks}
+        # n-grams
+        elif 'twm-ngrams' in path:
+            ngrams = json.load(codecs.open(f, 'rb', 'utf-8'))
+            ngram_chunks = set()
+            for val in ngrams.values():
+                for diz in val:
+                    ngram_chunks.add(diz['chunk'])
+            if debug:
+                print 'NGRAMS'
+                print ngram_chunks
+            all_chunks[sentence_id] = {'twm-ngrams': ngram_chunks}
+        # TextPro
+        elif 'textpro-chunks' in path:
+            with codecs.open(f, 'rb', 'utf-8'):
+                tp = [l.strip() for l in f.readlines()]
+            tmp_tp_chunks = []
+            # Parse TextPro format
+            for line in tp:
+                if line.startswith('#'): continue
+                items = line.split('\t')
+                token = items[0]
+                tag = items[3]
+                if tag == 'B-NP': chunk = [token]
+                elif tag == 'I-NP': chunk.append(token)
+                else: continue
+                tmp_tp_chunks.append(chunk)
 
-ngrams = json.load(codecs.open('/home/fox/srl/soccer/training/07042015/twm-ngrams/0.json'))
-links = json.load(codecs.open('/home/fox/srl/soccer/training/07042015/twm-links/0.json'))
-fsssasdadsadsdadas= codecs.open('/home/fox/srl/soccer/training/07042015/textpro/00', 'rb', 'utf-8')
-tp = [l.strip() for l in f.readlines()]
+            tp_chunks = []
+            for chunk in tmp_tp_chunks:
+                if chunk not in tp_chunks: tp_chunks.append(chunk)
+            tp_chunks = set([' '.join(chunk) for chunk in tp_chunks])
+            all_chunks[sentence_id] = {'textpro-chunks': tp_chunks}
 
-tmp_tp_chunks = []
-for line in tp:
-    if line.startswith('#'): continue
-    items = line.split('\t')
-    token = items[0]
-    tag = items[3]
-    if tag == 'B-NP': chunk = [token]
-    elif tag == 'I-NP': chunk.append(token)
-    else: continue
-    tmp_tp_chunks.append(chunk)
+if debug:
+    print all_chunks
 
-tp_chunks = []
-for chunk in tmp_tp_chunks:
-    if chunk not in tp_chunks: tp_chunks.append(chunk)
-tp_chunks = set([' '.join(chunk) for chunk in tp_chunks])
-
-ngram_chunks = set()
-for val in ngrams.values():
-    for diz in val:
-        ngram_chunks.add(diz['chunk'])
-
-print 'NGRAMS'
-print ngram_chunks
-
-link_chunks = set()
-for val in links.values():
-    for diz in val:
-        link_chunks.add(diz['chunk'])
-
-print 'LINKS'
-print link_chunks
 
 # If chunks overlap, prefer links > ngrams > chunker
 to_remove = set()
