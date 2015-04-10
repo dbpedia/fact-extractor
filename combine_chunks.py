@@ -30,9 +30,6 @@ for path, subdirs, files in os.walk(sys.argv[1]):
                     chunk = diz['chunk']
                     if chunk.lower() in stopwords.StopWords.words('italian'): continue
                     link_chunks.add(chunk)
-            if debug:
-                print 'LINKS'
-                print link_chunks
             all_chunks[sentence_id] = {'twm-links': link_chunks}
         # n-grams
         elif 'twm-ngrams' in path:
@@ -44,9 +41,6 @@ for path, subdirs, files in os.walk(sys.argv[1]):
                     chunk = diz['chunk']
                     if chunk.lower() in stopwords.StopWords.words('italian'): continue
                     ngram_chunks.add(diz['chunk'])
-            if debug:
-                print 'NGRAMS'
-                print ngram_chunks
             all_chunks[sentence_id]['twm-ngrams'] = ngram_chunks
         # TextPro
         elif 'textpro-chunks' in path:
@@ -81,24 +75,31 @@ for sentence, chunks in all_chunks.iteritems():
     link_chunks = chunks['twm-links']
     ngram_chunks = chunks['twm-ngrams']
     tp_chunks = chunks['textpro-chunks']
+    if debug:
+        print 'LINKS'
+        print link_chunks
+        print 'NGRAMS'
+        print ngram_chunks
+        print 'TEXTPRO'
+        print tp_chunks
     # Prune ngrams from links
     to_remove = set()
     for link_chunk in link_chunks:
         for ngram_chunk in ngram_chunks:
-            if link_chunk in ngram_chunk:
+            # Prune whether the link is an ngram substring or viceversa
+            if link_chunk in ngram_chunk or ngram_chunk in link_chunk:
                 to_remove.add(ngram_chunk)
     ngram_chunks.difference_update(to_remove)
 
     print 'NGRAMS PRUNED FROM LINKS'
     print ngram_chunks
 
-    print 'TEXTPRO'
-    print tp_chunks
     # Prune TextPro chunks from links
     to_remove = set()
     for link_chunk in link_chunks:
         for tp_chunk in tp_chunks:
-            if link_chunk in tp_chunk:
+            # Prune whether the link is a TextPro chunk substring or viceversa
+            if link_chunk in tp_chunk or tp_chunk in link_chunk:
                 to_remove.add(tp_chunk)
     tp_chunks.difference_update(to_remove)
 
@@ -109,7 +110,8 @@ for sentence, chunks in all_chunks.iteritems():
     to_remove = set()
     for ngram_chunk in ngram_chunks:
         for tp_chunk in tp_chunks:
-            if ngram_chunk in tp_chunk:
+            # Prune whether the ngram is TextPro chunk substring or viceversa
+            if ngram_chunk in tp_chunk or tp_chunk in ngram_chunk:
                 to_remove.add(tp_chunk)
     tp_chunks.difference_update(to_remove)
 
@@ -117,7 +119,5 @@ for sentence, chunks in all_chunks.iteritems():
     print tp_chunks
 
     combined[sentence] = tp_chunks.union(ngram_chunks, link_chunks)
-
-
-print 'FINAL'
-print combined
+    print 'COMBINED'
+    print combined[sentence]
