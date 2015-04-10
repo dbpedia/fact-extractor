@@ -109,7 +109,7 @@ for sentence, chunks in all_chunks.iteritems():
     print 'TEXTPRO PRUNED FROM NGRAMS'
     print tp_chunks
 
-    combined[sentence_id] = tp_chunks.union(ngram_chunks, link_chunks)
+    combined[sentence] = tp_chunks.union(ngram_chunks, link_chunks)
 
 
 print 'FINAL'
