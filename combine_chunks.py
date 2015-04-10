@@ -6,6 +6,7 @@ import json
 import os
 import re
 import sys
+import stopwords
 from collections import defaultdict
 
 debug = True
@@ -25,7 +26,10 @@ for path, subdirs, files in os.walk(sys.argv[1]):
             link_chunks = set()
             for val in links.values():
                 for diz in val:
-                    link_chunks.add(diz['chunk'])
+                    # Skip chunks if they are in a stopwords list
+                    chunk = diz['chunk']
+                    if chunk.lower() in stopwords.StopWords.words('italian'): continue
+                    link_chunks.add(chunk)
             if debug:
                 print 'LINKS'
                 print link_chunks
@@ -36,6 +40,9 @@ for path, subdirs, files in os.walk(sys.argv[1]):
             ngram_chunks = set()
             for val in ngrams.values():
                 for diz in val:
+                    # Skip chunks if they are in a stopwords list
+                    chunk = diz['chunk']
+                    if chunk.lower() in stopwords.StopWords.words('italian'): continue
                     ngram_chunks.add(diz['chunk'])
             if debug:
                 print 'NGRAMS'
