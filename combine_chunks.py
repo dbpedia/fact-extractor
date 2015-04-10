@@ -2,6 +2,7 @@
 # encoding: utf-8
 
 import codecs
+import itertools
 import json
 import os
 import re
@@ -11,6 +12,21 @@ from collections import defaultdict
 
 debug = True
 all_chunks = {}
+
+# From https://en.wikibooks.org/wiki/Algorithm_Implementation/Strings/Longest_common_substring#Python2
+def longest_common_substring(s1, s2):
+    m = [[0] * (1 + len(s2)) for i in xrange(1 + len(s1))]
+    longest, x_longest = 0, 0
+    for x in xrange(1, 1 + len(s1)):
+        for y in xrange(1, 1 + len(s2)):
+            if s1[x - 1] == s2[y - 1]:
+                m[x][y] = m[x - 1][y - 1] + 1
+                if m[x][y] > longest:
+                    longest = m[x][y]
+                    x_longest = x
+            else:
+                m[x][y] = 0
+    return s1[x_longest - longest: x_longest]
 
 # Loop over the dirs containing the chunks
 for path, subdirs, files in os.walk(sys.argv[1]):
@@ -67,7 +83,7 @@ for path, subdirs, files in os.walk(sys.argv[1]):
 if debug:
     print all_chunks
 
-combined = {}
+all_combined = {}
 
 # Combine results
 for sentence, chunks in all_chunks.iteritems():
@@ -118,6 +134,21 @@ for sentence, chunks in all_chunks.iteritems():
     print 'TEXTPRO PRUNED FROM NGRAMS'
     print tp_chunks
 
-    combined[sentence] = tp_chunks.union(ngram_chunks, link_chunks)
+    combined = tp_chunks.union(ngram_chunks, link_chunks)
+    pairs = itertools.combinations(combined, 2)
+    # Merge chunks in case of common substrings
+    for p1, p2 in pairs:
+        print p1
+        print p2
+        common = longest_common_substring(p1, p2)
+        if common:
+            print common
+            split1 = p1.split(common)
+            split2 = p2.split(common)
+            total = split1 + [common] + split2
+            print ''.join(total)
+
+
+    all_combined[sentence] = combined
     print 'COMBINED'
-    print combined[sentence]
+    print all_combined[sentence]
