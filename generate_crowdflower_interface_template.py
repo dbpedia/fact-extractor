@@ -43,7 +43,7 @@ def generate_crowdflower_interface_template(input_csv, output_html=None):
     sheet = csv.DictReader(input_csv)
     fields = sheet.fieldnames
     # Get "fe_name[0-9][0-9]" fields
-    fe_fields = [f for f in fields if re.match(r'fe[0-9]{2}$', f)]
+    fe_fields = [f for f in fields if re.match(r'fe_name[0-9]{2}$', f)]
     # Get "fe[0-9][0-9]" fields
     token_fields = [f for f in fields if re.match(r'fe[0-9]{2}$', f)]
     # Generate fe blocks for every token field
