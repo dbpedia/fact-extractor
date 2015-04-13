@@ -61,13 +61,13 @@ def prepare_crowdflower_input(chunk_data, debug):
                         # fe_name{i}, fe{j}
                         for i in xrange(0, len(fe_names)):
                             # Also store FE type (core or extra)
-                            input_row['fe_name%d' % i], input_row['fe_name%d_type' % i] = fe_names[i].items()[0]
+                            input_row['fe_name%02d' % i], input_row['fe_name%02d_type' % i] = fe_names[i].items()[0]
                             if debug:
-                                print 'FIELD fe_name%d: %s' % (i, fe_names[i])
+                                print 'FIELD fe_name%02d: %s' % (i, fe_names[i])
                         for j in xrange(0, len(sentence['chunks'])):
-                            input_row['fe%d' % j] = sentence['chunks'][j]
+                            input_row['fe%02d' % j] = sentence['chunks'][j]
                             if debug:
-                                print 'FIELD fe%d: %s' % (j, sentence['chunks'][j])
+                                print 'FIELD fe%02d: %s' % (j, sentence['chunks'][j])
         if debug:
             print 'COMPLETE ROW: %s' % input_row
         # Prepare input for DictWriter, since it won't write UTF-8
@@ -80,12 +80,12 @@ def write_input_spreadsheet(input_data, outfile, debug):
     fields = set([k for d in input_data for k in d.keys()])
     fields.add('_golden')
     fields = list(fields)
-    fields.sort()
     gold_columns = []
     for field in fields:
         # Add gold answer columns for each token
         if re.match('fe_name[0-9]$', field): gold_columns.append(field + '_gold')
     fields += gold_columns
+    fields.sort()
     if debug:
         print 'CSV FIELDS: %s' % fields
     writer = csv.DictWriter(outfile, fields)
