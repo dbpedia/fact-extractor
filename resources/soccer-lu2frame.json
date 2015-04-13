@@ -70,19 +70,6 @@
             "frames":
             [
                 {
-                    "frame": "Partita",
-                    "FEs":
-                    [
-                        { "Squadra_1": "core" },
-                        { "Squadra_2": "core" },
-                        { "Competizione": "extra"},
-                        { "Luogo": "extra" },
-                        { "Tempo": "extra" },
-                        { "Punteggio": "extra" },
-                        { "Classifica": "extra" }
-                    ]
-                },
-                {
                     "frame": "Attività",
                     "FEs":
                     [
