@@ -83,7 +83,7 @@ def write_input_spreadsheet(input_data, outfile, debug):
     gold_columns = []
     for field in fields:
         # Add gold answer columns for each token
-        if re.match('fe_name[0-9]$', field): gold_columns.append(field + '_gold')
+        if re.match('fe_name[0-9]{2}$', field): gold_columns.append(field + '_gold')
     fields += gold_columns
     fields.sort()
     if debug:
