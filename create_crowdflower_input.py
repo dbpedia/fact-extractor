@@ -81,6 +81,11 @@ def write_input_spreadsheet(input_data, outfile, debug):
     fields.add('_golden')
     fields = list(fields)
     fields.sort()
+    gold_columns = []
+    for field in fields:
+        # Add gold answer columns for each token
+        if field.startswith('fe_name'): gold_columns.append(field + '_gold')
+    fields += gold_columns
     if debug:
         print 'CSV FIELDS: %s' % fields
     writer = csv.DictWriter(outfile, fields)
