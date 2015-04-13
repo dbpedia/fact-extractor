@@ -1,6 +1,7 @@
 #!/usr/bin/env python
 # coding: utf-8
 
+import argparse
 import codecs
 import csv
 import json
@@ -8,104 +9,98 @@ import os
 import re
 import sys
 from collections import defaultdict
-from nltk import RegexpParser
-from get_meaningful_sentences import CHUNKER_GRAMMAR, load_pos_data
 
-LU_FRAME_MAP_LOCATION = 'resources/lu-frame-map.json'
+
+LU_FRAME_MAP_LOCATION = 'resources/soccer-lu2frame.json'
 LU_FRAME_MAP = json.load(open(LU_FRAME_MAP_LOCATION))
 TOKENS = []
 
 
 def load_all_tokens():
-    for lu in LU_FRAME_MAP.keys():
-        if LU_FRAME_MAP[lu].get('tokens'):
-            for token in LU_FRAME_MAP[lu].get('tokens'):
-                TOKENS.append(token)
+    for lu in LU_FRAME_MAP:
+        for token in lu['lu']['tokens']:
+            TOKENS.append(token)
 
 
-def add_chunk_data(pos_data):
-    chunker = RegexpParser(CHUNKER_GRAMMAR)
-    chunks = {} 
-    for sentence_id, data in pos_data.iteritems():
-        result = chunker.parse(data)
-        chunks[sentence_id] = {}
-        chunks[sentence_id]['chunks'] = [' '.join([token for token, pos in t.leaves()]) for t in result.subtrees(lambda result: result.label() == 'SN')]
-    return chunks
-
-# Assumes entity linked sentences have the <strong> tag
-def prepare_crowdflower_input(entity_linked_dir, chunk_data):
+def prepare_crowdflower_input(chunk_data, debug):
     input_data = []
-    # Walk into entity linked dir
-    for path, subdirs, files in os.walk(entity_linked_dir):
-        for name in files:
-            # Get sentence ID based on file naming convention {number}.json
-            row_id = name.split('.')[0]
-            if row_id in chunk_data.keys():
-                f = os.path.join(path, name)
-                # Load entity linked JSON file
-                entity_linked_data = json.load(codecs.open(f, 'rb', 'utf-8'), encoding='utf-8')
-                input_row = {}
-                input_row['id'] = row_id
-                sentence = entity_linked_data.keys()[0]
-                input_row['sentence'] = sentence
-                # Extract LU token based on the <strong> tag
-                match = re.search(r'<strong>([^<]+)</strong>', sentence)
-                if match: token = match.group(1)
-                else: print "No match in sentence -> %s" % sentence
-                frames = []
-                for lu in LU_FRAME_MAP.keys():
-                    tokens = LU_FRAME_MAP[lu].get('tokens')
-                    # Check if the LU token exists in the preloaded LU_FRAME_MAP
-                    if tokens and token in tokens:
-                        input_row['lu'] = lu
-                        frames = [frame for frame in LU_FRAME_MAP[lu].keys() if frame != 'tokens']
-                linked_entities = entity_linked_data[sentence]
-                for frame in frames:
-                    input_row['frame'] = frame
-                    fe_names = LU_FRAME_MAP[input_row['lu']][frame]
-                    # Store FE, chunks and linked entities with incremental numbers
-                    # fe_name{i}, fe{j}, entity{j}, type{j_k} 
-                    for i in xrange(0, len(fe_names)):
-                        input_row['fe_name' + str(i)] = fe_names[i]
-                    for j in xrange(0, len(chunk_data[row_id]['chunks'])):
-                        current_np = chunk_data[row_id]['chunks'][j]
-                        input_row['fe' + str(j)] = current_np
-                        for linked in linked_entities:
-                            # Retrieve entity in the sentence based on indices
-                            entity_string = sentence[linked['start']:linked['end']]
-                            if current_np.find(entity_string) != -1:
-                                input_row['entity' + str(j)] = entity_string 
-                                for k in xrange(0, len(linked['types'])):
-                                    input_row['type' + str(j) + '_' + str(k)] = linked['types'][k][28:]
-                # Prepare input for DictWriter, since it won't write UTF-8
-                input_data.append({k:v.encode('utf-8') for k,v in input_row.items()})
+    for sentence in chunk_data:
+        if debug:
+            print 'CHUNK DATA: %s' % sentence
+        input_row = {}
+        input_row['id'] = sentence['id']
+        snt = sentence['sentence']
+        input_row['sentence'] = snt
+        # Tokenize by splitting on spaces
+        sentence_tokens = snt.split()
+        if debug:
+            print 'ID: %s' % input_row['id']
+            print 'SENTENCE: %s' % input_row['sentence']
+            print 'TOKENS: %s' % sentence_tokens
+        frames = []
+        for lu in LU_FRAME_MAP:
+            lu_tokens = lu['lu']['tokens']
+            # Check if a sentence token matches a LU token and assign frames accordingly
+            for sentence_token in sentence_tokens:
+                if sentence_token in lu_tokens:
+                    if debug:
+                        print 'SENTENCE TOKEN "%s" MATCHED IN LU TOKENS' % sentence_token
+                    input_row['lu'] = lu['lu']['lemma']
+                    frames = lu['lu']['frames']
+                    if debug:
+                        print 'LU LEMMA: %s' % input_row['lu']
+                        print 'FRAMES: %s' % frames
+                    for frame in frames:
+                        # TODO this will overwrite in case of more frames per LU
+                        input_row['frame'] = frame['frame']
+                        fe_names = frame['FEs']
+                        if debug:
+                            print 'ASSIGNED FRAME: %s' % frame
+                            print 'FEs: %s' % fe_names
+                        # Store FE and chunks with incremental numbers
+                        # fe_name{i}, fe{j}
+                        for i in xrange(0, len(fe_names)):
+                            # Also store FE type (core or extra)
+                            input_row['fe_name%d' % i], input_row['fe_name%d_type' % i] = fe_names[i].items()[0]
+                            if debug:
+                                print 'FIELD fe_name%d: %s' % (i, fe_names[i])
+                        for j in xrange(0, len(sentence['chunks'])):
+                            input_row['fe%d' % j] = sentence['chunks'][j]
+                            if debug:
+                                print 'FIELD fe%d: %s' % (j, sentence['chunks'][j])
+        if debug:
+            print 'COMPLETE ROW: %s' % input_row
+        # Prepare input for DictWriter, since it won't write UTF-8
+        input_data.append({k:v.encode('utf-8') for k,v in input_row.items()})
     return input_data
 
 
-def write_input_spreadsheet(input_data, outfile='input-data.csv'):
+def write_input_spreadsheet(input_data, outfile, debug):
     # Merge all the keys to prepare the CSV headers
     fields = set([k for d in input_data for k in d.keys()])
     fields.add('_golden')
     fields = list(fields)
     fields.sort()
-    writer = csv.DictWriter(open(outfile, 'wb'), fields)
+    if debug:
+        print 'CSV FIELDS: %s' % fields
+    writer = csv.DictWriter(outfile, fields)
     writer.writeheader()
     writer.writerows(input_data)
     return 0
 
 
+def create_cli_parser():
+    parser = argparse.ArgumentParser(description='Build input CSV for a Semantic Role Labeling CrowdFlower job')
+    parser.add_argument('chunk_data', help='JSON file containing chunk data for each sentence')
+    parser.add_argument('-o', '--output', default='crowdflower_input.csv', type=argparse.FileType('wb'), help='Write output to the given file')
+    parser.add_argument('--debug', action='store_true', help='Toggle debug mode')
+    return parser
+
+
 if __name__ == "__main__":
-    if len(sys.argv) == 4:
-        pos_data = load_pos_data(sys.argv[1])
-        chunk_data = add_chunk_data(pos_data)
-        input_data = prepare_crowdflower_input(sys.argv[2], chunk_data)
-        outfile = sys.argv[3]
-        write_input_spreadsheet(input_data, outfile)
-    elif len(sys.argv) == 3:
-        pos_data = load_pos_data(sys.argv[1])
-        chunk_data = add_chunk_data(pos_data)
-        input_data = prepare_crowdflower_input(sys.argv[2], chunk_data)
-        write_input_spreadsheet(input_data)
-    else:
-        print "Usage: python %s <POS_DATA_DIR> <ENTITY_LINKED_DATA_DIR> [OUTPUT_FILE]" % __file__
-        sys.exit(1)
+    cli = create_cli_parser()
+    args = cli.parse_args()
+    chunk_data = json.load(codecs.open(args.chunk_data, 'rb', 'utf-8'))
+    input_data = prepare_crowdflower_input(chunk_data, args.debug)
+    write_input_spreadsheet(input_data, args.output, args.debug)
+    sys.exit(0)
