@@ -40,13 +40,14 @@ for path, subdirs, files in os.walk(sys.argv[1]):
         if 'twm-links' in path:
             links = json.load(codecs.open(f, 'rb', 'utf-8'))
             link_chunks = set()
-            for val in links.values():
+            for sentence, val in links.iteritems():
+                all_chunks[sentence_id] = {'sentence': sentence}
                 for diz in val:
                     # Skip chunks if they are in a stopwords list
                     chunk = diz['chunk']
                     if chunk.lower() in stopwords.StopWords.words('italian'): continue
                     link_chunks.add(chunk)
-            all_chunks[sentence_id] = {'twm-links': link_chunks}
+            all_chunks[sentence_id]['twm-links'] = link_chunks
         # n-grams
         elif 'twm-ngrams' in path:
             ngrams = json.load(codecs.open(f, 'rb', 'utf-8'))
@@ -83,14 +84,15 @@ for path, subdirs, files in os.walk(sys.argv[1]):
 if debug:
     print all_chunks
 
-all_combined = {}
+all_combined = []
 
 # Combine results
-for sentence, chunks in all_chunks.iteritems():
+for sentence_id, values in all_chunks.iteritems():
+    current = {'id': sentence_id, 'sentence': values['sentence']}
     # If chunks overlap, prefer links > ngrams > chunker
-    link_chunks = chunks['twm-links']
-    ngram_chunks = chunks['twm-ngrams']
-    tp_chunks = chunks['textpro-chunks']
+    link_chunks = values['twm-links']
+    ngram_chunks = values['twm-ngrams']
+    tp_chunks = values['textpro-chunks']
     if debug:
         print 'LINKS'
         print link_chunks
@@ -148,7 +150,13 @@ for sentence, chunks in all_chunks.iteritems():
             total = split1 + [common] + split2
             print ''.join(total)
 
-
-    all_combined[sentence] = combined
+    # Cast to list for json serialization
+    current['chunks'] = list(combined)
+    all_combined.append(current)
     print 'COMBINED'
-    print all_combined[sentence]
+    print current
+
+if debug:
+    print all_combined
+
+json.dump(all_combined, codecs.open('chunks.json', 'wb', 'utf-8'), ensure_ascii=False, indent=2)
