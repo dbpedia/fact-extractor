@@ -20,7 +20,7 @@ def read_full_results(results_file):
     # TODO csv lib doesn't handle unicode
     results = csv.DictReader(results_file)
     fields = results.fieldnames
-    fe_amount = len([f for f in fields if re.match('fe_name[0-9]$', f)])
+    fe_amount = len([f for f in fields if re.match(r'fe[0-9]{2}$', f)])
 
     # Skip gold
     regular = [row for row in results if row['_golden'] != 'true']
@@ -35,7 +35,7 @@ def read_full_results(results_file):
             processed[sentence_id]['frame'] = row['frame']
             processed[sentence_id]['lu'] = row['lu']
             for n in xrange(0, fe_amount):
-                entity = row['orig_fe_name' + str(n)]
+                entity = row['orig_fe%02d' % n]
                 processed[sentence_id][entity] = {
                     'judgments': 0,
                     'answers': list()
@@ -43,8 +43,8 @@ def read_full_results(results_file):
 
         # update judgments for each entity
         for n in xrange(0, fe_amount):
-            entity = row['orig_fe_name' + str(n)]
-            answer = row.get('fe_name' + str(n))
+            entity = row['orig_fe%02d' % n]
+            answer = row.get('fe%02d' % n)
             if answer:
                 processed[sentence_id][entity]['judgments'] += 1
                 processed[sentence_id][entity]['answers'].append(answer)
@@ -76,21 +76,21 @@ def tag_entities(results):
         frame = annotations['frame']
 
         annotations['entities'] = dict()
-        for fe in annotations.keys():
-            if fe in {'frame', 'lu', 'sentence'}:
+        for entity in annotations.keys():
+            if entity in {'frame', 'lu', 'sentence'}:
                 continue
 
             # skip uncertain answers
-            annotation = annotations[fe].get('majority')
-            if not annotation:
+            annotation = annotations[entity].get('majority')
+            if not annotation or annotation == 'Nessuno':
                 continue
 
             # build token label using token position, FE and frame
-            label = '%s_%s' % (fe, frame)
+            label = '%s_%s' % (annotation, frame)
             iob_tagged = [ (token, '%s-%s' % ('B' if i == 0 else 'I', label.decode('utf-8')))
-                for i, token in enumerate(annotation.split())
+                for i, token in enumerate(entity.split())
             ]
-            annotations['entities'][fe] = iob_tagged
+            annotations['entities'][entity] = iob_tagged
 
         annotations['entities']['lu'] = [ (token, '%s-LU' % ('B' if i == 0 else 'I'))
             for i, token in enumerate(annotations['lu'].split())
