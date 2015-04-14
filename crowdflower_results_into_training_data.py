@@ -1,5 +1,5 @@
-#!/opt/local/bin/python
-# -*- coding: utf-8 -*-
+#!/usr/bin/env python
+# -*- encoding: utf-8 -*-
 
 import codecs
 import re
@@ -25,8 +25,11 @@ def read_full_results(results_file):
     # Skip gold
     regular = [row for row in results if row['_golden'] != 'true']
     for row in regular:
+        # Avoid Unicode encode/decode exceptions
+        for k, v in row.iteritems():
+            row[k] = v.decode('utf-8')
         sentence_id = row['id']
-        sentence = h.unescape(row['sentence'].decode('utf-8'))
+        sentence = h.unescape(row['sentence'])
 
         # initialize data structure with sentence, frame, lu and entity list
         if not sentence_id in processed:
@@ -87,7 +90,7 @@ def tag_entities(results):
 
             # build token label using token position, FE and frame
             label = '%s_%s' % (annotation, frame)
-            iob_tagged = [ (token, '%s-%s' % ('B' if i == 0 else 'I', label.decode('utf-8')))
+            iob_tagged = [ (token, '%s-%s' % ('B' if i == 0 else 'I', label))
                 for i, token in enumerate(entity.split())
             ]
             annotations['entities'][entity] = iob_tagged
@@ -104,7 +107,7 @@ def process_sentence(sentence_id, annotations, lines):
     for i, (token, pos, lemma) in enumerate(lines):
         # TODO check if LUs can be more than one token
         processed.append([
-            sentence_id, str(i), token, pos, lemma, annotations['frame'].decode('utf-8'), 'O'
+            sentence_id, str(i), token, pos, lemma, annotations['frame'], 'O'
         ])
 
     # find the entities in the sentence and set iob tags accordingly
