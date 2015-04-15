@@ -9,6 +9,7 @@ import json
 import HTMLParser
 import argparse
 import os
+from orderedset import OrderedSet
 from collections import Counter
 
 
@@ -39,16 +40,17 @@ def read_full_results(results_file):
             processed[sentence_id]['lu'] = row['lu']
             for n in xrange(0, fe_amount):
                 entity = row['orig_fe%02d' % n]
-                processed[sentence_id][entity] = {
-                    'judgments': 0,
-                    'answers': list()
-                }
+                if entity:
+                    processed[sentence_id][entity] = {
+                        'judgments': 0,
+                        'answers': list()
+                    }
 
         # update judgments for each entity
         for n in xrange(0, fe_amount):
             entity = row['orig_fe%02d' % n]
             answer = row.get('fe%02d' % n)
-            if answer:
+            if entity and answer:
                 processed[sentence_id][entity]['judgments'] += 1
                 processed[sentence_id][entity]['answers'].append(answer)
 
@@ -88,16 +90,15 @@ def tag_entities(results):
             if not annotation or annotation == 'Nessuno':
                 continue
 
-            # build token label using token position, FE and frame
-            label = '%s_%s' % (annotation, frame)
-            iob_tagged = [ (token, '%s-%s' % ('B' if i == 0 else 'I', label))
-                for i, token in enumerate(entity.split())
-            ]
-            annotations['entities'][entity] = iob_tagged
+            # build the entity FE label, using FE name and frame
+            fe_label = 'B-%s_%s' % (annotation, frame)
+            # the entity is an n-gram, regardless of tokenization
+            annotations['entities'][entity] = fe_label
 
-        annotations['entities']['lu'] = [ (token, '%s-LU' % ('B' if i == 0 else 'I'))
-            for i, token in enumerate(annotations['lu'].split())
-        ]
+        # # build the entity LU label, token per token (if any)
+        # annotations['entities']['lu'] = [ (token, '%s-LU' % ('B' if i == 0 else 'I'))
+        #     for i, token in enumerate(annotations['lu'].split())
+        # ]
 
 
 def process_sentence(sentence_id, annotations, lines):
@@ -106,34 +107,37 @@ def process_sentence(sentence_id, annotations, lines):
     processed = list()
     for i, (token, pos, lemma) in enumerate(lines):
         # TODO check if LUs can be more than one token
-        processed.append([
-            sentence_id, str(i), token, pos, lemma, annotations['frame'], 'O'
-        ])
-
-    # find the entities in the sentence and set iob tags accordingly
-    # checking for single tokens is not enough, entities have to be matched as a
-    # whole (i.e. all its tokens must appear in sequence)
-    for entity, tokens in annotations['entities'].iteritems():
-        found = False
-        i = j = 0
-        while i < len(processed):
-            # if we are tagging the LU then grab the infinitive of the verb instead
-            # of the actual declined verb
-            word = processed[i][2] if entity != 'lu' else processed[i][4]
-            if tokens[j][0] == word:
-                j += 1
-                if j == len(tokens):
-                    found = True
-                    break
-            else:
+        tag = 'B-LU' if lemma == annotations['lu'] else 'O'
+        for entity in annotations['entities'].keys():
+            if not entity.startswith(token):
+                continue
+            elif entity.startswith(token) and len(entity.split()) > 1:
                 j = 0
-            i += 1
-
-        if found:
-            for line, (token, tag) in zip(processed[i-len(tokens) + 1:i + 1], tokens):
-                line[-1] = tag
-
-    return processed
+                while j < len(entity.split()) - 1:
+                    lines.pop(i + j)
+                    j += 1
+                pos = 'ENT'
+                token = entity
+                tag = annotations['entities'][entity]
+                processed.append([
+                    sentence_id, str(i), token, pos, lemma, annotations['frame'], tag
+                ])
+            else:
+                pos = 'ENT'
+                token = entity
+                tag = annotations['entities'][entity]
+                processed.append([
+                    sentence_id, str(i), token, pos, lemma, annotations['frame'], tag
+                ])
+        processed.append([
+            sentence_id, str(i), token, pos, lemma, annotations['frame'], tag
+        ])
+    
+    clean = OrderedSet()
+    for line in processed:
+        clean.add('\t'.join(line))
+        
+    return clean
 
 
 def produce_training_data(annotations, pos_tagged_sentences_dir, debug):
@@ -173,10 +177,8 @@ def main(crowdflower_csv, pos_data_dir, output_file, debug):
         print json.dumps(results, indent=2)
 
     output = produce_training_data(results, pos_data_dir, debug)
-
-    output_file.writelines('\t'.join(l).encode('utf-8') + '\n'
-                           for l in output
-                           if '<strong>' not in l and '</strong>' not in l)
+    for l in output:
+        output_file.write(l.encode('utf-8') + '\n')
 
     return 0
 
