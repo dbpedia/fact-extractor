@@ -95,11 +95,6 @@ def tag_entities(results):
             # the entity is an n-gram, regardless of tokenization
             annotations['entities'][entity] = fe_label
 
-        # # build the entity LU label, token per token (if any)
-        # annotations['entities']['lu'] = [ (token, '%s-LU' % ('B' if i == 0 else 'I'))
-        #     for i, token in enumerate(annotations['lu'].split())
-        # ]
-
 
 def process_sentence(sentence_id, annotations, lines):
     """ Processes a sentence by merging tagged words, LU and FEs """
