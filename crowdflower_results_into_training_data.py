@@ -101,33 +101,35 @@ def process_sentence(sentence_id, annotations, lines):
 
     processed = list()
     for i, (token, pos, lemma) in enumerate(lines):
-        # TODO check if LUs can be more than one token
-        tag = 'B-LU' if lemma == annotations['lu'] else 'O'
-        for entity in annotations['entities'].keys():
-            if not entity.startswith(token):
-                continue
-            elif entity.startswith(token) and len(entity.split()) > 1:
-                j = 0
-                while j < len(entity.split()) - 1:
-                    lines.pop(i + j)
-                    j += 1
-                pos = 'ENT'
-                token = entity
-                tag = annotations['entities'][entity]
-                processed.append([
-                    sentence_id, str(i), token, pos, lemma, annotations['frame'], tag
-                ])
-            else:
-                pos = 'ENT'
-                token = entity
-                tag = annotations['entities'][entity]
-                processed.append([
-                    sentence_id, str(i), token, pos, lemma, annotations['frame'], tag
-                ])
         processed.append([
-            sentence_id, str(i), token, pos, lemma, annotations['frame'], tag
+            sentence_id, str(i), token, pos, lemma, annotations['frame'], 'O'
         ])
-    
+
+    # find the entities in the sentence and set iob tags accordingly
+    # checking for single tokens is not enough, entities have to be matched as a
+    # whole (i.e. all its tokens must appear in sequence)
+    for entity, tag in annotations['entities'].iteritems():
+        tokens = entity.split()
+        found = False
+        i = j = 0
+
+        while i < len(processed):
+            word = processed[i][2]
+
+            if tokens[j] == word:
+                j += 1
+                if j == len(tokens):
+                    found = True
+                    break
+            else:
+                j = 0
+            i += 1
+
+        if found:
+            match_start = i - len(tokens) + 1
+            for line, token in zip(processed[match_start:i + 1], tokens):
+                line[-1] = tag
+
     clean = OrderedSet()
     for line in processed:
         clean.add('\t'.join(line))
