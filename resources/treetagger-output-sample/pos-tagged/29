@@ -1,0 +1,14 @@
+Nella	PRE:det	nel
+stagione	NOM	stagione
+2011-2012	NUM	@card@
+ha	VER:pres	avere
+giocato	VER:pper	giocare
+20	NUM	@card@
+partite	NOM	partita
+in	PRE	in
+Ligue	ABR	<unknown>
+1	NUM	@card@
+con	PRE	con
+l'	DET:def	il
+Ajaccio	NOM	<unknown>
+.	SENT	.

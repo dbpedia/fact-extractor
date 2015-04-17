@@ -1,0 +1,16 @@
+In	PRE	in
+carriera	NOM	carriera
+ha	VER:pres	avere
+giocato	VER:pper	giocare
+complessivamente	ADV	complessivamente
+74	NUM	@card@
+partite	NOM	partita
+in	PRE	in
+Serie	NOM	serie
+B	NPR	B
+,	PON	,
+con	PRE	con
+21	NUM	@card@
+gol	NOM	gol
+segnati	ADJ	segnato
+.	SENT	.
