@@ -129,6 +129,7 @@ def process_sentence(sentence_id, annotations, lines):
             match_start = i - len(tokens) + 1
             for line, token in zip(processed[match_start:i + 1], tokens):
                 line[-1] = tag
+                line[3] = 'ENT'
 
     clean = OrderedSet()
     for line in processed:
