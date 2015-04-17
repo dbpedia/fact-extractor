@@ -9,8 +9,8 @@ import json
 import HTMLParser
 import argparse
 import os
-from orderedset import OrderedSet
 from collections import Counter
+from lib.orderedset import OrderedSet
 
 
 def read_full_results(results_file):
