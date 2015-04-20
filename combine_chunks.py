@@ -11,7 +11,7 @@ import stopwords
 from collections import defaultdict
 
 debug = True
-all_chunks = {}
+all_chunks = defaultdict(lambda: dict())
 
 # From https://en.wikibooks.org/wiki/Algorithm_Implementation/Strings/Longest_common_substring#Python2
 def longest_common_substring(s1, s2):
@@ -90,9 +90,9 @@ all_combined = []
 for sentence_id, values in all_chunks.iteritems():
     current = {'id': sentence_id, 'sentence': values['sentence']}
     # If chunks overlap, prefer links > ngrams > chunker
-    link_chunks = values['twm-links']
-    ngram_chunks = values['twm-ngrams']
-    tp_chunks = values['textpro-chunks']
+    link_chunks = values.get('twm-links', set())
+    ngram_chunks = values.get('twm-ngrams', set())
+    tp_chunks = values.get('textpro-chunks', set())
     if debug:
         print 'LINKS'
         print link_chunks
