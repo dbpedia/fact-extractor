@@ -1,0 +1,64 @@
+{
+  "Ha giocato per quattro anni nella massima serie scozzese con il Dundee.": [
+    {
+      "start": 34, 
+      "chunk": "massima serie", 
+      "end": 47, 
+      "uri": "http://it.wikipedia.org/wiki/Ligue_1", 
+      "types": [
+        "http://dbpedia.org/ontology/SoccerLeague", 
+        "http://dbpedia.org/ontology/SportsLeague", 
+        "http://dbpedia.org/ontology/Organisation", 
+        "http://dbpedia.org/ontology/Event"
+      ]
+    }, 
+    {
+      "start": 23, 
+      "chunk": "anni", 
+      "end": 27, 
+      "uri": "http://it.wikipedia.org/wiki/Anno", 
+      "types": [
+        "http://dbpedia.org/ontology/TopicalConcept"
+      ]
+    }, 
+    {
+      "start": 64, 
+      "chunk": "Dundee", 
+      "end": 70, 
+      "uri": "http://it.wikipedia.org/wiki/Dundee", 
+      "types": [
+        "http://dbpedia.org/ontology/City", 
+        "http://dbpedia.org/ontology/Settlement", 
+        "http://dbpedia.org/ontology/PopulatedPlace", 
+        "http://dbpedia.org/ontology/Place"
+      ]
+    }, 
+    {
+      "start": 15, 
+      "chunk": "quattro", 
+      "end": 22, 
+      "uri": "http://it.wikipedia.org/wiki/4_(numero)", 
+      "types": [
+        "http://dbpedia.org/ontology/TopicalConcept"
+      ]
+    }, 
+    {
+      "start": 0, 
+      "chunk": "Ha", 
+      "end": 2, 
+      "uri": "http://it.wikipedia.org/wiki/Ettaro", 
+      "types": [
+        "http://dbpedia.org/ontology/TopicalConcept"
+      ]
+    }, 
+    {
+      "start": 11, 
+      "chunk": "per", 
+      "end": 14, 
+      "uri": "http://it.wikipedia.org/wiki/Per_(matematica)", 
+      "types": [
+        "http://dbpedia.org/ontology/TopicalConcept"
+      ]
+    }
+  ]
+}

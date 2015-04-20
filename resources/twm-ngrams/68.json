@@ -1,0 +1,34 @@
+{
+  "È il primo calciatore nordcoreano a giocare in Corea del Sud.": [
+    {
+      "start": 48, 
+      "chunk": "Corea del Sud", 
+      "end": 61
+    }, 
+    {
+      "start": 23, 
+      "chunk": "nordcoreano", 
+      "end": 34
+    }, 
+    {
+      "start": 3, 
+      "chunk": "il primo", 
+      "end": 11
+    }, 
+    {
+      "start": 12, 
+      "chunk": "calciatore", 
+      "end": 22
+    }, 
+    {
+      "start": 37, 
+      "chunk": "giocare", 
+      "end": 44
+    }, 
+    {
+      "start": 45, 
+      "chunk": "in", 
+      "end": 47
+    }
+  ]
+}

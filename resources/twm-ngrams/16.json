@@ -1,0 +1,24 @@
+{
+  "Ha giocato nella massima serie ungherese con MTK Budapest e Haladás.": [
+    {
+      "start": 17, 
+      "chunk": "massima serie ungherese", 
+      "end": 40
+    }, 
+    {
+      "start": 45, 
+      "chunk": "MTK Budapest", 
+      "end": 57
+    }, 
+    {
+      "start": 67, 
+      "chunk": "s.", 
+      "end": 69
+    }, 
+    {
+      "start": 0, 
+      "chunk": "Ha", 
+      "end": 2
+    }
+  ]
+}

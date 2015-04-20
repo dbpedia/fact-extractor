@@ -1,0 +1,34 @@
+{
+  "Ha giocato in massima serie con le maglie di Nantes e Troyes.": [
+    {
+      "start": 42, 
+      "chunk": "di Nantes", 
+      "end": 51
+    }, 
+    {
+      "start": 14, 
+      "chunk": "massima serie", 
+      "end": 27
+    }, 
+    {
+      "start": 54, 
+      "chunk": "Troyes", 
+      "end": 60
+    }, 
+    {
+      "start": 35, 
+      "chunk": "maglie", 
+      "end": 41
+    }, 
+    {
+      "start": 0, 
+      "chunk": "Ha", 
+      "end": 2
+    }, 
+    {
+      "start": 11, 
+      "chunk": "in", 
+      "end": 13
+    }
+  ]
+}

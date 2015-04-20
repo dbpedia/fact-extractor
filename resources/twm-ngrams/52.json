@@ -1,0 +1,39 @@
+{
+  "Ha giocato 20 volte per la nazionale slovena, segnando un gol.": [
+    {
+      "start": 27, 
+      "chunk": "nazionale slovena", 
+      "end": 44
+    }, 
+    {
+      "start": 58, 
+      "chunk": "gol", 
+      "end": 61
+    }, 
+    {
+      "start": 0, 
+      "chunk": "Ha", 
+      "end": 2
+    }, 
+    {
+      "start": 14, 
+      "chunk": "volte", 
+      "end": 19
+    }, 
+    {
+      "start": 20, 
+      "chunk": "per", 
+      "end": 23
+    }, 
+    {
+      "start": 24, 
+      "chunk": "la", 
+      "end": 26
+    }, 
+    {
+      "start": 55, 
+      "chunk": "un", 
+      "end": 57
+    }
+  ]
+}

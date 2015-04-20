@@ -1,0 +1,39 @@
+{
+  "Con la Nazionale Under-21 ha giocato una partita di qualificazione agli Europei di categoria.": [
+    {
+      "start": 7, 
+      "chunk": "Nazionale Under-21", 
+      "end": 25
+    }, 
+    {
+      "start": 72, 
+      "chunk": "Europei di categoria", 
+      "end": 92
+    }, 
+    {
+      "start": 52, 
+      "chunk": "qualificazione", 
+      "end": 66
+    }, 
+    {
+      "start": 41, 
+      "chunk": "partita", 
+      "end": 48
+    }, 
+    {
+      "start": 0, 
+      "chunk": "Con", 
+      "end": 3
+    }, 
+    {
+      "start": 67, 
+      "chunk": "agli", 
+      "end": 71
+    }, 
+    {
+      "start": 26, 
+      "chunk": "ha", 
+      "end": 28
+    }
+  ]
+}

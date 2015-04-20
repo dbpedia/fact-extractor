@@ -1,0 +1,32 @@
+{
+  "Nel 1934 si trasferì all'Ambrosiana, dove giocò 4 incontri nell'unica stagione in nerazzurro.": [
+    {
+      "start": 26, 
+      "chunk": "Ambrosiana", 
+      "end": 36, 
+      "uri": "http://it.wikipedia.org/wiki/Associazione_Sportiva_Ambrosiana-Inter", 
+      "types": [
+        "http://dbpedia.org/ontology/NameEntity"
+      ]
+    }, 
+    {
+      "start": 66, 
+      "chunk": "unica stagione", 
+      "end": 80, 
+      "uri": "http://it.wikipedia.org/wiki/Prima_Categoria_1909-1910", 
+      "types": [
+        "http://dbpedia.org/ontology/SportsEvent", 
+        "http://dbpedia.org/ontology/Event"
+      ]
+    }, 
+    {
+      "start": 81, 
+      "chunk": "in", 
+      "end": 83, 
+      "uri": "http://it.wikipedia.org/wiki/Pollice_(unità_di_misura)", 
+      "types": [
+        "http://dbpedia.org/ontology/TopicalConcept"
+      ]
+    }
+  ]
+}

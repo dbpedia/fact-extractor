@@ -1,0 +1,55 @@
+{
+  "Il figlio Alessandro gioca nelle giovanili del Milan.": [
+    {
+      "start": 47, 
+      "chunk": "Milan", 
+      "end": 52, 
+      "uri": "http://it.wikipedia.org/wiki/Associazione_Calcio_Milan", 
+      "types": [
+        "http://dbpedia.org/ontology/SoccerClub", 
+        "http://dbpedia.org/ontology/SportsTeam", 
+        "http://dbpedia.org/ontology/Organisation", 
+        "http://dbpedia.org/ontology/Agent"
+      ]
+    }, 
+    {
+      "start": 33, 
+      "chunk": "giovanili", 
+      "end": 42, 
+      "uri": "http://it.wikipedia.org/wiki/Campionato_Primavera", 
+      "types": [
+        "http://dbpedia.org/ontology/SportsEvent", 
+        "http://dbpedia.org/ontology/Event"
+      ]
+    }, 
+    {
+      "start": 10, 
+      "chunk": "Alessandro", 
+      "end": 20, 
+      "uri": "http://it.wikipedia.org/wiki/Alessandro_I_di_Serbia", 
+      "types": [
+        "http://dbpedia.org/ontology/Monarch", 
+        "http://dbpedia.org/ontology/Person", 
+        "http://dbpedia.org/ontology/Agent"
+      ]
+    }, 
+    {
+      "start": 3, 
+      "chunk": "figlio", 
+      "end": 9, 
+      "uri": "http://it.wikipedia.org/wiki/Figlio", 
+      "types": [
+        "http://dbpedia.org/ontology/TopicalConcept"
+      ]
+    }, 
+    {
+      "start": 21, 
+      "chunk": "gioca", 
+      "end": 26, 
+      "uri": "http://it.wikipedia.org/wiki/Gioco", 
+      "types": [
+        "http://dbpedia.org/ontology/TopicalConcept"
+      ]
+    }
+  ]
+}

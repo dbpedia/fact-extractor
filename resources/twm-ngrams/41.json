@@ -1,0 +1,39 @@
+{
+  "Con la Nazionale messicana ha preso parte ai Mondiali 1966, giocando 3 partite.": [
+    {
+      "start": 45, 
+      "chunk": "Mondiali 1966", 
+      "end": 58
+    }, 
+    {
+      "start": 7, 
+      "chunk": "Nazionale messicana", 
+      "end": 26
+    }, 
+    {
+      "start": 71, 
+      "chunk": "partite", 
+      "end": 78
+    }, 
+    {
+      "start": 0, 
+      "chunk": "Con", 
+      "end": 3
+    }, 
+    {
+      "start": 36, 
+      "chunk": "parte", 
+      "end": 41
+    }, 
+    {
+      "start": 27, 
+      "chunk": "ha", 
+      "end": 29
+    }, 
+    {
+      "start": 4, 
+      "chunk": "la", 
+      "end": 6
+    }
+  ]
+}

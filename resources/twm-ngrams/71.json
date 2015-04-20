@@ -1,0 +1,34 @@
+{
+  "Nel 2008, fu reso noto che avrebbe giocato sporadicamente per lo Skedsmo.": [
+    {
+      "start": 0, 
+      "chunk": "Nel 2008", 
+      "end": 8
+    }, 
+    {
+      "start": 65, 
+      "chunk": "Skedsmo", 
+      "end": 72
+    }, 
+    {
+      "start": 18, 
+      "chunk": "noto", 
+      "end": 22
+    }, 
+    {
+      "start": 62, 
+      "chunk": "lo", 
+      "end": 64
+    }, 
+    {
+      "start": 10, 
+      "chunk": "fu", 
+      "end": 12
+    }, 
+    {
+      "start": 58, 
+      "chunk": "per", 
+      "end": 61
+    }
+  ]
+}

@@ -1,0 +1,24 @@
+{
+  "Kristoffersen giocò con la maglia dell'Odd.": [
+    {
+      "start": 0, 
+      "chunk": "Kristoffersen", 
+      "end": 13
+    }, 
+    {
+      "start": 40, 
+      "chunk": "Odd", 
+      "end": 43
+    }, 
+    {
+      "start": 28, 
+      "chunk": "maglia", 
+      "end": 34
+    }, 
+    {
+      "start": 25, 
+      "chunk": "la", 
+      "end": 27
+    }
+  ]
+}

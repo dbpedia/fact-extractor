@@ -1,0 +1,64 @@
+{
+  "Prima del ritiro definitivo giocò uno scampolo di stagione come giocatore/allenatore nel Baracca Lugo.": [
+    {
+      "start": 90, 
+      "chunk": "Baracca Lugo", 
+      "end": 102
+    }, 
+    {
+      "start": 17, 
+      "chunk": "definitivo", 
+      "end": 27
+    }, 
+    {
+      "start": 10, 
+      "chunk": "ritiro", 
+      "end": 16
+    }, 
+    {
+      "start": 75, 
+      "chunk": "allenatore", 
+      "end": 85
+    }, 
+    {
+      "start": 65, 
+      "chunk": "giocatore", 
+      "end": 74
+    }, 
+    {
+      "start": 0, 
+      "chunk": "Prima", 
+      "end": 5
+    }, 
+    {
+      "start": 51, 
+      "chunk": "stagione", 
+      "end": 59
+    }, 
+    {
+      "start": 35, 
+      "chunk": "uno", 
+      "end": 38
+    }, 
+    {
+      "start": 60, 
+      "chunk": "come", 
+      "end": 64
+    }, 
+    {
+      "start": 86, 
+      "chunk": "nel", 
+      "end": 89
+    }, 
+    {
+      "start": 6, 
+      "chunk": "del", 
+      "end": 9
+    }, 
+    {
+      "start": 48, 
+      "chunk": "di", 
+      "end": 50
+    }
+  ]
+}

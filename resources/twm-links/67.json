@@ -1,0 +1,61 @@
+{
+  "Sempre durante il periodo del college, Stephens giocò due anni col Chicago Fire Premier.": [
+    {
+      "start": 68, 
+      "chunk": "Chicago Fire", 
+      "end": 80, 
+      "uri": "http://it.wikipedia.org/wiki/Chicago_Fire_Soccer_Club", 
+      "types": [
+        "http://dbpedia.org/ontology/SoccerClub", 
+        "http://dbpedia.org/ontology/SportsTeam", 
+        "http://dbpedia.org/ontology/Organisation", 
+        "http://dbpedia.org/ontology/Agent"
+      ]
+    }, 
+    {
+      "start": 39, 
+      "chunk": "Stephens", 
+      "end": 47, 
+      "uri": "http://it.wikipedia.org/wiki/Michael_Stephens", 
+      "types": [
+        "http://dbpedia.org/ontology/NameEntity"
+      ]
+    }, 
+    {
+      "start": 30, 
+      "chunk": "college", 
+      "end": 37, 
+      "uri": "http://it.wikipedia.org/wiki/College", 
+      "types": [
+        "http://dbpedia.org/ontology/TopicalConcept"
+      ]
+    }, 
+    {
+      "start": 59, 
+      "chunk": "anni", 
+      "end": 63, 
+      "uri": "http://it.wikipedia.org/wiki/Anno", 
+      "types": [
+        "http://dbpedia.org/ontology/TopicalConcept"
+      ]
+    }, 
+    {
+      "start": 81, 
+      "chunk": "Premier", 
+      "end": 88, 
+      "uri": "http://it.wikipedia.org/wiki/Tornei_WTA_Premier", 
+      "types": [
+        "http://dbpedia.org/ontology/NameEntity"
+      ]
+    }, 
+    {
+      "start": 55, 
+      "chunk": "due", 
+      "end": 58, 
+      "uri": "http://it.wikipedia.org/wiki/2_(numero)", 
+      "types": [
+        "http://dbpedia.org/ontology/TopicalConcept"
+      ]
+    }
+  ]
+}

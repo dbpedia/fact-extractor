@@ -1,0 +1,40 @@
+{
+  "Ha giocato nella massima serie cipriota con Apollon Limassol e AEL Limassol.": [
+    {
+      "start": 44, 
+      "chunk": "Apollon Limassol", 
+      "end": 60, 
+      "uri": "http://it.wikipedia.org/wiki/Apollon_Lemesou", 
+      "types": [
+        "http://dbpedia.org/ontology/SoccerClub", 
+        "http://dbpedia.org/ontology/SportsTeam", 
+        "http://dbpedia.org/ontology/Organisation", 
+        "http://dbpedia.org/ontology/Agent"
+      ]
+    }, 
+    {
+      "start": 63, 
+      "chunk": "AEL Limassol", 
+      "end": 75, 
+      "uri": "http://it.wikipedia.org/wiki/Athlitiki_Enosis_Lemesou", 
+      "types": [
+        "http://dbpedia.org/ontology/SoccerClub", 
+        "http://dbpedia.org/ontology/SportsTeam", 
+        "http://dbpedia.org/ontology/Organisation", 
+        "http://dbpedia.org/ontology/Agent"
+      ]
+    }, 
+    {
+      "start": 17, 
+      "chunk": "massima serie", 
+      "end": 30, 
+      "uri": "http://it.wikipedia.org/wiki/Prem'er-Liga", 
+      "types": [
+        "http://dbpedia.org/ontology/SoccerLeague", 
+        "http://dbpedia.org/ontology/SportsLeague", 
+        "http://dbpedia.org/ontology/Organisation", 
+        "http://dbpedia.org/ontology/Event"
+      ]
+    }
+  ]
+}

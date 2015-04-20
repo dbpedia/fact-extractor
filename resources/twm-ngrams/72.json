@@ -1,0 +1,24 @@
+{
+  "Eriksen giocò con la maglia dell'Odd.": [
+    {
+      "start": 0, 
+      "chunk": "Eriksen", 
+      "end": 7
+    }, 
+    {
+      "start": 34, 
+      "chunk": "Odd", 
+      "end": 37
+    }, 
+    {
+      "start": 22, 
+      "chunk": "maglia", 
+      "end": 28
+    }, 
+    {
+      "start": 19, 
+      "chunk": "la", 
+      "end": 21
+    }
+  ]
+}

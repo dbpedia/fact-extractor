@@ -1,0 +1,45 @@
+{
+  "Nel 2008, fu reso noto che avrebbe giocato sporadicamente per lo Skedsmo.": [
+    {
+      "start": 65, 
+      "chunk": "Skedsmo", 
+      "end": 72, 
+      "uri": "http://it.wikipedia.org/wiki/Skedsmo", 
+      "types": [
+        "http://dbpedia.org/ontology/Municipality", 
+        "http://dbpedia.org/ontology/GovernmentalAdministrativeRegion", 
+        "http://dbpedia.org/ontology/AdministrativeRegion", 
+        "http://dbpedia.org/ontology/Region", 
+        "http://dbpedia.org/ontology/PopulatedPlace", 
+        "http://dbpedia.org/ontology/Place"
+      ]
+    }, 
+    {
+      "start": 0, 
+      "chunk": "Nel 2008", 
+      "end": 8, 
+      "uri": "http://it.wikipedia.org/wiki/Coppa_Europa_di_sci_alpino_2008", 
+      "types": [
+        "http://dbpedia.org/ontology/NameEntity"
+      ]
+    }, 
+    {
+      "start": 10, 
+      "chunk": "fu", 
+      "end": 12, 
+      "uri": "http://it.wikipedia.org/wiki/Fu_(poesia)", 
+      "types": [
+        "http://dbpedia.org/ontology/TopicalConcept"
+      ]
+    }, 
+    {
+      "start": 58, 
+      "chunk": "per", 
+      "end": 61, 
+      "uri": "http://it.wikipedia.org/wiki/Per_(matematica)", 
+      "types": [
+        "http://dbpedia.org/ontology/TopicalConcept"
+      ]
+    }
+  ]
+}

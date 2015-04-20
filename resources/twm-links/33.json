@@ -1,0 +1,25 @@
+{
+  "Kristoffersen giocò con la maglia dell'Odd.": [
+    {
+      "start": 0, 
+      "chunk": "Kristoffersen", 
+      "end": 13, 
+      "uri": "http://it.wikipedia.org/wiki/Martinius_Kristoffersen", 
+      "types": [
+        "http://dbpedia.org/ontology/NameEntity"
+      ]
+    }, 
+    {
+      "start": 40, 
+      "chunk": "Odd", 
+      "end": 43, 
+      "uri": "http://it.wikipedia.org/wiki/Odds_Ballklubb", 
+      "types": [
+        "http://dbpedia.org/ontology/SoccerClub", 
+        "http://dbpedia.org/ontology/SportsTeam", 
+        "http://dbpedia.org/ontology/Organisation", 
+        "http://dbpedia.org/ontology/Agent"
+      ]
+    }
+  ]
+}

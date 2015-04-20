@@ -1,0 +1,40 @@
+{
+  "Ha giocato nella massima serie cipriota con l'APOEL Nicosia.": [
+    {
+      "start": 52, 
+      "chunk": "Nicosia", 
+      "end": 59, 
+      "uri": "http://it.wikipedia.org/wiki/Nicosia", 
+      "types": [
+        "http://dbpedia.org/ontology/City", 
+        "http://dbpedia.org/ontology/Settlement", 
+        "http://dbpedia.org/ontology/PopulatedPlace", 
+        "http://dbpedia.org/ontology/Place"
+      ]
+    }, 
+    {
+      "start": 46, 
+      "chunk": "APOEL", 
+      "end": 51, 
+      "uri": "http://it.wikipedia.org/wiki/Athlitikos_Podosfairikos_Omilos_Ellinon_Lefkosias", 
+      "types": [
+        "http://dbpedia.org/ontology/SoccerClub", 
+        "http://dbpedia.org/ontology/SportsTeam", 
+        "http://dbpedia.org/ontology/Organisation", 
+        "http://dbpedia.org/ontology/Agent"
+      ]
+    }, 
+    {
+      "start": 17, 
+      "chunk": "massima serie", 
+      "end": 30, 
+      "uri": "http://it.wikipedia.org/wiki/Prem'er-Liha", 
+      "types": [
+        "http://dbpedia.org/ontology/SoccerLeague", 
+        "http://dbpedia.org/ontology/SportsLeague", 
+        "http://dbpedia.org/ontology/Organisation", 
+        "http://dbpedia.org/ontology/Event"
+      ]
+    }
+  ]
+}

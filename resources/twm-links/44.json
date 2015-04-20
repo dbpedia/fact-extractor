@@ -1,0 +1,65 @@
+{
+  "Ha giocato con la sua Nazionale nella Coppa d'Africa del 2013.": [
+    {
+      "start": 46, 
+      "chunk": "Africa", 
+      "end": 52, 
+      "uri": "http://it.wikipedia.org/wiki/Africa", 
+      "types": [
+        "http://dbpedia.org/ontology/Continent", 
+        "http://dbpedia.org/ontology/Place", 
+        "http://dbpedia.org/ontology/PopulatedPlace"
+      ]
+    }, 
+    {
+      "start": 22, 
+      "chunk": "Nazionale", 
+      "end": 31, 
+      "uri": "http://it.wikipedia.org/wiki/Nazionale_di_rugby_a_15_dell'Italia", 
+      "types": [
+        "http://dbpedia.org/ontology/RugbyClub", 
+        "http://dbpedia.org/ontology/SportsTeam", 
+        "http://dbpedia.org/ontology/Organisation", 
+        "http://dbpedia.org/ontology/Agent"
+      ]
+    }, 
+    {
+      "start": 38, 
+      "chunk": "Coppa", 
+      "end": 43, 
+      "uri": "http://it.wikipedia.org/wiki/Santino_Coppa", 
+      "types": [
+        "http://dbpedia.org/ontology/Athlete", 
+        "http://dbpedia.org/ontology/Person", 
+        "http://dbpedia.org/ontology/Agent"
+      ]
+    }, 
+    {
+      "start": 0, 
+      "chunk": "Ha", 
+      "end": 2, 
+      "uri": "http://it.wikipedia.org/wiki/Ettaro", 
+      "types": [
+        "http://dbpedia.org/ontology/TopicalConcept"
+      ]
+    }, 
+    {
+      "start": 18, 
+      "chunk": "sua", 
+      "end": 21, 
+      "uri": "http://it.wikipedia.org/wiki/Luminosità_solare", 
+      "types": [
+        "http://dbpedia.org/ontology/TopicalConcept"
+      ]
+    }, 
+    {
+      "start": 15, 
+      "chunk": "la", 
+      "end": 17, 
+      "uri": "http://it.wikipedia.org/wiki/La_(nota)", 
+      "types": [
+        "http://dbpedia.org/ontology/TopicalConcept"
+      ]
+    }
+  ]
+}

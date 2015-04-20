@@ -1,0 +1,44 @@
+{
+  "Nel 1960 passa al Livorno giocando per un altro anno in Serie C.": [
+    {
+      "start": 56, 
+      "chunk": "Serie C", 
+      "end": 63
+    }, 
+    {
+      "start": 39, 
+      "chunk": "un altro", 
+      "end": 47
+    }, 
+    {
+      "start": 18, 
+      "chunk": "Livorno", 
+      "end": 25
+    }, 
+    {
+      "start": 48, 
+      "chunk": "anno", 
+      "end": 52
+    }, 
+    {
+      "start": 0, 
+      "chunk": "Nel", 
+      "end": 3
+    }, 
+    {
+      "start": 15, 
+      "chunk": "al", 
+      "end": 17
+    }, 
+    {
+      "start": 35, 
+      "chunk": "per", 
+      "end": 38
+    }, 
+    {
+      "start": 53, 
+      "chunk": "in", 
+      "end": 55
+    }
+  ]
+}

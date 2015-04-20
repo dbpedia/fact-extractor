@@ -1,0 +1,35 @@
+{
+  "Nella stagione 2012-2013 ha giocato 17 partite nel campionato belga con il Beerschot.": [
+    {
+      "start": 6, 
+      "chunk": "stagione", 
+      "end": 14, 
+      "uri": "http://it.wikipedia.org/wiki/Division_d'Honneur_1925-1926", 
+      "types": [
+        "http://dbpedia.org/ontology/SportsEvent", 
+        "http://dbpedia.org/ontology/Event"
+      ]
+    }, 
+    {
+      "start": 75, 
+      "chunk": "Beerschot", 
+      "end": 84, 
+      "uri": "http://it.wikipedia.org/wiki/Koninklijke_Beerschot_Voetbal_en_Athletiek_Club", 
+      "types": [
+        "http://dbpedia.org/ontology/SoccerClub", 
+        "http://dbpedia.org/ontology/SportsTeam", 
+        "http://dbpedia.org/ontology/Organisation", 
+        "http://dbpedia.org/ontology/Agent"
+      ]
+    }, 
+    {
+      "start": 25, 
+      "chunk": "ha", 
+      "end": 27, 
+      "uri": "http://it.wikipedia.org/wiki/Ettaro", 
+      "types": [
+        "http://dbpedia.org/ontology/TopicalConcept"
+      ]
+    }
+  ]
+}

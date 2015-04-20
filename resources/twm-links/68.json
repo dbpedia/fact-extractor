@@ -1,0 +1,53 @@
+{
+  "È il primo calciatore nordcoreano a giocare in Corea del Sud.": [
+    {
+      "start": 48, 
+      "chunk": "Corea del Sud", 
+      "end": 61, 
+      "uri": "http://it.wikipedia.org/wiki/Corea_del_Sud", 
+      "types": [
+        "http://dbpedia.org/ontology/Country", 
+        "http://dbpedia.org/ontology/PopulatedPlace", 
+        "http://dbpedia.org/ontology/Place"
+      ]
+    }, 
+    {
+      "start": 12, 
+      "chunk": "calciatore", 
+      "end": 22, 
+      "uri": "http://it.wikipedia.org/wiki/Calciatore", 
+      "types": [
+        "http://dbpedia.org/ontology/TopicalConcept"
+      ]
+    }, 
+    {
+      "start": 45, 
+      "chunk": "in", 
+      "end": 47, 
+      "uri": "http://it.wikipedia.org/wiki/Pollice_(unità_di_misura)", 
+      "types": [
+        "http://dbpedia.org/ontology/TopicalConcept"
+      ]
+    }, 
+    {
+      "start": 37, 
+      "chunk": "giocare", 
+      "end": 44, 
+      "uri": "http://it.wikipedia.org/wiki/Gioco", 
+      "types": [
+        "http://dbpedia.org/ontology/TopicalConcept"
+      ]
+    }, 
+    {
+      "start": 3, 
+      "chunk": "il primo", 
+      "end": 11, 
+      "uri": "http://it.wikipedia.org/wiki/Serie_A_1957-1958", 
+      "types": [
+        "http://dbpedia.org/ontology/SoccerTournament", 
+        "http://dbpedia.org/ontology/SportsEvent", 
+        "http://dbpedia.org/ontology/Event"
+      ]
+    }
+  ]
+}

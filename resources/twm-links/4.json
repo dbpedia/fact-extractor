@@ -1,0 +1,57 @@
+{
+  "Nella stagione 1925-1926 gioca nella Giovane Piemonte Torino.": [
+    {
+      "start": 54, 
+      "chunk": "Torino", 
+      "end": 60, 
+      "uri": "http://it.wikipedia.org/wiki/Torino_Football_Club", 
+      "types": [
+        "http://dbpedia.org/ontology/SoccerClub", 
+        "http://dbpedia.org/ontology/SportsTeam", 
+        "http://dbpedia.org/ontology/Organisation", 
+        "http://dbpedia.org/ontology/Agent"
+      ]
+    }, 
+    {
+      "start": 6, 
+      "chunk": "stagione 1925-1926", 
+      "end": 24, 
+      "uri": "http://it.wikipedia.org/wiki/Prima_Divisione_1925-1926", 
+      "types": [
+        "http://dbpedia.org/ontology/FootballMatch", 
+        "http://dbpedia.org/ontology/SportsEvent", 
+        "http://dbpedia.org/ontology/Event"
+      ]
+    }, 
+    {
+      "start": 45, 
+      "chunk": "Piemonte", 
+      "end": 53, 
+      "uri": "http://it.wikipedia.org/wiki/Piemonte", 
+      "types": [
+        "http://dbpedia.org/ontology/AdministrativeRegion", 
+        "http://dbpedia.org/ontology/Place", 
+        "http://dbpedia.org/ontology/PopulatedPlace", 
+        "http://dbpedia.org/ontology/Region"
+      ]
+    }, 
+    {
+      "start": 37, 
+      "chunk": "Giovane", 
+      "end": 44, 
+      "uri": "http://it.wikipedia.org/wiki/Giovinezza", 
+      "types": [
+        "http://dbpedia.org/ontology/TopicalConcept"
+      ]
+    }, 
+    {
+      "start": 25, 
+      "chunk": "gioca", 
+      "end": 30, 
+      "uri": "http://it.wikipedia.org/wiki/Gioco", 
+      "types": [
+        "http://dbpedia.org/ontology/TopicalConcept"
+      ]
+    }
+  ]
+}

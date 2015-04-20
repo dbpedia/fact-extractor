@@ -1,0 +1,49 @@
+{
+  "Thépot giocò per il Brest, FEC Levallois, Red Star FC, e l'USL Dunkerque.": [
+    {
+      "start": 44, 
+      "chunk": "Red Star", 
+      "end": 52
+    }, 
+    {
+      "start": 29, 
+      "chunk": "FEC", 
+      "end": 32
+    }, 
+    {
+      "start": 33, 
+      "chunk": "Levallois", 
+      "end": 42
+    }, 
+    {
+      "start": 61, 
+      "chunk": "USL", 
+      "end": 64
+    }, 
+    {
+      "start": 65, 
+      "chunk": "Dunkerque", 
+      "end": 74
+    }, 
+    {
+      "start": 22, 
+      "chunk": "Brest", 
+      "end": 27
+    }, 
+    {
+      "start": 53, 
+      "chunk": "FC", 
+      "end": 55
+    }, 
+    {
+      "start": 15, 
+      "chunk": "per", 
+      "end": 18
+    }, 
+    {
+      "start": 19, 
+      "chunk": "il", 
+      "end": 21
+    }
+  ]
+}

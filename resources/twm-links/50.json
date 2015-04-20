@@ -1,0 +1,71 @@
+{
+  "Ha giocato nella massima serie dei campionati russo, turco, azero e finlandese.": [
+    {
+      "start": 46, 
+      "chunk": "russo", 
+      "end": 51, 
+      "uri": "http://it.wikipedia.org/wiki/Lingua_russa", 
+      "types": [
+        "http://dbpedia.org/ontology/Language"
+      ]
+    }, 
+    {
+      "start": 68, 
+      "chunk": "finlandese", 
+      "end": 78, 
+      "uri": "http://it.wikipedia.org/wiki/Lingua_finlandese", 
+      "types": [
+        "http://dbpedia.org/ontology/Language"
+      ]
+    }, 
+    {
+      "start": 53, 
+      "chunk": "turco", 
+      "end": 58, 
+      "uri": "http://it.wikipedia.org/wiki/Lingua_turca", 
+      "types": [
+        "http://dbpedia.org/ontology/Language"
+      ]
+    }, 
+    {
+      "start": 60, 
+      "chunk": "azero", 
+      "end": 65, 
+      "uri": "http://it.wikipedia.org/wiki/Lingua_azera", 
+      "types": [
+        "http://dbpedia.org/ontology/Language"
+      ]
+    }, 
+    {
+      "start": 17, 
+      "chunk": "massima serie", 
+      "end": 30, 
+      "uri": "http://it.wikipedia.org/wiki/Prem'er-Liga", 
+      "types": [
+        "http://dbpedia.org/ontology/SoccerLeague", 
+        "http://dbpedia.org/ontology/SportsLeague", 
+        "http://dbpedia.org/ontology/Organisation", 
+        "http://dbpedia.org/ontology/Event"
+      ]
+    }, 
+    {
+      "start": 35, 
+      "chunk": "campionati", 
+      "end": 45, 
+      "uri": "http://it.wikipedia.org/wiki/Campionato_turco_di_pallavolo_femminile", 
+      "types": [
+        "http://dbpedia.org/ontology/SportsEvent", 
+        "http://dbpedia.org/ontology/Event"
+      ]
+    }, 
+    {
+      "start": 0, 
+      "chunk": "Ha", 
+      "end": 2, 
+      "uri": "http://it.wikipedia.org/wiki/Ettaro", 
+      "types": [
+        "http://dbpedia.org/ontology/TopicalConcept"
+      ]
+    }
+  ]
+}

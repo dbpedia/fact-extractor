@@ -1,0 +1,96 @@
+{
+  "Con la Nazionale Under-21 ha giocato sia amichevoli che partite di qualificazione agli Europei.": [
+    {
+      "start": 7, 
+      "chunk": "Nazionale Under-21", 
+      "end": 25, 
+      "uri": "http://it.wikipedia.org/wiki/Nazionale_Under-21_di_calcio_dell'Italia", 
+      "types": [
+        "http://dbpedia.org/ontology/SoccerClub", 
+        "http://dbpedia.org/ontology/SportsTeam", 
+        "http://dbpedia.org/ontology/Organisation", 
+        "http://dbpedia.org/ontology/Agent"
+      ]
+    }, 
+    {
+      "start": 87, 
+      "chunk": "Europei", 
+      "end": 94, 
+      "uri": "http://it.wikipedia.org/wiki/Campionato_europeo_di_calcio", 
+      "types": [
+        "http://dbpedia.org/ontology/SoccerTournament", 
+        "http://dbpedia.org/ontology/SportsEvent", 
+        "http://dbpedia.org/ontology/Event"
+      ]
+    }, 
+    {
+      "start": 67, 
+      "chunk": "qualificazione", 
+      "end": 81, 
+      "uri": "http://it.wikipedia.org/wiki/Qualificazioni_al_campionato_europeo_di_calcio_2012_-_Gruppo_C", 
+      "types": [
+        "http://dbpedia.org/ontology/FootballMatch", 
+        "http://dbpedia.org/ontology/SportsEvent", 
+        "http://dbpedia.org/ontology/Event"
+      ]
+    }, 
+    {
+      "start": 41, 
+      "chunk": "amichevoli", 
+      "end": 51, 
+      "uri": "http://it.wikipedia.org/wiki/Amichevole", 
+      "types": [
+        "http://dbpedia.org/ontology/TopicalConcept"
+      ]
+    }, 
+    {
+      "start": 26, 
+      "chunk": "ha", 
+      "end": 28, 
+      "uri": "http://it.wikipedia.org/wiki/Ettaro", 
+      "types": [
+        "http://dbpedia.org/ontology/TopicalConcept"
+      ]
+    }, 
+    {
+      "start": 82, 
+      "chunk": "agli", 
+      "end": 86, 
+      "uri": "http://it.wikipedia.org/wiki/Allium_sativum", 
+      "types": [
+        "http://dbpedia.org/ontology/FloweringPlant", 
+        "http://dbpedia.org/ontology/Plant", 
+        "http://dbpedia.org/ontology/Eukaryote", 
+        "http://dbpedia.org/ontology/Species"
+      ]
+    }, 
+    {
+      "start": 0, 
+      "chunk": "Con", 
+      "end": 3, 
+      "uri": "http://it.wikipedia.org/wiki/Lugaid_mac_Con", 
+      "types": [
+        "http://dbpedia.org/ontology/Person", 
+        "http://dbpedia.org/ontology/Agent"
+      ]
+    }, 
+    {
+      "start": 4, 
+      "chunk": "la", 
+      "end": 6, 
+      "uri": "http://it.wikipedia.org/wiki/La_(nota)", 
+      "types": [
+        "http://dbpedia.org/ontology/TopicalConcept"
+      ]
+    }, 
+    {
+      "start": 56, 
+      "chunk": "partite", 
+      "end": 63, 
+      "uri": "http://it.wikipedia.org/wiki/Partita_(musica)", 
+      "types": [
+        "http://dbpedia.org/ontology/TopicalConcept"
+      ]
+    }
+  ]
+}

@@ -1,0 +1,22 @@
+{
+  "Ha giocato nella massima serie cipriota con varie squadre.": [
+    {
+      "start": 50, 
+      "chunk": "squadre", 
+      "end": 57, 
+      "uri": "http://it.wikipedia.org/wiki/Squadra_(sport)", 
+      "types": [
+        "http://dbpedia.org/ontology/TopicalConcept"
+      ]
+    }, 
+    {
+      "start": 0, 
+      "chunk": "Ha", 
+      "end": 2, 
+      "uri": "http://it.wikipedia.org/wiki/Ettaro", 
+      "types": [
+        "http://dbpedia.org/ontology/TopicalConcept"
+      ]
+    }
+  ]
+}

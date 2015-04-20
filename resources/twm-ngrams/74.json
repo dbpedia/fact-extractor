@@ -1,0 +1,24 @@
+{
+  "Ha giocato in tutte le Nazionali giovanili italiane, dalla Under-16 alla Under-21.": [
+    {
+      "start": 23, 
+      "chunk": "Nazionali giovanili italiane", 
+      "end": 51
+    }, 
+    {
+      "start": 73, 
+      "chunk": "Under-", 
+      "end": 79
+    }, 
+    {
+      "start": 73, 
+      "chunk": "Under-", 
+      "end": 79
+    }, 
+    {
+      "start": 0, 
+      "chunk": "Ha", 
+      "end": 2
+    }
+  ]
+}

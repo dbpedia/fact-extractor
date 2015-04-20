@@ -1,0 +1,19 @@
+{
+  "Dopo aver giocato nella Dinamo Kiev, nel 2008 si trasferisce all'Amkar Perm'.": [
+    {
+      "start": 65, 
+      "chunk": "Amkar Perm'", 
+      "end": 76
+    }, 
+    {
+      "start": 24, 
+      "chunk": "Dinamo Kiev", 
+      "end": 35
+    }, 
+    {
+      "start": 37, 
+      "chunk": "nel 2008", 
+      "end": 45
+    }
+  ]
+}

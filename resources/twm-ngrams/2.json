@@ -1,0 +1,44 @@
+{
+  "Nel 1963 passa al Saronno, giocando per un altro anno in Serie C.": [
+    {
+      "start": 57, 
+      "chunk": "Serie C", 
+      "end": 64
+    }, 
+    {
+      "start": 40, 
+      "chunk": "un altro", 
+      "end": 48
+    }, 
+    {
+      "start": 18, 
+      "chunk": "Saronno", 
+      "end": 25
+    }, 
+    {
+      "start": 49, 
+      "chunk": "anno", 
+      "end": 53
+    }, 
+    {
+      "start": 0, 
+      "chunk": "Nel", 
+      "end": 3
+    }, 
+    {
+      "start": 15, 
+      "chunk": "al", 
+      "end": 17
+    }, 
+    {
+      "start": 36, 
+      "chunk": "per", 
+      "end": 39
+    }, 
+    {
+      "start": 54, 
+      "chunk": "in", 
+      "end": 56
+    }
+  ]
+}

@@ -1,0 +1,34 @@
+{
+  "Nella stagione 2011-2012 ha giocato 20 partite in Ligue 1 con l'Ajaccio.": [
+    {
+      "start": 6, 
+      "chunk": "stagione 2011-2012", 
+      "end": 24
+    }, 
+    {
+      "start": 50, 
+      "chunk": "Ligue 1", 
+      "end": 57
+    }, 
+    {
+      "start": 64, 
+      "chunk": "Ajaccio", 
+      "end": 71
+    }, 
+    {
+      "start": 39, 
+      "chunk": "partite", 
+      "end": 46
+    }, 
+    {
+      "start": 0, 
+      "chunk": "Nella", 
+      "end": 5
+    }, 
+    {
+      "start": 25, 
+      "chunk": "ha", 
+      "end": 27
+    }
+  ]
+}

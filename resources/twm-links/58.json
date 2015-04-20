@@ -1,0 +1,58 @@
+{
+  "Prima del ritiro definitivo giocò uno scampolo di stagione come giocatore/allenatore nel Baracca Lugo.": [
+    {
+      "start": 98, 
+      "chunk": "Lugo", 
+      "end": 102, 
+      "uri": "http://it.wikipedia.org/wiki/Lugo_(Italia)", 
+      "types": [
+        "http://dbpedia.org/ontology/Municipality", 
+        "http://dbpedia.org/ontology/GovernmentalAdministrativeRegion", 
+        "http://dbpedia.org/ontology/AdministrativeRegion", 
+        "http://dbpedia.org/ontology/Region", 
+        "http://dbpedia.org/ontology/PopulatedPlace", 
+        "http://dbpedia.org/ontology/Place"
+      ]
+    }, 
+    {
+      "start": 75, 
+      "chunk": "allenatore", 
+      "end": 85, 
+      "uri": "http://it.wikipedia.org/wiki/Allenatore", 
+      "types": [
+        "http://dbpedia.org/ontology/TopicalConcept"
+      ]
+    }, 
+    {
+      "start": 0, 
+      "chunk": "Prima", 
+      "end": 5, 
+      "uri": "http://it.wikipedia.org/wiki/Prima_Categoria", 
+      "types": [
+        "http://dbpedia.org/ontology/SoccerLeague", 
+        "http://dbpedia.org/ontology/SportsLeague", 
+        "http://dbpedia.org/ontology/Organisation", 
+        "http://dbpedia.org/ontology/Event"
+      ]
+    }, 
+    {
+      "start": 65, 
+      "chunk": "giocatore", 
+      "end": 74, 
+      "uri": "http://it.wikipedia.org/wiki/Giocatore", 
+      "types": [
+        "http://dbpedia.org/ontology/TopicalConcept"
+      ]
+    }, 
+    {
+      "start": 35, 
+      "chunk": "uno", 
+      "end": 38, 
+      "uri": "http://it.wikipedia.org/wiki/UNO_(gioco_di_carte)", 
+      "types": [
+        "http://dbpedia.org/ontology/Game", 
+        "http://dbpedia.org/ontology/Activity"
+      ]
+    }
+  ]
+}

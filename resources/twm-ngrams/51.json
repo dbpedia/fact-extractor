@@ -1,0 +1,24 @@
+{
+  "Johannessen giocò per il Frigg.": [
+    {
+      "start": 0, 
+      "chunk": "Johannessen", 
+      "end": 11
+    }, 
+    {
+      "start": 26, 
+      "chunk": "Frigg", 
+      "end": 31
+    }, 
+    {
+      "start": 19, 
+      "chunk": "per", 
+      "end": 22
+    }, 
+    {
+      "start": 23, 
+      "chunk": "il", 
+      "end": 25
+    }
+  ]
+}

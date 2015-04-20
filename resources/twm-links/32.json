@@ -1,0 +1,46 @@
+{
+  "Nella stagione 2001-02 giocò con il Gravina Calcio in Serie A.": [
+    {
+      "start": 55, 
+      "chunk": "Serie A", 
+      "end": 62, 
+      "uri": "http://it.wikipedia.org/wiki/Serie_A_(calcio_femminile)", 
+      "types": [
+        "http://dbpedia.org/ontology/SoccerLeague", 
+        "http://dbpedia.org/ontology/SportsLeague", 
+        "http://dbpedia.org/ontology/Organisation", 
+        "http://dbpedia.org/ontology/Event"
+      ]
+    }, 
+    {
+      "start": 37, 
+      "chunk": "Gravina Calcio", 
+      "end": 51, 
+      "uri": "http://it.wikipedia.org/wiki/Associazione_Calcio_Femminile_Gravina", 
+      "types": [
+        "http://dbpedia.org/ontology/SoccerClub", 
+        "http://dbpedia.org/ontology/SportsTeam", 
+        "http://dbpedia.org/ontology/Organisation", 
+        "http://dbpedia.org/ontology/Agent"
+      ]
+    }, 
+    {
+      "start": 6, 
+      "chunk": "stagione", 
+      "end": 14, 
+      "uri": "http://it.wikipedia.org/wiki/Stagione", 
+      "types": [
+        "http://dbpedia.org/ontology/TopicalConcept"
+      ]
+    }, 
+    {
+      "start": 52, 
+      "chunk": "in", 
+      "end": 54, 
+      "uri": "http://it.wikipedia.org/wiki/Pollice_(unità_di_misura)", 
+      "types": [
+        "http://dbpedia.org/ontology/TopicalConcept"
+      ]
+    }
+  ]
+}

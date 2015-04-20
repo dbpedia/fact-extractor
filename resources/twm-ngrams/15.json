@@ -1,0 +1,34 @@
+{
+  "Dopo aver giocato nei principali campionati europei, si trasferisce all'Académica nel 2010.": [
+    {
+      "start": 33, 
+      "chunk": "campionati europei", 
+      "end": 51
+    }, 
+    {
+      "start": 83, 
+      "chunk": "nel 2010", 
+      "end": 91
+    }, 
+    {
+      "start": 78, 
+      "chunk": "mica", 
+      "end": 82
+    }, 
+    {
+      "start": 22, 
+      "chunk": "principali", 
+      "end": 32
+    }, 
+    {
+      "start": 18, 
+      "chunk": "nei", 
+      "end": 21
+    }, 
+    {
+      "start": 53, 
+      "chunk": "si", 
+      "end": 55
+    }
+  ]
+}

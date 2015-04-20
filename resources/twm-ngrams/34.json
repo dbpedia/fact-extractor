@@ -1,0 +1,39 @@
+{
+  "Ha giocato nella massima serie cipriota con l'Ethnikos Achnas per diversi anni.": [
+    {
+      "start": 46, 
+      "chunk": "Ethnikos Achnas", 
+      "end": 61
+    }, 
+    {
+      "start": 17, 
+      "chunk": "massima serie", 
+      "end": 30
+    }, 
+    {
+      "start": 31, 
+      "chunk": "cipriota", 
+      "end": 39
+    }, 
+    {
+      "start": 0, 
+      "chunk": "Ha", 
+      "end": 2
+    }, 
+    {
+      "start": 74, 
+      "chunk": "anni", 
+      "end": 78
+    }, 
+    {
+      "start": 11, 
+      "chunk": "nella", 
+      "end": 16
+    }, 
+    {
+      "start": 62, 
+      "chunk": "per", 
+      "end": 65
+    }
+  ]
+}

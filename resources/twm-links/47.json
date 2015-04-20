@@ -1,0 +1,56 @@
+{
+  "Nella stagione 2011-2012 ha giocato 16 partite in Ligue 1 con il Digione.": [
+    {
+      "start": 6, 
+      "chunk": "stagione 2011-2012", 
+      "end": 24, 
+      "uri": "http://it.wikipedia.org/wiki/Ligue_2_2011-2012", 
+      "types": [
+        "http://dbpedia.org/ontology/SportsEvent", 
+        "http://dbpedia.org/ontology/Event"
+      ]
+    }, 
+    {
+      "start": 50, 
+      "chunk": "Ligue 1", 
+      "end": 57, 
+      "uri": "http://it.wikipedia.org/wiki/Ligue_1", 
+      "types": [
+        "http://dbpedia.org/ontology/SoccerLeague", 
+        "http://dbpedia.org/ontology/SportsLeague", 
+        "http://dbpedia.org/ontology/Organisation", 
+        "http://dbpedia.org/ontology/Event"
+      ]
+    }, 
+    {
+      "start": 65, 
+      "chunk": "Digione", 
+      "end": 72, 
+      "uri": "http://it.wikipedia.org/wiki/Dijon_Football_Côte-d'Or", 
+      "types": [
+        "http://dbpedia.org/ontology/SoccerClub", 
+        "http://dbpedia.org/ontology/SportsTeam", 
+        "http://dbpedia.org/ontology/Organisation", 
+        "http://dbpedia.org/ontology/Agent"
+      ]
+    }, 
+    {
+      "start": 25, 
+      "chunk": "ha", 
+      "end": 27, 
+      "uri": "http://it.wikipedia.org/wiki/Ettaro", 
+      "types": [
+        "http://dbpedia.org/ontology/TopicalConcept"
+      ]
+    }, 
+    {
+      "start": 47, 
+      "chunk": "in", 
+      "end": 49, 
+      "uri": "http://it.wikipedia.org/wiki/Pollice_(unità_di_misura)", 
+      "types": [
+        "http://dbpedia.org/ontology/TopicalConcept"
+      ]
+    }
+  ]
+}

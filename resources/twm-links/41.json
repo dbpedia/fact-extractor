@@ -1,0 +1,55 @@
+{
+  "Con la Nazionale messicana ha preso parte ai Mondiali 1966, giocando 3 partite.": [
+    {
+      "start": 7, 
+      "chunk": "Nazionale messicana", 
+      "end": 26, 
+      "uri": "http://it.wikipedia.org/wiki/Nazionale_di_calcio_del_Messico", 
+      "types": [
+        "http://dbpedia.org/ontology/SoccerClub", 
+        "http://dbpedia.org/ontology/SportsTeam", 
+        "http://dbpedia.org/ontology/Organisation", 
+        "http://dbpedia.org/ontology/Agent"
+      ]
+    }, 
+    {
+      "start": 45, 
+      "chunk": "Mondiali 1966", 
+      "end": 58, 
+      "uri": "http://it.wikipedia.org/wiki/Campionato_mondiale_di_calcio_1966", 
+      "types": [
+        "http://dbpedia.org/ontology/FootballMatch", 
+        "http://dbpedia.org/ontology/SportsEvent", 
+        "http://dbpedia.org/ontology/Event"
+      ]
+    }, 
+    {
+      "start": 0, 
+      "chunk": "Con", 
+      "end": 3, 
+      "uri": "http://it.wikipedia.org/wiki/Lugaid_mac_Con", 
+      "types": [
+        "http://dbpedia.org/ontology/Person", 
+        "http://dbpedia.org/ontology/Agent"
+      ]
+    }, 
+    {
+      "start": 27, 
+      "chunk": "ha", 
+      "end": 29, 
+      "uri": "http://it.wikipedia.org/wiki/Ettaro", 
+      "types": [
+        "http://dbpedia.org/ontology/TopicalConcept"
+      ]
+    }, 
+    {
+      "start": 4, 
+      "chunk": "la", 
+      "end": 6, 
+      "uri": "http://it.wikipedia.org/wiki/La_(nota)", 
+      "types": [
+        "http://dbpedia.org/ontology/TopicalConcept"
+      ]
+    }
+  ]
+}

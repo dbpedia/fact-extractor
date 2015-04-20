@@ -1,0 +1,24 @@
+{
+  "Nella stagione 2001-02 giocò con il Gravina Calcio in Serie A.": [
+    {
+      "start": 6, 
+      "chunk": "stagione 2001-02", 
+      "end": 22
+    }, 
+    {
+      "start": 37, 
+      "chunk": "Gravina Calcio", 
+      "end": 51
+    }, 
+    {
+      "start": 55, 
+      "chunk": "Serie A", 
+      "end": 62
+    }, 
+    {
+      "start": 0, 
+      "chunk": "Nella", 
+      "end": 5
+    }
+  ]
+}
