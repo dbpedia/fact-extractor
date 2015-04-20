@@ -1,0 +1,39 @@
+{
+  "Con la Portuguesa ha giocato in Série A e nella Copa Sudamericana.": [
+    {
+      "start": 49, 
+      "chunk": "Copa Sudamericana", 
+      "end": 66
+    }, 
+    {
+      "start": 7, 
+      "chunk": "Portuguesa", 
+      "end": 17
+    }, 
+    {
+      "start": 0, 
+      "chunk": "Con", 
+      "end": 3
+    }, 
+    {
+      "start": 18, 
+      "chunk": "ha", 
+      "end": 20
+    }, 
+    {
+      "start": 43, 
+      "chunk": "nella", 
+      "end": 48
+    }, 
+    {
+      "start": 4, 
+      "chunk": "la", 
+      "end": 6
+    }, 
+    {
+      "start": 29, 
+      "chunk": "in", 
+      "end": 31
+    }
+  ]
+}

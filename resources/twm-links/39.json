@@ -1,0 +1,34 @@
+{
+  "Dopo aver giocato due stagioni nel Widzew Łódź, nel 2013 si trasferisce al Norimberga.": [
+    {
+      "start": 22, 
+      "chunk": "stagioni", 
+      "end": 30, 
+      "uri": "http://it.wikipedia.org/wiki/Stagione", 
+      "types": [
+        "http://dbpedia.org/ontology/TopicalConcept"
+      ]
+    }, 
+    {
+      "start": 78, 
+      "chunk": "Norimberga", 
+      "end": 88, 
+      "uri": "http://it.wikipedia.org/wiki/1._Fußball-Club_Nürnberg_Verein_für_Leibesübungen", 
+      "types": [
+        "http://dbpedia.org/ontology/SoccerClub", 
+        "http://dbpedia.org/ontology/SportsTeam", 
+        "http://dbpedia.org/ontology/Organisation", 
+        "http://dbpedia.org/ontology/Agent"
+      ]
+    }, 
+    {
+      "start": 75, 
+      "chunk": "al", 
+      "end": 77, 
+      "uri": "http://it.wikipedia.org/wiki/Anno_luce", 
+      "types": [
+        "http://dbpedia.org/ontology/TopicalConcept"
+      ]
+    }
+  ]
+}

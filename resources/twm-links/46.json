@@ -1,0 +1,67 @@
+{
+  "Ha giocato 7 partite (segnando un gol) nella Nazionale Under 21 della Germania Ovest.": [
+    {
+      "start": 70, 
+      "chunk": "Germania Ovest", 
+      "end": 84, 
+      "uri": "http://it.wikipedia.org/wiki/Nazionale_di_calcio_della_Germania", 
+      "types": [
+        "http://dbpedia.org/ontology/SoccerClub", 
+        "http://dbpedia.org/ontology/SportsTeam", 
+        "http://dbpedia.org/ontology/Organisation", 
+        "http://dbpedia.org/ontology/Agent"
+      ]
+    }, 
+    {
+      "start": 45, 
+      "chunk": "Nazionale", 
+      "end": 54, 
+      "uri": "http://it.wikipedia.org/wiki/Nazionale_di_calcio_dell'Italia", 
+      "types": [
+        "http://dbpedia.org/ontology/SoccerClub", 
+        "http://dbpedia.org/ontology/SportsTeam", 
+        "http://dbpedia.org/ontology/Organisation", 
+        "http://dbpedia.org/ontology/Agent"
+      ]
+    }, 
+    {
+      "start": 55, 
+      "chunk": "Under 21", 
+      "end": 63, 
+      "uri": "http://it.wikipedia.org/wiki/Nazionale_Under-21_di_calcio_dell'Italia", 
+      "types": [
+        "http://dbpedia.org/ontology/SoccerClub", 
+        "http://dbpedia.org/ontology/SportsTeam", 
+        "http://dbpedia.org/ontology/Organisation", 
+        "http://dbpedia.org/ontology/Agent"
+      ]
+    }, 
+    {
+      "start": 34, 
+      "chunk": "gol", 
+      "end": 37, 
+      "uri": "http://it.wikipedia.org/wiki/Gol", 
+      "types": [
+        "http://dbpedia.org/ontology/TopicalConcept"
+      ]
+    }, 
+    {
+      "start": 0, 
+      "chunk": "Ha", 
+      "end": 2, 
+      "uri": "http://it.wikipedia.org/wiki/Ettaro", 
+      "types": [
+        "http://dbpedia.org/ontology/TopicalConcept"
+      ]
+    }, 
+    {
+      "start": 13, 
+      "chunk": "partite", 
+      "end": 20, 
+      "uri": "http://it.wikipedia.org/wiki/Partita_(musica)", 
+      "types": [
+        "http://dbpedia.org/ontology/TopicalConcept"
+      ]
+    }
+  ]
+}

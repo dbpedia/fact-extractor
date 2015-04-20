@@ -1,0 +1,34 @@
+{
+  "Nella stagione 1922-1923 gioca in Prima Divisione con l'Alessandria con 12 presenze.": [
+    {
+      "start": 6, 
+      "chunk": "stagione 1922-1923", 
+      "end": 24
+    }, 
+    {
+      "start": 34, 
+      "chunk": "Prima Divisione", 
+      "end": 49
+    }, 
+    {
+      "start": 56, 
+      "chunk": "Alessandria", 
+      "end": 67
+    }, 
+    {
+      "start": 25, 
+      "chunk": "gioca", 
+      "end": 30
+    }, 
+    {
+      "start": 75, 
+      "chunk": "presenze", 
+      "end": 83
+    }, 
+    {
+      "start": 0, 
+      "chunk": "Nella", 
+      "end": 5
+    }
+  ]
+}

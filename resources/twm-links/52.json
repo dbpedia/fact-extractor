@@ -1,0 +1,49 @@
+{
+  "Ha giocato 20 volte per la nazionale slovena, segnando un gol.": [
+    {
+      "start": 37, 
+      "chunk": "slovena", 
+      "end": 44, 
+      "uri": "http://it.wikipedia.org/wiki/Lingua_slovena", 
+      "types": [
+        "http://dbpedia.org/ontology/Language"
+      ]
+    }, 
+    {
+      "start": 14, 
+      "chunk": "volte", 
+      "end": 19, 
+      "uri": "http://it.wikipedia.org/wiki/Volta_(architettura)", 
+      "types": [
+        "http://dbpedia.org/ontology/TopicalConcept"
+      ]
+    }, 
+    {
+      "start": 0, 
+      "chunk": "Ha", 
+      "end": 2, 
+      "uri": "http://it.wikipedia.org/wiki/Ettaro", 
+      "types": [
+        "http://dbpedia.org/ontology/TopicalConcept"
+      ]
+    }, 
+    {
+      "start": 24, 
+      "chunk": "la", 
+      "end": 26, 
+      "uri": "http://it.wikipedia.org/wiki/La_(nota)", 
+      "types": [
+        "http://dbpedia.org/ontology/TopicalConcept"
+      ]
+    }, 
+    {
+      "start": 58, 
+      "chunk": "gol", 
+      "end": 61, 
+      "uri": "http://it.wikipedia.org/wiki/Gol", 
+      "types": [
+        "http://dbpedia.org/ontology/TopicalConcept"
+      ]
+    }
+  ]
+}

@@ -1,0 +1,55 @@
+{
+  "Ha giocato nella massima serie portoghese con la maglia del Varzim.": [
+    {
+      "start": 17, 
+      "chunk": "massima serie", 
+      "end": 30, 
+      "uri": "http://it.wikipedia.org/wiki/Ligue_1", 
+      "types": [
+        "http://dbpedia.org/ontology/SoccerLeague", 
+        "http://dbpedia.org/ontology/SportsLeague", 
+        "http://dbpedia.org/ontology/Organisation", 
+        "http://dbpedia.org/ontology/Event"
+      ]
+    }, 
+    {
+      "start": 31, 
+      "chunk": "portoghese", 
+      "end": 41, 
+      "uri": "http://it.wikipedia.org/wiki/Lingua_portoghese", 
+      "types": [
+        "http://dbpedia.org/ontology/Language"
+      ]
+    }, 
+    {
+      "start": 0, 
+      "chunk": "Ha", 
+      "end": 2, 
+      "uri": "http://it.wikipedia.org/wiki/Ettaro", 
+      "types": [
+        "http://dbpedia.org/ontology/TopicalConcept"
+      ]
+    }, 
+    {
+      "start": 60, 
+      "chunk": "Varzim", 
+      "end": 66, 
+      "uri": "http://it.wikipedia.org/wiki/Varzim_Sport_Clube", 
+      "types": [
+        "http://dbpedia.org/ontology/SoccerClub", 
+        "http://dbpedia.org/ontology/SportsTeam", 
+        "http://dbpedia.org/ontology/Organisation", 
+        "http://dbpedia.org/ontology/Agent"
+      ]
+    }, 
+    {
+      "start": 46, 
+      "chunk": "la", 
+      "end": 48, 
+      "uri": "http://it.wikipedia.org/wiki/La_(nota)", 
+      "types": [
+        "http://dbpedia.org/ontology/TopicalConcept"
+      ]
+    }
+  ]
+}

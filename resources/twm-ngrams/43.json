@@ -1,0 +1,34 @@
+{
+  "Con la Nazionale del suo paese, ha giocato la Coppa d'Africa 2010.": [
+    {
+      "start": 7, 
+      "chunk": "Nazionale del suo paese", 
+      "end": 30
+    }, 
+    {
+      "start": 52, 
+      "chunk": "d'Africa", 
+      "end": 60
+    }, 
+    {
+      "start": 43, 
+      "chunk": "la", 
+      "end": 45
+    }, 
+    {
+      "start": 43, 
+      "chunk": "la", 
+      "end": 45
+    }, 
+    {
+      "start": 46, 
+      "chunk": "Coppa", 
+      "end": 51
+    }, 
+    {
+      "start": 0, 
+      "chunk": "Con", 
+      "end": 3
+    }
+  ]
+}

@@ -1,0 +1,61 @@
+{
+  "Dopo l'esperienza torinese gioca un anno con la Fiorentina, suo ultimo club professionistico.": [
+    {
+      "start": 48, 
+      "chunk": "Fiorentina", 
+      "end": 58, 
+      "uri": "http://it.wikipedia.org/wiki/ACF_Fiorentina", 
+      "types": [
+        "http://dbpedia.org/ontology/SoccerClub", 
+        "http://dbpedia.org/ontology/SportsTeam", 
+        "http://dbpedia.org/ontology/Organisation", 
+        "http://dbpedia.org/ontology/Agent"
+      ]
+    }, 
+    {
+      "start": 71, 
+      "chunk": "club", 
+      "end": 75, 
+      "uri": "http://it.wikipedia.org/wiki/Squadra_di_calcio", 
+      "types": [
+        "http://dbpedia.org/ontology/TopicalConcept"
+      ]
+    }, 
+    {
+      "start": 36, 
+      "chunk": "anno", 
+      "end": 40, 
+      "uri": "http://it.wikipedia.org/wiki/Anno", 
+      "types": [
+        "http://dbpedia.org/ontology/TopicalConcept"
+      ]
+    }, 
+    {
+      "start": 7, 
+      "chunk": "esperienza", 
+      "end": 17, 
+      "uri": "http://it.wikipedia.org/wiki/Esperienza", 
+      "types": [
+        "http://dbpedia.org/ontology/TopicalConcept"
+      ]
+    }, 
+    {
+      "start": 27, 
+      "chunk": "gioca", 
+      "end": 32, 
+      "uri": "http://it.wikipedia.org/wiki/Gioco", 
+      "types": [
+        "http://dbpedia.org/ontology/TopicalConcept"
+      ]
+    }, 
+    {
+      "start": 45, 
+      "chunk": "la", 
+      "end": 47, 
+      "uri": "http://it.wikipedia.org/wiki/La_(nota)", 
+      "types": [
+        "http://dbpedia.org/ontology/TopicalConcept"
+      ]
+    }
+  ]
+}

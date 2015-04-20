@@ -1,0 +1,24 @@
+{
+  "Ha sempre giocato nel campionato cubano.": [
+    {
+      "start": 33, 
+      "chunk": "cubano", 
+      "end": 39, 
+      "uri": "http://it.wikipedia.org/wiki/Cubano", 
+      "types": [
+        "http://dbpedia.org/ontology/ChemicalCompound", 
+        "http://dbpedia.org/ontology/ChemicalSubstance", 
+        "http://dbpedia.org/ontology/Material"
+      ]
+    }, 
+    {
+      "start": 0, 
+      "chunk": "Ha", 
+      "end": 2, 
+      "uri": "http://it.wikipedia.org/wiki/Ettaro", 
+      "types": [
+        "http://dbpedia.org/ontology/TopicalConcept"
+      ]
+    }
+  ]
+}

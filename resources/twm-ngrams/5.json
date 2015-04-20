@@ -1,0 +1,39 @@
+{
+  "Ha giocato la sua unica partita in Nazionale nel 2000.": [
+    {
+      "start": 45, 
+      "chunk": "nel 2000", 
+      "end": 53
+    }, 
+    {
+      "start": 24, 
+      "chunk": "partita", 
+      "end": 31
+    }, 
+    {
+      "start": 35, 
+      "chunk": "Nazionale", 
+      "end": 44
+    }, 
+    {
+      "start": 0, 
+      "chunk": "Ha", 
+      "end": 2
+    }, 
+    {
+      "start": 14, 
+      "chunk": "sua", 
+      "end": 17
+    }, 
+    {
+      "start": 11, 
+      "chunk": "la", 
+      "end": 13
+    }, 
+    {
+      "start": 32, 
+      "chunk": "in", 
+      "end": 34
+    }
+  ]
+}

@@ -1,0 +1,28 @@
+{
+  "Dopo aver giocato nella Dinamo Kiev, nel 2008 si trasferisce all'Amkar Perm'.": [
+    {
+      "start": 24, 
+      "chunk": "Dinamo Kiev", 
+      "end": 35, 
+      "uri": "http://it.wikipedia.org/wiki/Futbol'nyj_Klub_Dynamo_Kyïv", 
+      "types": [
+        "http://dbpedia.org/ontology/SoccerClub", 
+        "http://dbpedia.org/ontology/SportsTeam", 
+        "http://dbpedia.org/ontology/Organisation", 
+        "http://dbpedia.org/ontology/Agent"
+      ]
+    }, 
+    {
+      "start": 65, 
+      "chunk": "Amkar Perm'", 
+      "end": 76, 
+      "uri": "http://it.wikipedia.org/wiki/Futbol'nyj_Klub_Amkar_Perm'", 
+      "types": [
+        "http://dbpedia.org/ontology/SoccerClub", 
+        "http://dbpedia.org/ontology/SportsTeam", 
+        "http://dbpedia.org/ontology/Organisation", 
+        "http://dbpedia.org/ontology/Agent"
+      ]
+    }
+  ]
+}

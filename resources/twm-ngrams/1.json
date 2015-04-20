@@ -1,0 +1,34 @@
+{
+  "Nel 1934 si trasferì all'Ambrosiana, dove giocò 4 incontri nell'unica stagione in nerazzurro.": [
+    {
+      "start": 66, 
+      "chunk": "unica stagione", 
+      "end": 80
+    }, 
+    {
+      "start": 26, 
+      "chunk": "Ambrosiana", 
+      "end": 36
+    }, 
+    {
+      "start": 38, 
+      "chunk": "dove", 
+      "end": 42
+    }, 
+    {
+      "start": 0, 
+      "chunk": "Nel", 
+      "end": 3
+    }, 
+    {
+      "start": 9, 
+      "chunk": "si", 
+      "end": 11
+    }, 
+    {
+      "start": 81, 
+      "chunk": "in", 
+      "end": 83
+    }
+  ]
+}

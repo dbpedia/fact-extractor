@@ -1,0 +1,54 @@
+{
+  "Dopo l'esperienza torinese gioca un anno con la Fiorentina, suo ultimo club professionistico.": [
+    {
+      "start": 33, 
+      "chunk": "un anno", 
+      "end": 40
+    }, 
+    {
+      "start": 18, 
+      "chunk": "torinese", 
+      "end": 26
+    }, 
+    {
+      "start": 48, 
+      "chunk": "Fiorentina", 
+      "end": 58
+    }, 
+    {
+      "start": 76, 
+      "chunk": "professionistico", 
+      "end": 92
+    }, 
+    {
+      "start": 27, 
+      "chunk": "gioca", 
+      "end": 32
+    }, 
+    {
+      "start": 7, 
+      "chunk": "esperienza", 
+      "end": 17
+    }, 
+    {
+      "start": 71, 
+      "chunk": "club", 
+      "end": 75
+    }, 
+    {
+      "start": 64, 
+      "chunk": "ultimo", 
+      "end": 70
+    }, 
+    {
+      "start": 60, 
+      "chunk": "suo", 
+      "end": 63
+    }, 
+    {
+      "start": 45, 
+      "chunk": "la", 
+      "end": 47
+    }
+  ]
+}

@@ -1,0 +1,29 @@
+{
+  "Dopo aver giocato due stagioni nel Widzew Łódź, nel 2013 si trasferisce al Norimberga.": [
+    {
+      "start": 18, 
+      "chunk": "due stagioni", 
+      "end": 30
+    }, 
+    {
+      "start": 51, 
+      "chunk": "nel 2013", 
+      "end": 59
+    }, 
+    {
+      "start": 78, 
+      "chunk": "Norimberga", 
+      "end": 88
+    }, 
+    {
+      "start": 60, 
+      "chunk": "si", 
+      "end": 62
+    }, 
+    {
+      "start": 75, 
+      "chunk": "al", 
+      "end": 77
+    }
+  ]
+}

@@ -1,0 +1,43 @@
+{
+  "Con il \"Grifone\" giocò sino al 1926, anno del suo ritiro dall'attività agonistica.": [
+    {
+      "start": 8, 
+      "chunk": "Grifone", 
+      "end": 15, 
+      "uri": "http://it.wikipedia.org/wiki/Grifone_(figlio_di_Carlo_Martello)", 
+      "types": [
+        "http://dbpedia.org/ontology/Monarch", 
+        "http://dbpedia.org/ontology/Person", 
+        "http://dbpedia.org/ontology/Agent"
+      ]
+    }, 
+    {
+      "start": 0, 
+      "chunk": "Con", 
+      "end": 3, 
+      "uri": "http://it.wikipedia.org/wiki/Lugaid_mac_Con", 
+      "types": [
+        "http://dbpedia.org/ontology/Person", 
+        "http://dbpedia.org/ontology/Agent"
+      ]
+    }, 
+    {
+      "start": 73, 
+      "chunk": "agonistica", 
+      "end": 83, 
+      "uri": "http://it.wikipedia.org/wiki/Agonista", 
+      "types": [
+        "http://dbpedia.org/ontology/TopicalConcept"
+      ]
+    }, 
+    {
+      "start": 29, 
+      "chunk": "al", 
+      "end": 31, 
+      "uri": "http://it.wikipedia.org/wiki/Anno_luce", 
+      "types": [
+        "http://dbpedia.org/ontology/TopicalConcept"
+      ]
+    }
+  ]
+}

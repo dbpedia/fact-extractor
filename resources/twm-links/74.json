@@ -1,0 +1,71 @@
+{
+  "Ha giocato in tutte le Nazionali giovanili italiane, dalla Under-16 alla Under-21.": [
+    {
+      "start": 73, 
+      "chunk": "Under-21", 
+      "end": 81, 
+      "uri": "http://it.wikipedia.org/wiki/Nazionali_giovanili", 
+      "types": [
+        "http://dbpedia.org/ontology/NameEntity"
+      ]
+    }, 
+    {
+      "start": 59, 
+      "chunk": "Under-16", 
+      "end": 67, 
+      "uri": "http://it.wikipedia.org/wiki/Nazionale_Under-16_di_calcio_dell'Italia", 
+      "types": [
+        "http://dbpedia.org/ontology/SoccerClub", 
+        "http://dbpedia.org/ontology/SportsTeam", 
+        "http://dbpedia.org/ontology/Organisation", 
+        "http://dbpedia.org/ontology/Agent"
+      ]
+    }, 
+    {
+      "start": 23, 
+      "chunk": "Nazionali", 
+      "end": 32, 
+      "uri": "http://it.wikipedia.org/wiki/Nazionale_di_calcio", 
+      "types": [
+        "http://dbpedia.org/ontology/NameEntity"
+      ]
+    }, 
+    {
+      "start": 33, 
+      "chunk": "giovanili", 
+      "end": 42, 
+      "uri": "http://it.wikipedia.org/wiki/Campionato_Primavera", 
+      "types": [
+        "http://dbpedia.org/ontology/SportsEvent", 
+        "http://dbpedia.org/ontology/Event"
+      ]
+    }, 
+    {
+      "start": 43, 
+      "chunk": "italiane", 
+      "end": 51, 
+      "uri": "http://it.wikipedia.org/wiki/Italiani", 
+      "types": [
+        "http://dbpedia.org/ontology/EthnicGroup"
+      ]
+    }, 
+    {
+      "start": 0, 
+      "chunk": "Ha", 
+      "end": 2, 
+      "uri": "http://it.wikipedia.org/wiki/Ettaro", 
+      "types": [
+        "http://dbpedia.org/ontology/TopicalConcept"
+      ]
+    }, 
+    {
+      "start": 11, 
+      "chunk": "in", 
+      "end": 13, 
+      "uri": "http://it.wikipedia.org/wiki/Pollice_(unità_di_misura)", 
+      "types": [
+        "http://dbpedia.org/ontology/TopicalConcept"
+      ]
+    }
+  ]
+}

@@ -1,0 +1,61 @@
+{
+  "Ha giocato la sua unica partita in Nazionale nel 2000.": [
+    {
+      "start": 32, 
+      "chunk": "in", 
+      "end": 34, 
+      "uri": "http://it.wikipedia.org/wiki/Pollice_(unità_di_misura)", 
+      "types": [
+        "http://dbpedia.org/ontology/TopicalConcept"
+      ]
+    }, 
+    {
+      "start": 35, 
+      "chunk": "Nazionale", 
+      "end": 44, 
+      "uri": "http://it.wikipedia.org/wiki/Nazionale_di_calcio_dell'Italia", 
+      "types": [
+        "http://dbpedia.org/ontology/SoccerClub", 
+        "http://dbpedia.org/ontology/SportsTeam", 
+        "http://dbpedia.org/ontology/Organisation", 
+        "http://dbpedia.org/ontology/Agent"
+      ]
+    }, 
+    {
+      "start": 0, 
+      "chunk": "Ha", 
+      "end": 2, 
+      "uri": "http://it.wikipedia.org/wiki/Ettaro", 
+      "types": [
+        "http://dbpedia.org/ontology/TopicalConcept"
+      ]
+    }, 
+    {
+      "start": 11, 
+      "chunk": "la", 
+      "end": 13, 
+      "uri": "http://it.wikipedia.org/wiki/La_(nota)", 
+      "types": [
+        "http://dbpedia.org/ontology/TopicalConcept"
+      ]
+    }, 
+    {
+      "start": 14, 
+      "chunk": "sua", 
+      "end": 17, 
+      "uri": "http://it.wikipedia.org/wiki/Luminosità_solare", 
+      "types": [
+        "http://dbpedia.org/ontology/TopicalConcept"
+      ]
+    }, 
+    {
+      "start": 24, 
+      "chunk": "partita", 
+      "end": 31, 
+      "uri": "http://it.wikipedia.org/wiki/Partita_(musica)", 
+      "types": [
+        "http://dbpedia.org/ontology/TopicalConcept"
+      ]
+    }
+  ]
+}

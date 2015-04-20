@@ -1,0 +1,82 @@
+{
+  "Il 22 luglio 2012 torna in Argentina per giocare nelle file del Boca Juniors.": [
+    {
+      "start": 27, 
+      "chunk": "Argentina", 
+      "end": 36, 
+      "uri": "http://it.wikipedia.org/wiki/Nazionale_di_calcio_dell'Argentina", 
+      "types": [
+        "http://dbpedia.org/ontology/SoccerClub", 
+        "http://dbpedia.org/ontology/FootballMatch", 
+        "http://dbpedia.org/ontology/Organisation", 
+        "http://dbpedia.org/ontology/Event"
+      ]
+    }, 
+    {
+      "start": 64, 
+      "chunk": "Boca Juniors", 
+      "end": 76, 
+      "uri": "http://it.wikipedia.org/wiki/Club_Atlético_Boca_Juniors", 
+      "types": [
+        "http://dbpedia.org/ontology/SoccerClub", 
+        "http://dbpedia.org/ontology/SportsTeam", 
+        "http://dbpedia.org/ontology/Organisation", 
+        "http://dbpedia.org/ontology/Agent"
+      ]
+    }, 
+    {
+      "start": 3, 
+      "chunk": "22 luglio", 
+      "end": 12, 
+      "uri": "http://it.wikipedia.org/wiki/22_luglio", 
+      "types": [
+        "http://dbpedia.org/ontology/NameEntity"
+      ]
+    }, 
+    {
+      "start": 55, 
+      "chunk": "file", 
+      "end": 59, 
+      "uri": "http://it.wikipedia.org/wiki/File", 
+      "types": [
+        "http://dbpedia.org/ontology/TopicalConcept"
+      ]
+    }, 
+    {
+      "start": 24, 
+      "chunk": "in", 
+      "end": 26, 
+      "uri": "http://it.wikipedia.org/wiki/Pollice_(unità_di_misura)", 
+      "types": [
+        "http://dbpedia.org/ontology/TopicalConcept"
+      ]
+    }, 
+    {
+      "start": 41, 
+      "chunk": "giocare", 
+      "end": 48, 
+      "uri": "http://it.wikipedia.org/wiki/Gioco", 
+      "types": [
+        "http://dbpedia.org/ontology/TopicalConcept"
+      ]
+    }, 
+    {
+      "start": 37, 
+      "chunk": "per", 
+      "end": 40, 
+      "uri": "http://it.wikipedia.org/wiki/Per_(matematica)", 
+      "types": [
+        "http://dbpedia.org/ontology/TopicalConcept"
+      ]
+    }, 
+    {
+      "start": 0, 
+      "chunk": "Il", 
+      "end": 2, 
+      "uri": "http://it.wikipedia.org/wiki/Il_(divinità)", 
+      "types": [
+        "http://dbpedia.org/ontology/NameEntity"
+      ]
+    }
+  ]
+}

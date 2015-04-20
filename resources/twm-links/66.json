@@ -1,0 +1,57 @@
+{
+  "Dal 2005 al 2007 gioca in Spagna nell'Azkar Lugo Fútbol Sala.": [
+    {
+      "start": 23, 
+      "chunk": "in", 
+      "end": 25, 
+      "uri": "http://it.wikipedia.org/wiki/Pollice_(unità_di_misura)", 
+      "types": [
+        "http://dbpedia.org/ontology/TopicalConcept"
+      ]
+    }, 
+    {
+      "start": 26, 
+      "chunk": "Spagna", 
+      "end": 32, 
+      "uri": "http://it.wikipedia.org/wiki/Nazionale_di_calcio_della_Spagna", 
+      "types": [
+        "http://dbpedia.org/ontology/SoccerClub", 
+        "http://dbpedia.org/ontology/SportsTeam", 
+        "http://dbpedia.org/ontology/Organisation", 
+        "http://dbpedia.org/ontology/Agent"
+      ]
+    }, 
+    {
+      "start": 9, 
+      "chunk": "al", 
+      "end": 11, 
+      "uri": "http://it.wikipedia.org/wiki/Anno_luce", 
+      "types": [
+        "http://dbpedia.org/ontology/TopicalConcept"
+      ]
+    }, 
+    {
+      "start": 44, 
+      "chunk": "Lugo", 
+      "end": 48, 
+      "uri": "http://it.wikipedia.org/wiki/Lugo_(Spagna)", 
+      "types": [
+        "http://dbpedia.org/ontology/Municipality", 
+        "http://dbpedia.org/ontology/GovernmentalAdministrativeRegion", 
+        "http://dbpedia.org/ontology/AdministrativeRegion", 
+        "http://dbpedia.org/ontology/Region", 
+        "http://dbpedia.org/ontology/PopulatedPlace", 
+        "http://dbpedia.org/ontology/Place"
+      ]
+    }, 
+    {
+      "start": 17, 
+      "chunk": "gioca", 
+      "end": 22, 
+      "uri": "http://it.wikipedia.org/wiki/Gioco", 
+      "types": [
+        "http://dbpedia.org/ontology/TopicalConcept"
+      ]
+    }
+  ]
+}

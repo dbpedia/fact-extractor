@@ -1,0 +1,34 @@
+{
+  "Dopo aver giocato nei principali campionati europei, si trasferisce all'Académica nel 2010.": [
+    {
+      "start": 33, 
+      "chunk": "campionati europei", 
+      "end": 51, 
+      "uri": "http://it.wikipedia.org/wiki/Campionati_europei_di_curling", 
+      "types": [
+        "http://dbpedia.org/ontology/SportsEvent", 
+        "http://dbpedia.org/ontology/Event"
+      ]
+    }, 
+    {
+      "start": 78, 
+      "chunk": "mica", 
+      "end": 82, 
+      "uri": "http://it.wikipedia.org/wiki/Mica", 
+      "types": [
+        "http://dbpedia.org/ontology/Material"
+      ]
+    }, 
+    {
+      "start": 18, 
+      "chunk": "nei", 
+      "end": 21, 
+      "uri": "http://it.wikipedia.org/wiki/Neo", 
+      "types": [
+        "http://dbpedia.org/ontology/Disease", 
+        "http://dbpedia.org/ontology/PhysiologicalProcess", 
+        "http://dbpedia.org/ontology/Process"
+      ]
+    }
+  ]
+}

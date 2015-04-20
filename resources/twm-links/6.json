@@ -1,0 +1,43 @@
+{
+  "Ha giocato in patria principalmente con il Maccabi Haifa.": [
+    {
+      "start": 43, 
+      "chunk": "Maccabi Haifa", 
+      "end": 56, 
+      "uri": "http://it.wikipedia.org/wiki/Maccabi_Haifa_Football_Club", 
+      "types": [
+        "http://dbpedia.org/ontology/SoccerClub", 
+        "http://dbpedia.org/ontology/SportsTeam", 
+        "http://dbpedia.org/ontology/Organisation", 
+        "http://dbpedia.org/ontology/Agent"
+      ]
+    }, 
+    {
+      "start": 14, 
+      "chunk": "patria", 
+      "end": 20, 
+      "uri": "http://it.wikipedia.org/wiki/Patria", 
+      "types": [
+        "http://dbpedia.org/ontology/TopicalConcept"
+      ]
+    }, 
+    {
+      "start": 11, 
+      "chunk": "in", 
+      "end": 13, 
+      "uri": "http://it.wikipedia.org/wiki/Pollice_(unità_di_misura)", 
+      "types": [
+        "http://dbpedia.org/ontology/TopicalConcept"
+      ]
+    }, 
+    {
+      "start": 0, 
+      "chunk": "Ha", 
+      "end": 2, 
+      "uri": "http://it.wikipedia.org/wiki/Ettaro", 
+      "types": [
+        "http://dbpedia.org/ontology/TopicalConcept"
+      ]
+    }
+  ]
+}

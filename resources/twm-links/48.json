@@ -1,0 +1,58 @@
+{
+  "Ha giocato in massima serie con le maglie di Nantes e Troyes.": [
+    {
+      "start": 14, 
+      "chunk": "massima serie", 
+      "end": 27, 
+      "uri": "http://it.wikipedia.org/wiki/Ligue_1", 
+      "types": [
+        "http://dbpedia.org/ontology/SoccerLeague", 
+        "http://dbpedia.org/ontology/SportsLeague", 
+        "http://dbpedia.org/ontology/Organisation", 
+        "http://dbpedia.org/ontology/Event"
+      ]
+    }, 
+    {
+      "start": 45, 
+      "chunk": "Nantes", 
+      "end": 51, 
+      "uri": "http://it.wikipedia.org/wiki/Football_Club_de_Nantes", 
+      "types": [
+        "http://dbpedia.org/ontology/SoccerClub", 
+        "http://dbpedia.org/ontology/SportsTeam", 
+        "http://dbpedia.org/ontology/Organisation", 
+        "http://dbpedia.org/ontology/Agent"
+      ]
+    }, 
+    {
+      "start": 54, 
+      "chunk": "Troyes", 
+      "end": 60, 
+      "uri": "http://it.wikipedia.org/wiki/Espérance_Sportive_Troyes_Aube_Champagne", 
+      "types": [
+        "http://dbpedia.org/ontology/SoccerClub", 
+        "http://dbpedia.org/ontology/SportsTeam", 
+        "http://dbpedia.org/ontology/Organisation", 
+        "http://dbpedia.org/ontology/Agent"
+      ]
+    }, 
+    {
+      "start": 11, 
+      "chunk": "in", 
+      "end": 13, 
+      "uri": "http://it.wikipedia.org/wiki/Pollice_(unità_di_misura)", 
+      "types": [
+        "http://dbpedia.org/ontology/TopicalConcept"
+      ]
+    }, 
+    {
+      "start": 0, 
+      "chunk": "Ha", 
+      "end": 2, 
+      "uri": "http://it.wikipedia.org/wiki/Ettaro", 
+      "types": [
+        "http://dbpedia.org/ontology/TopicalConcept"
+      ]
+    }
+  ]
+}

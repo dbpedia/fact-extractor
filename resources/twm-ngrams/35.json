@@ -1,0 +1,29 @@
+{
+  "Nella stagione 2013-2014 ha giocato 23 partite nella massima serie uruguaiana con il Danubio.": [
+    {
+      "start": 0, 
+      "chunk": "Nella stagione 2013-2014", 
+      "end": 24
+    }, 
+    {
+      "start": 53, 
+      "chunk": "massima serie", 
+      "end": 66
+    }, 
+    {
+      "start": 67, 
+      "chunk": "uruguaiana", 
+      "end": 77
+    }, 
+    {
+      "start": 85, 
+      "chunk": "Danubio", 
+      "end": 92
+    }, 
+    {
+      "start": 39, 
+      "chunk": "partite", 
+      "end": 46
+    }
+  ]
+}

@@ -1,0 +1,75 @@
+{
+  "Nella stagione 2005-2006 gioca 2 partite in Coppa UEFA con il Marsiglia.": [
+    {
+      "start": 44, 
+      "chunk": "Coppa UEFA", 
+      "end": 54, 
+      "uri": "http://it.wikipedia.org/wiki/UEFA_Europa_League", 
+      "types": [
+        "http://dbpedia.org/ontology/SoccerTournament", 
+        "http://dbpedia.org/ontology/SportsEvent", 
+        "http://dbpedia.org/ontology/Event"
+      ]
+    }, 
+    {
+      "start": 6, 
+      "chunk": "stagione 2005-2006", 
+      "end": 24, 
+      "uri": "http://it.wikipedia.org/wiki/Serie_A_2005-2006", 
+      "types": [
+        "http://dbpedia.org/ontology/SoccerClub", 
+        "http://dbpedia.org/ontology/SportsTeam", 
+        "http://dbpedia.org/ontology/Organisation", 
+        "http://dbpedia.org/ontology/Event"
+      ]
+    }, 
+    {
+      "start": 62, 
+      "chunk": "Marsiglia", 
+      "end": 71, 
+      "uri": "http://it.wikipedia.org/wiki/Olympique_de_Marseille", 
+      "types": [
+        "http://dbpedia.org/ontology/SoccerClub", 
+        "http://dbpedia.org/ontology/SportsTeam", 
+        "http://dbpedia.org/ontology/Organisation", 
+        "http://dbpedia.org/ontology/Agent"
+      ]
+    }, 
+    {
+      "start": 41, 
+      "chunk": "in", 
+      "end": 43, 
+      "uri": "http://it.wikipedia.org/wiki/Pollice_(unità_di_misura)", 
+      "types": [
+        "http://dbpedia.org/ontology/TopicalConcept"
+      ]
+    }, 
+    {
+      "start": 25, 
+      "chunk": "gioca", 
+      "end": 30, 
+      "uri": "http://it.wikipedia.org/wiki/Gioco", 
+      "types": [
+        "http://dbpedia.org/ontology/TopicalConcept"
+      ]
+    }, 
+    {
+      "start": 33, 
+      "chunk": "partite", 
+      "end": 40, 
+      "uri": "http://it.wikipedia.org/wiki/Set_(sport)", 
+      "types": [
+        "http://dbpedia.org/ontology/TopicalConcept"
+      ]
+    }, 
+    {
+      "start": 0, 
+      "chunk": "Nella", 
+      "end": 5, 
+      "uri": "http://it.wikipedia.org/wiki/Nemici_di_Mario", 
+      "types": [
+        "http://dbpedia.org/ontology/NameEntity"
+      ]
+    }
+  ]
+}

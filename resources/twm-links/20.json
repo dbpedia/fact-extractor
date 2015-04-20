@@ -1,0 +1,65 @@
+{
+  "La stagione successiva va al Manfredonia, giocando titolare per tutta la stagione.": [
+    {
+      "start": 3, 
+      "chunk": "stagione successiva", 
+      "end": 22, 
+      "uri": "http://it.wikipedia.org/wiki/Serie_B_2010-2011", 
+      "types": [
+        "http://dbpedia.org/ontology/SoccerTournament", 
+        "http://dbpedia.org/ontology/SportsEvent", 
+        "http://dbpedia.org/ontology/Event"
+      ]
+    }, 
+    {
+      "start": 29, 
+      "chunk": "Manfredonia", 
+      "end": 40, 
+      "uri": "http://it.wikipedia.org/wiki/Associazione_Sportiva_Dilettantistica_Manfredonia_Calcio", 
+      "types": [
+        "http://dbpedia.org/ontology/SoccerClub", 
+        "http://dbpedia.org/ontology/SportsTeam", 
+        "http://dbpedia.org/ontology/Organisation", 
+        "http://dbpedia.org/ontology/Agent"
+      ]
+    }, 
+    {
+      "start": 26, 
+      "chunk": "al", 
+      "end": 28, 
+      "uri": "http://it.wikipedia.org/wiki/Anno_luce", 
+      "types": [
+        "http://dbpedia.org/ontology/TopicalConcept"
+      ]
+    }, 
+    {
+      "start": 0, 
+      "chunk": "La", 
+      "end": 2, 
+      "uri": "http://it.wikipedia.org/wiki/Diapason", 
+      "types": [
+        "http://dbpedia.org/ontology/Instrument", 
+        "http://dbpedia.org/ontology/Device", 
+        "http://dbpedia.org/ontology/Object"
+      ]
+    }, 
+    {
+      "start": 70, 
+      "chunk": "la", 
+      "end": 72, 
+      "uri": "http://it.wikipedia.org/wiki/La_(nota)", 
+      "types": [
+        "http://dbpedia.org/ontology/TopicalConcept"
+      ]
+    }, 
+    {
+      "start": 51, 
+      "chunk": "titolare", 
+      "end": 59, 
+      "uri": "http://it.wikipedia.org/wiki/Vescovo_titolare", 
+      "types": [
+        "http://dbpedia.org/ontology/TopicalConcept"
+      ]
+    }
+  ]
+}

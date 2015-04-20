@@ -1,0 +1,40 @@
+{
+  "Ha giocato nella massima serie cipriota con APOEL Nicosia ed Ethnikos Achnas.": [
+    {
+      "start": 44, 
+      "chunk": "APOEL Nicosia", 
+      "end": 57, 
+      "uri": "http://it.wikipedia.org/wiki/Athlitikos_Podosfairikos_Omilos_Ellinon_Lefkosias", 
+      "types": [
+        "http://dbpedia.org/ontology/SoccerClub", 
+        "http://dbpedia.org/ontology/SportsTeam", 
+        "http://dbpedia.org/ontology/Organisation", 
+        "http://dbpedia.org/ontology/Agent"
+      ]
+    }, 
+    {
+      "start": 61, 
+      "chunk": "Ethnikos Achnas", 
+      "end": 76, 
+      "uri": "http://it.wikipedia.org/wiki/Ethnikos_Achnas", 
+      "types": [
+        "http://dbpedia.org/ontology/SoccerClub", 
+        "http://dbpedia.org/ontology/SportsTeam", 
+        "http://dbpedia.org/ontology/Organisation", 
+        "http://dbpedia.org/ontology/Agent"
+      ]
+    }, 
+    {
+      "start": 17, 
+      "chunk": "massima serie", 
+      "end": 30, 
+      "uri": "http://it.wikipedia.org/wiki/Souper_Ligka_Ellada", 
+      "types": [
+        "http://dbpedia.org/ontology/SoccerLeague", 
+        "http://dbpedia.org/ontology/SportsLeague", 
+        "http://dbpedia.org/ontology/Organisation", 
+        "http://dbpedia.org/ontology/Event"
+      ]
+    }
+  ]
+}

@@ -1,0 +1,42 @@
+{
+  "Ha giocato sia con la Nazionale greca che successivamente con quella cipriota.": [
+    {
+      "start": 32, 
+      "chunk": "greca", 
+      "end": 37, 
+      "uri": "http://it.wikipedia.org/wiki/Greci", 
+      "types": [
+        "http://dbpedia.org/ontology/EthnicGroup"
+      ]
+    }, 
+    {
+      "start": 0, 
+      "chunk": "Ha", 
+      "end": 2, 
+      "uri": "http://it.wikipedia.org/wiki/Ettaro", 
+      "types": [
+        "http://dbpedia.org/ontology/TopicalConcept"
+      ]
+    }, 
+    {
+      "start": 19, 
+      "chunk": "la", 
+      "end": 21, 
+      "uri": "http://it.wikipedia.org/wiki/La_(nota)", 
+      "types": [
+        "http://dbpedia.org/ontology/TopicalConcept"
+      ]
+    }, 
+    {
+      "start": 22, 
+      "chunk": "Nazionale", 
+      "end": 31, 
+      "uri": "http://it.wikipedia.org/wiki/Nazionale_di_pallanuoto_maschile_della_Grecia", 
+      "types": [
+        "http://dbpedia.org/ontology/SportsTeam", 
+        "http://dbpedia.org/ontology/Organisation", 
+        "http://dbpedia.org/ontology/Agent"
+      ]
+    }
+  ]
+}

@@ -1,0 +1,73 @@
+{
+  "Nel 1963 passa al Saronno, giocando per un altro anno in Serie C.": [
+    {
+      "start": 57, 
+      "chunk": "Serie C", 
+      "end": 64, 
+      "uri": "http://it.wikipedia.org/wiki/Lega_Pro", 
+      "types": [
+        "http://dbpedia.org/ontology/NameEntity"
+      ]
+    }, 
+    {
+      "start": 18, 
+      "chunk": "Saronno", 
+      "end": 25, 
+      "uri": "http://it.wikipedia.org/wiki/Foot-Ball_Club_Saronno_1910", 
+      "types": [
+        "http://dbpedia.org/ontology/SoccerClub", 
+        "http://dbpedia.org/ontology/SportsTeam", 
+        "http://dbpedia.org/ontology/Organisation", 
+        "http://dbpedia.org/ontology/Agent"
+      ]
+    }, 
+    {
+      "start": 49, 
+      "chunk": "anno", 
+      "end": 53, 
+      "uri": "http://it.wikipedia.org/wiki/Anno", 
+      "types": [
+        "http://dbpedia.org/ontology/TopicalConcept"
+      ]
+    }, 
+    {
+      "start": 54, 
+      "chunk": "in", 
+      "end": 56, 
+      "uri": "http://it.wikipedia.org/wiki/Pollice_(unità_di_misura)", 
+      "types": [
+        "http://dbpedia.org/ontology/TopicalConcept"
+      ]
+    }, 
+    {
+      "start": 15, 
+      "chunk": "al", 
+      "end": 17, 
+      "uri": "http://it.wikipedia.org/wiki/Anno_luce", 
+      "types": [
+        "http://dbpedia.org/ontology/TopicalConcept"
+      ]
+    }, 
+    {
+      "start": 40, 
+      "chunk": "un altro", 
+      "end": 48, 
+      "uri": "http://it.wikipedia.org/wiki/Tupolev_Tu-4", 
+      "types": [
+        "http://dbpedia.org/ontology/Aircraft", 
+        "http://dbpedia.org/ontology/MeanOfTransportation", 
+        "http://dbpedia.org/ontology/Device", 
+        "http://dbpedia.org/ontology/Object"
+      ]
+    }, 
+    {
+      "start": 36, 
+      "chunk": "per", 
+      "end": 39, 
+      "uri": "http://it.wikipedia.org/wiki/Per_(matematica)", 
+      "types": [
+        "http://dbpedia.org/ontology/TopicalConcept"
+      ]
+    }
+  ]
+}

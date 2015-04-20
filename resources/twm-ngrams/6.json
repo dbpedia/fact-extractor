@@ -1,0 +1,24 @@
+{
+  "Ha giocato in patria principalmente con il Maccabi Haifa.": [
+    {
+      "start": 43, 
+      "chunk": "Maccabi Haifa", 
+      "end": 56
+    }, 
+    {
+      "start": 11, 
+      "chunk": "in patria", 
+      "end": 20
+    }, 
+    {
+      "start": 0, 
+      "chunk": "Ha", 
+      "end": 2
+    }, 
+    {
+      "start": 40, 
+      "chunk": "il", 
+      "end": 42
+    }
+  ]
+}

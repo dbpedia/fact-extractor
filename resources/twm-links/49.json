@@ -1,0 +1,42 @@
+{
+  "Con gli \"SCO\" giocò per sei stagioni.": [
+    {
+      "start": 25, 
+      "chunk": "sei", 
+      "end": 28, 
+      "uri": "http://it.wikipedia.org/wiki/6_(numero)", 
+      "types": [
+        "http://dbpedia.org/ontology/TopicalConcept"
+      ]
+    }, 
+    {
+      "start": 21, 
+      "chunk": "per", 
+      "end": 24, 
+      "uri": "http://it.wikipedia.org/wiki/Per_(matematica)", 
+      "types": [
+        "http://dbpedia.org/ontology/TopicalConcept"
+      ]
+    }, 
+    {
+      "start": 29, 
+      "chunk": "stagioni", 
+      "end": 37, 
+      "uri": "http://it.wikipedia.org/wiki/Stagione", 
+      "types": [
+        "http://dbpedia.org/ontology/TopicalConcept"
+      ]
+    }, 
+    {
+      "start": 9, 
+      "chunk": "SCO", 
+      "end": 12, 
+      "uri": "http://it.wikipedia.org/wiki/SCO_Group", 
+      "types": [
+        "http://dbpedia.org/ontology/Company", 
+        "http://dbpedia.org/ontology/Organisation", 
+        "http://dbpedia.org/ontology/Agent"
+      ]
+    }
+  ]
+}

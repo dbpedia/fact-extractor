@@ -1,0 +1,39 @@
+{
+  "Ha giocato in massima serie anche con le maglie di ACIVI Vicenza e Triestina.": [
+    {
+      "start": 51, 
+      "chunk": "ACIVI Vicenza", 
+      "end": 64
+    }, 
+    {
+      "start": 14, 
+      "chunk": "massima serie", 
+      "end": 27
+    }, 
+    {
+      "start": 67, 
+      "chunk": "Triestina", 
+      "end": 76
+    }, 
+    {
+      "start": 41, 
+      "chunk": "maglie", 
+      "end": 47
+    }, 
+    {
+      "start": 0, 
+      "chunk": "Ha", 
+      "end": 2
+    }, 
+    {
+      "start": 28, 
+      "chunk": "anche", 
+      "end": 33
+    }, 
+    {
+      "start": 11, 
+      "chunk": "in", 
+      "end": 13
+    }
+  ]
+}

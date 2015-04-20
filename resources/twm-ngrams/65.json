@@ -1,0 +1,24 @@
+{
+  "Ha giocato per quattro anni nella massima serie scozzese con il Dundee.": [
+    {
+      "start": 34, 
+      "chunk": "massima serie scozzese", 
+      "end": 56
+    }, 
+    {
+      "start": 15, 
+      "chunk": "quattro anni", 
+      "end": 27
+    }, 
+    {
+      "start": 64, 
+      "chunk": "Dundee", 
+      "end": 70
+    }, 
+    {
+      "start": 0, 
+      "chunk": "Ha", 
+      "end": 2
+    }
+  ]
+}

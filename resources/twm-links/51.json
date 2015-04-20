@@ -1,0 +1,27 @@
+{
+  "Johannessen giocò per il Frigg.": [
+    {
+      "start": 26, 
+      "chunk": "Frigg", 
+      "end": 31, 
+      "uri": "http://it.wikipedia.org/wiki/Frigg_Oslo_Fotballklubb", 
+      "types": [
+        "http://dbpedia.org/ontology/SoccerClub", 
+        "http://dbpedia.org/ontology/SportsTeam", 
+        "http://dbpedia.org/ontology/Organisation", 
+        "http://dbpedia.org/ontology/Agent"
+      ]
+    }, 
+    {
+      "start": 0, 
+      "chunk": "Johannessen", 
+      "end": 11, 
+      "uri": "http://it.wikipedia.org/wiki/Karl_Johan_Johannessen", 
+      "types": [
+        "http://dbpedia.org/ontology/Athlete", 
+        "http://dbpedia.org/ontology/Person", 
+        "http://dbpedia.org/ontology/Agent"
+      ]
+    }
+  ]
+}

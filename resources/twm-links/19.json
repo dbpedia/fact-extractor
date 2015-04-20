@@ -1,0 +1,31 @@
+{
+  "Ha giocato 7 partite per la Nazionale cipriota tra il 1999 e il 2004.": [
+    {
+      "start": 25, 
+      "chunk": "la", 
+      "end": 27, 
+      "uri": "http://it.wikipedia.org/wiki/La_(nota)", 
+      "types": [
+        "http://dbpedia.org/ontology/TopicalConcept"
+      ]
+    }, 
+    {
+      "start": 13, 
+      "chunk": "partite", 
+      "end": 20, 
+      "uri": "http://it.wikipedia.org/wiki/Partita_(musica)", 
+      "types": [
+        "http://dbpedia.org/ontology/TopicalConcept"
+      ]
+    }, 
+    {
+      "start": 0, 
+      "chunk": "Ha", 
+      "end": 2, 
+      "uri": "http://it.wikipedia.org/wiki/Ettaro", 
+      "types": [
+        "http://dbpedia.org/ontology/TopicalConcept"
+      ]
+    }
+  ]
+}

@@ -1,0 +1,25 @@
+{
+  "Ha sempre giocato nel campionato libico.": [
+    {
+      "start": 22, 
+      "chunk": "campionato libico", 
+      "end": 39, 
+      "uri": "http://it.wikipedia.org/wiki/Libyan_Premier_League", 
+      "types": [
+        "http://dbpedia.org/ontology/SoccerLeague", 
+        "http://dbpedia.org/ontology/SportsLeague", 
+        "http://dbpedia.org/ontology/Organisation", 
+        "http://dbpedia.org/ontology/Event"
+      ]
+    }, 
+    {
+      "start": 0, 
+      "chunk": "Ha", 
+      "end": 2, 
+      "uri": "http://it.wikipedia.org/wiki/Ettaro", 
+      "types": [
+        "http://dbpedia.org/ontology/TopicalConcept"
+      ]
+    }
+  ]
+}

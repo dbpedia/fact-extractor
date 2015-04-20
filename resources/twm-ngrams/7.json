@@ -1,0 +1,44 @@
+{
+  "In patria gioca tra le file del Don Bosco Football Club.": [
+    {
+      "start": 32, 
+      "chunk": "Don Bosco", 
+      "end": 41
+    }, 
+    {
+      "start": 42, 
+      "chunk": "Football", 
+      "end": 50
+    }, 
+    {
+      "start": 23, 
+      "chunk": "file", 
+      "end": 27
+    }, 
+    {
+      "start": 3, 
+      "chunk": "patria", 
+      "end": 9
+    }, 
+    {
+      "start": 10, 
+      "chunk": "gioca", 
+      "end": 15
+    }, 
+    {
+      "start": 51, 
+      "chunk": "Club", 
+      "end": 55
+    }, 
+    {
+      "start": 0, 
+      "chunk": "In", 
+      "end": 2
+    }, 
+    {
+      "start": 28, 
+      "chunk": "del", 
+      "end": 31
+    }
+  ]
+}

@@ -1,0 +1,7 @@
+carriera	-	SS	B-NP
+74	-	N	B-NP
+partite	-	SP	I-NP
+Serie	-	SPN	B-NP
+B	-	SPN	I-NP
+21	-	N	B-NP
+gol	-	SN	I-NP

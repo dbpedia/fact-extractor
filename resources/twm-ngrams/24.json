@@ -1,0 +1,29 @@
+{
+  "Ha sempre giocato nel campionato mozambicano.": [
+    {
+      "start": 33, 
+      "chunk": "mozambicano", 
+      "end": 44
+    }, 
+    {
+      "start": 22, 
+      "chunk": "campionato", 
+      "end": 32
+    }, 
+    {
+      "start": 0, 
+      "chunk": "Ha", 
+      "end": 2
+    }, 
+    {
+      "start": 3, 
+      "chunk": "sempre", 
+      "end": 9
+    }, 
+    {
+      "start": 18, 
+      "chunk": "nel", 
+      "end": 21
+    }
+  ]
+}

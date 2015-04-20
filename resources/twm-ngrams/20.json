@@ -1,0 +1,39 @@
+{
+  "La stagione successiva va al Manfredonia, giocando titolare per tutta la stagione.": [
+    {
+      "start": 0, 
+      "chunk": "La stagione successiva", 
+      "end": 22
+    }, 
+    {
+      "start": 70, 
+      "chunk": "la stagione", 
+      "end": 81
+    }, 
+    {
+      "start": 29, 
+      "chunk": "Manfredonia", 
+      "end": 40
+    }, 
+    {
+      "start": 51, 
+      "chunk": "titolare", 
+      "end": 59
+    }, 
+    {
+      "start": 23, 
+      "chunk": "va", 
+      "end": 25
+    }, 
+    {
+      "start": 26, 
+      "chunk": "al", 
+      "end": 28
+    }, 
+    {
+      "start": 60, 
+      "chunk": "per", 
+      "end": 63
+    }
+  ]
+}

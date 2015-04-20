@@ -1,0 +1,53 @@
+{
+  "Nella stagione 1922-1923 gioca in Prima Divisione con l'Alessandria con 12 presenze.": [
+    {
+      "start": 34, 
+      "chunk": "Prima Divisione", 
+      "end": 49, 
+      "uri": "http://it.wikipedia.org/wiki/Prima_Divisione", 
+      "types": [
+        "http://dbpedia.org/ontology/NameEntity"
+      ]
+    }, 
+    {
+      "start": 6, 
+      "chunk": "stagione 1922-1923", 
+      "end": 24, 
+      "uri": "http://it.wikipedia.org/wiki/Prima_Divisione_1922-1923", 
+      "types": [
+        "http://dbpedia.org/ontology/SportsEvent", 
+        "http://dbpedia.org/ontology/Event"
+      ]
+    }, 
+    {
+      "start": 56, 
+      "chunk": "Alessandria", 
+      "end": 67, 
+      "uri": "http://it.wikipedia.org/wiki/Unione_Sportiva_Alessandria_1912", 
+      "types": [
+        "http://dbpedia.org/ontology/SoccerClub", 
+        "http://dbpedia.org/ontology/SportsTeam", 
+        "http://dbpedia.org/ontology/Organisation", 
+        "http://dbpedia.org/ontology/Agent"
+      ]
+    }, 
+    {
+      "start": 31, 
+      "chunk": "in", 
+      "end": 33, 
+      "uri": "http://it.wikipedia.org/wiki/Pollice_(unità_di_misura)", 
+      "types": [
+        "http://dbpedia.org/ontology/TopicalConcept"
+      ]
+    }, 
+    {
+      "start": 25, 
+      "chunk": "gioca", 
+      "end": 30, 
+      "uri": "http://it.wikipedia.org/wiki/Gioco", 
+      "types": [
+        "http://dbpedia.org/ontology/TopicalConcept"
+      ]
+    }
+  ]
+}

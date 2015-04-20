@@ -1,0 +1,39 @@
+{
+  "Ha giocato con la sua Nazionale nella Coppa d'Africa del 2013.": [
+    {
+      "start": 44, 
+      "chunk": "d'Africa", 
+      "end": 52
+    }, 
+    {
+      "start": 18, 
+      "chunk": "sua Nazionale", 
+      "end": 31
+    }, 
+    {
+      "start": 38, 
+      "chunk": "Coppa", 
+      "end": 43
+    }, 
+    {
+      "start": 0, 
+      "chunk": "Ha", 
+      "end": 2
+    }, 
+    {
+      "start": 32, 
+      "chunk": "nella", 
+      "end": 37
+    }, 
+    {
+      "start": 15, 
+      "chunk": "la", 
+      "end": 17
+    }, 
+    {
+      "start": 53, 
+      "chunk": "del", 
+      "end": 56
+    }
+  ]
+}

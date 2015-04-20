@@ -1,0 +1,34 @@
+{
+  "Nella stagione 2012-2013 ha giocato 17 partite nel campionato belga con il Beerschot.": [
+    {
+      "start": 6, 
+      "chunk": "stagione 2012-2013", 
+      "end": 24
+    }, 
+    {
+      "start": 51, 
+      "chunk": "campionato belga", 
+      "end": 67
+    }, 
+    {
+      "start": 75, 
+      "chunk": "Beerschot", 
+      "end": 84
+    }, 
+    {
+      "start": 39, 
+      "chunk": "partite", 
+      "end": 46
+    }, 
+    {
+      "start": 0, 
+      "chunk": "Nella", 
+      "end": 5
+    }, 
+    {
+      "start": 25, 
+      "chunk": "ha", 
+      "end": 27
+    }
+  ]
+}

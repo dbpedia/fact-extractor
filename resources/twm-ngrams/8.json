@@ -1,0 +1,39 @@
+{
+  "In carriera ha giocato complessivamente 74 partite in Serie B, con 21 gol segnati.": [
+    {
+      "start": 54, 
+      "chunk": "Serie B", 
+      "end": 61
+    }, 
+    {
+      "start": 70, 
+      "chunk": "gol", 
+      "end": 73
+    }, 
+    {
+      "start": 43, 
+      "chunk": "partite", 
+      "end": 50
+    }, 
+    {
+      "start": 3, 
+      "chunk": "carriera", 
+      "end": 11
+    }, 
+    {
+      "start": 0, 
+      "chunk": "In", 
+      "end": 2
+    }, 
+    {
+      "start": 12, 
+      "chunk": "ha", 
+      "end": 14
+    }, 
+    {
+      "start": 51, 
+      "chunk": "in", 
+      "end": 53
+    }
+  ]
+}

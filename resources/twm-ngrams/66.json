@@ -1,0 +1,39 @@
+{
+  "Dal 2005 al 2007 gioca in Spagna nell'Azkar Lugo Fútbol Sala.": [
+    {
+      "start": 9, 
+      "chunk": "al 2007", 
+      "end": 16
+    }, 
+    {
+      "start": 44, 
+      "chunk": "Lugo", 
+      "end": 48
+    }, 
+    {
+      "start": 57, 
+      "chunk": "Sala", 
+      "end": 61
+    }, 
+    {
+      "start": 17, 
+      "chunk": "gioca", 
+      "end": 22
+    }, 
+    {
+      "start": 26, 
+      "chunk": "Spagna", 
+      "end": 32
+    }, 
+    {
+      "start": 0, 
+      "chunk": "Dal", 
+      "end": 3
+    }, 
+    {
+      "start": 23, 
+      "chunk": "in", 
+      "end": 25
+    }
+  ]
+}

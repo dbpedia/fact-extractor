@@ -1,0 +1,34 @@
+{
+  "Nella stagione 1925-1926 gioca nella Giovane Piemonte Torino.": [
+    {
+      "start": 6, 
+      "chunk": "stagione 1925-1926", 
+      "end": 24
+    }, 
+    {
+      "start": 37, 
+      "chunk": "Giovane", 
+      "end": 44
+    }, 
+    {
+      "start": 45, 
+      "chunk": "Piemonte", 
+      "end": 53
+    }, 
+    {
+      "start": 25, 
+      "chunk": "gioca", 
+      "end": 30
+    }, 
+    {
+      "start": 54, 
+      "chunk": "Torino", 
+      "end": 60
+    }, 
+    {
+      "start": 0, 
+      "chunk": "Nella", 
+      "end": 5
+    }
+  ]
+}
