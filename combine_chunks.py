@@ -41,7 +41,7 @@ for path, subdirs, files in os.walk(sys.argv[1]):
             links = json.load(codecs.open(f, 'rb', 'utf-8'))
             link_chunks = set()
             for sentence, val in links.iteritems():
-                all_chunks[sentence_id] = {'sentence': sentence}
+                all_chunks[sentence_id]['sentence'] = sentence
                 for diz in val:
                     # Skip chunks if they are in a stopwords list
                     chunk = diz['chunk']
@@ -94,23 +94,19 @@ for sentence_id, values in all_chunks.iteritems():
     ngram_chunks = values.get('twm-ngrams', set())
     tp_chunks = values.get('textpro-chunks', set())
     if debug:
-        print 'LINKS'
-        print link_chunks
-        print 'NGRAMS'
-        print ngram_chunks
-        print 'TEXTPRO'
-        print tp_chunks
+        print 'LINKS', link_chunks
+        print 'NGRAMS', ngram_chunks
+        print 'TEXTPRO', tp_chunks
+
     # Prune ngrams from links
     to_remove = set()
     for link_chunk in link_chunks:
         for ngram_chunk in ngram_chunks:
             # Prune whether the link is an ngram substring or viceversa
             if link_chunk in ngram_chunk or ngram_chunk in link_chunk:
+                print 'Removing "%s" because it overlaps with "%s"' % (ngram_chunk, link_chunk)
                 to_remove.add(ngram_chunk)
     ngram_chunks.difference_update(to_remove)
-
-    print 'NGRAMS PRUNED FROM LINKS'
-    print ngram_chunks
 
     # Prune TextPro chunks from links
     to_remove = set()
@@ -118,11 +114,9 @@ for sentence_id, values in all_chunks.iteritems():
         for tp_chunk in tp_chunks:
             # Prune whether the link is a TextPro chunk substring or viceversa
             if link_chunk in tp_chunk or tp_chunk in link_chunk:
+                print 'Removing "%s" because it overlaps with "%s"' % (tp_chunk, link_chunk)
                 to_remove.add(tp_chunk)
     tp_chunks.difference_update(to_remove)
-
-    print 'TEXTPRO PRUNED FROM LINKS'
-    print tp_chunks
 
     # Prune TextPro chunks from ngrams
     to_remove = set()
@@ -130,31 +124,43 @@ for sentence_id, values in all_chunks.iteritems():
         for tp_chunk in tp_chunks:
             # Prune whether the ngram is TextPro chunk substring or viceversa
             if ngram_chunk in tp_chunk or tp_chunk in ngram_chunk:
+                print 'Removing "%s" because it overlaps with "%s"' % (tp_chunk, ngram_chunk)
                 to_remove.add(tp_chunk)
     tp_chunks.difference_update(to_remove)
 
-    print 'TEXTPRO PRUNED FROM NGRAMS'
-    print tp_chunks
-
     combined = tp_chunks.union(ngram_chunks, link_chunks)
+    print 'REMAINING CHUNKS', combined
+
+
+    # Merge chunks in case of common words
     pairs = itertools.combinations(combined, 2)
-    # Merge chunks in case of common substrings
     for p1, p2 in pairs:
-        print p1
-        print p2
-        common = longest_common_substring(p1, p2)
+        """
+        if not p1 in combined or not p2 in combined:
+            continue
+        """
+
+        words1, words2 = p1.split(), p2.split()
+        common = longest_common_substring(words1, words2)
         if common:
-            print common
-            split1 = p1.split(common)
-            split2 = p2.split(common)
-            total = split1 + [common] + split2
-            print ''.join(total)
+            word_common = ' '.join(common)
+            index1, index2 = p1.index(word_common), p2.index(word_common)
+
+            if index1 > index2:
+                total = p1[:index1] + p2[index2:]
+            else:
+                total = p2[:index2] + p1[index1:]
+
+            print 'Merging "%s" and "%s" to "%s"' % (p1, p2, total)
+
+            combined.remove(p1)
+            combined.remove(p2)
+            combined.add(total)
 
     # Cast to list for json serialization
     current['chunks'] = list(combined)
     all_combined.append(current)
-    print 'COMBINED'
-    print current
+    print 'COMBINED', current
 
 if debug:
     print all_combined
