@@ -10,8 +10,9 @@ import sys
 import stopwords
 from collections import defaultdict
 
+
 debug = True
-all_chunks = {}
+
 
 # From https://en.wikibooks.org/wiki/Algorithm_Implementation/Strings/Longest_common_substring#Python2
 def longest_common_substring(s1, s2):
@@ -28,135 +29,182 @@ def longest_common_substring(s1, s2):
                 m[x][y] = 0
     return s1[x_longest - longest: x_longest]
 
-# Loop over the dirs containing the chunks
-for path, subdirs, files in os.walk(sys.argv[1]):
-    for name in files:
-        f = os.path.join(path, name)
-        # Skip unwanted files
-        if not re.match('^[0-9]', name): continue 
-        # Standard sentence ID
-        sentence_id = '%02d' % int(os.path.splitext(name)[0])
-        # links
-        if 'twm-links' in path:
-            links = json.load(codecs.open(f, 'rb', 'utf-8'))
-            link_chunks = set()
-            for sentence, val in links.iteritems():
-                all_chunks[sentence_id] = {'sentence': sentence}
-                for diz in val:
-                    # Skip chunks if they are in a stopwords list
-                    chunk = diz['chunk']
-                    if chunk.lower() in stopwords.StopWords.words('italian'): continue
-                    link_chunks.add(chunk)
-            all_chunks[sentence_id]['twm-links'] = link_chunks
-        # n-grams
-        elif 'twm-ngrams' in path:
-            ngrams = json.load(codecs.open(f, 'rb', 'utf-8'))
-            ngram_chunks = set()
-            for val in ngrams.values():
-                for diz in val:
-                    # Skip chunks if they are in a stopwords list
-                    chunk = diz['chunk']
-                    if chunk.lower() in stopwords.StopWords.words('italian'): continue
-                    ngram_chunks.add(diz['chunk'])
-            all_chunks[sentence_id]['twm-ngrams'] = ngram_chunks
-        # TextPro
-        elif 'textpro-chunks' in path:
-            with codecs.open(f, 'rb', 'utf-8') as i:
-                tp = [l.strip() for l in i.readlines()]
-            tmp_tp_chunks = []
-            # Parse TextPro format
-            for line in tp:
-                if line.startswith('#'): continue
-                items = line.split('\t')
-                token = items[0]
-                tag = items[3]
-                if tag == 'B-NP': chunk = [token]
-                elif tag == 'I-NP': chunk.append(token)
-                else: continue
-                tmp_tp_chunks.append(chunk)
 
-            tp_chunks = []
-            for chunk in tmp_tp_chunks:
-                if chunk not in tp_chunks: tp_chunks.append(chunk)
-            tp_chunks = set([' '.join(chunk) for chunk in tp_chunks])
-            all_chunks[sentence_id]['textpro-chunks'] = tp_chunks
+def read_twm_links(f):
+    links = json.load(codecs.open(f, 'rb', 'utf-8'))
+    sentence, val = links.items()[0]
 
-if debug:
-    print all_chunks
+    link_chunks = set()
+    for diz in val:
+        chunk = diz['chunk']
+        if chunk.lower() not in stopwords.StopWords.words('italian'):
+            link_chunks.add(chunk)
 
-all_combined = []
+    return sentence, link_chunks
 
-# Combine results
-for sentence_id, values in all_chunks.iteritems():
-    current = {'id': sentence_id, 'sentence': values['sentence']}
-    # If chunks overlap, prefer links > ngrams > chunker
-    link_chunks = values['twm-links']
-    ngram_chunks = values['twm-ngrams']
-    tp_chunks = values['textpro-chunks']
+
+def read_ngrams(f):
+    ngrams = json.load(codecs.open(f, 'rb', 'utf-8'))
+
+    ngram_chunks = set()
+    for val in ngrams.values():
+        for diz in val:
+            chunk = diz['chunk']
+            if chunk.lower() not in stopwords.StopWords.words('italian'):
+                ngram_chunks.add(chunk)
+
+    return ngram_chunks
+
+
+def read_tp_chunks(f):
+    with codecs.open(f, 'rb', 'utf-8') as i:
+        tp = [l.strip() for l in i.readlines()]
+
+    tmp_tp_chunks, current_chunk = [], []
+    for line in tp:
+        if line.startswith('#'):
+            continue
+
+        items = line.split('\t')
+        token = items[0]
+        tag = items[3]
+
+        if tag == 'B-NP':
+            if current_chunk:
+                tmp_tp_chunks.append(current_chunk)
+            current_chunk = [token]
+        elif tag == 'I-NP':
+            if not current_chunk:
+                print 'WARNING missing starting token:', f  # FIXME might be symptom of error
+                current_chunk = []
+            current_chunk.append(token)
+        else:
+            print 'WARNING ignoring token "%s" with tag "%s" in file "%s"' % (
+                  token, tag, f)
+
+    if current_chunk:
+        tmp_tp_chunks.append(current_chunk)
+    return set(' '.join(chunk) for chunk in tmp_tp_chunks)
+
+
+def load_chunks(path):
+    """
+    loads all chunks contained in the given path
+
+    chunk type is determined only from the path of the file, 'twm-links',
+    'twm-ngrams' and 'textpro-chunks', the name of the file must be a
+    two digits number (the sentence id) and an optional extension
+    """
+    all_chunks = defaultdict(lambda: dict())
+
+    for path, _, files in os.walk(path):
+        for name in files:
+            f = os.path.join(path, name)
+            filename, ext = os.path.splitext(name)
+
+            # Skip unwanted files
+            match = re.match(r'^\d+$', filename)
+            if not match:
+                continue
+
+            sentence_id = '%02d' % int(match.group(0))
+            if 'twm-links' in path:
+                sentence, link_chunks = read_twm_links(f)
+                all_chunks[sentence_id]['sentence'] = sentence
+                all_chunks[sentence_id]['twm-links'] = link_chunks
+            elif 'twm-ngrams' in path:
+                all_chunks[sentence_id]['twm-ngrams'] = read_ngrams(f)
+            elif 'textpro-chunks' in path:
+                all_chunks[sentence_id]['textpro-chunks'] = read_tp_chunks(f)
+
+    return all_chunks
+
+
+def priority_update(first, second):
+    """
+    removes from second all the items which completely include, or are completely
+    included in, some item in first
+    """
+    to_remove = set()
+
+    for a, b in itertools.product(first, second):
+        if a in b or b in a:
+            to_remove.add(b)
+            if debug:
+                print 'Removing "%s" because it overlaps with "%s"' % (b, a)
+
+    second.difference_update(to_remove)
+
+
+def combine_chunks(sentence_id, values):
+    """
+    combine the chunks of each sentence
+    if chunks overlap, prefer links > ngrams > chunker
+    if chunks still overlap after this merge them, i.e. "la Nazionale" and
+    "Nazionale Under-21" would be merged into "la Nazionale Under-21"
+    """
+
+    link_chunks = values.get('twm-links', set())
+    ngram_chunks = values.get('twm-ngrams', set())
+    tp_chunks = values.get('textpro-chunks', set())
+
     if debug:
-        print 'LINKS'
-        print link_chunks
-        print 'NGRAMS'
-        print ngram_chunks
-        print 'TEXTPRO'
-        print tp_chunks
-    # Prune ngrams from links
-    to_remove = set()
-    for link_chunk in link_chunks:
-        for ngram_chunk in ngram_chunks:
-            # Prune whether the link is an ngram substring or viceversa
-            if link_chunk in ngram_chunk or ngram_chunk in link_chunk:
-                to_remove.add(ngram_chunk)
-    ngram_chunks.difference_update(to_remove)
+        print '--- PROCESSING SENTENCE', sentence_id
+        print 'LINKS', link_chunks
+        print 'NGRAMS', ngram_chunks
+        print 'TEXTPRO', tp_chunks
 
-    print 'NGRAMS PRUNED FROM LINKS'
-    print ngram_chunks
-
-    # Prune TextPro chunks from links
-    to_remove = set()
-    for link_chunk in link_chunks:
-        for tp_chunk in tp_chunks:
-            # Prune whether the link is a TextPro chunk substring or viceversa
-            if link_chunk in tp_chunk or tp_chunk in link_chunk:
-                to_remove.add(tp_chunk)
-    tp_chunks.difference_update(to_remove)
-
-    print 'TEXTPRO PRUNED FROM LINKS'
-    print tp_chunks
-
-    # Prune TextPro chunks from ngrams
-    to_remove = set()
-    for ngram_chunk in ngram_chunks:
-        for tp_chunk in tp_chunks:
-            # Prune whether the ngram is TextPro chunk substring or viceversa
-            if ngram_chunk in tp_chunk or tp_chunk in ngram_chunk:
-                to_remove.add(tp_chunk)
-    tp_chunks.difference_update(to_remove)
-
-    print 'TEXTPRO PRUNED FROM NGRAMS'
-    print tp_chunks
+    priority_update(link_chunks, ngram_chunks)
+    priority_update(link_chunks, tp_chunks)
+    priority_update(ngram_chunks, tp_chunks)
 
     combined = tp_chunks.union(ngram_chunks, link_chunks)
+    if debug:
+        print 'COMBINED CHUNKS', combined
+
     pairs = itertools.combinations(combined, 2)
-    # Merge chunks in case of common substrings
     for p1, p2 in pairs:
-        print p1
-        print p2
-        common = longest_common_substring(p1, p2)
+        if not p1 in combined or not p2 in combined:
+            continue
+
+        words1, words2 = p1.split(), p2.split()
+        common = longest_common_substring(words1, words2)
         if common:
-            print common
-            split1 = p1.split(common)
-            split2 = p2.split(common)
-            total = split1 + [common] + split2
-            print ''.join(total)
+            word_common = ' '.join(common)
+            index1, index2 = p1.index(word_common), p2.index(word_common)
 
-    # Cast to list for json serialization
-    current['chunks'] = list(combined)
-    all_combined.append(current)
-    print 'COMBINED'
-    print current
+            if index1 > index2:
+                total = p1[:index1] + p2[index2:]
+            else:
+                total = p2[:index2] + p1[index1:]
 
-if debug:
-    print all_combined
+            if debug:
+                print 'Merging "%s" and "%s" to "%s"' % (p1, p2, total)
 
-json.dump(all_combined, codecs.open('chunks.json', 'wb', 'utf-8'), ensure_ascii=False, indent=2)
+            combined.remove(p1)
+            combined.remove(p2)
+            combined.add(total)
+
+    return {
+        'id': sentence_id,
+        'sentence': values['sentence'],
+        'chunks': list(combined),
+    }
+
+
+def main():
+    path = sys.argv[1]
+    all_chunks = load_chunks(path)
+
+    all_combined = []
+    for sentence_id, values in all_chunks.iteritems():
+        combined = combine_chunks(sentence_id, values)
+        all_combined.append(combined)
+        if debug:
+            print 'RESULT', combined
+
+    json.dump(all_combined, codecs.open('chunks.json', 'wb', 'utf-8'),
+              ensure_ascii=False, indent=2)
+
+if __name__ == '__main__':
+    main()
