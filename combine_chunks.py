@@ -30,7 +30,7 @@ def longest_common_substring(s1, s2):
     return s1[x_longest - longest: x_longest]
 
 
-def read_twm_links_and_ngrams(f):
+def read_twm_links(f):
     links = json.load(codecs.open(f, 'rb', 'utf-8'))
     sentence, val = links.items()[0]
 
@@ -103,7 +103,7 @@ def load_chunks(path):
             filename, ext = os.path.splitext(name)
 
             # Skip unwanted files
-            match = re.match(r'^\d{2}$', filename)
+            match = re.match(r'^\d+$', filename)
             if not match:
                 continue
 
