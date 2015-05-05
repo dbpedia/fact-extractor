@@ -10,6 +10,7 @@ if ischild:
 else:
     from DateAndTimeListener import DateAndTimeListener
 
+from DateEnum import DateEnum
 
 def serializedATN():
     with StringIO() as buf:
@@ -1943,7 +1944,7 @@ class DateAndTimeParser ( Parser ):
 
                 result['type'] = DateEnum.TIMEX_DATE_DURATION;
                 result['value'] = localctx._day_duration.s;
-                result.append(result);
+                self.results.append(result);
                         
                 pass
 
@@ -1954,7 +1955,7 @@ class DateAndTimeParser ( Parser ):
 
                 result['type'] = DateEnum.TIMEX_DATE_DURATION;
                 result['value'] = localctx._week_duration.s;
-                result.append(result);
+                self.results.append(result);
                         
                 pass
 
@@ -1965,7 +1966,7 @@ class DateAndTimeParser ( Parser ):
 
                 result['type'] = DateEnum.TIMEX_DATE_DURATION;
                 result['value'] = localctx._month_duration.s;
-                result.append(result);
+                self.results.append(result);
                         
                 pass
 
@@ -1976,7 +1977,7 @@ class DateAndTimeParser ( Parser ):
 
                 result['type'] = DateEnum.TIMEX_DATE_DURATION;
                 result['value'] = localctx._year_duration.s;
-                result.append(result);
+                self.results.append(result);
                         
                 pass
 
@@ -1993,15 +1994,15 @@ class DateAndTimeParser ( Parser ):
 
                 result['type'] = DateEnum.TIMEX_DATE;
                 result['value'] = "$weekday_number:1$";
-                result.append(result);
+                self.results.append(result);
                 result = dict()
                 result['type'] = DateEnum.TIMEX_DATE;
                 result['value'] = "%02d" % (localctx._month.i) + ":_";
-                result.append(result);
+                self.results.append(result);
                 result = dict()
                 result['type'] = DateEnum.TIMEX_WEEKDAY;
                 result['value'] = localctx._day_absolute.s;
-                result.append(result);
+                self.results.append(result);
                        
                 pass
 
@@ -2018,15 +2019,15 @@ class DateAndTimeParser ( Parser ):
 
                 result['type'] = DateEnum.TIMEX_DATE;
                 result['value'] = "$weekday_number:2$";
-                result.append(result);
+                self.results.append(result);
                 result = dict()
                 result['type'] = DateEnum.TIMEX_DATE;
                 result['value'] = "%02d" % (localctx._month.i) + ":_";
-                result.append(result);
+                self.results.append(result);
                 result = dict()
                 result['type'] = DateEnum.TIMEX_WEEKDAY;
                 result['value'] = localctx._day_absolute.s;
-                result.append(result);
+                self.results.append(result);
                           
                 pass
 
@@ -2043,15 +2044,15 @@ class DateAndTimeParser ( Parser ):
 
                 result['type'] = DateEnum.TIMEX_DATE;
                 result['value'] = "$weekday_number:3$";
-                result.append(result);
+                self.results.append(result);
                 result = dict()
                 result['type'] = DateEnum.TIMEX_DATE;
                 result['value'] = "%02d" % (localctx._month.i) + ":_";
-                result.append(result);
+                self.results.append(result);
                 result = dict()
                 result['type'] = DateEnum.TIMEX_WEEKDAY;
                 result['value'] = localctx._day_absolute.s;
-                result.append(result);
+                self.results.append(result);
                           
                 pass
 
@@ -2068,15 +2069,15 @@ class DateAndTimeParser ( Parser ):
 
                 result['type'] = DateEnum.TIMEX_DATE;
                 result['value'] = "$weekday_number:4$";
-                result.append(result);
+                self.results.append(result);
                 result = dict()
                 result['type'] = DateEnum.TIMEX_DATE;
                 result['value'] = "%02d" % (localctx._month.i) + ":_";
-                result.append(result);
+                self.results.append(result);
                 result = dict()
                 result['type'] = DateEnum.TIMEX_WEEKDAY;
                 result['value'] = localctx._day_absolute.s;
-                result.append(result);
+                self.results.append(result);
                           
                 pass
 
@@ -2093,15 +2094,15 @@ class DateAndTimeParser ( Parser ):
 
                 result['type'] = DateEnum.TIMEX_DATE;
                 result['value'] = "$weekday_number:5$";
-                result.append(result);
+                self.results.append(result);
                 result = dict()
                 result['type'] = DateEnum.TIMEX_DATE;
                 result['value'] = "%02d" % (localctx._month.i) + ":_";
-                result.append(result);
+                self.results.append(result);
                 result = dict()
                 result['type'] = DateEnum.TIMEX_WEEKDAY;
                 result['value'] = localctx._day_absolute.s;
-                result.append(result);
+                self.results.append(result);
                           
                 pass
 
@@ -2118,15 +2119,15 @@ class DateAndTimeParser ( Parser ):
 
                 result['type'] = DateEnum.TIMEX_DATE;
                 result['value'] = "$weekday_number:-1$";
-                result.append(result);
+                self.results.append(result);
                 result = dict()
                 result['type'] = DateEnum.TIMEX_DATE;
                 result['value'] = "%02d" % (localctx._month.i) + ":_";
-                result.append(result);
+                self.results.append(result);
                 result = dict()
                 result['type'] = DateEnum.TIMEX_WEEKDAY;
                 result['value'] = localctx._day_absolute.s;
-                result.append(result);
+                self.results.append(result);
                           
                 pass
 
@@ -2143,15 +2144,15 @@ class DateAndTimeParser ( Parser ):
 
                 result['type'] = DateEnum.TIMEX_DATE;
                 result['value'] = "$weekday_number:1$";
-                result.append(result);
+                self.results.append(result);
                 result = dict()
                 result['type'] = DateEnum.TIMEX_DATE;
                 result['value'] = "%02d" % (localctx._month.i) + ":_";
-                result.append(result);
+                self.results.append(result);
                 result = dict()
                 result['type'] = DateEnum.TIMEX_WEEKDAY;
                 result['value'] = "$sunday$";
-                result.append(result);
+                self.results.append(result);
                         
                 pass
 
@@ -2168,15 +2169,15 @@ class DateAndTimeParser ( Parser ):
 
                 result['type'] = DateEnum.TIMEX_DATE;
                 result['value'] = "$weekday_number:2$";
-                result.append(result);
+                self.results.append(result);
                 result = dict()
                 result['type'] = DateEnum.TIMEX_DATE;
                 result['value'] = "%02d" % (localctx._month.i) + ":_";
-                result.append(result);
+                self.results.append(result);
                 result = dict()
                 result['type'] = DateEnum.TIMEX_WEEKDAY;
                 result['value'] = "$sunday$";
-                result.append(result);
+                self.results.append(result);
                         
                 pass
 
@@ -2193,15 +2194,15 @@ class DateAndTimeParser ( Parser ):
 
                 result['type'] = DateEnum.TIMEX_DATE;
                 result['value'] = "$weekday_number:3$";
-                result.append(result);
+                self.results.append(result);
                 result = dict()
                 result['type'] = DateEnum.TIMEX_DATE;
                 result['value'] = "%02d" % (localctx._month.i) + ":_";
-                result.append(result);
+                self.results.append(result);
                 result = dict()
                 result['type'] = DateEnum.TIMEX_WEEKDAY;
                 result['value'] = "$sunday$";
-                result.append(result);
+                self.results.append(result);
                         
                 pass
 
@@ -2218,15 +2219,15 @@ class DateAndTimeParser ( Parser ):
 
                 result['type'] = DateEnum.TIMEX_DATE;
                 result['value'] = "$weekday_number:4$";
-                result.append(result);
+                self.results.append(result);
                 result = dict()
                 result['type'] = DateEnum.TIMEX_DATE;
                 result['value'] = "%02d" % (localctx._month.i) + ":_";
-                result.append(result);
+                self.results.append(result);
                 result = dict()
                 result['type'] = DateEnum.TIMEX_WEEKDAY;
                 result['value'] = "$sunday$";
-                result.append(result);
+                self.results.append(result);
                         
                 pass
 
@@ -2243,15 +2244,15 @@ class DateAndTimeParser ( Parser ):
 
                 result['type'] = DateEnum.TIMEX_DATE;
                 result['value'] = "$weekday_number:5$";
-                result.append(result);
+                self.results.append(result);
                 result = dict()
                 result['type'] = DateEnum.TIMEX_DATE;
                 result['value'] = "%02d" % (localctx._month.i) + ":_";
-                result.append(result);
+                self.results.append(result);
                 result = dict()
                 result['type'] = DateEnum.TIMEX_WEEKDAY;
                 result['value'] = "$sunday$";
-                result.append(result);
+                self.results.append(result);
                         
                 pass
 
@@ -2268,15 +2269,15 @@ class DateAndTimeParser ( Parser ):
 
                 result['type'] = DateEnum.TIMEX_DATE;
                 result['value'] = "$weekday_number:-1$";
-                result.append(result);
+                self.results.append(result);
                 result = dict()
                 result['type'] = DateEnum.TIMEX_DATE;
                 result['value'] = "%02d" % (localctx._month.i) + ":_";
-                result.append(result);
+                self.results.append(result);
                 result = dict()
                 result['type'] = DateEnum.TIMEX_WEEKDAY;
                 result['value'] = "$sunday$";
-                result.append(result);
+                self.results.append(result);
                         
                 pass
 
@@ -2293,11 +2294,11 @@ class DateAndTimeParser ( Parser ):
 
                 result['type'] = DateEnum.TIMEX_DATE;
                 result['value'] = "$week_number:1$";
-                result.append(result);
+                self.results.append(result);
                 result = dict()
                 result['type'] = DateEnum.TIMEX_DATE;
                 result['value'] = "%02d" % (localctx._month.i) + ":_";
-                result.append(result);
+                self.results.append(result);
                        
                 pass
 
@@ -2314,11 +2315,11 @@ class DateAndTimeParser ( Parser ):
 
                 result['type'] = DateEnum.TIMEX_DATE;
                 result['value'] = "$week_number:2$";
-                result.append(result);
+                self.results.append(result);
                 result = dict()
                 result['type'] = DateEnum.TIMEX_DATE;
                 result['value'] = "%02d" % (localctx._month.i) + ":_";
-                result.append(result);
+                self.results.append(result);
                         
                 pass
 
@@ -2335,11 +2336,11 @@ class DateAndTimeParser ( Parser ):
 
                 result['type'] = DateEnum.TIMEX_DATE;
                 result['value'] = "$week_number:3$";
-                result.append(result);
+                self.results.append(result);
                 result = dict()
                 result['type'] = DateEnum.TIMEX_DATE;
                 result['value'] = "%02d" % (localctx._month.i) + ":_";
-                result.append(result);
+                self.results.append(result);
                           
                 pass
 
@@ -2356,11 +2357,11 @@ class DateAndTimeParser ( Parser ):
 
                 result['type'] = DateEnum.TIMEX_DATE;
                 result['value'] = "$week_number:4$";
-                result.append(result);
+                self.results.append(result);
                 result = dict()
                 result['type'] = DateEnum.TIMEX_DATE;
                 result['value'] = "%02d" % (localctx._month.i) + ":_";
-                result.append(result);
+                self.results.append(result);
                           
                 pass
 
@@ -2377,11 +2378,11 @@ class DateAndTimeParser ( Parser ):
 
                 result['type'] = DateEnum.TIMEX_DATE;
                 result['value'] = "$week_number:5$";
-                result.append(result);
+                self.results.append(result);
                 result = dict()
                 result['type'] = DateEnum.TIMEX_DATE;
                 result['value'] = "%02d" % (localctx._month.i) + ":_";
-                result.append(result);
+                self.results.append(result);
                           
                 pass
 
@@ -2398,11 +2399,11 @@ class DateAndTimeParser ( Parser ):
 
                 result['type'] = DateEnum.TIMEX_DATE;
                 result['value'] = "$week_number:-1$";
-                result.append(result);
+                self.results.append(result);
                 result = dict()
                 result['type'] = DateEnum.TIMEX_DATE;
                 result['value'] = "%02d" % (localctx._month.i) + ":_";
-                result.append(result);
+                self.results.append(result);
                           
                 pass
 
@@ -2413,7 +2414,7 @@ class DateAndTimeParser ( Parser ):
 
                 result['type'] = DateEnum.TIMEX_WEEK;
                 result['value'] = "%d" % (localctx._week_number.i);
-                result.append(result);
+                self.results.append(result);
                         
                 pass
 
@@ -2426,11 +2427,11 @@ class DateAndTimeParser ( Parser ):
 
                 result['type'] = DateEnum.TIMEX_DATE;
                 result['value'] = "$week:-1$";
-                result.append(result);
+                self.results.append(result);
                 result = dict()
                 result['type'] = DateEnum.TIMEX_WEEKDAY;
                 result['value'] = localctx._day_absolute.s;
-                result.append(result);
+                self.results.append(result);
                         
                 pass
 
@@ -2443,11 +2444,11 @@ class DateAndTimeParser ( Parser ):
 
                 result['type'] = DateEnum.TIMEX_DATE;
                 result['value'] = "$week:1$";
-                result.append(result);
+                self.results.append(result);
                 result = dict()
                 result['type'] = DateEnum.TIMEX_WEEKDAY;
                 result['value'] = localctx._day_absolute.s;
-                result.append(result);
+                self.results.append(result);
                        
                 pass
 
@@ -2460,11 +2461,11 @@ class DateAndTimeParser ( Parser ):
 
                 result['type'] = DateEnum.TIMEX_DATE;
                 result['value'] = "$week:1$";
-                result.append(result);
+                self.results.append(result);
                 result = dict()
                 result['type'] = DateEnum.TIMEX_WEEKDAY;
                 result['value'] = "$sunday$";
-                result.append(result);
+                self.results.append(result);
                        
                 pass
 
@@ -2477,11 +2478,11 @@ class DateAndTimeParser ( Parser ):
 
                 result['type'] = DateEnum.TIMEX_DATE;
                 result['value'] = "$week:0$";
-                result.append(result);
+                self.results.append(result);
                 result = dict()
                 result['type'] = DateEnum.TIMEX_WEEKDAY;
                 result['value'] = localctx._day_absolute.s;
-                result.append(result);
+                self.results.append(result);
                        
                 pass
 
@@ -2494,11 +2495,11 @@ class DateAndTimeParser ( Parser ):
 
                 result['type'] = DateEnum.TIMEX_DATE;
                 result['value'] = "$week:1$";
-                result.append(result);
+                self.results.append(result);
                 result = dict()
                 result['type'] = DateEnum.TIMEX_WEEKDAY;
                 result['value'] = localctx._day_absolute.s;
-                result.append(result);
+                self.results.append(result);
                         
                 pass
 
@@ -2511,11 +2512,11 @@ class DateAndTimeParser ( Parser ):
 
                 result['type'] = DateEnum.TIMEX_DATE;
                 result['value'] = "$week:-1$";
-                result.append(result);
+                self.results.append(result);
                 result = dict()
                 result['type'] = DateEnum.TIMEX_WEEKDAY;
                 result['value'] = localctx._day_absolute.s;
-                result.append(result);
+                self.results.append(result);
                        
                 pass
 
@@ -2528,11 +2529,11 @@ class DateAndTimeParser ( Parser ):
 
                 result['type'] = DateEnum.TIMEX_DATE;
                 result['value'] = "$week:-1$";
-                result.append(result);
+                self.results.append(result);
                 result = dict()
                 result['type'] = DateEnum.TIMEX_WEEKDAY;
                 result['value'] = localctx._day_absolute.s;
-                result.append(result);
+                self.results.append(result);
                        
                 pass
 
@@ -2545,11 +2546,11 @@ class DateAndTimeParser ( Parser ):
 
                 result['type'] = DateEnum.TIMEX_WEEKDAY;
                 result['value'] = localctx._day_absolute.s;
-                result.append(result);
+                self.results.append(result);
                 result = dict()
                 result['type'] = DateEnum.TIMEX_START_TIME;
                 result['value'] = "$morning$";
-                result.append(result);
+                self.results.append(result);
                      
                 pass
 
@@ -2562,11 +2563,11 @@ class DateAndTimeParser ( Parser ):
 
                 result['type'] = DateEnum.TIMEX_DATE;
                 result['value'] = localctx._day_relative.s;
-                result.append(result);
+                self.results.append(result);
                 result = dict()
                 result['type'] = DateEnum.TIMEX_START_TIME;
                 result['value'] = "$morning$";
-                result.append(result);
+                self.results.append(result);
                      
                 pass
 
@@ -2579,11 +2580,11 @@ class DateAndTimeParser ( Parser ):
 
                 result['type'] = DateEnum.TIMEX_YEAR;
                 result['value'] = "$year:1$";
-                result.append(result);
+                self.results.append(result);
                 result = dict()
                 result['type'] = DateEnum.TIMEX_DATE;
                 result['value'] = "%02d" % (localctx._month.i) + ":_" ;
-                result.append(result);
+                self.results.append(result);
                         
                 pass
 
@@ -2596,11 +2597,11 @@ class DateAndTimeParser ( Parser ):
 
                 result['type'] = DateEnum.TIMEX_YEAR;
                 result['value'] = "$year:0$";
-                result.append(result);
+                self.results.append(result);
                 result = dict()
                 result['type'] = DateEnum.TIMEX_DATE;
                 result['value'] = "%02d" % (localctx._month.i) + ":_" ;
-                result.append(result);
+                self.results.append(result);
                        
                 pass
 
@@ -2613,11 +2614,11 @@ class DateAndTimeParser ( Parser ):
 
                 result['type'] = DateEnum.TIMEX_YEAR;
                 result['value'] = "$year:-1$";
-                result.append(result);
+                self.results.append(result);
                 result = dict()
                 result['type'] = DateEnum.TIMEX_DATE;
                 result['value'] = "%02d" % (localctx._month.i) + ":_" ;
-                result.append(result);
+                self.results.append(result);
                        
                 pass
 
@@ -2630,11 +2631,11 @@ class DateAndTimeParser ( Parser ):
 
                 result['type'] = DateEnum.TIMEX_YEAR;
                 result['value'] = "$year:1$";
-                result.append(result);
+                self.results.append(result);
                 result = dict()
                 result['type'] = DateEnum.TIMEX_DATE;
                 result['value'] = "%02d" % (localctx._month.i) + ":_" ;
-                result.append(result);
+                self.results.append(result);
                         
                 pass
 
@@ -2647,11 +2648,11 @@ class DateAndTimeParser ( Parser ):
 
                 result['type'] = DateEnum.TIMEX_YEAR;
                 result['value'] = "$year:-1$";
-                result.append(result);
+                self.results.append(result);
                 result = dict()
                 result['type'] = DateEnum.TIMEX_DATE;
                 result['value'] = "%02d" % (localctx._month.i) + ":_" ;
-                result.append(result);
+                self.results.append(result);
                         
                 pass
 
@@ -2666,11 +2667,11 @@ class DateAndTimeParser ( Parser ):
 
                 result['type'] = DateEnum.TIMEX_DATE;
                 result['value'] = localctx._date.s;
-                result.append(result);
+                self.results.append(result);
                 result = dict()
                 result['type'] = DateEnum.TIMEX_YEAR;
                 result['value'] = (None if localctx._YEARNUM is None else localctx._YEARNUM.text);
-                result.append(result);
+                self.results.append(result);
                     
                 pass
 
@@ -2683,11 +2684,11 @@ class DateAndTimeParser ( Parser ):
 
                 result['type'] = DateEnum.TIMEX_DATE;
                 result['value'] = localctx._date.s;
-                result.append(result);
+                self.results.append(result);
                 result = dict()
                 result['type'] = DateEnum.TIMEX_YEAR;
                 result['value'] = (None if localctx._YEARNUM is None else localctx._YEARNUM.text);
-                result.append(result);
+                self.results.append(result);
                     
                 pass
 
@@ -2700,11 +2701,11 @@ class DateAndTimeParser ( Parser ):
 
                 result['type'] = DateEnum.TIMEX_REL_START_TIME;
                 result['value'] = "-:" + localctx._timecomponents.s;
-                result.append(result);
+                self.results.append(result);
                 result = dict()
                 result['type'] = DateEnum.TIMEX_DURATION;
                 result['value'] = localctx._timecomponents.s;
-                result.append(result);
+                self.results.append(result);
                        
                 pass
 
@@ -2717,11 +2718,11 @@ class DateAndTimeParser ( Parser ):
 
                 result['type'] = DateEnum.TIMEX_REL_START_TIME;
                 result['value'] = "-:" + localctx._timecomponents.s;
-                result.append(result);
+                self.results.append(result);
                 result = dict()
                 result['type'] = DateEnum.TIMEX_DURATION;
                 result['value'] = localctx._timecomponents.s;
-                result.append(result);
+                self.results.append(result);
                        
                 pass
 
@@ -2734,11 +2735,11 @@ class DateAndTimeParser ( Parser ):
 
                 result['type'] = DateEnum.TIMEX_REL_START_TIME;
                 result['value'] = "$now$";
-                result.append(result);
+                self.results.append(result);
                 result = dict()
                 result['type'] = DateEnum.TIMEX_DURATION;
                 result['value'] = localctx._timecomponents.s;
-                result.append(result);
+                self.results.append(result);
                        
                 pass
 
@@ -2751,11 +2752,11 @@ class DateAndTimeParser ( Parser ):
 
                 result['type'] = DateEnum.TIMEX_REL_START_TIME;
                 result['value'] = "$now$";
-                result.append(result);
+                self.results.append(result);
                 result = dict()
                 result['type'] = DateEnum.TIMEX_DURATION;
                 result['value'] = localctx._timecomponents.s;
-                result.append(result);
+                self.results.append(result);
                        
                 pass
 
@@ -2768,11 +2769,11 @@ class DateAndTimeParser ( Parser ):
 
                 result['type'] = DateEnum.TIMEX_REL_START_TIME;
                 result['value'] = "$now$";
-                result.append(result);
+                self.results.append(result);
                 result = dict()
                 result['type'] = DateEnum.TIMEX_DURATION;
                 result['value'] = localctx._timecomponents.s;
-                result.append(result);
+                self.results.append(result);
                        
                 pass
 
@@ -2785,11 +2786,11 @@ class DateAndTimeParser ( Parser ):
 
                 result['type'] = DateEnum.TIMEX_REL_START_TIME;
                 result['value'] = "-:" + localctx._timecomponents.s;
-                result.append(result);
+                self.results.append(result);
                 result = dict()
                 result['type'] = DateEnum.TIMEX_DURATION;
                 result['value'] = localctx._timecomponents.s;
-                result.append(result);
+                self.results.append(result);
                         
                 pass
 
@@ -2802,11 +2803,11 @@ class DateAndTimeParser ( Parser ):
 
                 result['type'] = DateEnum.TIMEX_REL_START_TIME;
                 result['value'] = "$now$";
-                result.append(result);
+                self.results.append(result);
                 result = dict()
                 result['type'] = DateEnum.TIMEX_DURATION;
                 result['value'] = "01:_:_" ;
-                result.append(result);
+                self.results.append(result);
                        
                 pass
 
@@ -2819,11 +2820,11 @@ class DateAndTimeParser ( Parser ):
 
                 result['type'] = DateEnum.TIMEX_REL_START_TIME;
                 result['value'] = "$now$";
-                result.append(result);
+                self.results.append(result);
                 result = dict()
                 result['type'] = DateEnum.TIMEX_DURATION;
                 result['value'] = "_:01:_" ;
-                result.append(result);
+                self.results.append(result);
                        
                 pass
 
@@ -2836,11 +2837,11 @@ class DateAndTimeParser ( Parser ):
 
                 result['type'] = DateEnum.TIMEX_REL_START_TIME;
                 result['value'] = "$now$";
-                result.append(result);
+                self.results.append(result);
                 result = dict()
                 result['type'] = DateEnum.TIMEX_DURATION;
                 result['value'] = "_:_:01" ;
-                result.append(result);
+                self.results.append(result);
                        
                 pass
 
@@ -2857,11 +2858,11 @@ class DateAndTimeParser ( Parser ):
 
                 result['type'] = DateEnum.TIMEX_START_TIME;
                 result['value'] = (String.format("%02d",localctx.a.i) + ":_:_") ;
-                result.append(result);
+                self.results.append(result);
                 result = dict()
                 result['type'] = DateEnum.TIMEX_DURATION;
                 result['value'] = (String.format("%02d",(localctx.b.i-localctx.a.i)) + ":_:_") ;
-                result.append(result);
+                self.results.append(result);
                        
                 pass
 
@@ -2882,11 +2883,11 @@ class DateAndTimeParser ( Parser ):
 
                 result['type'] = DateEnum.TIMEX_START_TIME;
                 result['value'] = (String.format("%02d",localctx.a.i) + ":_:_") ;
-                result.append(result);
+                self.results.append(result);
                 result = dict()
                 result['type'] = DateEnum.TIMEX_DURATION;
                 result['value'] = (String.format("%02d",(localctx.b.i-localctx.a.i)) + ":_:_") ;
-                result.append(result);
+                self.results.append(result);
                        
                 pass
 
@@ -2899,11 +2900,11 @@ class DateAndTimeParser ( Parser ):
 
                 result['type'] = DateEnum.TIMEX_DATE;
                 result['value'] = "$today$";
-                result.append(result);
+                self.results.append(result);
                 result = dict()
                 result['type'] = DateEnum.TIMEX_START_TIME;
                 result['value'] = "$afternoon$" ;
-                result.append(result);
+                self.results.append(result);
                       
                 pass
 
@@ -2914,11 +2915,11 @@ class DateAndTimeParser ( Parser ):
 
                 result['type'] = DateEnum.TIMEX_DATE;
                 result['value'] = "$today$";
-                result.append(result);
+                self.results.append(result);
                 result = dict()
                 result['type'] = DateEnum.TIMEX_START_TIME;
                 result['value'] = "$evening$" ;
-                result.append(result);
+                self.results.append(result);
                       
                 pass
 
@@ -2929,11 +2930,11 @@ class DateAndTimeParser ( Parser ):
 
                 result['type'] = DateEnum.TIMEX_DATE;
                 result['value'] = "$today$";
-                result.append(result);
+                self.results.append(result);
                 result = dict()
                 result['type'] = DateEnum.TIMEX_START_TIME;
                 result['value'] = "$night$" ;
-                result.append(result);
+                self.results.append(result);
                      
                 pass
 
@@ -2948,11 +2949,11 @@ class DateAndTimeParser ( Parser ):
 
                 result['type'] = DateEnum.TIMEX_WEEKDAY;
                 result['value'] = localctx._day_absolute.s ;
-                result.append(result);
+                self.results.append(result);
                 result = dict()
                 result['type'] = DateEnum.TIMEX_REPEAT_TIME;
                 result['value'] = "$weekly$" ;
-                result.append(result);
+                self.results.append(result);
                        
                 pass
 
@@ -2965,11 +2966,11 @@ class DateAndTimeParser ( Parser ):
 
                 result['type'] = DateEnum.TIMEX_START_TIME;
                 result['value'] = localctx._time_relative.s ;
-                result.append(result);
+                self.results.append(result);
                 result = dict()
                 result['type'] = DateEnum.TIMEX_REPEAT_TIME;
                 result['value'] = "$daily$" ;
-                result.append(result);
+                self.results.append(result);
                        
                 pass
 
@@ -2984,15 +2985,15 @@ class DateAndTimeParser ( Parser ):
 
                 result['type'] = DateEnum.TIMEX_WEEKDAY;
                 result['value'] = localctx._day_absolute.s ;
-                result.append(result);
+                self.results.append(result);
                 result = dict()
                 result['type'] = DateEnum.TIMEX_REPEAT_TIME;
                 result['value'] = "$weekly$" ;
-                result.append(result);
+                self.results.append(result);
                 result = dict()
                 result['type'] = DateEnum.TIMEX_START_TIME;
                 result['value'] = "$morning$" ;
-                result.append(result);
+                self.results.append(result);
                        
                 pass
 
@@ -3005,11 +3006,11 @@ class DateAndTimeParser ( Parser ):
 
                 result['type'] = DateEnum.TIMEX_WEEKDAY;
                 result['value'] = localctx._day_absolute.s ;
-                result.append(result);
+                self.results.append(result);
                 result = dict()
                 result['type'] = DateEnum.TIMEX_REPEAT_TIME;
                 result['value'] = "$weekly$" ;
-                result.append(result);
+                self.results.append(result);
                        
                 pass
 
@@ -3026,11 +3027,11 @@ class DateAndTimeParser ( Parser ):
 
                 result['type'] = DateEnum.TIMEX_START_TIME;
                 result['value'] = "11:45:_" ;
-                result.append(result);
+                self.results.append(result);
                 result = dict()
                 result['type'] = DateEnum.TIMEX_START_TIME;
                 result['value'] = "$morning$" ;
-                result.append(result);
+                self.results.append(result);
                        
                 pass
 
@@ -3047,11 +3048,11 @@ class DateAndTimeParser ( Parser ):
 
                 result['type'] = DateEnum.TIMEX_START_TIME;
                 result['value'] = "11:45:_" ;
-                result.append(result);
+                self.results.append(result);
                 result = dict()
                 result['type'] = DateEnum.TIMEX_START_TIME;
                 result['value'] = "$morning$" ;
-                result.append(result);
+                self.results.append(result);
                        
                 pass
 
@@ -3066,11 +3067,11 @@ class DateAndTimeParser ( Parser ):
 
                 result['type'] = DateEnum.TIMEX_DATE;
                 result['value'] = "$week:1$";
-                result.append(result);
+                self.results.append(result);
                 result = dict()
                 result['type'] = DateEnum.TIMEX_WEEKDAY;
                 result['value'] = "$monday$";
-                result.append(result);
+                self.results.append(result);
                       
                 pass
 
@@ -3085,11 +3086,11 @@ class DateAndTimeParser ( Parser ):
 
                 result['type'] = DateEnum.TIMEX_DATE;
                 result['value'] = "$week:1$";
-                result.append(result);
+                self.results.append(result);
                 result = dict()
                 result['type'] = DateEnum.TIMEX_WEEKDAY;
                 result['value'] = "$tuesday$";
-                result.append(result);
+                self.results.append(result);
                       
                 pass
 
@@ -3104,11 +3105,11 @@ class DateAndTimeParser ( Parser ):
 
                 result['type'] = DateEnum.TIMEX_DATE;
                 result['value'] = "$week:1$";
-                result.append(result);
+                self.results.append(result);
                 result = dict()
                 result['type'] = DateEnum.TIMEX_WEEKDAY;
                 result['value'] = "$wednesday$";
-                result.append(result);
+                self.results.append(result);
                       
                 pass
 
@@ -3123,11 +3124,11 @@ class DateAndTimeParser ( Parser ):
 
                 result['type'] = DateEnum.TIMEX_DATE;
                 result['value'] = "$week:1$";
-                result.append(result);
+                self.results.append(result);
                 result = dict()
                 result['type'] = DateEnum.TIMEX_WEEKDAY;
                 result['value'] = "$thursday$";
-                result.append(result);
+                self.results.append(result);
                       
                 pass
 
@@ -3142,11 +3143,11 @@ class DateAndTimeParser ( Parser ):
 
                 result['type'] = DateEnum.TIMEX_DATE;
                 result['value'] = "$week:1$";
-                result.append(result);
+                self.results.append(result);
                 result = dict()
                 result['type'] = DateEnum.TIMEX_WEEKDAY;
                 result['value'] = "$friday$";
-                result.append(result);
+                self.results.append(result);
                       
                 pass
 
@@ -3161,11 +3162,11 @@ class DateAndTimeParser ( Parser ):
 
                 result['type'] = DateEnum.TIMEX_DATE;
                 result['value'] = "$week:1$";
-                result.append(result);
+                self.results.append(result);
                 result = dict()
                 result['type'] = DateEnum.TIMEX_WEEKDAY;
                 result['value'] = "$saturday$";
-                result.append(result);
+                self.results.append(result);
                       
                 pass
 
@@ -3180,11 +3181,11 @@ class DateAndTimeParser ( Parser ):
 
                 result['type'] = DateEnum.TIMEX_DATE;
                 result['value'] = "$week:1$";
-                result.append(result);
+                self.results.append(result);
                 result = dict()
                 result['type'] = DateEnum.TIMEX_WEEKDAY;
                 result['value'] = "$sunday$";
-                result.append(result);
+                self.results.append(result);
                       
                 pass
 
@@ -3199,11 +3200,11 @@ class DateAndTimeParser ( Parser ):
 
                 result['type'] = DateEnum.TIMEX_DATE;
                 result['value'] = "$week:" + localctx._number.i + "$";
-                result.append(result);
+                self.results.append(result);
                 result = dict()
                 result['type'] = DateEnum.TIMEX_WEEKDAY;
                 result['value'] = "$monday$";
-                result.append(result);
+                self.results.append(result);
                       
                 pass
 
@@ -3218,11 +3219,11 @@ class DateAndTimeParser ( Parser ):
 
                 result['type'] = DateEnum.TIMEX_DATE;
                 result['value'] = "$week:" + localctx._number.i + "$";
-                result.append(result);
+                self.results.append(result);
                 result = dict()
                 result['type'] = DateEnum.TIMEX_WEEKDAY;
                 result['value'] = "$tuesday$";
-                result.append(result);
+                self.results.append(result);
                       
                 pass
 
@@ -3237,11 +3238,11 @@ class DateAndTimeParser ( Parser ):
 
                 result['type'] = DateEnum.TIMEX_DATE;
                 result['value'] = "$week:" + localctx._number.i + "$";
-                result.append(result);
+                self.results.append(result);
                 result = dict()
                 result['type'] = DateEnum.TIMEX_WEEKDAY;
                 result['value'] = "$wednesday$";
-                result.append(result);
+                self.results.append(result);
                       
                 pass
 
@@ -3256,11 +3257,11 @@ class DateAndTimeParser ( Parser ):
 
                 result['type'] = DateEnum.TIMEX_DATE;
                 result['value'] = "$week:" + localctx._number.i + "$";
-                result.append(result);
+                self.results.append(result);
                 result = dict()
                 result['type'] = DateEnum.TIMEX_WEEKDAY;
                 result['value'] = "$thursday$";
-                result.append(result);
+                self.results.append(result);
                       
                 pass
 
@@ -3275,11 +3276,11 @@ class DateAndTimeParser ( Parser ):
 
                 result['type'] = DateEnum.TIMEX_DATE;
                 result['value'] = "$week:" + localctx._number.i + "$";
-                result.append(result);
+                self.results.append(result);
                 result = dict()
                 result['type'] = DateEnum.TIMEX_WEEKDAY;
                 result['value'] = "$friday$";
-                result.append(result);
+                self.results.append(result);
                       
                 pass
 
@@ -3294,11 +3295,11 @@ class DateAndTimeParser ( Parser ):
 
                 result['type'] = DateEnum.TIMEX_DATE;
                 result['value'] = "$week:" + localctx._number.i + "$";
-                result.append(result);
+                self.results.append(result);
                 result = dict()
                 result['type'] = DateEnum.TIMEX_WEEKDAY;
                 result['value'] = "$saturday$";
-                result.append(result);
+                self.results.append(result);
                       
                 pass
 
@@ -3313,11 +3314,11 @@ class DateAndTimeParser ( Parser ):
 
                 result['type'] = DateEnum.TIMEX_DATE;
                 result['value'] = "$week:" + localctx._number.i + "$";
-                result.append(result);
+                self.results.append(result);
                 result = dict()
                 result['type'] = DateEnum.TIMEX_WEEKDAY;
                 result['value'] = "$saturday$";
-                result.append(result);
+                self.results.append(result);
                       
                 pass
 
@@ -3332,11 +3333,11 @@ class DateAndTimeParser ( Parser ):
 
                 result['type'] = DateEnum.TIMEX_DATE;
                 result['value'] = "$week:" + localctx._number.i + "$";
-                result.append(result);
+                self.results.append(result);
                 result = dict()
                 result['type'] = DateEnum.TIMEX_WEEKDAY;
                 result['value'] = "$sunday$";
-                result.append(result);
+                self.results.append(result);
                       
                 pass
 
@@ -3351,11 +3352,11 @@ class DateAndTimeParser ( Parser ):
 
                 result['type'] = DateEnum.TIMEX_DATE;
                 result['value'] = "$week:" + localctx._number.i + "$";
-                result.append(result);
+                self.results.append(result);
                 result = dict()
                 result['type'] = DateEnum.TIMEX_WEEKDAY;
                 result['value'] = "$sunday$";
-                result.append(result);
+                self.results.append(result);
                       
                 pass
 
@@ -3368,11 +3369,11 @@ class DateAndTimeParser ( Parser ):
 
                 result['type'] = DateEnum.TIMEX_DATE;
                 result['value'] = "$week:1$";
-                result.append(result);
+                self.results.append(result);
                 result = dict()
                 result['type'] = DateEnum.TIMEX_WEEKDAY;
                 result['value'] = "$sunday$";
-                result.append(result);
+                self.results.append(result);
                           
                 pass
 
@@ -3383,7 +3384,7 @@ class DateAndTimeParser ( Parser ):
 
                 result['type'] = DateEnum.TIMEX_SEASON;
                 result['value'] = localctx._season_relative.s;
-                result.append(result);
+                self.results.append(result);
                           
                 pass
 
@@ -3400,11 +3401,11 @@ class DateAndTimeParser ( Parser ):
 
                 result['type'] = DateEnum.TIMEX_DATE;
                 result['value'] = localctx.x.s;
-                result.append(result);
+                self.results.append(result);
                 result = dict()
                 result['type'] = DateEnum.TIMEX_END_DATE;
                 result['value'] = localctx.y.s;
-                result.append(result);
+                self.results.append(result);
                             
                 pass
 
@@ -3421,11 +3422,11 @@ class DateAndTimeParser ( Parser ):
 
                 result['type'] = DateEnum.TIMEX_DATE;
                 result['value'] = localctx.m.s;
-                result.append(result);
+                self.results.append(result);
                 result = dict()
                 result['type'] = DateEnum.TIMEX_END_DATE;
                 result['value'] = localctx.n.s;
-                result.append(result);
+                self.results.append(result);
                             
                 pass
 
@@ -3442,11 +3443,11 @@ class DateAndTimeParser ( Parser ):
 
                 result['type'] = DateEnum.TIMEX_DATE;
                 result['value'] = localctx.o.s;
-                result.append(result);
+                self.results.append(result);
                 result = dict()
                 result['type'] = DateEnum.TIMEX_END_DATE;
                 result['value'] = localctx.p.s;
-                result.append(result);
+                self.results.append(result);
                             
                 pass
 
@@ -3463,11 +3464,11 @@ class DateAndTimeParser ( Parser ):
 
                 result['type'] = DateEnum.TIMEX_DATE;
                 result['value'] = localctx.q.s;
-                result.append(result);
+                self.results.append(result);
                 result = dict()
                 result['type'] = DateEnum.TIMEX_END_DATE;
                 result['value'] = localctx.r.s;
-                result.append(result);
+                self.results.append(result);
                             
                 pass
 
@@ -3478,7 +3479,7 @@ class DateAndTimeParser ( Parser ):
 
                 result['type'] = DateEnum.TIMEX_DATE;
                 result['value'] = localctx._day_relative.s;
-                result.append(result);
+                self.results.append(result);
                           
                 pass
 
@@ -3489,7 +3490,7 @@ class DateAndTimeParser ( Parser ):
 
                 result['type'] = DateEnum.TIMEX_DATE;
                 result['value'] = localctx._week_relative.s;
-                result.append(result);
+                self.results.append(result);
                           
                 pass
 
@@ -3500,7 +3501,7 @@ class DateAndTimeParser ( Parser ):
 
                 result['type'] = DateEnum.TIMEX_DATE;
                 result['value'] = localctx._month_relative.s;
-                result.append(result);
+                self.results.append(result);
                             
                 pass
 
@@ -3511,7 +3512,7 @@ class DateAndTimeParser ( Parser ):
 
                 result['type'] = DateEnum.TIMEX_YEAR;
                 result['value'] = localctx._year_relative.s;
-                result.append(result);
+                self.results.append(result);
                             
                 pass
 
@@ -3522,7 +3523,7 @@ class DateAndTimeParser ( Parser ):
 
                 result['type'] = DateEnum.TIMEX_DURATION;
                 result['value'] = localctx._duration.s;
-                result.append(result);
+                self.results.append(result);
                       
                 pass
 
@@ -3539,11 +3540,11 @@ class DateAndTimeParser ( Parser ):
 
                 result['type'] = DateEnum.TIMEX_REL_START_TIME;
                 result['value'] = localctx.s.s;
-                result.append(result);
+                self.results.append(result);
                 result = dict()
                 result['type'] = DateEnum.TIMEX_END_TIME;
                 result['value'] = localctx.t.s;
-                result.append(result);
+                self.results.append(result);
                       
                 pass
 
@@ -3554,7 +3555,7 @@ class DateAndTimeParser ( Parser ):
 
                 result['type'] = DateEnum.TIMEX_REL_START_TIME;
                 result['value'] = localctx._rel_time_start.s;
-                result.append(result);
+                self.results.append(result);
                       
                 pass
 
@@ -3565,7 +3566,7 @@ class DateAndTimeParser ( Parser ):
 
                 result['type'] = DateEnum.TIMEX_START_TIME;
                 result['value'] = localctx._time_relative.s;
-                result.append(result);
+                self.results.append(result);
                       
                 pass
 
@@ -3576,7 +3577,7 @@ class DateAndTimeParser ( Parser ):
 
                 result['type'] = DateEnum.TIMEX_REPEAT_TIME;
                 result['value'] = localctx._date_repeat.s;
-                result.append(result);
+                self.results.append(result);
                       
                 pass
 
@@ -3593,11 +3594,11 @@ class DateAndTimeParser ( Parser ):
 
                 result['type'] = DateEnum.TIMEX_DATE;
                 result['value'] = localctx.u.s;
-                result.append(result);
+                self.results.append(result);
                 result = dict()
                 result['type'] = DateEnum.TIMEX_END_DATE;
                 result['value'] = localctx.v.s;
-                result.append(result);
+                self.results.append(result);
                             
                 pass
 
@@ -3608,7 +3609,7 @@ class DateAndTimeParser ( Parser ):
 
                 result['type'] = DateEnum.TIMEX_DATE;
                 result['value'] = localctx._date.s;
-                result.append(result);
+                self.results.append(result);
                       
                 pass
 
@@ -3619,7 +3620,7 @@ class DateAndTimeParser ( Parser ):
 
                 result['type'] = DateEnum.TIMEX_START_TIME;
                 result['value'] = localctx._time_start.s;
-                result.append(result);
+                self.results.append(result);
                   
                 pass
 
@@ -3630,7 +3631,7 @@ class DateAndTimeParser ( Parser ):
 
                 result['type'] = DateEnum.TIMEX_YEAR;
                 result['value'] = localctx._year.s;
-                result.append(result);
+                self.results.append(result);
                       
                 pass
 
@@ -3641,7 +3642,7 @@ class DateAndTimeParser ( Parser ):
 
                 result['type'] = DateEnum.TIMEX_WEEKDAY;
                 result['value'] = localctx._day_absolute.s;
-                result.append(result);
+                self.results.append(result);
                       
                 pass
 
@@ -3652,7 +3653,7 @@ class DateAndTimeParser ( Parser ):
 
                 result['type'] = DateEnum.TIMEX_DATE;
                 result['value'] = localctx._holiday.s;
-                result.append(result);
+                self.results.append(result);
                       
                 pass
 
@@ -3663,7 +3664,7 @@ class DateAndTimeParser ( Parser ):
 
                 result['type'] = DateEnum.TIMEX_SEASON;
                 result['value'] = localctx._season.s;
-                result.append(result);
+                self.results.append(result);
                       
                 pass
 

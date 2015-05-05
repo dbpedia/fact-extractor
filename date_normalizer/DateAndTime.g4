@@ -1,11 +1,8 @@
 // Remember that the grammar name must match the filename
 grammar DateAndTime;
 
-/*
-  FIXME implement the DateEntity class representing recognized date entities
-  FIXME implement the DateEnum enumeration with all the date entities labels (cf. below)
-*/
 @header {
+from DateEnum import DateEnum
 }
 
 @parser::members {
@@ -29,281 +26,281 @@ result = dict()
         {
 result['type'] = DateEnum.TIMEX_DATE_DURATION;
 result['value'] = $day_duration.s;
-result.append(result);
+self.results.append(result);
         }
     // durante le prossime 10 settimane
     | week_duration
         {
 result['type'] = DateEnum.TIMEX_DATE_DURATION;
 result['value'] = $week_duration.s;
-result.append(result);
+self.results.append(result);
         }
     // durante i prossimi 10 mesi
     | month_duration
         {
 result['type'] = DateEnum.TIMEX_DATE_DURATION;
 result['value'] = $month_duration.s;
-result.append(result);
+self.results.append(result);
         }
     // durante i prossimi 10 anni
     | year_duration
         {
 result['type'] = DateEnum.TIMEX_DATE_DURATION;
 result['value'] = $year_duration.s;
-result.append(result);
+self.results.append(result);
         }
     // primo lunedì di novembre
     | PRIMO day_absolute DI month
       {
 result['type'] = DateEnum.TIMEX_DATE;
 result['value'] = "\$weekday_number:1\$";
-result.append(result);
+self.results.append(result);
 result = dict()
 result['type'] = DateEnum.TIMEX_DATE;
 result['value'] = "%02d" % ($month.i) + ":_";
-result.append(result);
+self.results.append(result);
 result = dict()
 result['type'] = DateEnum.TIMEX_WEEKDAY;
 result['value'] = $day_absolute.s;
-result.append(result);
+self.results.append(result);
        }
     // secondo lunedì di novembre
     | SECONDO day_absolute DI month
       {
 result['type'] = DateEnum.TIMEX_DATE;
 result['value'] = "\$weekday_number:2\$";
-result.append(result);
+self.results.append(result);
 result = dict()
 result['type'] = DateEnum.TIMEX_DATE;
 result['value'] = "%02d" % ($month.i) + ":_";
-result.append(result);
+self.results.append(result);
 result = dict()
 result['type'] = DateEnum.TIMEX_WEEKDAY;
 result['value'] = $day_absolute.s;
-result.append(result);
+self.results.append(result);
           }
     // terzo lunedì di novembre
     | TERZO day_absolute DI month
       {
 result['type'] = DateEnum.TIMEX_DATE;
 result['value'] = "\$weekday_number:3\$";
-result.append(result);
+self.results.append(result);
 result = dict()
 result['type'] = DateEnum.TIMEX_DATE;
 result['value'] = "%02d" % ($month.i) + ":_";
-result.append(result);
+self.results.append(result);
 result = dict()
 result['type'] = DateEnum.TIMEX_WEEKDAY;
 result['value'] = $day_absolute.s;
-result.append(result);
+self.results.append(result);
           }
     // quarto lunedì di novembre
     | QUARTO day_absolute DI month
       {
 result['type'] = DateEnum.TIMEX_DATE;
 result['value'] = "\$weekday_number:4\$";
-result.append(result);
+self.results.append(result);
 result = dict()
 result['type'] = DateEnum.TIMEX_DATE;
 result['value'] = "%02d" % ($month.i) + ":_";
-result.append(result);
+self.results.append(result);
 result = dict()
 result['type'] = DateEnum.TIMEX_WEEKDAY;
 result['value'] = $day_absolute.s;
-result.append(result);
+self.results.append(result);
           }
     // quinto lunedì di novembre
     | QUINTO day_absolute DI month
       {
 result['type'] = DateEnum.TIMEX_DATE;
 result['value'] = "\$weekday_number:5\$";
-result.append(result);
+self.results.append(result);
 result = dict()
 result['type'] = DateEnum.TIMEX_DATE;
 result['value'] = "%02d" % ($month.i) + ":_";
-result.append(result);
+self.results.append(result);
 result = dict()
 result['type'] = DateEnum.TIMEX_WEEKDAY;
 result['value'] = $day_absolute.s;
-result.append(result);
+self.results.append(result);
           }
     // ultimo lunedì di novembre
     | ULTIMO day_absolute DI month
       {
 result['type'] = DateEnum.TIMEX_DATE;
 result['value'] = "\$weekday_number:-1\$";
-result.append(result);
+self.results.append(result);
 result = dict()
 result['type'] = DateEnum.TIMEX_DATE;
 result['value'] = "%02d" % ($month.i) + ":_";
-result.append(result);
+self.results.append(result);
 result = dict()
 result['type'] = DateEnum.TIMEX_WEEKDAY;
 result['value'] = $day_absolute.s;
-result.append(result);
+self.results.append(result);
           }
     // prima domenica di novembre
     | PRIMA DOMENICA DI month
       {
 result['type'] = DateEnum.TIMEX_DATE;
 result['value'] = "\$weekday_number:1\$";
-result.append(result);
+self.results.append(result);
 result = dict()
 result['type'] = DateEnum.TIMEX_DATE;
 result['value'] = "%02d" % ($month.i) + ":_";
-result.append(result);
+self.results.append(result);
 result = dict()
 result['type'] = DateEnum.TIMEX_WEEKDAY;
 result['value'] = "\$sunday\$";
-result.append(result);
+self.results.append(result);
         }
     // seconda domenica di novembre
     | SECONDA DOMENICA DI month
       {
 result['type'] = DateEnum.TIMEX_DATE;
 result['value'] = "\$weekday_number:2\$";
-result.append(result);
+self.results.append(result);
 result = dict()
 result['type'] = DateEnum.TIMEX_DATE;
 result['value'] = "%02d" % ($month.i) + ":_";
-result.append(result);
+self.results.append(result);
 result = dict()
 result['type'] = DateEnum.TIMEX_WEEKDAY;
 result['value'] = "\$sunday\$";
-result.append(result);
+self.results.append(result);
         }
     // terza domenica di novembre
     | TERZA DOMENICA DI month
       {
 result['type'] = DateEnum.TIMEX_DATE;
 result['value'] = "\$weekday_number:3\$";
-result.append(result);
+self.results.append(result);
 result = dict()
 result['type'] = DateEnum.TIMEX_DATE;
 result['value'] = "%02d" % ($month.i) + ":_";
-result.append(result);
+self.results.append(result);
 result = dict()
 result['type'] = DateEnum.TIMEX_WEEKDAY;
 result['value'] = "\$sunday\$";
-result.append(result);
+self.results.append(result);
         }
     // quarta domenica di novembre
     | QUARTA DOMENICA DI month
       {
 result['type'] = DateEnum.TIMEX_DATE;
 result['value'] = "\$weekday_number:4\$";
-result.append(result);
+self.results.append(result);
 result = dict()
 result['type'] = DateEnum.TIMEX_DATE;
 result['value'] = "%02d" % ($month.i) + ":_";
-result.append(result);
+self.results.append(result);
 result = dict()
 result['type'] = DateEnum.TIMEX_WEEKDAY;
 result['value'] = "\$sunday\$";
-result.append(result);
+self.results.append(result);
         }
     // quinta domenica di novembre
     | QUINTA DOMENICA DI month
       {
 result['type'] = DateEnum.TIMEX_DATE;
 result['value'] = "\$weekday_number:5\$";
-result.append(result);
+self.results.append(result);
 result = dict()
 result['type'] = DateEnum.TIMEX_DATE;
 result['value'] = "%02d" % ($month.i) + ":_";
-result.append(result);
+self.results.append(result);
 result = dict()
 result['type'] = DateEnum.TIMEX_WEEKDAY;
 result['value'] = "\$sunday\$";
-result.append(result);
+self.results.append(result);
         }
     // ultima domenica di novembre
     | ULTIMA DOMENICA DI month
       {
 result['type'] = DateEnum.TIMEX_DATE;
 result['value'] = "\$weekday_number:-1\$";
-result.append(result);
+self.results.append(result);
 result = dict()
 result['type'] = DateEnum.TIMEX_DATE;
 result['value'] = "%02d" % ($month.i) + ":_";
-result.append(result);
+self.results.append(result);
 result = dict()
 result['type'] = DateEnum.TIMEX_WEEKDAY;
 result['value'] = "\$sunday\$";
-result.append(result);
+self.results.append(result);
         }
     // prima (settimana) di novembre
     | PRIMA maybesettimana DI month
       {
 result['type'] = DateEnum.TIMEX_DATE;
 result['value'] = "\$week_number:1\$";
-result.append(result);
+self.results.append(result);
 result = dict()
 result['type'] = DateEnum.TIMEX_DATE;
 result['value'] = "%02d" % ($month.i) + ":_";
-result.append(result);
+self.results.append(result);
        }
     // seconda (settimana) di novembre
     | SECONDA maybesettimana DI month
       {
 result['type'] = DateEnum.TIMEX_DATE;
 result['value'] = "\$week_number:2\$";
-result.append(result);
+self.results.append(result);
 result = dict()
 result['type'] = DateEnum.TIMEX_DATE;
 result['value'] = "%02d" % ($month.i) + ":_";
-result.append(result);
+self.results.append(result);
         }
     // terza (settimana) di novembre
     | TERZA maybesettimana DI month
       {
 result['type'] = DateEnum.TIMEX_DATE;
 result['value'] = "\$week_number:3\$";
-result.append(result);
+self.results.append(result);
 result = dict()
 result['type'] = DateEnum.TIMEX_DATE;
 result['value'] = "%02d" % ($month.i) + ":_";
-result.append(result);
+self.results.append(result);
           }
     // quarta (settimana) di novembre
     | QUARTA maybesettimana DI month
       {
 result['type'] = DateEnum.TIMEX_DATE;
 result['value'] = "\$week_number:4\$";
-result.append(result);
+self.results.append(result);
 result = dict()
 result['type'] = DateEnum.TIMEX_DATE;
 result['value'] = "%02d" % ($month.i) + ":_";
-result.append(result);
+self.results.append(result);
           }
     // quinta (settimana) di novembre
     | QUINTA maybesettimana DI month
       {
 result['type'] = DateEnum.TIMEX_DATE;
 result['value'] = "\$week_number:5\$";
-result.append(result);
+self.results.append(result);
 result = dict()
 result['type'] = DateEnum.TIMEX_DATE;
 result['value'] = "%02d" % ($month.i) + ":_";
-result.append(result);
+self.results.append(result);
           }
     // ultima (settimana) di novembre
     | ULTIMA maybesettimana DI month
       {
 result['type'] = DateEnum.TIMEX_DATE;
 result['value'] = "\$week_number:-1\$";
-result.append(result);
+self.results.append(result);
 result = dict()
 result['type'] = DateEnum.TIMEX_DATE;
 result['value'] = "%02d" % ($month.i) + ":_";
-result.append(result);
+self.results.append(result);
           }
     // seconda settimana, settimana 8
     | week_number
         {
 result['type'] = DateEnum.TIMEX_WEEK;
 result['value'] = "%d" % ($week_number.i);
-result.append(result);
+self.results.append(result);
         }
 
     /*
@@ -314,88 +311,88 @@ result.append(result);
       {
 result['type'] = DateEnum.TIMEX_DATE;
 result['value'] = "\$week:-1\$";
-result.append(result);
+self.results.append(result);
 result = dict()
 result['type'] = DateEnum.TIMEX_WEEKDAY;
 result['value'] = $day_absolute.s;
-result.append(result);
+self.results.append(result);
         }
   // prossimo giovedi, prossimo weekend
     | PROSSIMO day_absolute
       {
 result['type'] = DateEnum.TIMEX_DATE;
 result['value'] = "\$week:1\$";
-result.append(result);
+self.results.append(result);
 result = dict()
 result['type'] = DateEnum.TIMEX_WEEKDAY;
 result['value'] = $day_absolute.s;
-result.append(result);
+self.results.append(result);
        }
   // prossima domenica
     | PROSSIMA DOMENICA
       {
 result['type'] = DateEnum.TIMEX_DATE;
 result['value'] = "\$week:1\$";
-result.append(result);
+self.results.append(result);
 result = dict()
 result['type'] = DateEnum.TIMEX_WEEKDAY;
 result['value'] = "\$sunday\$";
-result.append(result);
+self.results.append(result);
        }
     // questo giovedi
     | QUESTO day_absolute
       {
 result['type'] = DateEnum.TIMEX_DATE;
 result['value'] = "\$week:0\$";
-result.append(result);
+self.results.append(result);
 result = dict()
 result['type'] = DateEnum.TIMEX_WEEKDAY;
 result['value'] = $day_absolute.s;
-result.append(result);
+self.results.append(result);
        }
     // giovedi prossimo
     | day_absolute PROSSIMO
       {
 result['type'] = DateEnum.TIMEX_DATE;
 result['value'] = "\$week:1\$";
-result.append(result);
+self.results.append(result);
 result = dict()
 result['type'] = DateEnum.TIMEX_WEEKDAY;
 result['value'] = $day_absolute.s;
-result.append(result);
+self.results.append(result);
         }
     // giovedi scorso
     | day_absolute SCORSO
       {
 result['type'] = DateEnum.TIMEX_DATE;
 result['value'] = "\$week:-1\$";
-result.append(result);
+self.results.append(result);
 result = dict()
 result['type'] = DateEnum.TIMEX_WEEKDAY;
 result['value'] = $day_absolute.s;
-result.append(result);
+self.results.append(result);
        }
     // giovedi precedente
     | day_absolute PRECEDENTE
       {
 result['type'] = DateEnum.TIMEX_DATE;
 result['value'] = "\$week:-1\$";
-result.append(result);
+self.results.append(result);
 result = dict()
 result['type'] = DateEnum.TIMEX_WEEKDAY;
 result['value'] = $day_absolute.s;
-result.append(result);
+self.results.append(result);
        }
     // venerdi mattina
     | day_absolute MATTINA
   {
 result['type'] = DateEnum.TIMEX_WEEKDAY;
 result['value'] = $day_absolute.s;
-result.append(result);
+self.results.append(result);
 result = dict()
 result['type'] = DateEnum.TIMEX_START_TIME;
 result['value'] = "\$morning\$";
-result.append(result);
+self.results.append(result);
      }
     /*
      * RELATIVE DAYS
@@ -405,247 +402,247 @@ result.append(result);
   {
 result['type'] = DateEnum.TIMEX_DATE;
 result['value'] = $day_relative.s;
-result.append(result);
+self.results.append(result);
 result = dict()
 result['type'] = DateEnum.TIMEX_START_TIME;
 result['value'] = "\$morning\$";
-result.append(result);
+self.results.append(result);
      }
     // prossimo novembre
     | PROSSIMO month
       {
 result['type'] = DateEnum.TIMEX_YEAR;
 result['value'] = "\$year:1\$";
-result.append(result);
+self.results.append(result);
 result = dict()
 result['type'] = DateEnum.TIMEX_DATE;
 result['value'] = "%02d" % ($month.i) + ":_" ;
-result.append(result);
+self.results.append(result);
         }
     // questo novembre
     | QUESTO month
       {
 result['type'] = DateEnum.TIMEX_YEAR;
 result['value'] = "\$year:0\$";
-result.append(result);
+self.results.append(result);
 result = dict()
 result['type'] = DateEnum.TIMEX_DATE;
 result['value'] = "%02d" % ($month.i) + ":_" ;
-result.append(result);
+self.results.append(result);
        }
     // scorso novembre
     | SCORSO month
       {
 result['type'] = DateEnum.TIMEX_YEAR;
 result['value'] = "\$year:-1\$";
-result.append(result);
+self.results.append(result);
 result = dict()
 result['type'] = DateEnum.TIMEX_DATE;
 result['value'] = "%02d" % ($month.i) + ":_" ;
-result.append(result);
+self.results.append(result);
        }
     // novembre prossimo
     | month PROSSIMO
       {
 result['type'] = DateEnum.TIMEX_YEAR;
 result['value'] = "\$year:1\$";
-result.append(result);
+self.results.append(result);
 result = dict()
 result['type'] = DateEnum.TIMEX_DATE;
 result['value'] = "%02d" % ($month.i) + ":_" ;
-result.append(result);
+self.results.append(result);
         }
     // novembre scorso
     | month SCORSO
       {
 result['type'] = DateEnum.TIMEX_YEAR;
 result['value'] = "\$year:-1\$";
-result.append(result);
+self.results.append(result);
 result = dict()
 result['type'] = DateEnum.TIMEX_DATE;
 result['value'] = "%02d" % ($month.i) + ":_" ;
-result.append(result);
+self.results.append(result);
         }
     // 16/11/2013
     | date SLASH YEARNUM
     {
 result['type'] = DateEnum.TIMEX_DATE;
 result['value'] = $date.s;
-result.append(result);
+self.results.append(result);
 result = dict()
 result['type'] = DateEnum.TIMEX_YEAR;
 result['value'] = $YEARNUM.text;
-result.append(result);
+self.results.append(result);
     }
     // 16 novembre 2013
     | date YEARNUM
     {
 result['type'] = DateEnum.TIMEX_DATE;
 result['value'] = $date.s;
-result.append(result);
+self.results.append(result);
 result = dict()
 result['type'] = DateEnum.TIMEX_YEAR;
 result['value'] = $YEARNUM.text;
-result.append(result);
+self.results.append(result);
     }
     // ultimi 5 minuti
     | ULTIMI timecomponents
       {
 result['type'] = DateEnum.TIMEX_REL_START_TIME;
 result['value'] = "-:" + $timecomponents.s;
-result.append(result);
+self.results.append(result);
 result = dict()
 result['type'] = DateEnum.TIMEX_DURATION;
 result['value'] = $timecomponents.s;
-result.append(result);
+self.results.append(result);
        }
     // scorsi 5 minuti
     | SCORSI timecomponents
       {
 result['type'] = DateEnum.TIMEX_REL_START_TIME;
 result['value'] = "-:" + $timecomponents.s;
-result.append(result);
+self.results.append(result);
 result = dict()
 result['type'] = DateEnum.TIMEX_DURATION;
 result['value'] = $timecomponents.s;
-result.append(result);
+self.results.append(result);
        }
     // entro 5 minuti
     | ENTRO timecomponents
       {
 result['type'] = DateEnum.TIMEX_REL_START_TIME;
 result['value'] = "\$now\$";
-result.append(result);
+self.results.append(result);
 result = dict()
 result['type'] = DateEnum.TIMEX_DURATION;
 result['value'] = $timecomponents.s;
-result.append(result);
+self.results.append(result);
        }
     // prossimi 5 minuti
     | PROSSIMI timecomponents
       {
 result['type'] = DateEnum.TIMEX_REL_START_TIME;
 result['value'] = "\$now\$";
-result.append(result);
+self.results.append(result);
 result = dict()
 result['type'] = DateEnum.TIMEX_DURATION;
 result['value'] = $timecomponents.s;
-result.append(result);
+self.results.append(result);
        }
     // questi 5 minuti
     | QUESTI timecomponents
       {
 result['type'] = DateEnum.TIMEX_REL_START_TIME;
 result['value'] = "\$now\$";
-result.append(result);
+self.results.append(result);
 result = dict()
 result['type'] = DateEnum.TIMEX_DURATION;
 result['value'] = $timecomponents.s;
-result.append(result);
+self.results.append(result);
        }
     // 5 minuti precedenti
     | timecomponents PRECEDENTI
       {
 result['type'] = DateEnum.TIMEX_REL_START_TIME;
 result['value'] = "-:" + $timecomponents.s;
-result.append(result);
+self.results.append(result);
 result = dict()
 result['type'] = DateEnum.TIMEX_DURATION;
 result['value'] = $timecomponents.s;
-result.append(result);
+self.results.append(result);
         }
     | QUEST ORA
       {
 result['type'] = DateEnum.TIMEX_REL_START_TIME;
 result['value'] = "\$now\$";
-result.append(result);
+self.results.append(result);
 result = dict()
 result['type'] = DateEnum.TIMEX_DURATION;
 result['value'] = "01:_:_" ;
-result.append(result);
+self.results.append(result);
        }
     | QUESTO MINUTO
       {
 result['type'] = DateEnum.TIMEX_REL_START_TIME;
 result['value'] = "\$now\$";
-result.append(result);
+self.results.append(result);
 result = dict()
 result['type'] = DateEnum.TIMEX_DURATION;
 result['value'] = "_:01:_" ;
-result.append(result);
+self.results.append(result);
        }
     | QUESTO SECONDO
       {
 result['type'] = DateEnum.TIMEX_REL_START_TIME;
 result['value'] = "\$now\$";
-result.append(result);
+self.results.append(result);
 result = dict()
 result['type'] = DateEnum.TIMEX_DURATION;
 result['value'] = "_:_:01" ;
-result.append(result);
+self.results.append(result);
        }
 
     | DALLE a=number ALLE b=number
       {
 result['type'] = DateEnum.TIMEX_START_TIME;
 result['value'] = (String.format("%02d",$a.i) + ":_:_") ;
-result.append(result);
+self.results.append(result);
 result = dict()
 result['type'] = DateEnum.TIMEX_DURATION;
 result['value'] = (String.format("%02d",($b.i-$a.i)) + ":_:_") ;
-result.append(result);
+self.results.append(result);
        }
     // fra le 3 e le 5
     | FRA LE a=number E LE b=number
       {
 result['type'] = DateEnum.TIMEX_START_TIME;
 result['value'] = (String.format("%02d",$a.i) + ":_:_") ;
-result.append(result);
+self.results.append(result);
 result = dict()
 result['type'] = DateEnum.TIMEX_DURATION;
 result['value'] = (String.format("%02d",($b.i-$a.i)) + ":_:_") ;
-result.append(result);
+self.results.append(result);
        }
    | QUESTO POMERIGGIO
    {
 result['type'] = DateEnum.TIMEX_DATE;
 result['value'] = "\$today\$";
-result.append(result);
+self.results.append(result);
 result = dict()
 result['type'] = DateEnum.TIMEX_START_TIME;
 result['value'] = "\$afternoon\$" ;
-result.append(result);
+self.results.append(result);
       }
    | STASERA
    {
 result['type'] = DateEnum.TIMEX_DATE;
 result['value'] = "\$today\$";
-result.append(result);
+self.results.append(result);
 result = dict()
 result['type'] = DateEnum.TIMEX_START_TIME;
 result['value'] = "\$evening\$" ;
-result.append(result);
+self.results.append(result);
       }
   | STANOTTE
   {
 result['type'] = DateEnum.TIMEX_DATE;
 result['value'] = "\$today\$";
-result.append(result);
+self.results.append(result);
 result = dict()
 result['type'] = DateEnum.TIMEX_START_TIME;
 result['value'] = "\$night\$" ;
-result.append(result);
+self.results.append(result);
      }
     // tutti i giovedi
     | TUTTI I day_absolute
       {
 result['type'] = DateEnum.TIMEX_WEEKDAY;
 result['value'] = $day_absolute.s ;
-result.append(result);
+self.results.append(result);
 result = dict()
 result['type'] = DateEnum.TIMEX_REPEAT_TIME;
 result['value'] = "\$weekly\$" ;
-result.append(result);
+self.results.append(result);
        }
     // TODO need to split in 2 sub-rules
     // ogni sera
@@ -653,234 +650,234 @@ result.append(result);
       {
 result['type'] = DateEnum.TIMEX_START_TIME;
 result['value'] = $time_relative.s ;
-result.append(result);
+self.results.append(result);
 result = dict()
 result['type'] = DateEnum.TIMEX_REPEAT_TIME;
 result['value'] = "\$daily\$" ;
-result.append(result);
+self.results.append(result);
        }
     // ogni mercoledi mattina
     | OGNI day_absolute MATTINA
       {
 result['type'] = DateEnum.TIMEX_WEEKDAY;
 result['value'] = $day_absolute.s ;
-result.append(result);
+self.results.append(result);
 result = dict()
 result['type'] = DateEnum.TIMEX_REPEAT_TIME;
 result['value'] = "\$weekly\$" ;
-result.append(result);
+self.results.append(result);
 result = dict()
 result['type'] = DateEnum.TIMEX_START_TIME;
 result['value'] = "\$morning\$" ;
-result.append(result);
+self.results.append(result);
        }
      // ogni mercoledi
     | OGNI day_absolute
       {
 result['type'] = DateEnum.TIMEX_WEEKDAY;
 result['value'] = $day_absolute.s ;
-result.append(result);
+self.results.append(result);
 result = dict()
 result['type'] = DateEnum.TIMEX_REPEAT_TIME;
 result['value'] = "\$weekly\$" ;
-result.append(result);
+self.results.append(result);
        }
     | UN QUARTO A MEZZOGIORNO
       {
 result['type'] = DateEnum.TIMEX_START_TIME;
 result['value'] = "11:45:_" ;
-result.append(result);
+self.results.append(result);
 result = dict()
 result['type'] = DateEnum.TIMEX_START_TIME;
 result['value'] = "\$morning\$" ;
-result.append(result);
+self.results.append(result);
        }
     | MEZZOGIORNO MENO UN QUARTO
       {
 result['type'] = DateEnum.TIMEX_START_TIME;
 result['value'] = "11:45:_" ;
-result.append(result);
+self.results.append(result);
 result = dict()
 result['type'] = DateEnum.TIMEX_START_TIME;
 result['value'] = "\$morning\$" ;
-result.append(result);
+self.results.append(result);
        }
     | FRA UN LUNEDI
       {
 result['type'] = DateEnum.TIMEX_DATE;
 result['value'] = "\$week:1\$";
-result.append(result);
+self.results.append(result);
 result = dict()
 result['type'] = DateEnum.TIMEX_WEEKDAY;
 result['value'] = "\$monday\$";
-result.append(result);
+self.results.append(result);
       }
     | FRA UN MARTEDI
       {
 result['type'] = DateEnum.TIMEX_DATE;
 result['value'] = "\$week:1\$";
-result.append(result);
+self.results.append(result);
 result = dict()
 result['type'] = DateEnum.TIMEX_WEEKDAY;
 result['value'] = "\$tuesday\$";
-result.append(result);
+self.results.append(result);
       }
     | FRA UN MERCOLEDI
   {
 result['type'] = DateEnum.TIMEX_DATE;
 result['value'] = "\$week:1\$";
-result.append(result);
+self.results.append(result);
 result = dict()
 result['type'] = DateEnum.TIMEX_WEEKDAY;
 result['value'] = "\$wednesday\$";
-result.append(result);
+self.results.append(result);
       }
     | FRA UN GIOVEDI
   {
 result['type'] = DateEnum.TIMEX_DATE;
 result['value'] = "\$week:1\$";
-result.append(result);
+self.results.append(result);
 result = dict()
 result['type'] = DateEnum.TIMEX_WEEKDAY;
 result['value'] = "\$thursday\$";
-result.append(result);
+self.results.append(result);
       }
     | FRA UN VENERDI
   {
 result['type'] = DateEnum.TIMEX_DATE;
 result['value'] = "\$week:1\$";
-result.append(result);
+self.results.append(result);
 result = dict()
 result['type'] = DateEnum.TIMEX_WEEKDAY;
 result['value'] = "\$friday\$";
-result.append(result);
+self.results.append(result);
       }
     | FRA UN SABATO
   {
 result['type'] = DateEnum.TIMEX_DATE;
 result['value'] = "\$week:1\$";
-result.append(result);
+self.results.append(result);
 result = dict()
 result['type'] = DateEnum.TIMEX_WEEKDAY;
 result['value'] = "\$saturday\$";
-result.append(result);
+self.results.append(result);
       }
     | FRA UNA DOMENICA
   {
 result['type'] = DateEnum.TIMEX_DATE;
 result['value'] = "\$week:1\$";
-result.append(result);
+self.results.append(result);
 result = dict()
 result['type'] = DateEnum.TIMEX_WEEKDAY;
 result['value'] = "\$sunday\$";
-result.append(result);
+self.results.append(result);
       }
     | FRA number LUNEDI
   {
 result['type'] = DateEnum.TIMEX_DATE;
 result['value'] = "\$week:" + $number.i + "\$";
-result.append(result);
+self.results.append(result);
 result = dict()
 result['type'] = DateEnum.TIMEX_WEEKDAY;
 result['value'] = "\$monday\$";
-result.append(result);
+self.results.append(result);
       }
     | FRA number MARTEDI
   {
 result['type'] = DateEnum.TIMEX_DATE;
 result['value'] = "\$week:" + $number.i + "\$";
-result.append(result);
+self.results.append(result);
 result = dict()
 result['type'] = DateEnum.TIMEX_WEEKDAY;
 result['value'] = "\$tuesday\$";
-result.append(result);
+self.results.append(result);
       }
     | FRA number MERCOLEDI
   {
 result['type'] = DateEnum.TIMEX_DATE;
 result['value'] = "\$week:" + $number.i + "\$";
-result.append(result);
+self.results.append(result);
 result = dict()
 result['type'] = DateEnum.TIMEX_WEEKDAY;
 result['value'] = "\$wednesday\$";
-result.append(result);
+self.results.append(result);
       }
     | FRA number GIOVEDI
   {
 result['type'] = DateEnum.TIMEX_DATE;
 result['value'] = "\$week:" + $number.i + "\$";
-result.append(result);
+self.results.append(result);
 result = dict()
 result['type'] = DateEnum.TIMEX_WEEKDAY;
 result['value'] = "\$thursday\$";
-result.append(result);
+self.results.append(result);
       }
     | FRA number VENERDI
   {
 result['type'] = DateEnum.TIMEX_DATE;
 result['value'] = "\$week:" + $number.i + "\$";
-result.append(result);
+self.results.append(result);
 result = dict()
 result['type'] = DateEnum.TIMEX_WEEKDAY;
 result['value'] = "\$friday\$";
-result.append(result);
+self.results.append(result);
       }
     | FRA number SABATI
   {
 result['type'] = DateEnum.TIMEX_DATE;
 result['value'] = "\$week:" + $number.i + "\$";
-result.append(result);
+self.results.append(result);
 result = dict()
 result['type'] = DateEnum.TIMEX_WEEKDAY;
 result['value'] = "\$saturday\$";
-result.append(result);
+self.results.append(result);
       }
     | FRA number SABATO
   {
 result['type'] = DateEnum.TIMEX_DATE;
 result['value'] = "\$week:" + $number.i + "\$";
-result.append(result);
+self.results.append(result);
 result = dict()
 result['type'] = DateEnum.TIMEX_WEEKDAY;
 result['value'] = "\$saturday\$";
-result.append(result);
+self.results.append(result);
       }
     | FRA number DOMENICHE
   {
 result['type'] = DateEnum.TIMEX_DATE;
 result['value'] = "\$week:" + $number.i + "\$";
-result.append(result);
+self.results.append(result);
 result = dict()
 result['type'] = DateEnum.TIMEX_WEEKDAY;
 result['value'] = "\$sunday\$";
-result.append(result);
+self.results.append(result);
       }
     | FRA number DOMENICA
   {
 result['type'] = DateEnum.TIMEX_DATE;
 result['value'] = "\$week:" + $number.i + "\$";
-result.append(result);
+self.results.append(result);
 result = dict()
 result['type'] = DateEnum.TIMEX_WEEKDAY;
 result['value'] = "\$sunday\$";
-result.append(result);
+self.results.append(result);
       }
     | DOMENICA PROSSIMA
       {
 result['type'] = DateEnum.TIMEX_DATE;
 result['value'] = "\$week:1\$";
-result.append(result);
+self.results.append(result);
 result = dict()
 result['type'] = DateEnum.TIMEX_WEEKDAY;
 result['value'] = "\$sunday\$";
-result.append(result);
+self.results.append(result);
           }
     // prossima stagione
     | season_relative
       {
 result['type'] = DateEnum.TIMEX_SEASON;
 result['value'] = $season_relative.s;
-result.append(result);
+self.results.append(result);
           }
     /* WARNING the following rule may parse weird dates */
     // da ieri a dopodomani
@@ -888,164 +885,164 @@ result.append(result);
       {
 result['type'] = DateEnum.TIMEX_DATE;
 result['value'] = $x.s;
-result.append(result);
+self.results.append(result);
 result = dict()
 result['type'] = DateEnum.TIMEX_END_DATE;
 result['value'] = $y.s;
-result.append(result);
+self.results.append(result);
             }
     // da settimana scorsa a fra 2 settimane
     | DA m=week_relative A n=week_relative
       {
 result['type'] = DateEnum.TIMEX_DATE;
 result['value'] = $m.s;
-result.append(result);
+self.results.append(result);
 result = dict()
 result['type'] = DateEnum.TIMEX_END_DATE;
 result['value'] = $n.s;
-result.append(result);
+self.results.append(result);
             }
     // da 2 mesi fa a fra 6 mesi
     | DA o=month_relative A p=month_relative
       {
 result['type'] = DateEnum.TIMEX_DATE;
 result['value'] = $o.s;
-result.append(result);
+self.results.append(result);
 result = dict()
 result['type'] = DateEnum.TIMEX_END_DATE;
 result['value'] = $p.s;
-result.append(result);
+self.results.append(result);
             }
     // da 7 anni fa a fra 4 anni
     | DA q=year_relative A r=year_relative
       {
 result['type'] = DateEnum.TIMEX_DATE;
 result['value'] = $q.s;
-result.append(result);
+self.results.append(result);
 result = dict()
 result['type'] = DateEnum.TIMEX_END_DATE;
 result['value'] = $r.s;
-result.append(result);
+self.results.append(result);
             }
     // 3 giorni fa, dopodomani
     | day_relative
       {
 result['type'] = DateEnum.TIMEX_DATE;
 result['value'] = $day_relative.s;
-result.append(result);
+self.results.append(result);
           }
     // 2 settimane fa, settimana prossima
     | week_relative
       {
 result['type'] = DateEnum.TIMEX_DATE;
 result['value'] = $week_relative.s;
-result.append(result);
+self.results.append(result);
           }
     // 2 mesi fa, mese prossimo
     | month_relative
       {
 result['type'] = DateEnum.TIMEX_DATE;
 result['value'] = $month_relative.s;
-result.append(result);
+self.results.append(result);
             }
     // 2 anni fa, anno prossimo
     | year_relative
       {
 result['type'] = DateEnum.TIMEX_YEAR;
 result['value'] = $year_relative.s;
-result.append(result);
+self.results.append(result);
             }
     // per 5 minuti
     | duration
       {
 result['type'] = DateEnum.TIMEX_DURATION;
 result['value'] = $duration.s;
-result.append(result);
+self.results.append(result);
       }
     // da 5 minuti fa a fra 5 minuti
     | DA s=rel_time_start A t=rel_time_start
       {
 result['type'] = DateEnum.TIMEX_REL_START_TIME;
 result['value'] = $s.s;
-result.append(result);
+self.results.append(result);
 result = dict()
 result['type'] = DateEnum.TIMEX_END_TIME;
 result['value'] = $t.s;
-result.append(result);
+self.results.append(result);
       }
     // dopo 5 minuti
     | rel_time_start
       {
 result['type'] = DateEnum.TIMEX_REL_START_TIME;
 result['value'] = $rel_time_start.s;
-result.append(result);
+self.results.append(result);
       }
     // 5 minuti fa, fra 5 minuti
     | time_relative
       {
 result['type'] = DateEnum.TIMEX_START_TIME;
 result['value'] = $time_relative.s;
-result.append(result);
+self.results.append(result);
       }
     // tutti i giovedi
     | date_repeat
       {
 result['type'] = DateEnum.TIMEX_REPEAT_TIME;
 result['value'] = $date_repeat.s;
-result.append(result);
+self.results.append(result);
       }
     // dal 16 novembre al 4 gennaio
     | DAL u=date AL v=date
       {
 result['type'] = DateEnum.TIMEX_DATE;
 result['value'] = $u.s;
-result.append(result);
+self.results.append(result);
 result = dict()
 result['type'] = DateEnum.TIMEX_END_DATE;
 result['value'] = $v.s;
-result.append(result);
+self.results.append(result);
             }
     // 16 novembre
     | date
       {
 result['type'] = DateEnum.TIMEX_DATE;
 result['value'] = $date.s;
-result.append(result);
+self.results.append(result);
       }
     // alle 5
   | time_start
   {
 result['type'] = DateEnum.TIMEX_START_TIME;
 result['value'] = $time_start.s;
-result.append(result);
+self.results.append(result);
   }
     // 2013
     | year
       {
 result['type'] = DateEnum.TIMEX_YEAR;
 result['value'] = $year.s;
-result.append(result);
+self.results.append(result);
       }
     // giovedi
     | day_absolute
       {
 result['type'] = DateEnum.TIMEX_WEEKDAY;
 result['value'] = $day_absolute.s;
-result.append(result);
+self.results.append(result);
       }
     // natale
     | holiday
       {
 result['type'] = DateEnum.TIMEX_DATE;
 result['value'] = $holiday.s;
-result.append(result);
+self.results.append(result);
       }
     // estate
     | season
       {
 result['type'] = DateEnum.TIMEX_SEASON;
 result['value'] = $season.s;
-result.append(result);
+self.results.append(result);
       }
     ;
 

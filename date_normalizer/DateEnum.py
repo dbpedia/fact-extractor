@@ -1,0 +1,14 @@
+from enum import Enum
+class DateEnum(Enum):
+    TIMEX_DATE = 1
+    TIMEX_DATE_DURATION = 2
+    TIMEX_DURATION = 3
+    TIMEX_END_DATE = 4
+    TIMEX_END_TIME = 5
+    TIMEX_REL_START_TIME = 6
+    TIMEX_REPEAT_TIME = 7
+    TIMEX_SEASON = 8
+    TIMEX_START_TIME = 9
+    TIMEX_WEEK = 10
+    TIMEX_WEEKDAY = 11
+    TIMEX_YEAR = 12
