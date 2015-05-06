@@ -107,7 +107,7 @@ def load_chunks(path):
             if not match:
                 continue
 
-            sentence_id = '%02d' % int(match.group(0))
+            sentence_id = '%03d' % int(match.group(0))
             if 'twm-links' in path:
                 sentence, link_chunks = read_twm_links(f)
                 all_chunks[sentence_id]['sentence'] = sentence

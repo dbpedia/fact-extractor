@@ -92,7 +92,7 @@ def tag_entities(results):
 
             # build the entity FE label, using FE name and frame
             fe_label = 'B-%s_%s' % (annotation, frame)
-            # the entity is an n-gram, regardless of tokenization
+            # the entity is an n-gram, regardless of tokenization, so no I- tags
             annotations['entities'][entity] = fe_label
 
 
@@ -101,8 +101,10 @@ def process_sentence(sentence_id, annotations, lines):
 
     processed = list()
     for i, (token, pos, lemma) in enumerate(lines):
+        # TODO check if LUs can be more than one token
+        tag = 'B-LU' if lemma == annotations['lu'] else 'O'
         processed.append([
-            sentence_id, '-', token, pos, lemma, annotations['frame'], 'O'
+            sentence_id, '-', token, pos, lemma, annotations['frame'], tag
         ])
 
     # find the entities in the sentence and set group them into a single token
@@ -127,9 +129,9 @@ def process_sentence(sentence_id, annotations, lines):
 
         if found:
             match_start = i - len(tokens) + 1
-            replacement = [
-                [ sentence_id, '-', entity, 'ENT', entity, annotations['frame'], tag ]
-            ]
+            to_replace = processed[i]
+            # use the 'ENT' tag only if the n-gram has more than 1 token, otherwise keep the original POS tag
+            replacement = [[ sentence_id, '-', entity, 'ENT', entity, annotations['frame'], tag ]] if len(tokens) > 1 else [[ sentence_id, '-', entity, to_replace[3], entity, annotations['frame'], tag ]]
             processed = processed[:match_start] + replacement + processed[i + 1:]
 
     # insert correct token ids
