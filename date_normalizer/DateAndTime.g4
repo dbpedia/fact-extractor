@@ -775,7 +775,7 @@ self.results.append(result);
     | FRA number LUNEDI
   {
 result['type'] = DateEnum.TIMEX_DATE;
-result['value'] = "\$week:" + $number.i + "\$";
+result['value'] = "\$week:" + str($number.i) + "\$";
 self.results.append(result);
 result = dict()
 result['type'] = DateEnum.TIMEX_WEEKDAY;
@@ -785,7 +785,7 @@ self.results.append(result);
     | FRA number MARTEDI
   {
 result['type'] = DateEnum.TIMEX_DATE;
-result['value'] = "\$week:" + $number.i + "\$";
+result['value'] = "\$week:" + str($number.i) + "\$";
 self.results.append(result);
 result = dict()
 result['type'] = DateEnum.TIMEX_WEEKDAY;
@@ -795,7 +795,7 @@ self.results.append(result);
     | FRA number MERCOLEDI
   {
 result['type'] = DateEnum.TIMEX_DATE;
-result['value'] = "\$week:" + $number.i + "\$";
+result['value'] = "\$week:" + str($number.i) + "\$";
 self.results.append(result);
 result = dict()
 result['type'] = DateEnum.TIMEX_WEEKDAY;
@@ -805,7 +805,7 @@ self.results.append(result);
     | FRA number GIOVEDI
   {
 result['type'] = DateEnum.TIMEX_DATE;
-result['value'] = "\$week:" + $number.i + "\$";
+result['value'] = "\$week:" + str($number.i) + "\$";
 self.results.append(result);
 result = dict()
 result['type'] = DateEnum.TIMEX_WEEKDAY;
@@ -815,7 +815,7 @@ self.results.append(result);
     | FRA number VENERDI
   {
 result['type'] = DateEnum.TIMEX_DATE;
-result['value'] = "\$week:" + $number.i + "\$";
+result['value'] = "\$week:" + str($number.i) + "\$";
 self.results.append(result);
 result = dict()
 result['type'] = DateEnum.TIMEX_WEEKDAY;
@@ -825,7 +825,7 @@ self.results.append(result);
     | FRA number SABATI
   {
 result['type'] = DateEnum.TIMEX_DATE;
-result['value'] = "\$week:" + $number.i + "\$";
+result['value'] = "\$week:" + str($number.i) + "\$";
 self.results.append(result);
 result = dict()
 result['type'] = DateEnum.TIMEX_WEEKDAY;
@@ -835,7 +835,7 @@ self.results.append(result);
     | FRA number SABATO
   {
 result['type'] = DateEnum.TIMEX_DATE;
-result['value'] = "\$week:" + $number.i + "\$";
+result['value'] = "\$week:" + str($number.i) + "\$";
 self.results.append(result);
 result = dict()
 result['type'] = DateEnum.TIMEX_WEEKDAY;
@@ -845,7 +845,7 @@ self.results.append(result);
     | FRA number DOMENICHE
   {
 result['type'] = DateEnum.TIMEX_DATE;
-result['value'] = "\$week:" + $number.i + "\$";
+result['value'] = "\$week:" + str($number.i) + "\$";
 self.results.append(result);
 result = dict()
 result['type'] = DateEnum.TIMEX_WEEKDAY;
@@ -855,7 +855,7 @@ self.results.append(result);
     | FRA number DOMENICA
   {
 result['type'] = DateEnum.TIMEX_DATE;
-result['value'] = "\$week:" + $number.i + "\$";
+result['value'] = "\$week:" + str($number.i) + "\$";
 self.results.append(result);
 result = dict()
 result['type'] = DateEnum.TIMEX_WEEKDAY;
@@ -1053,44 +1053,44 @@ self.results.append(result);
 day_duration returns [String s]
     /* Future */
     : DURANTE I PROSSIMI number GIORNI
-        {$s = "\$day:" + $number.i + "\$"; }
+        {$s = "\$day:" + str($number.i) + "\$"; }
     | DURANTE I number GIORNI PROSSIMI
-        {$s = "\$day:" + $number.i + "\$"; }
+        {$s = "\$day:" + str($number.i) + "\$"; }
     | DURANTE I number PROSSIMI GIORNI
-        {$s = "\$day:" + $number.i + "\$"; }
+        {$s = "\$day:" + str($number.i) + "\$"; }
     | NEL CORSO DEI PROSSIMI number GIORNI
-        {$s = "\$day:" + $number.i + "\$"; }
+        {$s = "\$day:" + str($number.i) + "\$"; }
     | NEL CORSO DEI number GIORNI PROSSIMI
-        {$s = "\$day:" + $number.i + "\$"; }
+        {$s = "\$day:" + str($number.i) + "\$"; }
     | NEL CORSO DEI number PROSSIMI GIORNI
-        {$s = "\$day:" + $number.i + "\$"; }
+        {$s = "\$day:" + str($number.i) + "\$"; }
     | PER I PROSSIMI number GIORNI
-        {$s = "\$day:" + $number.i + "\$"; }
+        {$s = "\$day:" + str($number.i) + "\$"; }
     | PER I number GIORNI PROSSIMI
-        {$s = "\$day:" + $number.i + "\$"; }
+        {$s = "\$day:" + str($number.i) + "\$"; }
     | PER I number PROSSIMI GIORNI
-        {$s = "\$day:" + $number.i + "\$"; }
+        {$s = "\$day:" + str($number.i) + "\$"; }
     /* Past */
     | DURANTE GLI SCORSI number GIORNI
-        {$s = "\$day:-" + $number.i + "\$"; }
+        {$s = "\$day:-" + str($number.i) + "\$"; }
     | DURANTE I number GIORNI SCORSI
-        {$s = "\$day:-" + $number.i + "\$"; }
+        {$s = "\$day:-" + str($number.i) + "\$"; }
     | DURANTE I number SCORSI GIORNI
-        {$s = "\$day:-" + $number.i + "\$"; }
+        {$s = "\$day:-" + str($number.i) + "\$"; }
     | DURANTE I PASSATI number GIORNI
-        {$s = "\$day:-" + $number.i + "\$"; }
+        {$s = "\$day:-" + str($number.i) + "\$"; }
     | DURANTE I number GIORNI PASSATI
-        {$s = "\$day:-" + $number.i + "\$"; }
+        {$s = "\$day:-" + str($number.i) + "\$"; }
     | NEL CORSO DEGLI SCORSI number GIORNI
-        {$s = "\$day:-" + $number.i + "\$"; }
+        {$s = "\$day:-" + str($number.i) + "\$"; }
     | NEL CORSO DEI number GIORNI SCORSI
-        {$s = "\$day:-" + $number.i + "\$"; }
+        {$s = "\$day:-" + str($number.i) + "\$"; }
     | NEL CORSO DEI number SCORSI GIORNI
-        {$s = "\$day:-" + $number.i + "\$"; }
+        {$s = "\$day:-" + str($number.i) + "\$"; }
     | NEL CORSO DEI number GIORNI PASSATI
-        {$s = "\$day:-" + $number.i + "\$"; }
+        {$s = "\$day:-" + str($number.i) + "\$"; }
     | NEL CORSO DEI PASSATI number GIORNI
-        {$s = "\$day:-" + $number.i + "\$"; }
+        {$s = "\$day:-" + str($number.i) + "\$"; }
     ;
 
 week_duration returns [String s]
@@ -1102,11 +1102,11 @@ week_duration returns [String s]
     | DURANTE SETTIMANA PROSSIMA
         {$s = "\$week:1\$"; }
     | DURANTE LE PROSSIME number SETTIMANE
-        {$s = "\$week:" + $number.i + "\$"; }
+        {$s = "\$week:" + str(str($number.i)) + "\$"; }
     | DURANTE LE number SETTIMANE PROSSIME
-        {$s = "\$week:" + $number.i + "\$"; }
+        {$s = "\$week:" + str(str($number.i)) + "\$"; }
     | DURANTE LE number PROSSIME SETTIMANE
-        {$s = "\$week:" + $number.i + "\$"; }
+        {$s = "\$week:" + str(str($number.i)) + "\$"; }
     | NEL CORSO DELLA SETTIMANA PROSSIMA
         {$s = "\$week:1\$"; }
     | NEL CORSO DELLA PROSSIMA SETTIMANA
@@ -1114,11 +1114,11 @@ week_duration returns [String s]
     | NEL CORSO DI SETTIMANA PROSSIMA
         {$s = "\$week:1\$"; }
     | NEL CORSO DELLE PROSSIME number SETTIMANE
-        {$s = "\$week:" + $number.i + "\$"; }
+        {$s = "\$week:" + str(str($number.i)) + "\$"; }
     | NEL CORSO DELLE number SETTIMANE PROSSIME
-        {$s = "\$week:" + $number.i + "\$"; }
+        {$s = "\$week:" + str(str($number.i)) + "\$"; }
     | NEL CORSO DELLE number PROSSIME SETTIMANE
-        {$s = "\$week:" + $number.i + "\$"; }
+        {$s = "\$week:" + str(str($number.i)) + "\$"; }
     | PER LA PROSSIMA SETTIMANA
         {$s = "\$week:1\$"; }
     | PER LA SETTIMANA PROSSIMA
@@ -1126,11 +1126,11 @@ week_duration returns [String s]
     | PER SETTIMANA PROSSIMA
         {$s = "\$week:1\$"; }
     | PER LE PROSSIME number SETTIMANE
-        {$s = "\$week:" + $number.i + "\$"; }
+        {$s = "\$week:" + str($number.i) + "\$"; }
     | PER LE number PROSSIME SETTIMANE
-        {$s = "\$week:" + $number.i + "\$"; }
+        {$s = "\$week:" + str($number.i) + "\$"; }
     | PER LE number SETTIMANE PROSSIME
-        {$s = "\$week:" + $number.i + "\$"; }
+        {$s = "\$week:" + str($number.i) + "\$"; }
     /* Past */
     | DURANTE LA SCORSA SETTIMANA
         {$s = "\$week:-1\$"; }
@@ -1139,25 +1139,25 @@ week_duration returns [String s]
     | DURANTE SETTIMANA SCORSA
         {$s = "\$week:-1\$"; }
     | DURANTE LE SCORSE number SETTIMANE
-        {$s = "\$week:-" + $number.i + "\$"; }
+        {$s = "\$week:-" + str($number.i) + "\$"; }
     | DURANTE LE number SETTIMANE SCORSE
-        {$s = "\$week:-" + $number.i + "\$"; }
+        {$s = "\$week:-" + str($number.i) + "\$"; }
     | DURANTE LE number SCORSE SETTIMANE
-        {$s = "\$week:-" + $number.i + "\$"; }
+        {$s = "\$week:-" + str($number.i) + "\$"; }
     | DURANTE LE number PASSATE SETTIMANE
-        {$s = "\$week:-" + $number.i + "\$"; }
+        {$s = "\$week:-" + str($number.i) + "\$"; }
     | DURANTE LE number SETTIMANE PASSATE
-        {$s = "\$week:-" + $number.i + "\$"; }
+        {$s = "\$week:-" + str($number.i) + "\$"; }
     | NEL CORSO DELLE SCORSE number SETTIMANE
-        {$s = "\$week:-" + $number.i + "\$"; }
+        {$s = "\$week:-" + str($number.i) + "\$"; }
     | NEL CORSO DELLE number SETTIMANE SCORSE
-        {$s = "\$week:-" + $number.i + "\$"; }
+        {$s = "\$week:-" + str($number.i) + "\$"; }
     | NEL CORSO DELLE number SCORSE SETTIMANE
-        {$s = "\$week:-" + $number.i + "\$"; }
+        {$s = "\$week:-" + str($number.i) + "\$"; }
     | NEL CORSO DELLE number PASSATE SETTIMANE
-        {$s = "\$week:-" + $number.i + "\$"; }
+        {$s = "\$week:-" + str($number.i) + "\$"; }
     | NEL CORSO DELLE number SETTIMANE PASSATE
-        {$s = "\$week:-" + $number.i + "\$"; }
+        {$s = "\$week:-" + str($number.i) + "\$"; }
     ;
 
 month_duration returns [String s]
@@ -1167,56 +1167,56 @@ month_duration returns [String s]
     | DURANTE IL MESE PROSSIMO
         {$s = "\$month:1\$"; }
     | DURANTE I PROSSIMI number MESI
-        {$s = "\$month:" + $number.i + "\$"; }
+        {$s = "\$month:" + str($number.i) + "\$"; }
     | DURANTE I number MESI PROSSIMI
-        {$s = "\$month:" + $number.i + "\$"; }
+        {$s = "\$month:" + str($number.i) + "\$"; }
     | DURANTE I number PROSSIMI MESI
-        {$s = "\$month:" + $number.i + "\$"; }
+        {$s = "\$month:" + str($number.i) + "\$"; }
     | NEL CORSO DEL MESE PROSSIMO
         {$s = "\$month:1\$"; }
     | NEL CORSO DEL PROSSIMO MESE
         {$s = "\$month:1\$"; }
     | NEL CORSO DEI PROSSIMI number MESI
-        {$s = "\$month:" + $number.i + "\$"; }
+        {$s = "\$month:" + str($number.i) + "\$"; }
     | NEL CORSO DEI number MESI PROSSIMI
-        {$s = "\$month:" + $number.i + "\$"; }
+        {$s = "\$month:" + str($number.i) + "\$"; }
     | NEL CORSO DEI number PROSSIMI MESI
-        {$s = "\$month:" + $number.i + "\$"; }
+        {$s = "\$month:" + str($number.i) + "\$"; }
     | PER IL PROSSIMO MESE
         {$s = "\$month:1\$"; }
     | PER IL MESE PROSSIMO
         {$s = "\$month:1\$"; }
     | PER I PROSSIMI number MESI
-        {$s = "\$month:" + $number.i + "\$"; }
+        {$s = "\$month:" + str($number.i) + "\$"; }
     | PER I number PROSSIMI MESI
-        {$s = "\$month:" + $number.i + "\$"; }
+        {$s = "\$month:" + str($number.i) + "\$"; }
     | PER I number MESI PROSSIMI
-        {$s = "\$month:" + $number.i + "\$"; }
+        {$s = "\$month:" + str($number.i) + "\$"; }
     /* Past */
     | DURANTE LO SCORSO MESE
         {$s = "\$month:-1\$"; }
     | DURANTE IL MESE SCORSO
         {$s = "\$month:-1\$"; }
     | DURANTE GLI SCORSI number MESI
-        {$s = "\$month:-" + $number.i + "\$"; }
+        {$s = "\$month:-" + str($number.i) + "\$"; }
     | DURANTE I number MESI SCORSI
-        {$s = "\$month:-" + $number.i + "\$"; }
+        {$s = "\$month:-" + str($number.i) + "\$"; }
     | DURANTE I number SCORSI MESI
-        {$s = "\$month:-" + $number.i + "\$"; }
+        {$s = "\$month:-" + str($number.i) + "\$"; }
     | DURANTE I number PASSATI MESI
-        {$s = "\$month:-" + $number.i + "\$"; }
+        {$s = "\$month:-" + str($number.i) + "\$"; }
     | DURANTE I number MESI PASSATI
-        {$s = "\$month:-" + $number.i + "\$"; }
+        {$s = "\$month:-" + str($number.i) + "\$"; }
     | NEL CORSO DEGLI SCORSI number MESI
-        {$s = "\$month:-" + $number.i + "\$"; }
+        {$s = "\$month:-" + str($number.i) + "\$"; }
     | NEL CORSO DEI number MESI SCORSI
-        {$s = "\$month:-" + $number.i + "\$"; }
+        {$s = "\$month:-" + str($number.i) + "\$"; }
     | NEL CORSO DEI number SCORSI MESI
-        {$s = "\$month:-" + $number.i + "\$"; }
+        {$s = "\$month:-" + str($number.i) + "\$"; }
     | NEL CORSO DEI number PASSATI MESI
-        {$s = "\$month:-" + $number.i + "\$"; }
+        {$s = "\$month:-" + str($number.i) + "\$"; }
     | NEL CORSO DEI number MESI PASSATI
-        {$s = "\$month:-" + $number.i + "\$"; }
+        {$s = "\$month:-" + str($number.i) + "\$"; }
     ;
 
 year_duration returns [String s]
@@ -1226,56 +1226,56 @@ year_duration returns [String s]
     | DURANTE L ANNO PROSSIMO
         {$s = "\$year:1\$"; }
     | DURANTE I PROSSIMI number ANNI
-        {$s = "\$year:" + $number.i + "\$"; }
+        {$s = "\$year:" + str($number.i) + "\$"; }
     | DURANTE I number ANNI PROSSIMI
-        {$s = "\$year:" + $number.i + "\$"; }
+        {$s = "\$year:" + str($number.i) + "\$"; }
     | DURANTE I number PROSSIMI ANNI
-        {$s = "\$year:" + $number.i + "\$"; }
+        {$s = "\$year:" + str($number.i) + "\$"; }
     | NEL CORSO DELL ANNO PROSSIMO
         {$s = "\$year:1\$"; }
     | NEL CORSO DEL PROSSIMO ANNO
         {$s = "\$year:1\$"; }
     | NEL CORSO DEI PROSSIMI number ANNI
-        {$s = "\$year:" + $number.i + "\$"; }
+        {$s = "\$year:" + str($number.i) + "\$"; }
     | NEL CORSO DEI number ANNI PROSSIMI
-        {$s = "\$year:" + $number.i + "\$"; }
+        {$s = "\$year:" + str($number.i) + "\$"; }
     | NEL CORSO DEI number PROSSIMI ANNI
-        {$s = "\$year:" + $number.i + "\$"; }
+        {$s = "\$year:" + str($number.i) + "\$"; }
     | PER IL PROSSIMO ANNO
         {$s = "\$year:1\$"; }
     | PER L ANNO PROSSIMO
         {$s = "\$year:1\$"; }
     | PER I PROSSIMI number ANNI
-        {$s = "\$year:" + $number.i + "\$"; }
+        {$s = "\$year:" + str($number.i) + "\$"; }
     | PER I number PROSSIMI ANNI
-        {$s = "\$year:" + $number.i + "\$"; }
+        {$s = "\$year:" + str($number.i) + "\$"; }
     | PER I number ANNI PROSSIMI
-        {$s = "\$year:" + $number.i + "\$"; }
+        {$s = "\$year:" + str($number.i) + "\$"; }
     /* Past */
     | DURANTE LO SCORSO ANNO
         {$s = "\$year:-1\$"; }
     | DURANTE L ANNO SCORSO
         {$s = "\$year:-1\$"; }
     | DURANTE GLI SCORSI number ANNI
-        {$s = "\$year:-" + $number.i + "\$"; }
+        {$s = "\$year:-" + str($number.i) + "\$"; }
     | DURANTE I number ANNI SCORSI
-        {$s = "\$year:-" + $number.i + "\$"; }
+        {$s = "\$year:-" + str($number.i) + "\$"; }
     | DURANTE I number SCORSI ANNI
-        {$s = "\$year:-" + $number.i + "\$"; }
+        {$s = "\$year:-" + str($number.i) + "\$"; }
     | DURANTE I number PASSATI ANNI
-        {$s = "\$year:-" + $number.i + "\$"; }
+        {$s = "\$year:-" + str($number.i) + "\$"; }
     | DURANTE I number ANNI PASSATI
-        {$s = "\$year:-" + $number.i + "\$"; }
+        {$s = "\$year:-" + str($number.i) + "\$"; }
     | NEL CORSO DEGLI SCORSI number ANNI
-        {$s = "\$year:-" + $number.i + "\$"; }
+        {$s = "\$year:-" + str($number.i) + "\$"; }
     | NEL CORSO DEI number ANNI SCORSI
-        {$s = "\$year:-" + $number.i + "\$"; }
+        {$s = "\$year:-" + str($number.i) + "\$"; }
     | NEL CORSO DEI number SCORSI ANNI
-        {$s = "\$year:-" + $number.i + "\$"; }
+        {$s = "\$year:-" + str($number.i) + "\$"; }
     | NEL CORSO DEI number PASSATI ANNI
-        {$s = "\$year:-" + $number.i + "\$"; }
+        {$s = "\$year:-" + str($number.i) + "\$"; }
     | NEL CORSO DEI number ANNI PASSATI
-        {$s = "\$year:-" + $number.i + "\$"; }
+        {$s = "\$year:-" + str($number.i) + "\$"; }
     ;
 
 day_relative returns [String s]
@@ -1302,21 +1302,21 @@ day_relative returns [String s]
     | IERLALTRO
       {$s = "\$day_before_yesterday\$"; }
     | number GIORNI DA ADESSO
-          {$s = "\$day:" + $number.i + "\$"; }
+          {$s = "\$day:" + str($number.i) + "\$"; }
     | number GIORNI DA ORA
-          {$s = "\$day:" + $number.i + "\$"; }
+          {$s = "\$day:" + str($number.i) + "\$"; }
     | number GIORNI DOPO
-          {$s = "\$day:" + $number.i + "\$"; }
+          {$s = "\$day:" + str($number.i) + "\$"; }
     | ENTRO number GIORNI
-          {$s = "\$day:" + $number.i + "\$"; }
+          {$s = "\$day:" + str($number.i) + "\$"; }
     | DOPO number GIORNI
-          {$s = "\$day:" + $number.i + "\$"; }
+          {$s = "\$day:" + str($number.i) + "\$"; }
     | FRA number GIORNI
-          {$s = "\$day:" + $number.i + "\$"; }
+          {$s = "\$day:" + str($number.i) + "\$"; }
     | number GIORNI FA
-          {$s = "\$day:-" + $number.i + "\$"; }
+          {$s = "\$day:-" + str($number.i) + "\$"; }
     | number GIORNI PRIMA
-          {$s = "\$day:-" + $number.i + "\$"; }
+          {$s = "\$day:-" + str($number.i) + "\$"; }
     | UN GIORNO PRIMA
           {$s = "\$day:-1\$"; }
     ;
@@ -1427,15 +1427,15 @@ month_relative returns [String s]
     | UN MESE DOPO
           {$s = "\$month:1\$"; }
     | FRA number MESI
-          {$s = "\$month:" + $number.i + "\$"; }
+          {$s = "\$month:" + str($number.i) + "\$"; }
     | DOPO number MESI
-          {$s = "\$month:" + $number.i + "\$"; }
+          {$s = "\$month:" + str($number.i) + "\$"; }
     | number MESI DOPO
-          {$s = "\$month:" + $number.i + "\$"; }
+          {$s = "\$month:" + str($number.i) + "\$"; }
     | number MESI FA
-          {$s = "\$month:-" + $number.i + "\$"; }
+          {$s = "\$month:-" + str($number.i) + "\$"; }
     | number MESI PRIMA
-          {$s = "\$month:-" + $number.i + "\$"; }
+          {$s = "\$month:-" + str($number.i) + "\$"; }
         ;
 
 year_relative returns [String s]
@@ -1460,30 +1460,30 @@ year_relative returns [String s]
     | UN ANNO DOPO
           {$s = "\$year:1\$"; }
     | FRA number ANNI
-          {$s = "\$year:" + $number.i + "\$"; }
+          {$s = "\$year:" + str($number.i) + "\$"; }
     | DOPO number ANNI
-          {$s = "\$year:" + $number.i + "\$"; }
+          {$s = "\$year:" + str($number.i) + "\$"; }
     | number ANNI DOPO
-          {$s = "\$year:" + $number.i + "\$"; }
+          {$s = "\$year:" + str($number.i) + "\$"; }
     | number ANNI FA
-          {$s = "\$year:-" + $number.i + "\$"; }
+          {$s = "\$year:-" + str($number.i) + "\$"; }
     | number ANNI PRIMA
-          {$s = "\$year:-" + $number.i + "\$"; }
+          {$s = "\$year:-" + str($number.i) + "\$"; }
     ;
 
-week_number returns [int i]
+week_number returns [String i]
     : PRIMA SETTIMANA
-        {$i = 1; }
+        {$i = '1'; }
     | SECONDA SETTIMANA
-        {$i = 2; }
+        {$i = '2'; }
     | TERZA SETTIMANA
-        {$i = 3; }
+        {$i = '3'; }
     | QUARTA SETTIMANA
-        {$i = 4; }
+        {$i = '4'; }
     | QUINTA SETTIMANA
-        {$i = 5; }
+        {$i = '5'; }
     | SETTIMANA number
-        {$i = $number.i; }
+        {$i = str(str($number.i)); }
     ;
 
 week_relative returns [String s]
@@ -1512,21 +1512,21 @@ week_relative returns [String s]
     | UNA SETTIMANA DOPO
           {$s = "\$week:1\$"; }
     | FRA number SETTIMANE
-          {$s = "\$week:" + $number.i + "\$"; }
+          {$s = "\$week:" + str($number.i) + "\$"; }
     | DOPO number SETTIMANE
-          {$s = "\$week:" + $number.i + "\$"; }
+          {$s = "\$week:" + str($number.i) + "\$"; }
     | ENTRO number SETTIMANE
-          {$s = "\$week:" + $number.i + "\$"; }
+          {$s = "\$week:" + str($number.i) + "\$"; }
     | number SETTIMANE DOPO
-          {$s = "\$week:" + $number.i + "\$"; }
+          {$s = "\$week:" + str($number.i) + "\$"; }
     | number SETTIMANE DA ADESSO
-            {$s = "\$week:" + $number.i + "\$"; }
+            {$s = "\$week:" + str($number.i) + "\$"; }
     | number SETTIMANE DA ORA
-            {$s = "\$week:" + $number.i + "\$"; }
+            {$s = "\$week:" + str($number.i) + "\$"; }
     | number SETTIMANE FA
-          {$s = "\$week:-" + $number.i + "\$"; }
+          {$s = "\$week:-" + str($number.i) + "\$"; }
     | number SETTIMANE PRIMA
-          {$s = "\$week:-" + $number.i + "\$"; }
+          {$s = "\$week:-" + str($number.i) + "\$"; }
     ;
 
 year returns [String s]
@@ -1581,19 +1581,19 @@ year returns [String s]
     | ANNI number
           {$s = "\$period:19" + $number.text + "\$"; }
     | number ANNI DA ADESSO
-          {$s = "\$year:" + $number.i + "\$"; }
+          {$s = "\$year:" + str($number.i) + "\$"; }
     | number ANNI DA ORA
-          {$s = "\$year:" + $number.i + "\$"; }
+          {$s = "\$year:" + str($number.i) + "\$"; }
     | number ANNI DOPO
-          {$s = "\$year:" + $number.i + "\$"; }
+          {$s = "\$year:" + str($number.i) + "\$"; }
     | DOPO number ANNI
-          {$s = "\$year:" + $number.i + "\$"; }
+          {$s = "\$year:" + str($number.i) + "\$"; }
     | FRA number ANNI
-          {$s = "\$year:" + $number.i + "\$"; }
+          {$s = "\$year:" + str($number.i) + "\$"; }
     | number ANNI FA
-          {$s = "\$year:-" + $number.i + "\$"; }
+          {$s = "\$year:-" + str($number.i) + "\$"; }
     | number ANNI PRIMA
-          {$s = "\$year:-" + $number.i + "\$"; }
+          {$s = "\$year:-" + str($number.i) + "\$"; }
     | ANNI YEARNUM
           {$s = "\$period:" + $YEARNUM.text + "\$"; }
     | ANNI TIMENUM
@@ -1658,7 +1658,7 @@ time_start returns [String s]
 
 time_number returns [String s]
     : number INPUNTO
-      {$s = String.format("%02d",$number.i) + ":_:_"; }
+      {$s = String.format("%02d",str($number.i)) + ":_:_"; }
     /* 
     TODO this also takes dates if there are no slashes 
     */
@@ -1672,17 +1672,17 @@ time_number returns [String s]
     | a=number MENO b=number
       {$s = "%02d" % (($b.i+23) % 24) + ":" + "%02d" % ((60-$a.i)) + ":_"; }
     | number E UN QUARTO
-      {$s = "%02d" % ($number.i) + ":" + 15 + ":_"; }
+      {$s = "%02d" % (str($number.i)) + ":" + 15 + ":_"; }
     | UN QUARTO DOPO LE number
-      {$s = "%02d" % ($number.i) + ":" + 15 + ":_"; }
+      {$s = "%02d" % (str($number.i)) + ":" + 15 + ":_"; }
     | number E TRE QUARTI
-      {$s = "%02d" % ($number.i) + ":" + 45 + ":_"; }
+      {$s = "%02d" % (str($number.i)) + ":" + 45 + ":_"; }
     | UN QUARTO ALLE number
-      {$s = "%02d" % (($number.i+23) % 24) + ":" + 45 + ":_"; }
+      {$s = "%02d" % ((str($number.i)+23) % 24) + ":" + 45 + ":_"; }
     | number MENO UN QUARTO
-      {$s = "%02d" % (($number.i+23) % 24) + ":" + 45 + ":_"; }
+      {$s = "%02d" % ((str($number.i)+23) % 24) + ":" + 45 + ":_"; }
     | number E MEZZO
-      {$s = "%02d" % ($number.i) + ":" + 30 + ":_"; }
+      {$s = "%02d" % (str($number.i)) + ":" + 30 + ":_"; }
     | threedignum
       {$s = "%02d" % (($threedignum.i / 100)) + ":" + "%02d" % (($threedignum.i % 100)) + ":_" ; }
     | ORE timenum
@@ -1690,7 +1690,7 @@ time_number returns [String s]
     | timenum
       {$s = "%02d" % (($timenum.i / 100)) + ":" + "%02d" % (($timenum.i % 100)) + ":_" ; }
     | number
-      {$s = String.format("%02d",$number.i) + ":_:_"; }
+      {$s = String.format("%02d",str($number.i)) + ":_:_"; }
     ;
 
 ampm returns [String s]
@@ -1715,7 +1715,7 @@ ampm returns [String s]
 date returns [String s]
     // 16 novembre
     : number month
-      {$s = "%02d" % ($month.i) + ":" + "%02d" % ($number.i); }
+      {$s = "%02d" % ($month.i) + ":" + "%02d" % (str($number.i)); }
     // primo novembre
     | PRIMO month
     {$s = "%02d" % ($month.i) + ":01"; }
@@ -1724,10 +1724,10 @@ date returns [String s]
   {$s = "%02d" % ($b.i) + ":" + "%02d" % ($a.i); }
     // 16 di gennaio
   | number maybedi month
-  {$s = "%02d" % ($month.i) + ":" + "%02d" % ($number.i); }
+  {$s = "%02d" % ($month.i) + ":" + "%02d" % (str($number.i)); }
     // 16 di questo mese
     | number maybedi QUESTO MESE
-      {$s = "_:" + "%02d" % ($number.i); }
+      {$s = "_:" + "%02d" % (str($number.i)); }
     // novembre
   | month
   {$s = "%02d" % ($month.i) + ":_"; }
@@ -1810,13 +1810,13 @@ timecomponents returns [String s]
     | a=number MINUTI eand b=number SECONDI
       {$s = "_:" + "%02d" % ($a.i) + ":" + "%02d" % ($b.i) ; }
     | number ORE
-          {$s = "%02d:_:_" % ($number.i) ; }
+          {$s = "%02d:_:_" % (str($number.i)) ; }
     | number ORE E UN QUARTO
-          {$s = String.format("%02d:" + 15 + ":_", $number.i) ; }
+          {$s = String.format("%02d:" + 15 + ":_", str($number.i)) ; }
     | number ORE E MEZZO
-          {$s = String.format("%02d:" + 30 + ":_", $number.i) ; }
+          {$s = String.format("%02d:" + 30 + ":_", str($number.i)) ; }
     | number ORE E TRE QUARTI
-          {$s = String.format("%02d:" + 45 + ":_", $number.i) ; }
+          {$s = String.format("%02d:" + 45 + ":_", str($number.i)) ; }
     | UN ORA E UN QUARTO
           {$s = "01:15:_" ; }
     | UN ORA E MEZZO
@@ -1826,9 +1826,9 @@ timecomponents returns [String s]
     | UN ORA
           {$s = "01:_:_" ; }
     | number MINUTI
-          {$s = "_:%02d:_" % ($number.i) ; }
+          {$s = "_:%02d:_" % (str($number.i)) ; }
     | number SECONDI
-          {$s = "_:_:%02d" % ($number.i) ; }
+          {$s = "_:_:%02d" % (str($number.i)) ; }
     ;
 
 rel_time_start returns [String s]
@@ -1901,7 +1901,7 @@ season_relative returns [String s]
 */
 number returns [int i]
     : NUMBER
-      {$i = Integer.parseInt($NUMBER.text);}
+      {$i = int($NUMBER.text);}
     | UN
       {$i = 1 ;}
     | UNA
@@ -1916,17 +1916,17 @@ number returns [int i]
 
 threedignum returns [int i]
     : THREEDIGNUM
-      {$i = Integer.parseInt($THREEDIGNUM.text);}
+      {$i = int($THREEDIGNUM.text);}
     ;
 
 yearnum returns [int i]
     : YEARNUM
-      {$i = Integer.parseInt($YEARNUM.text);}
+      {$i = int($YEARNUM.text);}
     ;
 
 timenum returns [int i]
     : TIMENUM
-      {$i = Integer.parseInt($TIMENUM.text);}
+      {$i = int($TIMENUM.text);}
     ;
 
 
