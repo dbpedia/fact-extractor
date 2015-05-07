@@ -34,11 +34,14 @@ def read_twm_links(f):
     links = json.load(codecs.open(f, 'rb', 'utf-8'))
     sentence, val = links.items()[0]
 
-    link_chunks = set()
+    link_chunks = dict()
     for diz in val:
         chunk = diz['chunk']
         if chunk.lower() not in stopwords.StopWords.words('italian'):
-            link_chunks.add(chunk)
+            link_chunks[chunk] = {
+                'start': diz['start'],
+                'end': diz['end'],
+            }
 
     return sentence, link_chunks
 
@@ -46,12 +49,15 @@ def read_twm_links(f):
 def read_ngrams(f):
     ngrams = json.load(codecs.open(f, 'rb', 'utf-8'))
 
-    ngram_chunks = set()
+    ngram_chunks = dict()
     for val in ngrams.values():
         for diz in val:
             chunk = diz['chunk']
             if chunk.lower() not in stopwords.StopWords.words('italian'):
-                ngram_chunks.add(chunk)
+                ngram_chunks[chunk] = {
+                    'start': diz['start'],
+                    'end': diz['end'],
+                }
 
     return ngram_chunks
 
@@ -84,7 +90,7 @@ def read_tp_chunks(f):
 
     if current_chunk:
         tmp_tp_chunks.append(current_chunk)
-    return set(' '.join(chunk) for chunk in tmp_tp_chunks)
+    return {' '.join(chunk): {} for chunk in tmp_tp_chunks}
 
 
 def load_chunks(path):
@@ -122,8 +128,8 @@ def load_chunks(path):
 
 def priority_update(first, second):
     """
-    removes from second all the items which completely include, or are completely
-    included in, some item in first
+    removes from second all the chunks which completely include,
+    or is completely included in, some other chunk first
     """
     to_remove = set()
 
@@ -133,38 +139,29 @@ def priority_update(first, second):
             if debug:
                 print 'Removing "%s" because it overlaps with "%s"' % (b, a)
 
-    second.difference_update(to_remove)
+    for chunk in to_remove:
+        second.pop(chunk)
 
 
-def combine_chunks(sentence_id, values):
-    """
-    combine the chunks of each sentence
-    if chunks overlap, prefer links > ngrams > chunker
-    if chunks still overlap after this merge them, i.e. "la Nazionale" and
-    "Nazionale Under-21" would be merged into "la Nazionale Under-21"
-    """
-
-    link_chunks = values.get('twm-links', set())
-    ngram_chunks = values.get('twm-ngrams', set())
-    tp_chunks = values.get('textpro-chunks', set())
-
-    if debug:
-        print '--- PROCESSING SENTENCE', sentence_id
-        print 'LINKS', link_chunks
-        print 'NGRAMS', ngram_chunks
-        print 'TEXTPRO', tp_chunks
-
+def combine_priority(link_chunks, ngram_chunks, tp_chunks):
+    """ combine chunks according to priority link_chunks > ngram_chunks > tp_chunks """
     priority_update(link_chunks, ngram_chunks)
     priority_update(link_chunks, tp_chunks)
     priority_update(ngram_chunks, tp_chunks)
 
-    combined = tp_chunks.union(ngram_chunks, link_chunks)
-    if debug:
-        print 'COMBINED CHUNKS', combined
+    combined = dict()
+    combined.update(link_chunks)
+    combined.update(ngram_chunks)
+    combined.update(tp_chunks)
 
-    pairs = itertools.combinations(combined, 2)
+    return combined
+
+
+def combine_overlapping(chunks):
+    """ combine overlapping chunks """
+    pairs = itertools.combinations(chunks, 2)
     for p1, p2 in pairs:
-        if not p1 in combined or not p2 in combined:
+        if not p1 in chunks or not p2 in chunks:
             continue
 
         words1, words2 = p1.split(), p2.split()
@@ -173,22 +170,97 @@ def combine_chunks(sentence_id, values):
             word_common = ' '.join(common)
             index1, index2 = p1.index(word_common), p2.index(word_common)
 
-            if index1 > index2:
-                total = p1[:index1] + p2[index2:]
-            else:
-                total = p2[:index2] + p1[index1:]
+            #             v index1
+            #    +--------|-common-|------------+          p1
+            #          +--|-common-|-------------------+   p2
+            #             ^ index2
+            #    +------------------------------------+    total
+            if index1 < index2:
+                (p1, index1), (p2, index2) = (p2, index2), (p1, index1)
+            total = p1[:index1] + p2[index2:]
 
             if debug:
-                print 'Merging "%s" and "%s" to "%s"' % (p1, p2, total)
+                print 'Merging (overlap) "%s" and "%s" to "%s"' % (p1, p2, total)
 
-            combined.remove(p1)
-            combined.remove(p2)
-            combined.add(total)
+            p1 = chunks.pop(p1)
+            p2 = chunks.pop(p2)
+            chunks[total] = {
+                'start': p1.get('start', -1),
+                'end': p2.get('end', -1),
+            }
+
+    return chunks 
+
+
+def combine_contiguous(sentence, combined):
+    """ combine contiguous chunks """
+
+    def contiguous(c1, c2):
+        """ contiguous if no letters between chunks """
+        between = sentence[c1['end']:c2['start']]
+        return all(not c.isalpha() for c in between)
+
+    final = list()
+
+    # order by start
+    chunks = sorted(({'chunk': k, 'start': v.get('start', -1), 'end': v.get('end', -1)}
+                         for k, v in combined.iteritems()),
+                    key=lambda x: x.get('start', -1))
+    i = 0
+    while i < len(chunks):
+        if chunks[i]['start'] < 0:
+            final.append(chunks[i])
+            i += 1
+        else:
+            # start from this chunk and find all the contiguous ones
+            j = i
+            while j < len(chunks) - 1 and contiguous(chunks[j], chunks[j + 1]):
+                j += 1
+
+            # merge them
+            total = ' '.join(c['chunk'] for c in chunks[i:j + 1])
+            final.append({
+                'chunk': total,
+                'start': chunks[i]['start'],
+                'end': chunks[j]['end']
+            })
+
+            if j > i and debug:
+                print 'Merging (contiguous) chunks %d to %d to %s' % (i, j, total)
+
+            i = j + 1
+
+    return final
+
+
+def combine_chunks(sentence_id, values):
+    """
+    combine the chunks of each sentence
+    if chunks overlap, prefer links > ngrams > chunker
+    if chunks still overlap after this merge them, i.e. "la Nazionale" and
+    "Nazionale Under-21" would be merged into "la Nazionale Under-21"
+    finally, merge contiguous chunks into a single bigger one
+    """
+
+    link_chunks = values.get('twm-links', dict())
+    ngram_chunks = values.get('twm-ngrams', dict())
+    tp_chunks = values.get('textpro-chunks', dict())
+
+    if debug:
+        print '--- PROCESSING SENTENCE', sentence_id
+        print values['sentence']
+        print 'LINKS', link_chunks
+        print 'NGRAMS', ngram_chunks
+        print 'TEXTPRO', tp_chunks
+
+    chunks_p = combine_priority(link_chunks, ngram_chunks, tp_chunks)
+    chunks_o = combine_overlapping(chunks_p)
+    final = combine_contiguous(values['sentence'], chunks_o)
 
     return {
         'id': sentence_id,
         'sentence': values['sentence'],
-        'chunks': list(combined),
+        'chunks': list(x['chunk'] for x in final),
     }
 
 
