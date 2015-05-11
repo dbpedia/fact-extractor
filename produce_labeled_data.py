@@ -1,19 +1,21 @@
 #!/usr/bin/env python
 # -*- encoding: utf-8 -*-
 
-import argparse
 import codecs
-import csv
 import json
 import os
-import re
 import stopwords
 import sys
 from collections import defaultdict
+from rdflib import Graph, Namespace, URIRef, BNode, Literal
 
 
 LU_FRAME_MAP_LOCATION = 'resources/soccer-lu2frame-dbptypes.json'
 LU_FRAME_MAP = json.load(open(LU_FRAME_MAP_LOCATION))
+
+# Namespace prefixes for RDF serialization
+DBPEDIA_IT = Namespace('http://it.dbpedia.org/resource/')
+FACT_EXTRACTION = Namespace('http://dbpedia.org/fact-extraction/')
 
 
 def label_sentence(entity_linking_results, debug):
@@ -59,7 +61,10 @@ def label_sentence(entity_linking_results, debug):
                                 # Strip DBpedia ontology namespace
                                 looked_up = mapping.get(t[28:])
                                 if looked_up:
-                                    labeled[chunk] = {'uri': diz['uri'], 'FEs': looked_up}
+                                    if type(looked_up) == list:
+                                        labeled['FEs'] = [{'chunk': chunk, 'uri': diz['uri'], 'FE': fe} for fe in looked_up]
+                                    else:
+                                        labeled['FEs'] = [{'chunk': chunk, 'uri': diz['uri'], 'FE': looked_up}]
                     
     return labeled
 
@@ -81,11 +86,38 @@ def process_dir(indir, debug):
 
 
 # TODO implement the data model
-def to_assertions(labeled_results):
+def to_assertions(labeled_results, debug):
     """Serialize the labeled results into RDF"""
-    assertions = []
-    return assertions
+    assertions = Graph()
+    for result in labeled_results:
+        frame = result.get('frame')
+        if not frame:
+            if debug:
+                print 'No frame found in "%s"' % result['sentence']
+            continue
+        fes = result.get('FEs')
+        if not fes:
+            if debug:
+                print 'No FEs found in "%s"' % result['sentence']
+            continue
+        # FIXME Assume subject is the Wikipedia URI where the sentence comes from
+        s = URIRef(DBPEDIA_IT + 'ARTICLE')
+        p = URIRef(FACT_EXTRACTION + frame)
+        for i, fe in enumerate(result['FEs']):
+            o = URIRef('%s%s%04d' % (FACT_EXTRACTION, result['frame'], i))
+            assertions.add((s, p, o))
+#            b_node_subject = '%s_%04d' % (result['frame'], i)
+            p1 = URIRef('%shas%s' % (FACT_EXTRACTION, fe['FE']))
+#            b_node_predicate = 'has%s' % fe['FE']
+            o1 = URIRef(fe['uri'])
+#            b_node_object = fe['uri']
+            assertions.add((o, p1, o1))
+    return assertions.serialize(format='turtle', encoding='utf-8')
 
 
 if __name__ == '__main__':
-    json.dump(process_dir(sys.argv[1], True), codecs.open('labeled_data.json', 'wb', 'utf-8'), ensure_ascii=False, indent=2)
+    debug = True
+    labeled = process_dir(sys.argv[1], debug)
+    json.dump(labeled, codecs.open('labeled_data.json', 'wb', 'utf-8'), ensure_ascii=False, indent=2)
+    dataset = to_assertions(labeled, debug)
+    print dataset
