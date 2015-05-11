@@ -59,7 +59,7 @@ def label_sentence(entity_linking_results, debug):
                                 # Strip DBpedia ontology namespace
                                 looked_up = mapping.get(t[28:])
                                 if looked_up:
-                                    labeled[looked_up] = {chunk: diz['uri']}
+                                    labeled[chunk] = {'uri': diz['uri'], 'FEs': looked_up}
                     
     return labeled
 
@@ -73,8 +73,10 @@ def process_dir(indir, debug):
             # Filename is a number
             filename, ext = os.path.splitext(name)
             labeled = label_sentence(f, debug)
-            labeled['id'] = '%04d' % filename
+            labeled['id'] = '%04d' % int(filename)
             processed.append(labeled)
+            if debug:
+                print 'LABELED: %s' % labeled
     return processed
 
 
@@ -86,4 +88,4 @@ def to_assertions(labeled_results):
 
 
 if __name__ == '__main__':
-    print 'LABELED: %s' % label_sentence(sys.argv[1], True)
+    json.dump(process_dir(sys.argv[1], True), codecs.open('labeled_data.json', 'wb', 'utf-8'), ensure_ascii=False, indent=2)
