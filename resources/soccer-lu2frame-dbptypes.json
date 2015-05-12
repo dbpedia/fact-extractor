@@ -378,6 +378,26 @@
                         { "SoccerLeagueSeason": "Competizione" },
                         { "SoccerClub": ["Vincitore", "Perdente"] }
                     ]
+                },
+                {
+                    "frame": "Trofeo",
+                    "FEs":
+                    [
+                        { "Concorrente": "core" },
+                        { "Competizione": "core" },
+                        { "Premio": "extra" },
+                        { "Luogo": "extra" },
+                        { "Tempo": "extra" },
+                        { "Punteggio": "extra" },
+                        { "Classifica": "extra" }
+                    ],
+                    "DBpedia":
+                    [
+                        { "SoccerLeague": "Competizione" },
+                        { "SoccerTournament": "Competizione" },
+                        { "SoccerLeagueSeason": "Competizione" },
+                        { "SoccerPlayer": "Concorrente" }
+                    ]
                 }
             ]
         }
