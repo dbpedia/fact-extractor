@@ -4,18 +4,22 @@
 import codecs
 import json
 import os
+import random
 import stopwords
 import sys
-from collections import defaultdict
-from rdflib import Graph, Namespace, URIRef, BNode, Literal
+from rdflib import Graph, URIRef
+from rdflib.namespace import Namespace, NamespaceManager
 
 
 LU_FRAME_MAP_LOCATION = 'resources/soccer-lu2frame-dbptypes.json'
 LU_FRAME_MAP = json.load(open(LU_FRAME_MAP_LOCATION))
 
 # Namespace prefixes for RDF serialization
-DBPEDIA_IT = Namespace('http://it.dbpedia.org/resource/')
+RESOURCE = Namespace('http://it.dbpedia.org/resource/')
 FACT_EXTRACTION = Namespace('http://dbpedia.org/fact-extraction/')
+NAMESPACE_MANAGER = NamespaceManager(Graph())
+NAMESPACE_MANAGER.bind('resource', RESOURCE)
+NAMESPACE_MANAGER.bind('fact', FACT_EXTRACTION)
 
 
 def label_sentence(entity_linking_results, debug):
@@ -36,35 +40,73 @@ def label_sentence(entity_linking_results, debug):
         for sentence_token in sentence_tokens:
             if sentence_token in lu_tokens:
                 if debug:
-                    print 'SENTENCE TOKEN "%s" MATCHED IN LU TOKENS' % sentence_token
+                    print 'TOKEN "%s" MATCHED IN LU TOKENS' % sentence_token
                 labeled['lu'] = lu['lu']['lemma']
                 frames = lu['lu']['frames']
                 if debug:
                     print 'LU LEMMA: %s' % labeled['lu']
                     print 'FRAMES: %s' % [frame['frame'] for frame in frames]
+                # Frame processing
                 for frame in frames:
-                    # TODO this will overwrite in case of more frames per LU
-                    labeled['frame'] = frame['frame']
                     FEs = frame['FEs']
                     types_to_FEs = frame['DBpedia']
                     if debug:
-                        print 'ASSIGNED FRAME: %s' % frame['frame']
+                        print 'CURRENT FRAME: %s' % frame['frame']
                         print 'FEs: %s' % FEs
+                    core = False
+                    assigned_fes = []
                     for diz in val:
                         chunk = diz['chunk']
                         # Filter out linked stopwords
                         if chunk.lower() in stopwords.StopWords.words('italian'):
                             continue
                         types = diz['types']
+                        #### FE assignment ###
                         for t in types:
                             for mapping in types_to_FEs:
                                 # Strip DBpedia ontology namespace
                                 looked_up = mapping.get(t[28:])
                                 if looked_up:
+                                    if debug:
+                                        print 'Chunk "%s" has an ontology type "%s" that maps to FE "%s"' % (chunk, t[28:], looked_up)
+                                    ### Frame disambiguation strategy ###
+                                    # If there is at least one core FE, then assign that frame
+                                    # Will not work if the FEs across competing frames have the same ontology type
+                                    # e.g., Attività > Squadra and Partita > [Squadra_1, Squadra_2]
+
+                                    # Check if looked up FE is core
+                                    for fe in FEs:
+                                        if type(looked_up) == list:
+                                            for shared_type_fe in looked_up:
+                                                if fe.get(shared_type_fe) == 'core':
+                                                    if debug:
+                                                        print 'Looked up FE "%s" is core' % shared_type_fe
+                                                    core = True
+                                        else:
+                                            if fe.get(looked_up) == 'core':
+                                                if debug:
+                                                    print 'Looked up FE "%s" is core for frame "%s"' % (looked_up, frame['frame'])
+                                                core = True
+                                    # No FE disambiguation when multiple FEs have the same ontology type, e.g., [Vincitore, Perdente] -> Club
+                                    # Baseline strategy = random assignment
+                                    # Needs to be adjusted by humans
                                     if type(looked_up) == list:
-                                        labeled['FEs'] = [{'chunk': chunk, 'uri': diz['uri'], 'FE': fe} for fe in looked_up]
+                                        chosen = random.choice(looked_up)
+                                        assigned_fes.append({'chunk': chunk, 'uri': diz['uri'], 'FE': chosen})
                                     else:
-                                        labeled['FEs'] = [{'chunk': chunk, 'uri': diz['uri'], 'FE': looked_up}]
+                                        assigned_fes.append({'chunk': chunk, 'uri': diz['uri'], 'FE': looked_up})
+                    # Continue to next frame if no core FE was found
+                    if not core:
+                        if debug:
+                            print 'No core FE for frame "%s": skipping' % frame['frame']
+                        continue
+                    # Otherwise assign frame and previously stored FEs
+                    else:
+                        labeled['frame'] = frame['frame']
+                        labeled['FEs'] = assigned_fes
+                        if debug:
+                            print 'ASSIGNED FRAME: %s' % frame['frame']
+                            print 'ASSIGNED FEs: %s' % assigned_fes
                     
     return labeled
 
@@ -86,14 +128,17 @@ def process_dir(indir, debug):
 
 
 # TODO implement the data model
-def to_assertions(labeled_results, debug):
+def to_assertions(labeled_results, debug, outfile='dataset.ttl', format='turtle'):
     """Serialize the labeled results into RDF"""
+    discarded = []
     assertions = Graph()
+    assertions.namespace_manager = NAMESPACE_MANAGER
     for result in labeled_results:
         frame = result.get('frame')
         if not frame:
             if debug:
-                print 'No frame found in "%s"' % result['sentence']
+                print "Couldn't disambiguate any known frames in '%s'" % result['sentence']
+            discarded.append(result)
             continue
         fes = result.get('FEs')
         if not fes:
@@ -101,24 +146,22 @@ def to_assertions(labeled_results, debug):
                 print 'No FEs found in "%s"' % result['sentence']
             continue
         # FIXME Assume subject is the Wikipedia URI where the sentence comes from
-        s = URIRef(DBPEDIA_IT + 'SENTENCE' + result['id'])
-        p = URIRef(FACT_EXTRACTION + frame)
+        s = URIRef(RESOURCE['SENTENCE%s' % result['id']])
+        p = URIRef(FACT_EXTRACTION[frame])
         for fe in fes:
             o = URIRef('%s%s%04d' % (FACT_EXTRACTION, frame, int(result['id'])))
             assertions.add((s, p, o))
-#            b_node_subject = '%s_%04d' % (result['frame'], i)
             p1 = URIRef('%shas%s' % (FACT_EXTRACTION, fe['FE']))
-#            b_node_predicate = 'has%s' % fe['FE']
             o1 = URIRef(fe['uri'])
-#            b_node_object = fe['uri']
             assertions.add((o, p1, o1))
-    return assertions.serialize(format='turtle', encoding='utf-8')
+    assertions.serialize(outfile, format, encoding='utf-8')
+    return discarded
 
 
 if __name__ == '__main__':
     debug = True
     labeled = process_dir(sys.argv[1], debug)
     json.dump(labeled, codecs.open('labeled_data.json', 'wb', 'utf-8'), ensure_ascii=False, indent=2)
-    dataset = to_assertions(labeled, debug)
-    with codecs.open('dataset.ttl', 'wb', 'utf-8') as o:
-        o.writelines(dataset)
+    discarded = to_assertions(labeled, debug)
+    if debug:
+        print '%d out of %d NOT DISAMBIGUATED' % (len(discarded), len(labeled))
