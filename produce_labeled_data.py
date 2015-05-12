@@ -101,10 +101,10 @@ def to_assertions(labeled_results, debug):
                 print 'No FEs found in "%s"' % result['sentence']
             continue
         # FIXME Assume subject is the Wikipedia URI where the sentence comes from
-        s = URIRef(DBPEDIA_IT + 'ARTICLE')
+        s = URIRef(DBPEDIA_IT + 'SENTENCE' + result['id'])
         p = URIRef(FACT_EXTRACTION + frame)
-        for i, fe in enumerate(result['FEs']):
-            o = URIRef('%s%s%04d' % (FACT_EXTRACTION, result['frame'], i))
+        for fe in fes:
+            o = URIRef('%s%s%04d' % (FACT_EXTRACTION, frame, int(result['id'])))
             assertions.add((s, p, o))
 #            b_node_subject = '%s_%04d' % (result['frame'], i)
             p1 = URIRef('%shas%s' % (FACT_EXTRACTION, fe['FE']))
@@ -120,4 +120,5 @@ if __name__ == '__main__':
     labeled = process_dir(sys.argv[1], debug)
     json.dump(labeled, codecs.open('labeled_data.json', 'wb', 'utf-8'), ensure_ascii=False, indent=2)
     dataset = to_assertions(labeled, debug)
-    print dataset
+    with codecs.open('dataset.ttl', 'wb', 'utf-8') as o:
+        o.writelines(dataset)
