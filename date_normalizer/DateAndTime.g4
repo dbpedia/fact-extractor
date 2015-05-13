@@ -485,154 +485,6 @@ result['type'] = DateEnum.TIMEX_YEAR;
 result['value'] = $YEARNUM.text;
 self.results.append(result);
     }
-    // ultimi 5 minuti
-    | ULTIMI timecomponents
-      {
-result['type'] = DateEnum.TIMEX_REL_START_TIME;
-result['value'] = "-:" + $timecomponents.s;
-self.results.append(result);
-result = dict()
-result['type'] = DateEnum.TIMEX_DURATION;
-result['value'] = $timecomponents.s;
-self.results.append(result);
-       }
-    // scorsi 5 minuti
-    | SCORSI timecomponents
-      {
-result['type'] = DateEnum.TIMEX_REL_START_TIME;
-result['value'] = "-:" + $timecomponents.s;
-self.results.append(result);
-result = dict()
-result['type'] = DateEnum.TIMEX_DURATION;
-result['value'] = $timecomponents.s;
-self.results.append(result);
-       }
-    // entro 5 minuti
-    | ENTRO timecomponents
-      {
-result['type'] = DateEnum.TIMEX_REL_START_TIME;
-result['value'] = "\$now\$";
-self.results.append(result);
-result = dict()
-result['type'] = DateEnum.TIMEX_DURATION;
-result['value'] = $timecomponents.s;
-self.results.append(result);
-       }
-    // prossimi 5 minuti
-    | PROSSIMI timecomponents
-      {
-result['type'] = DateEnum.TIMEX_REL_START_TIME;
-result['value'] = "\$now\$";
-self.results.append(result);
-result = dict()
-result['type'] = DateEnum.TIMEX_DURATION;
-result['value'] = $timecomponents.s;
-self.results.append(result);
-       }
-    // questi 5 minuti
-    | QUESTI timecomponents
-      {
-result['type'] = DateEnum.TIMEX_REL_START_TIME;
-result['value'] = "\$now\$";
-self.results.append(result);
-result = dict()
-result['type'] = DateEnum.TIMEX_DURATION;
-result['value'] = $timecomponents.s;
-self.results.append(result);
-       }
-    // 5 minuti precedenti
-    | timecomponents PRECEDENTI
-      {
-result['type'] = DateEnum.TIMEX_REL_START_TIME;
-result['value'] = "-:" + $timecomponents.s;
-self.results.append(result);
-result = dict()
-result['type'] = DateEnum.TIMEX_DURATION;
-result['value'] = $timecomponents.s;
-self.results.append(result);
-        }
-    | QUEST ORA
-      {
-result['type'] = DateEnum.TIMEX_REL_START_TIME;
-result['value'] = "\$now\$";
-self.results.append(result);
-result = dict()
-result['type'] = DateEnum.TIMEX_DURATION;
-result['value'] = "01:_:_" ;
-self.results.append(result);
-       }
-    | QUESTO MINUTO
-      {
-result['type'] = DateEnum.TIMEX_REL_START_TIME;
-result['value'] = "\$now\$";
-self.results.append(result);
-result = dict()
-result['type'] = DateEnum.TIMEX_DURATION;
-result['value'] = "_:01:_" ;
-self.results.append(result);
-       }
-    | QUESTO SECONDO
-      {
-result['type'] = DateEnum.TIMEX_REL_START_TIME;
-result['value'] = "\$now\$";
-self.results.append(result);
-result = dict()
-result['type'] = DateEnum.TIMEX_DURATION;
-result['value'] = "_:_:01" ;
-self.results.append(result);
-       }
-
-    | DALLE a=number ALLE b=number
-      {
-result['type'] = DateEnum.TIMEX_START_TIME;
-result['value'] = ("%02d" % ($a.i) + ":_:_") ;
-self.results.append(result);
-result = dict()
-result['type'] = DateEnum.TIMEX_DURATION;
-result['value'] = ("%02d" % (($b.i-$a.i)) + ":_:_") ;
-self.results.append(result);
-       }
-    // fra le 3 e le 5
-    | FRA LE a=number E LE b=number
-      {
-result['type'] = DateEnum.TIMEX_START_TIME;
-result['value'] = ("%02d" % ($a.i) + ":_:_") ;
-self.results.append(result);
-result = dict()
-result['type'] = DateEnum.TIMEX_DURATION;
-result['value'] = ("%02d" % (($b.i-$a.i)) + ":_:_") ;
-self.results.append(result);
-       }
-   | QUESTO POMERIGGIO
-   {
-result['type'] = DateEnum.TIMEX_DATE;
-result['value'] = "\$today\$";
-self.results.append(result);
-result = dict()
-result['type'] = DateEnum.TIMEX_START_TIME;
-result['value'] = "\$afternoon\$" ;
-self.results.append(result);
-      }
-   | STASERA
-   {
-result['type'] = DateEnum.TIMEX_DATE;
-result['value'] = "\$today\$";
-self.results.append(result);
-result = dict()
-result['type'] = DateEnum.TIMEX_START_TIME;
-result['value'] = "\$evening\$" ;
-self.results.append(result);
-      }
-  | STANOTTE
-  {
-result['type'] = DateEnum.TIMEX_DATE;
-result['value'] = "\$today\$";
-self.results.append(result);
-result = dict()
-result['type'] = DateEnum.TIMEX_START_TIME;
-result['value'] = "\$night\$" ;
-self.results.append(result);
-     }
     // tutti i giovedi
     | TUTTI I day_absolute
       {
@@ -644,34 +496,7 @@ result['type'] = DateEnum.TIMEX_REPEAT_TIME;
 result['value'] = "\$weekly\$" ;
 self.results.append(result);
        }
-    // TODO need to split in 2 sub-rules
-    // ogni sera
-    | OGNI time_relative
-      {
-result['type'] = DateEnum.TIMEX_START_TIME;
-result['value'] = $time_relative.s ;
-self.results.append(result);
-result = dict()
-result['type'] = DateEnum.TIMEX_REPEAT_TIME;
-result['value'] = "\$daily\$" ;
-self.results.append(result);
-       }
-    // ogni mercoledi mattina
-    | OGNI day_absolute MATTINA
-      {
-result['type'] = DateEnum.TIMEX_WEEKDAY;
-result['value'] = $day_absolute.s ;
-self.results.append(result);
-result = dict()
-result['type'] = DateEnum.TIMEX_REPEAT_TIME;
-result['value'] = "\$weekly\$" ;
-self.results.append(result);
-result = dict()
-result['type'] = DateEnum.TIMEX_START_TIME;
-result['value'] = "\$morning\$" ;
-self.results.append(result);
-       }
-     // ogni mercoledi
+    // ogni mercoledi
     | OGNI day_absolute
       {
 result['type'] = DateEnum.TIMEX_WEEKDAY;
@@ -680,26 +505,6 @@ self.results.append(result);
 result = dict()
 result['type'] = DateEnum.TIMEX_REPEAT_TIME;
 result['value'] = "\$weekly\$" ;
-self.results.append(result);
-       }
-    | UN QUARTO A MEZZOGIORNO
-      {
-result['type'] = DateEnum.TIMEX_START_TIME;
-result['value'] = "11:45:_" ;
-self.results.append(result);
-result = dict()
-result['type'] = DateEnum.TIMEX_START_TIME;
-result['value'] = "\$morning\$" ;
-self.results.append(result);
-       }
-    | MEZZOGIORNO MENO UN QUARTO
-      {
-result['type'] = DateEnum.TIMEX_START_TIME;
-result['value'] = "11:45:_" ;
-self.results.append(result);
-result = dict()
-result['type'] = DateEnum.TIMEX_START_TIME;
-result['value'] = "\$morning\$" ;
 self.results.append(result);
        }
     | FRA UN LUNEDI
@@ -951,38 +756,6 @@ self.results.append(result);
 result['type'] = DateEnum.TIMEX_YEAR;
 result['value'] = $year_relative.s;
 self.results.append(result);
-            }
-    // per 5 minuti
-    | duration
-      {
-result['type'] = DateEnum.TIMEX_DURATION;
-result['value'] = $duration.s;
-self.results.append(result);
-      }
-    // da 5 minuti fa a fra 5 minuti
-    | DA s=rel_time_start A t=rel_time_start
-      {
-result['type'] = DateEnum.TIMEX_REL_START_TIME;
-result['value'] = $s.s;
-self.results.append(result);
-result = dict()
-result['type'] = DateEnum.TIMEX_END_TIME;
-result['value'] = $t.s;
-self.results.append(result);
-      }
-    // dopo 5 minuti
-    | rel_time_start
-      {
-result['type'] = DateEnum.TIMEX_REL_START_TIME;
-result['value'] = $rel_time_start.s;
-self.results.append(result);
-      }
-    // 5 minuti fa, fra 5 minuti
-    | time_relative
-      {
-result['type'] = DateEnum.TIMEX_START_TIME;
-result['value'] = $time_relative.s;
-self.results.append(result);
       }
     // tutti i giovedi
     | date_repeat
@@ -1009,13 +782,6 @@ result['type'] = DateEnum.TIMEX_DATE;
 result['value'] = $date.s;
 self.results.append(result);
       }
-    // alle 5
-  | time_start
-  {
-result['type'] = DateEnum.TIMEX_START_TIME;
-result['value'] = $time_start.s;
-self.results.append(result);
-  }
     // 2013
     | year
       {
@@ -1344,65 +1110,6 @@ day_absolute returns [String s]
       {$s = "\$weekend\$"; }
     ;
 
-time_relative returns [String s]
-    : ALBA
-          {$s = "\$dawn\$"; }
-    | MATTINO
-          {$s = "\$morning\$"; }
-    | MATTINA
-          {$s = "\$morning\$"; }
-    | DI MATTINA
-          {$s = "\$morning\$"; }
-    | IN MATTINATA
-          {$s = "\$morning\$"; }
-    | MEZZOGIORNO
-          {$s = "\$noon\$"; }
-    | A PRANZO
-            {$s = "\$noon\$"; }
-    | ALL ORA DI PRANZO
-            {$s = "\$noon\$"; }
-    | DOPO MEZZOGIORNO
-          {$s = "\$afternoon\$"; }
-    | POMERIGGIO
-          {$s = "\$afternoon\$"; }
-    | NEL POMERIGGIO
-          {$s = "\$afternoon\$"; }
-    | DOPO PRANZO
-          {$s = "\$afternoon\$"; }
-    | SERA
-          {$s = "\$evening\$"; }
-    | DI SERA
-          {$s = "\$evening\$"; }
-    | IN SERATA
-          {$s = "\$evening\$"; }
-    | A CENA
-          {$s = "\$evening\$"; }
-    | ALL ORA DI CENA
-          {$s = "\$evening\$"; }
-    | MEZZANOTTE
-          {$s = "\$midnight\$"; }
-    | NOTTE
-          {$s = "\$night\$"; }
-    | DI NOTTE
-          {$s = "\$night\$"; }
-    | IN NOTTATA
-          {$s = "\$night\$"; }
-    | ADESSO
-          {$s = "\$now\$"; }
-    | ORA
-          {$s = "\$now\$"; }
-    | QUESTO MOMENTO
-            {$s = "\$now\$"; }
-    | IN QUESTO MOMENTO
-            {$s = "\$now\$"; }
-    | AL MOMENTO
-            {$s = "\$now\$"; }
-    | PROPRIO ADESSO
-            {$s = "\$now\$"; }
-    | PROPRIO ORA
-            {$s = "\$now\$"; }
-    ;
-
 month_relative returns [String s]
     : QUESTO MESE
           {$s = "\$month:0\$"; }
@@ -1651,67 +1358,6 @@ date_repeat returns [String s]
           {$s = "\$yearly\$"; }
     ;
 
-time_start returns [String s]
-    : maybealle maybeore time_number
-      {$s = $time_number.s; }
-    ;
-
-time_number returns [String s]
-    : number INPUNTO
-      {$s = "%02d" % ($number.i) + ":_:_"; }
-    /*
-    TODO this also takes dates if there are no slashes
-    */
-    | a=number b=number
-      {$s = "%02d" % ($a.i) + ":" + "%02d" % ($b.i) + ":_"; }
-    | a=number ':' b=number
-      {$s = "%02d" % ($a.i) + ":" + "%02d" % ($b.i) + ":_"; }
-
-    | a=number E b=number
-      {$s = "%02d" % ($a.i) + ":" + "%02d" % ($b.i) + ":_"; }
-    | a=number MENO b=number
-      {$s = "%02d" % (($b.i+23) % 24) + ":" + "%02d" % ((60-$a.i)) + ":_"; }
-    | number E UN QUARTO
-      {$s = "%02d" % ($number.i) + ":" + 15 + ":_"; }
-    | UN QUARTO DOPO LE number
-      {$s = "%02d" % ($number.i) + ":" + 15 + ":_"; }
-    | number E TRE QUARTI
-      {$s = "%02d" % ($number.i) + ":" + 45 + ":_"; }
-    | UN QUARTO ALLE number
-      {$s = "%02d" % (($number.i+23) % 24) + ":" + 45 + ":_"; }
-    | number MENO UN QUARTO
-      {$s = "%02d" % (($number.i+23) % 24) + ":" + 45 + ":_"; }
-    | number E MEZZO
-      {$s = "%02d" % ($number.i) + ":" + 30 + ":_"; }
-    | threedignum
-      {$s = "%02d" % (($threedignum.i / 100)) + ":" + "%02d" % (($threedignum.i % 100)) + ":_" ; }
-    | ORE timenum
-      {$s = "%02d" % (($timenum.i / 100)) + ":" + "%02d" % (($timenum.i % 100)) + ":_" ; }
-    | timenum
-      {$s = "%02d" % (($timenum.i / 100)) + ":" + "%02d" % (($timenum.i % 100)) + ":_" ; }
-    | number
-      {$s = "%02d" % ($number.i) + ":_:_"; }
-    ;
-
-ampm returns [String s]
-    : DEL MATTINO
-      {$s = "\$am\$"; }
-    | DI MATTINA
-      {$s = "\$am\$"; }
-    | DELLA NOTTE
-      {$s = "\$am\$"; }
-    | DI NOTTE
-      {$s = "\$am\$"; }
-    | DEL POMERIGGIO
-      {$s = "\$pm\$"; }
-    | DI POMERIGGIO
-      {$s = "\$pm\$"; }
-    | DELLA SERA
-      {$s = "\$pm\$"; }
-    | DI SERA
-      {$s = "\$pm\$"; }
-    ;
-
 date returns [String s]
     // 16 novembre
     : number month
@@ -1791,61 +1437,6 @@ month returns [int i]
       {$i = 11; }
     | DICEMBRE
       {$i = 12; }
-    ;
-
-duration returns [String s]
-    : PER timecomponents
-      {$s = $timecomponents.s; }
-    | timecomponents
-      {$s = $timecomponents.s; }
-    ;
-
-timecomponents returns [String s]
-    : a=number ORE b=number MINUTI eand c=number SECONDI
-      {$s = "%02d" % ($a.i) + ":" + "%02d" % ($b.i) + ":" + "%02d" % ($c.i) ; }
-    | a=number ORE eand b=number MINUTI
-      {$s = "%02d" % ($a.i) + ":" + "%02d" % ($b.i) + ":_"; }
-    | a=number ORE eand b=number SECONDI
-      {$s = "%02d" % ($a.i) + ":_:" + "%02d" % ($b.i) ; }
-    | a=number MINUTI eand b=number SECONDI
-      {$s = "_:" + "%02d" % ($a.i) + ":" + "%02d" % ($b.i) ; }
-    | number ORE
-          {$s = "%02d:_:_" % ($number.i) ; }
-    | number ORE E UN QUARTO
-          {$s = "%02d:15:_" % $number.i ; }
-    | number ORE E MEZZO
-          {$s = "%02d:30:_" % $number.i ; }
-    | number ORE E TRE QUARTI
-          {$s = "%02d:45:_" % $number.i ; }
-    | UN ORA E UN QUARTO
-          {$s = "01:15:_" ; }
-    | UN ORA E MEZZO
-          {$s = "01:30:_" ; }
-    | UN ORA E TRE QUARTI
-          {$s = "01:45:_" ; }
-    | UN ORA
-          {$s = "01:_:_" ; }
-    | number MINUTI
-          {$s = "_:%02d:_" % ($number.i) ; }
-    | number SECONDI
-          {$s = "_:_:%02d" % ($number.i) ; }
-    ;
-
-rel_time_start returns [String s]
-    : DOPO timecomponents
-      {$s = "+:" + $timecomponents.s; }
-    | FRA timecomponents
-      {$s = "+:" + $timecomponents.s; }
-    | timecomponents DOPO
-      {$s = "+:" + $timecomponents.s; }
-    | timecomponents DA ADESSO
-      {$s = "+:" + $timecomponents.s; }
-    | timecomponents DA ORA
-      {$s = "+:" + $timecomponents.s; }
-    | timecomponents FA
-      {$s = "-:" + $timecomponents.s; }
-    | timecomponents PRIMA
-      {$s = "-:" + $timecomponents.s; }
     ;
 
 season returns [String s]

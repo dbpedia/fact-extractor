@@ -79,15 +79,6 @@ class DateAndTimeListener(ParseTreeListener):
         pass
 
 
-    # Enter a parse tree produced by DateAndTimeParser#time_relative.
-    def enterTime_relative(self, ctx):
-        pass
-
-    # Exit a parse tree produced by DateAndTimeParser#time_relative.
-    def exitTime_relative(self, ctx):
-        pass
-
-
     # Enter a parse tree produced by DateAndTimeParser#month_relative.
     def enterMonth_relative(self, ctx):
         pass
@@ -139,33 +130,6 @@ class DateAndTimeListener(ParseTreeListener):
 
     # Exit a parse tree produced by DateAndTimeParser#date_repeat.
     def exitDate_repeat(self, ctx):
-        pass
-
-
-    # Enter a parse tree produced by DateAndTimeParser#time_start.
-    def enterTime_start(self, ctx):
-        pass
-
-    # Exit a parse tree produced by DateAndTimeParser#time_start.
-    def exitTime_start(self, ctx):
-        pass
-
-
-    # Enter a parse tree produced by DateAndTimeParser#time_number.
-    def enterTime_number(self, ctx):
-        pass
-
-    # Exit a parse tree produced by DateAndTimeParser#time_number.
-    def exitTime_number(self, ctx):
-        pass
-
-
-    # Enter a parse tree produced by DateAndTimeParser#ampm.
-    def enterAmpm(self, ctx):
-        pass
-
-    # Exit a parse tree produced by DateAndTimeParser#ampm.
-    def exitAmpm(self, ctx):
         pass
 
 
@@ -238,33 +202,6 @@ class DateAndTimeListener(ParseTreeListener):
 
     # Exit a parse tree produced by DateAndTimeParser#month.
     def exitMonth(self, ctx):
-        pass
-
-
-    # Enter a parse tree produced by DateAndTimeParser#duration.
-    def enterDuration(self, ctx):
-        pass
-
-    # Exit a parse tree produced by DateAndTimeParser#duration.
-    def exitDuration(self, ctx):
-        pass
-
-
-    # Enter a parse tree produced by DateAndTimeParser#timecomponents.
-    def enterTimecomponents(self, ctx):
-        pass
-
-    # Exit a parse tree produced by DateAndTimeParser#timecomponents.
-    def exitTimecomponents(self, ctx):
-        pass
-
-
-    # Enter a parse tree produced by DateAndTimeParser#rel_time_start.
-    def enterRel_time_start(self, ctx):
-        pass
-
-    # Exit a parse tree produced by DateAndTimeParser#rel_time_start.
-    def exitRel_time_start(self, ctx):
         pass
 
 
