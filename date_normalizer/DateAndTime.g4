@@ -585,22 +585,22 @@ self.results.append(result);
     | DALLE a=number ALLE b=number
       {
 result['type'] = DateEnum.TIMEX_START_TIME;
-result['value'] = (String.format("%02d",$a.i) + ":_:_") ;
+result['value'] = ("%02d" % ($a.i) + ":_:_") ;
 self.results.append(result);
 result = dict()
 result['type'] = DateEnum.TIMEX_DURATION;
-result['value'] = (String.format("%02d",($b.i-$a.i)) + ":_:_") ;
+result['value'] = ("%02d" % (($b.i-$a.i)) + ":_:_") ;
 self.results.append(result);
        }
     // fra le 3 e le 5
     | FRA LE a=number E LE b=number
       {
 result['type'] = DateEnum.TIMEX_START_TIME;
-result['value'] = (String.format("%02d",$a.i) + ":_:_") ;
+result['value'] = ("%02d" % ($a.i) + ":_:_") ;
 self.results.append(result);
 result = dict()
 result['type'] = DateEnum.TIMEX_DURATION;
-result['value'] = (String.format("%02d",($b.i-$a.i)) + ":_:_") ;
+result['value'] = ("%02d" % (($b.i-$a.i)) + ":_:_") ;
 self.results.append(result);
        }
    | QUESTO POMERIGGIO
@@ -1047,7 +1047,7 @@ self.results.append(result);
     ;
 
 /*
-    BEGIN 
+    BEGIN
     lower level rules
 */
 day_duration returns [String s]
@@ -1102,11 +1102,11 @@ week_duration returns [String s]
     | DURANTE SETTIMANA PROSSIMA
         {$s = "\$week:1\$"; }
     | DURANTE LE PROSSIME number SETTIMANE
-        {$s = "\$week:" + str(str($number.i)) + "\$"; }
+        {$s = "\$week:" + str($number.i) + "\$"; }
     | DURANTE LE number SETTIMANE PROSSIME
-        {$s = "\$week:" + str(str($number.i)) + "\$"; }
+        {$s = "\$week:" + str($number.i) + "\$"; }
     | DURANTE LE number PROSSIME SETTIMANE
-        {$s = "\$week:" + str(str($number.i)) + "\$"; }
+        {$s = "\$week:" + str($number.i) + "\$"; }
     | NEL CORSO DELLA SETTIMANA PROSSIMA
         {$s = "\$week:1\$"; }
     | NEL CORSO DELLA PROSSIMA SETTIMANA
@@ -1114,11 +1114,11 @@ week_duration returns [String s]
     | NEL CORSO DI SETTIMANA PROSSIMA
         {$s = "\$week:1\$"; }
     | NEL CORSO DELLE PROSSIME number SETTIMANE
-        {$s = "\$week:" + str(str($number.i)) + "\$"; }
+        {$s = "\$week:" + str($number.i) + "\$"; }
     | NEL CORSO DELLE number SETTIMANE PROSSIME
-        {$s = "\$week:" + str(str($number.i)) + "\$"; }
+        {$s = "\$week:" + str($number.i) + "\$"; }
     | NEL CORSO DELLE number PROSSIME SETTIMANE
-        {$s = "\$week:" + str(str($number.i)) + "\$"; }
+        {$s = "\$week:" + str($number.i) + "\$"; }
     | PER LA PROSSIMA SETTIMANA
         {$s = "\$week:1\$"; }
     | PER LA SETTIMANA PROSSIMA
@@ -1483,7 +1483,7 @@ week_number returns [String i]
     | QUINTA SETTIMANA
         {$i = '5'; }
     | SETTIMANA number
-        {$i = str(str($number.i)); }
+        {$i = str($number.i); }
     ;
 
 week_relative returns [String s]
@@ -1658,9 +1658,9 @@ time_start returns [String s]
 
 time_number returns [String s]
     : number INPUNTO
-      {$s = String.format("%02d",str($number.i)) + ":_:_"; }
-    /* 
-    TODO this also takes dates if there are no slashes 
+      {$s = "%02d" % ($number.i) + ":_:_"; }
+    /*
+    TODO this also takes dates if there are no slashes
     */
     | a=number b=number
       {$s = "%02d" % ($a.i) + ":" + "%02d" % ($b.i) + ":_"; }
@@ -1672,17 +1672,17 @@ time_number returns [String s]
     | a=number MENO b=number
       {$s = "%02d" % (($b.i+23) % 24) + ":" + "%02d" % ((60-$a.i)) + ":_"; }
     | number E UN QUARTO
-      {$s = "%02d" % (str($number.i)) + ":" + 15 + ":_"; }
+      {$s = "%02d" % ($number.i) + ":" + 15 + ":_"; }
     | UN QUARTO DOPO LE number
-      {$s = "%02d" % (str($number.i)) + ":" + 15 + ":_"; }
+      {$s = "%02d" % ($number.i) + ":" + 15 + ":_"; }
     | number E TRE QUARTI
-      {$s = "%02d" % (str($number.i)) + ":" + 45 + ":_"; }
+      {$s = "%02d" % ($number.i) + ":" + 45 + ":_"; }
     | UN QUARTO ALLE number
-      {$s = "%02d" % ((str($number.i)+23) % 24) + ":" + 45 + ":_"; }
+      {$s = "%02d" % (($number.i+23) % 24) + ":" + 45 + ":_"; }
     | number MENO UN QUARTO
-      {$s = "%02d" % ((str($number.i)+23) % 24) + ":" + 45 + ":_"; }
+      {$s = "%02d" % (($number.i+23) % 24) + ":" + 45 + ":_"; }
     | number E MEZZO
-      {$s = "%02d" % (str($number.i)) + ":" + 30 + ":_"; }
+      {$s = "%02d" % ($number.i) + ":" + 30 + ":_"; }
     | threedignum
       {$s = "%02d" % (($threedignum.i / 100)) + ":" + "%02d" % (($threedignum.i % 100)) + ":_" ; }
     | ORE timenum
@@ -1690,7 +1690,7 @@ time_number returns [String s]
     | timenum
       {$s = "%02d" % (($timenum.i / 100)) + ":" + "%02d" % (($timenum.i % 100)) + ":_" ; }
     | number
-      {$s = String.format("%02d",str($number.i)) + ":_:_"; }
+      {$s = "%02d" % ($number.i) + ":_:_"; }
     ;
 
 ampm returns [String s]
@@ -1715,7 +1715,7 @@ ampm returns [String s]
 date returns [String s]
     // 16 novembre
     : number month
-      {$s = "%02d" % ($month.i) + ":" + "%02d" % (str($number.i)); }
+      {$s = "%02d" % ($month.i) + ":" + "%02d" % ($number.i); }
     // primo novembre
     | PRIMO month
     {$s = "%02d" % ($month.i) + ":01"; }
@@ -1724,10 +1724,10 @@ date returns [String s]
   {$s = "%02d" % ($b.i) + ":" + "%02d" % ($a.i); }
     // 16 di gennaio
   | number maybedi month
-  {$s = "%02d" % ($month.i) + ":" + "%02d" % (str($number.i)); }
+  {$s = "%02d" % ($month.i) + ":" + "%02d" % ($number.i); }
     // 16 di questo mese
     | number maybedi QUESTO MESE
-      {$s = "_:" + "%02d" % (str($number.i)); }
+      {$s = "_:" + "%02d" % ($number.i); }
     // novembre
   | month
   {$s = "%02d" % ($month.i) + ":_"; }
@@ -1750,12 +1750,12 @@ maybethe
     :
     | IL
     ;
-    
+
 eand
     :
     | E
     ;
-    
+
 maybealle
     :
     | ALLE
@@ -1810,13 +1810,13 @@ timecomponents returns [String s]
     | a=number MINUTI eand b=number SECONDI
       {$s = "_:" + "%02d" % ($a.i) + ":" + "%02d" % ($b.i) ; }
     | number ORE
-          {$s = "%02d:_:_" % (str($number.i)) ; }
+          {$s = "%02d:_:_" % ($number.i) ; }
     | number ORE E UN QUARTO
-          {$s = String.format("%02d:" + 15 + ":_", str($number.i)) ; }
+          {$s = "%02d:15:_" % $number.i ; }
     | number ORE E MEZZO
-          {$s = String.format("%02d:" + 30 + ":_", str($number.i)) ; }
+          {$s = "%02d:30:_" % $number.i ; }
     | number ORE E TRE QUARTI
-          {$s = String.format("%02d:" + 45 + ":_", str($number.i)) ; }
+          {$s = "%02d:45:_" % $number.i ; }
     | UN ORA E UN QUARTO
           {$s = "01:15:_" ; }
     | UN ORA E MEZZO
@@ -1826,9 +1826,9 @@ timecomponents returns [String s]
     | UN ORA
           {$s = "01:_:_" ; }
     | number MINUTI
-          {$s = "_:%02d:_" % (str($number.i)) ; }
+          {$s = "_:%02d:_" % ($number.i) ; }
     | number SECONDI
-          {$s = "_:_:%02d" % (str($number.i)) ; }
+          {$s = "_:_:%02d" % ($number.i) ; }
     ;
 
 rel_time_start returns [String s]

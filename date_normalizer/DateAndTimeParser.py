@@ -1214,78 +1214,78 @@ class DateAndTimeParser ( Parser ):
 
     sharedContextCache = PredictionContextCache()
 
-    literalNames = [ u"<INVALID>", u"':'", u"'a'", u"'adesso'", u"<INVALID>", 
-                     u"'al'", u"'all'", u"'alle'", u"'alba'", u"'anni'", 
-                     u"'anno'", u"'annualmente'", u"<INVALID>", u"'autunno'", 
-                     u"'bisettimanalmente'", u"'cena'", u"'corso'", u"'dalle'", 
-                     u"'da'", u"'dal'", u"'degli'", u"'dei'", u"'del'", 
-                     u"'dell'", u"'della'", u"'delle'", u"'di'", u"<INVALID>", 
-                     u"'domani'", u"<INVALID>", u"<INVALID>", u"'dopo'", 
-                     u"'dopodomani'", u"<INVALID>", u"'durante'", u"'e'", 
-                     u"'end'", u"'entro'", u"'estate'", u"'fa'", u"<INVALID>", 
-                     u"'ferragosto'", u"'fine'", u"<INVALID>", u"<INVALID>", 
-                     u"'giornalmente'", u"'giorni'", u"'giorno'", u"<INVALID>", 
-                     u"<INVALID>", u"'gli'", u"'ieri'", u"'i'", u"<INVALID>", 
-                     u"'il'", u"'in'", u"'in punto'", u"'inverno'", u"'l'", 
-                     u"'altro ieri'", u"'indomani'", u"'la'", u"'le'", u"'lo'", 
-                     u"<INVALID>", u"<INVALID>", u"<INVALID>", u"<INVALID>", 
-                     u"'marzo'", u"'mattina'", u"'mattinata'", u"'mattino'", 
-                     u"'meno'", u"'mensilmente'", u"<INVALID>", u"'mese'", 
-                     u"'mesi'", u"'mezzanotte'", u"<INVALID>", u"'mezzogiorno'", 
-                     u"'minuti'", u"'minuto'", u"'momento'", u"'natale'", 
-                     u"'nel'", u"'nottata'", u"'notte'", u"<INVALID>", u"<INVALID>", 
-                     u"'oggi'", u"'ogni'", u"'ora'", u"'ore'", u"<INVALID>", 
-                     u"'pasqua'", u"'passate'", u"'passati'", u"'pranzo'", 
-                     u"'precedente'", u"'precedenti'", u"'per'", u"'piu'", 
-                     u"'pomeriggio'", u"'prima'", u"'primavera'", u"'primo'", 
-                     u"'proprio'", u"'prossima'", u"'prossime'", u"'prossimi'", 
-                     u"'prossimo'", u"'quarta'", u"'quarti'", u"'quarto'", 
-                     u"<INVALID>", u"'quest'", u"'questa'", u"'questo'", 
-                     u"'questi'", u"'quinta'", u"'quinto'", u"'quotidianamente'", 
-                     u"<INVALID>", u"<INVALID>", u"'san valentino'", u"'scorsa'", 
-                     u"'scorse'", u"'scorsi'", u"'scorso'", u"'seconda'", 
-                     u"'secondi'", u"'secondo'", u"'sera'", u"'serata'", 
-                     u"<INVALID>", u"'settimana'", u"'settimanalmente'", 
-                     u"'settimane'", u"'stagione'", u"'stagionei'", u"'stanotte'", 
-                     u"'stasera'", u"'tardi'", u"'terza'", u"'terzo'", u"<INVALID>", 
-                     u"'trimestre'", u"'trimestralmente'", u"'tutte'", u"'tutti'", 
-                     u"'ultima'", u"<INVALID>", u"'ultimo'", u"'un'", u"'una'", 
-                     u"<INVALID>", u"'ventura'", u"'venturo'", u"'volte'", 
+    literalNames = [ u"<INVALID>", u"':'", u"'a'", u"'adesso'", u"<INVALID>",
+                     u"'al'", u"'all'", u"'alle'", u"'alba'", u"'anni'",
+                     u"'anno'", u"'annualmente'", u"<INVALID>", u"'autunno'",
+                     u"'bisettimanalmente'", u"'cena'", u"'corso'", u"'dalle'",
+                     u"'da'", u"'dal'", u"'degli'", u"'dei'", u"'del'",
+                     u"'dell'", u"'della'", u"'delle'", u"'di'", u"<INVALID>",
+                     u"'domani'", u"<INVALID>", u"<INVALID>", u"'dopo'",
+                     u"'dopodomani'", u"<INVALID>", u"'durante'", u"'e'",
+                     u"'end'", u"'entro'", u"'estate'", u"'fa'", u"<INVALID>",
+                     u"'ferragosto'", u"'fine'", u"<INVALID>", u"<INVALID>",
+                     u"'giornalmente'", u"'giorni'", u"'giorno'", u"<INVALID>",
+                     u"<INVALID>", u"'gli'", u"'ieri'", u"'i'", u"<INVALID>",
+                     u"'il'", u"'in'", u"'in punto'", u"'inverno'", u"'l'",
+                     u"'altro ieri'", u"'indomani'", u"'la'", u"'le'", u"'lo'",
+                     u"<INVALID>", u"<INVALID>", u"<INVALID>", u"<INVALID>",
+                     u"'marzo'", u"'mattina'", u"'mattinata'", u"'mattino'",
+                     u"'meno'", u"'mensilmente'", u"<INVALID>", u"'mese'",
+                     u"'mesi'", u"'mezzanotte'", u"<INVALID>", u"'mezzogiorno'",
+                     u"'minuti'", u"'minuto'", u"'momento'", u"'natale'",
+                     u"'nel'", u"'nottata'", u"'notte'", u"<INVALID>", u"<INVALID>",
+                     u"'oggi'", u"'ogni'", u"'ora'", u"'ore'", u"<INVALID>",
+                     u"'pasqua'", u"'passate'", u"'passati'", u"'pranzo'",
+                     u"'precedente'", u"'precedenti'", u"'per'", u"'piu'",
+                     u"'pomeriggio'", u"'prima'", u"'primavera'", u"'primo'",
+                     u"'proprio'", u"'prossima'", u"'prossime'", u"'prossimi'",
+                     u"'prossimo'", u"'quarta'", u"'quarti'", u"'quarto'",
+                     u"<INVALID>", u"'quest'", u"'questa'", u"'questo'",
+                     u"'questi'", u"'quinta'", u"'quinto'", u"'quotidianamente'",
+                     u"<INVALID>", u"<INVALID>", u"'san valentino'", u"'scorsa'",
+                     u"'scorse'", u"'scorsi'", u"'scorso'", u"'seconda'",
+                     u"'secondi'", u"'secondo'", u"'sera'", u"'serata'",
+                     u"<INVALID>", u"'settimana'", u"'settimanalmente'",
+                     u"'settimane'", u"'stagione'", u"'stagionei'", u"'stanotte'",
+                     u"'stasera'", u"'tardi'", u"'terza'", u"'terzo'", u"<INVALID>",
+                     u"'trimestre'", u"'trimestralmente'", u"'tutte'", u"'tutti'",
+                     u"'ultima'", u"<INVALID>", u"'ultimo'", u"'un'", u"'una'",
+                     u"<INVALID>", u"'ventura'", u"'venturo'", u"'volte'",
                      u"'week'", u"'weekend'", u"<INVALID>", u"'/'" ]
 
-    symbolicNames = [ u"<INVALID>", u"<INVALID>", u"A", u"ADESSO", u"AGOSTO", 
-                      u"AL", u"ALL", u"ALLE", u"ALBA", u"ANNI", u"ANNO", 
-                      u"ANNUALMENTE", u"APRILE", u"AUTUNNO", u"BISETTIMANALMENTE", 
-                      u"CENA", u"CORSO", u"DALLE", u"DA", u"DAL", u"DEGLI", 
-                      u"DEI", u"DEL", u"DELL", u"DELLA", u"DELLE", u"DI", 
-                      u"DICEMBRE", u"DOMANI", u"DOMENICA", u"DOMENICHE", 
-                      u"DOPO", u"DOPODOMANI", u"DUE", u"DURANTE", u"E", 
-                      u"END", u"ENTRO", u"ESTATE", u"FA", u"FEBBRAIO", u"FERRAGOSTO", 
-                      u"FINE", u"FRA", u"GENNAIO", u"GIORNALMENTE", u"GIORNI", 
-                      u"GIORNO", u"GIOVEDI", u"GIUGNO", u"GLI", u"IERI", 
-                      u"I", u"IERLALTRO", u"IL", u"IN", u"INPUNTO", u"INVERNO", 
-                      u"L", u"ALTROIERI", u"INDOMANI", u"LA", u"LE", u"LO", 
-                      u"LUGLIO", u"LUNEDI", u"MAGGIO", u"MARTEDI", u"MARZO", 
-                      u"MATTINA", u"MATTINATA", u"MATTINO", u"MENO", u"MENSILMENTE", 
-                      u"MERCOLEDI", u"MESE", u"MESI", u"MEZZANOTTE", u"MEZZO", 
-                      u"MEZZOGIORNO", u"MINUTI", u"MINUTO", u"MOMENTO", 
-                      u"NATALE", u"NEL", u"NOTTATA", u"NOTTE", u"NOVEMBRE", 
-                      u"NUMBER", u"OGGI", u"OGNI", u"ORA", u"ORE", u"OTTOBRE", 
-                      u"PASQUA", u"PASSATE", u"PASSATI", u"PRANZO", u"PRECEDENTE", 
-                      u"PRECEDENTI", u"PER", u"PIU", u"POMERIGGIO", u"PRIMA", 
-                      u"PRIMAVERA", u"PRIMO", u"PROPRIO", u"PROSSIMA", u"PROSSIME", 
-                      u"PROSSIMI", u"PROSSIMO", u"QUARTA", u"QUARTI", u"QUARTO", 
-                      u"QUATTRO", u"QUEST", u"QUESTA", u"QUESTO", u"QUESTI", 
-                      u"QUINTA", u"QUINTO", u"QUOTIDIANAMENTE", u"SABATO", 
-                      u"SABATI", u"SANVALENTINO", u"SCORSA", u"SCORSE", 
-                      u"SCORSI", u"SCORSO", u"SECONDA", u"SECONDI", u"SECONDO", 
-                      u"SERA", u"SERATA", u"SETTEMBRE", u"SETTIMANA", u"SETTIMANALMENTE", 
-                      u"SETTIMANE", u"STAGIONE", u"STAGIONI", u"STANOTTE", 
-                      u"STASERA", u"TARDI", u"TERZA", u"TERZO", u"TRE", 
-                      u"TRIMESTRE", u"TRIMESTRALMENTE", u"TUTTE", u"TUTTI", 
-                      u"ULTIMA", u"ULTIMI", u"ULTIMO", u"UN", u"UNA", u"VENERDI", 
-                      u"VENTURA", u"VENTURO", u"VOLTE", u"WEEK", u"WEEKEND", 
-                      u"WS", u"SLASH", u"THREEDIGNUM", u"TIMENUM", u"YEARNUM", 
+    symbolicNames = [ u"<INVALID>", u"<INVALID>", u"A", u"ADESSO", u"AGOSTO",
+                      u"AL", u"ALL", u"ALLE", u"ALBA", u"ANNI", u"ANNO",
+                      u"ANNUALMENTE", u"APRILE", u"AUTUNNO", u"BISETTIMANALMENTE",
+                      u"CENA", u"CORSO", u"DALLE", u"DA", u"DAL", u"DEGLI",
+                      u"DEI", u"DEL", u"DELL", u"DELLA", u"DELLE", u"DI",
+                      u"DICEMBRE", u"DOMANI", u"DOMENICA", u"DOMENICHE",
+                      u"DOPO", u"DOPODOMANI", u"DUE", u"DURANTE", u"E",
+                      u"END", u"ENTRO", u"ESTATE", u"FA", u"FEBBRAIO", u"FERRAGOSTO",
+                      u"FINE", u"FRA", u"GENNAIO", u"GIORNALMENTE", u"GIORNI",
+                      u"GIORNO", u"GIOVEDI", u"GIUGNO", u"GLI", u"IERI",
+                      u"I", u"IERLALTRO", u"IL", u"IN", u"INPUNTO", u"INVERNO",
+                      u"L", u"ALTROIERI", u"INDOMANI", u"LA", u"LE", u"LO",
+                      u"LUGLIO", u"LUNEDI", u"MAGGIO", u"MARTEDI", u"MARZO",
+                      u"MATTINA", u"MATTINATA", u"MATTINO", u"MENO", u"MENSILMENTE",
+                      u"MERCOLEDI", u"MESE", u"MESI", u"MEZZANOTTE", u"MEZZO",
+                      u"MEZZOGIORNO", u"MINUTI", u"MINUTO", u"MOMENTO",
+                      u"NATALE", u"NEL", u"NOTTATA", u"NOTTE", u"NOVEMBRE",
+                      u"NUMBER", u"OGGI", u"OGNI", u"ORA", u"ORE", u"OTTOBRE",
+                      u"PASQUA", u"PASSATE", u"PASSATI", u"PRANZO", u"PRECEDENTE",
+                      u"PRECEDENTI", u"PER", u"PIU", u"POMERIGGIO", u"PRIMA",
+                      u"PRIMAVERA", u"PRIMO", u"PROPRIO", u"PROSSIMA", u"PROSSIME",
+                      u"PROSSIMI", u"PROSSIMO", u"QUARTA", u"QUARTI", u"QUARTO",
+                      u"QUATTRO", u"QUEST", u"QUESTA", u"QUESTO", u"QUESTI",
+                      u"QUINTA", u"QUINTO", u"QUOTIDIANAMENTE", u"SABATO",
+                      u"SABATI", u"SANVALENTINO", u"SCORSA", u"SCORSE",
+                      u"SCORSI", u"SCORSO", u"SECONDA", u"SECONDI", u"SECONDO",
+                      u"SERA", u"SERATA", u"SETTEMBRE", u"SETTIMANA", u"SETTIMANALMENTE",
+                      u"SETTIMANE", u"STAGIONE", u"STAGIONI", u"STANOTTE",
+                      u"STASERA", u"TARDI", u"TERZA", u"TERZO", u"TRE",
+                      u"TRIMESTRE", u"TRIMESTRALMENTE", u"TUTTE", u"TUTTI",
+                      u"ULTIMA", u"ULTIMI", u"ULTIMO", u"UN", u"UNA", u"VENERDI",
+                      u"VENTURA", u"VENTURO", u"VOLTE", u"WEEK", u"WEEKEND",
+                      u"WS", u"SLASH", u"THREEDIGNUM", u"TIMENUM", u"YEARNUM",
                       u"YEAR19", u"YEAR20" ]
 
     RULE_value = 0
@@ -1325,15 +1325,15 @@ class DateAndTimeParser ( Parser ):
     RULE_yearnum = 34
     RULE_timenum = 35
 
-    ruleNames =  [ u"value", u"date_or_time", u"day_duration", u"week_duration", 
-                   u"month_duration", u"year_duration", u"day_relative", 
-                   u"day_absolute", u"time_relative", u"month_relative", 
-                   u"year_relative", u"week_number", u"week_relative", u"year", 
-                   u"date_repeat", u"time_start", u"time_number", u"ampm", 
-                   u"date", u"maybesettimana", u"maybedi", u"maybethe", 
-                   u"eand", u"maybealle", u"maybeore", u"month", u"duration", 
-                   u"timecomponents", u"rel_time_start", u"season", u"holiday", 
-                   u"season_relative", u"number", u"threedignum", u"yearnum", 
+    ruleNames =  [ u"value", u"date_or_time", u"day_duration", u"week_duration",
+                   u"month_duration", u"year_duration", u"day_relative",
+                   u"day_absolute", u"time_relative", u"month_relative",
+                   u"year_relative", u"week_number", u"week_relative", u"year",
+                   u"date_repeat", u"time_start", u"time_number", u"ampm",
+                   u"date", u"maybesettimana", u"maybedi", u"maybethe",
+                   u"eand", u"maybealle", u"maybeore", u"month", u"duration",
+                   u"timecomponents", u"rel_time_start", u"season", u"holiday",
+                   u"season_relative", u"number", u"threedignum", u"yearnum",
                    u"timenum" ]
 
     EOF = Token.EOF
@@ -1551,7 +1551,7 @@ class DateAndTimeParser ( Parser ):
         localctx = DateAndTimeParser.ValueContext(self, self._ctx, self.state)
         self.enterRule(localctx, 0, self.RULE_value)
 
-            
+
         self._la = 0 # Token type
         try:
             self.enterOuterAlt(localctx, 1)
@@ -1933,7 +1933,7 @@ class DateAndTimeParser ( Parser ):
         self.enterRule(localctx, 2, self.RULE_date_or_time)
 
         result = dict()
-            
+
         try:
             self.state = 506
             la_ = self._interp.adaptivePredict(self._input,1,self._ctx)
@@ -1945,7 +1945,7 @@ class DateAndTimeParser ( Parser ):
                 result['type'] = DateEnum.TIMEX_DATE_DURATION;
                 result['value'] = localctx._day_duration.s;
                 self.results.append(result);
-                        
+
                 pass
 
             elif la_ == 2:
@@ -1956,7 +1956,7 @@ class DateAndTimeParser ( Parser ):
                 result['type'] = DateEnum.TIMEX_DATE_DURATION;
                 result['value'] = localctx._week_duration.s;
                 self.results.append(result);
-                        
+
                 pass
 
             elif la_ == 3:
@@ -1967,7 +1967,7 @@ class DateAndTimeParser ( Parser ):
                 result['type'] = DateEnum.TIMEX_DATE_DURATION;
                 result['value'] = localctx._month_duration.s;
                 self.results.append(result);
-                        
+
                 pass
 
             elif la_ == 4:
@@ -1978,7 +1978,7 @@ class DateAndTimeParser ( Parser ):
                 result['type'] = DateEnum.TIMEX_DATE_DURATION;
                 result['value'] = localctx._year_duration.s;
                 self.results.append(result);
-                        
+
                 pass
 
             elif la_ == 5:
@@ -2003,7 +2003,7 @@ class DateAndTimeParser ( Parser ):
                 result['type'] = DateEnum.TIMEX_WEEKDAY;
                 result['value'] = localctx._day_absolute.s;
                 self.results.append(result);
-                       
+
                 pass
 
             elif la_ == 6:
@@ -2028,7 +2028,7 @@ class DateAndTimeParser ( Parser ):
                 result['type'] = DateEnum.TIMEX_WEEKDAY;
                 result['value'] = localctx._day_absolute.s;
                 self.results.append(result);
-                          
+
                 pass
 
             elif la_ == 7:
@@ -2053,7 +2053,7 @@ class DateAndTimeParser ( Parser ):
                 result['type'] = DateEnum.TIMEX_WEEKDAY;
                 result['value'] = localctx._day_absolute.s;
                 self.results.append(result);
-                          
+
                 pass
 
             elif la_ == 8:
@@ -2078,7 +2078,7 @@ class DateAndTimeParser ( Parser ):
                 result['type'] = DateEnum.TIMEX_WEEKDAY;
                 result['value'] = localctx._day_absolute.s;
                 self.results.append(result);
-                          
+
                 pass
 
             elif la_ == 9:
@@ -2103,7 +2103,7 @@ class DateAndTimeParser ( Parser ):
                 result['type'] = DateEnum.TIMEX_WEEKDAY;
                 result['value'] = localctx._day_absolute.s;
                 self.results.append(result);
-                          
+
                 pass
 
             elif la_ == 10:
@@ -2128,7 +2128,7 @@ class DateAndTimeParser ( Parser ):
                 result['type'] = DateEnum.TIMEX_WEEKDAY;
                 result['value'] = localctx._day_absolute.s;
                 self.results.append(result);
-                          
+
                 pass
 
             elif la_ == 11:
@@ -2153,7 +2153,7 @@ class DateAndTimeParser ( Parser ):
                 result['type'] = DateEnum.TIMEX_WEEKDAY;
                 result['value'] = "$sunday$";
                 self.results.append(result);
-                        
+
                 pass
 
             elif la_ == 12:
@@ -2178,7 +2178,7 @@ class DateAndTimeParser ( Parser ):
                 result['type'] = DateEnum.TIMEX_WEEKDAY;
                 result['value'] = "$sunday$";
                 self.results.append(result);
-                        
+
                 pass
 
             elif la_ == 13:
@@ -2203,7 +2203,7 @@ class DateAndTimeParser ( Parser ):
                 result['type'] = DateEnum.TIMEX_WEEKDAY;
                 result['value'] = "$sunday$";
                 self.results.append(result);
-                        
+
                 pass
 
             elif la_ == 14:
@@ -2228,7 +2228,7 @@ class DateAndTimeParser ( Parser ):
                 result['type'] = DateEnum.TIMEX_WEEKDAY;
                 result['value'] = "$sunday$";
                 self.results.append(result);
-                        
+
                 pass
 
             elif la_ == 15:
@@ -2253,7 +2253,7 @@ class DateAndTimeParser ( Parser ):
                 result['type'] = DateEnum.TIMEX_WEEKDAY;
                 result['value'] = "$sunday$";
                 self.results.append(result);
-                        
+
                 pass
 
             elif la_ == 16:
@@ -2278,7 +2278,7 @@ class DateAndTimeParser ( Parser ):
                 result['type'] = DateEnum.TIMEX_WEEKDAY;
                 result['value'] = "$sunday$";
                 self.results.append(result);
-                        
+
                 pass
 
             elif la_ == 17:
@@ -2299,7 +2299,7 @@ class DateAndTimeParser ( Parser ):
                 result['type'] = DateEnum.TIMEX_DATE;
                 result['value'] = "%02d" % (localctx._month.i) + ":_";
                 self.results.append(result);
-                       
+
                 pass
 
             elif la_ == 18:
@@ -2320,7 +2320,7 @@ class DateAndTimeParser ( Parser ):
                 result['type'] = DateEnum.TIMEX_DATE;
                 result['value'] = "%02d" % (localctx._month.i) + ":_";
                 self.results.append(result);
-                        
+
                 pass
 
             elif la_ == 19:
@@ -2341,7 +2341,7 @@ class DateAndTimeParser ( Parser ):
                 result['type'] = DateEnum.TIMEX_DATE;
                 result['value'] = "%02d" % (localctx._month.i) + ":_";
                 self.results.append(result);
-                          
+
                 pass
 
             elif la_ == 20:
@@ -2362,7 +2362,7 @@ class DateAndTimeParser ( Parser ):
                 result['type'] = DateEnum.TIMEX_DATE;
                 result['value'] = "%02d" % (localctx._month.i) + ":_";
                 self.results.append(result);
-                          
+
                 pass
 
             elif la_ == 21:
@@ -2383,7 +2383,7 @@ class DateAndTimeParser ( Parser ):
                 result['type'] = DateEnum.TIMEX_DATE;
                 result['value'] = "%02d" % (localctx._month.i) + ":_";
                 self.results.append(result);
-                          
+
                 pass
 
             elif la_ == 22:
@@ -2404,7 +2404,7 @@ class DateAndTimeParser ( Parser ):
                 result['type'] = DateEnum.TIMEX_DATE;
                 result['value'] = "%02d" % (localctx._month.i) + ":_";
                 self.results.append(result);
-                          
+
                 pass
 
             elif la_ == 23:
@@ -2415,7 +2415,7 @@ class DateAndTimeParser ( Parser ):
                 result['type'] = DateEnum.TIMEX_WEEK;
                 result['value'] = "%d" % (localctx._week_number.i);
                 self.results.append(result);
-                        
+
                 pass
 
             elif la_ == 24:
@@ -2432,7 +2432,7 @@ class DateAndTimeParser ( Parser ):
                 result['type'] = DateEnum.TIMEX_WEEKDAY;
                 result['value'] = localctx._day_absolute.s;
                 self.results.append(result);
-                        
+
                 pass
 
             elif la_ == 25:
@@ -2449,7 +2449,7 @@ class DateAndTimeParser ( Parser ):
                 result['type'] = DateEnum.TIMEX_WEEKDAY;
                 result['value'] = localctx._day_absolute.s;
                 self.results.append(result);
-                       
+
                 pass
 
             elif la_ == 26:
@@ -2466,7 +2466,7 @@ class DateAndTimeParser ( Parser ):
                 result['type'] = DateEnum.TIMEX_WEEKDAY;
                 result['value'] = "$sunday$";
                 self.results.append(result);
-                       
+
                 pass
 
             elif la_ == 27:
@@ -2483,7 +2483,7 @@ class DateAndTimeParser ( Parser ):
                 result['type'] = DateEnum.TIMEX_WEEKDAY;
                 result['value'] = localctx._day_absolute.s;
                 self.results.append(result);
-                       
+
                 pass
 
             elif la_ == 28:
@@ -2500,7 +2500,7 @@ class DateAndTimeParser ( Parser ):
                 result['type'] = DateEnum.TIMEX_WEEKDAY;
                 result['value'] = localctx._day_absolute.s;
                 self.results.append(result);
-                        
+
                 pass
 
             elif la_ == 29:
@@ -2517,7 +2517,7 @@ class DateAndTimeParser ( Parser ):
                 result['type'] = DateEnum.TIMEX_WEEKDAY;
                 result['value'] = localctx._day_absolute.s;
                 self.results.append(result);
-                       
+
                 pass
 
             elif la_ == 30:
@@ -2534,7 +2534,7 @@ class DateAndTimeParser ( Parser ):
                 result['type'] = DateEnum.TIMEX_WEEKDAY;
                 result['value'] = localctx._day_absolute.s;
                 self.results.append(result);
-                       
+
                 pass
 
             elif la_ == 31:
@@ -2551,7 +2551,7 @@ class DateAndTimeParser ( Parser ):
                 result['type'] = DateEnum.TIMEX_START_TIME;
                 result['value'] = "$morning$";
                 self.results.append(result);
-                     
+
                 pass
 
             elif la_ == 32:
@@ -2568,7 +2568,7 @@ class DateAndTimeParser ( Parser ):
                 result['type'] = DateEnum.TIMEX_START_TIME;
                 result['value'] = "$morning$";
                 self.results.append(result);
-                     
+
                 pass
 
             elif la_ == 33:
@@ -2585,7 +2585,7 @@ class DateAndTimeParser ( Parser ):
                 result['type'] = DateEnum.TIMEX_DATE;
                 result['value'] = "%02d" % (localctx._month.i) + ":_" ;
                 self.results.append(result);
-                        
+
                 pass
 
             elif la_ == 34:
@@ -2602,7 +2602,7 @@ class DateAndTimeParser ( Parser ):
                 result['type'] = DateEnum.TIMEX_DATE;
                 result['value'] = "%02d" % (localctx._month.i) + ":_" ;
                 self.results.append(result);
-                       
+
                 pass
 
             elif la_ == 35:
@@ -2619,7 +2619,7 @@ class DateAndTimeParser ( Parser ):
                 result['type'] = DateEnum.TIMEX_DATE;
                 result['value'] = "%02d" % (localctx._month.i) + ":_" ;
                 self.results.append(result);
-                       
+
                 pass
 
             elif la_ == 36:
@@ -2636,7 +2636,7 @@ class DateAndTimeParser ( Parser ):
                 result['type'] = DateEnum.TIMEX_DATE;
                 result['value'] = "%02d" % (localctx._month.i) + ":_" ;
                 self.results.append(result);
-                        
+
                 pass
 
             elif la_ == 37:
@@ -2653,7 +2653,7 @@ class DateAndTimeParser ( Parser ):
                 result['type'] = DateEnum.TIMEX_DATE;
                 result['value'] = "%02d" % (localctx._month.i) + ":_" ;
                 self.results.append(result);
-                        
+
                 pass
 
             elif la_ == 38:
@@ -2672,7 +2672,7 @@ class DateAndTimeParser ( Parser ):
                 result['type'] = DateEnum.TIMEX_YEAR;
                 result['value'] = (None if localctx._YEARNUM is None else localctx._YEARNUM.text);
                 self.results.append(result);
-                    
+
                 pass
 
             elif la_ == 39:
@@ -2689,7 +2689,7 @@ class DateAndTimeParser ( Parser ):
                 result['type'] = DateEnum.TIMEX_YEAR;
                 result['value'] = (None if localctx._YEARNUM is None else localctx._YEARNUM.text);
                 self.results.append(result);
-                    
+
                 pass
 
             elif la_ == 40:
@@ -2706,7 +2706,7 @@ class DateAndTimeParser ( Parser ):
                 result['type'] = DateEnum.TIMEX_DURATION;
                 result['value'] = localctx._timecomponents.s;
                 self.results.append(result);
-                       
+
                 pass
 
             elif la_ == 41:
@@ -2723,7 +2723,7 @@ class DateAndTimeParser ( Parser ):
                 result['type'] = DateEnum.TIMEX_DURATION;
                 result['value'] = localctx._timecomponents.s;
                 self.results.append(result);
-                       
+
                 pass
 
             elif la_ == 42:
@@ -2740,7 +2740,7 @@ class DateAndTimeParser ( Parser ):
                 result['type'] = DateEnum.TIMEX_DURATION;
                 result['value'] = localctx._timecomponents.s;
                 self.results.append(result);
-                       
+
                 pass
 
             elif la_ == 43:
@@ -2757,7 +2757,7 @@ class DateAndTimeParser ( Parser ):
                 result['type'] = DateEnum.TIMEX_DURATION;
                 result['value'] = localctx._timecomponents.s;
                 self.results.append(result);
-                       
+
                 pass
 
             elif la_ == 44:
@@ -2774,7 +2774,7 @@ class DateAndTimeParser ( Parser ):
                 result['type'] = DateEnum.TIMEX_DURATION;
                 result['value'] = localctx._timecomponents.s;
                 self.results.append(result);
-                       
+
                 pass
 
             elif la_ == 45:
@@ -2791,7 +2791,7 @@ class DateAndTimeParser ( Parser ):
                 result['type'] = DateEnum.TIMEX_DURATION;
                 result['value'] = localctx._timecomponents.s;
                 self.results.append(result);
-                        
+
                 pass
 
             elif la_ == 46:
@@ -2808,7 +2808,7 @@ class DateAndTimeParser ( Parser ):
                 result['type'] = DateEnum.TIMEX_DURATION;
                 result['value'] = "01:_:_" ;
                 self.results.append(result);
-                       
+
                 pass
 
             elif la_ == 47:
@@ -2825,7 +2825,7 @@ class DateAndTimeParser ( Parser ):
                 result['type'] = DateEnum.TIMEX_DURATION;
                 result['value'] = "_:01:_" ;
                 self.results.append(result);
-                       
+
                 pass
 
             elif la_ == 48:
@@ -2842,7 +2842,7 @@ class DateAndTimeParser ( Parser ):
                 result['type'] = DateEnum.TIMEX_DURATION;
                 result['value'] = "_:_:01" ;
                 self.results.append(result);
-                       
+
                 pass
 
             elif la_ == 49:
@@ -2857,13 +2857,13 @@ class DateAndTimeParser ( Parser ):
                 localctx.b = self.number()
 
                 result['type'] = DateEnum.TIMEX_START_TIME;
-                result['value'] = (String.format("%02d",localctx.a.i) + ":_:_") ;
+                result['value'] = ("%02d" % (localctx.a.i) + ":_:_") ;
                 self.results.append(result);
                 result = dict()
                 result['type'] = DateEnum.TIMEX_DURATION;
-                result['value'] = (String.format("%02d",(localctx.b.i-localctx.a.i)) + ":_:_") ;
+                result['value'] = ("%02d" % ((localctx.b.i-localctx.a.i)) + ":_:_") ;
                 self.results.append(result);
-                       
+
                 pass
 
             elif la_ == 50:
@@ -2882,13 +2882,13 @@ class DateAndTimeParser ( Parser ):
                 localctx.b = self.number()
 
                 result['type'] = DateEnum.TIMEX_START_TIME;
-                result['value'] = (String.format("%02d",localctx.a.i) + ":_:_") ;
+                result['value'] = ("%02d" % (localctx.a.i) + ":_:_") ;
                 self.results.append(result);
                 result = dict()
                 result['type'] = DateEnum.TIMEX_DURATION;
-                result['value'] = (String.format("%02d",(localctx.b.i-localctx.a.i)) + ":_:_") ;
+                result['value'] = ("%02d" % ((localctx.b.i-localctx.a.i)) + ":_:_") ;
                 self.results.append(result);
-                       
+
                 pass
 
             elif la_ == 51:
@@ -2905,7 +2905,7 @@ class DateAndTimeParser ( Parser ):
                 result['type'] = DateEnum.TIMEX_START_TIME;
                 result['value'] = "$afternoon$" ;
                 self.results.append(result);
-                      
+
                 pass
 
             elif la_ == 52:
@@ -2920,7 +2920,7 @@ class DateAndTimeParser ( Parser ):
                 result['type'] = DateEnum.TIMEX_START_TIME;
                 result['value'] = "$evening$" ;
                 self.results.append(result);
-                      
+
                 pass
 
             elif la_ == 53:
@@ -2935,7 +2935,7 @@ class DateAndTimeParser ( Parser ):
                 result['type'] = DateEnum.TIMEX_START_TIME;
                 result['value'] = "$night$" ;
                 self.results.append(result);
-                     
+
                 pass
 
             elif la_ == 54:
@@ -2954,7 +2954,7 @@ class DateAndTimeParser ( Parser ):
                 result['type'] = DateEnum.TIMEX_REPEAT_TIME;
                 result['value'] = "$weekly$" ;
                 self.results.append(result);
-                       
+
                 pass
 
             elif la_ == 55:
@@ -2971,7 +2971,7 @@ class DateAndTimeParser ( Parser ):
                 result['type'] = DateEnum.TIMEX_REPEAT_TIME;
                 result['value'] = "$daily$" ;
                 self.results.append(result);
-                       
+
                 pass
 
             elif la_ == 56:
@@ -2994,7 +2994,7 @@ class DateAndTimeParser ( Parser ):
                 result['type'] = DateEnum.TIMEX_START_TIME;
                 result['value'] = "$morning$" ;
                 self.results.append(result);
-                       
+
                 pass
 
             elif la_ == 57:
@@ -3011,7 +3011,7 @@ class DateAndTimeParser ( Parser ):
                 result['type'] = DateEnum.TIMEX_REPEAT_TIME;
                 result['value'] = "$weekly$" ;
                 self.results.append(result);
-                       
+
                 pass
 
             elif la_ == 58:
@@ -3032,7 +3032,7 @@ class DateAndTimeParser ( Parser ):
                 result['type'] = DateEnum.TIMEX_START_TIME;
                 result['value'] = "$morning$" ;
                 self.results.append(result);
-                       
+
                 pass
 
             elif la_ == 59:
@@ -3053,7 +3053,7 @@ class DateAndTimeParser ( Parser ):
                 result['type'] = DateEnum.TIMEX_START_TIME;
                 result['value'] = "$morning$" ;
                 self.results.append(result);
-                       
+
                 pass
 
             elif la_ == 60:
@@ -3072,7 +3072,7 @@ class DateAndTimeParser ( Parser ):
                 result['type'] = DateEnum.TIMEX_WEEKDAY;
                 result['value'] = "$monday$";
                 self.results.append(result);
-                      
+
                 pass
 
             elif la_ == 61:
@@ -3091,7 +3091,7 @@ class DateAndTimeParser ( Parser ):
                 result['type'] = DateEnum.TIMEX_WEEKDAY;
                 result['value'] = "$tuesday$";
                 self.results.append(result);
-                      
+
                 pass
 
             elif la_ == 62:
@@ -3110,7 +3110,7 @@ class DateAndTimeParser ( Parser ):
                 result['type'] = DateEnum.TIMEX_WEEKDAY;
                 result['value'] = "$wednesday$";
                 self.results.append(result);
-                      
+
                 pass
 
             elif la_ == 63:
@@ -3129,7 +3129,7 @@ class DateAndTimeParser ( Parser ):
                 result['type'] = DateEnum.TIMEX_WEEKDAY;
                 result['value'] = "$thursday$";
                 self.results.append(result);
-                      
+
                 pass
 
             elif la_ == 64:
@@ -3148,7 +3148,7 @@ class DateAndTimeParser ( Parser ):
                 result['type'] = DateEnum.TIMEX_WEEKDAY;
                 result['value'] = "$friday$";
                 self.results.append(result);
-                      
+
                 pass
 
             elif la_ == 65:
@@ -3167,7 +3167,7 @@ class DateAndTimeParser ( Parser ):
                 result['type'] = DateEnum.TIMEX_WEEKDAY;
                 result['value'] = "$saturday$";
                 self.results.append(result);
-                      
+
                 pass
 
             elif la_ == 66:
@@ -3186,7 +3186,7 @@ class DateAndTimeParser ( Parser ):
                 result['type'] = DateEnum.TIMEX_WEEKDAY;
                 result['value'] = "$sunday$";
                 self.results.append(result);
-                      
+
                 pass
 
             elif la_ == 67:
@@ -3205,7 +3205,7 @@ class DateAndTimeParser ( Parser ):
                 result['type'] = DateEnum.TIMEX_WEEKDAY;
                 result['value'] = "$monday$";
                 self.results.append(result);
-                      
+
                 pass
 
             elif la_ == 68:
@@ -3224,7 +3224,7 @@ class DateAndTimeParser ( Parser ):
                 result['type'] = DateEnum.TIMEX_WEEKDAY;
                 result['value'] = "$tuesday$";
                 self.results.append(result);
-                      
+
                 pass
 
             elif la_ == 69:
@@ -3243,7 +3243,7 @@ class DateAndTimeParser ( Parser ):
                 result['type'] = DateEnum.TIMEX_WEEKDAY;
                 result['value'] = "$wednesday$";
                 self.results.append(result);
-                      
+
                 pass
 
             elif la_ == 70:
@@ -3262,7 +3262,7 @@ class DateAndTimeParser ( Parser ):
                 result['type'] = DateEnum.TIMEX_WEEKDAY;
                 result['value'] = "$thursday$";
                 self.results.append(result);
-                      
+
                 pass
 
             elif la_ == 71:
@@ -3281,7 +3281,7 @@ class DateAndTimeParser ( Parser ):
                 result['type'] = DateEnum.TIMEX_WEEKDAY;
                 result['value'] = "$friday$";
                 self.results.append(result);
-                      
+
                 pass
 
             elif la_ == 72:
@@ -3300,7 +3300,7 @@ class DateAndTimeParser ( Parser ):
                 result['type'] = DateEnum.TIMEX_WEEKDAY;
                 result['value'] = "$saturday$";
                 self.results.append(result);
-                      
+
                 pass
 
             elif la_ == 73:
@@ -3319,7 +3319,7 @@ class DateAndTimeParser ( Parser ):
                 result['type'] = DateEnum.TIMEX_WEEKDAY;
                 result['value'] = "$saturday$";
                 self.results.append(result);
-                      
+
                 pass
 
             elif la_ == 74:
@@ -3338,7 +3338,7 @@ class DateAndTimeParser ( Parser ):
                 result['type'] = DateEnum.TIMEX_WEEKDAY;
                 result['value'] = "$sunday$";
                 self.results.append(result);
-                      
+
                 pass
 
             elif la_ == 75:
@@ -3357,7 +3357,7 @@ class DateAndTimeParser ( Parser ):
                 result['type'] = DateEnum.TIMEX_WEEKDAY;
                 result['value'] = "$sunday$";
                 self.results.append(result);
-                      
+
                 pass
 
             elif la_ == 76:
@@ -3374,7 +3374,7 @@ class DateAndTimeParser ( Parser ):
                 result['type'] = DateEnum.TIMEX_WEEKDAY;
                 result['value'] = "$sunday$";
                 self.results.append(result);
-                          
+
                 pass
 
             elif la_ == 77:
@@ -3385,7 +3385,7 @@ class DateAndTimeParser ( Parser ):
                 result['type'] = DateEnum.TIMEX_SEASON;
                 result['value'] = localctx._season_relative.s;
                 self.results.append(result);
-                          
+
                 pass
 
             elif la_ == 78:
@@ -3406,7 +3406,7 @@ class DateAndTimeParser ( Parser ):
                 result['type'] = DateEnum.TIMEX_END_DATE;
                 result['value'] = localctx.y.s;
                 self.results.append(result);
-                            
+
                 pass
 
             elif la_ == 79:
@@ -3427,7 +3427,7 @@ class DateAndTimeParser ( Parser ):
                 result['type'] = DateEnum.TIMEX_END_DATE;
                 result['value'] = localctx.n.s;
                 self.results.append(result);
-                            
+
                 pass
 
             elif la_ == 80:
@@ -3448,7 +3448,7 @@ class DateAndTimeParser ( Parser ):
                 result['type'] = DateEnum.TIMEX_END_DATE;
                 result['value'] = localctx.p.s;
                 self.results.append(result);
-                            
+
                 pass
 
             elif la_ == 81:
@@ -3469,7 +3469,7 @@ class DateAndTimeParser ( Parser ):
                 result['type'] = DateEnum.TIMEX_END_DATE;
                 result['value'] = localctx.r.s;
                 self.results.append(result);
-                            
+
                 pass
 
             elif la_ == 82:
@@ -3480,7 +3480,7 @@ class DateAndTimeParser ( Parser ):
                 result['type'] = DateEnum.TIMEX_DATE;
                 result['value'] = localctx._day_relative.s;
                 self.results.append(result);
-                          
+
                 pass
 
             elif la_ == 83:
@@ -3491,7 +3491,7 @@ class DateAndTimeParser ( Parser ):
                 result['type'] = DateEnum.TIMEX_DATE;
                 result['value'] = localctx._week_relative.s;
                 self.results.append(result);
-                          
+
                 pass
 
             elif la_ == 84:
@@ -3502,7 +3502,7 @@ class DateAndTimeParser ( Parser ):
                 result['type'] = DateEnum.TIMEX_DATE;
                 result['value'] = localctx._month_relative.s;
                 self.results.append(result);
-                            
+
                 pass
 
             elif la_ == 85:
@@ -3513,7 +3513,7 @@ class DateAndTimeParser ( Parser ):
                 result['type'] = DateEnum.TIMEX_YEAR;
                 result['value'] = localctx._year_relative.s;
                 self.results.append(result);
-                            
+
                 pass
 
             elif la_ == 86:
@@ -3524,7 +3524,7 @@ class DateAndTimeParser ( Parser ):
                 result['type'] = DateEnum.TIMEX_DURATION;
                 result['value'] = localctx._duration.s;
                 self.results.append(result);
-                      
+
                 pass
 
             elif la_ == 87:
@@ -3545,7 +3545,7 @@ class DateAndTimeParser ( Parser ):
                 result['type'] = DateEnum.TIMEX_END_TIME;
                 result['value'] = localctx.t.s;
                 self.results.append(result);
-                      
+
                 pass
 
             elif la_ == 88:
@@ -3556,7 +3556,7 @@ class DateAndTimeParser ( Parser ):
                 result['type'] = DateEnum.TIMEX_REL_START_TIME;
                 result['value'] = localctx._rel_time_start.s;
                 self.results.append(result);
-                      
+
                 pass
 
             elif la_ == 89:
@@ -3567,7 +3567,7 @@ class DateAndTimeParser ( Parser ):
                 result['type'] = DateEnum.TIMEX_START_TIME;
                 result['value'] = localctx._time_relative.s;
                 self.results.append(result);
-                      
+
                 pass
 
             elif la_ == 90:
@@ -3578,7 +3578,7 @@ class DateAndTimeParser ( Parser ):
                 result['type'] = DateEnum.TIMEX_REPEAT_TIME;
                 result['value'] = localctx._date_repeat.s;
                 self.results.append(result);
-                      
+
                 pass
 
             elif la_ == 91:
@@ -3599,7 +3599,7 @@ class DateAndTimeParser ( Parser ):
                 result['type'] = DateEnum.TIMEX_END_DATE;
                 result['value'] = localctx.v.s;
                 self.results.append(result);
-                            
+
                 pass
 
             elif la_ == 92:
@@ -3610,7 +3610,7 @@ class DateAndTimeParser ( Parser ):
                 result['type'] = DateEnum.TIMEX_DATE;
                 result['value'] = localctx._date.s;
                 self.results.append(result);
-                      
+
                 pass
 
             elif la_ == 93:
@@ -3621,7 +3621,7 @@ class DateAndTimeParser ( Parser ):
                 result['type'] = DateEnum.TIMEX_START_TIME;
                 result['value'] = localctx._time_start.s;
                 self.results.append(result);
-                  
+
                 pass
 
             elif la_ == 94:
@@ -3632,7 +3632,7 @@ class DateAndTimeParser ( Parser ):
                 result['type'] = DateEnum.TIMEX_YEAR;
                 result['value'] = localctx._year.s;
                 self.results.append(result);
-                      
+
                 pass
 
             elif la_ == 95:
@@ -3643,7 +3643,7 @@ class DateAndTimeParser ( Parser ):
                 result['type'] = DateEnum.TIMEX_WEEKDAY;
                 result['value'] = localctx._day_absolute.s;
                 self.results.append(result);
-                      
+
                 pass
 
             elif la_ == 96:
@@ -3654,7 +3654,7 @@ class DateAndTimeParser ( Parser ):
                 result['type'] = DateEnum.TIMEX_DATE;
                 result['value'] = localctx._holiday.s;
                 self.results.append(result);
-                      
+
                 pass
 
             elif la_ == 97:
@@ -3665,7 +3665,7 @@ class DateAndTimeParser ( Parser ):
                 result['type'] = DateEnum.TIMEX_SEASON;
                 result['value'] = localctx._season.s;
                 self.results.append(result);
-                      
+
                 pass
 
 
@@ -3758,7 +3758,7 @@ class DateAndTimeParser ( Parser ):
                 localctx._number = self.number()
                 self.state = 512
                 self.match(DateAndTimeParser.GIORNI)
-                localctx.s =  "$day:" + str(localctx._number.i) + "$" 
+                localctx.s =  "$day:" + str(localctx._number.i) + "$"
                 pass
 
             elif la_ == 2:
@@ -3773,7 +3773,7 @@ class DateAndTimeParser ( Parser ):
                 self.match(DateAndTimeParser.GIORNI)
                 self.state = 519
                 self.match(DateAndTimeParser.PROSSIMI)
-                localctx.s =  "$day:" + str(localctx._number.i) + "$" 
+                localctx.s =  "$day:" + str(localctx._number.i) + "$"
                 pass
 
             elif la_ == 3:
@@ -3788,7 +3788,7 @@ class DateAndTimeParser ( Parser ):
                 self.match(DateAndTimeParser.PROSSIMI)
                 self.state = 526
                 self.match(DateAndTimeParser.GIORNI)
-                localctx.s =  "$day:" + str(localctx._number.i) + "$" 
+                localctx.s =  "$day:" + str(localctx._number.i) + "$"
                 pass
 
             elif la_ == 4:
@@ -3805,7 +3805,7 @@ class DateAndTimeParser ( Parser ):
                 localctx._number = self.number()
                 self.state = 534
                 self.match(DateAndTimeParser.GIORNI)
-                localctx.s =  "$day:" + str(localctx._number.i) + "$" 
+                localctx.s =  "$day:" + str(localctx._number.i) + "$"
                 pass
 
             elif la_ == 5:
@@ -3822,7 +3822,7 @@ class DateAndTimeParser ( Parser ):
                 self.match(DateAndTimeParser.GIORNI)
                 self.state = 542
                 self.match(DateAndTimeParser.PROSSIMI)
-                localctx.s =  "$day:" + str(localctx._number.i) + "$" 
+                localctx.s =  "$day:" + str(localctx._number.i) + "$"
                 pass
 
             elif la_ == 6:
@@ -3839,7 +3839,7 @@ class DateAndTimeParser ( Parser ):
                 self.match(DateAndTimeParser.PROSSIMI)
                 self.state = 550
                 self.match(DateAndTimeParser.GIORNI)
-                localctx.s =  "$day:" + str(localctx._number.i) + "$" 
+                localctx.s =  "$day:" + str(localctx._number.i) + "$"
                 pass
 
             elif la_ == 7:
@@ -3854,7 +3854,7 @@ class DateAndTimeParser ( Parser ):
                 localctx._number = self.number()
                 self.state = 557
                 self.match(DateAndTimeParser.GIORNI)
-                localctx.s =  "$day:" + str(localctx._number.i) + "$" 
+                localctx.s =  "$day:" + str(localctx._number.i) + "$"
                 pass
 
             elif la_ == 8:
@@ -3869,7 +3869,7 @@ class DateAndTimeParser ( Parser ):
                 self.match(DateAndTimeParser.GIORNI)
                 self.state = 564
                 self.match(DateAndTimeParser.PROSSIMI)
-                localctx.s =  "$day:" + str(localctx._number.i) + "$" 
+                localctx.s =  "$day:" + str(localctx._number.i) + "$"
                 pass
 
             elif la_ == 9:
@@ -3884,7 +3884,7 @@ class DateAndTimeParser ( Parser ):
                 self.match(DateAndTimeParser.PROSSIMI)
                 self.state = 571
                 self.match(DateAndTimeParser.GIORNI)
-                localctx.s =  "$day:" + str(localctx._number.i) + "$" 
+                localctx.s =  "$day:" + str(localctx._number.i) + "$"
                 pass
 
             elif la_ == 10:
@@ -3899,7 +3899,7 @@ class DateAndTimeParser ( Parser ):
                 localctx._number = self.number()
                 self.state = 578
                 self.match(DateAndTimeParser.GIORNI)
-                localctx.s =  "$day:-" + str(localctx._number.i) + "$" 
+                localctx.s =  "$day:-" + str(localctx._number.i) + "$"
                 pass
 
             elif la_ == 11:
@@ -3914,7 +3914,7 @@ class DateAndTimeParser ( Parser ):
                 self.match(DateAndTimeParser.GIORNI)
                 self.state = 585
                 self.match(DateAndTimeParser.SCORSI)
-                localctx.s =  "$day:-" + str(localctx._number.i) + "$" 
+                localctx.s =  "$day:-" + str(localctx._number.i) + "$"
                 pass
 
             elif la_ == 12:
@@ -3929,7 +3929,7 @@ class DateAndTimeParser ( Parser ):
                 self.match(DateAndTimeParser.SCORSI)
                 self.state = 592
                 self.match(DateAndTimeParser.GIORNI)
-                localctx.s =  "$day:-" + str(localctx._number.i) + "$" 
+                localctx.s =  "$day:-" + str(localctx._number.i) + "$"
                 pass
 
             elif la_ == 13:
@@ -3944,7 +3944,7 @@ class DateAndTimeParser ( Parser ):
                 localctx._number = self.number()
                 self.state = 599
                 self.match(DateAndTimeParser.GIORNI)
-                localctx.s =  "$day:-" + str(localctx._number.i) + "$" 
+                localctx.s =  "$day:-" + str(localctx._number.i) + "$"
                 pass
 
             elif la_ == 14:
@@ -3959,7 +3959,7 @@ class DateAndTimeParser ( Parser ):
                 self.match(DateAndTimeParser.GIORNI)
                 self.state = 606
                 self.match(DateAndTimeParser.PASSATI)
-                localctx.s =  "$day:-" + str(localctx._number.i) + "$" 
+                localctx.s =  "$day:-" + str(localctx._number.i) + "$"
                 pass
 
             elif la_ == 15:
@@ -3976,7 +3976,7 @@ class DateAndTimeParser ( Parser ):
                 localctx._number = self.number()
                 self.state = 614
                 self.match(DateAndTimeParser.GIORNI)
-                localctx.s =  "$day:-" + str(localctx._number.i) + "$" 
+                localctx.s =  "$day:-" + str(localctx._number.i) + "$"
                 pass
 
             elif la_ == 16:
@@ -3993,7 +3993,7 @@ class DateAndTimeParser ( Parser ):
                 self.match(DateAndTimeParser.GIORNI)
                 self.state = 622
                 self.match(DateAndTimeParser.SCORSI)
-                localctx.s =  "$day:-" + str(localctx._number.i) + "$" 
+                localctx.s =  "$day:-" + str(localctx._number.i) + "$"
                 pass
 
             elif la_ == 17:
@@ -4010,7 +4010,7 @@ class DateAndTimeParser ( Parser ):
                 self.match(DateAndTimeParser.SCORSI)
                 self.state = 630
                 self.match(DateAndTimeParser.GIORNI)
-                localctx.s =  "$day:-" + str(localctx._number.i) + "$" 
+                localctx.s =  "$day:-" + str(localctx._number.i) + "$"
                 pass
 
             elif la_ == 18:
@@ -4027,7 +4027,7 @@ class DateAndTimeParser ( Parser ):
                 self.match(DateAndTimeParser.GIORNI)
                 self.state = 638
                 self.match(DateAndTimeParser.PASSATI)
-                localctx.s =  "$day:-" + str(localctx._number.i) + "$" 
+                localctx.s =  "$day:-" + str(localctx._number.i) + "$"
                 pass
 
             elif la_ == 19:
@@ -4044,7 +4044,7 @@ class DateAndTimeParser ( Parser ):
                 localctx._number = self.number()
                 self.state = 646
                 self.match(DateAndTimeParser.GIORNI)
-                localctx.s =  "$day:-" + str(localctx._number.i) + "$" 
+                localctx.s =  "$day:-" + str(localctx._number.i) + "$"
                 pass
 
 
@@ -4147,7 +4147,7 @@ class DateAndTimeParser ( Parser ):
                 self.match(DateAndTimeParser.PROSSIMA)
                 self.state = 654
                 self.match(DateAndTimeParser.SETTIMANA)
-                localctx.s =  "$week:1$" 
+                localctx.s =  "$week:1$"
                 pass
 
             elif la_ == 2:
@@ -4160,7 +4160,7 @@ class DateAndTimeParser ( Parser ):
                 self.match(DateAndTimeParser.SETTIMANA)
                 self.state = 659
                 self.match(DateAndTimeParser.PROSSIMA)
-                localctx.s =  "$week:1$" 
+                localctx.s =  "$week:1$"
                 pass
 
             elif la_ == 3:
@@ -4171,7 +4171,7 @@ class DateAndTimeParser ( Parser ):
                 self.match(DateAndTimeParser.SETTIMANA)
                 self.state = 663
                 self.match(DateAndTimeParser.PROSSIMA)
-                localctx.s =  "$week:1$" 
+                localctx.s =  "$week:1$"
                 pass
 
             elif la_ == 4:
@@ -4186,7 +4186,7 @@ class DateAndTimeParser ( Parser ):
                 localctx._number = self.number()
                 self.state = 669
                 self.match(DateAndTimeParser.SETTIMANE)
-                localctx.s =  "$week:" + str(str(localctx._number.i)) + "$" 
+                localctx.s =  "$week:" + str(localctx._number.i) + "$"
                 pass
 
             elif la_ == 5:
@@ -4201,7 +4201,7 @@ class DateAndTimeParser ( Parser ):
                 self.match(DateAndTimeParser.SETTIMANE)
                 self.state = 676
                 self.match(DateAndTimeParser.PROSSIME)
-                localctx.s =  "$week:" + str(str(localctx._number.i)) + "$" 
+                localctx.s =  "$week:" + str(localctx._number.i) + "$"
                 pass
 
             elif la_ == 6:
@@ -4216,7 +4216,7 @@ class DateAndTimeParser ( Parser ):
                 self.match(DateAndTimeParser.PROSSIME)
                 self.state = 683
                 self.match(DateAndTimeParser.SETTIMANE)
-                localctx.s =  "$week:" + str(str(localctx._number.i)) + "$" 
+                localctx.s =  "$week:" + str(localctx._number.i) + "$"
                 pass
 
             elif la_ == 7:
@@ -4231,7 +4231,7 @@ class DateAndTimeParser ( Parser ):
                 self.match(DateAndTimeParser.SETTIMANA)
                 self.state = 690
                 self.match(DateAndTimeParser.PROSSIMA)
-                localctx.s =  "$week:1$" 
+                localctx.s =  "$week:1$"
                 pass
 
             elif la_ == 8:
@@ -4246,7 +4246,7 @@ class DateAndTimeParser ( Parser ):
                 self.match(DateAndTimeParser.PROSSIMA)
                 self.state = 696
                 self.match(DateAndTimeParser.SETTIMANA)
-                localctx.s =  "$week:1$" 
+                localctx.s =  "$week:1$"
                 pass
 
             elif la_ == 9:
@@ -4261,7 +4261,7 @@ class DateAndTimeParser ( Parser ):
                 self.match(DateAndTimeParser.SETTIMANA)
                 self.state = 702
                 self.match(DateAndTimeParser.PROSSIMA)
-                localctx.s =  "$week:1$" 
+                localctx.s =  "$week:1$"
                 pass
 
             elif la_ == 10:
@@ -4278,7 +4278,7 @@ class DateAndTimeParser ( Parser ):
                 localctx._number = self.number()
                 self.state = 709
                 self.match(DateAndTimeParser.SETTIMANE)
-                localctx.s =  "$week:" + str(str(localctx._number.i)) + "$" 
+                localctx.s =  "$week:" + str(localctx._number.i) + "$"
                 pass
 
             elif la_ == 11:
@@ -4295,7 +4295,7 @@ class DateAndTimeParser ( Parser ):
                 self.match(DateAndTimeParser.SETTIMANE)
                 self.state = 717
                 self.match(DateAndTimeParser.PROSSIME)
-                localctx.s =  "$week:" + str(str(localctx._number.i)) + "$" 
+                localctx.s =  "$week:" + str(localctx._number.i) + "$"
                 pass
 
             elif la_ == 12:
@@ -4312,7 +4312,7 @@ class DateAndTimeParser ( Parser ):
                 self.match(DateAndTimeParser.PROSSIME)
                 self.state = 725
                 self.match(DateAndTimeParser.SETTIMANE)
-                localctx.s =  "$week:" + str(str(localctx._number.i)) + "$" 
+                localctx.s =  "$week:" + str(localctx._number.i) + "$"
                 pass
 
             elif la_ == 13:
@@ -4325,7 +4325,7 @@ class DateAndTimeParser ( Parser ):
                 self.match(DateAndTimeParser.PROSSIMA)
                 self.state = 731
                 self.match(DateAndTimeParser.SETTIMANA)
-                localctx.s =  "$week:1$" 
+                localctx.s =  "$week:1$"
                 pass
 
             elif la_ == 14:
@@ -4338,7 +4338,7 @@ class DateAndTimeParser ( Parser ):
                 self.match(DateAndTimeParser.SETTIMANA)
                 self.state = 736
                 self.match(DateAndTimeParser.PROSSIMA)
-                localctx.s =  "$week:1$" 
+                localctx.s =  "$week:1$"
                 pass
 
             elif la_ == 15:
@@ -4349,7 +4349,7 @@ class DateAndTimeParser ( Parser ):
                 self.match(DateAndTimeParser.SETTIMANA)
                 self.state = 740
                 self.match(DateAndTimeParser.PROSSIMA)
-                localctx.s =  "$week:1$" 
+                localctx.s =  "$week:1$"
                 pass
 
             elif la_ == 16:
@@ -4364,7 +4364,7 @@ class DateAndTimeParser ( Parser ):
                 localctx._number = self.number()
                 self.state = 746
                 self.match(DateAndTimeParser.SETTIMANE)
-                localctx.s =  "$week:" + str(localctx._number.i) + "$" 
+                localctx.s =  "$week:" + str(localctx._number.i) + "$"
                 pass
 
             elif la_ == 17:
@@ -4379,7 +4379,7 @@ class DateAndTimeParser ( Parser ):
                 self.match(DateAndTimeParser.PROSSIME)
                 self.state = 753
                 self.match(DateAndTimeParser.SETTIMANE)
-                localctx.s =  "$week:" + str(localctx._number.i) + "$" 
+                localctx.s =  "$week:" + str(localctx._number.i) + "$"
                 pass
 
             elif la_ == 18:
@@ -4394,7 +4394,7 @@ class DateAndTimeParser ( Parser ):
                 self.match(DateAndTimeParser.SETTIMANE)
                 self.state = 760
                 self.match(DateAndTimeParser.PROSSIME)
-                localctx.s =  "$week:" + str(localctx._number.i) + "$" 
+                localctx.s =  "$week:" + str(localctx._number.i) + "$"
                 pass
 
             elif la_ == 19:
@@ -4407,7 +4407,7 @@ class DateAndTimeParser ( Parser ):
                 self.match(DateAndTimeParser.SCORSA)
                 self.state = 766
                 self.match(DateAndTimeParser.SETTIMANA)
-                localctx.s =  "$week:-1$" 
+                localctx.s =  "$week:-1$"
                 pass
 
             elif la_ == 20:
@@ -4420,7 +4420,7 @@ class DateAndTimeParser ( Parser ):
                 self.match(DateAndTimeParser.SETTIMANA)
                 self.state = 771
                 self.match(DateAndTimeParser.SCORSA)
-                localctx.s =  "$week:-1$" 
+                localctx.s =  "$week:-1$"
                 pass
 
             elif la_ == 21:
@@ -4431,7 +4431,7 @@ class DateAndTimeParser ( Parser ):
                 self.match(DateAndTimeParser.SETTIMANA)
                 self.state = 775
                 self.match(DateAndTimeParser.SCORSA)
-                localctx.s =  "$week:-1$" 
+                localctx.s =  "$week:-1$"
                 pass
 
             elif la_ == 22:
@@ -4446,7 +4446,7 @@ class DateAndTimeParser ( Parser ):
                 localctx._number = self.number()
                 self.state = 781
                 self.match(DateAndTimeParser.SETTIMANE)
-                localctx.s =  "$week:-" + str(localctx._number.i) + "$" 
+                localctx.s =  "$week:-" + str(localctx._number.i) + "$"
                 pass
 
             elif la_ == 23:
@@ -4461,7 +4461,7 @@ class DateAndTimeParser ( Parser ):
                 self.match(DateAndTimeParser.SETTIMANE)
                 self.state = 788
                 self.match(DateAndTimeParser.SCORSE)
-                localctx.s =  "$week:-" + str(localctx._number.i) + "$" 
+                localctx.s =  "$week:-" + str(localctx._number.i) + "$"
                 pass
 
             elif la_ == 24:
@@ -4476,7 +4476,7 @@ class DateAndTimeParser ( Parser ):
                 self.match(DateAndTimeParser.SCORSE)
                 self.state = 795
                 self.match(DateAndTimeParser.SETTIMANE)
-                localctx.s =  "$week:-" + str(localctx._number.i) + "$" 
+                localctx.s =  "$week:-" + str(localctx._number.i) + "$"
                 pass
 
             elif la_ == 25:
@@ -4491,7 +4491,7 @@ class DateAndTimeParser ( Parser ):
                 self.match(DateAndTimeParser.PASSATE)
                 self.state = 802
                 self.match(DateAndTimeParser.SETTIMANE)
-                localctx.s =  "$week:-" + str(localctx._number.i) + "$" 
+                localctx.s =  "$week:-" + str(localctx._number.i) + "$"
                 pass
 
             elif la_ == 26:
@@ -4506,7 +4506,7 @@ class DateAndTimeParser ( Parser ):
                 self.match(DateAndTimeParser.SETTIMANE)
                 self.state = 809
                 self.match(DateAndTimeParser.PASSATE)
-                localctx.s =  "$week:-" + str(localctx._number.i) + "$" 
+                localctx.s =  "$week:-" + str(localctx._number.i) + "$"
                 pass
 
             elif la_ == 27:
@@ -4523,7 +4523,7 @@ class DateAndTimeParser ( Parser ):
                 localctx._number = self.number()
                 self.state = 817
                 self.match(DateAndTimeParser.SETTIMANE)
-                localctx.s =  "$week:-" + str(localctx._number.i) + "$" 
+                localctx.s =  "$week:-" + str(localctx._number.i) + "$"
                 pass
 
             elif la_ == 28:
@@ -4540,7 +4540,7 @@ class DateAndTimeParser ( Parser ):
                 self.match(DateAndTimeParser.SETTIMANE)
                 self.state = 825
                 self.match(DateAndTimeParser.SCORSE)
-                localctx.s =  "$week:-" + str(localctx._number.i) + "$" 
+                localctx.s =  "$week:-" + str(localctx._number.i) + "$"
                 pass
 
             elif la_ == 29:
@@ -4557,7 +4557,7 @@ class DateAndTimeParser ( Parser ):
                 self.match(DateAndTimeParser.SCORSE)
                 self.state = 833
                 self.match(DateAndTimeParser.SETTIMANE)
-                localctx.s =  "$week:-" + str(localctx._number.i) + "$" 
+                localctx.s =  "$week:-" + str(localctx._number.i) + "$"
                 pass
 
             elif la_ == 30:
@@ -4574,7 +4574,7 @@ class DateAndTimeParser ( Parser ):
                 self.match(DateAndTimeParser.PASSATE)
                 self.state = 841
                 self.match(DateAndTimeParser.SETTIMANE)
-                localctx.s =  "$week:-" + str(localctx._number.i) + "$" 
+                localctx.s =  "$week:-" + str(localctx._number.i) + "$"
                 pass
 
             elif la_ == 31:
@@ -4591,7 +4591,7 @@ class DateAndTimeParser ( Parser ):
                 self.match(DateAndTimeParser.SETTIMANE)
                 self.state = 849
                 self.match(DateAndTimeParser.PASSATE)
-                localctx.s =  "$week:-" + str(localctx._number.i) + "$" 
+                localctx.s =  "$week:-" + str(localctx._number.i) + "$"
                 pass
 
 
@@ -4700,7 +4700,7 @@ class DateAndTimeParser ( Parser ):
                 self.match(DateAndTimeParser.PROSSIMO)
                 self.state = 857
                 self.match(DateAndTimeParser.MESE)
-                localctx.s =  "$month:1$" 
+                localctx.s =  "$month:1$"
                 pass
 
             elif la_ == 2:
@@ -4713,7 +4713,7 @@ class DateAndTimeParser ( Parser ):
                 self.match(DateAndTimeParser.MESE)
                 self.state = 862
                 self.match(DateAndTimeParser.PROSSIMO)
-                localctx.s =  "$month:1$" 
+                localctx.s =  "$month:1$"
                 pass
 
             elif la_ == 3:
@@ -4728,7 +4728,7 @@ class DateAndTimeParser ( Parser ):
                 localctx._number = self.number()
                 self.state = 868
                 self.match(DateAndTimeParser.MESI)
-                localctx.s =  "$month:" + str(localctx._number.i) + "$" 
+                localctx.s =  "$month:" + str(localctx._number.i) + "$"
                 pass
 
             elif la_ == 4:
@@ -4743,7 +4743,7 @@ class DateAndTimeParser ( Parser ):
                 self.match(DateAndTimeParser.MESI)
                 self.state = 875
                 self.match(DateAndTimeParser.PROSSIMI)
-                localctx.s =  "$month:" + str(localctx._number.i) + "$" 
+                localctx.s =  "$month:" + str(localctx._number.i) + "$"
                 pass
 
             elif la_ == 5:
@@ -4758,7 +4758,7 @@ class DateAndTimeParser ( Parser ):
                 self.match(DateAndTimeParser.PROSSIMI)
                 self.state = 882
                 self.match(DateAndTimeParser.MESI)
-                localctx.s =  "$month:" + str(localctx._number.i) + "$" 
+                localctx.s =  "$month:" + str(localctx._number.i) + "$"
                 pass
 
             elif la_ == 6:
@@ -4773,7 +4773,7 @@ class DateAndTimeParser ( Parser ):
                 self.match(DateAndTimeParser.MESE)
                 self.state = 889
                 self.match(DateAndTimeParser.PROSSIMO)
-                localctx.s =  "$month:1$" 
+                localctx.s =  "$month:1$"
                 pass
 
             elif la_ == 7:
@@ -4788,7 +4788,7 @@ class DateAndTimeParser ( Parser ):
                 self.match(DateAndTimeParser.PROSSIMO)
                 self.state = 895
                 self.match(DateAndTimeParser.MESE)
-                localctx.s =  "$month:1$" 
+                localctx.s =  "$month:1$"
                 pass
 
             elif la_ == 8:
@@ -4805,7 +4805,7 @@ class DateAndTimeParser ( Parser ):
                 localctx._number = self.number()
                 self.state = 902
                 self.match(DateAndTimeParser.MESI)
-                localctx.s =  "$month:" + str(localctx._number.i) + "$" 
+                localctx.s =  "$month:" + str(localctx._number.i) + "$"
                 pass
 
             elif la_ == 9:
@@ -4822,7 +4822,7 @@ class DateAndTimeParser ( Parser ):
                 self.match(DateAndTimeParser.MESI)
                 self.state = 910
                 self.match(DateAndTimeParser.PROSSIMI)
-                localctx.s =  "$month:" + str(localctx._number.i) + "$" 
+                localctx.s =  "$month:" + str(localctx._number.i) + "$"
                 pass
 
             elif la_ == 10:
@@ -4839,7 +4839,7 @@ class DateAndTimeParser ( Parser ):
                 self.match(DateAndTimeParser.PROSSIMI)
                 self.state = 918
                 self.match(DateAndTimeParser.MESI)
-                localctx.s =  "$month:" + str(localctx._number.i) + "$" 
+                localctx.s =  "$month:" + str(localctx._number.i) + "$"
                 pass
 
             elif la_ == 11:
@@ -4852,7 +4852,7 @@ class DateAndTimeParser ( Parser ):
                 self.match(DateAndTimeParser.PROSSIMO)
                 self.state = 924
                 self.match(DateAndTimeParser.MESE)
-                localctx.s =  "$month:1$" 
+                localctx.s =  "$month:1$"
                 pass
 
             elif la_ == 12:
@@ -4865,7 +4865,7 @@ class DateAndTimeParser ( Parser ):
                 self.match(DateAndTimeParser.MESE)
                 self.state = 929
                 self.match(DateAndTimeParser.PROSSIMO)
-                localctx.s =  "$month:1$" 
+                localctx.s =  "$month:1$"
                 pass
 
             elif la_ == 13:
@@ -4880,7 +4880,7 @@ class DateAndTimeParser ( Parser ):
                 localctx._number = self.number()
                 self.state = 935
                 self.match(DateAndTimeParser.MESI)
-                localctx.s =  "$month:" + str(localctx._number.i) + "$" 
+                localctx.s =  "$month:" + str(localctx._number.i) + "$"
                 pass
 
             elif la_ == 14:
@@ -4895,7 +4895,7 @@ class DateAndTimeParser ( Parser ):
                 self.match(DateAndTimeParser.PROSSIMI)
                 self.state = 942
                 self.match(DateAndTimeParser.MESI)
-                localctx.s =  "$month:" + str(localctx._number.i) + "$" 
+                localctx.s =  "$month:" + str(localctx._number.i) + "$"
                 pass
 
             elif la_ == 15:
@@ -4910,7 +4910,7 @@ class DateAndTimeParser ( Parser ):
                 self.match(DateAndTimeParser.MESI)
                 self.state = 949
                 self.match(DateAndTimeParser.PROSSIMI)
-                localctx.s =  "$month:" + str(localctx._number.i) + "$" 
+                localctx.s =  "$month:" + str(localctx._number.i) + "$"
                 pass
 
             elif la_ == 16:
@@ -4923,7 +4923,7 @@ class DateAndTimeParser ( Parser ):
                 self.match(DateAndTimeParser.SCORSO)
                 self.state = 955
                 self.match(DateAndTimeParser.MESE)
-                localctx.s =  "$month:-1$" 
+                localctx.s =  "$month:-1$"
                 pass
 
             elif la_ == 17:
@@ -4936,7 +4936,7 @@ class DateAndTimeParser ( Parser ):
                 self.match(DateAndTimeParser.MESE)
                 self.state = 960
                 self.match(DateAndTimeParser.SCORSO)
-                localctx.s =  "$month:-1$" 
+                localctx.s =  "$month:-1$"
                 pass
 
             elif la_ == 18:
@@ -4951,7 +4951,7 @@ class DateAndTimeParser ( Parser ):
                 localctx._number = self.number()
                 self.state = 966
                 self.match(DateAndTimeParser.MESI)
-                localctx.s =  "$month:-" + str(localctx._number.i) + "$" 
+                localctx.s =  "$month:-" + str(localctx._number.i) + "$"
                 pass
 
             elif la_ == 19:
@@ -4966,7 +4966,7 @@ class DateAndTimeParser ( Parser ):
                 self.match(DateAndTimeParser.MESI)
                 self.state = 973
                 self.match(DateAndTimeParser.SCORSI)
-                localctx.s =  "$month:-" + str(localctx._number.i) + "$" 
+                localctx.s =  "$month:-" + str(localctx._number.i) + "$"
                 pass
 
             elif la_ == 20:
@@ -4981,7 +4981,7 @@ class DateAndTimeParser ( Parser ):
                 self.match(DateAndTimeParser.SCORSI)
                 self.state = 980
                 self.match(DateAndTimeParser.MESI)
-                localctx.s =  "$month:-" + str(localctx._number.i) + "$" 
+                localctx.s =  "$month:-" + str(localctx._number.i) + "$"
                 pass
 
             elif la_ == 21:
@@ -4996,7 +4996,7 @@ class DateAndTimeParser ( Parser ):
                 self.match(DateAndTimeParser.PASSATI)
                 self.state = 987
                 self.match(DateAndTimeParser.MESI)
-                localctx.s =  "$month:-" + str(localctx._number.i) + "$" 
+                localctx.s =  "$month:-" + str(localctx._number.i) + "$"
                 pass
 
             elif la_ == 22:
@@ -5011,7 +5011,7 @@ class DateAndTimeParser ( Parser ):
                 self.match(DateAndTimeParser.MESI)
                 self.state = 994
                 self.match(DateAndTimeParser.PASSATI)
-                localctx.s =  "$month:-" + str(localctx._number.i) + "$" 
+                localctx.s =  "$month:-" + str(localctx._number.i) + "$"
                 pass
 
             elif la_ == 23:
@@ -5028,7 +5028,7 @@ class DateAndTimeParser ( Parser ):
                 localctx._number = self.number()
                 self.state = 1002
                 self.match(DateAndTimeParser.MESI)
-                localctx.s =  "$month:-" + str(localctx._number.i) + "$" 
+                localctx.s =  "$month:-" + str(localctx._number.i) + "$"
                 pass
 
             elif la_ == 24:
@@ -5045,7 +5045,7 @@ class DateAndTimeParser ( Parser ):
                 self.match(DateAndTimeParser.MESI)
                 self.state = 1010
                 self.match(DateAndTimeParser.SCORSI)
-                localctx.s =  "$month:-" + str(localctx._number.i) + "$" 
+                localctx.s =  "$month:-" + str(localctx._number.i) + "$"
                 pass
 
             elif la_ == 25:
@@ -5062,7 +5062,7 @@ class DateAndTimeParser ( Parser ):
                 self.match(DateAndTimeParser.SCORSI)
                 self.state = 1018
                 self.match(DateAndTimeParser.MESI)
-                localctx.s =  "$month:-" + str(localctx._number.i) + "$" 
+                localctx.s =  "$month:-" + str(localctx._number.i) + "$"
                 pass
 
             elif la_ == 26:
@@ -5079,7 +5079,7 @@ class DateAndTimeParser ( Parser ):
                 self.match(DateAndTimeParser.PASSATI)
                 self.state = 1026
                 self.match(DateAndTimeParser.MESI)
-                localctx.s =  "$month:-" + str(localctx._number.i) + "$" 
+                localctx.s =  "$month:-" + str(localctx._number.i) + "$"
                 pass
 
             elif la_ == 27:
@@ -5096,7 +5096,7 @@ class DateAndTimeParser ( Parser ):
                 self.match(DateAndTimeParser.MESI)
                 self.state = 1034
                 self.match(DateAndTimeParser.PASSATI)
-                localctx.s =  "$month:-" + str(localctx._number.i) + "$" 
+                localctx.s =  "$month:-" + str(localctx._number.i) + "$"
                 pass
 
 
@@ -5211,7 +5211,7 @@ class DateAndTimeParser ( Parser ):
                 self.match(DateAndTimeParser.PROSSIMO)
                 self.state = 1042
                 self.match(DateAndTimeParser.ANNO)
-                localctx.s =  "$year:1$" 
+                localctx.s =  "$year:1$"
                 pass
 
             elif la_ == 2:
@@ -5224,7 +5224,7 @@ class DateAndTimeParser ( Parser ):
                 self.match(DateAndTimeParser.ANNO)
                 self.state = 1047
                 self.match(DateAndTimeParser.PROSSIMO)
-                localctx.s =  "$year:1$" 
+                localctx.s =  "$year:1$"
                 pass
 
             elif la_ == 3:
@@ -5239,7 +5239,7 @@ class DateAndTimeParser ( Parser ):
                 localctx._number = self.number()
                 self.state = 1053
                 self.match(DateAndTimeParser.ANNI)
-                localctx.s =  "$year:" + str(localctx._number.i) + "$" 
+                localctx.s =  "$year:" + str(localctx._number.i) + "$"
                 pass
 
             elif la_ == 4:
@@ -5254,7 +5254,7 @@ class DateAndTimeParser ( Parser ):
                 self.match(DateAndTimeParser.ANNI)
                 self.state = 1060
                 self.match(DateAndTimeParser.PROSSIMI)
-                localctx.s =  "$year:" + str(localctx._number.i) + "$" 
+                localctx.s =  "$year:" + str(localctx._number.i) + "$"
                 pass
 
             elif la_ == 5:
@@ -5269,7 +5269,7 @@ class DateAndTimeParser ( Parser ):
                 self.match(DateAndTimeParser.PROSSIMI)
                 self.state = 1067
                 self.match(DateAndTimeParser.ANNI)
-                localctx.s =  "$year:" + str(localctx._number.i) + "$" 
+                localctx.s =  "$year:" + str(localctx._number.i) + "$"
                 pass
 
             elif la_ == 6:
@@ -5284,7 +5284,7 @@ class DateAndTimeParser ( Parser ):
                 self.match(DateAndTimeParser.ANNO)
                 self.state = 1074
                 self.match(DateAndTimeParser.PROSSIMO)
-                localctx.s =  "$year:1$" 
+                localctx.s =  "$year:1$"
                 pass
 
             elif la_ == 7:
@@ -5299,7 +5299,7 @@ class DateAndTimeParser ( Parser ):
                 self.match(DateAndTimeParser.PROSSIMO)
                 self.state = 1080
                 self.match(DateAndTimeParser.ANNO)
-                localctx.s =  "$year:1$" 
+                localctx.s =  "$year:1$"
                 pass
 
             elif la_ == 8:
@@ -5316,7 +5316,7 @@ class DateAndTimeParser ( Parser ):
                 localctx._number = self.number()
                 self.state = 1087
                 self.match(DateAndTimeParser.ANNI)
-                localctx.s =  "$year:" + str(localctx._number.i) + "$" 
+                localctx.s =  "$year:" + str(localctx._number.i) + "$"
                 pass
 
             elif la_ == 9:
@@ -5333,7 +5333,7 @@ class DateAndTimeParser ( Parser ):
                 self.match(DateAndTimeParser.ANNI)
                 self.state = 1095
                 self.match(DateAndTimeParser.PROSSIMI)
-                localctx.s =  "$year:" + str(localctx._number.i) + "$" 
+                localctx.s =  "$year:" + str(localctx._number.i) + "$"
                 pass
 
             elif la_ == 10:
@@ -5350,7 +5350,7 @@ class DateAndTimeParser ( Parser ):
                 self.match(DateAndTimeParser.PROSSIMI)
                 self.state = 1103
                 self.match(DateAndTimeParser.ANNI)
-                localctx.s =  "$year:" + str(localctx._number.i) + "$" 
+                localctx.s =  "$year:" + str(localctx._number.i) + "$"
                 pass
 
             elif la_ == 11:
@@ -5363,7 +5363,7 @@ class DateAndTimeParser ( Parser ):
                 self.match(DateAndTimeParser.PROSSIMO)
                 self.state = 1109
                 self.match(DateAndTimeParser.ANNO)
-                localctx.s =  "$year:1$" 
+                localctx.s =  "$year:1$"
                 pass
 
             elif la_ == 12:
@@ -5376,7 +5376,7 @@ class DateAndTimeParser ( Parser ):
                 self.match(DateAndTimeParser.ANNO)
                 self.state = 1114
                 self.match(DateAndTimeParser.PROSSIMO)
-                localctx.s =  "$year:1$" 
+                localctx.s =  "$year:1$"
                 pass
 
             elif la_ == 13:
@@ -5391,7 +5391,7 @@ class DateAndTimeParser ( Parser ):
                 localctx._number = self.number()
                 self.state = 1120
                 self.match(DateAndTimeParser.ANNI)
-                localctx.s =  "$year:" + str(localctx._number.i) + "$" 
+                localctx.s =  "$year:" + str(localctx._number.i) + "$"
                 pass
 
             elif la_ == 14:
@@ -5406,7 +5406,7 @@ class DateAndTimeParser ( Parser ):
                 self.match(DateAndTimeParser.PROSSIMI)
                 self.state = 1127
                 self.match(DateAndTimeParser.ANNI)
-                localctx.s =  "$year:" + str(localctx._number.i) + "$" 
+                localctx.s =  "$year:" + str(localctx._number.i) + "$"
                 pass
 
             elif la_ == 15:
@@ -5421,7 +5421,7 @@ class DateAndTimeParser ( Parser ):
                 self.match(DateAndTimeParser.ANNI)
                 self.state = 1134
                 self.match(DateAndTimeParser.PROSSIMI)
-                localctx.s =  "$year:" + str(localctx._number.i) + "$" 
+                localctx.s =  "$year:" + str(localctx._number.i) + "$"
                 pass
 
             elif la_ == 16:
@@ -5434,7 +5434,7 @@ class DateAndTimeParser ( Parser ):
                 self.match(DateAndTimeParser.SCORSO)
                 self.state = 1140
                 self.match(DateAndTimeParser.ANNO)
-                localctx.s =  "$year:-1$" 
+                localctx.s =  "$year:-1$"
                 pass
 
             elif la_ == 17:
@@ -5447,7 +5447,7 @@ class DateAndTimeParser ( Parser ):
                 self.match(DateAndTimeParser.ANNO)
                 self.state = 1145
                 self.match(DateAndTimeParser.SCORSO)
-                localctx.s =  "$year:-1$" 
+                localctx.s =  "$year:-1$"
                 pass
 
             elif la_ == 18:
@@ -5462,7 +5462,7 @@ class DateAndTimeParser ( Parser ):
                 localctx._number = self.number()
                 self.state = 1151
                 self.match(DateAndTimeParser.ANNI)
-                localctx.s =  "$year:-" + str(localctx._number.i) + "$" 
+                localctx.s =  "$year:-" + str(localctx._number.i) + "$"
                 pass
 
             elif la_ == 19:
@@ -5477,7 +5477,7 @@ class DateAndTimeParser ( Parser ):
                 self.match(DateAndTimeParser.ANNI)
                 self.state = 1158
                 self.match(DateAndTimeParser.SCORSI)
-                localctx.s =  "$year:-" + str(localctx._number.i) + "$" 
+                localctx.s =  "$year:-" + str(localctx._number.i) + "$"
                 pass
 
             elif la_ == 20:
@@ -5492,7 +5492,7 @@ class DateAndTimeParser ( Parser ):
                 self.match(DateAndTimeParser.SCORSI)
                 self.state = 1165
                 self.match(DateAndTimeParser.ANNI)
-                localctx.s =  "$year:-" + str(localctx._number.i) + "$" 
+                localctx.s =  "$year:-" + str(localctx._number.i) + "$"
                 pass
 
             elif la_ == 21:
@@ -5507,7 +5507,7 @@ class DateAndTimeParser ( Parser ):
                 self.match(DateAndTimeParser.PASSATI)
                 self.state = 1172
                 self.match(DateAndTimeParser.ANNI)
-                localctx.s =  "$year:-" + str(localctx._number.i) + "$" 
+                localctx.s =  "$year:-" + str(localctx._number.i) + "$"
                 pass
 
             elif la_ == 22:
@@ -5522,7 +5522,7 @@ class DateAndTimeParser ( Parser ):
                 self.match(DateAndTimeParser.ANNI)
                 self.state = 1179
                 self.match(DateAndTimeParser.PASSATI)
-                localctx.s =  "$year:-" + str(localctx._number.i) + "$" 
+                localctx.s =  "$year:-" + str(localctx._number.i) + "$"
                 pass
 
             elif la_ == 23:
@@ -5539,7 +5539,7 @@ class DateAndTimeParser ( Parser ):
                 localctx._number = self.number()
                 self.state = 1187
                 self.match(DateAndTimeParser.ANNI)
-                localctx.s =  "$year:-" + str(localctx._number.i) + "$" 
+                localctx.s =  "$year:-" + str(localctx._number.i) + "$"
                 pass
 
             elif la_ == 24:
@@ -5556,7 +5556,7 @@ class DateAndTimeParser ( Parser ):
                 self.match(DateAndTimeParser.ANNI)
                 self.state = 1195
                 self.match(DateAndTimeParser.SCORSI)
-                localctx.s =  "$year:-" + str(localctx._number.i) + "$" 
+                localctx.s =  "$year:-" + str(localctx._number.i) + "$"
                 pass
 
             elif la_ == 25:
@@ -5573,7 +5573,7 @@ class DateAndTimeParser ( Parser ):
                 self.match(DateAndTimeParser.SCORSI)
                 self.state = 1203
                 self.match(DateAndTimeParser.ANNI)
-                localctx.s =  "$year:-" + str(localctx._number.i) + "$" 
+                localctx.s =  "$year:-" + str(localctx._number.i) + "$"
                 pass
 
             elif la_ == 26:
@@ -5590,7 +5590,7 @@ class DateAndTimeParser ( Parser ):
                 self.match(DateAndTimeParser.PASSATI)
                 self.state = 1211
                 self.match(DateAndTimeParser.ANNI)
-                localctx.s =  "$year:-" + str(localctx._number.i) + "$" 
+                localctx.s =  "$year:-" + str(localctx._number.i) + "$"
                 pass
 
             elif la_ == 27:
@@ -5607,7 +5607,7 @@ class DateAndTimeParser ( Parser ):
                 self.match(DateAndTimeParser.ANNI)
                 self.state = 1219
                 self.match(DateAndTimeParser.PASSATI)
-                localctx.s =  "$year:-" + str(localctx._number.i) + "$" 
+                localctx.s =  "$year:-" + str(localctx._number.i) + "$"
                 pass
 
 
@@ -5710,21 +5710,21 @@ class DateAndTimeParser ( Parser ):
                 self.enterOuterAlt(localctx, 1)
                 self.state = 1224
                 self.match(DateAndTimeParser.OGGI)
-                localctx.s =  "$today$" 
+                localctx.s =  "$today$"
                 pass
 
             elif la_ == 2:
                 self.enterOuterAlt(localctx, 2)
                 self.state = 1226
                 self.match(DateAndTimeParser.DOMANI)
-                localctx.s =  "$tomorrow$" 
+                localctx.s =  "$tomorrow$"
                 pass
 
             elif la_ == 3:
                 self.enterOuterAlt(localctx, 3)
                 self.state = 1228
                 self.match(DateAndTimeParser.INDOMANI)
-                localctx.s =  "$tomorrow$" 
+                localctx.s =  "$tomorrow$"
                 pass
 
             elif la_ == 4:
@@ -5737,7 +5737,7 @@ class DateAndTimeParser ( Parser ):
                 self.match(DateAndTimeParser.DA)
                 self.state = 1233
                 self.match(DateAndTimeParser.ORA)
-                localctx.s =  "$tomorrow$" 
+                localctx.s =  "$tomorrow$"
                 pass
 
             elif la_ == 5:
@@ -5750,14 +5750,14 @@ class DateAndTimeParser ( Parser ):
                 self.match(DateAndTimeParser.DA)
                 self.state = 1238
                 self.match(DateAndTimeParser.ADESSO)
-                localctx.s =  "$tomorrow$" 
+                localctx.s =  "$tomorrow$"
                 pass
 
             elif la_ == 6:
                 self.enterOuterAlt(localctx, 6)
                 self.state = 1240
                 self.match(DateAndTimeParser.IERI)
-                localctx.s =  "$yesterday$" 
+                localctx.s =  "$yesterday$"
                 pass
 
             elif la_ == 7:
@@ -5768,7 +5768,7 @@ class DateAndTimeParser ( Parser ):
                 self.match(DateAndTimeParser.GIORNO)
                 self.state = 1244
                 self.match(DateAndTimeParser.FA)
-                localctx.s =  "$yesterday$" 
+                localctx.s =  "$yesterday$"
                 pass
 
             elif la_ == 8:
@@ -5777,28 +5777,28 @@ class DateAndTimeParser ( Parser ):
                 self.match(DateAndTimeParser.DOPO)
                 self.state = 1247
                 self.match(DateAndTimeParser.DOMANI)
-                localctx.s =  "$day_after_tomorrow$" 
+                localctx.s =  "$day_after_tomorrow$"
                 pass
 
             elif la_ == 9:
                 self.enterOuterAlt(localctx, 9)
                 self.state = 1249
                 self.match(DateAndTimeParser.DOPODOMANI)
-                localctx.s =  "$day_after_tomorrow$" 
+                localctx.s =  "$day_after_tomorrow$"
                 pass
 
             elif la_ == 10:
                 self.enterOuterAlt(localctx, 10)
                 self.state = 1251
                 self.match(DateAndTimeParser.ALTROIERI)
-                localctx.s =  "$day_before_yesterday$" 
+                localctx.s =  "$day_before_yesterday$"
                 pass
 
             elif la_ == 11:
                 self.enterOuterAlt(localctx, 11)
                 self.state = 1253
                 self.match(DateAndTimeParser.IERLALTRO)
-                localctx.s =  "$day_before_yesterday$" 
+                localctx.s =  "$day_before_yesterday$"
                 pass
 
             elif la_ == 12:
@@ -5811,7 +5811,7 @@ class DateAndTimeParser ( Parser ):
                 self.match(DateAndTimeParser.DA)
                 self.state = 1258
                 self.match(DateAndTimeParser.ADESSO)
-                localctx.s =  "$day:" + str(localctx._number.i) + "$" 
+                localctx.s =  "$day:" + str(localctx._number.i) + "$"
                 pass
 
             elif la_ == 13:
@@ -5824,7 +5824,7 @@ class DateAndTimeParser ( Parser ):
                 self.match(DateAndTimeParser.DA)
                 self.state = 1264
                 self.match(DateAndTimeParser.ORA)
-                localctx.s =  "$day:" + str(localctx._number.i) + "$" 
+                localctx.s =  "$day:" + str(localctx._number.i) + "$"
                 pass
 
             elif la_ == 14:
@@ -5835,7 +5835,7 @@ class DateAndTimeParser ( Parser ):
                 self.match(DateAndTimeParser.GIORNI)
                 self.state = 1269
                 self.match(DateAndTimeParser.DOPO)
-                localctx.s =  "$day:" + str(localctx._number.i) + "$" 
+                localctx.s =  "$day:" + str(localctx._number.i) + "$"
                 pass
 
             elif la_ == 15:
@@ -5846,7 +5846,7 @@ class DateAndTimeParser ( Parser ):
                 localctx._number = self.number()
                 self.state = 1274
                 self.match(DateAndTimeParser.GIORNI)
-                localctx.s =  "$day:" + str(localctx._number.i) + "$" 
+                localctx.s =  "$day:" + str(localctx._number.i) + "$"
                 pass
 
             elif la_ == 16:
@@ -5857,7 +5857,7 @@ class DateAndTimeParser ( Parser ):
                 localctx._number = self.number()
                 self.state = 1279
                 self.match(DateAndTimeParser.GIORNI)
-                localctx.s =  "$day:" + str(localctx._number.i) + "$" 
+                localctx.s =  "$day:" + str(localctx._number.i) + "$"
                 pass
 
             elif la_ == 17:
@@ -5868,7 +5868,7 @@ class DateAndTimeParser ( Parser ):
                 localctx._number = self.number()
                 self.state = 1284
                 self.match(DateAndTimeParser.GIORNI)
-                localctx.s =  "$day:" + str(localctx._number.i) + "$" 
+                localctx.s =  "$day:" + str(localctx._number.i) + "$"
                 pass
 
             elif la_ == 18:
@@ -5879,7 +5879,7 @@ class DateAndTimeParser ( Parser ):
                 self.match(DateAndTimeParser.GIORNI)
                 self.state = 1289
                 self.match(DateAndTimeParser.FA)
-                localctx.s =  "$day:-" + str(localctx._number.i) + "$" 
+                localctx.s =  "$day:-" + str(localctx._number.i) + "$"
                 pass
 
             elif la_ == 19:
@@ -5890,7 +5890,7 @@ class DateAndTimeParser ( Parser ):
                 self.match(DateAndTimeParser.GIORNI)
                 self.state = 1294
                 self.match(DateAndTimeParser.PRIMA)
-                localctx.s =  "$day:-" + str(localctx._number.i) + "$" 
+                localctx.s =  "$day:-" + str(localctx._number.i) + "$"
                 pass
 
             elif la_ == 20:
@@ -5901,7 +5901,7 @@ class DateAndTimeParser ( Parser ):
                 self.match(DateAndTimeParser.GIORNO)
                 self.state = 1299
                 self.match(DateAndTimeParser.PRIMA)
-                localctx.s =  "$day:-1$" 
+                localctx.s =  "$day:-1$"
                 pass
 
 
@@ -5981,49 +5981,49 @@ class DateAndTimeParser ( Parser ):
                 self.enterOuterAlt(localctx, 1)
                 self.state = 1303
                 self.match(DateAndTimeParser.LUNEDI)
-                localctx.s =  "$monday$" 
+                localctx.s =  "$monday$"
 
             elif token in [DateAndTimeParser.MARTEDI]:
                 self.enterOuterAlt(localctx, 2)
                 self.state = 1305
                 self.match(DateAndTimeParser.MARTEDI)
-                localctx.s =  "$tuesday$" 
+                localctx.s =  "$tuesday$"
 
             elif token in [DateAndTimeParser.MERCOLEDI]:
                 self.enterOuterAlt(localctx, 3)
                 self.state = 1307
                 self.match(DateAndTimeParser.MERCOLEDI)
-                localctx.s =  "$wednesday$" 
+                localctx.s =  "$wednesday$"
 
             elif token in [DateAndTimeParser.GIOVEDI]:
                 self.enterOuterAlt(localctx, 4)
                 self.state = 1309
                 self.match(DateAndTimeParser.GIOVEDI)
-                localctx.s =  "$thursday$" 
+                localctx.s =  "$thursday$"
 
             elif token in [DateAndTimeParser.VENERDI]:
                 self.enterOuterAlt(localctx, 5)
                 self.state = 1311
                 self.match(DateAndTimeParser.VENERDI)
-                localctx.s =  "$friday$" 
+                localctx.s =  "$friday$"
 
             elif token in [DateAndTimeParser.SABATO]:
                 self.enterOuterAlt(localctx, 6)
                 self.state = 1313
                 self.match(DateAndTimeParser.SABATO)
-                localctx.s =  "$saturday$" 
+                localctx.s =  "$saturday$"
 
             elif token in [DateAndTimeParser.DOMENICA]:
                 self.enterOuterAlt(localctx, 7)
                 self.state = 1315
                 self.match(DateAndTimeParser.DOMENICA)
-                localctx.s =  "$sunday$" 
+                localctx.s =  "$sunday$"
 
             elif token in [DateAndTimeParser.WEEKEND]:
                 self.enterOuterAlt(localctx, 8)
                 self.state = 1317
                 self.match(DateAndTimeParser.WEEKEND)
-                localctx.s =  "$weekend$" 
+                localctx.s =  "$weekend$"
 
             elif token in [DateAndTimeParser.WEEK]:
                 self.enterOuterAlt(localctx, 9)
@@ -6031,7 +6031,7 @@ class DateAndTimeParser ( Parser ):
                 self.match(DateAndTimeParser.WEEK)
                 self.state = 1320
                 self.match(DateAndTimeParser.END)
-                localctx.s =  "$weekend$" 
+                localctx.s =  "$weekend$"
 
             elif token in [DateAndTimeParser.FINE]:
                 self.enterOuterAlt(localctx, 10)
@@ -6039,7 +6039,7 @@ class DateAndTimeParser ( Parser ):
                 self.match(DateAndTimeParser.FINE)
                 self.state = 1323
                 self.match(DateAndTimeParser.SETTIMANA)
-                localctx.s =  "$weekend$" 
+                localctx.s =  "$weekend$"
 
             else:
                 raise NoViableAltException(self)
@@ -6159,21 +6159,21 @@ class DateAndTimeParser ( Parser ):
                 self.enterOuterAlt(localctx, 1)
                 self.state = 1327
                 self.match(DateAndTimeParser.ALBA)
-                localctx.s =  "$dawn$" 
+                localctx.s =  "$dawn$"
                 pass
 
             elif la_ == 2:
                 self.enterOuterAlt(localctx, 2)
                 self.state = 1329
                 self.match(DateAndTimeParser.MATTINO)
-                localctx.s =  "$morning$" 
+                localctx.s =  "$morning$"
                 pass
 
             elif la_ == 3:
                 self.enterOuterAlt(localctx, 3)
                 self.state = 1331
                 self.match(DateAndTimeParser.MATTINA)
-                localctx.s =  "$morning$" 
+                localctx.s =  "$morning$"
                 pass
 
             elif la_ == 4:
@@ -6182,7 +6182,7 @@ class DateAndTimeParser ( Parser ):
                 self.match(DateAndTimeParser.DI)
                 self.state = 1334
                 self.match(DateAndTimeParser.MATTINA)
-                localctx.s =  "$morning$" 
+                localctx.s =  "$morning$"
                 pass
 
             elif la_ == 5:
@@ -6191,14 +6191,14 @@ class DateAndTimeParser ( Parser ):
                 self.match(DateAndTimeParser.IN)
                 self.state = 1337
                 self.match(DateAndTimeParser.MATTINATA)
-                localctx.s =  "$morning$" 
+                localctx.s =  "$morning$"
                 pass
 
             elif la_ == 6:
                 self.enterOuterAlt(localctx, 6)
                 self.state = 1339
                 self.match(DateAndTimeParser.MEZZOGIORNO)
-                localctx.s =  "$noon$" 
+                localctx.s =  "$noon$"
                 pass
 
             elif la_ == 7:
@@ -6207,7 +6207,7 @@ class DateAndTimeParser ( Parser ):
                 self.match(DateAndTimeParser.A)
                 self.state = 1342
                 self.match(DateAndTimeParser.PRANZO)
-                localctx.s =  "$noon$" 
+                localctx.s =  "$noon$"
                 pass
 
             elif la_ == 8:
@@ -6220,7 +6220,7 @@ class DateAndTimeParser ( Parser ):
                 self.match(DateAndTimeParser.DI)
                 self.state = 1347
                 self.match(DateAndTimeParser.PRANZO)
-                localctx.s =  "$noon$" 
+                localctx.s =  "$noon$"
                 pass
 
             elif la_ == 9:
@@ -6229,14 +6229,14 @@ class DateAndTimeParser ( Parser ):
                 self.match(DateAndTimeParser.DOPO)
                 self.state = 1350
                 self.match(DateAndTimeParser.MEZZOGIORNO)
-                localctx.s =  "$afternoon$" 
+                localctx.s =  "$afternoon$"
                 pass
 
             elif la_ == 10:
                 self.enterOuterAlt(localctx, 10)
                 self.state = 1352
                 self.match(DateAndTimeParser.POMERIGGIO)
-                localctx.s =  "$afternoon$" 
+                localctx.s =  "$afternoon$"
                 pass
 
             elif la_ == 11:
@@ -6245,7 +6245,7 @@ class DateAndTimeParser ( Parser ):
                 self.match(DateAndTimeParser.NEL)
                 self.state = 1355
                 self.match(DateAndTimeParser.POMERIGGIO)
-                localctx.s =  "$afternoon$" 
+                localctx.s =  "$afternoon$"
                 pass
 
             elif la_ == 12:
@@ -6254,14 +6254,14 @@ class DateAndTimeParser ( Parser ):
                 self.match(DateAndTimeParser.DOPO)
                 self.state = 1358
                 self.match(DateAndTimeParser.PRANZO)
-                localctx.s =  "$afternoon$" 
+                localctx.s =  "$afternoon$"
                 pass
 
             elif la_ == 13:
                 self.enterOuterAlt(localctx, 13)
                 self.state = 1360
                 self.match(DateAndTimeParser.SERA)
-                localctx.s =  "$evening$" 
+                localctx.s =  "$evening$"
                 pass
 
             elif la_ == 14:
@@ -6270,7 +6270,7 @@ class DateAndTimeParser ( Parser ):
                 self.match(DateAndTimeParser.DI)
                 self.state = 1363
                 self.match(DateAndTimeParser.SERA)
-                localctx.s =  "$evening$" 
+                localctx.s =  "$evening$"
                 pass
 
             elif la_ == 15:
@@ -6279,7 +6279,7 @@ class DateAndTimeParser ( Parser ):
                 self.match(DateAndTimeParser.IN)
                 self.state = 1366
                 self.match(DateAndTimeParser.SERATA)
-                localctx.s =  "$evening$" 
+                localctx.s =  "$evening$"
                 pass
 
             elif la_ == 16:
@@ -6288,7 +6288,7 @@ class DateAndTimeParser ( Parser ):
                 self.match(DateAndTimeParser.A)
                 self.state = 1369
                 self.match(DateAndTimeParser.CENA)
-                localctx.s =  "$evening$" 
+                localctx.s =  "$evening$"
                 pass
 
             elif la_ == 17:
@@ -6301,21 +6301,21 @@ class DateAndTimeParser ( Parser ):
                 self.match(DateAndTimeParser.DI)
                 self.state = 1374
                 self.match(DateAndTimeParser.CENA)
-                localctx.s =  "$evening$" 
+                localctx.s =  "$evening$"
                 pass
 
             elif la_ == 18:
                 self.enterOuterAlt(localctx, 18)
                 self.state = 1376
                 self.match(DateAndTimeParser.MEZZANOTTE)
-                localctx.s =  "$midnight$" 
+                localctx.s =  "$midnight$"
                 pass
 
             elif la_ == 19:
                 self.enterOuterAlt(localctx, 19)
                 self.state = 1378
                 self.match(DateAndTimeParser.NOTTE)
-                localctx.s =  "$night$" 
+                localctx.s =  "$night$"
                 pass
 
             elif la_ == 20:
@@ -6324,7 +6324,7 @@ class DateAndTimeParser ( Parser ):
                 self.match(DateAndTimeParser.DI)
                 self.state = 1381
                 self.match(DateAndTimeParser.NOTTE)
-                localctx.s =  "$night$" 
+                localctx.s =  "$night$"
                 pass
 
             elif la_ == 21:
@@ -6333,21 +6333,21 @@ class DateAndTimeParser ( Parser ):
                 self.match(DateAndTimeParser.IN)
                 self.state = 1384
                 self.match(DateAndTimeParser.NOTTATA)
-                localctx.s =  "$night$" 
+                localctx.s =  "$night$"
                 pass
 
             elif la_ == 22:
                 self.enterOuterAlt(localctx, 22)
                 self.state = 1386
                 self.match(DateAndTimeParser.ADESSO)
-                localctx.s =  "$now$" 
+                localctx.s =  "$now$"
                 pass
 
             elif la_ == 23:
                 self.enterOuterAlt(localctx, 23)
                 self.state = 1388
                 self.match(DateAndTimeParser.ORA)
-                localctx.s =  "$now$" 
+                localctx.s =  "$now$"
                 pass
 
             elif la_ == 24:
@@ -6356,7 +6356,7 @@ class DateAndTimeParser ( Parser ):
                 self.match(DateAndTimeParser.QUESTO)
                 self.state = 1391
                 self.match(DateAndTimeParser.MOMENTO)
-                localctx.s =  "$now$" 
+                localctx.s =  "$now$"
                 pass
 
             elif la_ == 25:
@@ -6367,7 +6367,7 @@ class DateAndTimeParser ( Parser ):
                 self.match(DateAndTimeParser.QUESTO)
                 self.state = 1395
                 self.match(DateAndTimeParser.MOMENTO)
-                localctx.s =  "$now$" 
+                localctx.s =  "$now$"
                 pass
 
             elif la_ == 26:
@@ -6376,7 +6376,7 @@ class DateAndTimeParser ( Parser ):
                 self.match(DateAndTimeParser.AL)
                 self.state = 1398
                 self.match(DateAndTimeParser.MOMENTO)
-                localctx.s =  "$now$" 
+                localctx.s =  "$now$"
                 pass
 
             elif la_ == 27:
@@ -6385,7 +6385,7 @@ class DateAndTimeParser ( Parser ):
                 self.match(DateAndTimeParser.PROPRIO)
                 self.state = 1401
                 self.match(DateAndTimeParser.ADESSO)
-                localctx.s =  "$now$" 
+                localctx.s =  "$now$"
                 pass
 
             elif la_ == 28:
@@ -6394,7 +6394,7 @@ class DateAndTimeParser ( Parser ):
                 self.match(DateAndTimeParser.PROPRIO)
                 self.state = 1404
                 self.match(DateAndTimeParser.ORA)
-                localctx.s =  "$now$" 
+                localctx.s =  "$now$"
                 pass
 
 
@@ -6478,7 +6478,7 @@ class DateAndTimeParser ( Parser ):
                 self.match(DateAndTimeParser.QUESTO)
                 self.state = 1409
                 self.match(DateAndTimeParser.MESE)
-                localctx.s =  "$month:0$" 
+                localctx.s =  "$month:0$"
                 pass
 
             elif la_ == 2:
@@ -6487,7 +6487,7 @@ class DateAndTimeParser ( Parser ):
                 self.match(DateAndTimeParser.MESE)
                 self.state = 1412
                 self.match(DateAndTimeParser.SCORSO)
-                localctx.s =  "$month:-1$" 
+                localctx.s =  "$month:-1$"
                 pass
 
             elif la_ == 3:
@@ -6496,7 +6496,7 @@ class DateAndTimeParser ( Parser ):
                 self.match(DateAndTimeParser.SCORSO)
                 self.state = 1415
                 self.match(DateAndTimeParser.MESE)
-                localctx.s =  "$month:-1$" 
+                localctx.s =  "$month:-1$"
                 pass
 
             elif la_ == 4:
@@ -6507,7 +6507,7 @@ class DateAndTimeParser ( Parser ):
                 self.match(DateAndTimeParser.MESE)
                 self.state = 1419
                 self.match(DateAndTimeParser.FA)
-                localctx.s =  "$month:-1$" 
+                localctx.s =  "$month:-1$"
                 pass
 
             elif la_ == 5:
@@ -6518,7 +6518,7 @@ class DateAndTimeParser ( Parser ):
                 self.match(DateAndTimeParser.MESE)
                 self.state = 1423
                 self.match(DateAndTimeParser.PRIMA)
-                localctx.s =  "$month:-1$" 
+                localctx.s =  "$month:-1$"
                 pass
 
             elif la_ == 6:
@@ -6527,7 +6527,7 @@ class DateAndTimeParser ( Parser ):
                 self.match(DateAndTimeParser.MESE)
                 self.state = 1426
                 self.match(DateAndTimeParser.PROSSIMO)
-                localctx.s =  "$month:1$" 
+                localctx.s =  "$month:1$"
                 pass
 
             elif la_ == 7:
@@ -6536,7 +6536,7 @@ class DateAndTimeParser ( Parser ):
                 self.match(DateAndTimeParser.PROSSIMO)
                 self.state = 1429
                 self.match(DateAndTimeParser.MESE)
-                localctx.s =  "$month:1$" 
+                localctx.s =  "$month:1$"
                 pass
 
             elif la_ == 8:
@@ -6545,7 +6545,7 @@ class DateAndTimeParser ( Parser ):
                 self.match(DateAndTimeParser.MESE)
                 self.state = 1432
                 self.match(DateAndTimeParser.VENTURO)
-                localctx.s =  "$month:1$" 
+                localctx.s =  "$month:1$"
                 pass
 
             elif la_ == 9:
@@ -6556,7 +6556,7 @@ class DateAndTimeParser ( Parser ):
                 self.match(DateAndTimeParser.UN)
                 self.state = 1436
                 self.match(DateAndTimeParser.MESE)
-                localctx.s =  "$month:1$" 
+                localctx.s =  "$month:1$"
                 pass
 
             elif la_ == 10:
@@ -6567,7 +6567,7 @@ class DateAndTimeParser ( Parser ):
                 self.match(DateAndTimeParser.UN)
                 self.state = 1440
                 self.match(DateAndTimeParser.MESE)
-                localctx.s =  "$month:1$" 
+                localctx.s =  "$month:1$"
                 pass
 
             elif la_ == 11:
@@ -6578,7 +6578,7 @@ class DateAndTimeParser ( Parser ):
                 self.match(DateAndTimeParser.MESE)
                 self.state = 1444
                 self.match(DateAndTimeParser.DOPO)
-                localctx.s =  "$month:1$" 
+                localctx.s =  "$month:1$"
                 pass
 
             elif la_ == 12:
@@ -6589,7 +6589,7 @@ class DateAndTimeParser ( Parser ):
                 localctx._number = self.number()
                 self.state = 1448
                 self.match(DateAndTimeParser.MESI)
-                localctx.s =  "$month:" + str(localctx._number.i) + "$" 
+                localctx.s =  "$month:" + str(localctx._number.i) + "$"
                 pass
 
             elif la_ == 13:
@@ -6600,7 +6600,7 @@ class DateAndTimeParser ( Parser ):
                 localctx._number = self.number()
                 self.state = 1453
                 self.match(DateAndTimeParser.MESI)
-                localctx.s =  "$month:" + str(localctx._number.i) + "$" 
+                localctx.s =  "$month:" + str(localctx._number.i) + "$"
                 pass
 
             elif la_ == 14:
@@ -6611,7 +6611,7 @@ class DateAndTimeParser ( Parser ):
                 self.match(DateAndTimeParser.MESI)
                 self.state = 1458
                 self.match(DateAndTimeParser.DOPO)
-                localctx.s =  "$month:" + str(localctx._number.i) + "$" 
+                localctx.s =  "$month:" + str(localctx._number.i) + "$"
                 pass
 
             elif la_ == 15:
@@ -6622,7 +6622,7 @@ class DateAndTimeParser ( Parser ):
                 self.match(DateAndTimeParser.MESI)
                 self.state = 1463
                 self.match(DateAndTimeParser.FA)
-                localctx.s =  "$month:-" + str(localctx._number.i) + "$" 
+                localctx.s =  "$month:-" + str(localctx._number.i) + "$"
                 pass
 
             elif la_ == 16:
@@ -6633,7 +6633,7 @@ class DateAndTimeParser ( Parser ):
                 self.match(DateAndTimeParser.MESI)
                 self.state = 1468
                 self.match(DateAndTimeParser.PRIMA)
-                localctx.s =  "$month:-" + str(localctx._number.i) + "$" 
+                localctx.s =  "$month:-" + str(localctx._number.i) + "$"
                 pass
 
 
@@ -6717,7 +6717,7 @@ class DateAndTimeParser ( Parser ):
                 self.match(DateAndTimeParser.QUEST)
                 self.state = 1474
                 self.match(DateAndTimeParser.ANNO)
-                localctx.s =  "$year:0$" 
+                localctx.s =  "$year:0$"
                 pass
 
             elif la_ == 2:
@@ -6726,7 +6726,7 @@ class DateAndTimeParser ( Parser ):
                 self.match(DateAndTimeParser.ANNO)
                 self.state = 1477
                 self.match(DateAndTimeParser.SCORSO)
-                localctx.s =  "$year:-1$" 
+                localctx.s =  "$year:-1$"
                 pass
 
             elif la_ == 3:
@@ -6735,7 +6735,7 @@ class DateAndTimeParser ( Parser ):
                 self.match(DateAndTimeParser.SCORSO)
                 self.state = 1480
                 self.match(DateAndTimeParser.ANNO)
-                localctx.s =  "$year:-1$" 
+                localctx.s =  "$year:-1$"
                 pass
 
             elif la_ == 4:
@@ -6746,7 +6746,7 @@ class DateAndTimeParser ( Parser ):
                 self.match(DateAndTimeParser.ANNO)
                 self.state = 1484
                 self.match(DateAndTimeParser.FA)
-                localctx.s =  "$year:-1$" 
+                localctx.s =  "$year:-1$"
                 pass
 
             elif la_ == 5:
@@ -6757,7 +6757,7 @@ class DateAndTimeParser ( Parser ):
                 self.match(DateAndTimeParser.ANNO)
                 self.state = 1488
                 self.match(DateAndTimeParser.PRIMA)
-                localctx.s =  "$year:-1$" 
+                localctx.s =  "$year:-1$"
                 pass
 
             elif la_ == 6:
@@ -6766,7 +6766,7 @@ class DateAndTimeParser ( Parser ):
                 self.match(DateAndTimeParser.ANNO)
                 self.state = 1491
                 self.match(DateAndTimeParser.PROSSIMO)
-                localctx.s =  "$year:1$" 
+                localctx.s =  "$year:1$"
                 pass
 
             elif la_ == 7:
@@ -6775,7 +6775,7 @@ class DateAndTimeParser ( Parser ):
                 self.match(DateAndTimeParser.ANNO)
                 self.state = 1494
                 self.match(DateAndTimeParser.VENTURO)
-                localctx.s =  "$year:1$" 
+                localctx.s =  "$year:1$"
                 pass
 
             elif la_ == 8:
@@ -6786,7 +6786,7 @@ class DateAndTimeParser ( Parser ):
                 self.match(DateAndTimeParser.UN)
                 self.state = 1498
                 self.match(DateAndTimeParser.ANNO)
-                localctx.s =  "$year:1$" 
+                localctx.s =  "$year:1$"
                 pass
 
             elif la_ == 9:
@@ -6797,7 +6797,7 @@ class DateAndTimeParser ( Parser ):
                 self.match(DateAndTimeParser.UN)
                 self.state = 1502
                 self.match(DateAndTimeParser.ANNO)
-                localctx.s =  "$year:1$" 
+                localctx.s =  "$year:1$"
                 pass
 
             elif la_ == 10:
@@ -6808,7 +6808,7 @@ class DateAndTimeParser ( Parser ):
                 self.match(DateAndTimeParser.ANNO)
                 self.state = 1506
                 self.match(DateAndTimeParser.DOPO)
-                localctx.s =  "$year:1$" 
+                localctx.s =  "$year:1$"
                 pass
 
             elif la_ == 11:
@@ -6819,7 +6819,7 @@ class DateAndTimeParser ( Parser ):
                 localctx._number = self.number()
                 self.state = 1510
                 self.match(DateAndTimeParser.ANNI)
-                localctx.s =  "$year:" + str(localctx._number.i) + "$" 
+                localctx.s =  "$year:" + str(localctx._number.i) + "$"
                 pass
 
             elif la_ == 12:
@@ -6830,7 +6830,7 @@ class DateAndTimeParser ( Parser ):
                 localctx._number = self.number()
                 self.state = 1515
                 self.match(DateAndTimeParser.ANNI)
-                localctx.s =  "$year:" + str(localctx._number.i) + "$" 
+                localctx.s =  "$year:" + str(localctx._number.i) + "$"
                 pass
 
             elif la_ == 13:
@@ -6841,7 +6841,7 @@ class DateAndTimeParser ( Parser ):
                 self.match(DateAndTimeParser.ANNI)
                 self.state = 1520
                 self.match(DateAndTimeParser.DOPO)
-                localctx.s =  "$year:" + str(localctx._number.i) + "$" 
+                localctx.s =  "$year:" + str(localctx._number.i) + "$"
                 pass
 
             elif la_ == 14:
@@ -6852,7 +6852,7 @@ class DateAndTimeParser ( Parser ):
                 self.match(DateAndTimeParser.ANNI)
                 self.state = 1525
                 self.match(DateAndTimeParser.FA)
-                localctx.s =  "$year:-" + str(localctx._number.i) + "$" 
+                localctx.s =  "$year:-" + str(localctx._number.i) + "$"
                 pass
 
             elif la_ == 15:
@@ -6863,7 +6863,7 @@ class DateAndTimeParser ( Parser ):
                 self.match(DateAndTimeParser.ANNI)
                 self.state = 1530
                 self.match(DateAndTimeParser.PRIMA)
-                localctx.s =  "$year:-" + str(localctx._number.i) + "$" 
+                localctx.s =  "$year:-" + str(localctx._number.i) + "$"
                 pass
 
 
@@ -6932,7 +6932,7 @@ class DateAndTimeParser ( Parser ):
                 self.match(DateAndTimeParser.PRIMA)
                 self.state = 1536
                 self.match(DateAndTimeParser.SETTIMANA)
-                localctx.i =  '1' 
+                localctx.i =  '1'
 
             elif token in [DateAndTimeParser.SECONDA]:
                 self.enterOuterAlt(localctx, 2)
@@ -6940,7 +6940,7 @@ class DateAndTimeParser ( Parser ):
                 self.match(DateAndTimeParser.SECONDA)
                 self.state = 1539
                 self.match(DateAndTimeParser.SETTIMANA)
-                localctx.i =  '2' 
+                localctx.i =  '2'
 
             elif token in [DateAndTimeParser.TERZA]:
                 self.enterOuterAlt(localctx, 3)
@@ -6948,7 +6948,7 @@ class DateAndTimeParser ( Parser ):
                 self.match(DateAndTimeParser.TERZA)
                 self.state = 1542
                 self.match(DateAndTimeParser.SETTIMANA)
-                localctx.i =  '3' 
+                localctx.i =  '3'
 
             elif token in [DateAndTimeParser.QUARTA]:
                 self.enterOuterAlt(localctx, 4)
@@ -6956,7 +6956,7 @@ class DateAndTimeParser ( Parser ):
                 self.match(DateAndTimeParser.QUARTA)
                 self.state = 1545
                 self.match(DateAndTimeParser.SETTIMANA)
-                localctx.i =  '4' 
+                localctx.i =  '4'
 
             elif token in [DateAndTimeParser.QUINTA]:
                 self.enterOuterAlt(localctx, 5)
@@ -6964,7 +6964,7 @@ class DateAndTimeParser ( Parser ):
                 self.match(DateAndTimeParser.QUINTA)
                 self.state = 1548
                 self.match(DateAndTimeParser.SETTIMANA)
-                localctx.i =  '5' 
+                localctx.i =  '5'
 
             elif token in [DateAndTimeParser.SETTIMANA]:
                 self.enterOuterAlt(localctx, 6)
@@ -6972,7 +6972,7 @@ class DateAndTimeParser ( Parser ):
                 self.match(DateAndTimeParser.SETTIMANA)
                 self.state = 1551
                 localctx._number = self.number()
-                localctx.i =  str(str(localctx._number.i)) 
+                localctx.i =  str(localctx._number.i)
 
             else:
                 raise NoViableAltException(self)
@@ -7072,7 +7072,7 @@ class DateAndTimeParser ( Parser ):
                 self.match(DateAndTimeParser.QUESTA)
                 self.state = 1557
                 self.match(DateAndTimeParser.SETTIMANA)
-                localctx.s =  "$week:0$" 
+                localctx.s =  "$week:0$"
                 pass
 
             elif la_ == 2:
@@ -7081,7 +7081,7 @@ class DateAndTimeParser ( Parser ):
                 self.match(DateAndTimeParser.IN)
                 self.state = 1560
                 self.match(DateAndTimeParser.SETTIMANA)
-                localctx.s =  "$week:0$" 
+                localctx.s =  "$week:0$"
                 pass
 
             elif la_ == 3:
@@ -7090,7 +7090,7 @@ class DateAndTimeParser ( Parser ):
                 self.match(DateAndTimeParser.SETTIMANA)
                 self.state = 1563
                 self.match(DateAndTimeParser.SCORSA)
-                localctx.s =  "$week:-1$" 
+                localctx.s =  "$week:-1$"
                 pass
 
             elif la_ == 4:
@@ -7099,7 +7099,7 @@ class DateAndTimeParser ( Parser ):
                 self.match(DateAndTimeParser.SCORSA)
                 self.state = 1566
                 self.match(DateAndTimeParser.SETTIMANA)
-                localctx.s =  "$week:-1$" 
+                localctx.s =  "$week:-1$"
                 pass
 
             elif la_ == 5:
@@ -7110,7 +7110,7 @@ class DateAndTimeParser ( Parser ):
                 self.match(DateAndTimeParser.SETTIMANA)
                 self.state = 1570
                 self.match(DateAndTimeParser.FA)
-                localctx.s =  "$week:-1$" 
+                localctx.s =  "$week:-1$"
                 pass
 
             elif la_ == 6:
@@ -7121,7 +7121,7 @@ class DateAndTimeParser ( Parser ):
                 self.match(DateAndTimeParser.SETTIMANA)
                 self.state = 1574
                 self.match(DateAndTimeParser.PRIMA)
-                localctx.s =  "$week:-1$" 
+                localctx.s =  "$week:-1$"
                 pass
 
             elif la_ == 7:
@@ -7130,7 +7130,7 @@ class DateAndTimeParser ( Parser ):
                 self.match(DateAndTimeParser.SETTIMANA)
                 self.state = 1577
                 self.match(DateAndTimeParser.PROSSIMA)
-                localctx.s =  "$week:1$" 
+                localctx.s =  "$week:1$"
                 pass
 
             elif la_ == 8:
@@ -7139,7 +7139,7 @@ class DateAndTimeParser ( Parser ):
                 self.match(DateAndTimeParser.SETTIMANA)
                 self.state = 1580
                 self.match(DateAndTimeParser.VENTURA)
-                localctx.s =  "$week:1$" 
+                localctx.s =  "$week:1$"
                 pass
 
             elif la_ == 9:
@@ -7148,7 +7148,7 @@ class DateAndTimeParser ( Parser ):
                 self.match(DateAndTimeParser.PROSSIMA)
                 self.state = 1583
                 self.match(DateAndTimeParser.SETTIMANA)
-                localctx.s =  "$week:1$" 
+                localctx.s =  "$week:1$"
                 pass
 
             elif la_ == 10:
@@ -7159,7 +7159,7 @@ class DateAndTimeParser ( Parser ):
                 self.match(DateAndTimeParser.UNA)
                 self.state = 1587
                 self.match(DateAndTimeParser.SETTIMANA)
-                localctx.s =  "$week:1$" 
+                localctx.s =  "$week:1$"
                 pass
 
             elif la_ == 11:
@@ -7170,7 +7170,7 @@ class DateAndTimeParser ( Parser ):
                 self.match(DateAndTimeParser.UNA)
                 self.state = 1591
                 self.match(DateAndTimeParser.SETTIMANA)
-                localctx.s =  "$week:1$" 
+                localctx.s =  "$week:1$"
                 pass
 
             elif la_ == 12:
@@ -7181,7 +7181,7 @@ class DateAndTimeParser ( Parser ):
                 self.match(DateAndTimeParser.SETTIMANA)
                 self.state = 1595
                 self.match(DateAndTimeParser.DOPO)
-                localctx.s =  "$week:1$" 
+                localctx.s =  "$week:1$"
                 pass
 
             elif la_ == 13:
@@ -7192,7 +7192,7 @@ class DateAndTimeParser ( Parser ):
                 localctx._number = self.number()
                 self.state = 1599
                 self.match(DateAndTimeParser.SETTIMANE)
-                localctx.s =  "$week:" + str(localctx._number.i) + "$" 
+                localctx.s =  "$week:" + str(localctx._number.i) + "$"
                 pass
 
             elif la_ == 14:
@@ -7203,7 +7203,7 @@ class DateAndTimeParser ( Parser ):
                 localctx._number = self.number()
                 self.state = 1604
                 self.match(DateAndTimeParser.SETTIMANE)
-                localctx.s =  "$week:" + str(localctx._number.i) + "$" 
+                localctx.s =  "$week:" + str(localctx._number.i) + "$"
                 pass
 
             elif la_ == 15:
@@ -7214,7 +7214,7 @@ class DateAndTimeParser ( Parser ):
                 localctx._number = self.number()
                 self.state = 1609
                 self.match(DateAndTimeParser.SETTIMANE)
-                localctx.s =  "$week:" + str(localctx._number.i) + "$" 
+                localctx.s =  "$week:" + str(localctx._number.i) + "$"
                 pass
 
             elif la_ == 16:
@@ -7225,7 +7225,7 @@ class DateAndTimeParser ( Parser ):
                 self.match(DateAndTimeParser.SETTIMANE)
                 self.state = 1614
                 self.match(DateAndTimeParser.DOPO)
-                localctx.s =  "$week:" + str(localctx._number.i) + "$" 
+                localctx.s =  "$week:" + str(localctx._number.i) + "$"
                 pass
 
             elif la_ == 17:
@@ -7238,7 +7238,7 @@ class DateAndTimeParser ( Parser ):
                 self.match(DateAndTimeParser.DA)
                 self.state = 1620
                 self.match(DateAndTimeParser.ADESSO)
-                localctx.s =  "$week:" + str(localctx._number.i) + "$" 
+                localctx.s =  "$week:" + str(localctx._number.i) + "$"
                 pass
 
             elif la_ == 18:
@@ -7251,7 +7251,7 @@ class DateAndTimeParser ( Parser ):
                 self.match(DateAndTimeParser.DA)
                 self.state = 1626
                 self.match(DateAndTimeParser.ORA)
-                localctx.s =  "$week:" + str(localctx._number.i) + "$" 
+                localctx.s =  "$week:" + str(localctx._number.i) + "$"
                 pass
 
             elif la_ == 19:
@@ -7262,7 +7262,7 @@ class DateAndTimeParser ( Parser ):
                 self.match(DateAndTimeParser.SETTIMANE)
                 self.state = 1631
                 self.match(DateAndTimeParser.FA)
-                localctx.s =  "$week:-" + str(localctx._number.i) + "$" 
+                localctx.s =  "$week:-" + str(localctx._number.i) + "$"
                 pass
 
             elif la_ == 20:
@@ -7273,7 +7273,7 @@ class DateAndTimeParser ( Parser ):
                 self.match(DateAndTimeParser.SETTIMANE)
                 self.state = 1636
                 self.match(DateAndTimeParser.PRIMA)
-                localctx.s =  "$week:-" + str(localctx._number.i) + "$" 
+                localctx.s =  "$week:-" + str(localctx._number.i) + "$"
                 pass
 
 
@@ -7395,7 +7395,7 @@ class DateAndTimeParser ( Parser ):
                 self.enterOuterAlt(localctx, 1)
                 self.state = 1641
                 localctx._YEARNUM = self.match(DateAndTimeParser.YEARNUM)
-                localctx.s =  (None if localctx._YEARNUM is None else localctx._YEARNUM.text) 
+                localctx.s =  (None if localctx._YEARNUM is None else localctx._YEARNUM.text)
                 pass
 
             elif la_ == 2:
@@ -7404,7 +7404,7 @@ class DateAndTimeParser ( Parser ):
                 self.match(DateAndTimeParser.NEL)
                 self.state = 1644
                 localctx._YEARNUM = self.match(DateAndTimeParser.YEARNUM)
-                localctx.s =  (None if localctx._YEARNUM is None else localctx._YEARNUM.text) 
+                localctx.s =  (None if localctx._YEARNUM is None else localctx._YEARNUM.text)
                 pass
 
             elif la_ == 3:
@@ -7413,7 +7413,7 @@ class DateAndTimeParser ( Parser ):
                 self.match(DateAndTimeParser.QUEST)
                 self.state = 1647
                 self.match(DateAndTimeParser.ANNO)
-                localctx.s =  "$year:0$" 
+                localctx.s =  "$year:0$"
                 pass
 
             elif la_ == 4:
@@ -7422,7 +7422,7 @@ class DateAndTimeParser ( Parser ):
                 self.match(DateAndTimeParser.ANNO)
                 self.state = 1650
                 localctx._YEARNUM = self.match(DateAndTimeParser.YEARNUM)
-                localctx.s =  (None if localctx._YEARNUM is None else localctx._YEARNUM.text) 
+                localctx.s =  (None if localctx._YEARNUM is None else localctx._YEARNUM.text)
                 pass
 
             elif la_ == 5:
@@ -7431,7 +7431,7 @@ class DateAndTimeParser ( Parser ):
                 self.match(DateAndTimeParser.ANNO)
                 self.state = 1653
                 localctx._TIMENUM = self.match(DateAndTimeParser.TIMENUM)
-                localctx.s =  (None if localctx._TIMENUM is None else localctx._TIMENUM.text) 
+                localctx.s =  (None if localctx._TIMENUM is None else localctx._TIMENUM.text)
                 pass
 
             elif la_ == 6:
@@ -7440,7 +7440,7 @@ class DateAndTimeParser ( Parser ):
                 self.match(DateAndTimeParser.ANNO)
                 self.state = 1656
                 localctx._threedignum = self.threedignum()
-                localctx.s =  (None if localctx._threedignum is None else self._input.getText((localctx._threedignum.start,localctx._threedignum.stop))) 
+                localctx.s =  (None if localctx._threedignum is None else self._input.getText((localctx._threedignum.start,localctx._threedignum.stop)))
                 pass
 
             elif la_ == 7:
@@ -7451,7 +7451,7 @@ class DateAndTimeParser ( Parser ):
                 self.match(DateAndTimeParser.IL)
                 self.state = 1661
                 localctx._YEARNUM = self.match(DateAndTimeParser.YEARNUM)
-                localctx.s =  "$afteryear:" + (None if localctx._YEARNUM is None else localctx._YEARNUM.text) + "$"  
+                localctx.s =  "$afteryear:" + (None if localctx._YEARNUM is None else localctx._YEARNUM.text) + "$"
                 pass
 
             elif la_ == 8:
@@ -7462,7 +7462,7 @@ class DateAndTimeParser ( Parser ):
                 self.match(DateAndTimeParser.DEL)
                 self.state = 1665
                 localctx._YEARNUM = self.match(DateAndTimeParser.YEARNUM)
-                localctx.s =  "$beforeyear:" + (None if localctx._YEARNUM is None else localctx._YEARNUM.text) + "$"  
+                localctx.s =  "$beforeyear:" + (None if localctx._YEARNUM is None else localctx._YEARNUM.text) + "$"
                 pass
 
             elif la_ == 9:
@@ -7475,7 +7475,7 @@ class DateAndTimeParser ( Parser ):
                 self.match(DateAndTimeParser.ANNO)
                 self.state = 1670
                 localctx._YEARNUM = self.match(DateAndTimeParser.YEARNUM)
-                localctx.s =  "$afteryear:" + (None if localctx._YEARNUM is None else localctx._YEARNUM.text) + "$"  
+                localctx.s =  "$afteryear:" + (None if localctx._YEARNUM is None else localctx._YEARNUM.text) + "$"
                 pass
 
             elif la_ == 10:
@@ -7488,7 +7488,7 @@ class DateAndTimeParser ( Parser ):
                 self.match(DateAndTimeParser.ANNO)
                 self.state = 1675
                 localctx._YEARNUM = self.match(DateAndTimeParser.YEARNUM)
-                localctx.s =  "$beforeyear:" + (None if localctx._YEARNUM is None else localctx._YEARNUM.text) + "$"  
+                localctx.s =  "$beforeyear:" + (None if localctx._YEARNUM is None else localctx._YEARNUM.text) + "$"
                 pass
 
             elif la_ == 11:
@@ -7497,7 +7497,7 @@ class DateAndTimeParser ( Parser ):
                 self.match(DateAndTimeParser.ANNO)
                 self.state = 1678
                 self.match(DateAndTimeParser.SCORSO)
-                localctx.s =  "$year:-1$" 
+                localctx.s =  "$year:-1$"
                 pass
 
             elif la_ == 12:
@@ -7506,7 +7506,7 @@ class DateAndTimeParser ( Parser ):
                 self.match(DateAndTimeParser.SCORSO)
                 self.state = 1681
                 self.match(DateAndTimeParser.ANNO)
-                localctx.s =  "$year:-1$" 
+                localctx.s =  "$year:-1$"
                 pass
 
             elif la_ == 13:
@@ -7515,7 +7515,7 @@ class DateAndTimeParser ( Parser ):
                 self.match(DateAndTimeParser.ANNO)
                 self.state = 1684
                 self.match(DateAndTimeParser.PRECEDENTE)
-                localctx.s =  "$year:-1$" 
+                localctx.s =  "$year:-1$"
                 pass
 
             elif la_ == 14:
@@ -7526,7 +7526,7 @@ class DateAndTimeParser ( Parser ):
                 self.match(DateAndTimeParser.ANNO)
                 self.state = 1688
                 self.match(DateAndTimeParser.PRIMA)
-                localctx.s =  "$year:-1$" 
+                localctx.s =  "$year:-1$"
                 pass
 
             elif la_ == 15:
@@ -7537,7 +7537,7 @@ class DateAndTimeParser ( Parser ):
                 self.match(DateAndTimeParser.ANNO)
                 self.state = 1692
                 self.match(DateAndTimeParser.FA)
-                localctx.s =  "$year:-1$" 
+                localctx.s =  "$year:-1$"
                 pass
 
             elif la_ == 16:
@@ -7546,7 +7546,7 @@ class DateAndTimeParser ( Parser ):
                 self.match(DateAndTimeParser.ANNO)
                 self.state = 1695
                 self.match(DateAndTimeParser.PROSSIMO)
-                localctx.s =  "$year:1$" 
+                localctx.s =  "$year:1$"
                 pass
 
             elif la_ == 17:
@@ -7555,7 +7555,7 @@ class DateAndTimeParser ( Parser ):
                 self.match(DateAndTimeParser.PROSSIMO)
                 self.state = 1698
                 self.match(DateAndTimeParser.ANNO)
-                localctx.s =  "$year:1$" 
+                localctx.s =  "$year:1$"
                 pass
 
             elif la_ == 18:
@@ -7564,7 +7564,7 @@ class DateAndTimeParser ( Parser ):
                 self.match(DateAndTimeParser.ANNO)
                 self.state = 1701
                 self.match(DateAndTimeParser.VENTURO)
-                localctx.s =  "$year:1$" 
+                localctx.s =  "$year:1$"
                 pass
 
             elif la_ == 19:
@@ -7577,7 +7577,7 @@ class DateAndTimeParser ( Parser ):
                 self.match(DateAndTimeParser.DA)
                 self.state = 1706
                 self.match(DateAndTimeParser.ADESSO)
-                localctx.s =  "$year:1$" 
+                localctx.s =  "$year:1$"
                 pass
 
             elif la_ == 20:
@@ -7590,7 +7590,7 @@ class DateAndTimeParser ( Parser ):
                 self.match(DateAndTimeParser.DA)
                 self.state = 1711
                 self.match(DateAndTimeParser.ORA)
-                localctx.s =  "$year:1$" 
+                localctx.s =  "$year:1$"
                 pass
 
             elif la_ == 21:
@@ -7601,7 +7601,7 @@ class DateAndTimeParser ( Parser ):
                 self.match(DateAndTimeParser.UN)
                 self.state = 1715
                 self.match(DateAndTimeParser.ANNO)
-                localctx.s =  "$year:1$" 
+                localctx.s =  "$year:1$"
                 pass
 
             elif la_ == 22:
@@ -7612,7 +7612,7 @@ class DateAndTimeParser ( Parser ):
                 self.match(DateAndTimeParser.UN)
                 self.state = 1719
                 self.match(DateAndTimeParser.ANNO)
-                localctx.s =  "$year:1$" 
+                localctx.s =  "$year:1$"
                 pass
 
             elif la_ == 23:
@@ -7623,7 +7623,7 @@ class DateAndTimeParser ( Parser ):
                 self.match(DateAndTimeParser.IL)
                 self.state = 1723
                 localctx._YEARNUM = self.match(DateAndTimeParser.YEARNUM)
-                localctx.s =  "$afteryear:" + (None if localctx._YEARNUM is None else localctx._YEARNUM.text) + "$" 
+                localctx.s =  "$afteryear:" + (None if localctx._YEARNUM is None else localctx._YEARNUM.text) + "$"
                 pass
 
             elif la_ == 24:
@@ -7634,7 +7634,7 @@ class DateAndTimeParser ( Parser ):
                 self.match(DateAndTimeParser.DEL)
                 self.state = 1727
                 localctx._YEARNUM = self.match(DateAndTimeParser.YEARNUM)
-                localctx.s =  "$beforeyear:" + (None if localctx._YEARNUM is None else localctx._YEARNUM.text) + "$" 
+                localctx.s =  "$beforeyear:" + (None if localctx._YEARNUM is None else localctx._YEARNUM.text) + "$"
                 pass
 
             elif la_ == 25:
@@ -7643,7 +7643,7 @@ class DateAndTimeParser ( Parser ):
                 self.match(DateAndTimeParser.ANNI)
                 self.state = 1730
                 localctx._number = self.number()
-                localctx.s =  "$period:19" + (None if localctx._number is None else self._input.getText((localctx._number.start,localctx._number.stop))) + "$" 
+                localctx.s =  "$period:19" + (None if localctx._number is None else self._input.getText((localctx._number.start,localctx._number.stop))) + "$"
                 pass
 
             elif la_ == 26:
@@ -7656,7 +7656,7 @@ class DateAndTimeParser ( Parser ):
                 self.match(DateAndTimeParser.DA)
                 self.state = 1736
                 self.match(DateAndTimeParser.ADESSO)
-                localctx.s =  "$year:" + str(localctx._number.i) + "$" 
+                localctx.s =  "$year:" + str(localctx._number.i) + "$"
                 pass
 
             elif la_ == 27:
@@ -7669,7 +7669,7 @@ class DateAndTimeParser ( Parser ):
                 self.match(DateAndTimeParser.DA)
                 self.state = 1742
                 self.match(DateAndTimeParser.ORA)
-                localctx.s =  "$year:" + str(localctx._number.i) + "$" 
+                localctx.s =  "$year:" + str(localctx._number.i) + "$"
                 pass
 
             elif la_ == 28:
@@ -7680,7 +7680,7 @@ class DateAndTimeParser ( Parser ):
                 self.match(DateAndTimeParser.ANNI)
                 self.state = 1747
                 self.match(DateAndTimeParser.DOPO)
-                localctx.s =  "$year:" + str(localctx._number.i) + "$" 
+                localctx.s =  "$year:" + str(localctx._number.i) + "$"
                 pass
 
             elif la_ == 29:
@@ -7691,7 +7691,7 @@ class DateAndTimeParser ( Parser ):
                 localctx._number = self.number()
                 self.state = 1752
                 self.match(DateAndTimeParser.ANNI)
-                localctx.s =  "$year:" + str(localctx._number.i) + "$" 
+                localctx.s =  "$year:" + str(localctx._number.i) + "$"
                 pass
 
             elif la_ == 30:
@@ -7702,7 +7702,7 @@ class DateAndTimeParser ( Parser ):
                 localctx._number = self.number()
                 self.state = 1757
                 self.match(DateAndTimeParser.ANNI)
-                localctx.s =  "$year:" + str(localctx._number.i) + "$" 
+                localctx.s =  "$year:" + str(localctx._number.i) + "$"
                 pass
 
             elif la_ == 31:
@@ -7713,7 +7713,7 @@ class DateAndTimeParser ( Parser ):
                 self.match(DateAndTimeParser.ANNI)
                 self.state = 1762
                 self.match(DateAndTimeParser.FA)
-                localctx.s =  "$year:-" + str(localctx._number.i) + "$" 
+                localctx.s =  "$year:-" + str(localctx._number.i) + "$"
                 pass
 
             elif la_ == 32:
@@ -7724,7 +7724,7 @@ class DateAndTimeParser ( Parser ):
                 self.match(DateAndTimeParser.ANNI)
                 self.state = 1767
                 self.match(DateAndTimeParser.PRIMA)
-                localctx.s =  "$year:-" + str(localctx._number.i) + "$" 
+                localctx.s =  "$year:-" + str(localctx._number.i) + "$"
                 pass
 
             elif la_ == 33:
@@ -7733,7 +7733,7 @@ class DateAndTimeParser ( Parser ):
                 self.match(DateAndTimeParser.ANNI)
                 self.state = 1771
                 localctx._YEARNUM = self.match(DateAndTimeParser.YEARNUM)
-                localctx.s =  "$period:" + (None if localctx._YEARNUM is None else localctx._YEARNUM.text) + "$" 
+                localctx.s =  "$period:" + (None if localctx._YEARNUM is None else localctx._YEARNUM.text) + "$"
                 pass
 
             elif la_ == 34:
@@ -7742,7 +7742,7 @@ class DateAndTimeParser ( Parser ):
                 self.match(DateAndTimeParser.ANNI)
                 self.state = 1774
                 localctx._TIMENUM = self.match(DateAndTimeParser.TIMENUM)
-                localctx.s =  "$period:" + (None if localctx._TIMENUM is None else localctx._TIMENUM.text) + "$" 
+                localctx.s =  "$period:" + (None if localctx._TIMENUM is None else localctx._TIMENUM.text) + "$"
                 pass
 
 
@@ -7887,14 +7887,14 @@ class DateAndTimeParser ( Parser ):
                 self.match(DateAndTimeParser.OGNI)
                 self.state = 1779
                 self.match(DateAndTimeParser.GIORNO)
-                localctx.s =  "$daily$" 
+                localctx.s =  "$daily$"
                 pass
 
             elif la_ == 2:
                 self.enterOuterAlt(localctx, 2)
                 self.state = 1781
                 self.match(DateAndTimeParser.QUOTIDIANAMENTE)
-                localctx.s =  "$daily$" 
+                localctx.s =  "$daily$"
                 pass
 
             elif la_ == 3:
@@ -7905,14 +7905,14 @@ class DateAndTimeParser ( Parser ):
                 self.match(DateAndTimeParser.I)
                 self.state = 1785
                 self.match(DateAndTimeParser.GIORNI)
-                localctx.s =  "$daily$" 
+                localctx.s =  "$daily$"
                 pass
 
             elif la_ == 4:
                 self.enterOuterAlt(localctx, 4)
                 self.state = 1787
                 self.match(DateAndTimeParser.GIORNALMENTE)
-                localctx.s =  "$daily$" 
+                localctx.s =  "$daily$"
                 pass
 
             elif la_ == 5:
@@ -7923,7 +7923,7 @@ class DateAndTimeParser ( Parser ):
                 self.match(DateAndTimeParser.DOPO)
                 self.state = 1791
                 self.match(DateAndTimeParser.GIORNO)
-                localctx.s =  "$daily$" 
+                localctx.s =  "$daily$"
                 pass
 
             elif la_ == 6:
@@ -7932,14 +7932,14 @@ class DateAndTimeParser ( Parser ):
                 self.match(DateAndTimeParser.OGNI)
                 self.state = 1794
                 self.match(DateAndTimeParser.SETTIMANA)
-                localctx.s =  "$weekly$" 
+                localctx.s =  "$weekly$"
                 pass
 
             elif la_ == 7:
                 self.enterOuterAlt(localctx, 7)
                 self.state = 1796
                 self.match(DateAndTimeParser.SETTIMANALMENTE)
-                localctx.s =  "$weekly$" 
+                localctx.s =  "$weekly$"
                 pass
 
             elif la_ == 8:
@@ -7950,7 +7950,7 @@ class DateAndTimeParser ( Parser ):
                 self.match(DateAndTimeParser.LE)
                 self.state = 1800
                 self.match(DateAndTimeParser.SETTIMANE)
-                localctx.s =  "$weekly$" 
+                localctx.s =  "$weekly$"
                 pass
 
             elif la_ == 9:
@@ -7961,14 +7961,14 @@ class DateAndTimeParser ( Parser ):
                 self.match(DateAndTimeParser.DOPO)
                 self.state = 1804
                 self.match(DateAndTimeParser.SETTIMANA)
-                localctx.s =  "$weekly$" 
+                localctx.s =  "$weekly$"
                 pass
 
             elif la_ == 10:
                 self.enterOuterAlt(localctx, 10)
                 self.state = 1806
                 self.match(DateAndTimeParser.BISETTIMANALMENTE)
-                localctx.s =  "$biweekly$" 
+                localctx.s =  "$biweekly$"
                 pass
 
             elif la_ == 11:
@@ -7979,7 +7979,7 @@ class DateAndTimeParser ( Parser ):
                 self.match(DateAndTimeParser.DUE)
                 self.state = 1810
                 self.match(DateAndTimeParser.SETTIMANE)
-                localctx.s =  "$biweekly$" 
+                localctx.s =  "$biweekly$"
                 pass
 
             elif la_ == 12:
@@ -7992,7 +7992,7 @@ class DateAndTimeParser ( Parser ):
                 self.match(DateAndTimeParser.AL)
                 self.state = 1815
                 self.match(DateAndTimeParser.MESE)
-                localctx.s =  "$biweekly$" 
+                localctx.s =  "$biweekly$"
                 pass
 
             elif la_ == 13:
@@ -8001,14 +8001,14 @@ class DateAndTimeParser ( Parser ):
                 self.match(DateAndTimeParser.OGNI)
                 self.state = 1818
                 self.match(DateAndTimeParser.MESE)
-                localctx.s =  "$monthly$" 
+                localctx.s =  "$monthly$"
                 pass
 
             elif la_ == 14:
                 self.enterOuterAlt(localctx, 14)
                 self.state = 1820
                 self.match(DateAndTimeParser.MENSILMENTE)
-                localctx.s =  "$monthly$" 
+                localctx.s =  "$monthly$"
                 pass
 
             elif la_ == 15:
@@ -8019,7 +8019,7 @@ class DateAndTimeParser ( Parser ):
                 self.match(DateAndTimeParser.I)
                 self.state = 1824
                 self.match(DateAndTimeParser.MESI)
-                localctx.s =  "$monthly$" 
+                localctx.s =  "$monthly$"
                 pass
 
             elif la_ == 16:
@@ -8030,7 +8030,7 @@ class DateAndTimeParser ( Parser ):
                 self.match(DateAndTimeParser.DOPO)
                 self.state = 1828
                 self.match(DateAndTimeParser.MESE)
-                localctx.s =  "$monthly$" 
+                localctx.s =  "$monthly$"
                 pass
 
             elif la_ == 17:
@@ -8041,14 +8041,14 @@ class DateAndTimeParser ( Parser ):
                 self.match(DateAndTimeParser.TRE)
                 self.state = 1832
                 self.match(DateAndTimeParser.MESI)
-                localctx.s =  "$quarterly$" 
+                localctx.s =  "$quarterly$"
                 pass
 
             elif la_ == 18:
                 self.enterOuterAlt(localctx, 18)
                 self.state = 1834
                 self.match(DateAndTimeParser.TRIMESTRALMENTE)
-                localctx.s =  "$quarterly$" 
+                localctx.s =  "$quarterly$"
                 pass
 
             elif la_ == 19:
@@ -8061,7 +8061,7 @@ class DateAndTimeParser ( Parser ):
                 self.match(DateAndTimeParser.ALL)
                 self.state = 1839
                 self.match(DateAndTimeParser.ANNO)
-                localctx.s =  "$quarterly$" 
+                localctx.s =  "$quarterly$"
                 pass
 
             elif la_ == 20:
@@ -8074,7 +8074,7 @@ class DateAndTimeParser ( Parser ):
                 self.match(DateAndTimeParser.L)
                 self.state = 1844
                 self.match(DateAndTimeParser.ANNO)
-                localctx.s =  "$quarterly$" 
+                localctx.s =  "$quarterly$"
                 pass
 
             elif la_ == 21:
@@ -8083,7 +8083,7 @@ class DateAndTimeParser ( Parser ):
                 self.match(DateAndTimeParser.OGNI)
                 self.state = 1847
                 self.match(DateAndTimeParser.TRIMESTRE)
-                localctx.s =  "$quarterly$" 
+                localctx.s =  "$quarterly$"
                 pass
 
             elif la_ == 22:
@@ -8092,7 +8092,7 @@ class DateAndTimeParser ( Parser ):
                 self.match(DateAndTimeParser.OGNI)
                 self.state = 1850
                 self.match(DateAndTimeParser.ANNO)
-                localctx.s =  "$yearly$" 
+                localctx.s =  "$yearly$"
                 pass
 
             elif la_ == 23:
@@ -8103,14 +8103,14 @@ class DateAndTimeParser ( Parser ):
                 self.match(DateAndTimeParser.GLI)
                 self.state = 1854
                 self.match(DateAndTimeParser.ANNI)
-                localctx.s =  "$yearly$" 
+                localctx.s =  "$yearly$"
                 pass
 
             elif la_ == 24:
                 self.enterOuterAlt(localctx, 24)
                 self.state = 1856
                 self.match(DateAndTimeParser.ANNUALMENTE)
-                localctx.s =  "$yearly$" 
+                localctx.s =  "$yearly$"
                 pass
 
 
@@ -8168,7 +8168,7 @@ class DateAndTimeParser ( Parser ):
             self.maybeore()
             self.state = 1862
             localctx._time_number = self.time_number()
-            localctx.s =  localctx._time_number.s 
+            localctx.s =  localctx._time_number.s
         except RecognitionException as re:
             localctx.exception = re
             self._errHandler.reportError(self, re)
@@ -8267,7 +8267,7 @@ class DateAndTimeParser ( Parser ):
                 localctx._number = self.number()
                 self.state = 1866
                 self.match(DateAndTimeParser.INPUNTO)
-                localctx.s =  String.format("%02d",str(localctx._number.i)) + ":_:_" 
+                localctx.s =  "%02d" % (localctx._number.i) + ":_:_"
                 pass
 
             elif la_ == 2:
@@ -8276,7 +8276,7 @@ class DateAndTimeParser ( Parser ):
                 localctx.a = self.number()
                 self.state = 1870
                 localctx.b = self.number()
-                localctx.s =  "%02d" % (localctx.a.i) + ":" + "%02d" % (localctx.b.i) + ":_" 
+                localctx.s =  "%02d" % (localctx.a.i) + ":" + "%02d" % (localctx.b.i) + ":_"
                 pass
 
             elif la_ == 3:
@@ -8287,7 +8287,7 @@ class DateAndTimeParser ( Parser ):
                 self.match(DateAndTimeParser.T__0)
                 self.state = 1875
                 localctx.b = self.number()
-                localctx.s =  "%02d" % (localctx.a.i) + ":" + "%02d" % (localctx.b.i) + ":_" 
+                localctx.s =  "%02d" % (localctx.a.i) + ":" + "%02d" % (localctx.b.i) + ":_"
                 pass
 
             elif la_ == 4:
@@ -8298,7 +8298,7 @@ class DateAndTimeParser ( Parser ):
                 self.match(DateAndTimeParser.E)
                 self.state = 1880
                 localctx.b = self.number()
-                localctx.s =  "%02d" % (localctx.a.i) + ":" + "%02d" % (localctx.b.i) + ":_" 
+                localctx.s =  "%02d" % (localctx.a.i) + ":" + "%02d" % (localctx.b.i) + ":_"
                 pass
 
             elif la_ == 5:
@@ -8309,7 +8309,7 @@ class DateAndTimeParser ( Parser ):
                 self.match(DateAndTimeParser.MENO)
                 self.state = 1885
                 localctx.b = self.number()
-                localctx.s =  "%02d" % ((localctx.b.i+23) % 24) + ":" + "%02d" % ((60-localctx.a.i)) + ":_" 
+                localctx.s =  "%02d" % ((localctx.b.i+23) % 24) + ":" + "%02d" % ((60-localctx.a.i)) + ":_"
                 pass
 
             elif la_ == 6:
@@ -8322,7 +8322,7 @@ class DateAndTimeParser ( Parser ):
                 self.match(DateAndTimeParser.UN)
                 self.state = 1891
                 self.match(DateAndTimeParser.QUARTO)
-                localctx.s =  "%02d" % (str(localctx._number.i)) + ":" + 15 + ":_" 
+                localctx.s =  "%02d" % (localctx._number.i) + ":" + 15 + ":_"
                 pass
 
             elif la_ == 7:
@@ -8337,7 +8337,7 @@ class DateAndTimeParser ( Parser ):
                 self.match(DateAndTimeParser.LE)
                 self.state = 1898
                 localctx._number = self.number()
-                localctx.s =  "%02d" % (str(localctx._number.i)) + ":" + 15 + ":_" 
+                localctx.s =  "%02d" % (localctx._number.i) + ":" + 15 + ":_"
                 pass
 
             elif la_ == 8:
@@ -8350,7 +8350,7 @@ class DateAndTimeParser ( Parser ):
                 self.match(DateAndTimeParser.TRE)
                 self.state = 1904
                 self.match(DateAndTimeParser.QUARTI)
-                localctx.s =  "%02d" % (str(localctx._number.i)) + ":" + 45 + ":_" 
+                localctx.s =  "%02d" % (localctx._number.i) + ":" + 45 + ":_"
                 pass
 
             elif la_ == 9:
@@ -8363,7 +8363,7 @@ class DateAndTimeParser ( Parser ):
                 self.match(DateAndTimeParser.ALLE)
                 self.state = 1910
                 localctx._number = self.number()
-                localctx.s =  "%02d" % ((str(localctx._number.i)+23) % 24) + ":" + 45 + ":_" 
+                localctx.s =  "%02d" % ((localctx._number.i+23) % 24) + ":" + 45 + ":_"
                 pass
 
             elif la_ == 10:
@@ -8376,7 +8376,7 @@ class DateAndTimeParser ( Parser ):
                 self.match(DateAndTimeParser.UN)
                 self.state = 1916
                 self.match(DateAndTimeParser.QUARTO)
-                localctx.s =  "%02d" % ((str(localctx._number.i)+23) % 24) + ":" + 45 + ":_" 
+                localctx.s =  "%02d" % ((localctx._number.i+23) % 24) + ":" + 45 + ":_"
                 pass
 
             elif la_ == 11:
@@ -8387,14 +8387,14 @@ class DateAndTimeParser ( Parser ):
                 self.match(DateAndTimeParser.E)
                 self.state = 1921
                 self.match(DateAndTimeParser.MEZZO)
-                localctx.s =  "%02d" % (str(localctx._number.i)) + ":" + 30 + ":_" 
+                localctx.s =  "%02d" % (localctx._number.i) + ":" + 30 + ":_"
                 pass
 
             elif la_ == 12:
                 self.enterOuterAlt(localctx, 12)
                 self.state = 1924
                 localctx._threedignum = self.threedignum()
-                localctx.s =  "%02d" % ((localctx._threedignum.i / 100)) + ":" + "%02d" % ((localctx._threedignum.i % 100)) + ":_"  
+                localctx.s =  "%02d" % ((localctx._threedignum.i / 100)) + ":" + "%02d" % ((localctx._threedignum.i % 100)) + ":_"
                 pass
 
             elif la_ == 13:
@@ -8403,21 +8403,21 @@ class DateAndTimeParser ( Parser ):
                 self.match(DateAndTimeParser.ORE)
                 self.state = 1928
                 localctx._timenum = self.timenum()
-                localctx.s =  "%02d" % ((localctx._timenum.i / 100)) + ":" + "%02d" % ((localctx._timenum.i % 100)) + ":_"  
+                localctx.s =  "%02d" % ((localctx._timenum.i / 100)) + ":" + "%02d" % ((localctx._timenum.i % 100)) + ":_"
                 pass
 
             elif la_ == 14:
                 self.enterOuterAlt(localctx, 14)
                 self.state = 1931
                 localctx._timenum = self.timenum()
-                localctx.s =  "%02d" % ((localctx._timenum.i / 100)) + ":" + "%02d" % ((localctx._timenum.i % 100)) + ":_"  
+                localctx.s =  "%02d" % ((localctx._timenum.i / 100)) + ":" + "%02d" % ((localctx._timenum.i % 100)) + ":_"
                 pass
 
             elif la_ == 15:
                 self.enterOuterAlt(localctx, 15)
                 self.state = 1934
                 localctx._number = self.number()
-                localctx.s =  String.format("%02d",str(localctx._number.i)) + ":_:_" 
+                localctx.s =  "%02d" % (localctx._number.i) + ":_:_"
                 pass
 
 
@@ -8487,7 +8487,7 @@ class DateAndTimeParser ( Parser ):
                 self.match(DateAndTimeParser.DEL)
                 self.state = 1940
                 self.match(DateAndTimeParser.MATTINO)
-                localctx.s =  "$am$" 
+                localctx.s =  "$am$"
                 pass
 
             elif la_ == 2:
@@ -8496,7 +8496,7 @@ class DateAndTimeParser ( Parser ):
                 self.match(DateAndTimeParser.DI)
                 self.state = 1943
                 self.match(DateAndTimeParser.MATTINA)
-                localctx.s =  "$am$" 
+                localctx.s =  "$am$"
                 pass
 
             elif la_ == 3:
@@ -8505,7 +8505,7 @@ class DateAndTimeParser ( Parser ):
                 self.match(DateAndTimeParser.DELLA)
                 self.state = 1946
                 self.match(DateAndTimeParser.NOTTE)
-                localctx.s =  "$am$" 
+                localctx.s =  "$am$"
                 pass
 
             elif la_ == 4:
@@ -8514,7 +8514,7 @@ class DateAndTimeParser ( Parser ):
                 self.match(DateAndTimeParser.DI)
                 self.state = 1949
                 self.match(DateAndTimeParser.NOTTE)
-                localctx.s =  "$am$" 
+                localctx.s =  "$am$"
                 pass
 
             elif la_ == 5:
@@ -8523,7 +8523,7 @@ class DateAndTimeParser ( Parser ):
                 self.match(DateAndTimeParser.DEL)
                 self.state = 1952
                 self.match(DateAndTimeParser.POMERIGGIO)
-                localctx.s =  "$pm$" 
+                localctx.s =  "$pm$"
                 pass
 
             elif la_ == 6:
@@ -8532,7 +8532,7 @@ class DateAndTimeParser ( Parser ):
                 self.match(DateAndTimeParser.DI)
                 self.state = 1955
                 self.match(DateAndTimeParser.POMERIGGIO)
-                localctx.s =  "$pm$" 
+                localctx.s =  "$pm$"
                 pass
 
             elif la_ == 7:
@@ -8541,7 +8541,7 @@ class DateAndTimeParser ( Parser ):
                 self.match(DateAndTimeParser.DELLA)
                 self.state = 1958
                 self.match(DateAndTimeParser.SERA)
-                localctx.s =  "$pm$" 
+                localctx.s =  "$pm$"
                 pass
 
             elif la_ == 8:
@@ -8550,7 +8550,7 @@ class DateAndTimeParser ( Parser ):
                 self.match(DateAndTimeParser.DI)
                 self.state = 1961
                 self.match(DateAndTimeParser.SERA)
-                localctx.s =  "$pm$" 
+                localctx.s =  "$pm$"
                 pass
 
 
@@ -8627,7 +8627,7 @@ class DateAndTimeParser ( Parser ):
                 localctx._number = self.number()
                 self.state = 1966
                 localctx._month = self.month()
-                localctx.s =  "%02d" % (localctx._month.i) + ":" + "%02d" % (str(localctx._number.i)) 
+                localctx.s =  "%02d" % (localctx._month.i) + ":" + "%02d" % (localctx._number.i)
                 pass
 
             elif la_ == 2:
@@ -8636,7 +8636,7 @@ class DateAndTimeParser ( Parser ):
                 self.match(DateAndTimeParser.PRIMO)
                 self.state = 1970
                 localctx._month = self.month()
-                localctx.s =  "%02d" % (localctx._month.i) + ":01" 
+                localctx.s =  "%02d" % (localctx._month.i) + ":01"
                 pass
 
             elif la_ == 3:
@@ -8647,7 +8647,7 @@ class DateAndTimeParser ( Parser ):
                 self.match(DateAndTimeParser.SLASH)
                 self.state = 1975
                 localctx.b = self.number()
-                localctx.s =  "%02d" % (localctx.b.i) + ":" + "%02d" % (localctx.a.i) 
+                localctx.s =  "%02d" % (localctx.b.i) + ":" + "%02d" % (localctx.a.i)
                 pass
 
             elif la_ == 4:
@@ -8658,7 +8658,7 @@ class DateAndTimeParser ( Parser ):
                 self.maybedi()
                 self.state = 1980
                 localctx._month = self.month()
-                localctx.s =  "%02d" % (localctx._month.i) + ":" + "%02d" % (str(localctx._number.i)) 
+                localctx.s =  "%02d" % (localctx._month.i) + ":" + "%02d" % (localctx._number.i)
                 pass
 
             elif la_ == 5:
@@ -8671,14 +8671,14 @@ class DateAndTimeParser ( Parser ):
                 self.match(DateAndTimeParser.QUESTO)
                 self.state = 1986
                 self.match(DateAndTimeParser.MESE)
-                localctx.s =  "_:" + "%02d" % (str(localctx._number.i)) 
+                localctx.s =  "_:" + "%02d" % (localctx._number.i)
                 pass
 
             elif la_ == 6:
                 self.enterOuterAlt(localctx, 6)
                 self.state = 1989
                 localctx._month = self.month()
-                localctx.s =  "%02d" % (localctx._month.i) + ":_" 
+                localctx.s =  "%02d" % (localctx._month.i) + ":_"
                 pass
 
 
@@ -9058,73 +9058,73 @@ class DateAndTimeParser ( Parser ):
                 self.enterOuterAlt(localctx, 1)
                 self.state = 2018
                 self.match(DateAndTimeParser.GENNAIO)
-                localctx.i =  1 
+                localctx.i =  1
 
             elif token in [DateAndTimeParser.FEBBRAIO]:
                 self.enterOuterAlt(localctx, 2)
                 self.state = 2020
                 self.match(DateAndTimeParser.FEBBRAIO)
-                localctx.i =  2 
+                localctx.i =  2
 
             elif token in [DateAndTimeParser.MARZO]:
                 self.enterOuterAlt(localctx, 3)
                 self.state = 2022
                 self.match(DateAndTimeParser.MARZO)
-                localctx.i =  3 
+                localctx.i =  3
 
             elif token in [DateAndTimeParser.APRILE]:
                 self.enterOuterAlt(localctx, 4)
                 self.state = 2024
                 self.match(DateAndTimeParser.APRILE)
-                localctx.i =  4 
+                localctx.i =  4
 
             elif token in [DateAndTimeParser.MAGGIO]:
                 self.enterOuterAlt(localctx, 5)
                 self.state = 2026
                 self.match(DateAndTimeParser.MAGGIO)
-                localctx.i =  5 
+                localctx.i =  5
 
             elif token in [DateAndTimeParser.GIUGNO]:
                 self.enterOuterAlt(localctx, 6)
                 self.state = 2028
                 self.match(DateAndTimeParser.GIUGNO)
-                localctx.i =  6 
+                localctx.i =  6
 
             elif token in [DateAndTimeParser.LUGLIO]:
                 self.enterOuterAlt(localctx, 7)
                 self.state = 2030
                 self.match(DateAndTimeParser.LUGLIO)
-                localctx.i =  7 
+                localctx.i =  7
 
             elif token in [DateAndTimeParser.AGOSTO]:
                 self.enterOuterAlt(localctx, 8)
                 self.state = 2032
                 self.match(DateAndTimeParser.AGOSTO)
-                localctx.i =  8 
+                localctx.i =  8
 
             elif token in [DateAndTimeParser.SETTEMBRE]:
                 self.enterOuterAlt(localctx, 9)
                 self.state = 2034
                 self.match(DateAndTimeParser.SETTEMBRE)
-                localctx.i =  9 
+                localctx.i =  9
 
             elif token in [DateAndTimeParser.OTTOBRE]:
                 self.enterOuterAlt(localctx, 10)
                 self.state = 2036
                 self.match(DateAndTimeParser.OTTOBRE)
-                localctx.i =  10 
+                localctx.i =  10
 
             elif token in [DateAndTimeParser.NOVEMBRE]:
                 self.enterOuterAlt(localctx, 11)
                 self.state = 2038
                 self.match(DateAndTimeParser.NOVEMBRE)
-                localctx.i =  11 
+                localctx.i =  11
 
             elif token in [DateAndTimeParser.DICEMBRE]:
                 self.enterOuterAlt(localctx, 12)
                 self.state = 2040
                 self.match(DateAndTimeParser.DICEMBRE)
-                localctx.i =  12 
+                localctx.i =  12
 
             else:
                 raise NoViableAltException(self)
@@ -9179,13 +9179,13 @@ class DateAndTimeParser ( Parser ):
                 self.match(DateAndTimeParser.PER)
                 self.state = 2045
                 localctx._timecomponents = self.timecomponents()
-                localctx.s =  localctx._timecomponents.s 
+                localctx.s =  localctx._timecomponents.s
 
             elif token in [DateAndTimeParser.DUE, DateAndTimeParser.NUMBER, DateAndTimeParser.QUATTRO, DateAndTimeParser.TRE, DateAndTimeParser.UN, DateAndTimeParser.UNA]:
                 self.enterOuterAlt(localctx, 2)
                 self.state = 2048
                 localctx._timecomponents = self.timecomponents()
-                localctx.s =  localctx._timecomponents.s 
+                localctx.s =  localctx._timecomponents.s
 
             else:
                 raise NoViableAltException(self)
@@ -9290,7 +9290,7 @@ class DateAndTimeParser ( Parser ):
                 localctx.c = self.number()
                 self.state = 2059
                 self.match(DateAndTimeParser.SECONDI)
-                localctx.s =  "%02d" % (localctx.a.i) + ":" + "%02d" % (localctx.b.i) + ":" + "%02d" % (localctx.c.i)  
+                localctx.s =  "%02d" % (localctx.a.i) + ":" + "%02d" % (localctx.b.i) + ":" + "%02d" % (localctx.c.i)
                 pass
 
             elif la_ == 2:
@@ -9305,7 +9305,7 @@ class DateAndTimeParser ( Parser ):
                 localctx.b = self.number()
                 self.state = 2066
                 self.match(DateAndTimeParser.MINUTI)
-                localctx.s =  "%02d" % (localctx.a.i) + ":" + "%02d" % (localctx.b.i) + ":_" 
+                localctx.s =  "%02d" % (localctx.a.i) + ":" + "%02d" % (localctx.b.i) + ":_"
                 pass
 
             elif la_ == 3:
@@ -9320,7 +9320,7 @@ class DateAndTimeParser ( Parser ):
                 localctx.b = self.number()
                 self.state = 2073
                 self.match(DateAndTimeParser.SECONDI)
-                localctx.s =  "%02d" % (localctx.a.i) + ":_:" + "%02d" % (localctx.b.i)  
+                localctx.s =  "%02d" % (localctx.a.i) + ":_:" + "%02d" % (localctx.b.i)
                 pass
 
             elif la_ == 4:
@@ -9335,7 +9335,7 @@ class DateAndTimeParser ( Parser ):
                 localctx.b = self.number()
                 self.state = 2080
                 self.match(DateAndTimeParser.SECONDI)
-                localctx.s =  "_:" + "%02d" % (localctx.a.i) + ":" + "%02d" % (localctx.b.i)  
+                localctx.s =  "_:" + "%02d" % (localctx.a.i) + ":" + "%02d" % (localctx.b.i)
                 pass
 
             elif la_ == 5:
@@ -9344,7 +9344,7 @@ class DateAndTimeParser ( Parser ):
                 localctx._number = self.number()
                 self.state = 2084
                 self.match(DateAndTimeParser.ORE)
-                localctx.s =  "%02d:_:_" % (str(localctx._number.i))  
+                localctx.s =  "%02d:_:_" % (localctx._number.i)
                 pass
 
             elif la_ == 6:
@@ -9359,7 +9359,7 @@ class DateAndTimeParser ( Parser ):
                 self.match(DateAndTimeParser.UN)
                 self.state = 2091
                 self.match(DateAndTimeParser.QUARTO)
-                localctx.s =  String.format("%02d:" + 15 + ":_", str(localctx._number.i))  
+                localctx.s =  "%02d:15:_" % localctx._number.i
                 pass
 
             elif la_ == 7:
@@ -9372,7 +9372,7 @@ class DateAndTimeParser ( Parser ):
                 self.match(DateAndTimeParser.E)
                 self.state = 2097
                 self.match(DateAndTimeParser.MEZZO)
-                localctx.s =  String.format("%02d:" + 30 + ":_", str(localctx._number.i))  
+                localctx.s =  "%02d:30:_" % localctx._number.i
                 pass
 
             elif la_ == 8:
@@ -9387,7 +9387,7 @@ class DateAndTimeParser ( Parser ):
                 self.match(DateAndTimeParser.TRE)
                 self.state = 2104
                 self.match(DateAndTimeParser.QUARTI)
-                localctx.s =  String.format("%02d:" + 45 + ":_", str(localctx._number.i))  
+                localctx.s =  "%02d:45:_" % localctx._number.i
                 pass
 
             elif la_ == 9:
@@ -9402,7 +9402,7 @@ class DateAndTimeParser ( Parser ):
                 self.match(DateAndTimeParser.UN)
                 self.state = 2111
                 self.match(DateAndTimeParser.QUARTO)
-                localctx.s =  "01:15:_"  
+                localctx.s =  "01:15:_"
                 pass
 
             elif la_ == 10:
@@ -9415,7 +9415,7 @@ class DateAndTimeParser ( Parser ):
                 self.match(DateAndTimeParser.E)
                 self.state = 2116
                 self.match(DateAndTimeParser.MEZZO)
-                localctx.s =  "01:30:_"  
+                localctx.s =  "01:30:_"
                 pass
 
             elif la_ == 11:
@@ -9430,7 +9430,7 @@ class DateAndTimeParser ( Parser ):
                 self.match(DateAndTimeParser.TRE)
                 self.state = 2122
                 self.match(DateAndTimeParser.QUARTI)
-                localctx.s =  "01:45:_"  
+                localctx.s =  "01:45:_"
                 pass
 
             elif la_ == 12:
@@ -9439,7 +9439,7 @@ class DateAndTimeParser ( Parser ):
                 self.match(DateAndTimeParser.UN)
                 self.state = 2125
                 self.match(DateAndTimeParser.ORA)
-                localctx.s =  "01:_:_"  
+                localctx.s =  "01:_:_"
                 pass
 
             elif la_ == 13:
@@ -9448,7 +9448,7 @@ class DateAndTimeParser ( Parser ):
                 localctx._number = self.number()
                 self.state = 2128
                 self.match(DateAndTimeParser.MINUTI)
-                localctx.s =  "_:%02d:_" % (str(localctx._number.i))  
+                localctx.s =  "_:%02d:_" % (localctx._number.i)
                 pass
 
             elif la_ == 14:
@@ -9457,7 +9457,7 @@ class DateAndTimeParser ( Parser ):
                 localctx._number = self.number()
                 self.state = 2132
                 self.match(DateAndTimeParser.SECONDI)
-                localctx.s =  "_:_:%02d" % (str(localctx._number.i))  
+                localctx.s =  "_:_:%02d" % (localctx._number.i)
                 pass
 
 
@@ -9529,7 +9529,7 @@ class DateAndTimeParser ( Parser ):
                 self.match(DateAndTimeParser.DOPO)
                 self.state = 2138
                 localctx._timecomponents = self.timecomponents()
-                localctx.s =  "+:" + localctx._timecomponents.s 
+                localctx.s =  "+:" + localctx._timecomponents.s
                 pass
 
             elif la_ == 2:
@@ -9538,7 +9538,7 @@ class DateAndTimeParser ( Parser ):
                 self.match(DateAndTimeParser.FRA)
                 self.state = 2142
                 localctx._timecomponents = self.timecomponents()
-                localctx.s =  "+:" + localctx._timecomponents.s 
+                localctx.s =  "+:" + localctx._timecomponents.s
                 pass
 
             elif la_ == 3:
@@ -9547,7 +9547,7 @@ class DateAndTimeParser ( Parser ):
                 localctx._timecomponents = self.timecomponents()
                 self.state = 2146
                 self.match(DateAndTimeParser.DOPO)
-                localctx.s =  "+:" + localctx._timecomponents.s 
+                localctx.s =  "+:" + localctx._timecomponents.s
                 pass
 
             elif la_ == 4:
@@ -9558,7 +9558,7 @@ class DateAndTimeParser ( Parser ):
                 self.match(DateAndTimeParser.DA)
                 self.state = 2151
                 self.match(DateAndTimeParser.ADESSO)
-                localctx.s =  "+:" + localctx._timecomponents.s 
+                localctx.s =  "+:" + localctx._timecomponents.s
                 pass
 
             elif la_ == 5:
@@ -9569,7 +9569,7 @@ class DateAndTimeParser ( Parser ):
                 self.match(DateAndTimeParser.DA)
                 self.state = 2156
                 self.match(DateAndTimeParser.ORA)
-                localctx.s =  "+:" + localctx._timecomponents.s 
+                localctx.s =  "+:" + localctx._timecomponents.s
                 pass
 
             elif la_ == 6:
@@ -9578,7 +9578,7 @@ class DateAndTimeParser ( Parser ):
                 localctx._timecomponents = self.timecomponents()
                 self.state = 2160
                 self.match(DateAndTimeParser.FA)
-                localctx.s =  "-:" + localctx._timecomponents.s 
+                localctx.s =  "-:" + localctx._timecomponents.s
                 pass
 
             elif la_ == 7:
@@ -9587,7 +9587,7 @@ class DateAndTimeParser ( Parser ):
                 localctx._timecomponents = self.timecomponents()
                 self.state = 2164
                 self.match(DateAndTimeParser.PRIMA)
-                localctx.s =  "-:" + localctx._timecomponents.s 
+                localctx.s =  "-:" + localctx._timecomponents.s
                 pass
 
 
@@ -9643,25 +9643,25 @@ class DateAndTimeParser ( Parser ):
                 self.enterOuterAlt(localctx, 1)
                 self.state = 2169
                 self.match(DateAndTimeParser.AUTUNNO)
-                localctx.s =  "$autumn$" 
+                localctx.s =  "$autumn$"
 
             elif token in [DateAndTimeParser.ESTATE]:
                 self.enterOuterAlt(localctx, 2)
                 self.state = 2171
                 self.match(DateAndTimeParser.ESTATE)
-                localctx.s =  "$summer$" 
+                localctx.s =  "$summer$"
 
             elif token in [DateAndTimeParser.INVERNO]:
                 self.enterOuterAlt(localctx, 3)
                 self.state = 2173
                 self.match(DateAndTimeParser.INVERNO)
-                localctx.s =  "$winter$" 
+                localctx.s =  "$winter$"
 
             elif token in [DateAndTimeParser.PRIMAVERA]:
                 self.enterOuterAlt(localctx, 4)
                 self.state = 2175
                 self.match(DateAndTimeParser.PRIMAVERA)
-                localctx.s =  "$spring$" 
+                localctx.s =  "$spring$"
 
             else:
                 raise NoViableAltException(self)
@@ -9718,25 +9718,25 @@ class DateAndTimeParser ( Parser ):
                 self.enterOuterAlt(localctx, 1)
                 self.state = 2179
                 self.match(DateAndTimeParser.FERRAGOSTO)
-                localctx.s =  "$feast_of_the_assumption$" 
+                localctx.s =  "$feast_of_the_assumption$"
 
             elif token in [DateAndTimeParser.NATALE]:
                 self.enterOuterAlt(localctx, 2)
                 self.state = 2181
                 self.match(DateAndTimeParser.NATALE)
-                localctx.s =  "$christmas$" 
+                localctx.s =  "$christmas$"
 
             elif token in [DateAndTimeParser.PASQUA]:
                 self.enterOuterAlt(localctx, 3)
                 self.state = 2183
                 self.match(DateAndTimeParser.PASQUA)
-                localctx.s =  "$easter$" 
+                localctx.s =  "$easter$"
 
             elif token in [DateAndTimeParser.SANVALENTINO]:
                 self.enterOuterAlt(localctx, 4)
                 self.state = 2185
                 self.match(DateAndTimeParser.SANVALENTINO)
-                localctx.s =  "$valentine$" 
+                localctx.s =  "$valentine$"
 
             else:
                 raise NoViableAltException(self)
@@ -9813,7 +9813,7 @@ class DateAndTimeParser ( Parser ):
                 self.match(DateAndTimeParser.QUESTA)
                 self.state = 2190
                 self.match(DateAndTimeParser.STAGIONE)
-                localctx.s =  "$season:0$" 
+                localctx.s =  "$season:0$"
                 pass
 
             elif la_ == 2:
@@ -9822,7 +9822,7 @@ class DateAndTimeParser ( Parser ):
                 self.match(DateAndTimeParser.STAGIONE)
                 self.state = 2193
                 self.match(DateAndTimeParser.SCORSA)
-                localctx.s =  "$season:-1$" 
+                localctx.s =  "$season:-1$"
                 pass
 
             elif la_ == 3:
@@ -9831,7 +9831,7 @@ class DateAndTimeParser ( Parser ):
                 self.match(DateAndTimeParser.SCORSA)
                 self.state = 2196
                 self.match(DateAndTimeParser.STAGIONE)
-                localctx.s =  "$season:-1$" 
+                localctx.s =  "$season:-1$"
                 pass
 
             elif la_ == 4:
@@ -9842,7 +9842,7 @@ class DateAndTimeParser ( Parser ):
                 self.match(DateAndTimeParser.STAGIONE)
                 self.state = 2200
                 self.match(DateAndTimeParser.FA)
-                localctx.s =  "$season:-1$" 
+                localctx.s =  "$season:-1$"
                 pass
 
             elif la_ == 5:
@@ -9853,7 +9853,7 @@ class DateAndTimeParser ( Parser ):
                 self.match(DateAndTimeParser.STAGIONE)
                 self.state = 2204
                 self.match(DateAndTimeParser.PRIMA)
-                localctx.s =  "$season:-1$" 
+                localctx.s =  "$season:-1$"
                 pass
 
             elif la_ == 6:
@@ -9862,7 +9862,7 @@ class DateAndTimeParser ( Parser ):
                 self.match(DateAndTimeParser.STAGIONE)
                 self.state = 2207
                 self.match(DateAndTimeParser.PROSSIMA)
-                localctx.s =  "$season:1$" 
+                localctx.s =  "$season:1$"
                 pass
 
             elif la_ == 7:
@@ -9871,7 +9871,7 @@ class DateAndTimeParser ( Parser ):
                 self.match(DateAndTimeParser.PROSSIMA)
                 self.state = 2210
                 self.match(DateAndTimeParser.STAGIONE)
-                localctx.s =  "$season:1$" 
+                localctx.s =  "$season:1$"
                 pass
 
             elif la_ == 8:
@@ -9880,7 +9880,7 @@ class DateAndTimeParser ( Parser ):
                 self.match(DateAndTimeParser.STAGIONE)
                 self.state = 2213
                 self.match(DateAndTimeParser.VENTURA)
-                localctx.s =  "$season:1$" 
+                localctx.s =  "$season:1$"
                 pass
 
             elif la_ == 9:
@@ -9891,7 +9891,7 @@ class DateAndTimeParser ( Parser ):
                 self.match(DateAndTimeParser.UNA)
                 self.state = 2217
                 self.match(DateAndTimeParser.STAGIONE)
-                localctx.s =  "$season:1$" 
+                localctx.s =  "$season:1$"
                 pass
 
             elif la_ == 10:
@@ -9902,7 +9902,7 @@ class DateAndTimeParser ( Parser ):
                 self.match(DateAndTimeParser.UNA)
                 self.state = 2221
                 self.match(DateAndTimeParser.STAGIONE)
-                localctx.s =  "$season:1$" 
+                localctx.s =  "$season:1$"
                 pass
 
             elif la_ == 11:
@@ -9913,7 +9913,7 @@ class DateAndTimeParser ( Parser ):
                 self.match(DateAndTimeParser.STAGIONE)
                 self.state = 2225
                 self.match(DateAndTimeParser.DOPO)
-                localctx.s =  "$season:1$" 
+                localctx.s =  "$season:1$"
                 pass
 
 
@@ -9982,31 +9982,31 @@ class DateAndTimeParser ( Parser ):
                 self.enterOuterAlt(localctx, 2)
                 self.state = 2231
                 self.match(DateAndTimeParser.UN)
-                localctx.i =  1 
+                localctx.i =  1
 
             elif token in [DateAndTimeParser.UNA]:
                 self.enterOuterAlt(localctx, 3)
                 self.state = 2233
                 self.match(DateAndTimeParser.UNA)
-                localctx.i =  1 
+                localctx.i =  1
 
             elif token in [DateAndTimeParser.DUE]:
                 self.enterOuterAlt(localctx, 4)
                 self.state = 2235
                 self.match(DateAndTimeParser.DUE)
-                localctx.i =  2 
+                localctx.i =  2
 
             elif token in [DateAndTimeParser.TRE]:
                 self.enterOuterAlt(localctx, 5)
                 self.state = 2237
                 self.match(DateAndTimeParser.TRE)
-                localctx.i =  3 
+                localctx.i =  3
 
             elif token in [DateAndTimeParser.QUATTRO]:
                 self.enterOuterAlt(localctx, 6)
                 self.state = 2239
                 self.match(DateAndTimeParser.QUATTRO)
-                localctx.i =  4 
+                localctx.i =  4
 
             else:
                 raise NoViableAltException(self)
