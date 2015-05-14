@@ -138,7 +138,7 @@ def to_assertions(labeled_results, debug, outfile='dataset.ttl', format='turtle'
         if not frame:
             if debug:
                 print "Couldn't disambiguate any known frames in '%s'" % result['sentence']
-            discarded.append(result)
+            discarded.append(result['sentence'])
             continue
         fes = result.get('FEs')
         if not fes:
@@ -163,5 +163,7 @@ if __name__ == '__main__':
     labeled = process_dir(sys.argv[1], debug)
     json.dump(labeled, codecs.open('labeled_data.json', 'wb', 'utf-8'), ensure_ascii=False, indent=2)
     discarded = to_assertions(labeled, debug)
+    with codecs.open('discarded', 'wb', 'utf-8') as o:
+        o.writelines([sentence + '\n' for sentence in discarded])
     if debug:
         print '%d out of %d NOT DISAMBIGUATED' % (len(discarded), len(labeled))
