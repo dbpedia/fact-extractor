@@ -197,8 +197,7 @@ def combine_contiguous(sentence, combined):
 
     def contiguous(c1, c2):
         """ contiguous if no letters between chunks """
-        between = sentence[c1['end']:c2['start']]
-        return all(not c.isalpha() for c in between)
+        return c1['end'] + 1 == c2['start']
 
     final = list()
 
