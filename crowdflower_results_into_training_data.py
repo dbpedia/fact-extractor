@@ -117,6 +117,7 @@ def process_sentence(sentence_id, annotations, lines):
         found = False
         i = j = 0
 
+        # try to match all tokens of the entity
         while i < len(processed):
             word = processed[i][2]
 
@@ -141,34 +142,28 @@ def process_sentence(sentence_id, annotations, lines):
                 replacement = [sentence_id, '-', entity, to_replace[3], entity,
                                annotations['frame'], tag]
 
-            try:
-                date_tokens = {DateEnum.TIMEX_DATE, DateEnum.TIMEX_DATE_DURATION,
-                               DateEnum.TIMEX_END_DATE, DateEnum.TIMEX_SEASON,
-                               DateEnum.TIMEX_YEAR, DateEnum.TIMEX_SEASON}
-                date_norm = [x for x in date_normalizer.get_tokens(entity)
-                             if x['type'] in date_tokens and x['value']]
-
-                if date_norm:
-                    print '--- entity: "%s" norm ' % entity + str(date_norm)
-            except Exception as ex:
-                pass
-
             processed = processed[:match_start] + [replacement] + processed[i + 1:]
+
+
+    # normalize dates
+    for row in processed:
+        entity, tag = row[2], row[-1]
+
+        if tag in {u'B-Tempo_Attività', u'B-Durata_Attività'}:
+            date_norm = filter(lambda x: x and x['value'],
+                               date_normalizer.get_tokens(entity))
+            if date_norm:
+                if sentence_id == '1': import pdb; pdb.set_trace()
+                replacement[2] = date_norm[0]['value']
+                replacement[3] = str(date_norm[0]['type'])
+            else:
+                print 'WARNING cannot normalize %s "%s"' % (tag, entity)
+
 
     # insert correct token ids
     for i, p in enumerate(processed):
         p[1] = str(i)
-
     
-    try:
-        sentence = ' '.join(x[2] for x in processed)
-        date_norm = date_normalizer.get_tokens(sentence)
-        #if date_norm: #and all(x['value'] for x in date_norm):
-        #    print '--- sentence: "%s" norm ' % sentence + str(date_norm)
-    except:
-        pass
-
-    #import pdb;pdb.set_trace()
     clean = OrderedSet()
     for line in processed:
         clean.add('\t'.join(line))

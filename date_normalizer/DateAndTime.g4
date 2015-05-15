@@ -728,7 +728,7 @@ result = dict()
 result['type'] = DateEnum.TIMEX_END_DATE;
 result['value'] = $r.s;
 self.results.append(result);
-            }
+    }
     // 3 giorni fa, dopodomani
     | day_relative
       {
@@ -1572,7 +1572,7 @@ GENNAIO   : 'gen''n'?'naio'? ;
 GIORNALMENTE  : 'giornalmente' ;
 GIORNI     : 'giorni' ;
 GIORNO      : 'giorno' ;
-GIOVEDI     : 'gio''vedi'? ;
+GIOVEDI     : 'gio'(' '|'v '|'vedi') ;
 GIUGNO      : 'giu''gno'? ;
 GLI       : 'gli' ;
 IERI      : 'ieri' ;
