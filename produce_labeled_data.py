@@ -56,9 +56,9 @@ def label_sentence(entity_linking_results, debug):
                     core = False
                     assigned_fes = []
                     for diz in val:
-                        chunk = diz['chunk']
+                        chunk = {'chunk': diz['chunk'], 'uri': diz['uri']}
                         # Filter out linked stopwords
-                        if chunk.lower() in stopwords.StopWords.words('italian'):
+                        if chunk['chunk'].lower() in stopwords.StopWords.words('italian'):
                             continue
                         types = diz['types']
                         #### FE assignment ###
@@ -68,7 +68,7 @@ def label_sentence(entity_linking_results, debug):
                                 looked_up = mapping.get(t[28:])
                                 if looked_up:
                                     if debug:
-                                        print 'Chunk "%s" has an ontology type "%s" that maps to FE "%s"' % (chunk, t[28:], looked_up)
+                                        print 'Chunk "%s" has an ontology type "%s" that maps to FE "%s"' % (chunk['chunk'], t[28:], looked_up)
                                     ### Frame disambiguation strategy ###
                                     # If there is at least one core FE, then assign that frame
                                     # Will not work if the FEs across competing frames have the same ontology type
@@ -78,12 +78,19 @@ def label_sentence(entity_linking_results, debug):
                                     for fe in FEs:
                                         if type(looked_up) == list:
                                             for shared_type_fe in looked_up:
-                                                if fe.get(shared_type_fe) == 'core':
+                                                shared_fe_type = fe.get(shared_type_fe)
+                                                # TODO overwritten value
+                                                if shared_fe_type:
+                                                    chunk['type'] = shared_fe_type
+                                                if shared_fe_type == 'core':
                                                     if debug:
                                                         print 'Looked up FE "%s" is core' % shared_type_fe
                                                     core = True
                                         else:
-                                            if fe.get(looked_up) == 'core':
+                                            fe_type = fe.get(looked_up)
+                                            if fe_type:
+                                                chunk['type'] = fe_type
+                                            if fe_type == 'core':
                                                 if debug:
                                                     print 'Looked up FE "%s" is core for frame "%s"' % (looked_up, frame['frame'])
                                                 core = True
@@ -92,9 +99,11 @@ def label_sentence(entity_linking_results, debug):
                                     # Needs to be adjusted by humans
                                     if type(looked_up) == list:
                                         chosen = random.choice(looked_up)
-                                        assigned_fes.append({'chunk': chunk, 'uri': diz['uri'], 'FE': chosen, 'type': fe[chosen]})
+                                        chunk['FE'] = chosen
+                                        assigned_fes.append(chunk)
                                     else:
-                                        assigned_fes.append({'chunk': chunk, 'uri': diz['uri'], 'FE': looked_up, 'type': fe[looked_up]})
+                                        chunk['FE'] = looked_up
+                                        assigned_fes.append(chunk)
                     # Continue to next frame if no core FE was found
                     if not core:
                         if debug:
