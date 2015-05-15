@@ -92,9 +92,9 @@ def label_sentence(entity_linking_results, debug):
                                     # Needs to be adjusted by humans
                                     if type(looked_up) == list:
                                         chosen = random.choice(looked_up)
-                                        assigned_fes.append({'chunk': chunk, 'uri': diz['uri'], 'FE': chosen})
+                                        assigned_fes.append({'chunk': chunk, 'uri': diz['uri'], 'FE': chosen, 'type': fe[chosen]})
                                     else:
-                                        assigned_fes.append({'chunk': chunk, 'uri': diz['uri'], 'FE': looked_up})
+                                        assigned_fes.append({'chunk': chunk, 'uri': diz['uri'], 'FE': looked_up, 'type': fe[looked_up]})
                     # Continue to next frame if no core FE was found
                     if not core:
                         if debug:
