@@ -130,7 +130,8 @@
                         { "SoccerLeague": "Competizione" },
                         { "SoccerTournament": "Competizione" },
                         { "SoccerLeagueSeason": "Competizione" },
-                        { "SoccerClub": ["Squadra_1", "Squadra_2"] }
+                        { "SoccerClub": ["Squadra_1", "Squadra_2"] },
+                        { "Place": "Luogo" }
                     ]
                 },
                 {
@@ -210,7 +211,8 @@
                         { "SoccerLeague": "Competizione" },
                         { "SoccerTournament": "Competizione" },
                         { "SoccerLeagueSeason": "Competizione" },
-                        { "SoccerClub": ["Vincitore", "Perdente"] }
+                        { "SoccerClub": ["Vincitore", "Perdente"] },
+                        { "Place": "Luogo" }
                     ]
                 }
             ]
@@ -287,7 +289,8 @@
                     "DBpedia":
                     [
                         { "SoccerClub": "Squadra" },
-                        { "SoccerPlayer": "Entità" }
+                        { "SoccerPlayer": "Entità" },
+                        { "Place": "Luogo" }
                     ]
                 }
             ]
@@ -376,7 +379,8 @@
                         { "SoccerLeague": "Competizione" },
                         { "SoccerTournament": "Competizione" },
                         { "SoccerLeagueSeason": "Competizione" },
-                        { "SoccerClub": ["Vincitore", "Perdente"] }
+                        { "SoccerClub": ["Vincitore", "Perdente"] },
+                        { "Place": "Luogo" }
                     ]
                 },
                 {
@@ -396,7 +400,8 @@
                         { "SoccerLeague": "Competizione" },
                         { "SoccerTournament": "Competizione" },
                         { "SoccerLeagueSeason": "Competizione" },
-                        { "SoccerPlayer": "Concorrente" }
+                        { "SoccerPlayer": "Concorrente" },
+                        { "Place": "Luogo" }
                     ]
                 }
             ]
