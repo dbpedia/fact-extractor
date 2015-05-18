@@ -389,6 +389,7 @@
                     [
                         { "Concorrente": "core" },
                         { "Competizione": "core" },
+                        { "Squadra": "extra" },
                         { "Premio": "extra" },
                         { "Luogo": "extra" },
                         { "Tempo": "extra" },
@@ -401,6 +402,7 @@
                         { "SoccerTournament": "Competizione" },
                         { "SoccerLeagueSeason": "Competizione" },
                         { "SoccerPlayer": "Concorrente" },
+                        { "SoccerClub": "Squadra" },
                         { "Place": "Luogo" }
                     ]
                 }
