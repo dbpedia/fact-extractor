@@ -102,10 +102,14 @@ def label_sentence(entity_linking_results, debug):
                                     if type(looked_up) == list:
                                         chosen = random.choice(looked_up)
                                         chunk['FE'] = chosen
-                                        assigned_fes.append(chunk)
+                                        # Avoid duplicates
+                                        if chunk not in assigned_fes:
+                                            assigned_fes.append(chunk)
                                     else:
                                         chunk['FE'] = looked_up
-                                        assigned_fes.append(chunk)
+                                        # Avoid duplicates
+                                        if chunk not in assigned_fes:
+                                            assigned_fes.append(chunk)
                     # Continue to next frame if NO core FE was found
                     if not core:
                         if debug:
@@ -132,7 +136,7 @@ def label_sentence(entity_linking_results, debug):
                                 labeled['FEs'] = assigned_fes
                         else:
                             labeled['frame'] = current_frame
-                            labeled['FEs'] = assigned_fes                    
+                            labeled['FEs'] = assigned_fes
     return labeled
 
 
