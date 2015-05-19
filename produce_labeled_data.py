@@ -69,8 +69,9 @@ def label_sentence(entity_linking_results, debug):
                                 if looked_up:
                                     if debug:
                                         print 'Chunk "%s" has an ontology type "%s" that maps to FE "%s"' % (chunk['chunk'], t[28:], looked_up)
-                                    ### Frame disambiguation strategy ###
-                                    # If there is at least one core FE, then assign that frame
+                                    ### Frame disambiguation strategy, part 1 ###
+                                    # If there is AT LEAST ONE core FE, then assign that frame
+                                    # TODO strict assignment: ALL core FEs must be found
                                     # Will not work if the FEs across competing frames have the same ontology type
                                     # e.g., Attività > Squadra and Partita > [Squadra_1, Squadra_2]
 
@@ -84,7 +85,7 @@ def label_sentence(entity_linking_results, debug):
                                                     chunk['type'] = shared_fe_type
                                                 if shared_fe_type == 'core':
                                                     if debug:
-                                                        print 'Looked up FE "%s" is core' % shared_type_fe
+                                                        print 'Mapped FE "%s" is core for frame "%s"' % (shared_type_fe, frame['frame'])
                                                     core = True
                                         else:
                                             fe_type = fe.get(looked_up)
@@ -92,10 +93,11 @@ def label_sentence(entity_linking_results, debug):
                                                 chunk['type'] = fe_type
                                             if fe_type == 'core':
                                                 if debug:
-                                                    print 'Looked up FE "%s" is core for frame "%s"' % (looked_up, frame['frame'])
+                                                    print 'Mapped FE "%s" is core for frame "%s"' % (looked_up, frame['frame'])
                                                 core = True
-                                    # No FE disambiguation when multiple FEs have the same ontology type, e.g., [Vincitore, Perdente] -> Club
-                                    # Baseline strategy = random assignment
+                                    ### FE disambiguation strategy ###
+                                    # If multiple FEs have the same ontology type, e.g., [Vincitore, Perdente] -> Club
+                                    # BASELINE = random assignment
                                     # Needs to be adjusted by humans
                                     if type(looked_up) == list:
                                         chosen = random.choice(looked_up)
@@ -104,19 +106,33 @@ def label_sentence(entity_linking_results, debug):
                                     else:
                                         chunk['FE'] = looked_up
                                         assigned_fes.append(chunk)
-                    # Continue to next frame if no core FE was found
+                    # Continue to next frame if NO core FE was found
                     if not core:
                         if debug:
                             print 'No core FE for frame "%s": skipping' % frame['frame']
                         continue
                     # Otherwise assign frame and previously stored FEs
                     else:
-                        labeled['frame'] = frame['frame']
-                        labeled['FEs'] = assigned_fes
                         if debug:
-                            print 'ASSIGNED FRAME: %s' % frame['frame']
-                            print 'ASSIGNED FEs: %s' % assigned_fes
-                    
+                            print 'ASSIGNING FRAME: %s' % frame['frame']
+                            print 'ASSIGNING FEs: %s' % assigned_fes
+                        ### Frame disambiguation strategy, part 2 ###
+                        # If at least 1 core FE is detected in multiple frames:
+                        # BASELINE = random assignment
+                        # Needs to be adjusted by humans
+                        current_frame = frame['frame']
+                        previous_frame = labeled.get('frame')
+                        if previous_frame:
+                            if debug:
+                                print 'Core FEs for multiple frames were detected. Making a random assignment...'
+                            previous_FEs = labeled['FEs']
+                            choice = random.choice([previous_frame, current_frame])
+                            if choice == current_frame:
+                                labeled['frame'] = current_frame
+                                labeled['FEs'] = assigned_fes
+                        else:
+                            labeled['frame'] = current_frame
+                            labeled['FEs'] = assigned_fes                    
     return labeled
 
 
