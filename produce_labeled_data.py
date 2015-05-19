@@ -123,10 +123,10 @@ def label_sentence(entity_linking_results, debug):
                         current_frame = frame['frame']
                         previous_frame = labeled.get('frame')
                         if previous_frame:
-                            if debug:
-                                print 'Core FEs for multiple frames were detected. Making a random assignment...'
                             previous_FEs = labeled['FEs']
                             choice = random.choice([previous_frame, current_frame])
+                            if debug:
+                                print 'CORE FES FOR MULTIPLE FRAMES WERE DETECTED. MAKING A RANDOM ASSIGNMENT: %s' % choice
                             if choice == current_frame:
                                 labeled['frame'] = current_frame
                                 labeled['FEs'] = assigned_fes
