@@ -17,7 +17,7 @@ would produce statements like:
 ```
 
 ## Have you already?
-Introduced yourself in the [DBpedia GSoC mailing list](https://lists.sourceforge.net/lists/listinfo/dbpedia-gsoc)?
+Introduced yourself in the [DBpedia mailing list](https://lists.sourceforge.net/lists/listinfo/dbpedia-discussion)?
 If not, please do so!
 
 ## High-level Workflow + Related Code
