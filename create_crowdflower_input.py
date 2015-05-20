@@ -10,8 +10,8 @@ import re
 import sys
 from collections import defaultdict
 
-
-LU_FRAME_MAP_LOCATION = 'resources/soccer-lu2frame-dbptypes.json'
+# Keep the task simple: avoid timex and numeric FEs in frame definitions
+LU_FRAME_MAP_LOCATION = 'resources/soccer-lu2frame-dbptypes-notimex.json'
 LU_FRAME_MAP = json.load(open(LU_FRAME_MAP_LOCATION))
 
 
@@ -47,7 +47,7 @@ def prepare_crowdflower_input(labeled_data, chunk_data, debug):
                 chunks.remove(chunk)
         if debug:
             print 'PRUNED CHUNKS: %s' % chunks
-        # Add FEs that were not retrieved by the unsupervised strategy
+        # Add FEs from the frame definition, even if some are already labeled
         for lu_obj in LU_FRAME_MAP:
             lu = lu_obj['lu']['lemma']
             if not lu == input_row['lu']:
@@ -57,8 +57,6 @@ def prepare_crowdflower_input(labeled_data, chunk_data, debug):
                     continue
                 for j, fe in enumerate(frame['FEs']):
                     fe_name, fe_type = fe.items()[0] # Always only one dict
-                    if fe_name in fe_names:
-                        continue
                     input_row['fe_name%02d' % j] = fe_name
                     input_row['fe_name%02d_type' % j] = fe_type
                 for k, chunk in enumerate(chunks):
