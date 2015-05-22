@@ -381,7 +381,7 @@
                         { "SoccerLeague": "Competizione" },
                         { "SoccerTournament": "Competizione" },
                         { "SoccerLeagueSeason": "Competizione" },
-                        { "SoccerPlayer": "Concorrente" },
+                        { "SoccerPlayer": "Vincitore" },
                         { "SoccerClub": "Squadra" },
                         { "Place": "Luogo" }
                     ]
