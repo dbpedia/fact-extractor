@@ -54,6 +54,16 @@ def load_expected_fes(frame_definitions):
     return expected
 
 
+def load_expected_frames(frame_gold):
+    """Build the dict with the expected frames for all the sentences"""
+    expected = {}
+    for line in frame_gold:
+        sentence, frames = line.strip().split('\t')
+        frames = frames.split('|')
+        expected[sentence] = frames
+    return expected
+    
+    
 def read_crowdflower_full_results(full_results):
     """ Reads and aggregates the CrowdFlower full annotation results from an open stream"""
     processed = {}
@@ -93,8 +103,23 @@ def read_crowdflower_full_results(full_results):
     return processed
 
 
-def frame_positives(processed_annotation_results):
+def frame_positives(labeled_data, frame_gold, logger):
     """Compute frame true and false positives"""
+    tp = fp = 0
+    logger.debug(frame_gold)
+    for sentence in labeled_data:
+        snt = sentence['sentence']
+        seen = sentence['frame']
+        expected = frame_gold.get(snt)
+        if not expected:
+            continue
+        logger.debug("Sentence [%s]: frame = [%s]" % (snt, seen))
+        logger.debug("Expected frames = %s" % expected)
+        if seen in expected:
+            tp += 1
+            logger.debug("+1 true positive!")
+        else:
+            fp += 1
     return tp, fp
 
 
@@ -173,6 +198,7 @@ def create_cli_parser():
     parser = argparse.ArgumentParser(description='Evaluate the unsupervised approach via standard measures (p, r, f1)')
     parser.add_argument('labeled_data', type=argparse.FileType('r'), help='JSON file containing labeled data for each sentence')
     parser.add_argument('annotation_results', type=argparse.FileType('r'), help='CrowdFlower CSV file containing the annotation results to evaluate against')
+    parser.add_argument('frame_gold', type=argparse.FileType('r'), help='TSV file containing sentences annotated with frames to evaluate against')
     parser.add_argument('--debug', action='store_const', const='debug', help='Toggle debug mode')
     return parser
     
@@ -189,9 +215,13 @@ def main(args):
     fe_tp, fe_fp = fe_positives(results, logger)
     fe_precision = precision(fe_tp, fe_fp)
     expected = load_expected_fes(FRAME_DEFINITIONS)
-    labeled_data_subset = get_labeled_data_subset(labeled_data, results)
+    labeled_data_subset = get_labeled_data_subset(labeled_data, results, logger)
     fe_fn = fe_false_negatives(labeled_data_subset, expected, logger)
     fe_recall = recall(fe_tp, fe_fn)
+    expected_frames = load_expected_frames(args.frame_gold)
+    frame_tp, frame_fp = frame_positives(labeled_data, expected_frames, logger)
+    frame_precision = precision(frame_tp, frame_fp)
+    logger.info("Frame precision = %f" % frame_precision)
     logger.info("FE precision = %f" % fe_precision)
     logger.info("FE recall = %f" % fe_recall)
     logger.info("FE F1 = %f" % f1(fe_precision, fe_recall))
