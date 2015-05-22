@@ -125,7 +125,17 @@ def frame_false_negatives(missed_sentences):
     """Compute frame false negatives"""
     return len(missed_sentences)
     
-
+    
+def get_labeled_data_subset(full_labeled_data, processed_annotation_results, logger):
+    """Return the labeled data subset corresponding to the annotation results"""
+    subset = []
+    sentence_ids = processed_annotation_results.keys()
+    for sentence in full_labeled_data:
+        if sentence['id'] in sentence_ids:
+            subset.append(sentence)
+    return subset
+    
+    
 # FIXME we are comparing against the frame definitions, not the gold standard here!!!
 def fe_false_negatives(labeled_data, expected_fes, logger):
     """Compute core FEs false negatives"""
@@ -167,9 +177,7 @@ def create_cli_parser():
     return parser
     
 
-def main():
-    cli = create_cli_parser()
-    args = cli.parse_args()
+def main(args):
     if args.debug:
         logger = setup_logger(args.debug)
     else:
@@ -177,14 +185,20 @@ def main():
     labeled_data = load_labeled_data(args.labeled_data)
     results = read_crowdflower_full_results(args.annotation_results)
     set_majority_vote_answer(results)
+    logger.debug(json.dumps(results, ensure_ascii=False, indent=2))
     fe_tp, fe_fp = fe_positives(results, logger)
-    print precision(fe_tp, fe_fp)
-    # print json.dumps(results, ensure_ascii=False, indent=2)
-    # expected = load_expected_fes(FRAME_DEFINITIONS)
-    # fe_fn = fe_false_negatives(labeled_data, expected, logger)
-    # print fe_fn
+    fe_precision = precision(fe_tp, fe_fp)
+    expected = load_expected_fes(FRAME_DEFINITIONS)
+    labeled_data_subset = get_labeled_data_subset(labeled_data, results)
+    fe_fn = fe_false_negatives(labeled_data_subset, expected, logger)
+    fe_recall = recall(fe_tp, fe_fn)
+    logger.info("FE precision = %f" % fe_precision)
+    logger.info("FE recall = %f" % fe_recall)
+    logger.info("FE F1 = %f" % f1(fe_precision, fe_recall))
     return 0
     
     
 if __name__ == '__main__':
-    exit(main())
+    cli = create_cli_parser()
+    args = cli.parse_args()
+    exit(main(args))
