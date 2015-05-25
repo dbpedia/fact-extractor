@@ -29,6 +29,7 @@
                         { "Squadra": "core" },
                         { "Agente": "extra" },
                         { "Durata": "extra" },
+                        { "Luogo": "extra" },
                         { "Tempo": "extra" }
                     ],
                     "DBpedia":
@@ -37,6 +38,7 @@
                         { "SoccerTournament": "Competizione" },
                         { "SoccerLeagueSeason": "Competizione" },
                         { "SoccerClub": "Squadra" },
+                        { "Place": "Luogo" },
                         { "SoccerPlayer": "Agente" }
                     ]
                 }
@@ -142,6 +144,7 @@
                         { "Squadra": "core" },
                         { "Agente": "extra" },
                         { "Durata": "extra" },
+                        { "Luogo": "extra" },
                         { "Tempo": "extra" }
                     ],
                     "DBpedia":
@@ -150,6 +153,7 @@
                         { "SoccerTournament": "Competizione" },
                         { "SoccerLeagueSeason": "Competizione" },
                         { "SoccerClub": "Squadra" },
+                        { "Place": "Luogo" },
                         { "SoccerPlayer": "Agente" }
                     ]
                 }
@@ -264,6 +268,7 @@
                         { "Squadra": "core" },
                         { "Agente": "extra" },
                         { "Durata": "extra" },
+                        { "Luogo": "extra" },
                         { "Tempo": "extra" }
                     ],
                     "DBpedia":
@@ -272,6 +277,7 @@
                         { "SoccerTournament": "Competizione" },
                         { "SoccerLeagueSeason": "Competizione" },
                         { "SoccerClub": "Squadra" },
+                        { "Place": "Luogo" },
                         { "SoccerPlayer": "Agente" }
                     ]
                 },
