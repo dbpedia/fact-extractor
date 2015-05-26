@@ -205,8 +205,17 @@ def load_full_gold_standard(full_gold_standard):
     return loaded
 
 
-def evaluate_against_full_gold_standard(labeled_data, gold_standard, logger):
-    """Evaluate the unsupervised approach output against a full annotation gold standard"""
+def evaluate_against_gold(labeled_data, gold_standard, logger, exact):
+    """
+    Evaluate the unsupervised approach output against a fully annotated gold standard.
+    FE chunks checking:
+    exact = exact string matching
+    partial = substring matching
+    """
+    if exact:
+        logger.info("FE chunks EXACT checking enabled")
+    else:
+        logger.info("FE chunks PARTIAL checking enabled")
     frame_tp = frame_fp = frame_fn = fe_tp = fe_fp = fe_fn = 0
     for sentence in labeled_data:
         sentence_id = sentence['id']
@@ -255,22 +264,42 @@ def evaluate_against_full_gold_standard(labeled_data, gold_standard, logger):
             expected[expected_chunk] = expected_fe
         logger.debug("Expected FEs: %s" % expected)
         for chunk, fe in expected.iteritems():
-            # Strict checking
-            # TODO Don't be strict on FE chunks, if the seen chunk is a substring of the expected one, it's still OK
-            if chunk in seen.keys():
-                logger.debug("Expected chunk [%s] FOUND in seen chunks %s" % (chunk, seen.keys()))
-                if fe == seen[chunk]:
-                    logger.debug("Seen FE = [%s], expected = [%s]" % (seen[chunk], fe))
-                    fe_tp += 1
-                    logger.debug("+1 FE TRUE positive, current precision = %f" % precision(fe_tp, fe_fp))
+            # Exact checking
+            if exact:
+                if chunk in seen.keys():
+                    logger.debug("Expected chunk [%s] FOUND in seen chunks %s" % (chunk, seen.keys()))
+                    if fe == seen[chunk]:
+                        logger.debug("Seen FE = [%s], expected = [%s]" % (seen[chunk], fe))
+                        fe_tp += 1
+                        logger.debug("+1 FE TRUE positive, current precision = %f" % precision(fe_tp, fe_fp))
+                    else:
+                        logger.debug("Seen FE = [%s], expected = [%s]" % (seen[chunk], fe))
+                        fe_fp += 1
+                        logger.debug("+1 FE FALSE positive, current precision = %f" % precision(fe_tp, fe_fp))
                 else:
-                    logger.debug("Seen FE = [%s], expected = [%s]" % (seen[chunk], fe))
-                    fe_fp += 1
-                    logger.debug("+1 FE FALSE positive, current precision = %f" % precision(fe_tp, fe_fp))
+                    logger.debug("Expected chunk [%s] NOT in seen chunks %s" % (chunk, seen.keys()))
+                    fe_fn += 1
+                    logger.debug("+1 FE false negative, current recall = %f" % recall(fe_tp, fe_fn))
+            # Partial checking
             else:
-                logger.debug("Expected chunk [%s] NOT in seen chunks %s" % (chunk, seen.keys()))
-                fe_fn += 1
-                logger.debug("+1 FE false negative, current recall = %f" % recall(fe_tp, fe_fn))
+                partial_matches = 0
+                for seen_chunk, seen_fe in seen.iteritems():
+                    if seen_chunk in chunk:
+                        partial_matches += 1
+                        logger.debug("Seen chunk = [%s], expected = [%s]. At least a partial match" % (seen_chunk, chunk))
+                        if fe == seen_fe:
+                            logger.debug("Seen FE = [%s], expected = [%s]" % (seen_fe, fe))
+                            fe_tp += 1
+                            logger.debug("+1 FE TRUE positive, current precision = %f" % precision(fe_tp, fe_fp))
+                        else:
+                            logger.debug("Seen FE = [%s], expected = [%s]" % (seen_fe, fe))
+                            fe_fp += 1
+                            logger.debug("+1 FE FALSE positive, current precision = %f" % precision(fe_tp, fe_fp))
+                if partial_matches == 0:
+                    logger.debug("Expected chunk [%s] NOT in seen chunks %s" % (chunk, seen.keys()))
+                    fe_fn += 1
+                    logger.debug("+1 FE false negative, current recall = %f" % recall(fe_tp, fe_fn))
+                            
         logger.debug("=================================")
 
     # Compute all measures
@@ -298,9 +327,10 @@ def f1(p, r):
 
 def create_cli_parser():
     parser = argparse.ArgumentParser(description='Evaluate the unsupervised approach via standard measures (p, r, f1)')
-    parser.add_argument('labeled_data', type=argparse.FileType('r'), help='JSON file containing labeled data for each sentence')
+    parser.add_argument('labeled_data', type=argparse.FileType('r'), help='JSON file with labeled data for each sentence')
+    parser.add_argument('gold_standard', type=argparse.FileType('r'), help='TSV file with full frame annotation to evaluate against')
     parser.add_argument('annotation_results', type=argparse.FileType('r'), help='CrowdFlower CSV file containing the annotation results to evaluate against')
-    parser.add_argument('frame_gold', type=argparse.FileType('r'), help='TSV file containing sentences annotated with frames to evaluate against')
+    parser.add_argument('--partial', action='store_false', default='True', help='Enable partial matching of FE chunks. Default is exact matching')
     parser.add_argument('--debug', action='store_const', const='debug', help='Toggle debug mode')
     return parser
     
@@ -311,9 +341,9 @@ def main(args):
     else:
         logger = setup_logger()
     labeled_data = load_labeled_data(args.labeled_data)
-    gold = load_full_gold_standard(args.frame_gold)
+    gold = load_full_gold_standard(args.gold_standard)
     # print json.dumps(gold, ensure_ascii=False, indent=2)
-    performance = evaluate_against_full_gold_standard(labeled_data, gold, logger)
+    performance = evaluate_against_gold(labeled_data, gold, logger, args.partial)
     print performance
     # results = read_crowdflower_full_results(args.annotation_results)
     # set_majority_vote_answer(results)
