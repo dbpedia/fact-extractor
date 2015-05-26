@@ -329,7 +329,7 @@ def create_cli_parser():
     parser = argparse.ArgumentParser(description='Evaluate the unsupervised approach via standard measures (p, r, f1)')
     parser.add_argument('labeled_data', type=argparse.FileType('r'), help='JSON file with labeled data for each sentence')
     parser.add_argument('gold_standard', type=argparse.FileType('r'), help='TSV file with full frame annotation to evaluate against')
-    parser.add_argument('annotation_results', type=argparse.FileType('r'), help='CrowdFlower CSV file containing the annotation results to evaluate against')
+    parser.add_argument('--crowdflower', type=argparse.FileType('r'), help='CrowdFlower CSV file containing the annotation results to evaluate against')
     parser.add_argument('--partial', action='store_false', default='True', help='Enable partial matching of FE chunks. Default is exact matching')
     parser.add_argument('--debug', action='store_const', const='debug', help='Toggle debug mode')
     return parser
@@ -345,7 +345,7 @@ def main(args):
     # print json.dumps(gold, ensure_ascii=False, indent=2)
     performance = evaluate_against_gold(labeled_data, gold, logger, args.partial)
     print performance
-    # results = read_crowdflower_full_results(args.annotation_results)
+    # results = read_crowdflower_full_results(args.crowdflower)
     # set_majority_vote_answer(results)
     # logger.debug(json.dumps(results, ensure_ascii=False, indent=2))
     # fe_tp, fe_fp = fe_positives(results, logger)
