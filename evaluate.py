@@ -214,28 +214,30 @@ def evaluate_against_full_gold_standard(labeled_data, gold_standard, logger):
         annotations = gold_standard.get(sentence_id)
         if not annotations:
             logger.warning("No gold standard for sentence [%s]. Skipping..." % sentence_id)
+            logger.debug("=================================")
             continue
         # Frame
         logger.debug("----------- Evaluating frame... -----------")
         seen_frame = sentence.get('frame')
         if not seen_frame:
             frame_fn += 1
-            logger.debug("No frame assigned to sentence [%s]. +1 frame false negative. Total = %d" % (sentence_id, frame_fn))
+            logger.debug("No frame assigned to sentence [%s]. +1 frame false negative, current recall = %f" % (sentence_id, recall(frame_tp, frame_fn)))
             continue
         expected_frame = set([annotation['frame'] for annotation in annotations])
         # All annotations inside a sentence must have the same frame, otherwise the gold standard is wrong
         if len(expected_frame) > 1:
             logger.warning("More than 1 frame (%s) detected in annotated sentence [%s]. Skipping..." % expected_frame, sentence_id)
+            logger.debug("=================================")
             continue
         # Pop the only one element
         expected_frame = expected_frame.pop()
         logger.debug("Seen = [%s], expected = [%s]" % (seen_frame, expected_frame))
         if seen_frame == expected_frame:
             frame_tp += 1
-            logger.debug("+1 frame TRUE positive, total = [%d]" % frame_tp)
+            logger.debug("+1 frame TRUE positive, current precision = %f" % precision(frame_tp, frame_fp))
         else:
             frame_fp += 1
-            logger.debug("+1 frame FALSE positive, total = [%d]" % frame_fp)
+            logger.debug("+1 frame FALSE positive, current precision = %f" % precision(frame_tp, frame_fp))
             
         # FEs
         logger.debug("----------- Evaluating FEs... -----------")
@@ -260,15 +262,15 @@ def evaluate_against_full_gold_standard(labeled_data, gold_standard, logger):
                 if fe == seen[chunk]:
                     logger.debug("Seen FE = [%s], expected = [%s]" % (seen[chunk], fe))
                     fe_tp += 1
-                    logger.debug("+1 FE TRUE positive, total = [%d]" % fe_tp)
+                    logger.debug("+1 FE TRUE positive, current precision = %f" % precision(fe_tp, fe_fp))
                 else:
                     logger.debug("Seen FE = [%s], expected = [%s]" % (seen[chunk], fe))
                     fe_fp += 1
-                    logger.debug("+1 FE FALSE positive, total = [%d]" % fe_fp)
+                    logger.debug("+1 FE FALSE positive, current precision = %f" % precision(fe_tp, fe_fp))
             else:
                 logger.debug("Expected chunk [%s] NOT in seen chunks %s" % (chunk, seen.keys()))
                 fe_fn += 1
-                logger.debug("+1 FE false negative, total = [%d]" % fe_fn)
+                logger.debug("+1 FE false negative, current recall = %f" % recall(fe_tp, fe_fn))
         logger.debug("=================================")
 
     # Compute all measures
