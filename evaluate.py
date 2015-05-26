@@ -7,6 +7,7 @@ import logging
 import json
 import random
 import re
+from collections import defaultdict
 from sys import argv, exit
 from crowdflower_results_into_training_data import set_majority_vote_answer
 
@@ -179,6 +180,105 @@ def fe_false_negatives(labeled_data, expected_fes, logger):
     return fe_fn
 
 
+def load_full_gold_standard(full_gold_standard):
+    """Read a full annotation to evaluate against from a TSV open stream"""
+    annotations = []
+    loaded = defaultdict(list)
+    for line in full_gold_standard:
+        current = {}
+        sentence_id, token_id, chunk, pos, lemma, frame, tag = line.decode('utf-8').strip().split('\t')
+        to_fill = {}
+        current['%04d' % int(sentence_id)] = to_fill
+        
+        to_fill['frame'] = frame
+        # It's a FE
+        if tag != 'B-LU' and tag != 'O':
+            to_fill['FE'] = tag.split('_')[0].replace('B-', '')
+            to_fill['chunk'] = chunk
+        else:
+            continue
+        annotations.append(current)
+    # Join dicts on common ID key
+    for annotation in annotations:
+        for k, v in annotation.iteritems():
+            loaded[k].append(v)
+    return loaded
+
+
+def evaluate_against_full_gold_standard(labeled_data, gold_standard, logger):
+    """Evaluate the unsupervised approach output against a full annotation gold standard"""
+    frame_tp = frame_fp = frame_fn = fe_tp = fe_fp = fe_fn = 0
+    for sentence in labeled_data:
+        sentence_id = sentence['id']
+        logger.debug("Labeled sentence [%s]" % sentence_id)
+        annotations = gold_standard.get(sentence_id)
+        if not annotations:
+            logger.warning("No gold standard for sentence [%s]. Skipping..." % sentence_id)
+            continue
+        # Frame
+        logger.debug("----------- Evaluating frame... -----------")
+        seen_frame = sentence.get('frame')
+        if not seen_frame:
+            frame_fn += 1
+            logger.debug("No frame assigned to sentence [%s]. +1 frame false negative. Total = %d" % (sentence_id, frame_fn))
+            continue
+        expected_frame = set([annotation['frame'] for annotation in annotations])
+        # All annotations inside a sentence must have the same frame, otherwise the gold standard is wrong
+        if len(expected_frame) > 1:
+            logger.warning("More than 1 frame (%s) detected in annotated sentence [%s]. Skipping..." % expected_frame, sentence_id)
+            continue
+        # Pop the only one element
+        expected_frame = expected_frame.pop()
+        logger.debug("Seen = [%s], expected = [%s]" % (seen_frame, expected_frame))
+        if seen_frame == expected_frame:
+            frame_tp += 1
+            logger.debug("+1 frame TRUE positive, total = [%d]" % frame_tp)
+        else:
+            frame_fp += 1
+            logger.debug("+1 frame FALSE positive, total = [%d]" % frame_fp)
+            
+        # FEs
+        logger.debug("----------- Evaluating FEs... -----------")
+        seen_fes = sentence['FEs']
+        seen = {}
+        for seen_fe_obj in seen_fes:
+            seen_fe = seen_fe_obj['FE']
+            seen_chunk = seen_fe_obj['chunk']
+            seen[seen_chunk] = seen_fe
+        logger.debug("Seen FEs: %s" % seen)
+        expected = {}
+        for annotation in annotations:
+            expected_fe = annotation['FE']
+            expected_chunk = annotation['chunk']
+            expected[expected_chunk] = expected_fe
+        logger.debug("Expected FEs: %s" % expected)
+        for chunk, fe in expected.iteritems():
+            # Strict checking
+            # TODO Don't be strict on FE chunks, if the seen chunk is a substring of the expected one, it's still OK
+            if chunk in seen.keys():
+                logger.debug("Expected chunk [%s] FOUND in seen chunks %s" % (chunk, seen.keys()))
+                if fe == seen[chunk]:
+                    logger.debug("Seen FE = [%s], expected = [%s]" % (seen[chunk], fe))
+                    fe_tp += 1
+                    logger.debug("+1 FE TRUE positive, total = [%d]" % fe_tp)
+                else:
+                    logger.debug("Seen FE = [%s], expected = [%s]" % (seen[chunk], fe))
+                    fe_fp += 1
+                    logger.debug("+1 FE FALSE positive, total = [%d]" % fe_fp)
+            else:
+                logger.debug("Expected chunk [%s] NOT in seen chunks %s" % (chunk, seen.keys()))
+                fe_fn += 1
+                logger.debug("+1 FE false negative, total = [%d]" % fe_fn)
+        logger.debug("=================================")
+
+    # Compute all measures
+    frame_precision = precision(frame_tp, frame_fp)
+    frame_recall = recall(frame_tp, frame_fn)
+    fe_precision = precision(fe_tp, fe_fp)
+    fe_recall = recall(fe_tp, fe_fn)
+    return ( (frame_precision, frame_recall, f1(frame_precision, frame_recall)), (fe_precision, fe_recall, f1(fe_precision, fe_recall)) )
+
+
 def precision(tp, fp):
     """Standard precision measure"""
     return float(tp) / float(tp + fp)
@@ -209,22 +309,26 @@ def main(args):
     else:
         logger = setup_logger()
     labeled_data = load_labeled_data(args.labeled_data)
-    results = read_crowdflower_full_results(args.annotation_results)
-    set_majority_vote_answer(results)
-    logger.debug(json.dumps(results, ensure_ascii=False, indent=2))
-    fe_tp, fe_fp = fe_positives(results, logger)
-    fe_precision = precision(fe_tp, fe_fp)
-    expected = load_expected_fes(FRAME_DEFINITIONS)
-    labeled_data_subset = get_labeled_data_subset(labeled_data, results, logger)
-    fe_fn = fe_false_negatives(labeled_data_subset, expected, logger)
-    fe_recall = recall(fe_tp, fe_fn)
-    expected_frames = load_expected_frames(args.frame_gold)
-    frame_tp, frame_fp = frame_positives(labeled_data, expected_frames, logger)
-    frame_precision = precision(frame_tp, frame_fp)
-    logger.info("Frame precision = %f" % frame_precision)
-    logger.info("FE precision = %f" % fe_precision)
-    logger.info("FE recall = %f" % fe_recall)
-    logger.info("FE F1 = %f" % f1(fe_precision, fe_recall))
+    gold = load_full_gold_standard(args.frame_gold)
+    # print json.dumps(gold, ensure_ascii=False, indent=2)
+    performance = evaluate_against_full_gold_standard(labeled_data, gold, logger)
+    print performance
+    # results = read_crowdflower_full_results(args.annotation_results)
+    # set_majority_vote_answer(results)
+    # logger.debug(json.dumps(results, ensure_ascii=False, indent=2))
+    # fe_tp, fe_fp = fe_positives(results, logger)
+    # fe_precision = precision(fe_tp, fe_fp)
+    # expected = load_expected_fes(FRAME_DEFINITIONS)
+    # labeled_data_subset = get_labeled_data_subset(labeled_data, results, logger)
+    # fe_fn = fe_false_negatives(labeled_data_subset, expected, logger)
+    # fe_recall = recall(fe_tp, fe_fn)
+    # expected_frames = load_expected_frames(args.frame_gold)
+    # frame_tp, frame_fp = frame_positives(labeled_data, expected_frames, logger)
+    # frame_precision = precision(frame_tp, frame_fp)
+    # logger.info("Frame precision = %f" % frame_precision)
+    # logger.info("FE precision = %f" % fe_precision)
+    # logger.info("FE recall = %f" % fe_recall)
+    # logger.info("FE F1 = %f" % f1(fe_precision, fe_recall))
     return 0
     
     
