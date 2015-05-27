@@ -11,7 +11,7 @@ import sys
 from collections import defaultdict
 
 
-LU_FRAME_MAP_LOCATION = 'resources/soccer-lu2frame.json'
+LU_FRAME_MAP_LOCATION = 'resources/soccer-lu2frame-dbptypes-notimex.json'
 LU_FRAME_MAP = json.load(open(LU_FRAME_MAP_LOCATION))
 TOKENS = []
 
@@ -49,13 +49,13 @@ def prepare_crowdflower_input(chunk_data, debug):
                     frames = lu['lu']['frames']
                     if debug:
                         print 'LU LEMMA: %s' % input_row['lu']
-                        print 'FRAMES: %s' % frames
+                        print 'FRAMES: %s' % [frame['frame'] for frame in frames]
                     for frame in frames:
                         # TODO this will overwrite in case of more frames per LU
                         input_row['frame'] = frame['frame']
                         fe_names = frame['FEs']
                         if debug:
-                            print 'ASSIGNED FRAME: %s' % frame
+                            print 'ASSIGNED FRAME: %s' % frame['frame']
                             print 'FEs: %s' % fe_names
                         # Store FE and chunks with incremental numbers
                         # fe_name{i}, fe{j}
