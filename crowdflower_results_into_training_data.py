@@ -9,6 +9,7 @@ import json
 import HTMLParser
 import argparse
 import os
+import random
 from collections import Counter
 from lib.orderedset import OrderedSet
 
@@ -23,9 +24,8 @@ def read_full_results(results_file):
     fields = results.fieldnames
     fe_amount = len([f for f in fields if re.match(r'fe[0-9]{2}$', f)])
 
-    # Skip gold
-    regular = [row for row in results if row['_golden'] != 'true']
-    for row in regular:
+    # Include gold
+    for row in results:
         # Avoid Unicode encode/decode exceptions
         for k, v in row.iteritems():
             row[k] = v.decode('utf-8')
@@ -71,8 +71,11 @@ def set_majority_vote_answer(results_json):
                 if freq > majority:
                     v[fe]['majority'] = answer
 
+            # Randomly break ties by picking one of the answers
             if not v[fe].get('majority'):
-                print "HEADS UP! No majority answer for sentence [%s], FE [%s]" % (k, fe)
+                chosen = random.choice(v[fe]['answers'])
+                v[fe]['majority'] = chosen
+                print "HEADS UP! No majority answer for sentence [%s], FE [%s]. Randomly broken tie, picked [%s]" % (k, fe, answer)
 
 
 def tag_entities(results):
@@ -100,6 +103,7 @@ def process_sentence(sentence_id, annotations, lines):
     """ Processes a sentence by merging tagged words, LU and FEs """
 
     processed = list()
+    
     for i, (token, pos, lemma) in enumerate(lines):
         # TODO check if LUs can be more than one token
         tag = 'B-LU' if lemma == annotations['lu'] else 'O'
@@ -149,10 +153,19 @@ def produce_training_data(annotations, pos_tagged_sentences_dir, debug):
     """ Adds to the treetagger output information about frames """
     output = []
     for sentence_id, annotations in annotations.iteritems():
-
+        # pos-tagged filenames are not formatted with 4 digits, so strip leading zeros
+        sentence_id = sentence_id.lstrip('0')
+        if not sentence_id: sentence_id = '0'
         # open treetagger output with tagged words
         with(codecs.open(pos_tagged_sentences_dir + sentence_id, 'rb', 'utf-8')) as i:
-            lines = [l.strip().split('\t') for l in i.readlines()]
+            lines = []
+            for line in i:
+                items = line.strip().split('\t')
+                # there must be 3 items (token, pos, lemma)
+                if len(items) != 3:
+                    print 'HEADS UP! Sentence [%s], malformed pos-tagged line %s. Skipping...' % (sentence_id, items)
+                    continue
+                lines.append(items)
             processed = process_sentence(sentence_id, annotations, lines)
             output.extend(processed)
 
