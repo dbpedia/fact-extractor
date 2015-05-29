@@ -190,7 +190,7 @@ def load_full_gold_standard(full_gold_standard, logger):
         try:
             sentence_id, token_id, chunk, pos, lemma, frame, tag = line.decode('utf-8').strip().split('\t')
         except ValueError as e:
-            logger.error("Malformed gold standard line: %s" % line.decode('utf-8').strip().split('\t'))
+            logger.error("Malformed gold standard line (failed to split on tabs). Check for spaces instead of tabs and viceversa: %s" % line.decode('utf-8').strip().split('\t'))
             exit(1)
         to_fill = {}
         current['%04d' % int(sentence_id)] = to_fill
