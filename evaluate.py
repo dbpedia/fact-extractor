@@ -180,13 +180,18 @@ def fe_false_negatives(labeled_data, expected_fes, logger):
     return fe_fn
 
 
-def load_full_gold_standard(full_gold_standard):
+def load_full_gold_standard(full_gold_standard, logger):
     """Read a full annotation to evaluate against from a TSV open stream"""
     annotations = []
     loaded = defaultdict(list)
     for line in full_gold_standard:
         current = {}
-        sentence_id, token_id, chunk, pos, lemma, frame, tag = line.decode('utf-8').strip().split('\t')
+        # Detect malformed lines
+        try:
+            sentence_id, token_id, chunk, pos, lemma, frame, tag = line.decode('utf-8').strip().split('\t')
+        except ValueError as e:
+            logger.error("Malformed gold standard line: %s" % line.decode('utf-8').strip().split('\t'))
+            exit(1)
         to_fill = {}
         current['%04d' % int(sentence_id)] = to_fill
         
@@ -341,7 +346,7 @@ def main(args):
     else:
         logger = setup_logger()
     labeled_data = load_labeled_data(args.labeled_data)
-    gold = load_full_gold_standard(args.gold_standard)
+    gold = load_full_gold_standard(args.gold_standard, logger)
     # print json.dumps(gold, ensure_ascii=False, indent=2)
     performance = evaluate_against_gold(labeled_data, gold, logger, args.partial)
     print performance
