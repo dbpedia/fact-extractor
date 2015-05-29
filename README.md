@@ -35,7 +35,7 @@ If not, please do so!
   1. [Build CrowdFlower input spreadsheet](create_crowdflower_input.py)
 4. Frame Classifier Training
   1. [Translate CrowdFlower results into training data format](crowdflower_results_into_training_data.py)
-  2. [Train classifier](use_classifier.sh)
+  2. Train classifier
 5. Frame Extraction
 
 ## Requirements
