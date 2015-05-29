@@ -100,7 +100,7 @@
 338	20	partita	NOM	partita	Sconfitta	O
 338	21	di	PRE	di	Sconfitta	O
 338	22	campionato	NOM	campionato	Sconfitta	B-Competizione_Sconfitta
-338	23	persa	VER:pper	perdere Sconfitta	B-LU
+338	23	persa	VER:pper	perdere	Sconfitta	B-LU
 338	23	per	PRE	per	Sconfitta	O
 338	24	2-1	NUM	@card@	Sconfitta	O
 338	25	in casa	ENT	in casa	Sconfitta	B-Luogo_Sconfitta
@@ -130,7 +130,7 @@
 332	8	5º	NOM	<unknown>	Sconfitta	O
 332	9	posto	VER:pper	porre	Sconfitta	O
 332	10	nel	PRE:det	nel	Sconfitta	O
-332	11	campionato di Serie C1 girone B ENT	campionato di Serie C1 girone B	Sconfitta	B-Competizione_Sconfitta
+332	11	campionato di Serie C1 girone B	ENT	campionato di Serie C1 girone B	Sconfitta	B-Competizione_Sconfitta
 332	15	,	PON	,	Sconfitta	O
 332	16	quindi	ADV	quindi	Sconfitta	O
 332	17	perde	VER:pres	perdere	Sconfitta	B-LU
@@ -1692,7 +1692,7 @@
 411	16	della	PRE:det	del	Attività	O
 411	17	K-League	NOM	K-League	Attività	B-Competizione_Attività
 411	18	,	PON	,	Attività	O
-411	19	massima	divisione coreana	ENT	massima	divisione coreana	Attività	B-Competizione_Attività
+411	19	massima divisione coreana	ENT	massima divisione coreana	Attività	B-Competizione_Attività
 411	22	.	SENT	.	Attività	O
 93	23	Colleziona	VER:impe	collezionare	Trofeo	O
 93	24	56	NUM	@card@	Trofeo	O
