@@ -70,4 +70,4 @@ Pull requests not complying to these guidelines will be ignored.
 - [Frame Semantics Annotation Made Easy with DBpedia](http://ceur-ws.org/Vol-1030/paper-03.pdf)
 
 ## License
-The source code is under the terms of the [GNU General Public License, version 2](http://www.gnu.org/licenses/gpl-2.0.html).
+The source code is under the terms of the [GNU General Public License, version 3](http://www.gnu.org/licenses/gpl.html).
