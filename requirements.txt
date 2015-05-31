@@ -1,2 +1,0 @@
-antlr4-python2-runtime==4.5
-enum34==1.0.4
