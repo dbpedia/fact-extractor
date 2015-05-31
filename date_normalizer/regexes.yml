@@ -1,0 +1,10 @@
+basic:
+  month: (gennaio|febbraio|marzo|aprile|maggio|giugno|luglio|agosto|settembre|ottobre|novembre|dicembre)
+
+time:
+ (il|l')\s*(?P<match>\d+ {month} \d{{4}}): '"{match}"^^xsd:date'
+ (il|l')\s*(?P<match>\d+ {month}): '"{match}"^^xsd:gMonthDay'
+ (nel|nell')\s*(?P<match>{month} \d{{4}}): '"{match}"^^xsd:gYearMonth'
+ in (?P<match>{month}): '"{match}"^^xsd:gMonth'
+ nel (?P<match>\d{{4}}): '"{match}"^^xsd:gYear'
+ l'anno seguente: '"$YEAR + 1"'

@@ -1,0 +1,6 @@
+il 14 settembre 2010: '"14 settembre 2010"^^xsd:date'
+il 15 ottobre: '"15 ottobre"^^xsd:gMonthDay'
+nel giugno 2012: '"giugno 2012"^^xsd:gYearMonth'
+in maggio: '"maggio"^^xsd:gMonth'
+nel 2014: '"2014"^^xsd:gYear'
+l'anno seguente: '"$YEAR + 1"'
