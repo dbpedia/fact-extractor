@@ -1,10 +1,20 @@
-basic:
+__meta__:
   month: (gennaio|febbraio|marzo|aprile|maggio|giugno|luglio|agosto|settembre|ottobre|novembre|dicembre)
+  lit_digit: (uno|una|due|tre|quattro|cinque|sei|sette|otto|nove)
 
 time:
- (il|l')\s*(?P<match>\d+ {month} \d{{4}}): '"{match}"^^xsd:date'
- (il|l')\s*(?P<match>\d+ {month}): '"{match}"^^xsd:gMonthDay'
- (nel|nell')\s*(?P<match>{month} \d{{4}}): '"{match}"^^xsd:gYearMonth'
- in (?P<match>{month}): '"{match}"^^xsd:gMonth'
- nel (?P<match>\d{{4}}): '"{match}"^^xsd:gYear'
- l'anno seguente: '"$YEAR + 1"'
+  - (il|l')\s*(?P<match>\d{{1,2}} {month} \d{{4}}): '"{match}"^^xsd:date'
+  - (il|l')\s*(?P<match>\d{{1,2}} {month}): '"{match}"^^xsd:gMonthDay'
+  - (nel|nell')\s*(?P<match>{month} \d{{4}}): '"{match}"^^xsd:gYearMonth'
+  - in (?P<match>{month}): '"{match}"^^xsd:gMonth'
+  - nel (?P<match>\d{{4}}): '"{match}"^^xsd:gYear'
+  - l'anno seguente: '"$YEAR + 1"'
+
+duration:
+  - stagione \d{{2,4}}-\d{{2,4}}: '"P1Y"^^xsd:duration'
+  - campionato \d{{2,4}}-\d{{2,4}}: '"P1Y"^^xsd:duration'
+  - fino al (?P<match>\d{{,4}}): '"to {match}"'
+  - per (?P<match>{lit_digit}) stagion[ei]: '"P{match}Y"^^xsd:duration'
+  - per (?P<match>{lit_digit}) ann[oi]: '"P{match}Y"^^xsd:duration'
+  - dal (?P<y1>\d{{2,4}}) al (?P<y2>\d{{2,4}}): '"P{match}Y"^^xsd:duration'
+  - una sola stagione: '"P1Y"^^xsd:duration'
