@@ -122,7 +122,7 @@
 315	15	Under-20	NOM	<unknown>	Trofeo	B-Competizione_Trofeo	
 315	16	2009	NUM	@card@	Trofeo	O	
 315	17	0	SENT	0	Trofeo	O	
-316	0	Suo	PRO:poss	suo	Sconfitta	O	
+316	0	Suo	PRO:poss	suo	Sconfitta	O	frase da buttare
 316	1	cugino	NOM	cugino	Sconfitta	O	
 316	2	di	PRE	di	Sconfitta	O	
 316	3	secondo	ADJ	secondo	Sconfitta	O	
@@ -364,10 +364,10 @@
 133	1	tre	ADJ	tre	Sconfitta	O	
 133	2	vittorie	NOM	vittoria	Sconfitta	O	
 133	3	in	PRE	in	Sconfitta	O	
-133	4	Division 1	ENT	Division 1	Sconfitta	B-Competizione_Sconfitta	
+133	4	Division 1	ENT	Division 1	Sconfitta	O	
 133	5	,	PON	,	Sconfitta	O	
 133	6	una	DET:indef	una	Sconfitta	O	
-133	7	Coupe de France	ENT	Coupe de France	Sconfitta	B-Competizione_Sconfitta	
+133	7	Coupe de France	ENT	Coupe de France	Sconfitta	O	
 133	8	e	CON	e	Sconfitta	O	
 133	9	due	ADJ	due	Sconfitta	O	
 133	10	finali	NOM	finale	Sconfitta	O	
@@ -3451,7 +3451,7 @@
 12	4	nel	PRE:det	nel	Attività	O	
 12	5	2007	NUM	@card@	Attività	O	
 12	6	0	SENT	0	Attività	O	
-11	0	Il	DET:def	il	Attività	O	
+11	0	Il	DET:def	il	Attività	O	questa frase è da buttare
 11	1	22	NUM	@card@	Attività	O	
 11	2	luglio	NOM	luglio	Attività	O	
 11	3	2014	NUM	@card@	Attività	O	
