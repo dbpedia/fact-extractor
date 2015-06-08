@@ -1468,8 +1468,7 @@
 150	18	qualificazione	NOM	qualificazione	Sconfitta	B-Competizione_Sconfitta
 150	19	per	PRE	per	Sconfitta	O
 150	20	il	DET:def	il	Sconfitta	O
-150	21	Mondiale	NOM	Mondiale	Sconfitta	B-Competizione_Sconfitta
-150	22	2002	NUM	@card@	Sconfitta	O
+150	21	Mondiale 2002	ENT	Mondiale 2002	Sconfitta	B-Competizione_Sconfitta
 150	23	,	PON	,	Sconfitta	O
 150	24	persa	VER:pper	perdere	Sconfitta	B-LU
 150	25	dal	PRE:det	dal	Sconfitta	O
