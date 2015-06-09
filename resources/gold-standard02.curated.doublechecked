@@ -191,7 +191,7 @@
 313	3	ha	VER:pres	avere	Attività	O
 313	4	esordito	VER:pper	esordire	Attività	B-LU
 313	5	nell'	PRE:det	nel	Attività	O
-313	6	amichevole	NOM	amichevole	Attività	B-Competizione_Attività	rly?
+313	6	amichevole	NOM	amichevole	Attività	B-Competizione_Attività
 313	7	contro	PRE	contro	Attività	O
 313	8	il	DET:def	il	Attività	O
 313	9	Congo	NOM	Congo	Attività	O
@@ -754,7 +754,7 @@
 354	3	2013	NUM	@card@	Sconfitta	O
 354	4	perde	VER:pres	perdere	Sconfitta	B-LU
 354	5	la	DET:def	il	Sconfitta	O
-354	6	finale	NOM	finale	Sconfitta	O
+354	6	finale	NOM	finale	Sconfitta	B-Competizione_Sconfitta
 354	7	di	PRE	di	Sconfitta	O
 354	8	Coppa Italia	ENT	Coppa Italia	Sconfitta	B-Competizione_Sconfitta
 354	9	contro	PRE	contro	Sconfitta	O
@@ -780,8 +780,7 @@
 355	1	sempre	ADV	sempre	Attività	O
 355	2	giocato	VER:pper	giocare	Attività	B-LU
 355	3	nella	PRE:det	nel	Attività	O
-355	4	massima serie	ENT	massima serie	Attività	B-Competizione_Attività
-355	5	iraniana	ADJ	iraniano	Attività	B-Competizione_Attività
+355	4	massima serie iraniana	ENT	massima serie iraniana	Attività	B-Competizione_Attività
 355	6	con	PRE	con	Attività	O
 355	7	varie	ADJ	vario	Attività	O
 355	8	squadre	NOM	squadra	Attività	O
@@ -849,7 +848,7 @@
 358	24	agli	PRE:det	al	Attività	O
 358	25	ordini	NOM	ordine	Attività	O
 358	26	di	PRE	di	Attività	O
-358	27	Eriksson	NPR	Eriksson	Attività	B-Agente_Attività	non è stato lui però..
+358	27	Eriksson	NPR	Eriksson	Attività	O
 358	28	nel	PRE:det	nel	Attività	O
 358	29	Manchester City	ENT	Manchester City	Attività	B-Squadra_Attività
 358	30	0	SENT	0	Attività	O
@@ -926,10 +925,10 @@
 295	13	Norvegia	NPR	Norvegia	Sconfitta	B-Vincitore_Sconfitta
 295	14	,	PON	,	Sconfitta	O
 295	15	partita	NOM	partita	Sconfitta	O
-295	16	persa	ADJ	perso	Sconfitta	O
+295	16	persa	ADJ	perso	Sconfitta	B-LU
 295	17	per	PRE	per	Sconfitta	O
 295	18	7-0	NUM	@card@	Sconfitta	O
-295	19	0	SENT	0	Sconfitta	O	ma sono la stessa frase?
+295	19	0	SENT	0	Sconfitta	O
 295	20	Viene	VER:pres	venire	Sconfitta	O
 295	21	convocato	VER:pper	convocare	Sconfitta	O
 295	22	nuovamente	ADV	nuovamente	Sconfitta	O
@@ -942,7 +941,7 @@
 295	29	partita amichevole	ENT	partita amichevole	Sconfitta	B-Competizione_Sconfitta
 295	30	contro	PRE	contro	Sconfitta	O
 295	31	l'	DET:def	il	Sconfitta	O
-295	32	Islanda	NPR	Islanda	Sconfitta	B-Perdente_Sconfitta	non si sa chi ha vinto
+295	32	Islanda	NPR	Islanda	Sconfitta	B-Perdente_Sconfitta
 295	33	(	PON	(	Sconfitta	O
 295	34	1-0	NUM	@card@	Sconfitta	O
 295	35	)	PON	)	Sconfitta	O
@@ -988,8 +987,7 @@
 296	1	esordito	VER:pper	esordire	Attività	B-LU
 296	2	con	PRE	con	Attività	O
 296	3	la	DET:def	il	Attività	O
-296	4	Nazionale	NOM	Nazionale	Attività	B-Squadra_Attività
-296	5	cambogiana	ADJ	cambogiano	Attività	B-Squadra_Attività
+296	4	Nazionale cambogiana	ENT	Nazionale cambogiana	Attività	B-Squadra_Attività
 296	6	nel	PRE:det	nel	Attività	O
 296	7	2011	NUM	@card@	Attività	O
 296	8	0	SENT	0	Attività	O
@@ -997,8 +995,7 @@
 178	1	2005	NUM	@card@	Attività	O
 178	2	scende	VER:pres	scendere	Attività	O
 178	3	in	PRE	in	Attività	O
-178	4	Serie	NOM	serie	Attività	O
-178	5	C1	NPR	C1	Attività	B-Competizione_Attività
+178	5	Serie C1	ENT	Serie C1	Attività	B-Competizione_Attività
 178	6	acquistato	VER:pper	acquistare	Attività	O
 178	7	dal	PRE:det	dal	Attività	O
 178	8	Pro Sesto	ENT	Pro Sesto	Attività	B-Squadra_Attività
@@ -1007,7 +1004,8 @@
 178	11	ininterrottamente	ADV	ininterrottamente	Attività	O
 178	12	in	PRE	in	Attività	O
 178	13	questa	PRO:demo	questo	Attività	O
-178	14	serie a	ENT	serie a	Attività	B-Competizione_Attività
+178	14	serie	NOM	serie	Attività	O
+178	14	a	PRE	a	Attività	O
 178	15	tutt'	ADV	tutt'	Attività	O
 178	16	oggi	ADV	oggi	Attività	O
 178	17	,	PON	,	Attività	O
@@ -1060,7 +1058,7 @@
 275	3	cui	PRO:rela	cui	Trofeo	O
 275	4	militava	VER:impf	militare	Trofeo	O
 275	5	in	PRE	in	Trofeo	O
-275	6	nazionale	ADJ	nazionale	Trofeo	O
+275	6	nazionale	NOM	nazionale	Trofeo	O
 275	7	ha	VER:pres	avere	Trofeo	O
 275	8	giocato	VER:pper	giocare	Trofeo	O
 275	9	per	PRE	per	Trofeo	O
@@ -1072,8 +1070,7 @@
 275	15	cui	PRO:rela	cui	Trofeo	O
 275	16	vinse	VER:remo	vincere	Trofeo	B-LU
 275	17	tre	ADJ	tre	Trofeo	O
-275	18	campionati	NOM	campionati	Trofeo	B-Competizione_Trofeo
-275	19	lettoni	NOM	lettone	Trofeo	O
+275	18	campionati lettoni	ENT	campionati lettoni	Trofeo	B-Competizione_Trofeo
 275	20	0	SENT	0	Trofeo	O
 274	0	Moacir	NOM	Moacir	Trofeo	B-Vincitore_Trofeo
 274	1	iniziò	VER:remo	iniziare	Trofeo	O
@@ -1095,9 +1092,7 @@
 274	17	1961	NUM	@card@	Trofeo	O
 274	18	vincendo	VER:geru	vincere	Trofeo	B-LU
 274	19	un	DET:indef	un	Trofeo	O
-274	20	Torneo	NOM	torneo	Trofeo	B-Competizione_Trofeo
-274	21	Rio-San	VER:pres	<unknown>	Trofeo	B-Competizione_Trofeo
-274	22	Paolo	NPR	Paolo	Trofeo	B-Competizione_Trofeo
+274	20	Torneo Rio-San Paolo	ENT	Torneo Rio-San Paolo	Trofeo	B-Competizione_Trofeo
 274	23	0	SENT	0	Trofeo	O
 273	0	Ha	VER:pres	avere	Attività	O
 273	1	esordito	VER:pper	esordire	Attività	B-LU
@@ -1120,17 +1115,13 @@
 272	7	ha	VER:pres	avere	Trofeo	O
 272	8	vinto	VER:pper	vincere	Trofeo	B-LU
 272	9	due	ADJ	due	Trofeo	O
-272	10	campionati	NOM	campionati	Trofeo	B-Competizione_Trofeo
-272	11	olandesi	ADJ	olandese	Trofeo	B-Competizione_Trofeo
+272	10	campionati olandesi	ENT	campionati olandesi	Trofeo	B-Competizione_Trofeo
 272	12	,	PON	,	Trofeo	O
 272	13	una	DET:indef	una	Trofeo	O
-272	14	Coppa	NOM	coppa	Trofeo	B-Competizione_Trofeo
-272	15	d'	PRE	d'	Trofeo	B-Competizione_Trofeo
-272	16	Olanda	NPR	Olanda	Trofeo	B-Competizione_Trofeo
+272	14	Coppa d'Olanda	ENT	Coppa d'Olanda	Trofeo	B-Competizione_Trofeo
 272	17	e	CON	e	Trofeo	O
 272	18	tre	ADJ	tre	Trofeo	O
-272	19	campionati	NOM	campionato	Trofeo	B-Competizione_Trofeo
-272	20	belgi	ADJ	belga	Trofeo	B-Competizione_Trofeo
+272	19	campionati belgi	ENT	campionati belgi	Trofeo	B-Competizione_Trofeo
 272	21	0	SENT	0	Trofeo	O
 271	0	È	VER:pres	essere	Attività	O
 271	1	tornato	VER:pper	tornare	Attività	O
@@ -1143,9 +1134,7 @@
 271	8	giocare	VER:infi	giocare	Attività	B-LU
 271	9	con	PRE	con	Attività	O
 271	10	l'	DET:def	il	Attività	O
-271	11	Internacional	NOM	Internacional	Attività	B-Squadra_Attività
-271	12	de	NPR	de	Attività	B-Squadra_Attività
-271	13	Porto Alegre	ENT	Porto Alegre	Attività	B-Squadra_Attività
+271	11	Internacional de Porto Alegre	ENT	Internacional de Porto Alegre	Attività	B-Squadra_Attività
 271	14	0	SENT	0	Attività	O
 270	0	Ha	VER:pres	avere	Attività	O
 270	1	esordito	VER:pper	esordire	Attività	B-LU
@@ -1189,19 +1178,17 @@
 171	1	2012	NUM	@card@	Trofeo	O
 171	2	vinse	VER:remo	vincere	Trofeo	B-LU
 171	3	la	DET:def	il	Trofeo	O
-171	4	Coppa	NOM	Coppa	Trofeo	B-Competizione_Trofeo
-171	5	del	PRE:det	del	Trofeo	B-Competizione_Trofeo
-171	6	Baltico	NPR	Baltico	Trofeo	B-Competizione_Trofeo
+171	4	Coppa del Baltico	ENT	Coppa del Baltico	Trofeo	B-Competizione_Trofeo
 171	7	giocando	VER:geru	giocare	Trofeo	O
 171	8	da	PRE	da	Trofeo	O
 171	9	titolare	NOM	titolare	Trofeo	O
 171	10	sia	CON	sia	Trofeo	O
-171	11	contro	PRE	contro	Trofeo	O	dovrebbe essere con
+171	11	contro	PRE	contro	Trofeo	O
 171	12	la	DET:def	il	Trofeo	O
 171	13	che	PRO:rela	che	Trofeo	O
 171	14	contro	ADV	contro	Trofeo	O
 171	15	la	PRO:pers	la	Trofeo	O
-171	16	0	SENT	0	Trofeo	O	mancano pezzi
+171	16	0	SENT	0	Trofeo	O
 172	0	Riceve	VER:pres	ricevere	Sconfitta	O
 172	1	la	DET:def	il	Sconfitta	O
 172	2	sua	PRO:poss	suo	Sconfitta	O
@@ -1266,7 +1253,7 @@
 174	2	gara	NOM	gara	Sconfitta	O
 174	3	disputata	VER:pper	disputare	Sconfitta	O
 174	4	da	PRE	da	Sconfitta	O
-174	5	Brezzi	NOM	Brezzi	Sconfitta	B-Perdente_Sconfitta
+174	5	Brezzi	NOM	Brezzi	Sconfitta	O
 174	6	in	PRE	in	Sconfitta	O
 174	7	nazionale	ADJ	nazionale	Sconfitta	O
 174	8	risale	VER:pres	risalire	Sconfitta	O
@@ -1294,8 +1281,7 @@
 175	0	Ha	VER:pres	avere	Attività	O
 175	1	giocato	VER:pper	giocare	Attività	B-LU
 175	2	nella	PRE:det	nel	Attività	O
-175	3	massima serie	ENT	massima serie	Attività	B-Competizione_Attività
-175	4	cipriota	ADJ	cipriota	Attività	O
+175	3	massima serie cipriota	ENT	massima serie cipriota	Attività	B-Competizione_Attività
 175	5	con	PRE	con	Attività	O
 175	6	l'	DET:def	il	Attività	O
 175	7	Ermis Aradippou	ENT	Ermis Aradippou	Attività	B-Squadra_Attività
@@ -1346,8 +1332,7 @@
 177	1	esordito	VER:pper	esordire	Attività	O
 177	2	con	PRE	con	Attività	O
 177	3	la	DET:def	il	Attività	O
-177	4	Nazionale	NOM	Nazionale	Attività	B-Squadra_Attività
-177	5	cipriota	ADJ	cipriota	Attività	O
+177	4	Nazionale cipriota	ENT	Nazionale cipriota	Attività	B-Squadra_Attività
 177	6	nel	PRE:det	nel	Attività	O
 177	7	2001	NUM	@card@	Attività	O
 177	8	,	PON	,	Attività	O
@@ -1362,9 +1347,7 @@
 185	1	2000	NUM	@card@	Attività	O
 185	2	entra	VER:pres	entrare	Attività	O
 185	3	nelle	PRE:det	nel	Attività	O
-185	4	giovanili	ADJ	giovanili	Attività	B-Squadra_Attività
-185	5	del	PRE:det	del	Attività	B-Squadra_Attività
-185	6	Metz	NOM	Metz	Attività	B-Squadra_Attività
+185	4	giovanili del Metz	ENT	giovanili del Metz	Attività	B-Squadra_Attività
 185	7	dove	PRO:rela	dove	Attività	O
 185	8	rimane	VER:pres	rimanere	Attività	B-LU
 185	9	fino	PRE	fino	Attività	O
@@ -1373,27 +1356,8 @@
 185	12	quando	CON	quando	Attività	O
 185	13	passa	ADJ	passo	Attività	O
 185	14	nelle	PRE:det	nel	Attività	O
-185	15	giovanili	ADJ	giovanile	Attività	B-Squadra_Attività
-185	16	dell'	PRE:det	del	Attività	B-Squadra_Attività
-185	17	ASC	NOM	<unknown>	Attività	B-Squadra_Attività
-185	18	Lascabas	NOM	<unknown>	Attività	B-Squadra_Attività
+185	15	giovanili dell'ASC Lascabas	ENT	giovanili dell'ASC Lascabas	Attività	B-Squadra_Attività
 185	19	0	SENT	0	Attività	O
-184	0	Haugen	NOM	Haugen	Trofeo	B-Vincitore_Trofeo
-184	1	giocò	VER:remo	giocare	Trofeo	O
-184	2	una	DET:indef	una	Trofeo	O
-184	3	partita	NOM	partita	Trofeo	O
-184	4	per	PRE	per	Trofeo	O
-184	5	la	DET:def	il	Trofeo	O
-184	6	:	PON	:	Trofeo	O	??
-184	7	giocò	VER:remo	giocare	Trofeo	O
-184	8	infatti	ADV	infatti	Trofeo	O
-184	9	il	DET:def	il	Trofeo	O
-184	10	match	NOM	match	Trofeo	O
-184	11	vinto	VER:pper	vincere	Trofeo	B-LU
-184	12	per	PRE	per	Trofeo	O
-184	13	3-1	NUM	@card@	Trofeo	O
-184	14	sulla	NOM	sulla	Trofeo	O
-184	15	0	SENT	0	Trofeo	O	manca roba
 187	0	Ha	VER:pres	avere	Attività	O
 187	1	esordito	VER:pper	esordire	Attività	B-LU
 187	2	in	PRE	in	Attività	O
@@ -1432,12 +1396,11 @@
 180	8	la	DET:def	il	Sconfitta	O
 180	9	maglia	NOM	maglia	Sconfitta	O
 180	10	della	PRE:det	del	Sconfitta	O
-180	11	Nazionale	NOM	Nazionale	Sconfitta	B-Perdente_Sconfitta
-180	12	maggiore	ADJ	grande	Sconfitta	O
+180	11	Nazionale maggiore	ENT	Nazionale maggiore	Sconfitta	B-Perdente_Sconfitta
 180	13	in	PRE	in	Sconfitta	O
 180	14	occasione	NOM	occasione	Sconfitta	O
 180	15	dell'	PRE:det	del	Sconfitta	O
-180	16	amichevole	NOM	amichevole	Sconfitta	O
+180	16	amichevole	NOM	amichevole	Sconfitta	B-Competizione_Sconfitta
 180	17	persa	VER:pper	perdere	Sconfitta	B-LU
 180	18	per	PRE	per	Sconfitta	O
 180	19	5-3	NUM	@card@	Sconfitta	O
@@ -1512,10 +1475,9 @@
 299	5	esordito	VER:pper	esordire	Attività	B-LU
 299	6	con	PRE	con	Attività	O
 299	7	la	DET:def	il	Attività	O
-299	8	Nazionale	NOM	Nazionale	Attività	B-Squadra_Attività
-299	9	rumena	ADJ	rumeno	Attività	B-Squadra_Attività
+299	8	Nazionale rumena	ENT	Nazionale rumena	Attività	B-Squadra_Attività
 299	10	nell'	PRE:det	nel	Attività	O
-299	11	amichevole	ADJ	amichevole	Attività	O
+299	11	amichevole	ADJ	amichevole	Attività	B-Competizione_Attività
 299	12	Albania-Romania	NOM	<unknown>	Attività	O
 299	13	(	PON	(	Attività	O
 299	14	0-1	NUM	@card@	Attività	O
@@ -1545,7 +1507,7 @@
 7	13	Catanzaro	NPR	Catanzaro	Sconfitta	B-Perdente_Sconfitta
 7	14	,	PON	,	Sconfitta	O
 7	15	partita	NOM	partita	Sconfitta	O
-7	16	persa	ADJ	perso	Sconfitta	O
+7	16	persa	ADJ	perso	Sconfitta	B-LU
 7	17	con	PRE	con	Sconfitta	O
 7	18	la	DET:def	il	Sconfitta	O
 7	19	Fiorentina	NPR	Fiorentina	Sconfitta	B-Vincitore_Sconfitta
@@ -1562,8 +1524,8 @@
 0	7	tre	ADJ	tre	Attività	O
 0	8	stagioni	NOM	stagione	Attività	O
 0	9	in	PRE	in	Attività	O
-0	10	Serie	NOM	serie	Attività	O
-0	11	C.	NPR	C.	Attività	O
+0	10	Serie C	ENT	Serie C	Attività	B-Competizione_Attività
+0	12	0	SENT	0	Sconfitta	O
 1	0	Ha	VER:pres	avere	Attività	O
 1	1	giocato	VER:pper	giocare	Attività	B-LU
 1	2	alcune	PRO:indef	alcun|alcune	Attività	O
@@ -1619,17 +1581,16 @@
 8	2	179	NUM	@card@	Attività	O
 8	3	partite	NOM	partita	Attività	O
 8	4	nella	PRE:det	nel	Attività	O
-8	5	massima serie	ENT	massima serie	Attività	B-Competizione_Attività
-8	6	scozzese	ADJ	scozzese	Attività	B-Competizione_Attività
+8	5	massima serie scozzese	ENT	massima serie scozzese	Attività	B-Competizione_Attività
 8	7	e	CON	e	Attività	O
 8	8	14	NUM	@card@	Attività	O
-8	9	gare	NOM	gara	Attività	B-Competizione_Attività
-8	10	internazionali	ADJ	internazionale	Attività	B-Competizione_Attività
+8	9	gare	NOM	gara	Attività	O
+8	10	internazionali	ADJ	internazionale	Attività	O
 8	11	0	SENT	0	Attività	O
 9	0	Nella	PRE:det	nel	Sconfitta	O
 9	1	stagione	NOM	stagione	Sconfitta	O
 9	2	2008-2009	NUM	@card@	Sconfitta	O
-9	3	Exteberria	NOM	<unknown>	Sconfitta	B-Perdente_Sconfitta
+9	3	Exteberria	NOM	<unknown>	Sconfitta	O
 9	4	arriva	VER:pres	arrivare	Sconfitta	O
 9	5	con	PRE	con	Sconfitta	O
 9	6	il	DET:def	il	Sconfitta	O
@@ -1649,7 +1610,7 @@
 71	2	campionato	NOM	campionato	Attività	B-Competizione_Attività
 71	3	ritorna	VER:pres	ritornare	Attività	O
 71	4	a	PRE	a	Attività	O
-71	5	Lucca	NPR	Lucca	Attività	B-Squadra_Attività	secondo me non è la squadra
+71	5	Lucca	NPR	Lucca	Attività	B-Squadra_Attività
 71	6	,	PON	,	Attività	O
 71	7	dove	PRO:rela	dove	Attività	O
 71	8	rimarrà	VER:futu	rimanere	Attività	B-LU
@@ -1668,21 +1629,21 @@
 71	21	9	NUM	@card@	Attività	O
 71	22	reti	NOM	rete	Attività	O
 71	23	0	SENT	0	Attività	O
-291	0	L'	DET:def	il	Sconfitta	O	la ho cambiata in sconfitta perchè c'è anche l'informazione su chi ha perso
-291	1	anno	NOM	anno	Sconfitta	O	è sicuramente una scelta opinabile
-291	2	seguente	ADJ	seguente	Sconfitta	O
-291	3	Brehme	NOM	<unknown>	Sconfitta	B-Vincitore_Sconfitta
-291	4	vince	VER:pres	vincere	Sconfitta	B-LU
-291	5	la	DET:def	il	Sconfitta	O
-291	6	Coppa UEFA	ENT	Coppa UEFA	Sconfitta	B-Competizione_Sconfitta
-291	7	sempre	ADV	sempre	Sconfitta	O
-291	8	con	PRE	con	Sconfitta	O
-291	9	i	DET:def	il	Sconfitta	O
-291	10	neroazzurri	NOM	<unknown>	Sconfitta	O
-291	11	contro	PRE	contro	Sconfitta	O
-291	12	la	DET:def	il	Sconfitta	O
-291	13	Roma	NPR	Roma	Sconfitta	B-Perdente_Sconfitta
-291	14	0	SENT	0	Sconfitta	O
+291	0	L'	DET:def	il	Sconfitta	O
+291	1	anno	NOM	anno	Trofeo	O
+291	2	seguente	ADJ	seguente	Trofeo	O
+291	3	Brehme	NOM	<unknown>	Trofeo	B-Vincitore_Trofeo
+291	4	vince	VER:pres	vincere	Trofeo	B-LU
+291	5	la	DET:def	il	Trofeo	O
+291	6	Coppa UEFA	ENT	Coppa UEFA	Trofeo	B-Competizione_Trofeo
+291	7	sempre	ADV	sempre	Trofeo	O
+291	8	con	PRE	con	Trofeo	O
+291	9	i	DET:def	il	Trofeo	O
+291	10	neroazzurri	NOM	<unknown>	Trofeo	O
+291	11	contro	PRE	contro	Trofeo	O
+291	12	la	DET:def	il	Trofeo	O
+291	13	Roma	NPR	Roma	Trofeo	O
+291	14	0	SENT	0	Trofeo	O
 73	0	Nel	PRE:det	nel	Trofeo	O
 73	1	1944	NUM	@card@	Trofeo	O
 73	2	,	PON	,	Trofeo	O
@@ -1696,11 +1657,7 @@
 73	10	Conversano	NOM	Conversano	Trofeo	B-Squadra_Trofeo
 73	11	vince	VER:pres	vincere	Trofeo	B-LU
 73	12	il	DET:def	il	Trofeo	O
-73	13	Campionato	NOM	Campionato	Trofeo	B-Competizione_Trofeo	http://it.wikipedia.org/wiki/Campionato_dell%27Italia_libera_1944
-73	14	dell'	PRE:det	del	Trofeo	B-Competizione_Trofeo
-73	15	Italia	NPR	Italia	Trofeo	B-Competizione_Trofeo
-73	16	libera	ADJ	libero	Trofeo	B-Competizione_Trofeo
-73	17	1944	PON	@card@	Trofeo	B-Competizione_Trofeo
+73	13	Campionato dell'Italia libera 1944	ENT	Campionato dell'Italia libera 1944	Trofeo	B-Competizione_Trofeo
 73	18	0	SENT	0	Trofeo	O
 72	0	Cresce	VER:pres	crescere	Sconfitta	O
 72	1	nel	PRE:det	nel	Sconfitta	O
@@ -1739,20 +1696,16 @@
 75	5	edizione	NOM	edizione	Trofeo	O
 75	6	1979	NUM	@card@	Trofeo	O
 75	7	del	PRE:det	del	Trofeo	O
-75	8	campionato europeo	ENT	campionato europeo	Trofeo	B-Competizione_Trofeo
-75	9	di	PRE	di	Trofeo	O
-75	10	calcio	NOM	calcio	Trofeo	O
-75	11	Under-18	NOM	<unknown>	Trofeo	B-Squadra_Trofeo
+75	8	campionato europeo di calcio Under-18	ENT	campionato europeo di calcio Under-18	Trofeo	B-Competizione_Trofeo
 75	12	0	SENT	0	Trofeo	O
 74	0	Ha	VER:pres	avere	Attività	O
 74	1	giocato	VER:pper	giocare	Attività	B-LU
 74	2	nella	PRE:det	nel	Attività	O
-74	3	massima serie	ENT	massima serie	Attività	B-Competizione_Attività
-74	4	olandese	ADJ	olandese	Attività	B-Competizione_Attività
+74	3	massima serie olandese	ENT	massima serie olandese	Attività	B-Competizione_Attività
 74	5	ed	CON	ed	Attività	O
 74	6	in	PRE	in	Attività	O
 74	7	quella	PRO:demo	quello	Attività	O
-74	8	bulgara	ADJ	bulgaro	Attività	B-Competizione_Attività	mmmh..
+74	8	bulgara	ADJ	bulgaro	Attività	B-Competizione_Attività
 74	9	0	SENT	0	Attività	O
 77	0	Nel	PRE:det	nel	Trofeo	O
 77	1	1987	NUM	@card@	Trofeo	O
@@ -1765,14 +1718,13 @@
 77	8	cui	PRO:rela	cui	Trofeo	O
 77	9	vince	VER:pres	vincere	Trofeo	B-LU
 77	10	la	DET:def	il	Trofeo	O
-77	11	Serie B	ENT	Serie B	Trofeo	B-Competizione_Trofeo
-77	12	1988-1989	NUM	@card@	Trofeo	B-Competizione_Trofeo
+77	11	Serie B 1988-1989	ENT	Serie B 1988-1989	Trofeo	B-Competizione_Trofeo
 77	13	,	PON	,	Trofeo	O
 77	14	ottenendo	VER:geru	ottenere	Trofeo	O
 77	15	la	DET:def	il	Trofeo	O
 77	16	promozione	NOM	promozione	Trofeo	O
 77	17	in	PRE	in	Trofeo	O
-77	18	massima serie	ENT	massima serie	Trofeo	B-Competizione_Trofeo	serve?
+77	18	massima serie	ENT	massima serie	Trofeo	O
 77	19	0	SENT	0	Trofeo	O
 76	0	Ha	VER:pres	avere	Attività	O
 76	1	esordito	VER:pper	esordire	Attività	B-LU
@@ -1815,19 +1767,16 @@
 78	5	Rivoltana	NOM	<unknown>	Attività	B-Squadra_Attività
 78	6	,	PON	,	Attività	O
 78	7	nel	PRE:det	nel	Attività	O
-78	8	campionato	NOM	campionato	Attività	B-Competizione_Attività	http://it.wikipedia.org/wiki/Eccellenza_Lombardia
-78	9	lombardo	ADJ	lombardo	Attività	B-Competizione_Attività
-78	10	di	PRE	di	Attività	B-Competizione_Attività
-78	11	Eccellenza	NOM	Eccellenza	Attività	B-Competizione_Attività
+78	8	campionato lombardo di Eccellenza	Eccellenza	campionato lombardo di Eccellenza	Attività	B-Competizione_Attività
 78	12	0	SENT	0	Attività	O
 48	0	Dopo	ADV	dopo	Attività	O
 48	1	aver	VER:infi	avere	Attività	O
-48	2	giocato	VER:pper	giocare	Attività	O
+48	2	giocato	VER:pper	giocare	Attività	B-LU
 48	3	nell'	PRE:det	nel	Attività	O
 48	4	Entella	NOM	Entella	Attività	B-Squadra_Attività
 48	5	,	PON	,	Attività	O
 48	6	è	VER:pres	essere	Attività	O
-48	7	rimasto	VER:pper	rimanere	Attività	B-LU
+48	7	rimasto	VER:pper	rimanere	Attività
 48	8	a	PRE	a	Attività	O
 48	9	vivere	VER:infi	vivere	Attività	O
 48	10	a	PRE	a	Attività	O
@@ -1861,31 +1810,6 @@
 49	22	60	NUM	@card@	Attività	O
 49	23	sterline	NOM	sterlina	Attività	O
 49	24	0	SENT	0	Attività	O
-124	0	Keane	ADJ	Keane	Attività	B-Agente_Attività
-124	1	riscuote	VER:pres	riscuotere	Attività	O
-124	2	un	DET:indef	un	Attività	O
-124	3	vasto	ADJ	vasto	Attività	O
-124	4	successo	NOM	successo	Attività	O
-124	5	tra	PRE	tra	Attività	O
-124	6	i	DET:def	il	Attività	O
-124	7	tifosi	NOM	tifoso	Attività	O
-124	8	del	PRE:det	del	Attività	O
-124	9	Tottenham	NOM	Tottenham	Attività	B-Squadra_Attività
-124	10	,	PON	,	Attività	O
-124	11	ed	CON	ed	Attività	O
-124	12	il	DET:def	il	Attività	O
-124	13	rapporto	NOM	rapporto	Attività	O
-124	14	è	VER:pres	essere	Attività	O
-124	15	rimasto	VER:pper	rimanere	Attività	B-LU	mmmh..
-124	16	invariato	ADJ	invariato	Attività	O
-124	17	anche	ADV	anche	Attività	O
-124	18	dopo	ADV	dopo	Attività	O
-124	19	la	DET:def	il	Attività	O
-124	20	breve	ADJ	breve	Attività	O
-124	21	esperienza	NOM	esperienza	Attività	O
-124	22	a	PRE	a	Attività	O
-124	23	Liverpool	NPR	Liverpool	Attività	B-Squadra_Attività
-124	24	0	SENT	0	Attività	O
 369	0	Dal	PRE:det	dal	Trofeo	O
 369	1	1994	NUM	@card@	Trofeo	O
 369	2	al	PRE:det	al	Trofeo	O
@@ -1917,10 +1841,7 @@
 401	10	0	SENT	0	Attività	O
 46	0	Con	PRE	con	Sconfitta	O
 46	1	"	PON	"	Sconfitta	O		
-46	2	i	DET:def	il	Sconfitta	B-Perdente_Sconfitta	http://it.wikipedia.org/wiki/Fotbal_Club_Universitatea_Craiova
-46	3	leoni	NOM	leone	Sconfitta	B-Perdente_Sconfitta
-46	4	di	PRE	di	Sconfitta	B-Perdente_Sconfitta
-46	5	Banie	NOM	Banie	Sconfitta	B-Perdente_Sconfitta
+46	2	i leoni di Banie	ENT	i leoni di Banie	Sconfitta	B-Perdente_Sconfitta
 46	6	"	PON	"	Sconfitta	O		
 46	7	disputò	VER:remo	disputare	Sconfitta	O
 46	8	il	DET:def	il	Sconfitta	O
@@ -1981,7 +1902,7 @@
 359	3	carriera	NOM	carriera	Attività	O
 359	4	di	PRE	di	Attività	O
 359	5	calciatore	NOM	calciatore	Attività	O
-359	6	Pointer	ENT	Pointer	Attività	B-Agente_Attività	http://it.wikipedia.org/wiki/Ray_Pointer
+359	6	Pointer	ENT	Pointer	Attività	B-Agente_Attività
 359	7	rimase	VER:remo	rimanere	Attività	B-LU
 359	8	nel	PRE:det	nel	Attività	O
 359	9	Portsmouth	NOM	Portsmouth	Attività	B-Squadra_Attività
@@ -2003,7 +1924,7 @@
 277	9	1935	NUM	@card@	Sconfitta	O
 277	10	nell'	PRE:det	nel	Sconfitta	O
 277	11	incontro	NOM	incontro	Sconfitta	O
-277	12	esterno	ADJ	esterno	Sconfitta	B-Competizione_Sconfitta
+277	12	esterno	ADJ	esterno	Sconfitta	O
 277	13	perso	VER:pper	perdere	Sconfitta	B-LU
 277	14	dai	PRE:det	dal	Sconfitta	O
 277	15	"	PON	"	Sconfitta	O		
@@ -2140,7 +2061,7 @@
 232	3	a	PRE	a	Attività	O
 232	4	giocare	VER:infi	giocare	Attività	B-LU
 232	5	in	PRE	in	Attività	O
-232	6	Giappone	NPR	Giappone	Attività	O
+232	6	Giappone	NPR	Giappone	Attività	B-Luogo_Attività
 232	7	con	PRE	con	Attività	O
 232	8	il	DET:def	il	Attività	O
 232	9	Tokushima Vortis	ENT	Tokushima Vortis	Attività	B-Squadra_Attività
@@ -2211,7 +2132,7 @@
 237	24	1-1	NUM	@card@	Attività	O
 237	25	contro	PRE	contro	Attività	O
 237	26	la	DET:def	il	Attività	O
-237	27	Cremonese	NPR	Cremonese	Attività	B-Squadra_Attività	No (?)
+237	27	Cremonese	NPR	Cremonese	Attività	O
 237	28	)	PON	)	Attività	O
 237	29	0	SENT	0	Attività	O
 236	0	Nel	PRE:det	nel	Attività	O
@@ -2220,8 +2141,7 @@
 236	3	esordito	VER:pper	esordire	Attività	O
 236	4	con	PRE	con	Attività	O
 236	5	la	DET:def	il	Attività	O
-236	6	Nazionale	NOM	Nazionale	Attività	B-Squadra_Attività
-236	7	cipriota	ADJ	cipriota	Attività	B-Squadra_Attività
+236	6	Nazionale cipriota	ENT	Nazionale cipriota	Attività	B-Squadra_Attività
 236	8	,	PON	,	Attività	O
 236	9	giocando	VER:geru	giocare	Attività	B-LU
 236	10	5	NUM	@card@	Attività	O
@@ -2240,7 +2160,7 @@
 235	6	nerazzurra	ADJ	nerazzurro	Sconfitta	O
 235	7	perde	VER:pres	perdere	Sconfitta	B-LU
 235	8	uno	DET:indef	uno	Sconfitta	O
-235	9	scudetto	NOM	scudetto	Sconfitta	B-Competizione_Sconfitta
+235	9	scudetto	NOM	scudetto	Sconfitta	O
 235	10	all'	PRE:det	al	Sconfitta	O
 235	11	ultima	ADJ	ultimo	Sconfitta	O
 235	12	giornata	NOM	giornata	Sconfitta	O
@@ -2295,15 +2215,14 @@
 309	15	la	DET:def	il	Sconfitta	O
 309	16	Slovacchia	NPR	Slovacchia	Sconfitta	B-Vincitore_Sconfitta
 309	17	0	SENT	0	Sconfitta	O
-308	0	Il	DET:def	il	Attività	O	volendo sarebbe una sconfitta, ma così mi sembra troppo difficile
+308	0	Il	DET:def	il	Attività	O
 308	1	21	NUM	@card@	Attività	O
 308	2	maggio	NOM	maggio	Attività	O
 308	3	2014	NUM	@card@	Attività	O
 308	4	esordisce	VER:pres	esordire	Attività	B-LU
 308	5	con	PRE	con	Attività	O
 308	6	la	DET:def	il	Attività	O
-308	7	Nazionale	NOM	Nazionale	Attività	B-Squadra_Attività
-308	8	kosovara	ADJ	kosovaro	Attività	B-Squadra_Attività
+308	7	Nazionale kosovara	ENT	Nazionale kosovara	Attività	B-Squadra_Attività
 308	9	nell'	PRE:det	nel	Attività	O
 308	10	amichevole	ADJ	amichevole	Attività	O
 308	11	Kosovo-Turchia	NOM	<unknown>	Attività	O
@@ -2380,24 +2299,6 @@
 305	15	del	PRE:det	del	Trofeo	O
 305	16	1988	NUM	@card@	Trofeo	O
 305	17	0	SENT	0	Trofeo	O
-304	0	Batistuta	NOM	Batistuta	Attività	B-Agente_Attività
-304	1	è	VER:pres	essere	Attività	O
-304	2	rimasto	VER:pper	rimanere	Attività	B-LU
-304	3	celebre	ADJ	celebre	Attività	O
-304	4	anche	ADV	anche	Attività	O
-304	5	per	PRE	per	Attività	O
-304	6	delle	PRE:det	del	Attività	O
-304	7	esultanze	NOM	esultanza	Attività	O
-304	8	particolari	ADJ	particolare	Attività	O
-304	9	divenute	VER:pper	divenire	Attività	O
-304	10	col	PRE:det	col	Attività	O
-304	11	tempo	NOM	tempo	Attività	O
-304	12	un	DET:indef	un	Attività	O
-304	13	proprio	ADJ	proprio	Attività	O
-304	14	marchio	NOM	marchio	Attività	O
-304	15	di	PRE	di	Attività	O
-304	16	fabbrica	NOM	fabbrica	Attività	O
-304	17	0	SENT	0	Attività	O
 303	0	Nel	PRE:det	nel	Attività	O
 303	1	2009	NUM	@card@	Attività	O
 303	2	ha	VER:pres	avere	Attività	O
@@ -2425,19 +2326,6 @@
 302	12	incontro	NOM	incontro	Attività	O
 302	13	ufficiale	ADJ	ufficiale	Attività	O
 302	14	0	SENT	0	Attività	O
-301	0	Il	DET:def	il	Attività	O
-301	1	5	NUM	@card@	Attività	O
-301	2	aprile	NOM	aprile	Attività	O
-301	3	del	PRE:det	del	Attività	O
-301	4	1978	NUM	@card@	Attività	O
-301	5	esordisce	VER:pres	esordire	Attività	B-LU
-301	6	contro	ADV	contro	Attività	O
-301	7	la	DET:def	il	Attività	O
-301	8	Turchia	NPR	Turchia	Attività	B-Squadra_Attività
-301	9	(	PON	(	Attività	O
-301	10	4-2	NUM	@card@	Attività	O
-301	11	)	PON	)	Attività	O
-301	12	0	SENT	0	Attività	O
 300	0	Inizia	VER:pres	iniziare	Attività	O
 300	1	la	DET:def	il	Attività	O
 300	2	carriera	NOM	carriera	Attività	O
@@ -2450,8 +2338,7 @@
 300	9	cui	PRO:rela	cui	Attività	O
 300	10	esordisce	VER:pres	esordire	Attività	B-LU
 300	11	nella	PRE:det	nel	Attività	O
-300	12	Serie B	ENT	Serie B	Attività	B-Competizione_Attività
-300	13	1974-1975	NUM	@card@	Attività	B-Competizione_Attività
+300	12	Serie B 1974-1975	ENT	Serie B 1974-1975	Attività	B-Competizione_Attività
 300	14	0	SENT	0	Attività	O
 127	0	Cresce	VER:pres	crescere	Attività	O
 127	1	nella	PRE:det	nel	Attività	O
@@ -2544,7 +2431,7 @@
 123	2	si	PRO:refl	si	Attività	O
 123	3	accasa	VER:pres	accasare	Attività	O
 123	4	in	PRE	in	Attività	O
-123	5	Giappone	NPR	Giappone	Attività	O
+123	5	Giappone	NPR	Giappone	Attività	B-Luogo_Attività
 123	6	,	PON	,	Attività	O
 123	7	presso	PRE	presso	Attività	O
 123	8	i	DET:def	il	Attività	O
@@ -2561,8 +2448,7 @@
 122	2	gioca	VER:pres	giocare	Trofeo	O
 122	3	con	PRE	con	Trofeo	O
 122	4	il	DET:def	il	Trofeo	O
-122	5	KPMG	NOM	<unknown>	Trofeo	B-Squadra_Trofeo
-122	6	United	NPR	United	Trofeo	B-Squadra_Trofeo
+122	5	KPMG United	ENT	KPMG United	Trofeo	B-Squadra_Trofeo
 122	7	,	PON	,	Trofeo	O
 122	8	militandovi	VER:geru	militare	Trofeo	O
 122	9	per	PRE	per	Trofeo	O
@@ -2570,61 +2456,9 @@
 122	11	anni	NOM	anno	Trofeo	O
 122	12	e	CON	e	Trofeo	O
 122	13	vincendo	VER:geru	vincere	Trofeo	B-LU
-122	14	due campionati	ENT	due campionati	Trofeo	B-Competizione_Trofeo
-122	15	0	SENT	0	Trofeo	O
-121	0	Conclusa	VER:pper	concludere	Attività	O
-121	1	la	DET:def	il	Attività	O
-121	2	carriera	NOM	carriera	Attività	O
-121	3	Crespo	ENT	Crespo	Attività	B-Agente_Attività
-121	4	è	VER:pres	essere	Attività	O
-121	5	rimasto	VER:pper	rimanere	Attività	B-LU
-121	6	a	PRE	a	Attività	O
-121	7	vivere	VER:infi	vivere	Attività	O
-121	8	a	PRE	a	Attività	O
-121	9	Parma	NPR	Parma	Attività	O
-121	10	con	PRE	con	Attività	O
-121	11	la	DET:def	il	Attività	O
-121	12	famiglia	NOM	famiglia	Attività	O
-121	13	,	PON	,	Attività	O
-121	14	dichiarando	VER:geru	dichiarare	Attività	O
-121	15	che	PRO:rela	che	Attività	O
-121	16	la	DET:def	il	Attività	O
-121	17	città	NOM	città	Attività	O
-121	18	rappresenta	VER:pres	rappresentare	Attività	O
-121	19	gran	ADJ	gran	Attività	O
-121	20	parte	NOM	parte	Attività	O
-121	21	della	PRE:det	del	Attività	O
-121	22	propria	ADJ	proprio	Attività	O
-121	23	vita	NOM	vita	Attività	O
-121	24	0	SENT	0	Attività	O
-120	0	Vestì	VER:remo	vestire	Sconfitta	O
-120	1	la	DET:def	il	Sconfitta	O
-120	2	maglia	NOM	maglia	Sconfitta	O
-120	3	della	PRE:det	del	Sconfitta	O
-120	4	Nazionale	NOM	Nazionale	Sconfitta	
-120	5	maggiore	ADJ	grande	Sconfitta	O
-120	6	in	PRE	in	Sconfitta	O
-120	7	2	NUM	@card@	Sconfitta	O
-120	8	occasioni	NOM	occasione	Sconfitta	O
-120	9	0	SENT	0	Sconfitta	O
-120	10	Esordì	VER:remo	esordire	Sconfitta	O
-120	11	il	DET:def	il	Sconfitta	O
-120	12	18	NUM	@card@	Sconfitta	O
-120	13	gennaio	NOM	gennaio	Sconfitta	O
-120	14	1997	NUM	@card@	Sconfitta	O
-120	15	,	PON	,	Sconfitta	O
-120	16	sostituendo	VER:geru	sostituire	Sconfitta	O
-120	17	Stig	NOM	<unknown>	Sconfitta	O
-120	18	Johansen	NOM	<unknown>	Sconfitta	O
-120	19	nell'	PRE:det	nel	Sconfitta	O
-120	20	amichevole	NOM	amichevole	Sconfitta	B-Competizione_Sconfitta
-120	21	contro	PRE	contro	Sconfitta	O
-120	22	la	DET:def	il	Sconfitta	O
-120	23	,	PON	,	Sconfitta	O	???
-120	24	persa	VER:pper	perdere	Sconfitta	B-LU
-120	25	per	PRE	per	Sconfitta	O
-120	26	1-0	NUM	@card@	Sconfitta	O
-120	27	0	SENT	0	Sconfitta	O
+122	14	due	ADJ	due	Trofeo	O
+122	15	campionati	NOM	campionato	Trofeo	B-Competizione_Trofeo
+122	16	0	SENT	0	Trofeo	O
 40	0	Dopo	ADV	dopo	Attività	O
 40	1	2	NUM	@card@	Attività	O
 40	2	anni	NOM	anno	Attività	O
@@ -2656,29 +2490,27 @@
 41	1	sempre	ADV	sempre	Attività	O
 41	2	giocato	VER:pper	giocare	Attività	B-LU
 41	3	nel	PRE:det	nel	Attività	O
-41	4	campionato	NOM	campionato	Attività	B-Competizione_Attività
-41	5	libico	ADJ	libico	Attività	B-Competizione_Attività
+41	4	campionato libico	ENT	campionato libico	Attività	B-Competizione_Attività
 41	6	0	SENT	0	Attività	O
-42	0	Giocò	VER:remo	giocare	Sconfitta	O
-42	1	una	DET:indef	una	Sconfitta	O
-42	2	sola	ADJ	solo	Sconfitta	O
-42	3	partita	NOM	partita	Sconfitta	O
-42	4	con	PRE	con	Sconfitta	O
-42	5	la	DET:def	il	Sconfitta	O
-42	6	Nazionale	NOM	Nazionale	Sconfitta	B-Vincitore_Sconfitta	idealmente no (vedi sotto)
-42	7	nordirlandese	ADJ	nordirlandese	Sconfitta	B-Vincitore_Sconfitta
-42	8	,	PON	,	Sconfitta	O
-42	9	contro	PRE	contro	Sconfitta	O
-42	10	la	DET:def	il	Sconfitta	O
-42	11	Georgia	NPR	Georgia	Sconfitta	B-Perdente_Sconfitta
-42	12	,	PON	,	Sconfitta	O
-42	13	in	PRE	in	Sconfitta	O
-42	14	cui	PRO:rela	cui	Sconfitta	O
-42	15	i	DET:def	il	Sconfitta	O
-42	16	verdi	NOM	verdi	Sconfitta	B-Vincitore_Sconfitta	idealmente si, il classificatore non ha modo di sapere il colore della maglia delle squadre
-42	17	vinsero	VER:remo	vincere	Sconfitta	B-LU
-42	18	4-1	NUM	@card@	Sconfitta	O
-42	19	0	SENT	0	Sconfitta	O
+42	0	Giocò	VER:remo	giocare	Vittoria	O
+42	1	una	DET:indef	una	Vittoria	O
+42	2	sola	ADJ	solo	Vittoria	O
+42	3	partita	NOM	partita	Vittoria	O
+42	4	con	PRE	con	Vittoria	O
+42	5	la	DET:def	il	Vittoria	O
+42	6	Nazionale nordirlandese	ENT	Nazionale nordirlandese	Vittoria	B-Vincitore_Vittoria
+42	8	,	PON	,	Vittoria	O
+42	9	contro	PRE	contro	Vittoria	O
+42	10	la	DET:def	il	Vittoria	O
+42	11	Georgia	NPR	Georgia	Vittoria	B-Perdente_Vittoria
+42	12	,	PON	,	Vittoria	O
+42	13	in	PRE	in	Vittoria	O
+42	14	cui	PRO:rela	cui	Vittoria	O
+42	15	i	DET:def	il	Vittoria	O
+42	16	verdi	NOM	verdi	Vittoria	O
+42	17	vinsero	VER:remo	vincere	Vittoria	B-LU
+42	18	4-1	NUM	@card@	Vittoria	O
+42	19	0	SENT	0	Vittoria	O
 43	0	Ha	VER:pres	avere	Attività	O
 43	1	esordito	VER:pper	esordire	Attività	B-LU
 43	2	con	PRE	con	Attività	O
@@ -2688,7 +2520,7 @@
 43	6	un'	DET:indef	un'	Attività	O
 43	7	amichevole	NOM	amichevole	Attività	B-Competizione_Attività
 43	8	contro	PRE	contro	Attività	O
-43	9	la	DET:def	il	Attività	O	contro la famosissima http://it.wikipedia.org/wiki/Stringa_(informatica)#Stringa_vuota
+43	9	la	DET:def	il	Attività	O
 43	10	nel	PRE:det	nel	Attività	O
 43	11	febbraio	NOM	febbraio	Attività	O
 43	12	del	PRE:det	del	Attività	O
@@ -2701,14 +2533,13 @@
 44	4	conquista	NOM	conquista	Trofeo	O
 44	5	il	DET:def	il	Trofeo	O
 44	6	suo	PRO:poss	suo	Trofeo	O
-44	7	primo trofeo	ENT	primo trofeo	Trofeo	B-Premio_Trofeo	??
+44	7	primo trofeo	ENT	primo trofeo	Trofeo	O
 44	8	da	PRE	da	Trofeo	O
 44	9	allenatore	NOM	allenatore	Trofeo	O
 44	10	,	PON	,	Trofeo	O
 44	11	vincendo	VER:geru	vincere	Trofeo	B-LU
 44	12	la	DET:def	il	Trofeo	O
-44	13	Coppa di Francia	ENT	Coppa di Francia	Trofeo	B-Competizione_Trofeo
-44	14	2013-2014	NUM	@card@	Trofeo	O
+44	13	Coppa di Francia 2013-2014	ENT	Coppa di Francia 2013-2014	Trofeo	B-Competizione_Trofeo
 44	15	0	SENT	0	Trofeo	O
 45	0	Nella	PRE:det	nel	Attività	O
 45	1	stagione	NOM	stagione	Attività	O
@@ -2748,8 +2579,7 @@
 128	1	esordito	VER:pper	esordire	Attività	B-LU
 128	2	con	PRE	con	Attività	O
 128	3	la	DET:def	il	Attività	O
-128	4	Nazionale	NOM	Nazionale	Attività	B-Squadra_Attività
-128	5	cipriota	ADJ	cipriota	Attività	B-Squadra_Attività
+128	4	Nazionale cipriota	ENT	Nazionale cipriota	Attività	B-Squadra_Attività
 128	6	nel	PRE:det	nel	Attività	O
 128	7	2001	NUM	@card@	Attività	O
 128	8	,	PON	,	Attività	O
@@ -2758,20 +2588,20 @@
 128	11	solo	ADJ	solo	Attività	O
 128	12	incontro	NOM	incontro	Attività	O
 128	13	0	SENT	0	Attività	O
-176	0	Il	DET:def	il	Attività	O
-176	1	5	NUM	@card@	Attività	O
-176	2	luglio	NOM	luglio	Attività	O
-176	3	2013	NUM	@card@	Attività	O
-176	4	rescinde	VER:pres	rescindere	Attività	B-LU
-176	5	il	DET:def	il	Attività	O
-176	6	contratto	NOM	contratto	Attività	O
-176	7	con	PRE	con	Attività	O
-176	8	il	DET:def	il	Attività	O
-176	9	Cuneo	NPR	Cuneo	Attività	B-Squadra_Attività
-176	10	rimanendo	VER:geru	rimanere	Attività	O
-176	11	così	ADV	così	Attività	O
-176	12	svincolato	VER:pper	svincolare	Attività	O
-176	13	0	SENT	0	Attività	O
+176	0	Il	DET:def	il	Stato	O
+176	1	5	NUM	@card@	Stato	O
+176	2	luglio	NOM	luglio	Stato	O
+176	3	2013	NUM	@card@	Stato	O
+176	4	rescinde	VER:pres	rescindere	Stato	O
+176	5	il	DET:def	il	Stato	O
+176	6	contratto	NOM	contratto	Stato	O
+176	7	con	PRE	con	Stato	O
+176	8	il	DET:def	il	Stato	O
+176	9	Cuneo	NPR	Cuneo	Stato	B-Squadra_Stato
+176	10	rimanendo	VER:geru	rimanere	Stato	B-LU
+176	11	così	ADV	così	Stato	O
+176	12	svincolato	VER:pper	svincolare	Stato	B-Stato_Stato
+176	13	0	SENT	0	Stato	O
 278	0	Nel	PRE:det	nel	Attività	O
 278	1	1987	NUM	@card@	Attività	O
 278	2	è	VER:pres	essere	Attività	O
@@ -2803,22 +2633,20 @@
 387	3	ha	VER:pres	avere	Trofeo	O
 387	4	vinto	VER:pper	vincere	Trofeo	B-LU
 387	5	il	DET:def	il	Trofeo	O
-387	6	campionato lettone	ENT	campionato lettone	Trofeo	B-Competizione_Trofeo
-387	7	2010	NUM	@card@	Trofeo	O
+387	6	campionato lettone 2010	ENT	campionato lettone 2010	Trofeo	B-Competizione_Trofeo
 387	8	,	PON	,	Trofeo	O
 387	9	la	DET:def	il	Trofeo	O
-387	10	Baltic League	ENT	Baltic League	Trofeo	B-Competizione_Trofeo
-387	11	2010-2011	NUM	@card@	Trofeo	O
+387	10	Baltic League 2010-2011	ENT	Baltic League 2010-2011	Trofeo	B-Competizione_Trofeo
 387	12	e	CON	e	Trofeo	O
 387	13	la	DET:def	il	Trofeo	O
-387	14	Coppa di Lettonia	ENT	Coppa di Lettonia	Trofeo	B-Competizione_Trofeo
-387	15	2011-2012	NUM	@card@	Trofeo	O
+387	14	Coppa di Lettonia 2011-2012	ENT	Coppa di Lettonia 2011-2012	Trofeo	B-Competizione_Trofeo
 387	16	0	SENT	0	Trofeo	O
 386	0	Da	PRE	da	Trofeo	O
 386	1	allenatore	NOM	allenatore	Trofeo	O
 386	2	ha	VER:pres	avere	Trofeo	O
 386	3	vinto	VER:pper	vincere	Trofeo	B-LU
-386	4	tre campionati belgi	ENT	tre campionati belgi	Trofeo	B-Competizione_Trofeo
+386	4	tre	ADJ	tre	Trofeo	O
+386	4	campionati belgi	ENT	campionati belgi	Trofeo	B-Competizione_Trofeo
 386	5	con	PRE	con	Trofeo	O
 386	6	lo	DET:def	il	Trofeo	O
 386	7	Standard Liegi	ENT	Standard Liegi	Trofeo	B-Squadra_Trofeo
@@ -2847,50 +2675,49 @@
 389	13	anno	NOM	anno	Trofeo	O
 389	14	un'	DET:indef	un'	Trofeo	O
 389	15	altra	ADJ	altro	Trofeo	O
-389	16	Chatham	NOM	<unknown>	Trofeo	B-Competizione_Trofeo
-389	17	Cup	NPR	Cup	Trofeo	B-Competizione_Trofeo
+389	16	Chatham Cup	ENT	Chatham Cup	Trofeo	B-Competizione_Trofeo
 389	18	0	SENT	0	Trofeo	O
-388	0	Il	DET:def	il	Trofeo	O
-388	1	17	NUM	@card@	Trofeo	O
-388	2	novembre	NOM	novembre	Trofeo	O
-388	3	2010	NUM	@card@	Trofeo	O
-388	4	esordisce	VER:pres	esordire	Trofeo	O
-388	5	con	PRE	con	Trofeo	O
-388	6	la	DET:def	il	Trofeo	O
-388	7	Nazionale Under-21	ENT	Nazionale Under-21	Trofeo	B-Vincitore_Trofeo
-388	8	diretta	VER:pres	dirigere	Trofeo	O
-388	9	da	PRE	da	Trofeo	O
-388	10	Ciro	NPR	Ciro	Trofeo	O
-388	11	Ferrara	NPR	Ferrara	Trofeo	O
-388	12	nell'	PRE:det	nel	Trofeo	O
-388	13	amichevole	NOM	amichevole	Trofeo	B-Competizione_Trofeo
-388	14	vinta	VER:pper	vincere	Trofeo	B-LU
-388	15	contro	PRE	contro	Trofeo	O
-388	16	la	DET:def	il	Trofeo	O
-388	17	Turchia	NPR	Turchia	Trofeo	B-Squadra_Trofeo
-388	18	(	PON	(	Trofeo	O
-388	19	2-1	NUM	@card@	Trofeo	O
-388	20	)	PON	)	Trofeo	O
-388	21	0	SENT	0	Trofeo	O
-343	0	A	PRE	a	Attività	O
-343	1	giugno	NOM	giugno	Attività	O
-343	2	2012	NUM	@card@	Attività	O
-343	3	non	ADV	non	Attività	O
-343	4	rinnova	VER:pres	rinnovare	Attività	O
-343	5	il	DET:def	il	Attività	O
-343	6	suo	PRO:poss	suo	Attività	O
-343	7	contratto	NOM	contratto	Attività	O
-343	8	con	PRE	con	Attività	O
-343	9	il	DET:def	il	Attività	O
-343	10	Novara	NPR	Novara	Attività	B-Squadra_Attività
-343	11	rimanendo	VER:geru	rimanere	Attività	B-LU
-343	12	quindi	ADV	quindi	Attività	O
-343	13	svincolato	VER:pper	svincolare	Attività	O
-343	14	dal	PRE:det	dal	Attività	O
-343	15	1º	NOM	<unknown>	Attività	O
-343	16	luglio	NOM	luglio	Attività	O
-343	17	2012	NUM	@card@	Attività	O
-343	18	0	SENT	0	Attività	O
+388	0	Il	DET:def	il	Vittoria	O
+388	1	17	NUM	@card@	Vittoria	O
+388	2	novembre	NOM	novembre	Vittoria	O
+388	3	2010	NUM	@card@	Vittoria	O
+388	4	esordisce	VER:pres	esordire	Vittoria	O
+388	5	con	PRE	con	Vittoria	O
+388	6	la	DET:def	il	Vittoria	O
+388	7	Nazionale Under-21	ENT	Nazionale Under-21	Vittoria	B-Vincitore_Vittoria
+388	8	diretta	VER:pres	dirigere	Vittoria	O
+388	9	da	PRE	da	Vittoria	O
+388	10	Ciro	NPR	Ciro	Vittoria	O
+388	11	Ferrara	NPR	Ferrara	Vittoria	O
+388	12	nell'	PRE:det	nel	Vittoria	O
+388	13	amichevole	NOM	amichevole	Vittoria	B-Competizione_Vittoria
+388	14	vinta	VER:pper	vincere	Vittoria	B-LU
+388	15	contro	PRE	contro	Vittoria	O
+388	16	la	DET:def	il	Vittoria	O
+388	17	Turchia	NPR	Turchia	Vittoria	B-Perdente_Vittoria
+388	18	(	PON	(	Vittoria	O
+388	19	2-1	NUM	@card@	Vittoria	O
+388	20	)	PON	)	Vittoria	O
+388	21	0	SENT	0	Vittoria	O
+343	0	A	PRE	a	Stato	O
+343	1	giugno	NOM	giugno	Stato	O
+343	2	2012	NUM	@card@	Stato	O
+343	3	non	ADV	non	Stato	O
+343	4	rinnova	VER:pres	rinnovare	Stato	O
+343	5	il	DET:def	il	Stato	O
+343	6	suo	PRO:poss	suo	Stato	O
+343	7	contratto	NOM	contratto	Stato	O
+343	8	con	PRE	con	Stato	O
+343	9	il	DET:def	il	Stato	O
+343	10	Novara	NPR	Novara	Stato	B-Squadra_Stato
+343	11	rimanendo	VER:geru	rimanere	Stato	B-LU
+343	12	quindi	ADV	quindi	Stato	O
+343	13	svincolato	VER:pper	svincolare	Stato	B-Stato_Stato
+343	14	dal	PRE:det	dal	Stato	O
+343	15	1º	NOM	<unknown>	Stato	O
+343	16	luglio	NOM	luglio	Stato	O
+343	17	2012	NUM	@card@	Stato	O
+343	18	0	SENT	0	Stato	O
 342	0	Segna	VER:pres	segnare	Sconfitta	O
 342	1	il	DET:def	il	Sconfitta	O
 342	2	primo	ADJ	primo	Sconfitta	O
@@ -2916,25 +2743,6 @@
 342	22	persa	VER:pper	perdere	Sconfitta	B-LU
 342	23	2-1	NUM	@card@	Sconfitta	O
 342	24	0	SENT	0	Sconfitta	O
-341	0	In	PRE	in	Attività	O
-341	1	seguito	NOM	seguito	Attività	O
-341	2	al	PRE:det	al	Attività	O
-341	3	ritiro	NOM	ritiro	Attività	O
-341	4	è	VER:pres	essere	Attività	O
-341	5	rimasto	VER:pper	rimanere	Attività	B-LU
-341	6	nello	PRE:det	nel	Attività	O
-341	7	stato	NOM	stato	Attività	O
-341	8	di	PRE	di	Attività	O
-341	9	San	NPR	San	Attività	O	Luogo_Attività?
-341	10	Paolo	NPR	Paolo	Attività	O
-341	11	,	PON	,	Attività	O
-341	12	ove	ADV	ove	Attività	O
-341	13	svolge	VER:pres	svolgere	Attività	O
-341	14	la	DET:def	il	Attività	O
-341	15	professione	NOM	professione	Attività	O
-341	16	di	PRE	di	Attività	O
-341	17	allenatore	NOM	allenatore	Attività	O
-341	18	0	SENT	0	Attività	O
 340	0	He	VER:impe	He	Attività	O
 340	1	esordito	VER:pper	esordire	Attività	B-LU
 340	2	in	PRE	in	Attività	O
@@ -2968,7 +2776,7 @@
 346	5	debutta	VER:pres	debuttare	Attività	O
 346	6	contro	ADV	contro	Attività	O
 346	7	il	DET:def	il	Attività	O
-346	8	Newcastle United	ENT	Newcastle United	Attività	B-Squadra_Attività
+346	8	Newcastle United	ENT	Newcastle United	Attività	O
 346	9	giocando	VER:geru	giocare	Attività	B-LU
 346	10	per	PRE	per	Attività	O
 346	11	tutti	ADJ	tutto	Attività	O
@@ -3031,45 +2839,6 @@
 349	14	il	DET:def	il	Sconfitta	O
 349	15	Genoa	NPR	Genoa	Sconfitta	B-Vincitore_Sconfitta
 349	16	0	SENT	0	Sconfitta	O
-348	0	Viene	VER:pres	venire	Attività	O
-348	1	convocato	VER:pper	convocare	Attività	B-LU
-348	2	anche	ADV	anche	Attività	O
-348	3	per	PRE	per	Attività	O
-348	4	la	DET:def	il	Attività	O
-348	5	Copa América	ENT	Copa América	Attività	B-Competizione_Attività
-348	6	2011	NUM	@card@	Attività	O
-348	7	con	PRE	con	Attività	O
-348	8	la	DET:def	il	Attività	O
-348	9	Nazionale	NOM	Nazionale	Attività	B-Squadra_Attività
-348	10	maggiore	ADJ	grande	Attività	O
-348	11	,	PON	,	Attività	O
-348	12	ma	CON	ma	Attività	O
-348	13	non	ADV	non	Attività	O
-348	14	rimane	VER:pres	rimanere	Attività	O
-348	15	in	PRE	in	Attività	O
-348	16	panchina	NOM	panchina	Attività	O
-348	17	per	PRE	per	Attività	O
-348	18	tutta	ADJ	tutto	Attività	O
-348	19	la	DET:def	il	Attività	O
-348	20	competizione	NOM	competizione	Attività	O
-348	21	0	SENT	0	Attività	O
-242	0	L'	DET:def	il	Attività	O
-242	1	8	NUM	@card@	Attività	O
-242	2	dicembre	NOM	dicembre	Attività	O
-242	3	del	PRE:det	del	Attività	O
-242	4	1962	NUM	@card@	Attività	O
-242	5	esordisce	VER:pres	esordire	Attività	B-LU
-242	6	contro	PRE	contro	Attività	O
-242	7	Malta	NPR	Malta	Attività	B-Squadra_Attività
-242	8	,	PON	,	Attività	O
-242	9	realizzando	VER:geru	realizzare	Attività	O
-242	10	anche	ADV	anche	Attività	O
-242	11	una	DET:indef	una	Attività	O
-242	12	rete	NOM	rete	Attività	O
-242	13	nel	PRE:det	nel	Attività	O
-242	14	1-3	NUM	@card@	Attività	O
-242	15	finale	ADJ	finale	Attività	O
-242	16	0	SENT	0	Attività	O
 243	0	Ha	VER:pres	avere	Attività	O
 243	1	esordito	VER:pper	esordire	Attività	B-LU
 243	2	in	PRE	in	Attività	O
@@ -3105,15 +2874,15 @@
 168	0	Ha	VER:pres	avere	Attività	O
 168	1	esordito	VER:pper	esordire	Attività	B-LU
 168	2	nella	PRE:det	nel	Attività	O
-168	3	Nazionale	NOM	Nazionale	Attività	B-Squadra_Attività
-168	4	cilena	ADJ	cileno	Attività	B-Squadra_Attività
+168	3	Nazionale cilena	ENT	Nazionale cilena	Attività	B-Squadra_Attività
 168	5	nel	PRE:det	nel	Attività	O
 168	6	2002	NUM	@card@	Attività	O
 168	7	0	SENT	0	Attività	O
 246	0	Ha	VER:pres	avere	Trofeo	O
 246	1	vinto	VER:pper	vincere	Trofeo	B-LU
 246	2	con	PRE	con	Trofeo	O
-246	3	la	PRO:pers	la	Trofeo	O	la boh
+246	3	la	PRO:pers	la	Trofeo	O
+246	3	Sampdoria	NPR	Sampdoria	Trofeo	B-Squadra_Trofeo
 246	4	gli	DET:def	il	Trofeo	O
 246	5	europei	NOM	europei	Trofeo	B-Competizione_Trofeo
 246	6	nel	PRE:det	nel	Trofeo	O
@@ -3131,7 +2900,7 @@
 247	6	panchina	NOM	panchina	Trofeo	O
 247	7	dello	PRE:det	del	Trofeo	O
 247	8	Sliema Wanderers	ENT	Sliema Wanderers	Trofeo	B-Squadra_Trofeo
-247	9	e	CON	e	Trofeo	O	“e con cui vince” D:
+247	9	e	CON	e	Trofeo	O
 247	10	con	PRE	con	Trofeo	O
 247	11	cui	PRO:rela	cui	Trofeo	O
 247	12	vince	VER:pres	vincere	Trofeo	B-LU
@@ -3144,15 +2913,13 @@
 244	0	Ha	VER:pres	avere	Attività	O
 244	1	giocato	VER:pper	giocare	Attività	B-LU
 244	2	nella	PRE:det	nel	Attività	O
-244	3	massima serie	ENT	massima serie	Attività	B-Competizione_Attività
-244	4	croata	ADJ	croato	Attività	O
+244	3	massima serie croata	ENT	massima serie croata	Attività	B-Competizione_Attività
 244	5	con	PRE	con	Attività	O
 244	6	Hrvatski dragovoljac	ENT	Hrvatski dragovoljac	Attività	B-Squadra_Attività
 244	7	,	PON	,	Attività	O
 244	8	Lokomotiva Zagabria	ENT	Lokomotiva Zagabria	Attività	B-Squadra_Attività
 244	9	e	CON	e	Attività	O
-244	10	Dinamo	NPR	Dinamo	Attività	B-Squadra_Attività
-244	11	Zagabria	NPR	Zagabria	Attività	B-Squadra_Attività
+244	10	Dinamo Zagabria	ENT	Dinamo Zagabria	Attività	B-Squadra_Attività
 244	12	0	SENT	0	Attività	O
 245	0	Nella	PRE:det	nel	Attività	O
 245	1	stagione	NOM	stagione	Attività	O
@@ -3212,7 +2979,9 @@
 162	8	la	DET:def	il	Trofeo	O
 162	9	medaglia d'oro	ENT	medaglia d'oro	Trofeo	B-Premio_Trofeo
 162	10	ai	PRE:det	al	Trofeo	O
-162	11	Giochi olimpici del 1948	ENT	Giochi olimpici del 1948	Trofeo	B-Competizione_Trofeo
+162	11	Giochi olimpici	ENT	Giochi olimpici	Trofeo	B-Competizione_Trofeo
+162	10	del	PRE:det	del	Trofeo	O
+162	10	1948	NUM	@card@	Trofeo	O
 162	12	0	SENT	0	Trofeo	O
 248	0	Ha	VER:pres	avere	Attività	O
 248	1	giocato	VER:pper	giocare	Attività	B-LU
@@ -3264,15 +3033,14 @@
 166	1	esordito	VER:pper	esordire	Attività	B-LU
 166	2	con	PRE	con	Attività	O
 166	3	la	DET:def	il	Attività	O
-166	4	Nazionale	NOM	Nazionale	Attività	B-Squadra_Attività
-166	5	ungherese	ADJ	ungherese	Attività	B-Squadra_Attività
+166	4	Nazionale ungherese	ENT	Nazionale ungherese	Attività	B-Squadra_Attività
 166	6	il	DET:def	il	Attività	O
 166	7	4	NUM	@card@	Attività	O
 166	8	giugno	NOM	giugno	Attività	O
 166	9	2014	NUM	@card@	Attività	O
 166	10	nell'	PRE:det	nel	Attività	O
-166	11	amichevole	ADJ	amichevole	Attività	B-Competizione_Attività
-166	12	Ungheria-Albania	NOM	<unknown>	Attività	B-Competizione_Attività
+166	11	amichevole	ADJ	amichevole	Attività	O
+166	12	Ungheria-Albania	NOM	<unknown>	Attività	O
 166	13	(	PON	(	Attività	O
 166	14	1-0	NUM	@card@	Attività	O
 166	15	)	PON	)	Attività	O
@@ -3291,7 +3059,7 @@
 165	11	partita	NOM	partita	Attività	O
 165	12	contro	PRE	contro	Attività	O
 165	13	la	DET:def	il	Attività	O
-165	14	Giordania	NPR	Giordania	Attività	B-Squadra_Attività	o no?
+165	14	Giordania	NPR	Giordania	Attività
 165	15	0	SENT	0	Attività	O
 164	0	Il	DET:def	il	Sconfitta	O
 164	1	15	NUM	@card@	Sconfitta	O
@@ -3308,7 +3076,8 @@
 164	12	2-0	NUM	@card@	Sconfitta	O
 164	13	contro	PRE	contro	Sconfitta	O
 164	14	l	VER:infi	<unknown>	Sconfitta	O
-164	15	'	PON	'	Sconfitta	O	contro chi?
+164	15	'	PON	'	Sconfitta	O
+164	13	Olanda	NPR	Olanda	Sconfitta	B-Vincitore_Sconfitta
 164	16	0	SENT	0	Sconfitta	O
 17	0	Lie	VER:impe	Lie	Trofeo	B-Vincitore_Trofeo
 17	1	giocò	VER:remo	giocare	Trofeo	O
@@ -3336,8 +3105,7 @@
 15	1	esordito	VER:pper	esordire	Attività	O
 15	2	con	PRE	con	Attività	O
 15	3	la	DET:def	il	Attività	O
-15	4	Nazionale	NOM	Nazionale	Attività	B-Squadra_Attività
-15	5	cipriota	ADJ	cipriota	Attività	B-Squadra_Attività
+15	4	Nazionale cipriota	ENT	Nazionale cipriota	Attività	B-Squadra_Attività
 15	6	nel	PRE:det	nel	Attività	O
 15	7	1982	NUM	@card@	Attività	O
 15	8	,	PON	,	Attività	O
@@ -3348,33 +3116,33 @@
 15	13	al	PRE:det	al	Attività	O
 15	14	1985	NUM	@card@	Attività	O
 15	15	0	SENT	0	Attività	O
-14	0	Alla	PRE:det	al	Attività	O
-14	1	fine	NOM	fine	Attività	O
-14	2	della	PRE:det	del	Attività	O
-14	3	stagione	NOM	stagione	Attività	B-Competizione_Attività
-14	4	2010-2011	NUM	@card@	Attività	B-Competizione_Attività
-14	5	,	PON	,	Attività	O
-14	6	in	PRE	in	Attività	O
-14	7	cui	PRO:rela	cui	Attività	O
-14	8	ha	VER:pres	avere	Attività	O
-14	9	giocato	VER:pper	giocare	Attività	B-LU
-14	10	36	NUM	@card@	Attività	O
-14	11	partite	NOM	partita	Attività	O
-14	12	tutte	ADJ	tutto	Attività	O
-14	13	da	PRE	da	Attività	O
-14	14	titolare	NOM	titolare	Attività	O
-14	15	,	PON	,	Attività	O
-14	16	collezionando	VER:geru	collezionare	Attività	O
-14	17	tre	ADJ	tre	Attività	O
-14	18	reti	NOM	rete	Attività	O
-14	19	e	CON	e	Attività	O
-14	20	un'	DET:indef	un'	Attività	O
-14	21	espulsione	NOM	espulsione	Attività	O
-14	22	,	PON	,	Attività	O
-14	23	è	VER:pres	essere	Attività	O
-14	24	rimasto	VER:pper	rimanere	Attività	O
-14	25	svincolato	VER:pper	svincolare	Attività	O
-14	26	0	SENT	0	Attività	O
+14	0	Alla	PRE:det	al	Stato	O
+14	1	fine	NOM	fine	Stato	O
+14	2	della	PRE:det	del	Stato	O
+14	3	stagione	NOM	stagione	Stato	O
+14	4	2010-2011	NUM	@card@	Stato	O
+14	5	,	PON	,	Stato	O
+14	6	in	PRE	in	Stato	O
+14	7	cui	PRO:rela	cui	Stato	O
+14	8	ha	VER:pres	avere	Stato	O
+14	9	giocato	VER:pper	giocare	Stato	O
+14	10	36	NUM	@card@	Stato	O
+14	11	partite	NOM	partita	Stato	O
+14	12	tutte	ADJ	tutto	Stato	O
+14	13	da	PRE	da	Stato	O
+14	14	titolare	NOM	titolare	Stato	O
+14	15	,	PON	,	Stato	O
+14	16	collezionando	VER:geru	collezionare	Stato	O
+14	17	tre	ADJ	tre	Stato	O
+14	18	reti	NOM	rete	Stato	O
+14	19	e	CON	e	Stato	O
+14	20	un'	DET:indef	un'	Stato	O
+14	21	espulsione	NOM	espulsione	Stato	O
+14	22	,	PON	,	Stato	O
+14	23	è	VER:pres	essere	Stato	O
+14	24	rimasto	VER:pper	rimanere	Stato	B-LU
+14	25	svincolato	VER:pper	svincolare	Stato	B-Stato_Stato
+14	26	0	SENT	0	Stato	O
 13	0	Debutta	VER:pres	debuttare	Attività	O
 13	1	nel	PRE:det	nel	Attività	O
 13	2	2006	NUM	@card@	Attività	O
@@ -3396,25 +3164,25 @@
 12	4	nel	PRE:det	nel	Attività	O
 12	5	2007	NUM	@card@	Attività	O
 12	6	0	SENT	0	Attività	O
-11	0	Il	DET:def	il	Attività	O	questa frase è da buttare
-11	1	22	NUM	@card@	Attività	O
-11	2	luglio	NOM	luglio	Attività	O
-11	3	2014	NUM	@card@	Attività	O
-11	4	,	PON	,	Attività	O
-11	5	dopo	PRE	dopo	Attività	O
-11	6	la	DET:def	il	Attività	O
-11	7	mancata	ADJ	mancato	Attività	O
-11	8	iscrizione	NOM	iscrizione	Attività	O
-11	9	del	PRE:det	del	Attività	O
-11	10	Siena	NPR	Siena	Attività	B-Squadra_Attività	No, non c'entra nulla
-11	11	al	PRE:det	al	Attività	O
-11	12	campionato	NOM	campionato	Attività	B-Competizione_Attività	^
-11	13	di	PRE	di	Attività	O
-11	14	Serie B	ENT	Serie B	Attività	B-Competizione_Attività	^
-11	15	,	PON	,	Attività	O
-11	16	rimane	VER:pres	rimanere	Attività	B-LU
-11	17	svincolato	VER:pper	svincolare	Attività	O
-11	18	0	SENT	0	Attività	O
+11	0	Il	DET:def	il	Stato	O
+11	1	22	NUM	@card@	Stato	O
+11	2	luglio	NOM	luglio	Stato	O
+11	3	2014	NUM	@card@	Stato	O
+11	4	,	PON	,	Stato	O
+11	5	dopo	PRE	dopo	Stato	O
+11	6	la	DET:def	il	Stato	O
+11	7	mancata	ADJ	mancato	Stato	O
+11	8	iscrizione	NOM	iscrizione	Stato	O
+11	9	del	PRE:det	del	Stato	O
+11	10	Siena	NPR	Siena	Stato	B-Squadra_Stato
+11	11	al	PRE:det	al	Stato	O
+11	12	campionato	NOM	campionato	Stato	O
+11	13	di	PRE	di	Stato	O
+11	14	Serie B	ENT	Serie B	Stato	O
+11	15	,	PON	,	Stato	O
+11	16	rimane	VER:pres	rimanere	Stato	B-LU
+11	17	svincolato	VER:pper	svincolare	Stato	B-Stato_Stato
+11	18	0	SENT	0	Stato	O
 10	0	Nella	PRE:det	nel	Sconfitta	O
 10	1	stagione	NOM	stagione	Sconfitta	O
 10	2	successiva	ADJ	successivo	Sconfitta	O
@@ -3449,9 +3217,7 @@
 19	7	0	SENT	0	Attività	O
 18	0	Esordisce	VER:pres	esordire	Sconfitta	O
 18	1	nella	PRE:det	nel	Sconfitta	O
-18	2	nazionale	ADJ	nazionale	Sconfitta	B-Perdente_Sconfitta
-18	3	maggiore	ADJ	maggiore	Sconfitta	O
-18	4	svedese	ADJ	svedese	Sconfitta	B-Perdente_Sconfitta
+18	2	nazionale maggiore svedese	Esordisce	nazionale maggiore svedese	Sconfitta	B-Perdente_Sconfitta
 18	5	il	DET:def	il	Sconfitta	O
 18	6	22	NUM	@card@	Sconfitta	O
 18	7	gennaio	NOM	gennaio	Sconfitta	O
@@ -3461,7 +3227,8 @@
 18	11	da	PRE	da	Sconfitta	O
 18	12	titolare	VER:infi	titolare	Sconfitta	O
 18	13	nella	PRE:det	nel	Sconfitta	O
-18	14	partita amichevole	ENT	partita amichevole	Sconfitta	B-Competizione_Sconfitta
+18	9	partita	NOM	partita	Attività	O
+18	9	amichevole	NOM	amichevole	Attività	B-Competizione_Sconfitta
 18	15	persa	VER:pres	perdere	Sconfitta	B-LU
 18	16	per	PRE	per	Sconfitta	O
 18	17	3-0	NUM	@card@	Sconfitta	O
@@ -3493,7 +3260,7 @@
 89	6	novembre	NOM	novembre	Attività	O
 89	7	2013	NUM	@card@	Attività	O
 89	8	in	PRE	in	Attività	O
-89	9	Lussemburgo-Montenegro	NOM	<unknown>	Attività	B-Competizione_Attività	forse, potrebbe essere troppo difficile
+89	9	Lussemburgo-Montenegro	NOM	<unknown>	Attività	O
 89	10	(	PON	(	Attività	O
 89	11	1-4	NUM	@card@	Attività	O
 89	12	)	PON	)	Attività	O
@@ -3552,62 +3319,62 @@
 86	27	la	DET:def	il	Sconfitta	O
 86	28	Norvegia	NPR	Norvegia	Sconfitta	B-Vincitore_Sconfitta
 86	29	0	SENT	0	Sconfitta	O
-87	0	Il	DET:def	il	Attività	O
-87	1	31	NUM	@card@	Attività	O
-87	2	gennaio	NOM	gennaio	Attività	O
-87	3	2005	NUM	@card@	Attività	O
-87	4	,	PON	,	Attività	O
-87	5	alla	PRE:det	al	Attività	O
-87	6	scadenza	NOM	scadenza	Attività	O
-87	7	del	PRE:det	del	Attività	O
-87	8	contratto	NOM	contratto	Attività	O
-87	9	,	PON	,	Attività	O
-87	10	rimane	VER:pres	rimanere	Attività	O
-87	11	svincolato	VER:pper	svincolare	Attività	O
-87	12	e	CON	e	Attività	O
-87	13	decide	VER:pres	decidere	Attività	O
-87	14	di	PRE	di	Attività	O
-87	15	trasferirsi	VER:infi	trasferire	Attività	B-LU
-87	16	al	PRE:det	al	Attività	O
-87	17	Vitória Setúbal	ENT	Vitória Setúbal	Attività	B-Squadra_Attività
-87	18	,	PON	,	Attività	O
-87	19	in	PRE	in	Attività	O
-87	20	Portogallo	NPR	Portogallo	Attività	O
-87	21	,	PON	,	Attività	O
-87	22	dopo	PRE	dopo	Attività	O
-87	23	un	DET:indef	un	Attività	O
-87	24	periodo	NOM	periodo	Attività	O
-87	25	di	PRE	di	Attività	O
-87	26	prova	NOM	prova	Attività	O
-87	27	all'	PRE:det	al	Attività	O
-87	28	Hellas Verona	ENT	Hellas Verona	Attività	B-Squadra_Attività
-87	29	0	SENT	0	Attività	O
-80	0	Il	DET:def	il	Attività	O
-80	1	4	NUM	@card@	Attività	O
-80	2	agosto	NOM	agosto	Attività	O
-80	3	2011	NUM	@card@	Attività	O
-80	4	,	PON	,	Attività	O
-80	5	dopo	PRE	dopo	Attività	O
-80	6	aver	VER:infi	avere	Attività	O
-80	7	rescisso	VER:pper	rescindere	Attività	O
-80	8	il	DET:def	il	Attività	O
-80	9	contratto	NOM	contratto	Attività	O
-80	10	con	PRE	con	Attività	O
-80	11	la	DET:def	il	Attività	O
-80	12	Lazio	NPR	Lazio	Attività	B-Squadra_Attività
-80	13	,	PON	,	Attività	O
-80	14	firma	NOM	firma	Attività	O
-80	15	per	PRE	per	Attività	O
-80	16	il	DET:def	il	Attività	O
-80	17	Bassano Virtus	ENT	Bassano Virtus	Attività	B-Squadra_Attività
-80	18	0	SENT	0	Attività	O
-80	19	A	PRE	a	Attività	O
-80	20	fine	ADJ	fine	Attività	O
-80	21	stagione	NOM	stagione	Attività	O
-80	22	rimane	VER:pres	rimanere	Attività	B-LU	non mi convince
-80	23	però	ADV	però	Attività	O
-80	24	svincolato	VER:pper	svincolare	Attività	O
-80	25	0	SENT	0	Attività	O
+87	0	Il	DET:def	il	Stato	O
+87	1	31	NUM	@card@	Stato	O
+87	2	gennaio	NOM	gennaio	Stato	O
+87	3	2005	NUM	@card@	Stato	O
+87	4	,	PON	,	Stato	O
+87	5	alla	PRE:det	al	Stato	O
+87	6	scadenza	NOM	scadenza	Stato	O
+87	7	del	PRE:det	del	Stato	O
+87	8	contratto	NOM	contratto	Stato	O
+87	9	,	PON	,	Stato	O
+87	10	rimane	VER:pres	rimanere	Stato	B-LU
+87	11	svincolato	VER:pper	svincolare	Stato	B-Stato_Stato
+87	12	e	CON	e	Stato	O
+87	13	decide	VER:pres	decidere	Stato	O
+87	14	di	PRE	di	Stato	O
+87	15	trasferirsi	VER:infi	trasferire	Stato	O
+87	16	al	PRE:det	al	Stato	O
+87	17	Vitória Setúbal	ENT	Vitória Setúbal	Stato	B-Squadra_Stato
+87	18	,	PON	,	Stato	O
+87	19	in	PRE	in	Stato	O
+87	20	Portogallo	NPR	Portogallo	Stato	B-Luogo_Stato
+87	21	,	PON	,	Stato	O
+87	22	dopo	PRE	dopo	Stato	O
+87	23	un	DET:indef	un	Stato	O
+87	24	periodo	NOM	periodo	Stato	O
+87	25	di	PRE	di	Stato	O
+87	26	prova	NOM	prova	Stato	O
+87	27	all'	PRE:det	al	Stato	O
+87	28	Hellas Verona	ENT	Hellas Verona	Stato	B-Squadra_Stato
+87	29	0	SENT	0	Stato	O
+80	0	Il	DET:def	il	Stato	O
+80	1	4	NUM	@card@	Stato	O
+80	2	agosto	NOM	agosto	Stato	O
+80	3	2011	NUM	@card@	Stato	O
+80	4	,	PON	,	Stato	O
+80	5	dopo	PRE	dopo	Stato	O
+80	6	aver	VER:infi	avere	Stato	O
+80	7	rescisso	VER:pper	rescindere	Stato	O
+80	8	il	DET:def	il	Stato	O
+80	9	contratto	NOM	contratto	Stato	O
+80	10	con	PRE	con	Stato	O
+80	11	la	DET:def	il	Stato	O
+80	12	Lazio	NPR	Lazio	Stato	B-Squadra_Stato
+80	13	,	PON	,	Stato	O
+80	14	firma	NOM	firma	Stato	O
+80	15	per	PRE	per	Stato	O
+80	16	il	DET:def	il	Stato	O
+80	17	Bassano Virtus	ENT	Bassano Virtus	Stato	B-Squadra_Stato
+80	18	0	SENT	0	Stato	O
+80	19	A	PRE	a	Stato	O
+80	20	fine	ADJ	fine	Stato	O
+80	21	stagione	NOM	stagione	Stato	O
+80	22	rimane	VER:pres	rimanere	Stato	B-LU
+80	23	però	ADV	però	Stato	O
+80	24	svincolato	VER:pper	svincolare	Stato	B-Stato_Stato
+80	25	0	SENT	0	Stato	O
 81	0	Esordisce	VER:pres	esordire	Sconfitta	O
 81	1	con	PRE	con	Sconfitta	O
 81	2	la	DET:def	il	Sconfitta	O
@@ -3649,7 +3416,7 @@
 83	6	marzo	NOM	marzo	Attività	O
 83	7	1942	NUM	@card@	Attività	O
 83	8	in	PRE	in	Attività	O
-83	9	Livorno-Liguria	NOM	<unknown>	Attività	B-Competizione_Attività
+83	9	Livorno-Liguria	NOM	<unknown>	Attività	O
 83	10	(	PON	(	Attività	O
 83	11	2-0	NUM	@card@	Attività	O
 83	12	)	PON	)	Attività	O
