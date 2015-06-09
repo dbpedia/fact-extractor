@@ -240,9 +240,8 @@ def evaluate_against_gold(labeled_data, gold_standard, logger, exact):
         expected_frame = set([annotation['frame'] for annotation in annotations])
         # All annotations inside a sentence must have the same frame, otherwise the gold standard is wrong
         if len(expected_frame) > 1:
-            logger.warning("More than 1 frame (%s) detected in annotated sentence [%s]. Skipping..." % expected_frame, sentence_id)
-            logger.debug("=================================")
-            continue
+            logger.error("More than 1 frame (%s) detected in gold standard sentence [%s]. Please fix it." % (expected_frame, sentence_id))
+            exit(1)
         # Pop the only one element
         expected_frame = expected_frame.pop()
         logger.debug("Seen = [%s], expected = [%s]" % (seen_frame, expected_frame))
