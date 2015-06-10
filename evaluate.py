@@ -251,6 +251,8 @@ def evaluate_against_gold(labeled_data, gold_standard, logger, exact):
         else:
             frame_fp += 1
             logger.debug("+1 frame FALSE positive, current precision = %f" % precision(frame_tp, frame_fp))
+            frame_fn += 1
+            logger.debug("+1 frame FALSE negative, current recall = %f" % recall(frame_tp, frame_fn))
             
         # FEs
         logger.debug("----------- Evaluating FEs... -----------")
@@ -280,6 +282,8 @@ def evaluate_against_gold(labeled_data, gold_standard, logger, exact):
                         logger.debug("Seen FE = [%s], expected = [%s]" % (seen[chunk], fe))
                         fe_fp += 1
                         logger.debug("+1 FE FALSE positive, current precision = %f" % precision(fe_tp, fe_fp))
+                        fe_fn += 1
+                        logger.debug("+1 FE FALSE negative, current recall = %f" % recall(fe_tp, fe_fn))
                 else:
                     logger.debug("Expected chunk [%s] NOT in seen chunks %s" % (chunk, seen.keys()))
                     fe_fn += 1
@@ -299,6 +303,8 @@ def evaluate_against_gold(labeled_data, gold_standard, logger, exact):
                             logger.debug("Seen FE = [%s], expected = [%s]" % (seen_fe, fe))
                             fe_fp += 1
                             logger.debug("+1 FE FALSE positive, current precision = %f" % precision(fe_tp, fe_fp))
+                            fe_fn += 1
+                            logger.debug("+1 FE false negative, current recall = %f" % recall(fe_tp, fe_fn))
                 if partial_matches == 0:
                     logger.debug("Expected chunk [%s] NOT in seen chunks %s" % (chunk, seen.keys()))
                     fe_fn += 1
