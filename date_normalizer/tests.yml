@@ -11,3 +11,7 @@ per due stagioni: '"P2Y"^^xsd:duration'
 per due anni: '"P2Y"^^xsd:duration'
 dal 1996 al 2005: '"P9Y"^^xsd:duration'
 una sola stagione: '"P1Y"^^xsd:duration'
+tre stagioni: '"P3Y"^^xsd:duration'
+2 - 1: "2-1"
+1 a 2: "1-2"
+primo: "I"

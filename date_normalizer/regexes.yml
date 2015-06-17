@@ -14,7 +14,14 @@ duration:
   - stagione \d{{2,4}}-\d{{2,4}}: '"P1Y"^^xsd:duration'
   - campionato \d{{2,4}}-\d{{2,4}}: '"P1Y"^^xsd:duration'
   - fino al (?P<match>\d{{,4}}): '"to {match}"'
-  - per (?P<match>{lit_digit}) stagion[ei]: '"P{match}Y"^^xsd:duration'
+  - (per )?(?P<match>{lit_digit})( sol[ae])? stagion[ei]: '"P{match}Y"^^xsd:duration'
   - per (?P<match>{lit_digit}) ann[oi]: '"P{match}Y"^^xsd:duration'
   - dal (?P<y1>\d{{2,4}}) al (?P<y2>\d{{2,4}}): '"P{match}Y"^^xsd:duration'
-  - una sola stagione: '"P1Y"^^xsd:duration'
+
+score:
+  - (?P<s1>\d{{1,2}})\s*[-a]\s*(?P<s2>\d{{1,2}}): "{s1}-{s2}"
+
+ranking:
+  - primo: "I"
+  - secondo: "II"
+  - terzo: "III"
