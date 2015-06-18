@@ -11,8 +11,7 @@ import argparse
 import os
 from collections import Counter
 from lib.orderedset import OrderedSet
-import date_normalizer
-from date_normalizer.DateEnum import DateEnum
+from date_normalizer import DateNormalizer
 
 
 def read_full_results(results_file):
@@ -35,7 +34,7 @@ def read_full_results(results_file):
         sentence = h.unescape(row['sentence'])
 
         # initialize data structure with sentence, frame, lu and entity list
-        if not sentence_id in processed:
+        if sentence_id not in processed:
             processed[sentence_id] = dict()
             processed[sentence_id]['sentence'] = sentence
             processed[sentence_id]['frame'] = row['frame']
@@ -62,14 +61,14 @@ def read_full_results(results_file):
 def set_majority_vote_answer(results_json):
     """ Determine the correct entity which corresponds to a given FE """
 
-    for k,v in results_json.iteritems():
+    for k, v in results_json.iteritems():
         for fe in v.keys():
             if fe in {'frame', 'lu', 'sentence'}:
                 continue
 
             answers_count = Counter(v[fe]['answers'])
             majority = v[fe]['judgments'] / 2.0
-            for answer,freq in answers_count.iteritems():
+            for answer, freq in answers_count.iteritems():
                 if freq > majority:
                     v[fe]['majority'] = answer
 
@@ -98,8 +97,8 @@ def tag_entities(results):
             annotations['entities'][entity] = fe_label
 
 
-def process_sentence(sentence_id, annotations, lines):
-    """ Processes a sentence by merging tagged words, LU and FEs """
+def merge_tokens(sentence_id, annotations, lines):
+    """ Merge tagged words, LU and FEs """
 
     processed = list()
     for i, (token, pos, lemma) in enumerate(lines):
@@ -144,30 +143,37 @@ def process_sentence(sentence_id, annotations, lines):
 
             processed = processed[:match_start] + [replacement] + processed[i + 1:]
 
+    return processed
 
-    # normalize dates
-    for row in processed:
+
+def normalize_numerical_fes(sentence_id, tokens):
+    """ normalize numerical FEs such as dates, durations, etc """
+
+    print '--------------------'
+    print sentence_id, ' '.join(x[2] for x in tokens)
+    normalizer = DateNormalizer()
+    for row in tokens:
         entity, tag = row[2], row[-1]
 
         if tag in {u'B-Tempo_Attività', u'B-Durata_Attività'}:
-            date_norm = filter(lambda x: x and x['value'],
-                               date_normalizer.get_tokens(entity))
-            if date_norm:
-                if sentence_id == '1': import pdb; pdb.set_trace()
-                replacement[2] = date_norm[0]['value']
-                replacement[3] = str(date_norm[0]['type'])
-            else:
-                print 'WARNING cannot normalize %s "%s"' % (tag, entity)
+            _, res = normalizer.normalize(entity)
+            print entity, res
 
+    return tokens
+
+
+def process_sentence(sentence_id, annotations, lines):
+    merged = merge_tokens(sentence_id, annotations, lines)
+    normalized = normalize_numerical_fes(sentence_id, merged)
 
     # insert correct token ids
-    for i, p in enumerate(processed):
+    for i, p in enumerate(normalized):
         p[1] = str(i)
-    
+
     clean = OrderedSet()
-    for line in processed:
+    for line in normalized:
         clean.add('\t'.join(line))
-        
+
     return clean
 
 
@@ -187,7 +193,7 @@ def produce_training_data(annotations, pos_tagged_sentences_dir, debug):
                 print json.dumps(annotations, indent=2)
                 print 'Result'
                 print '\n'.join(repr(x) for x in processed)
- 
+
     return output
 
 

@@ -1,12 +1,14 @@
 import yaml
 import re
+import os
 
 
 class BaseDateNormalizer(object):
     """ matches expressions with rules """
 
     def __init__(self):
-        with open('regexes.yml') as f:
+        path = os.path.join(os.path.dirname(__file__), 'regexes.yml')
+        with open(path) as f:
             specs = yaml.load(f)
 
         self.meta = specs.pop('__meta__')
@@ -18,7 +20,6 @@ class BaseDateNormalizer(object):
             self.regexes[category] = [(re.compile(pattern.format(**basic_r)), result)
                                       for pattern, result in regexes]
 
-
     def normalize(self, expression):
         for category, regexes in self.regexes.iteritems():
             for regex, result in regexes:
@@ -26,11 +27,10 @@ class BaseDateNormalizer(object):
                 if match:
                     return self._process_match(regex, result, match, category)
         else:
-            return None
-
+            return None, None
 
     def _process_match(self, regex, result, match, category):
-        return result.format(match=match)
+        return match.span(), result.format(match=match)
 
 
 class DateNormalizer(BaseDateNormalizer):
@@ -40,17 +40,19 @@ class DateNormalizer(BaseDateNormalizer):
         super(DateNormalizer, self).__init__(*args, **kwargs)
 
     def _process_match(self, regex, result, match, category):
-        default_cleaner = lambda regex, result, match, category: result.format(match=match)
-        return {
+        processed = {
             'time': self._clean_time,
             'duration': self._clean_duration,
             'score': self._clean_score,
-        }.get(category, default_cleaner)(regex, result, match, category)
+        }.get(category, self._default_cleaner)(regex, result, match, category)
 
+        return match.span(), processed
+
+    def _default_cleaner(self, regex, result, match, category):
+        return result.format(match=match)
 
     def _clean_score(self, regex, result, match, category):
         return result.format(**match.groupdict())
-
 
     def _clean_time(self, regex, result, match, category):
         match = match.groupdict().get('match')
@@ -63,9 +65,8 @@ class DateNormalizer(BaseDateNormalizer):
         match = '-'.join(reversed(match.split(' ')))  # '14 09 2010' --> 2010-09-14
         return result.format(match=match)
 
-
     def _clean_duration(self, regex, result, match, category):
-        y1, y2= match.groupdict().get('y1'), match.groupdict().get('y2')
+        y1, y2 = match.groupdict().get('y1'), match.groupdict().get('y2')
         if y1 and y2:
             duration = int(y2) - int(y1)
             return result.format(match=str(duration))
@@ -87,6 +88,8 @@ if __name__ == '__main__':
 
     d = DateNormalizer()
     for text, expected in test_cases.iteritems():
-        result = d.normalize(text)
+        position, result = d.normalize(text)
         if result != expected:
             print 'expected %s but got %s on %s' % (expected, result, text)
+
+    print 'All tests run'

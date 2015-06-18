@@ -7,8 +7,9 @@ time:
   - (il|l')\s*(?P<match>\d{{1,2}} {month}): '"{match}"^^xsd:gMonthDay'
   - (nel|nell')\s*(?P<match>{month} \d{{4}}): '"{match}"^^xsd:gYearMonth'
   - in (?P<match>{month}): '"{match}"^^xsd:gMonth'
-  - nel (?P<match>\d{{4}}): '"{match}"^^xsd:gYear'
+  - (nel|il) (?P<match>\d{{4}}): '"{match}"^^xsd:gYear'
   - l'anno seguente: '"$YEAR + 1"'
+  - (la )?stagione successiva: '"$YEAR + 1"'
 
 duration:
   - stagione \d{{2,4}}-\d{{2,4}}: '"P1Y"^^xsd:duration'
