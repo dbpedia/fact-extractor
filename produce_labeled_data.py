@@ -159,6 +159,7 @@ def process_dir(indir, debug):
 # TODO implement the data model
 def to_assertions(labeled_results, debug, outfile='dataset.ttl', format='turtle'):
     """Serialize the labeled results into RDF"""
+    processed = []
     discarded = []
     assertions = Graph()
     assertions.namespace_manager = NAMESPACE_MANAGER
@@ -173,7 +174,9 @@ def to_assertions(labeled_results, debug, outfile='dataset.ttl', format='turtle'
         if not fes:
             if debug:
                 print 'No FEs found in "%s"' % result['sentence']
+            discarded.append(result['sentence'])
             continue
+        processed.append(result['sentence'])
         # FIXME Assume subject is the Wikipedia URI where the sentence comes from
         s = URIRef(RESOURCE['SENTENCE%s' % result['id']])
         p = URIRef(FACT_EXTRACTION[frame])
@@ -184,15 +187,17 @@ def to_assertions(labeled_results, debug, outfile='dataset.ttl', format='turtle'
             o1 = URIRef(fe['uri'])
             assertions.add((o, p1, o1))
     assertions.serialize(outfile, format, encoding='utf-8')
-    return discarded
+    return processed, discarded
 
 
 if __name__ == '__main__':
     debug = True
     labeled = process_dir(sys.argv[1], debug)
     json.dump(labeled, codecs.open('labeled_data.json', 'wb', 'utf-8'), ensure_ascii=False, indent=2)
-    discarded = to_assertions(labeled, debug)
-    with codecs.open('discarded', 'wb', 'utf-8') as o:
-        o.writelines([sentence + '\n' for sentence in discarded])
+    processed, discarded = to_assertions(labeled, debug)
+    with codecs.open('processed', 'wb', 'utf-8') as p:
+        p.writelines([sentence + '\n' for sentence in processed])    
+    with codecs.open('discarded', 'wb', 'utf-8') as d:
+        d.writelines([sentence + '\n' for sentence in discarded])
     if debug:
         print '%d out of %d NOT DISAMBIGUATED' % (len(discarded), len(labeled))
