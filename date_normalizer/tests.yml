@@ -1,5 +1,5 @@
-il 14 settembre 2010: '"2010-09-14"^^xsd:date'
-il 15 ottobre: '"10-15"^^xsd:gMonthDay'
+il 4 settembre 2010: '"2010-09-04"^^xsd:date'
+il 5 agosto: '"08-05"^^xsd:gMonthDay'
 nel giugno 2012: '"2012-06"^^xsd:gYearMonth'
 in maggio: '"05"^^xsd:gMonth'
 nel 2014: '"2014"^^xsd:gYear'
@@ -13,7 +13,10 @@ per due stagioni: '"P2Y"^^xsd:duration'
 per due anni: '"P2Y"^^xsd:duration'
 dal 1996 al 2005: '"P9Y"^^xsd:duration'
 una sola stagione: '"P1Y"^^xsd:duration'
+per quattro annate: '"P4Y"^^xsd:duration'
 tre stagioni: '"P3Y"^^xsd:duration'
 2 - 1: "2-1"
 1 a 2: "1-2"
 primo: "I"
+tre annate: '"P3Y"^^xsd:duration'
+2 stagioni: '"P2Y"^^xsd:duration'
