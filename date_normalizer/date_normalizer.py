@@ -20,14 +20,24 @@ class BaseDateNormalizer(object):
             self.regexes[category] = [(re.compile(pattern.format(**basic_r)), result)
                                       for pattern, result in regexes]
 
-    def normalize(self, expression):
+    def normalize_one(self, expression):
+        """ find the first match in expression """
+        expression = expression.lower()
         for category, regexes in self.regexes.iteritems():
             for regex, result in regexes:
                 match = regex.search(expression)
                 if match:
                     return self._process_match(regex, result, match, category)
         else:
-            return None, None
+            return (None, None), None
+
+    def normalize_many(self, expression):
+        """ find all the matching entities in expression """
+        expression = expression.lower()
+        for category, regexes in self.regexes.iteritems():
+            for regex, result in regexes:
+                for match in regex.finditer(expression):
+                    yield self._process_match(regex, result, match, category)
 
     def _process_match(self, regex, result, match, category):
         return match.span(), result.format(match=match)
