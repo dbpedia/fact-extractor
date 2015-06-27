@@ -168,13 +168,14 @@ def normalize_numerical_fes(sentence_id, tokens):
         # find an appropriate tag (i.e. anything different from 'O'
         # if exists among the matching tokens)
         tags = set(x[-1] for x in tokens[i:j] if x[-1] != 'O')
-        assert len(tags) in {0, 1}, 'Cannot decide which tag to use for %s: %r' % (original, tags)
+        assert len(tags) in {0, 1}, 'Cannot decide which tag to use for %s: %r' % (
+                                    original, tags)
         tag = tags.pop() if tags else 'O'
 
         # replace the old tokens with a new one
         tokens = (tokens[:i] +
-                 [[sentence_id, '-', original, norm, original, tokens[0][-2], tag]] + 
-                 tokens[j:])
+                  [[sentence_id, '-', original, 'ENT', norm, tokens[0][-2], tag]] +
+                  tokens[j:])
         assert ' '.join(x[2] for x in tokens) == sentence, 'Failed to rebuild sentence'
 
     return tokens
