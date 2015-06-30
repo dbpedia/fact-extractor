@@ -174,7 +174,7 @@ def normalize_numerical_fes(sentence_id, tokens):
 
         # replace the old tokens with a new one
         tokens = (tokens[:i] +
-                  [[sentence_id, '-', original, 'ENT', norm, tokens[0][-2], tag]] +
+                  [[sentence_id, '-', original, 'ENT', original, tokens[0][-2], tag]] +
                   tokens[j:])
         assert ' '.join(x[2] for x in tokens) == sentence, 'Failed to rebuild sentence'
 

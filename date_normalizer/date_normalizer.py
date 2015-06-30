@@ -58,6 +58,8 @@ class DateNormalizer(object):
                 match = regex.search(expression)
                 if match:
                     return self._process_match(transform, match)
+        else:
+            return (-1, -1), None
 
     def normalize_many(self, expression):
         """ find all the matching entities in the given expression expression """
