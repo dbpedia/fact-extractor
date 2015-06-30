@@ -24,7 +24,7 @@ If not, please do so!
 **INPUT** = Wikipedia corpus (e.g., [the latest Italian chapter](http://dumps.wikimedia.org/itwiki/latest/itwiki-latest-pages-articles.xml.bz2))
 
 1. Verb Extraction
-  1. [Extract raw text from Wikipedia dump](lib/WikiExtractor.py), forked from [this repo](https://github.com/bwbaugh/wikipedia-extractor)
+  1. [Extract raw text from Wikipedia dump](lib/WikiExtractor.py), forked from [this repo](https://github.com/attardi/wikiextractor)
   2. [Extract a sub-corpus based on Wiki IDs](get_soccer_players_articles.py)
   3. [Verb Extraction](extract_verbs.sh)
 2. Verb Ranking
