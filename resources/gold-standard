@@ -2038,9 +2038,9 @@
 264	6	.	SENT	.	Trofeo	O
 264	7	Con	PRE	con	Trofeo	O
 264	8	i	DET:def	il	Trofeo	O
-264	9	"	PON	"	Trofeo	O	Trofeo	O
+264	9	"	PON	"	Trofeo	O
 264	10	biancorossi	NOM	biancorosso	Trofeo	O
-264	11	"	PON	"	Trofeo	O	Trofeo	O
+264	11	"	PON	"	Trofeo	O
 264	12	vinse	VER:remo	vincere	Trofeo	B-LU
 264	13	la	DET:def	il	Trofeo	O
 264	14	Coppa d'Olanda 1965-1966	ENT	Coppa d'Olanda 1965-1966	Trofeo	B-Competizione_Trofeo

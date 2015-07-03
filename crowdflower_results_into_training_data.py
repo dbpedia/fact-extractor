@@ -26,6 +26,8 @@ def read_full_results(results_file):
 
     # Include gold
     for row in results:
+        # Uncomment the following line to skip gold
+        # if row['_golden'] == 'true': continue
         # Avoid Unicode encode/decode exceptions
         for k, v in row.iteritems():
             row[k] = v.decode('utf-8')
@@ -93,10 +95,8 @@ def tag_entities(results):
             if not annotation or annotation == 'Nessuno':
                 continue
 
-            # build the entity FE label, using FE name and frame
-            fe_label = 'B-%s_%s' % (annotation, frame)
             # the entity is an n-gram, regardless of tokenization, so no I- tags
-            annotations['entities'][entity] = fe_label
+            annotations['entities'][entity] = annotation
 
 
 def process_sentence(sentence_id, annotations, lines):
@@ -106,7 +106,7 @@ def process_sentence(sentence_id, annotations, lines):
     
     for i, (token, pos, lemma) in enumerate(lines):
         # TODO check if LUs can be more than one token
-        tag = 'B-LU' if lemma == annotations['lu'] else 'O'
+        tag = 'LU' if lemma == annotations['lu'] else 'O'
         processed.append([
             sentence_id, '-', token, pos, lemma, annotations['frame'], tag
         ])

@@ -197,8 +197,8 @@ def load_full_gold_standard(full_gold_standard, logger):
         
         to_fill['frame'] = frame
         # It's a FE
-        if tag != 'B-LU' and tag != 'O':
-            to_fill['FE'] = tag.split('_')[0].replace('B-', '')
+        if tag != 'LU' and tag != 'O':
+            to_fill['FE'] = tag.split('_')[0]
             to_fill['chunk'] = chunk
         else:
             continue
