@@ -24,7 +24,7 @@ def process_article(content, soccer_ids, tokens, mapping, output_dir, max_words)
     else:
         soccer_ids.remove(attrs['id'])
 
-    mapping[attrs['id']] = attrs['url']
+    mapping[attrs['id']] = attrs['title']
     all_sentences = re.split(r'\.\s+', content)
 
     i = 0

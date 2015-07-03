@@ -7,6 +7,7 @@ import os
 import random
 import stopwords
 import sys
+import urllib
 from rdflib import Graph, URIRef
 from rdflib.namespace import Namespace, NamespaceManager
 
@@ -149,7 +150,7 @@ def process_dir(indir, debug):
             # Filename is a number
             filename, ext = os.path.splitext(name)
             labeled = label_sentence(f, debug)
-            labeled['id'] = '%04d' % int(filename)
+            labeled['id'] = filename
             processed.append(labeled)
             if debug:
                 print 'LABELED: %s' % labeled
@@ -157,7 +158,7 @@ def process_dir(indir, debug):
 
 
 # TODO implement the data model
-def to_assertions(labeled_results, debug, outfile='dataset.ttl', format='turtle'):
+def to_assertions(labeled_results, mapping, debug, outfile='dataset.ttl', format='turtle'):
     """Serialize the labeled results into RDF"""
     processed = []
     discarded = []
@@ -177,11 +178,10 @@ def to_assertions(labeled_results, debug, outfile='dataset.ttl', format='turtle'
             discarded.append(result['sentence'])
             continue
         processed.append(result['sentence'])
-        # FIXME Assume subject is the Wikipedia URI where the sentence comes from
-        s = URIRef(RESOURCE['SENTENCE%s' % result['id']])
+        s = URIRef(RESOURCE + urllib.quote(mapping[result['id'].split('.')[0]].encode('utf8')))
         p = URIRef(FACT_EXTRACTION[frame])
         for fe in fes:
-            o = URIRef('%s%s%04d' % (FACT_EXTRACTION, frame, int(result['id'])))
+            o = URIRef('%s%s%s' % (FACT_EXTRACTION, frame, result['id']))
             assertions.add((s, p, o))
             p1 = URIRef('%shas%s' % (FACT_EXTRACTION, fe['FE']))
             o1 = URIRef(fe['uri'])
@@ -193,8 +193,9 @@ def to_assertions(labeled_results, debug, outfile='dataset.ttl', format='turtle'
 if __name__ == '__main__':
     debug = True
     labeled = process_dir(sys.argv[1], debug)
+    mapping = json.load(open(sys.argv[2]))
     json.dump(labeled, codecs.open('labeled_data.json', 'wb', 'utf-8'), ensure_ascii=False, indent=2)
-    processed, discarded = to_assertions(labeled, debug)
+    processed, discarded = to_assertions(labeled, mapping, debug)
     with codecs.open('processed', 'wb', 'utf-8') as p:
         p.writelines([sentence + '\n' for sentence in processed])    
     with codecs.open('discarded', 'wb', 'utf-8') as d:

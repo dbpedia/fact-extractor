@@ -98,22 +98,15 @@ def load_chunks(path):
     loads all chunks contained in the given path
 
     chunk type is determined only from the path of the file, 'twm-links',
-    'twm-ngrams' and 'textpro-chunks', the name of the file must be a
-    two digits number (the sentence id) and an optional extension
+    'twm-ngrams' and 'textpro-chunks', the name of the file is the sentence id
     """
     all_chunks = defaultdict(lambda: dict())
 
     for path, _, files in os.walk(path):
         for name in files:
             f = os.path.join(path, name)
-            filename, ext = os.path.splitext(name)
+            sentence_id = name
 
-            # Skip unwanted files
-            match = re.match(r'^\d+$', filename)
-            if not match:
-                continue
-
-            sentence_id = '%04d' % int(match.group(0))
             if 'twm-links' in path:
                 sentence, link_chunks = read_twm_links(f)
                 all_chunks[sentence_id]['sentence'] = sentence
