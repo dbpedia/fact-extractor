@@ -29,8 +29,9 @@ def process_article(content, soccer_ids, tokens, mapping, output_dir, max_words)
 
     i = 0
     for sentence in all_sentences:
-        if len(sentence.split(' ')) < max_words and \
-                any(token in sentence for token in tokens):
+        snt_tokens = sentence.split()
+        if len(snt_tokens) < max_words and \
+                any(token in snt_tokens for token in tokens):
 
             fout = os.path.join(output_dir, '%s.%d' % (attrs['id'], i))
             with open(fout, 'w') as f:
