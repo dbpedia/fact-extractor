@@ -7,7 +7,8 @@ import os
 import random
 import stopwords
 import sys
-import urllib
+from urllib import quote
+from rfc3987 import parse  # URI/IRI validation
 from rdflib import Graph, URIRef
 from rdflib.namespace import Namespace, NamespaceManager
 
@@ -147,19 +148,17 @@ def process_dir(indir, debug):
     for path, subdirs, files in os.walk(indir):
         for name in files:
             f = os.path.join(path, name)
-            # Filename is a number
-            filename, ext = os.path.splitext(name)
             labeled = label_sentence(f, debug)
-            labeled['id'] = filename
+            # Filename is {WIKI_ID}.{SENTENCE_ID}
+            labeled['id'] = name
             processed.append(labeled)
             if debug:
                 print 'LABELED: %s' % labeled
     return processed
 
 
-# TODO implement the data model
-def to_assertions(labeled_results, mapping, debug, outfile='dataset.ttl', format='turtle'):
-    """Serialize the labeled results into RDF"""
+def to_assertions(labeled_results, mapping, debug, outfile='dataset.nt', format='nt'):
+    """Serialize the labeled results into RDF NTriples"""
     processed = []
     discarded = []
     assertions = Graph()
@@ -178,21 +177,79 @@ def to_assertions(labeled_results, mapping, debug, outfile='dataset.ttl', format
             discarded.append(result['sentence'])
             continue
         processed.append(result['sentence'])
-        s = URIRef(RESOURCE + urllib.quote(mapping[result['id'].split('.')[0]].encode('utf8')))
-        p = URIRef(FACT_EXTRACTION[frame])
+        wiki_id, sentence_id = result['id'].split('.')
+        wiki_title = mapping.get(wiki_id)
+        if not wiki_title and debug:
+            print 'No title for sentence %s' % sentence_id
+        # Remember to replace spaces with underscores and to encode into UTF-8
+        wiki_title = wiki_title.replace(' ', '_')
+        wiki_title = quote(wiki_title.encode('utf8'))
+        # Mint a URI unicode string
+        s = RESOURCE + wiki_title
+        # URI sanity check
+        try:
+            parsed = parse(s, rule='URI_reference')
+            if debug:
+                print 'Valid URI: ', parsed
+        except Exception as e:
+            print "Couldn't parse '%s' (%s). Skipping ..." % (s, e)
+            continue
+        frame_label = quote(frame.encode('utf8'))
+        # The main predicate takes the frame label
+        p = FACT_EXTRACTION + frame_label
         for fe in fes:
-            o = URIRef('%s%s%s' % (FACT_EXTRACTION, frame, result['id']))
-            assertions.add((s, p, o))
-            p1 = URIRef('%shas%s' % (FACT_EXTRACTION, fe['FE']))
-            o1 = URIRef(fe['uri'])
-            assertions.add((o, p1, o1))
-    assertions.serialize(outfile, format, encoding='utf-8')
+            # The reified object takes the frame label + full ID
+            o = FACT_EXTRACTION + frame_label + '_' + wiki_id + '_' + sentence_id
+            try:
+                # Craft an NTriple string
+                frame_triple = '<%s> <%s> <%s> .' % (s, p, o)
+                # Sanity check + addition
+                assertions.parse(data=frame_triple, format=format)
+                if debug:
+                    print 'Frame triple added: %s' % frame_triple
+            except Exception as e:
+                print "Invalid triple: %s (%s). Skipping ..." % (frame_triple, e)
+                continue
+            # The FE predicate takes the FE label
+            fe_label = quote(fe['FE'].encode('utf8'))
+            p1 = '%shas%s' % (FACT_EXTRACTION, fe_label)
+            # The FE object takes the linked entity URI
+            le_uri = fe['uri']
+            # Remember to URL-encode the Wiki title
+            wiki_title = quote(le_uri[31:].encode('utf8'))
+            # Recompose the URI
+            o1 = RESOURCE + wiki_title
+            # URI sanity check
+            try:
+                parsed = parse(o1, rule='URI_reference')
+                if debug:
+                    print 'Valid URI: ', parsed
+            except Exception as e:
+                print "Couldn't parse '%s' (%s). Skipping ..." % (o1, e)
+                continue
+            # NTriple sanity check
+            try:
+                # Craft an NTriple string
+                fe_triple = '<%s> <%s> <%s> .' % (o, p1, o1)
+                assertions.parse(data=fe_triple, format=format)
+                if debug:
+                    print 'FE triple added: %s' % fe_triple
+            except Exception as e:
+                print "Invalid triple: %s (%s). Skipping ..." % (triple, e)
+                continue
+    try:
+        assertions.serialize(outfile, format)
+    except Exception as e:
+        # If something goes wrong, probably it's due to exotic URIs, so encode the exception to UTF-8!
+        print "Couldn't serialize the dataset (%s)" % e.encode('utf8')
+        pass
     return processed, discarded
 
 
 if __name__ == '__main__':
     debug = True
-    labeled = process_dir(sys.argv[1], debug)
+    #labeled = process_dir(sys.argv[1], debug)
+    labeled = json.load(codecs.open(sys.argv[1], 'rb', encoding='utf8'))
     mapping = json.load(open(sys.argv[2]))
     json.dump(labeled, codecs.open('labeled_data.json', 'wb', 'utf-8'), ensure_ascii=False, indent=2)
     processed, discarded = to_assertions(labeled, mapping, debug)
