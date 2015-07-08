@@ -72,6 +72,7 @@ def label_sentence(entity_linking_results, debug):
                                     if debug:
                                         print 'Chunk "%s" has an ontology type "%s" that maps to FE "%s"' % (chunk['chunk'], t[28:], looked_up)
                                     ### Frame disambiguation strategy, part 1 ###
+                                    # LAPSE ASSIGNMENT
                                     # If there is AT LEAST ONE core FE, then assign that frame
                                     # TODO strict assignment: ALL core FEs must be found
                                     # Will not work if the FEs across competing frames have the same ontology type
@@ -248,8 +249,8 @@ def to_assertions(labeled_results, mapping, debug, outfile='dataset.nt', format=
 
 if __name__ == '__main__':
     debug = True
-    #labeled = process_dir(sys.argv[1], debug)
-    labeled = json.load(codecs.open(sys.argv[1], 'rb', encoding='utf8'))
+    labeled = process_dir(sys.argv[1], debug)
+    # labeled = json.load(codecs.open(sys.argv[1], 'rb', encoding='utf8'))
     mapping = json.load(open(sys.argv[2]))
     json.dump(labeled, codecs.open('labeled_data.json', 'wb', 'utf-8'), ensure_ascii=False, indent=2)
     processed, discarded = to_assertions(labeled, mapping, debug)

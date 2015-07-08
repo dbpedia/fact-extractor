@@ -196,8 +196,8 @@ def load_full_gold_standard(full_gold_standard, logger):
         current['%04d' % int(sentence_id)] = to_fill
         
         to_fill['frame'] = frame
-        # It's a FE
-        if tag != 'LU' and tag != 'O':
+        # Consider LUs and FEs for evaluation
+        if tag != 'O':
             to_fill['FE'] = tag.split('_')[0]
             to_fill['chunk'] = chunk
         else:
@@ -305,6 +305,7 @@ def evaluate_against_gold(labeled_data, gold_standard, logger, exact):
                             logger.debug("+1 FE FALSE positive, current precision = %f" % precision(fe_tp, fe_fp))
                             fe_fn += 1
                             logger.debug("+1 FE false negative, current recall = %f" % recall(fe_tp, fe_fn))
+                    # FIXME if seen role isn't in expected ones, fire a FP!!!
                 if partial_matches == 0:
                     logger.debug("Expected chunk [%s] NOT in seen chunks %s" % (chunk, seen.keys()))
                     fe_fn += 1
