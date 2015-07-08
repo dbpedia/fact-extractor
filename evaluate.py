@@ -196,10 +196,18 @@ def load_full_gold_standard(full_gold_standard, logger):
         current['%04d' % int(sentence_id)] = to_fill
         
         to_fill['frame'] = frame
-        # Consider LUs and FEs for evaluation
+        # # Consider LU lemmas and FEs for evaluation
+        # if tag == 'LU':
+        #     to_fill['lu'] = tag
+        #     to_fill['lu_lemma'] = lemma
         if tag != 'O':
-            to_fill['FE'] = tag.split('_')[0]
-            to_fill['chunk'] = chunk
+            if tag == 'LU':
+                to_fill['FE'] = tag
+                to_fill['chunk'] = lemma
+            else:
+                # FE label naming convention: {LABEL}_{FRAME}
+                to_fill['FE'] = tag.split('_')[0]
+                to_fill['chunk'] = chunk
         else:
             continue
         annotations.append(current)
@@ -224,7 +232,7 @@ def evaluate_against_gold(labeled_data, gold_standard, logger, exact):
     frame_tp = frame_fp = frame_fn = fe_tp = fe_fp = fe_fn = 0
     for sentence in labeled_data:
         sentence_id = sentence['id']
-        logger.debug("Labeled sentence [%s]" % sentence_id)
+        logger.debug('Labeled sentence [%s]: "%s"' % (sentence_id, sentence['sentence']))
         annotations = gold_standard.get(sentence_id)
         if not annotations:
             logger.warning("No gold standard for sentence [%s]. Skipping..." % sentence_id)
@@ -253,15 +261,20 @@ def evaluate_against_gold(labeled_data, gold_standard, logger, exact):
             logger.debug("+1 frame FALSE positive, current precision = %f" % precision(frame_tp, frame_fp))
             frame_fn += 1
             logger.debug("+1 frame FALSE negative, current recall = %f" % recall(frame_tp, frame_fn))
-            
+        
+        # FEs and LU lemmas
+        logger.debug("----------- Evaluating FEs (including LU lemmas)... -----------")
+        seen = {} # contains all the seen objects
         # FEs
-        logger.debug("----------- Evaluating FEs... -----------")
         seen_fes = sentence['FEs']
-        seen = {}
         for seen_fe_obj in seen_fes:
             seen_fe = seen_fe_obj['FE']
             seen_chunk = seen_fe_obj['chunk']
             seen[seen_chunk] = seen_fe
+        # LU lemmas
+        seen_lu_lemma = sentence['lu']
+        seen[seen_lu_lemma] = 'LU' 
+        
         logger.debug("Seen FEs: %s" % seen)
         expected = {}
         for annotation in annotations:
@@ -305,11 +318,29 @@ def evaluate_against_gold(labeled_data, gold_standard, logger, exact):
                             logger.debug("+1 FE FALSE positive, current precision = %f" % precision(fe_tp, fe_fp))
                             fe_fn += 1
                             logger.debug("+1 FE false negative, current recall = %f" % recall(fe_tp, fe_fn))
-                    # FIXME if seen role isn't in expected ones, fire a FP!!!
                 if partial_matches == 0:
                     logger.debug("Expected chunk [%s] NOT in seen chunks %s" % (chunk, seen.keys()))
                     fe_fn += 1
                     logger.debug("+1 FE false negative, current recall = %f" % recall(fe_tp, fe_fn))
+        # Check for false positives in the seen FEs that are not expected
+        # Exact checking
+        if exact:
+            for seen_chunk in seen.keys():
+                if seen_chunk not in expected.keys():
+                    logger.debug("Seen chunk [%s] NOT IN expected chunks %s" % (seen_chunk, expected.keys()))
+                    fe_fp += 1
+                    logger.debug("+1 FE FALSE positive, current precision = %f" % precision(fe_tp, fe_fp))
+        # Partial checking
+        else:
+            for seen_chunk in seen.keys():
+                partial_matches = 0
+                for expected_chunk in expected.keys():
+                    if seen_chunk in expected_chunk:
+                        partial_matches += 1
+                if partial_matches == 0:
+                    logger.debug("Seen chunk [%s] NOT PART of any expected chunks %s" % (seen_chunk, expected.keys()))
+                    fe_fp += 1
+                    logger.debug("+1 FE FALSE positive, current precision = %f" % precision(fe_tp, fe_fp))
                             
         logger.debug("=================================")
 
