@@ -1,0 +1,78 @@
+__meta_vars__:
+  month: (gennaio|febbraio|marzo|aprile|maggio|giugno|luglio|agosto|settembre|ottobre|novembre|dicembre)
+  lit_digit: (uno|una|due|tre|quattro|cinque|sei|sette|otto|nove)
+  tens: (venti|trenta|quaranta|cinquanta|sessanta|settanta|ottanta|novanta)
+
+__meta_funcs__:
+  - >
+    def month_to_num(month):
+        try:
+            return meta_vars['month'][1:-1].split('|').index(month) + 1
+        except ValueError:
+            return month
+  - >
+    def lit_digit_to_num(digit):
+        try:
+            return max(1, meta_vars['lit_digit'][1:-1].split('|').index(digit))
+        except ValueError:
+            return digit
+
+time:
+  - (del\s|il\s|l'\s?)(?P<day>\d{{1,2}}) (?P<month>{month}) (?P<year>\d{{4}}): >
+      '"{}-{:02d}-{:02d}"^^xsd:date'.format(match.group('year'),
+                                            month_to_num(match.group('month')),
+                                            int(match.group('day')))
+
+  - (del\s|il\s|l'\s?)(?P<day>\d{{1,2}}) (?P<month>{month})(?!\s+\d): >
+      '"{:02d}-{:02d}"^^xsd:gMonthDay'.format(month_to_num(match.group('month')),
+                                              int(match.group('day')))
+
+  - (del\s|a\s|nel\s|nell'\s?)(?P<month>{month}) (del|dell')?\s*(?P<year>\d{{4}}): >
+      '"{}-{:02d}"^^xsd:gYearMonth'.format(match.group('year'),
+                                           month_to_num(match.group('month')))
+
+  - in (?P<month>{month}): >
+      '"{:02d}"^^xsd:gMonth'.format(month_to_num(match.group('month')))
+
+  - (nel\s|il\s|nell'\s?)(\w+(\s|\b)){{,2}}(?P<year>\d{{4}})(?!\s*[-/]): >
+      '"{}"^^xsd:gYear'.format(match.group('year'))
+
+  - l'\s?anno seguente: >
+      '"$YEAR + 1"'
+
+  - (la )?stagione successiva: >
+      '"$YEAR + 1"'
+
+duration:
+  - stagione (calcistica )?(?P<y1>\d{{2,4}})[-/](?P<y2>\d{{2,4}}): >
+      '"P1Y"^^xsd:duration'
+
+  - campionato \d{{2,4}}[-/]\d{{2,4}}: >
+      '"P1Y"^^xsd:duration'
+
+  - nel \d{{2,4}}[-/]\d{{2,4}}: >
+      '"P1Y"^^xsd:duration'
+
+  - fino al((l'\s?|la\s|\s)?(\w+(\b|\s)){{,3}} del(l')?)? (?P<year>\d{{2,4}}): >
+      '"to {}"'.format(match.group('year'))
+
+  - dal (?P<year>\d{{2,4}})\b(?! al): >
+      '"from {}"'.format(match.group('year'))
+
+  - (per )?(?P<num>{lit_digit}|\d+)( sol[iae])? (stagion[ei]|ann[oi]|annat[ae]): >
+      '"P{}Y"^^xsd:duration'.format(lit_digit_to_num(match.group('num')))
+
+  - dal (?P<y1>\d{{2,4}}) al (?P<y2>\d{{2,4}}): >
+      '"P{}Y"^^xsd:duration'.format(int(match.group('y2')) - int(match.group('y1')))
+
+  - negli anni (\d0|{tens}): >
+      '"P10Y"^^xsd:duration'
+
+score:
+  - \b(?P<s1>\d{{1,2}})\s*[-a]\s*(?P<s2>\d{{1,2}})\b: >
+      "{}-{}".format(match.group('s1'), match.group('s2'))
+
+ranking:
+  - primo: '"I"'
+  - secondo: '"II"'
+  - terzo: '"III"'
