@@ -7,11 +7,12 @@ import os
 import random
 import stopwords
 import sys
+from collections import defaultdict
 from urllib import quote
 from rfc3987 import parse  # URI/IRI validation
 from rdflib import Graph, URIRef
 from rdflib.namespace import Namespace, NamespaceManager
-
+from date_normalizer import DateNormalizer
 
 LU_FRAME_MAP_LOCATION = 'resources/soccer-lu2frame-dbptypes.json'
 LU_FRAME_MAP = json.load(open(LU_FRAME_MAP_LOCATION))
@@ -30,6 +31,7 @@ def label_sentence(entity_linking_results, debug):
     links = json.load(codecs.open(entity_linking_results, 'rb', 'utf-8'))
     sentence, val = links.items()[0]
     labeled['sentence'] = sentence
+    labeled['FEs'] = defaultdict(list)
     # Tokenize by splitting on spaces
     sentence_tokens = sentence.split()
     if debug:
@@ -140,6 +142,26 @@ def label_sentence(entity_linking_results, debug):
                         else:
                             labeled['frame'] = current_frame
                             labeled['FEs'] = assigned_fes
+    # Normalize + annotate numerical FEs (only if we could disambiguate the sentence)
+    if labeled.get('frame'):
+        if debug:
+            print 'LABELING AND NORMALIZING NUMERICAL FEs...'
+        normalizer = DateNormalizer()
+        for (start, end), tag, norm in normalizer.normalize_many(sentence):
+            # TODO date_normalizer/regexes.yml has the double quotes, but are not rendered
+            if tag == 'Classifica':
+                norm = '"%s"' % norm
+            chunk = sentence[start:end]
+            if debug:
+                print 'Chunk [%s] normalized into [%s], tagged as [%s]' % (chunk, norm, tag)
+            fe = {
+                'chunk': chunk,
+                'FE': tag,
+                # All numerical FEs are extra ones and their values are literals
+                'type': 'extra',
+                'literal': norm
+            }
+            labeled['FEs'].append(fe)
     return labeled
 
 
@@ -214,30 +236,47 @@ def to_assertions(labeled_results, mapping, debug, outfile='dataset.nt', format=
             # The FE predicate takes the FE label
             fe_label = quote(fe['FE'].encode('utf8'))
             p1 = '%shas%s' % (FACT_EXTRACTION, fe_label)
-            # The FE object takes the linked entity URI
-            le_uri = fe['uri']
-            # Remember to URL-encode the Wiki title
-            wiki_title = quote(le_uri[31:].encode('utf8'))
-            # Recompose the URI
-            o1 = RESOURCE + wiki_title
-            # URI sanity check
-            try:
-                parsed = parse(o1, rule='URI_reference')
-                if debug:
-                    print 'Valid URI: ', parsed
-            except Exception as e:
-                print "Couldn't parse '%s' (%s). Skipping ..." % (o1, e)
-                continue
-            # NTriple sanity check
-            try:
-                # Craft an NTriple string
-                fe_triple = '<%s> <%s> <%s> .' % (o, p1, o1)
-                assertions.parse(data=fe_triple, format=format)
-                if debug:
-                    print 'FE triple added: %s' % fe_triple
-            except Exception as e:
-                print "Invalid triple: %s (%s). Skipping ..." % (triple, e)
-                continue
+            # The FE object takes the linked entity URI or the literal
+            le_uri = fe.get('uri')
+            literal = fe.get('literal')
+            # It's a URI
+            if le_uri:
+                # Remember to URL-encode the Wiki title
+                wiki_title = quote(le_uri[31:].encode('utf8'))
+                # Recompose the URI
+                o1 = RESOURCE + wiki_title
+                # URI sanity check
+                try:
+                    parsed = parse(o1, rule='URI_reference')
+                    if debug:
+                        print 'Valid URI: ', parsed
+                except Exception as e:
+                    print "Couldn't parse '%s' (%s). Skipping ..." % (o1, e)
+                    continue
+                # NTriple sanity check
+                try:
+                    # Craft an NTriple string
+                    fe_triple = '<%s> <%s> <%s> .' % (o, p1, o1)
+                    assertions.parse(data=fe_triple, format=format)
+                    if debug:
+                        print 'FE triple added: %s' % fe_triple
+                except Exception as e:
+                    print "Invalid triple: %s (%s). Skipping ..." % (fe_triple, e)
+                    continue
+                    
+            # It's a literal
+            elif literal:
+                o1 = literal
+                # NTriple sanity check
+                try:
+                    # Craft an NTriple string
+                    fe_triple = '<%s> <%s> %s .' % (o, p1, o1)
+                    assertions.parse(data=fe_triple, format=format)
+                    if debug:
+                        print 'FE triple added: %s' % fe_triple
+                except Exception as e:
+                    print "Invalid triple: %s (%s). Skipping ..." % (fe_triple, e)
+                    continue
     try:
         assertions.serialize(outfile, format)
     except Exception as e:
