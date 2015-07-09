@@ -12,6 +12,7 @@ import os
 import random
 from collections import Counter
 from lib.orderedset import OrderedSet
+from date_normalizer import DateNormalizer
 
 
 def read_full_results(results_file):
@@ -35,7 +36,7 @@ def read_full_results(results_file):
         sentence = h.unescape(row['sentence'])
 
         # initialize data structure with sentence, frame, lu and entity list
-        if not sentence_id in processed:
+        if sentence_id not in processed:
             processed[sentence_id] = dict()
             processed[sentence_id]['sentence'] = sentence
             processed[sentence_id]['frame'] = row['frame']
@@ -62,14 +63,14 @@ def read_full_results(results_file):
 def set_majority_vote_answer(results_json):
     """ Determine the correct entity which corresponds to a given FE """
 
-    for k,v in results_json.iteritems():
+    for k, v in results_json.iteritems():
         for fe in v.keys():
             if fe in {'frame', 'lu', 'sentence'}:
                 continue
 
             answers_count = Counter(v[fe]['answers'])
             majority = v[fe]['judgments'] / 2.0
-            for answer,freq in answers_count.iteritems():
+            for answer, freq in answers_count.iteritems():
                 if freq > majority:
                     v[fe]['majority'] = answer
 
@@ -99,8 +100,8 @@ def tag_entities(results):
             annotations['entities'][entity] = annotation
 
 
-def process_sentence(sentence_id, annotations, lines):
-    """ Processes a sentence by merging tagged words, LU and FEs """
+def merge_tokens(sentence_id, annotations, lines):
+    """ Merge tagged words, LU and FEs """
 
     processed = list()
     
@@ -119,6 +120,7 @@ def process_sentence(sentence_id, annotations, lines):
         found = False
         i = j = 0
 
+        # try to match all tokens of the entity
         while i < len(processed):
             word = processed[i][2]
 
@@ -134,18 +136,67 @@ def process_sentence(sentence_id, annotations, lines):
         if found:
             match_start = i - len(tokens) + 1
             to_replace = processed[i]
-            # use the 'ENT' tag only if the n-gram has more than 1 token, otherwise keep the original POS tag
-            replacement = [[ sentence_id, '-', entity, 'ENT', entity, annotations['frame'], tag ]] if len(tokens) > 1 else [[ sentence_id, '-', entity, to_replace[3], entity, annotations['frame'], tag ]]
-            processed = processed[:match_start] + replacement + processed[i + 1:]
+            # use the 'ENT' tag only if the n-gram has more than 1 token,
+            # otherwise keep the original POS tag
+            if len(tokens) > 1:
+                replacement = [sentence_id, '-', entity, 'ENT', entity,
+                               annotations['frame'], tag]
+            else:
+                replacement = [sentence_id, '-', entity, to_replace[3], entity,
+                               annotations['frame'], tag]
+
+            processed = processed[:match_start] + [replacement] + processed[i + 1:]
+
+    return processed
+
+
+def normalize_numerical_fes(sentence_id, tokens):
+    """ normalize numerical FEs such as dates, durations, etc """
+    normalizer = DateNormalizer()
+    sentence = ' '.join(x[2] for x in tokens)
+
+    for (start, end), category, norm in normalizer.normalize_many(sentence):
+        original = sentence[start:end]
+
+        # find the first token of the match
+        cursor = i = 0
+        while cursor < start:
+            cursor += len(tokens[i][2]) + 1  # remember the space between tokens
+            i += 1
+
+        # find the last token of the match
+        j = i + 1
+        while ' '.join(x[2] for x in tokens[i:j]) != original:
+            j += 1
+
+        # find an appropriate tag (i.e. anything different from 'O'
+        # if exists among the matching tokens)
+        tags = set(x[-1] for x in tokens[i:j] if x[-1] != 'O')
+        assert len(tags) in {0, 1}, 'Cannot decide which tag to use for %s: %r' % (
+                                    original, tags)
+        tag = tags.pop() if tags else 'O'
+
+        # replace the old tokens with a new one
+        tokens = (tokens[:i] +
+                  [[sentence_id, '-', original, 'ENT', original, tokens[0][-2], tag]] +
+                  tokens[j:])
+        assert ' '.join(x[2] for x in tokens) == sentence, 'Failed to rebuild sentence'
+
+    return tokens
+
+
+def process_sentence(sentence_id, annotations, lines):
+    merged = merge_tokens(sentence_id, annotations, lines)
+    normalized = normalize_numerical_fes(sentence_id, merged)
 
     # insert correct token ids
-    for i, p in enumerate(processed):
+    for i, p in enumerate(normalized):
         p[1] = str(i)
 
     clean = OrderedSet()
-    for line in processed:
+    for line in normalized:
         clean.add('\t'.join(line))
-        
+
     return clean
 
 
@@ -174,7 +225,7 @@ def produce_training_data(annotations, pos_tagged_sentences_dir, debug):
                 print json.dumps(annotations, indent=2)
                 print 'Result'
                 print '\n'.join(repr(x) for x in processed)
- 
+
     return output
 
 
