@@ -145,12 +145,9 @@ def label_sentence(entity_linking_results, debug):
     # Normalize + annotate numerical FEs (only if we could disambiguate the sentence)
     if labeled.get('frame'):
         if debug:
-            print 'LABELING AND NORMALIZING NUMERICAL FEs...'
+            print 'LABELING AND NORMALIZING NUMERICAL FEs ...'
         normalizer = DateNormalizer()
         for (start, end), tag, norm in normalizer.normalize_many(sentence):
-            # TODO date_normalizer/regexes.yml has the double quotes, but are not rendered
-            if tag == 'Classifica':
-                norm = '"%s"' % norm
             chunk = sentence[start:end]
             if debug:
                 print 'Chunk [%s] normalized into [%s], tagged as [%s]' % (chunk, norm, tag)

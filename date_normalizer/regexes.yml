@@ -73,6 +73,9 @@ Punteggio:
       '"{}-{}"'.format(match.group('s1'), match.group('s2'))
 
 Classifica:
-  - primo: '"I"'
-  - secondo: '"II"'
-  - terzo: '"III"'
+  - primo: > 
+      '"I"'
+  - secondo: >
+      '"II"'
+  - terzo: >
+      '"III"'
