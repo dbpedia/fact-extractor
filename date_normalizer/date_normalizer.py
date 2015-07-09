@@ -57,9 +57,9 @@ class DateNormalizer(object):
             for regex, transform in regexes:
                 match = regex.search(expression)
                 if match:
-                    return self._process_match(transform, match)
+                    return self._process_match(category, transform, match)
         else:
-            return (-1, -1), None
+            return (-1, -1), None, None
 
     def normalize_many(self, expression):
         """ find all the matching entities in the given expression expression """
@@ -67,11 +67,11 @@ class DateNormalizer(object):
         for category, regexes in self.regexes.iteritems():
             for regex, transform in regexes:
                 for match in regex.finditer(expression):
-                    yield self._process_match(transform, match)
+                    yield self._process_match(category, transform, match)
 
-    def _process_match(self, transform, match):
+    def _process_match(self, category, transform, match):
         result = eval(transform, self.globals, {'match': match})
-        return match.span(), result
+        return match.span(), category, result
 
 
 if __name__ == '__main__':
@@ -80,7 +80,7 @@ if __name__ == '__main__':
 
     d = DateNormalizer()
     for text, expected in test_cases.iteritems():
-        position, result = d.normalize_one(text)
+        position, category, result = d.normalize_one(text)
         if result != expected:
             print 'expected %s but got %s on %s' % (expected, result, text)
 

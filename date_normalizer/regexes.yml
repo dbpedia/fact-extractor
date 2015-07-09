@@ -17,7 +17,7 @@ __meta_funcs__:
         except ValueError:
             return digit
 
-time:
+tempo:
   - (del\s|il\s|l'\s?)(?P<day>\d{{1,2}}) (?P<month>{month}) (?P<year>\d{{4}}): >
       '"{}-{:02d}-{:02d}"^^xsd:date'.format(match.group('year'),
                                             month_to_num(match.group('month')),
@@ -43,7 +43,7 @@ time:
   - (la )?stagione successiva: >
       '"$YEAR + 1"'
 
-duration:
+durata:
   - stagione (calcistica )?(?P<y1>\d{{2,4}})[-/](?P<y2>\d{{2,4}}): >
       '"P1Y"^^xsd:duration'
 
@@ -68,11 +68,11 @@ duration:
   - negli anni (\d0|{tens}): >
       '"P10Y"^^xsd:duration'
 
-score:
+punteggio:
   - \b(?P<s1>\d{{1,2}})\s*[-a]\s*(?P<s2>\d{{1,2}})\b: >
       "{}-{}".format(match.group('s1'), match.group('s2'))
 
-ranking:
+classifica:
   - primo: '"I"'
   - secondo: '"II"'
   - terzo: '"III"'
