@@ -17,7 +17,7 @@ clean:
 	mkdir -p $(WORK_DIR)
 
 get-soccer-ids-sample:
-	curl -g -H 'Accept: text/csv' 'http://it.dbpedia.org/sparql?query=SELECT%20?id%20WHERE%20{%20?player%20a%20%3Chttp://dbpedia.org/ontology/SoccerPlayer%3E%20.%20?player%20dbpedia-owl:wikiPageID%20?id%20}' | tail -n +2 > $(SOCCER_IDS)
+	curl -g -H 'Accept: text/csv' 'http://$(LANGCODE).dbpedia.org/sparql?query=SELECT%20?id%20WHERE%20{%20?player%20a%20%3Chttp://dbpedia.org/ontology/SoccerPlayer%3E%20.%20?player%20dbpedia-owl:wikiPageID%20?id%20}' | tail -n +2 > $(SOCCER_IDS)
 
 extract-pages:
 	mkdir -p $(WORK_DIR)

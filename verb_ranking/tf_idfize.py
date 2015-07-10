@@ -21,11 +21,10 @@ def compute_tfidf_matrix(corpus_dir):
             f = os.path.join(path, name)
             with codecs.open(f, 'rb', 'utf-8') as i:
                 tokens = []
-                lines = i.readlines()
-                for l in lines:
+                for line in i:
                     # Skip <doc> tags
-                    if not regex.match(ur'</?doc', l):
-                        l_tokens = regex.split(ur'[^\p{L}]+', l.lower())
+                    if not regex.match(ur'</?doc', line):
+                        l_tokens = regex.split(ur'[^\p{L}]+', line.lower())
                         tokens += [token for token in l_tokens
                                          if token and token not in STOPWORDS]
                 t.addDocument(f, tokens)
@@ -33,7 +32,8 @@ def compute_tfidf_matrix(corpus_dir):
 
 
 def dump_tfidf(ranking, outfile='tfidf.json'):
-    json.dump(ranking, open(outfile, 'wb'), indent=2)
+    with open(outfile, 'wb') as f:
+        json.dump(ranking, f, indent=2)
     return 0
 
 
