@@ -4,4 +4,4 @@
 !requirements.txt
 nlp
 *.csv
-workspace/
+workspace-*/

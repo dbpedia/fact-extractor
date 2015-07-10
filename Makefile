@@ -1,13 +1,23 @@
-WORK_DIR=./workspace
-PAGES_DIR=$(WORK_DIR)/sentences
+LANGCODE=it
+LANGUAGE=italian
+WORK_DIR=./workspace-$(LANGCODE)
+PAGES_DIR=$(WORK_DIR)/pages
 PAGES_DIR=$(WORK_DIR)/pages
 SOCCER_DIR=$(WORK_DIR)/soccer
-TREETAGGER=../tree-tagger/cmd/tree-tagger-italian
+SENTENCES_DIR=$(WORK_DIR)/sentences
+TREETAGGER=../tree-tagger/cmd/tree-tagger-$(LANGUAGE)
 SOCCER_IDS=../soccer_ids
-DUMP=../itwiki-latest-pages-articles.xml.bz2
+DUMP=../$(LANGCODE)wiki-latest-pages-articles.xml.bz2
 
 default:
 	@echo "Ciao"
+
+clean:
+	rm -rf $(WORK_DIR)
+	mkdir -p $(WORK_DIR)
+
+get-soccer-ids-sample:
+	curl -g -H 'Accept: text/csv' 'http://it.dbpedia.org/sparql?query=SELECT%20?id%20WHERE%20{%20?player%20a%20%3Chttp://dbpedia.org/ontology/SoccerPlayer%3E%20.%20?player%20dbpedia-owl:wikiPageID%20?id%20}' | tail -n +2 > $(SOCCER_IDS)
 
 extract-pages:
 	mkdir -p $(WORK_DIR)
@@ -30,6 +40,11 @@ extract-verbs:
 	python verb_extraction/bag_of_words.py $(WORK_DIR)/all-soccer.txt \
 		$(WORK_DIR)/vocabulary.txt
 
+extract-sentences:
+	mkdir -p $(SENTENCES_DIR)
+	python verb_extraction/extract_sentences.py $(WORK_DIR)/all-soccer.txt \
+		resources/tokens.list $(SENTENCES_DIR)  # TODO replace with highest ranked verbs
+
 rank-verbs:
 	python verb_ranking/tf_idfize.py $(SOCCER_DIR) $(WORK_DIR)/verbs.txt \
 		--variance-out $(WORK_DIR)/verbs-variance.json \
@@ -40,3 +55,4 @@ rank-verbs:
 		$(WORK_DIR)/verbs-stdev.json $(WORK_DIR)/lemma-stdev.json
 	cut -f 2 $(WORK_DIR)/verb-lemma.txt | python verb_ranking/make_lemma_freq.py - \
 		$(WORK_DIR)/lemma-freq.json
+	# TODO use the ranking to extract the most meaningful verbs
