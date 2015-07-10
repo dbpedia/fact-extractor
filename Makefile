@@ -34,25 +34,30 @@ extract-soccer:
 extract-verbs:
 	cat $(WORK_DIR)/all-soccer.txt | $(TREETAGGER) | grep VER | grep -v '<unknown>' | \
 		cut -f 1,3 | tr '[:upper:]' '[:lower:]' > $(WORK_DIR)/raw-verbs.txt
-	sort -u $(WORK_DIR)/raw-verbs.txt -o $(WORK_DIR)/verb-lemma.txt
-	cut -f 1 $(WORK_DIR)/verb-lemma.txt > $(WORK_DIR)/verbs.txt
-	cut -f 2 $(WORK_DIR)/verb-lemma.txt | sort -u -o $(WORK_DIR)/lemmas.txt
+	sort -u $(WORK_DIR)/raw-verbs.txt -o $(WORK_DIR)/token2lemma.txt
+	cut -f 1 $(WORK_DIR)/token2lemma.txt > $(WORK_DIR)/tokens.txt
+	cut -f 2 $(WORK_DIR)/token2lemma.txt | sort -u -o $(WORK_DIR)/lemmas.txt
 	python verb_extraction/bag_of_words.py $(WORK_DIR)/all-soccer.txt \
 		$(WORK_DIR)/vocabulary.txt
 
 extract-sentences:
 	mkdir -p $(SENTENCES_DIR)
 	python verb_extraction/extract_sentences.py $(WORK_DIR)/all-soccer.txt \
-		resources/tokens.list $(SENTENCES_DIR)  # TODO replace with highest ranked verbs
+		resources/tokens.list $(SENTENCES_DIR)
 
 rank-verbs:
-	python verb_ranking/tf_idfize.py $(SOCCER_DIR) $(WORK_DIR)/verbs.txt \
+	cut -f 2 $(WORK_DIR)/token-lemma.txt | python verb_ranking/make_lemma_freq.py - \
+		$(WORK_DIR)/lemma-freq.json
+	cut -d '"' -f 2 workspace-it/lemma-freq.json | grep -vP	\
+		'avere|essere|fare|potere|volere|dovere' | sed -n '2,52'p | sort \
+		> $(WORK_DIR)/top-50-lemmas.txt
+	grep -wf $(WORK_DIR)/top-50-lemmas.txt $(WORK_DIR)/token-lemma | sort -u \
+		> $(WORK_DIR)/top-50-tokens.txt
+	grep -wf $(WORK_DIR)/top-50-lemmas.txt > $(WORK_DIR)/top-50-token2lemma.txt
+	python verb_ranking/tf_idfize.py $(SOCCER_DIR) $(WORK_DIR)/top-50-tokens.txt \
 		--variance-out $(WORK_DIR)/verbs-variance.json \
 		--stdevs-out $(WORK_DIR)/verbs-stdev.json \
 		--threshold-rank-out $(WORK_DIR)/verbs-rank-threshold.json \
 		--tfidf-rank-out $(WORK_DIR)/verbs-tfidf-rank.json
-	python verb_ranking/compute_stdev_by_lemma.py $(WORK_DIR)/verb-lemma.txt \
+	python verb_ranking/compute_stdev_by_lemma.py $(WORK_DIR)/top-50-token2lemma.txt \
 		$(WORK_DIR)/verbs-stdev.json $(WORK_DIR)/lemma-stdev.json
-	cut -f 2 $(WORK_DIR)/verb-lemma.txt | python verb_ranking/make_lemma_freq.py - \
-		$(WORK_DIR)/lemma-freq.json
-	# TODO use the ranking to extract the most meaningful verbs
