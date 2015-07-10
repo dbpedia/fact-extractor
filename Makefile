@@ -5,8 +5,10 @@ PAGES_DIR=$(WORK_DIR)/pages
 PAGES_DIR=$(WORK_DIR)/pages
 SOCCER_DIR=$(WORK_DIR)/soccer
 SENTENCES_DIR=$(WORK_DIR)/sentences
+GOLD_DIR=$(WORK_DIR)/gold
 TREETAGGER=../tree-tagger/cmd/tree-tagger-$(LANGUAGE)
 SOCCER_IDS=../soccer_ids
+GOLD_LU_NUM=10
 DUMP=../$(LANGCODE)wiki-latest-pages-articles.xml.bz2
 
 default:
@@ -46,14 +48,15 @@ extract-sentences:
 		resources/tokens.list $(SENTENCES_DIR)
 
 rank-verbs:
-	cut -f 2 $(WORK_DIR)/token-lemma.txt | python verb_ranking/make_lemma_freq.py - \
+	cut -f 2 $(WORK_DIR)/token2lemma.txt | python verb_ranking/make_lemma_freq.py - \
 		$(WORK_DIR)/lemma-freq.json
 	cut -d '"' -f 2 workspace-it/lemma-freq.json | grep -vP	\
 		'avere|essere|fare|potere|volere|dovere' | sed -n '2,52'p | sort \
 		> $(WORK_DIR)/top-50-lemmas.txt
-	grep -wf $(WORK_DIR)/top-50-lemmas.txt $(WORK_DIR)/token-lemma | sort -u \
+	grep -wf $(WORK_DIR)/top-50-lemmas.txt $(WORK_DIR)/token2lemma.txt | sort -u \
 		> $(WORK_DIR)/top-50-tokens.txt
-	grep -wf $(WORK_DIR)/top-50-lemmas.txt > $(WORK_DIR)/top-50-token2lemma.txt
+	grep -wf $(WORK_DIR)/top-50-lemmas.txt $(WORK_DIR)/token2lemma.txt \
+		> $(WORK_DIR)/top-50-token2lemma.txt
 	python verb_ranking/tf_idfize.py $(SOCCER_DIR) $(WORK_DIR)/top-50-tokens.txt \
 		--variance-out $(WORK_DIR)/verbs-variance.json \
 		--stdevs-out $(WORK_DIR)/verbs-stdev.json \
@@ -61,3 +64,21 @@ rank-verbs:
 		--tfidf-rank-out $(WORK_DIR)/verbs-tfidf-rank.json
 	python verb_ranking/compute_stdev_by_lemma.py $(WORK_DIR)/top-50-token2lemma.txt \
 		$(WORK_DIR)/verbs-stdev.json $(WORK_DIR)/lemma-stdev.json
+
+gold-add:
+	mkdir -p $(GOLD_DIR)/$(LU)/sentences $(GOLD_DIR)/$(LU)/tagged
+	grep -w $(LU) $(WORK_DIR)/top-50-token2lemma.txt | cut -f 1 \
+		> $(GOLD_DIR)/$(LU)/tokens.txt
+	python verb_extraction/extract_sentences.py $(WORK_DIR)/all-soccer.txt \
+		$(GOLD_DIR)/$(LU)/tokens.txt $(GOLD_DIR)/$(LU)/sentences \
+		--min-words 5 --max-words 15
+	find $(GOLD_DIR)/$(LU)/sentences/* -exec sh -c 'echo $$1 && cat "$$1" | \
+		$(TREETAGGER) > $(GOLD_DIR)/$(LU)/tagged/$$(basename $$1)' 'gold-add' {} \;
+	python seed_selection/get_meaningful_sentences.py $(GOLD_DIR)/$(LU)/tagged \
+		$(GOLD_DIR)/$(LU)/tokens.txt $(GOLD_DIR)/$(LU)/gold.txt
+	sed -i -r "s/($$(paste -s -d \| $(GOLD_DIR)/$(LU)/tokens.txt))/<strong>\1<\/strong>/gi" \
+		$(GOLD_DIR)/$(LU)/gold.txt
+
+gold-finalize:
+	find $(GOLD_DIR)/*/gold.txt -exec sh -c 'cat "$$1" | shuf | head -n $(GOLD_LU_NUM) \
+		>> $(GOLD_DIR)/gold.txt' 'gold-finalize' {}  \;
