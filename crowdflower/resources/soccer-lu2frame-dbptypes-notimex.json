@@ -27,9 +27,15 @@
                     [
                         { "Competizione": "core" },
                         { "Squadra": "core" },
-                        { "Agente": "extra" },
-                        { "Durata": "extra" },
-                        { "Tempo": "extra" }
+                        { "Agente": "extra" }
+                    ],
+                    "DBpedia":
+                    [
+                        { "SoccerLeague": "Competizione" },
+                        { "SoccerTournament": "Competizione" },
+                        { "SoccerLeagueSeason": "Competizione" },
+                        { "SoccerClub": "Squadra" },
+                        { "SoccerPlayer": "Agente" }
                     ]
                 }
             ]
@@ -112,10 +118,15 @@
                         { "Squadra_1": "core" },
                         { "Squadra_2": "core" },
                         { "Competizione": "extra"},
-                        { "Luogo": "extra" },
-                        { "Tempo": "extra" },
-                        { "Punteggio": "extra" },
-                        { "Classifica": "extra" }
+                        { "Luogo": "extra" }
+                    ],
+                    "DBpedia":
+                    [
+                        { "SoccerLeague": "Competizione" },
+                        { "SoccerTournament": "Competizione" },
+                        { "SoccerLeagueSeason": "Competizione" },
+                        { "SoccerClub": ["Squadra_1", "Squadra_2"] },
+                        { "Place": "Luogo" }
                     ]
                 },
                 {
@@ -124,9 +135,15 @@
                     [
                         { "Competizione": "core" },
                         { "Squadra": "core" },
-                        { "Agente": "extra" },
-                        { "Durata": "extra" },
-                        { "Tempo": "extra" }
+                        { "Agente": "extra" }
+                    ],
+                    "DBpedia":
+                    [
+                        { "SoccerLeague": "Competizione" },
+                        { "SoccerTournament": "Competizione" },
+                        { "SoccerLeagueSeason": "Competizione" },
+                        { "SoccerClub": "Squadra" },
+                        { "SoccerPlayer": "Agente" }
                     ]
                 }
             ]
@@ -174,13 +191,18 @@
                     "frame": "Sconfitta",
                     "FEs":
                     [
-                        { "Vincente": "core" },
+                        { "Vincitore": "core" },
                         { "Perdente": "core" },
                         { "Competizione": "extra"},
-                        { "Luogo": "extra" },
-                        { "Tempo": "extra" },
-                        { "Punteggio": "extra" },
-                        { "Classifica": "extra" }
+                        { "Luogo": "extra" }
+                    ],
+                    "DBpedia":
+                    [
+                        { "SoccerLeague": "Competizione" },
+                        { "SoccerTournament": "Competizione" },
+                        { "SoccerLeagueSeason": "Competizione" },
+                        { "SoccerClub": ["Vincitore", "Perdente"] },
+                        { "Place": "Luogo" }
                     ]
                 }
             ]
@@ -230,9 +252,15 @@
                     [
                         { "Competizione": "core" },
                         { "Squadra": "core" },
-                        { "Agente": "extra" },
-                        { "Durata": "extra" },
-                        { "Tempo": "extra" }
+                        { "Agente": "extra" }
+                    ],
+                    "DBpedia":
+                    [
+                        { "SoccerLeague": "Competizione" },
+                        { "SoccerTournament": "Competizione" },
+                        { "SoccerLeagueSeason": "Competizione" },
+                        { "SoccerClub": "Squadra" },
+                        { "SoccerPlayer": "Agente" }
                     ]
                 },
                 {
@@ -241,10 +269,14 @@
                     [
                         { "Entità": "core" },
                         { "Stato": "core" },
-                        { "Durata": "extra" },
                         { "Luogo": "extra" },
-                        { "Squadra": "extra" },
-                        { "Tempo": "extra" }
+                        { "Squadra": "extra" }
+                    ],
+                    "DBpedia":
+                    [
+                        { "SoccerClub": "Squadra" },
+                        { "SoccerPlayer": "Entità" },
+                        { "Place": "Luogo" }
                     ]
                 }
             ]
@@ -323,10 +355,35 @@
                         { "Vincitore": "core" },
                         { "Perdente": "core" },
                         { "Competizione": "extra"},
-                        { "Luogo": "extra" },
-                        { "Tempo": "extra" },
-                        { "Punteggio": "extra" },
-                        { "Classifica": "extra" }
+                        { "Luogo": "extra" }
+                    ],
+                    "DBpedia":
+                    [
+                        { "SoccerLeague": "Competizione" },
+                        { "SoccerTournament": "Competizione" },
+                        { "SoccerLeagueSeason": "Competizione" },
+                        { "SoccerClub": ["Vincitore", "Perdente"] },
+                        { "Place": "Luogo" }
+                    ]
+                },
+                {
+                    "frame": "Trofeo",
+                    "FEs":
+                    [
+                        { "Vincitore": "core" },
+                        { "Competizione": "core" },
+                        { "Squadra": "extra" },
+                        { "Premio": "extra" },
+                        { "Luogo": "extra" }
+                    ],
+                    "DBpedia":
+                    [
+                        { "SoccerLeague": "Competizione" },
+                        { "SoccerTournament": "Competizione" },
+                        { "SoccerLeagueSeason": "Competizione" },
+                        { "SoccerPlayer": "Vincitore" },
+                        { "SoccerClub": "Squadra" },
+                        { "Place": "Luogo" }
                     ]
                 }
             ]

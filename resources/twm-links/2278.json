@@ -1,0 +1,51 @@
+{
+  "Il 18 maggio 2011 vince l'Europa League in finale contro i connazionali del Braga.": [
+    {
+      "end": 39, 
+      "chunk": "Europa League", 
+      "uri": "http://it.dbpedia.org/resource/UEFA_Europa_League_2010-2011", 
+      "start": 26, 
+      "score": 1.0, 
+      "types": [
+        "http://dbpedia.org/ontology/FootballMatch", 
+        "http://dbpedia.org/ontology/SportsEvent", 
+        "http://dbpedia.org/ontology/Event"
+      ]
+    }, 
+    {
+      "end": 81, 
+      "chunk": "Braga", 
+      "uri": "http://it.dbpedia.org/resource/Sporting_Clube_de_Braga", 
+      "start": 76, 
+      "score": 0.3981773191245296, 
+      "types": [
+        "http://dbpedia.org/ontology/SoccerClub", 
+        "http://dbpedia.org/ontology/SportsTeam", 
+        "http://dbpedia.org/ontology/Organisation", 
+        "http://dbpedia.org/ontology/Agent"
+      ]
+    }, 
+    {
+      "end": 12, 
+      "chunk": "18 maggio", 
+      "uri": "http://it.dbpedia.org/resource/18_maggio", 
+      "start": 3, 
+      "score": 0.19423562741318257, 
+      "types": [
+        "http://dbpedia.org/ontology/NameEntity"
+      ]
+    }, 
+    {
+      "end": 49, 
+      "chunk": "finale", 
+      "uri": "http://it.dbpedia.org/resource/UEFA_Women's_Champions_League_2013-2014", 
+      "start": 43, 
+      "score": 0.0606996098029913, 
+      "types": [
+        "http://dbpedia.org/ontology/SoccerTournament", 
+        "http://dbpedia.org/ontology/SportsEvent", 
+        "http://dbpedia.org/ontology/Event"
+      ]
+    }
+  ]
+}
