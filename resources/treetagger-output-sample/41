@@ -1,0 +1,15 @@
+Con	PRE	con
+la	DET:def	il
+Nazionale	NOM	nazionale
+messicana	ADJ	messicano
+ha	VER:pres	avere
+preso	VER:pper	prendere
+parte	NOM	parte
+ai	PRE:det	al
+Mondiali	NOM	mondiale
+1966	NUM	@card@
+,	PON	,
+giocando	VER:geru	giocare
+3	NUM	@card@
+partite	NOM	partita
+.	SENT	.

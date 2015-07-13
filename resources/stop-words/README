@@ -1,0 +1,10 @@
+Stopwords Corpus
+
+This corpus contains lists of stop words for several languages.  These
+are high-frequency grammatical words which are usually ignored in text
+retrieval applications.
+
+They were obtained from:
+http://www.nltk.org/nltk_data/
+    for [Dutch, English, French, German, Italian, Portuguese, Russian, Spanish]
+Bulgarian: Apache lucene ( The stopword list is BSD-Licensed.)

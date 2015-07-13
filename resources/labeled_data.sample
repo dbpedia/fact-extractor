@@ -1,0 +1,16 @@
+[
+    {
+    "id": "2278",
+    "frame": "Trofeo",
+    "lu": "vincere",
+    "FEs": [
+        {
+        "chunk": "finale",
+        "type": "core",
+        "uri": "http://it.dbpedia.org/resource/UEFA_Women's_Champions_League_2013-2014",
+        "FE": "Competizione"
+        }
+    ],
+    "sentence": "Il 18 maggio 2011 vince l'Europa League in finale contro i connazionali del Braga."
+    }
+]

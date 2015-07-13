@@ -1,0 +1,14 @@
+In	PRE	in
+totale	NOM	totale
+ha	VER:pres	avere
+giocato	VER:pper	giocare
+136	NUM	@card@
+partite	NOM	partita
+(	PON	(
+con	PRE	con
+5	NUM	@card@
+reti	NOM	rete
+)	PON	)
+in	PRE	in
+Serie	NOM	serie
+B.	NPR	B.

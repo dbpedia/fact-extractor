@@ -1,0 +1,17 @@
+Ha	VER:pres	avere
+giocato	VER:pper	giocare
+7	NUM	@card@
+partite	NOM	partita
+(	PON	(
+segnando	VER:geru	segnare
+un	DET:indef	un
+gol	NOM	gol
+)	PON	)
+nella	PRE:det	nel
+Nazionale	NOM	nazionale
+Under	NPR	Under
+21	NUM	@card@
+della	PRE:det	del
+Germania	NPR	Germania
+Ovest	NOM	ovest
+.	SENT	.

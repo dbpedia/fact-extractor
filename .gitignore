@@ -1,5 +1,7 @@
 *.pyc
 *.swp
 *.txt
+!requirements.txt
 nlp
 *.csv
+workspace-*/
