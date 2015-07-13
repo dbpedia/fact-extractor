@@ -17,14 +17,14 @@ would produce statements like:
 ```
 
 ## Have you already?
-Introduced yourself in the [DBpedia GSoC mailing list](https://lists.sourceforge.net/lists/listinfo/dbpedia-gsoc)?
+Introduced yourself in the [DBpedia mailing list](https://lists.sourceforge.net/lists/listinfo/dbpedia-discussion)?
 If not, please do so!
 
 ## High-level Workflow + Related Code
 **INPUT** = Wikipedia corpus (e.g., [the latest Italian chapter](http://dumps.wikimedia.org/itwiki/latest/itwiki-latest-pages-articles.xml.bz2))
 
 1. Verb Extraction
-  1. [Extract raw text from Wikipedia dump](lib/WikiExtractor.py), forked from [this repo](https://github.com/bwbaugh/wikipedia-extractor)
+  1. [Extract raw text from Wikipedia dump](lib/WikiExtractor.py), forked from [this repo](https://github.com/attardi/wikiextractor)
   2. [Extract a sub-corpus based on Wiki IDs](get_soccer_players_articles.py)
   3. [Verb Extraction](extract_verbs.sh)
 2. Verb Ranking
@@ -35,7 +35,7 @@ If not, please do so!
   1. [Build CrowdFlower input spreadsheet](create_crowdflower_input.py)
 4. Frame Classifier Training
   1. [Translate CrowdFlower results into training data format](crowdflower_results_into_training_data.py)
-  2. [Train classifier](use_classifier.sh)
+  2. Train classifier
 5. Frame Extraction
 
 ## Requirements
@@ -70,4 +70,4 @@ Pull requests not complying to these guidelines will be ignored.
 - [Frame Semantics Annotation Made Easy with DBpedia](http://ceur-ws.org/Vol-1030/paper-03.pdf)
 
 ## License
-The source code is under the terms of the [GNU General Public License, version 2](http://www.gnu.org/licenses/gpl-2.0.html).
+The source code is under the terms of the [GNU General Public License, version 3](http://www.gnu.org/licenses/gpl.html).
