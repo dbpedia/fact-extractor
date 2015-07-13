@@ -18,7 +18,7 @@ __meta_funcs__:
             return digit
 
 Tempo:
-  - (del\s|il\s|l'\s?)(?P<day>\d{{1,2}}) (?P<month>{month}) (?P<year>\d{{4}}): >
+  - (del\s|il\s|l'\s?)?(?P<day>\d{{1,2}}) (?P<month>{month}) (?P<year>\d{{4}}): >
       '"{}-{:02d}-{:02d}"^^<http://www.w3.org/2001/XMLSchema#date>'.format(match.group('year'),
                                             month_to_num(match.group('month')),
                                             int(match.group('day')))
@@ -34,7 +34,7 @@ Tempo:
   - in (?P<month>{month}): >
       '"{:02d}"^^<http://www.w3.org/2001/XMLSchema#gMonth>'.format(month_to_num(match.group('month')))
 
-  - (nel\s|il\s|nell'\s?)(\w+(\s|\b)){{,2}}(?P<year>\d{{4}})(?!\s*[-/]): >
+  - (nel\s|il\s|nell'\s?)(?P<year>\d{{4}})(?!\s*[-/]): >
       '"{}"^^<http://www.w3.org/2001/XMLSchema#gYear>'.format(match.group('year'))
 
   - l'\s?anno seguente: >
@@ -56,7 +56,7 @@ Durata:
   - fino al((l'\s?|la\s|\s)?(\w+(\b|\s)){{,3}} del(l')?)? (?P<year>\d{{2,4}}): >
       '"to {}"'.format(match.group('year'))
 
-  - dal (?P<year>\d{{2,4}})\b(?! al): >
+  - dal (?P<year>\d{{4}})\b(?! al): >
       '"from {}"'.format(match.group('year'))
 
   - (per )?(?P<num>{lit_digit}|\d+)( sol[iae])? (stagion[ei]|ann[oi]|annat[ae]): >
