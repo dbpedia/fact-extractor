@@ -1,1 +1,6 @@
 PyYAML==3.11
+regex==2015.06.24
+nltk==3.0.3
+rdflib==4.2.0
+numpy==1.9.2
+click==4.0

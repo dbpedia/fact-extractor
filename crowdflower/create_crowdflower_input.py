@@ -88,10 +88,15 @@ def write_input_spreadsheet(input_data, outfile, debug):
 
 
 def create_cli_parser():
-    parser = argparse.ArgumentParser(description='Build input CSV for a Semantic Role Labeling CrowdFlower job')
-    parser.add_argument('labeled_data', help='JSON file containing labeled data for each sentence')
-    parser.add_argument('chunks', help='JSON file containing chunks for each sentence')
-    parser.add_argument('-o', '--output', default='crowdflower_input.csv', type=argparse.FileType('wb'), help='Write output to the given file')
+    parser = argparse.ArgumentParser(
+            description='Build input CSV for a Semantic Role Labeling CrowdFlower job')
+    parser.add_argument('labeled_data',
+                        help='JSON file containing labeled data for each sentence')
+    parser.add_argument('chunks',
+                        help='JSON file containing chunks for each sentence')
+    parser.add_argument('-o', '--output', default='crowdflower_input.csv',
+                        type=argparse.FileType('wb'),
+                        help='Write output to the given file')
     parser.add_argument('--debug', action='store_true', help='Toggle debug mode')
     return parser
 

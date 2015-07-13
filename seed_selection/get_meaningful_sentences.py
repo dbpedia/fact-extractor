@@ -4,19 +4,15 @@
 import codecs
 import os
 import sys
+import click
 from collections import defaultdict
 from nltk import RegexpParser
+
 
 CHUNKER_GRAMMAR = r"""
     SN: {<PRO.*|DET.*|>?<ADJ>*<NUM>?<NOM|NPR>+<NUM>?<ADJ|VER:pper>*}
     CHUNK: {<SN><VER.*>+<SN>}
     """
-
-
-def load_tokens(tokens_file):
-    with codecs.open(tokens_file, 'rb', 'utf-8') as i:
-        tokens = [l.strip() for l in i.readlines()]
-    return tokens if tokens else False
 
 
 def load_pos_data(dir):
@@ -49,26 +45,16 @@ def filter_sentences_by_chunk(pos_data, tokens):
     return filtered
 
 
-def write_sentences(sentences, outfile='gold'):
-    with codecs.open(outfile, 'wb', 'utf-8') as o:
-        o.writelines([s + '\n' for s in sentences])
-    return 0
+@click.command()
+@click.argument('tagged-dir', type=click.Path(exists=True, file_okay=False))
+@click.argument('tokens', type=click.File('r'))
+@click.argument('outfile', default='gold', type=click.File('w'))
+def main(tagged_dir, tokens, outfile):
+    pos_data = load_pos_data(tagged_dir)
+    tokens = [l.strip() for l in tokens]
+    sentences = filter_sentences_by_chunk(pos_data, tokens)
+    outfile.write('\n'.join(sentences).encode('utf8'))
 
 
 if __name__ == "__main__":
-    if len(sys.argv) == 4:
-        pos_data = load_pos_data(sys.argv[1])
-        tokens = load_tokens(sys.argv[2])
-        outfile = sys.argv[3]
-        sentences = filter_sentences_by_chunk(pos_data, tokens)
-        write_sentences(sentences, outfile)
-        sys.exit(0)
-    elif len(sys.argv) == 3:
-        pos_data = load_pos_data(sys.argv[1])
-        tokens = load_tokens(sys.argv[2])
-        sentences = filter_sentences_by_chunk(pos_data, tokens)
-        write_sentences(sentences)
-        sys.exit(0)
-    else:
-        print "Usage: python %s <POS_DATA_DIR> <TOKENS_FILE> [OUTPUT_FILE]" % __file__
-        sys.exit(1)
+    main()

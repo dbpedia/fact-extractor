@@ -5,9 +5,6 @@ import json
 import sys
 
 
-DEBUG = True
-
-
 def iter_split(iterator, split):
     acc = []
     for item in iterator:
@@ -17,56 +14,42 @@ def iter_split(iterator, split):
             acc = []
 
 
-def process_article(content, soccer_ids, tokens, mapping, output_dir, max_words):
+def process_article(content, soccer_ids, mapping, output_dir, max_words):
     attrs = dict(re.findall(r'([^\s=]+)="([^"]+)"', content))
+    print >> sys.stderr, 'Processing [%s]...\r' % attrs['id'],
+
     if attrs['id'] not in soccer_ids:
         return
     else:
         soccer_ids.remove(attrs['id'])
 
     mapping[attrs['id']] = attrs['title']
-    all_sentences = re.split(r'\.\s+', content)
+    fout = os.path.join(output_dir, '%s' % attrs['id'])
+    with open(fout, 'w') as f:
+        f.write(content.encode('utf8'))
 
-    i = 0
-    for sentence in all_sentences:
-        snt_tokens = sentence.split()
-        if len(snt_tokens) < max_words and \
-                any(token in snt_tokens for token in tokens):
-
-            fout = os.path.join(output_dir, '%s.%d' % (attrs['id'], i))
-            with open(fout, 'w') as f:
-                f.write(sentence.encode('utf8'))
-            i += 1
-
-    if DEBUG:
-        print >> sys.stderr, "%6d %10s %30s %5d sentences%s" % (
-                len(soccer_ids), attrs['id'], attrs['title'], i,
-                ' (skipped)' if i == 0 else '')
+    print >> sys.stderr, '\rFound article [%s] %s' % (attrs['id'], attrs['title'])
 
 
 @click.command()
 @click.argument('soccer_ids', type=click.File('r'))
 @click.argument('input_file', type=click.File('r'))
-@click.argument('token_list', type=click.File('r'))
 @click.argument('output_dir', type=click.Path(exists=True, file_okay=False))
 @click.argument('output_mapping', type=click.File('w'))
 @click.option('--max-words', default=25)
-def main(soccer_ids, input_file, token_list, output_dir, output_mapping, max_words):
+def main(soccer_ids, input_file, output_dir, output_mapping, max_words):
     soccer_ids = {row.strip().decode('utf8') for row in soccer_ids}
-    tokens = {row.strip().decode('utf8') for row in token_list}
 
     mapping = {}
     for i, rows in enumerate(iter_split(input_file, lambda row: '</doc>' in row)):
         article = '\n'.join(rows).decode('utf8')
-        process_article(article, soccer_ids, tokens, mapping, output_dir, max_words)
+        process_article(article, soccer_ids, mapping, output_dir, max_words)
 
         if len(soccer_ids) == 0:
             break
 
     json.dump(mapping, output_mapping, indent=2)
-
-    if DEBUG:
-        print >> sys.stderr, 'Processed %d articles' % i
+    print >> sys.stderr, '\rProcessed %d articles' % i
 
 if __name__ == '__main__':
     main()

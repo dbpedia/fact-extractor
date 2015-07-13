@@ -12,7 +12,7 @@ DEBUG = True
 
 def load_wiki_ids(filein):
     with open(filein) as i:
-        return [l.strip() for l in i.readlines()]
+        return {l.strip() for l in i}
 
 
 def extract_soccer_articles(soccer_ids, corpus_dir, output_dir):
@@ -20,8 +20,12 @@ def extract_soccer_articles(soccer_ids, corpus_dir, output_dir):
         for name in files:
             f = os.path.join(path, name)
             with open(f) as i:
-                content = ''.join(i.readlines())
+                content = i.read()
+
             match = re.search('id="([^"]+)"', content)
+            if not match:
+                continue
+
             current_id = match.group(1)
             if DEBUG:
                 print "File = [%s] - Wiki ID = [%s]" % (f, current_id)
