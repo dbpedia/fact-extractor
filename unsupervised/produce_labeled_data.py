@@ -5,8 +5,11 @@ import codecs
 import json
 import os
 import random
-import stopwords
 import sys
+# FIXME this is a hack for relative imports, it shouldn't work this way
+sys.path.append(os.path.join(os.path.dirname(__file__), '..', 'lib'))
+sys.path.append(os.path.join(os.path.dirname(__file__), '..', 'date_normalizer'))
+import stopwords # Internal module
 from collections import defaultdict
 from urllib import quote
 from rfc3987 import parse  # URI/IRI validation
@@ -14,7 +17,7 @@ from rdflib import Graph, URIRef
 from rdflib.namespace import Namespace, NamespaceManager
 from date_normalizer import DateNormalizer
 
-LU_FRAME_MAP_LOCATION = 'resources/soccer-lu2frame-dbptypes.json'
+LU_FRAME_MAP_LOCATION = '../resources/soccer-lu2frame-dbptypes.json'
 LU_FRAME_MAP = json.load(open(LU_FRAME_MAP_LOCATION))
 
 # Namespace prefixes for RDF serialization
