@@ -15,7 +15,7 @@ from urllib import quote
 from rfc3987 import parse  # URI/IRI validation
 from rdflib import Graph, URIRef
 from rdflib.namespace import Namespace, NamespaceManager
-from date_normalizer import DateNormalizer
+from date_normalizer import DateNormalizer # Internal module
 
 LU_FRAME_MAP_LOCATION = '../resources/soccer-lu2frame-dbptypes.json'
 LU_FRAME_MAP = json.load(open(LU_FRAME_MAP_LOCATION))
@@ -63,7 +63,7 @@ def label_sentence(entity_linking_results, debug):
                     core = False
                     assigned_fes = []
                     for diz in val:
-                        chunk = {'chunk': diz['chunk'], 'uri': diz['uri']}
+                        chunk = {'chunk': diz['chunk'], 'uri': diz['uri'], 'score': diz['score']}
                         # Filter out linked stopwords
                         if chunk['chunk'].lower() in stopwords.StopWords.words('italian'):
                             continue
