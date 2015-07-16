@@ -1,5 +1,8 @@
 #!/usr/bin/env python
 # -*- encoding: utf-8 -*-
+import os
+if __name__ == '__main__' and __package__ is None:
+    os.sys.path.append(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 
 import argparse
 import csv
@@ -9,10 +12,8 @@ import random
 import re
 from collections import defaultdict
 from sys import argv, exit
-from crowdflower_results_into_training_data import set_majority_vote_answer
-
-
-FRAME_DEFINITIONS = json.load(open('resources/soccer-lu2frame-dbptypes.json'), 'utf-8')
+from crowdflower.crowdflower_results_into_training_data import set_majority_vote_answer
+from resources.soccer_lu2frame_dbtypes import LU_FRAME_MAP as FRAME_DEFINITIONS
 
 
 def setup_logger(level='info'):
