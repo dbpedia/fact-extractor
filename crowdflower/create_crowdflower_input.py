@@ -11,7 +11,9 @@ import sys
 from collections import defaultdict
 
 # Keep the task simple: avoid timex and numeric FEs in frame definitions
-LU_FRAME_MAP_LOCATION = 'resources/soccer-lu2frame-dbptypes-notimex.json'
+LU_FRAME_MAP_LOCATION = os.path.join(os.path.dirname(__file__),
+                                     'resources',
+                                     'soccer-lu2frame-dbptypes-notimex.json')
 LU_FRAME_MAP = json.load(open(LU_FRAME_MAP_LOCATION))
 
 

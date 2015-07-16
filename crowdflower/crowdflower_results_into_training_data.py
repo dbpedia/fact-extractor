@@ -1,63 +1,19 @@
 #!/usr/bin/env python
 # -*- encoding: utf-8 -*-
+import os
+if __name__ == '__main__' and __package__ is None:
+    os.sys.path.append(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 
 import codecs
 import re
 import sys
-import csv
 import json
-import HTMLParser
 import argparse
-import os
 import random
 from collections import Counter
 from lib.orderedset import OrderedSet
 from date_normalizer import DateNormalizer
-
-
-def read_full_results(results_file):
-    """ Reads and aggregates the results from an open stream"""
-    h = HTMLParser.HTMLParser()
-    processed = {}
-
-    # TODO csv lib doesn't handle unicode
-    results = csv.DictReader(results_file)
-    fields = results.fieldnames
-    fe_amount = len([f for f in fields if re.match(r'fe[0-9]{2}$', f)])
-
-    # Include gold
-    for row in results:
-        # Uncomment the following line to skip gold
-        # if row['_golden'] == 'true': continue
-        # Avoid Unicode encode/decode exceptions
-        for k, v in row.iteritems():
-            row[k] = v.decode('utf-8')
-        sentence_id = row['id']
-        sentence = h.unescape(row['sentence'])
-
-        # initialize data structure with sentence, frame, lu and entity list
-        if sentence_id not in processed:
-            processed[sentence_id] = dict()
-            processed[sentence_id]['sentence'] = sentence
-            processed[sentence_id]['frame'] = row['frame']
-            processed[sentence_id]['lu'] = row['lu']
-            for n in xrange(0, fe_amount):
-                entity = row['orig_fe%02d' % n]
-                if entity:
-                    processed[sentence_id][entity] = {
-                        'judgments': 0,
-                        'answers': list()
-                    }
-
-        # update judgments for each entity
-        for n in xrange(0, fe_amount):
-            entity = row['orig_fe%02d' % n]
-            answer = row.get('fe%02d' % n)
-            if entity and answer:
-                processed[sentence_id][entity]['judgments'] += 1
-                processed[sentence_id][entity]['answers'].append(answer)
-
-    return processed
+from utils import read_full_results
 
 
 def set_majority_vote_answer(results_json):
@@ -68,7 +24,8 @@ def set_majority_vote_answer(results_json):
             if fe in {'frame', 'lu', 'sentence'}:
                 continue
 
-            answers_count = Counter(v[fe]['answers'])
+            answers = [x['answer'] for x in v[fe]['answers']]
+            answers_count = Counter(answers)
             majority = v[fe]['judgments'] / 2.0
             for answer, freq in answers_count.iteritems():
                 if freq > majority:
@@ -76,7 +33,7 @@ def set_majority_vote_answer(results_json):
 
             # Randomly break ties by picking one of the answers
             if not v[fe].get('majority'):
-                chosen = random.choice(v[fe]['answers'])
+                chosen = random.choice(answers)
                 v[fe]['majority'] = chosen
                 print "HEADS UP! No majority answer for sentence [%s], FE [%s]. Randomly broken tie, picked [%s]" % (k, fe, answer)
 
