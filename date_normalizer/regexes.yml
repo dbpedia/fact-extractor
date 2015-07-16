@@ -1,41 +1,69 @@
 __meta_vars__:
   month: (gennaio|febbraio|marzo|aprile|maggio|giugno|luglio|agosto|settembre|ottobre|novembre|dicembre)
   lit_digit: (uno|una|due|tre|quattro|cinque|sei|sette|otto|nove)
-  tens: (venti|trenta|quaranta|cinquanta|sessanta|settanta|ottanta|novanta)
+  tens: (dieci|venti|trenta|quaranta|cinquanta|sessanta|settanta|ottanta|novanta)
+  schema:
+    year: http://www.w3.org/2001/XMLSchema#gYear
+    month: http://www.w3.org/2001/XMLSchema#gMonth
+    yearMonth: http://www.w3.org/2001/XMLSchema#gYearMonth
+    monthDay: http://www.w3.org/2001/XMLSchema#gMonthDay
+    date: http://www.w3.org/2001/XMLSchema#date
+    duration: http://www.w3.org/2001/XMLSchema#duration
+
 
 __meta_funcs__:
   - >
+    def index_in_or(or_pattern, element):
+        return or_pattern.split('|').index(element)
+  - >
     def month_to_num(month):
+        """ gennaio -> 1, febbraio -> 2, ..., dicembre -> 12 """
         try:
-            return meta_vars['month'][1:-1].split('|').index(month) + 1
+            return index_in_or(meta_vars['month'], month) + 1
         except ValueError:
             return month
   - >
     def lit_digit_to_num(digit):
+        """ uno -> 1, due -> 2, ..., nove -> 9 """
         try:
-            return max(1, meta_vars['lit_digit'][1:-1].split('|').index(digit))
+            return max(1, index_in_or(meta_vars['lit_digit'], digit))
         except ValueError:
             return digit
+  - >
+    def abs_year(year):
+        """ 87 -> 1987, 1987 -> 1987 """
+        return year if len(str(year)) == 4 else '19' + str(year)
+  - >
+    def tens_to_num(tens):
+        try:
+            return 10 * (index_in_or(meta_vars['tens'], tens) + 1)
+        except ValueError:
+            return tens
 
 Tempo:
   - (del\s|il\s|l'\s?)(?P<day>\d{{1,2}}) (?P<month>{month}) (?P<year>\d{{4}}): >
-      '"{}-{:02d}-{:02d}"^^<http://www.w3.org/2001/XMLSchema#date>'.format(match.group('year'),
-                                            month_to_num(match.group('month')),
-                                            int(match.group('day')))
+      '"{}-{:02d}-{:02d}"^^<{schema}>'.format(match.group('year'),
+                                             month_to_num(match.group('month')),
+                                             int(match.group('day')),
+                                             schema=schema['date'])
 
   - (del\s|il\s|l'\s?)(?P<day>\d{{1,2}}) (?P<month>{month})(?!\s+\d): >
-      '"{:02d}-{:02d}"^^<http://www.w3.org/2001/XMLSchema#gMonthDay>'.format(month_to_num(match.group('month')),
-                                              int(match.group('day')))
+      '"{:02d}-{:02d}"^^<{schema}>'.format(month_to_num(match.group('month')),
+                                             int(match.group('day')),
+                                             schema=schema['monthDay'])
 
   - (del\s|a\s|nel\s|nell'\s?)(?P<month>{month}) (del|dell')?\s*(?P<year>\d{{4}}): >
-      '"{}-{:02d}"^^<http://www.w3.org/2001/XMLSchema#gYearMonth>'.format(match.group('year'),
-                                           month_to_num(match.group('month')))
+      '"{}-{:02d}"^^<{schema}>'.format(match.group('year'),
+                                       month_to_num(match.group('month')),
+                                       schema=schema['yearMonth'])
 
   - in (?P<month>{month}): >
-      '"{:02d}"^^<http://www.w3.org/2001/XMLSchema#gMonth>'.format(month_to_num(match.group('month')))
+      '"{:02d}"^^<{schema}>'.format(month_to_num(match.group('month')),
+                                         schema=schema['month'])
 
   - (nel\s|il\s|nell'\s?)(\w+(\s|\b)){{,2}}(?P<year>\d{{4}})(?!\s*[-/]): >
-      '"{}"^^<http://www.w3.org/2001/XMLSchema#gYear>'.format(match.group('year'))
+      '"{}"^^<{schema}>'.format(match.group('year'),
+                                schema=schema['year'])
 
   - l'\s?anno seguente: >
       '"$YEAR + 1"'
@@ -45,13 +73,25 @@ Tempo:
 
 Durata:
   - stagione (calcistica )?(?P<y1>\d{{2,4}})[-/](?P<y2>\d{{2,4}}): >
-      '"P1Y"^^<http://www.w3.org/2001/XMLSchema#duration>'
+      {
+        'duration': '"P1Y"^^<{}>'.format(schema['duration']),
+        'start': '"{}"^^<{}>'.format(abs_year(match.group('y1')), schema['year']),
+        'end': '"{}"^^<{}>'.format(abs_year(match.group('y2')), schema['year']),
+      }
 
-  - campionato \d{{2,4}}[-/]\d{{2,4}}: >
-      '"P1Y"^^<http://www.w3.org/2001/XMLSchema#duration>'
+  - campionato (?P<y1>\d{{2,4}})[-/](?P<y2>\d{{2,4}}): >
+      {
+        'duration': '"P1Y"^^<{}>'.format(schema['duration']),
+        'start': '"{}"^^<{}>'.format(abs_year(match.group('y1')), schema['year']),
+        'end': '"{}"^^<{}>'.format(abs_year(match.group('y2')), schema['year']),
+      }
 
-  - nel \d{{2,4}}[-/]\d{{2,4}}: >
-      '"P1Y"^^<http://www.w3.org/2001/XMLSchema#duration>'
+  - nel (?P<y1>\d{{2,4}})[-/](?P<y2>\d{{2,4}}): >
+      {
+        'duration': '"P1Y"^^<{}>'.format(schema['duration']),
+        'start': '"{}"^^<{}>'.format(abs_year(match.group('y1')), schema['year']),
+        'end': '"{}"^^<{}>'.format(abs_year(match.group('y2')), schema['year']),
+      }
 
   - fino al((l'\s?|la\s|\s)?(\w+(\b|\s)){{,3}} del(l')?)? (?P<year>\d{{2,4}}): >
       '"to {}"'.format(match.group('year'))
@@ -60,13 +100,24 @@ Durata:
       '"from {}"'.format(match.group('year'))
 
   - (per )?(?P<num>{lit_digit}|\d+)( sol[iae])? (stagion[ei]|ann[oi]|annat[ae]): >
-      '"P{}Y"^^<http://www.w3.org/2001/XMLSchema#duration>'.format(lit_digit_to_num(match.group('num')))
+      '"P{}Y"^^<{}>'.format(lit_digit_to_num(match.group('num')), schema['duration'])
 
   - dal (?P<y1>\d{{2,4}}) al (?P<y2>\d{{2,4}}): >
-      '"P{}Y"^^<http://www.w3.org/2001/XMLSchema#duration>'.format(int(match.group('y2')) - int(match.group('y1')))
+      {
+        'duration': '"P{}Y"^^<{}>'.format(int(match.group('y2')) - int(match.group('y1')),
+                                          schema['duration']),
+        'start': '"{}"^^<{}>'.format(abs_year(match.group('y1')), schema['year']),
+        'end': '"{}"^^<{}>'.format(abs_year(match.group('y2')), schema['year']),
+      }
 
-  - negli anni (\d0|{tens}): >
-      '"P10Y"^^<http://www.w3.org/2001/XMLSchema#duration>'
+  - negli anni (?P<y>\d0|{tens}): >
+      {
+        'duration': '"P10Y"^^<{}>'.format(schema['duration']),
+        'start': '"{}"^^<{}>'.format(abs_year(tens_to_num(match.group('y'))),
+                                     schema['year']),
+        'end': '"{}"^^<{}>'.format(int(abs_year(tens_to_num(match.group('y')))) + 9,
+                                   schema['year'])
+      }
 
 Punteggio:
   - \b(?P<s1>\d{{1,2}})\s*[-a]\s*(?P<s2>\d{{1,2}})\b: >
