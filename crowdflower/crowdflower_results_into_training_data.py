@@ -155,7 +155,7 @@ def normalize_numerical_fes(sentence_id, tokens):
     normalizer = DateNormalizer()
     sentence = ' '.join(x[2] for x in tokens)
 
-    for (start, end), norm in normalizer.normalize_many(sentence):
+    for (start, end), category, norm in normalizer.normalize_many(sentence):
         original = sentence[start:end]
 
         # find the first token of the match
