@@ -33,7 +33,7 @@ per quattro annate: '"P4Y"^^<http://www.w3.org/2001/XMLSchema#duration>'
 tre stagioni: '"P3Y"^^<http://www.w3.org/2001/XMLSchema#duration>'
 2 - 1: '"2-1"'
 1 a 2: '"1-2"'
-primo: "I"
+primo: '"I"'
 tre annate: '"P3Y"^^<http://www.w3.org/2001/XMLSchema#duration>'
 2 stagioni: '"P2Y"^^<http://www.w3.org/2001/XMLSchema#duration>'
 nell'estate del 2006: '"2006"^^<http://www.w3.org/2001/XMLSchema#gYear>'

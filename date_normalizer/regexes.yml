@@ -14,7 +14,7 @@ __meta_vars__:
 __meta_funcs__:
   - >
     def index_in_or(or_pattern, element):
-        return or_pattern.split('|').index(element)
+        return or_pattern[1:-1].split('|').index(element)
   - >
     def month_to_num(month):
         """ gennaio -> 1, febbraio -> 2, ..., dicembre -> 12 """
@@ -43,14 +43,14 @@ __meta_funcs__:
 Tempo:
   - (del\s|il\s|l'\s?)(?P<day>\d{{1,2}}) (?P<month>{month}) (?P<year>\d{{4}}): >
       '"{}-{:02d}-{:02d}"^^<{schema}>'.format(match.group('year'),
-                                             month_to_num(match.group('month')),
-                                             int(match.group('day')),
-                                             schema=schema['date'])
+                                              month_to_num(match.group('month')),
+                                              int(match.group('day')),
+                                              schema=schema['date'])
 
   - (del\s|il\s|l'\s?)(?P<day>\d{{1,2}}) (?P<month>{month})(?!\s+\d): >
       '"{:02d}-{:02d}"^^<{schema}>'.format(month_to_num(match.group('month')),
-                                             int(match.group('day')),
-                                             schema=schema['monthDay'])
+                                           int(match.group('day')),
+                                           schema=schema['monthDay'])
 
   - (del\s|a\s|nel\s|nell'\s?)(?P<month>{month}) (del|dell')?\s*(?P<year>\d{{4}}): >
       '"{}-{:02d}"^^<{schema}>'.format(match.group('year'),
@@ -59,7 +59,7 @@ Tempo:
 
   - in (?P<month>{month}): >
       '"{:02d}"^^<{schema}>'.format(month_to_num(match.group('month')),
-                                         schema=schema['month'])
+                                    schema=schema['month'])
 
   - (nel\s|il\s|nell'\s?)(\w+(\s|\b)){{,2}}(?P<year>\d{{4}})(?!\s*[-/]): >
       '"{}"^^<{schema}>'.format(match.group('year'),
@@ -124,6 +124,9 @@ Punteggio:
       '"{}-{}"'.format(match.group('s1'), match.group('s2'))
 
 Classifica:
-  - primo: '"I"'
-  - secondo: '"II"'
-  - terzo: '"III"'
+  - primo: >
+      '"I"'
+  - secondo: >
+      '"II"'
+  - terzo: >
+      '"II"'

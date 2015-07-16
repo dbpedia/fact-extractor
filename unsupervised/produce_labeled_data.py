@@ -1,11 +1,13 @@
 #!/usr/bin/env python
 # -*- encoding: utf-8 -*-
+import os
+if __name__ == '__main__' and __package__ is None:
+    os.sys.path.append(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 
 import codecs
 import json
-import os
 import random
-import stopwords
+from resources import stopwords
 import sys
 from collections import defaultdict
 from urllib import quote
@@ -13,13 +15,12 @@ from rfc3987 import parse  # URI/IRI validation
 from rdflib import Graph, URIRef
 from rdflib.namespace import Namespace, NamespaceManager
 from date_normalizer import DateNormalizer
-
-LU_FRAME_MAP_LOCATION = 'resources/soccer-lu2frame-dbptypes.json'
-LU_FRAME_MAP = json.load(open(LU_FRAME_MAP_LOCATION))
+from resources.soccer_lu2frame_dbtypes import LU_FRAME_MAP
 
 # Namespace prefixes for RDF serialization
 RESOURCE = Namespace('http://it.dbpedia.org/resource/')
 FACT_EXTRACTION = Namespace('http://dbpedia.org/fact-extraction/')
+ONTOLOGY = Namespace('http://dbpedia.org/ontology/')
 NAMESPACE_MANAGER = NamespaceManager(Graph())
 NAMESPACE_MANAGER.bind('resource', RESOURCE)
 NAMESPACE_MANAGER.bind('fact', FACT_EXTRACTION)
@@ -149,15 +150,13 @@ def label_sentence(entity_linking_results, debug):
         normalizer = DateNormalizer()
         for (start, end), tag, norm in normalizer.normalize_many(sentence):
             # TODO date_normalizer/regexes.yml has the double quotes, but are not rendered
-            if tag == 'Classifica':
-                norm = '"%s"' % norm
             chunk = sentence[start:end]
             if debug:
                 print 'Chunk [%s] normalized into [%s], tagged as [%s]' % (chunk, norm, tag)
+            # All numerical FEs are extra ones and their values are literals
             fe = {
                 'chunk': chunk,
                 'FE': tag,
-                # All numerical FEs are extra ones and their values are literals
                 'type': 'extra',
                 'literal': norm
             }
@@ -200,7 +199,8 @@ def to_assertions(labeled_results, mapping, debug, outfile='dataset.nt', format=
             discarded.append(result['sentence'])
             continue
         processed.append(result['sentence'])
-        wiki_id, sentence_id = result['id'].split('.')
+        parts = result['id'].split('.')
+        wiki_id, sentence_id = parts[0], parts[1]  # there might be the extension
         wiki_title = mapping.get(wiki_id)
         if not wiki_title and debug:
             print 'No title for sentence %s' % sentence_id
@@ -269,13 +269,26 @@ def to_assertions(labeled_results, mapping, debug, outfile='dataset.nt', format=
                 o1 = literal
                 # NTriple sanity check
                 try:
-                    # Craft an NTriple string
-                    fe_triple = '<%s> <%s> %s .' % (o, p1, o1)
-                    assertions.parse(data=fe_triple, format=format)
-                    if debug:
-                        print 'FE triple added: %s' % fe_triple
+                    if type(literal) == str:
+                        # Craft an NTriple string
+                        fe_triple = '<%s> <%s> %s .' % (o, p1, o1)
+                        assertions.parse(data=fe_triple, format=format)
+                        if debug:
+                            print 'FE triple added: %s' % fe_triple
+                    elif type(literal) == dict and 'duration' in literal:
+                        assertions.parse(data='<%s> <%s> %s .' % (o, p1, o1['duration']),
+                                         format=format)
+                        ps = '%sstartYear' % ONTOLOGY
+                        assertions.parse(data='<%s> <%s> %s .' % (o, ps, o1['start']),
+                                         format=format)
+                        pe = '%sendYear' % ONTOLOGY
+                        assertions.parse(data='<%s> <%s> %s .' % (o, pe, o1['end']),
+                                         format=format)
+                    else:
+                        print "Don't know how to serialize", literal
                 except Exception as e:
                     print "Invalid triple: %s (%s). Skipping ..." % (fe_triple, e)
+                    raise
                     continue
     try:
         assertions.serialize(outfile, format)

@@ -1,4 +1,5 @@
-[
+# -*- encoding: utf-8 -*-
+LU_FRAME_MAP = [
     {
         "lu":
         {
@@ -7,8 +8,8 @@
             [
                 "esordendo",
                 "esordendovi",
-                "esordì",
-                "esordirà",
+                u"esordì",
+                u"esordirà",
                 "esordiranno",
                 "esordire",
                 "esordirono",
@@ -22,7 +23,7 @@
             "frames":
             [
                 {
-                    "frame": "Attività",
+                    "frame": u"Attività",
                     "FEs":
                     [
                         { "Competizione": "core" },
@@ -98,7 +99,7 @@
                 "giocavano",
                 "giocavi",
                 "giocavo",
-                "giocherà",
+                u"giocherà",
                 "giocheranno",
                 "giocherebbe",
                 "giocherebbero",
@@ -106,12 +107,12 @@
                 "giocheremo",
                 "giocheresti",
                 "giocherete",
-                "giocherò",
+                u"giocherò",
                 "giochiamo",
                 "giochi",
                 "giochino",
                 "gioco",
-                "giocò"
+                u"giocò"
             ],
             "frames":
             [
@@ -137,7 +138,7 @@
                     ]
                 },
                 {
-                    "frame": "Attività",
+                    "frame": u"Attività",
                     "FEs":
                     [
                         { "Competizione": "core" },
@@ -175,7 +176,7 @@
                 "perdendoli",
                 "perdendolo",
                 "perdendone",
-                "perderà",
+                u"perderà",
                 "perderanno",
                 "perdere",
                 "perderla",
@@ -246,7 +247,7 @@
                 "rimanga",
                 "rimangono",
                 "rimani",
-                "rimarrà",
+                u"rimarrà",
                 "rimarrai",
                 "rimarranno",
                 "rimarrebbe",
@@ -261,7 +262,7 @@
             "frames":
             [
                 {
-                    "frame": "Attività",
+                    "frame": u"Attività",
                     "FEs":
                     [
                         { "Competizione": "core" },
@@ -285,7 +286,7 @@
                     "frame": "Stato",
                     "FEs":
                     [
-                        { "Entità": "core" },
+                        { u"Entità": "core" },
                         { "Stato": "core" },
                         { "Durata": "extra" },
                         { "Luogo": "extra" },
@@ -295,7 +296,7 @@
                     "DBpedia":
                     [
                         { "SoccerClub": "Squadra" },
-                        { "SoccerPlayer": "Entità" },
+                        { "SoccerPlayer": u"Entità" },
                         { "Place": "Luogo" }
                     ]
                 }
@@ -325,7 +326,7 @@
                 "vincenti", 
                 "vincerai", 
                 "vinceranno", 
-                "vincerà", 
+                u"vincerà", 
                 "vincerci", 
                 "vincerebbero", 
                 "vincerebbe", 
@@ -340,7 +341,7 @@
                 "vincerlo", 
                 "vincermi", 
                 "vincerne", 
-                "vincerò", 
+                u"vincerò", 
                 "vincersi", 
                 "vincer", 
                 "vincervi", 
