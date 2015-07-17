@@ -6,10 +6,18 @@ PAGES_DIR=$(WORK_DIR)/pages
 SOCCER_DIR=$(WORK_DIR)/soccer
 SENTENCES_DIR=$(WORK_DIR)/sentences
 GOLD_DIR=$(WORK_DIR)/gold
-TREETAGGER=../tree-tagger/cmd/tree-tagger-$(LANGUAGE)
+TREETAGGER_HOME=../tree-tagger
+TREETAGGER=$(TREETAGGER_HOME)/cmd/tree-tagger-$(LANGUAGE)
 SOCCER_IDS=../soccer_ids
 GOLD_LU_NUM=10
 DUMP=../$(LANGCODE)wiki-latest-pages-articles.xml.bz2
+CL_MAIN_PACKAGE=org.fbk.cit.hlt.dirha
+CL_JAVA_OPTS=-Dlog-config=supervised/classifier/log-config.txt -Xmx2G -Dfile.encoding=UTF-8 -cp supervised/classifier/target/fatJar.jar
+CL_TRAINING_SET=supervised/resources/training.sample
+CL_GAZETTEER=supervised/resources/it/soccer-gaz.tsv
+CL_EVAL_OUTPUT=/tmp/classifierEvaluationOutput
+CL_SENTENCES_FILE=
+CL_ANNOTATED_GOLD=
 
 default:
 	@echo "Ciao"
@@ -74,3 +82,38 @@ gold-finalize:
 	mkdir -p $(GOLD_DIR)/gold
 	find $(GOLD_DIR)/*/gold/* | shuf | head -n $(GOLD_LU_NUM) | xargs -i cp {} \
 		$(GOLD_DIR)/gold/
+	find $(GOLD_DIR)/gold/* -type f -exec sh -c 'cat $$1; echo' _ "{}" \; \
+		| head -n 50 > $(WORK_DIR)/sample-50.txt
+
+supervised-learn-roles:
+	java $(CL_JAVA_OPTS) $(CL_MAIN_PACKAGE).SpreadSheetToRoleTrainingSet \
+		-t $(CL_TRAINING_SET)
+	java $(CL_JAVA_OPTS) $(CL_MAIN_PACKAGE).RoleTrainingSetToLibsvm \
+		-t $(CL_TRAINING_SET).iob2 -g $(CL_GAZETTEER)
+	svm-train -t 0 -m 10000 $(CL_TRAINING_SET).iob2.svm $(CL_TRAINING_SET).iob2.model
+
+supervised-learn-frames:
+	java $(CL_JAVA_OPTS) $(CL_MAIN_PACKAGE).SpreadSheetToFrameTrainingSet \
+		-t $(CL_TRAINING_SET) 
+	java $(CL_JAVA_OPTS) $(CL_MAIN_PACKAGE).FrameTrainingSetToLibsvm \
+		-t $(CL_TRAINING_SET).frame -g $(CL_GAZETTEER)
+	svm-train -t 0 -m 10000 $(CL_TRAINING_SET).frame.svm $(CL_TRAINING_SET).frame.model
+
+supervised-run-interactive:
+	java $(CL_JAVA_OPTS) -Dtreetagger.home=$(TREETAGGER_HOME) \
+		$(CL_MAIN_PACKAGE).Annotator -g $(CL_GAZETTEER) -m $(CL_TRAINING_SET) \
+		-l $(LANGCODE) -i
+
+supervised-run-batch:
+	ifndef CL_SENTENCES_FILE $(error CL_SENTENCES_FILE is not set) endif
+	java $(CL_JAVA_OPTS) -Dtreetagger.home=$(TREETAGGER_HOME) \
+		$(CL_MAIN_PACKAGE).Annotator -g $(CL_GAZETTEER) -m $(CL_TRAINING_SET) \
+		-l $(LANGCODE) -r $(CL_EVAL_OUTPUT)  -a $(CL_SENTENCES_FILE)
+
+supervised-evaluate:
+	ifndef CL_ANNOTATED_GOLD $(error CL_ANNOTATED_GOLD is not set) endif
+	ifndef CL_SENTENCES_FILE $(error CL_SENTENCES_FILE is not set) endif
+	java $(CL_JAVA_OPTS) -Dtreetagger.home=$(TREETAGGER_HOME) \
+		$(CL_MAIN_PACKAGE).Annotator -g $(CL_GAZETTEER) -m $(CL_TRAINING_SET) \
+		-l $(LANGCODE) -r $(CL_EVAL_OUTPUT) -a $(CL_SENTENCES_FILE) \
+		-e $(CL_ANNOTATED_GOLD)
