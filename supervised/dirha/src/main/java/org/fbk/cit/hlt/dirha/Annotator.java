@@ -85,32 +85,12 @@ public class Annotator {
 		File roleLabelFile = new File(roleFile + ".label");
 
 		tt = new TreeTaggerWrapper<String>();
-		//tt.setModel("/Users/giuliano/Applications/treetagger/lib/italian-utf8.par");
-		if (System.getProperty("treetagger.home") == null) {
-			System.setProperty("treetagger.home", "/Users/giuliano/Applications/treetagger");
-		}
-
 		if (lang.equalsIgnoreCase("it")){
-			if (System.getProperty("treetagger.home") == null) {
-				tt.setModel("/Users/giuliano/Applications/treetagger/lib/italian-utf8.par");
-			}
-			else {
-				tt.setModel(System.getProperty("treetagger.home") + "/lib/italian-utf8.par");
-			}
+			tt.setModel(System.getProperty("treetagger.home") + "/lib/italian-utf8.par");
 		} else if(lang.equalsIgnoreCase("en")){
-			if (System.getProperty("treetagger.home") == null) {
-				tt.setModel("/Users/giuliano/Applications/treetagger/lib/english.par");
-			}
-			else {
-				tt.setModel(System.getProperty("treetagger.home") + "/lib/english.par");
-			}
+			tt.setModel(System.getProperty("treetagger.home") + "/lib/english.par");
 		} else if(lang.equalsIgnoreCase("de")){
-			if (System.getProperty("treetagger.home") == null) {
-				tt.setModel("/Users/giuliano/Applications/treetagger/lib/german.par");
-			}
-			else {
-				tt.setModel(System.getProperty("treetagger.home") + "/lib/german.par");
-			}
+			tt.setModel(System.getProperty("treetagger.home") + "/lib/german.par");
 		}
 
 		roleFeatureIndex = new FeatureIndex(true);

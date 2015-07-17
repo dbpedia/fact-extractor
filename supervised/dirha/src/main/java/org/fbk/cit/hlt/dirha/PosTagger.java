@@ -52,35 +52,14 @@ public class PosTagger {
 		//java -Dfile.encoding=UTF-8 -cp dist/dirha.jar org.fbk.cit.hlt.dirha.PosTagger
 
 		Tokenizer tokenier = new HardTokenizer();
-		// Point TT4J to the TreeTagger installation directory. The executable is expected
-		// in the "bin" subdirectory - in this example at "/opt/treetagger/bin/tree-tagger"
-		if (System.getProperty("treetagger.home") == null) {
-			System.setProperty("treetagger.home", "/Users/giuliano/Applications/treetagger");
-		}
-
 		TreeTaggerWrapper tt = new TreeTaggerWrapper<String>();
 		try {
 			if (args[0].equals("it")){
-				if (System.getProperty("treetagger.home") == null) {
-					tt.setModel("/Users/giuliano/Applications/treetagger/lib/italian-utf8.par");
-				}
-				else {
-					tt.setModel(System.getProperty("treetagger.home") + "/lib/italian-utf8.par");
-				}
+				tt.setModel(System.getProperty("treetagger.home") + "/lib/italian-utf8.par");
 			} else if(args[0].equals("en")){
-				if (System.getProperty("treetagger.home") == null) {
-					tt.setModel("/Users/giuliano/Applications/treetagger/lib/english.par");
-				}
-				else {
-					tt.setModel(System.getProperty("treetagger.home") + "/lib/english.par");
-				}
+				tt.setModel(System.getProperty("treetagger.home") + "/lib/english.par");
 			} else if(args[0].equals("de")){
-				if (System.getProperty("treetagger.home") == null) {
-					tt.setModel("/Users/giuliano/Applications/treetagger/lib/german.par");
-				}
-				else {
-					tt.setModel(System.getProperty("treetagger.home") + "/lib/german.par");
-				}
+				tt.setModel(System.getProperty("treetagger.home") + "/lib/german.par");
 			}
 			tt.setHandler(new TokenHandler<String>() {
 				public void token(String token, String pos, String lemma) {

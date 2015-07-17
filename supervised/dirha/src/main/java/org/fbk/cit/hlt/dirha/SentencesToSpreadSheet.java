@@ -53,10 +53,6 @@ public class SentencesToSpreadSheet {
 		// Point TT4J to the TreeTagger installation directory. The executable is expected
 		// in the "bin" subdirectory - in this example at "/opt/treetagger/bin/tree-tagger"
 		String ttHome = System.getProperty("treetagger.home");
-        if (ttHome == null) {
-            ttHome = "/Users/giuliano/Applications/treetagger";
-        }
-        System.setProperty("treetagger.home", ttHome); 
 
 		TreeTaggerWrapper tt = new TreeTaggerWrapper<String>();
 
@@ -65,9 +61,6 @@ public class SentencesToSpreadSheet {
 		String line = null;
 
 		String ttModel = System.getProperty("treetagger.model");
-        if (ttModel == null) {
-            ttModel = "/Users/giuliano/Applications/treetagger/lib/italian-utf8.par";
-        }
 		tt.setModel(ttModel);
 		/*tt.setHandler(new TokenHandler<String>() {
 			public void token(String token, String pos, String lemma) {

@@ -48,7 +48,6 @@ public class SentencesToMysql {
 		System.setProperty("treetagger.home", "/Users/giuliano/Applications/treetagger");
 		TreeTaggerWrapper tt = new TreeTaggerWrapper<String>();
 
-
 		LineNumberReader lr = new LineNumberReader(new InputStreamReader(new FileInputStream(fin), "UTF-8"));
 		PrintWriter pw = new PrintWriter(new BufferedWriter(new OutputStreamWriter(new FileOutputStream(fout), "UTF-8")));
 		String line = null;
