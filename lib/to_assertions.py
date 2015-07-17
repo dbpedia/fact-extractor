@@ -108,7 +108,7 @@ def serialize_fe(fe, reified, namespaces, wiki_title, assertions, format):
     literal = fe.get('literal')
     
     if le_uri:  # It's a URI
-        wiki_title = quote(le_uri[31:].encode('utf8'))
+        wiki_title = quote(le_uri.split('/')[-1].encode('utf8'))
         o1 = namespaces['resource'] + wiki_title
         parsed = parse(o1, rule='URI_reference')  # URI sanity check
         fe_triple = '<%s> <%s> <%s> .' % (reified, p1, o1)  # Craft an NTriple string
