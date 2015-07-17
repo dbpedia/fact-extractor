@@ -1,0 +1,11 @@
+Put_into_operation=turnOn
+Put_out_of_operation=turnOff
+Check_status=state
+Contacting=NOT_MAPPED_YET
+Accept_communication=NOT_MAPPED_YET
+Terminate_communication=NOT_MAPPED_YET
+Cause_to_open=open
+Cause_to_close=close
+Increase_value_on_a_range=increase
+Decrease_value_on_a_range=decrease
+Set_value_on_a_range=change

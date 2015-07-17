@@ -1,0 +1,18 @@
+ELECTRICAL_DEVICE	videocitofono	mp3	ventilazione	timer	ventola	ipad	ipod	tablet	iphone	asciugacapelli	lumino	lettore	dvd	videoregistratore	ventilatore	neon	radio	televisione	tv	computer	pc	stereo	hifi	cellulare	smartphone	telefono	telefonino	lampada	luce	abatjour	lampadario	tapparella	citofono	interfono	video	piantana	condizionatore	decoder	lampadina	monitor	satelitte	phon	ricevitore
+DEVICE	termoconvettore	sciacquone	scarico	riscaldamento	termosifone	calorifero	radiatore	stufa	stufetta	termostato
+FURNITURE	frigo	cottura	gas	lavello	tavolino	tavolo	pensile		sedia	armadio		comodino	letto	lettino		cassettiera	divano	seggiola		scrivania		specchio	lavabo	lavandino	tappeto	appendiabiti	cestino	pattummiera	poltrona
+ARCHITECTURAL_ELEMENT	angolo	persiane	porta	finestra	velux	portone		portoncino	tenda	tendina	serranda	tapparella	anta	porticina
+ROOM	stanza	dispensa	giroscale	poggiolo	ingresso	cucina	corridoio	entrata	camera		bagno	cucinino	sala	salotto	soggiorno	studio	balcone	terrazzo	terrazza	pianerottolo	scala	cameretta	stanza	toilet	soppalco	garage	cantina	soffitta	ufficio	sgabuzzino	ripostiglio	gabinetto	disimpegno	disbrigo	solaio	sottotetto	cantinato	interrato	scantinato	semiinterrato	seminterrato	sotterraneo
+PERSON	mamma	papà	nonna	sorella	fratello	nonno	madre	padre	dottore	medico	118	figlio	figlia	cugino	cugina	zio	zia	vicino
+CLOSE	chiudere	serrare	sbarrare	sbattere	sprangare	socchiudere	chiusura
+OPEN	aprire	spalancare	dischiudere	schiudere
+TURN_ON	accendere	attivare	scaricare	sciacquare	partire
+TURN_OFF	spegnare	spegnere	disattivare	interrompere
+CHANGE	mettere	girare	vedere
+PROPERTY	temperatura	luminosità	calore
+VALUE	soffusa	minimo	massimo	po	raiuno	canalecinque	italiauno	raidue	raitre	lasette	metà	bbc
+TIME	stasera	domani	ora	minuto	oggi	ieri
+NUMBER	uno	due	tre	quattro	cinque	sei	sette	otto	nove	dici	undici	dodici	tredici	quattordici	quindici	sedici	diciassette	diciotto	diciannove	venti	ventuno	ventidue	ventitre	ventiquattro	venticinque	ventisei	ventisette	ventotto	ventinove	trenta	trentuno	trentadue	trentatre
+RELATIVE_LOCATION	qui	qua	lì	là
+ATTRIBUTE	piccolo	piccoli	grandi	grande	principale	principali	tutte	tutti
+NUMBER	1	2	3	4	5	6	7	8	9	10	11	12	13	14	15	16	17	18	19	20	21	22	23	24	25	26	27	28	29	30	31	32	33	34	35	36	37	38	39	40	zero	uno	due	tre	quattro	cinque	sei	sette	otto	nove	dieci	undici	dodici	tredici	quattordici	quindici	sedici	diciassette	diciotto	diciannove	venti	ventuno	ventidue	ventitre	ventiquattro	venticinque	ventisei	ventisette	ventotto	ventinove	trenta	trentuno	trentadue	trentatre	trenaquattro	trentacinque	trentasei	trenasette	trentotto	trentavove
