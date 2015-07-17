@@ -4,9 +4,7 @@ import org.json.JSONArray;
 import org.json.JSONObject;
 
 import java.io.IOException;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Set;
+import java.util.*;
 
 /**
  * Created by admin on 4/17/15.
@@ -32,18 +30,24 @@ public class ChunkCombinator {
     }
 
 
-    public Set<String> getTheWikiMachineChunks(String sentence, boolean disambiguation) throws Exception {
-        Set<String> twmChunks = new HashSet<>();
-        JSONObject response = twm.linkText(sentence, disambiguation);
-        JSONArray chunks = twm.extractEntities(response, disambiguation);
-        for (int i = 0; i < chunks.length(); i++) {
-            JSONObject link = chunks.getJSONObject(i);
-            String chunk = link.getString("chunk");
-            twmChunks.add(chunk);
-        }
-        return twmChunks;
+    public Set<String> getTheWikiMachineChunks( String sentence, boolean disambiguation ) throws Exception {
+        return getTheWikiMachineChunkToUri( sentence, disambiguation ).keySet( );
     }
 
+    public Map<String, String> getTheWikiMachineChunkToUri( String sentence, boolean disambiguation ) throws Exception {
+        Map<String, String> chunkToUri = new HashMap<>( );
+
+        JSONObject response = twm.linkText( sentence, disambiguation );
+        JSONArray chunks = twm.extractEntities( response, disambiguation );
+        for ( int i = 0; i < chunks.length( ); i++ ) {
+            JSONObject link = chunks.getJSONObject( i );
+            String chunk = link.getString( "chunk" ),
+                    uri = link.getString( "uri" );
+            chunkToUri.put( chunk, uri );
+        }
+
+        return chunkToUri;
+    }
 
     public Set<String> getTextProNPChunks(String sentence) throws IOException {
         List<String> chunks = tpr.runTextPro(sentence);

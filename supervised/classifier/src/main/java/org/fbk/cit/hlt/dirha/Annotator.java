@@ -192,51 +192,51 @@ public class Annotator {
 		} catch (Exception e) {
 			logger.error(e);
 		}
-        Set<String> disambiguated = combinator.getTheWikiMachineChunks(line, true);
+        Map<String, String> disambiguated = combinator.getTheWikiMachineChunkToUri( line, true );
 		exampleList = mergeChunksIntoExampleList(exampleList, disambiguated);
  		exampleList.add(eos);
 		return exampleList;
 	}
 
-	private List<String[]> mergeChunksIntoExampleList(List<String[]> exampleList, Set<String> combinedChunks) {
-		List<String[]> merged = new ArrayList<>(exampleList);
-		for (String chunk : combinedChunks) {
-			String[] tokens = chunk.split("\\s+");
-			boolean found = false;
-			int i = 0;
-            int j = 0;
-			while (i < merged.size()) {
-				String word = merged.get(i)[0];
-				if (tokens[j].equals(word)) {
-					j += 1;
-					if (j == tokens.length) {
-						found = true;
-						break;
-					}
-				} else {
+    private List<String[]> mergeChunksIntoExampleList( List<String[]> exampleList, Map<String, String> combinedChunks ) {
+        List<String[]> merged = new ArrayList<>( exampleList );
+        for ( String chunk : combinedChunks.keySet( ) ) {
+            String[] tokens = chunk.split( "\\s+" );
+            boolean found = false;
+            int i = 0, j = 0;
+            while ( i < merged.size( ) ) {
+                String word = merged.get( i )[ 0 ];
+                if ( tokens[ j ].equals( word ) ) {
+                    j += 1;
+                    if ( j == tokens.length ) {
+                        found = true;
+                        break;
+                    }
+                } else {
                     j = 0;
-				}
+                }
                 i += 1;
-			}
-            if (found) {
-                List<String[]> tmpList = new ArrayList<>();
+            }
+
+            if ( found ) {
+                List<String[]> tmpList = new ArrayList<>( );
                 int matchStartIndex = i - tokens.length + 1;
-				String[] toReplace = merged.get(i);
-				String[] replacement = null;
-//				Use the 'ENT' tag only if the n-gram has more than 1 token, otherwise keep the original POS tag
-				if (tokens.length > 1) {
-					replacement = new String[]{chunk.replace(' ', '_'), "ENT", chunk.replace(' ', '_')};
-				} else {
-					replacement = new String[]{chunk, toReplace[1], chunk};
-				}
-                List<String[]> startSubList = merged.subList(0, matchStartIndex);
-                List<String[]> endSubList = merged.subList(i + 1, merged.size());
-                tmpList.addAll(startSubList);
-                tmpList.add(replacement);
-                tmpList.addAll(endSubList);
+                String[] toReplace = merged.get( i );
+                String[] replacement;
+
+                // Use the 'ENT' tag only if the n-gram has more than 1 token, otherwise keep the original POS tag
+                if ( tokens.length > 1 )
+                    replacement = new String[]{ chunk.replace( ' ', '_' ), "ENT", combinedChunks.get( chunk ) };
+                else replacement = new String[]{ chunk, toReplace[ 1 ], combinedChunks.get( chunk ) };
+
+                List<String[]> startSubList = merged.subList( 0, matchStartIndex );
+                List<String[]> endSubList = merged.subList( i + 1, merged.size( ) );
+                tmpList.addAll( startSubList );
+                tmpList.add( replacement );
+                tmpList.addAll( endSubList );
                 merged = tmpList;
             }
-		}
+        }
         return merged;
     }
 

@@ -22,12 +22,10 @@ if [[ -n ${5+x} ]]; then
 fi
 if [[ -n ${6+x} ]]; then
     TREETAGGER_HOME=$(readlink -f "$6")
-else
-    TREETAGGER_HOME="/Users/admin/srl/treetagger"
 fi
 
 TREETAGGER_MODEL=${TREETAGGER_HOME}/lib/italian-utf8.par
-JAVA_OPTS="-Xmx2G -Dfile.encoding=UTF-8 -cp target/fatJar.jar"
+JAVA_OPTS="-Dlog-config=classifier/log-config.txt -Xmx2G -Dfile.encoding=UTF-8 -cp classifier/target/fatJar.jar"
 MAIN_PACKAGE="org.fbk.cit.hlt.dirha"
 
 # Minimal java arguments to launch the classifier
@@ -47,15 +45,13 @@ if [[ -n "$EVALUATION_OUTPUT" ]] ; then
     CLASSIFIER_ARGS+="-r ${EVALUATION_OUTPUT}"
 fi
 
-echo $TRAINING_SET
-echo $GAZETTEER
-echo $SENTENCES_FILE
-echo $ANNOTATED_GOLD_FILE
-echo $EVALUATION_OUTPUT
-echo $TREETAGGER_HOME
-echo $CLASSIFIER_ARGS
-
-cd ..
+echo "training set: $TRAINING_SET"
+echo "gazetteer: $GAZETTEER"
+echo "sentences file: $SENTENCES_FILE"
+echo "annotated gold file: $ANNOTATED_GOLD_FILE"
+echo "evaluation output: $EVALUATION_OUTPUT"
+echo "treetagger home: $TREETAGGER_HOME"
+echo "classifier args: $CLASSIFIER_ARGS"
 
 # Tokenize + POS tag a file with raw sentences into a tsv ready for annotation
 #java -Dfile.encoding=UTF-8 -Dtreetagger.home=$TREETAGGER_HOME -Dtreetagger.model=$TREETAGGER_MODEL -cp target/fatJar.jar $MAIN_PACKAGE.SentencesToSpreadSheet ../../training/itwiki/gold test.out 0 10
