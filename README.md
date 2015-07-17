@@ -35,13 +35,12 @@ If not, please do so!
   1. [Build CrowdFlower input spreadsheet](create_crowdflower_input.py)
 4. Frame Classifier Training
   1. [Translate CrowdFlower results into training data format](crowdflower_results_into_training_data.py)
-  2. Train classifier
+  2. [Train classifier](supervised/classifier) (forked from [this repo](https://bitbucket.org/cgiuliano/dirha))
 5. Frame Extraction
 
 ## Requirements
 - [TreeTagger](http://www.cis.uni-muenchen.de/~schmid/tools/TreeTagger/)
 - [libsvm](http://www.csie.ntu.edu.tw/~cjlin/libsvm/)
-- csplit from [GNU coreutils 8.23](https://www.gnu.org/software/coreutils/) or later
 
 ## Warm-up Tasks
 See the [issues](../../issues).
