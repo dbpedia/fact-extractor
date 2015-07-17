@@ -14,13 +14,6 @@ DUMP=../$(LANGCODE)wiki-latest-pages-articles.xml.bz2
 default:
 	@echo "Ciao"
 
-clean:
-	rm -rf $(WORK_DIR)
-	mkdir -p $(WORK_DIR)
-
-get-soccer-ids-sample:
-	curl -g -H 'Accept: text/csv' 'http://$(LANGCODE).dbpedia.org/sparql?query=SELECT%20?id%20WHERE%20{%20?player%20a%20%3Chttp://dbpedia.org/ontology/SoccerPlayer%3E%20.%20?player%20dbpedia-owl:wikiPageID%20?id%20}' | tail -n +2 > $(SOCCER_IDS)
-
 extract-pages:
 	mkdir -p $(WORK_DIR)
 	bzcat $(DUMP) | python lib/WikiExtractor.py -o $(PAGES_DIR)
@@ -66,7 +59,7 @@ rank-verbs:
 		$(WORK_DIR)/verbs-stdev.json $(WORK_DIR)/lemma-stdev.json
 
 gold-add:
-	mkdir -p $(GOLD_DIR)/$(LU)/sentences $(GOLD_DIR)/$(LU)/tagged
+	mkdir -p $(GOLD_DIR)/$(LU)/sentences $(GOLD_DIR)/$(LU)/tagged $(GOLD_DIR)/$(LU)/gold
 	grep -w $(LU) $(WORK_DIR)/top-50-token2lemma.txt | cut -f 1 \
 		> $(GOLD_DIR)/$(LU)/tokens.txt
 	python verb_extraction/extract_sentences.py $(WORK_DIR)/all-soccer.txt \
@@ -75,10 +68,9 @@ gold-add:
 	find $(GOLD_DIR)/$(LU)/sentences/* -exec sh -c 'echo $$1 && cat "$$1" | \
 		$(TREETAGGER) > $(GOLD_DIR)/$(LU)/tagged/$$(basename $$1)' 'gold-add' {} \;
 	python seed_selection/get_meaningful_sentences.py $(GOLD_DIR)/$(LU)/tagged \
-		$(GOLD_DIR)/$(LU)/tokens.txt $(GOLD_DIR)/$(LU)/gold.txt
-	sed -i -r "s/($$(paste -s -d \| $(GOLD_DIR)/$(LU)/tokens.txt))/<strong>\1<\/strong>/gi" \
-		$(GOLD_DIR)/$(LU)/gold.txt
+		$(GOLD_DIR)/$(LU)/tokens.txt $(GOLD_DIR)/$(LU)/gold
 
 gold-finalize:
-	find $(GOLD_DIR)/*/gold.txt -exec sh -c 'cat "$$1" | shuf | head -n $(GOLD_LU_NUM) \
-		>> $(GOLD_DIR)/gold.txt' 'gold-finalize' {}  \;
+	mkdir -p $(GOLD_DIR)/gold
+	find $(GOLD_DIR)/*/gold/* | shuf | head -n $(GOLD_LU_NUM) | xargs -i cp {} \
+		$(GOLD_DIR)/gold/

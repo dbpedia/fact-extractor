@@ -59,8 +59,6 @@ def to_labeled(sentences):
             ]
         }
 
-        print '\n'.join(repr((fe[4], fe[-1])) for fe in rows if fe[-1] not in ['O', 'LU'])
-
         # normalize and annotate numerical expressions
         for (start, end), tag, norm in normalizer.normalize_many(sentence):
             labels['FEs'].append({

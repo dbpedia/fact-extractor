@@ -32,7 +32,7 @@ def load_pos_data(dir):
 
 def filter_sentences_by_chunk(pos_data, tokens):
     chunker = RegexpParser(CHUNKER_GRAMMAR)
-    filtered = []
+    filtered = {}
     for sentence_id, data in pos_data.iteritems():
         result = chunker.parse(data)
         good_one = False
@@ -41,19 +41,25 @@ def filter_sentences_by_chunk(pos_data, tokens):
                 for token, pos in t.leaves():
                     if pos.find('VER') != -1 and token in tokens: good_one = True
                 if good_one:
-                    filtered.append(' '.join([item[0] for item in data]))
+                    filtered[sentence_id] = ' '.join(item[0] for item in data)
     return filtered
+
+
+def save_sentences(sentences, outdir):
+    for sentence_id, text in sentences.iteritems():
+        with open(os.path.join(outdir, sentence_id), 'w') as f:
+            f.write(text.encode('utf8'))
 
 
 @click.command()
 @click.argument('tagged-dir', type=click.Path(exists=True, file_okay=False))
 @click.argument('tokens', type=click.File('r'))
-@click.argument('outfile', default='gold', type=click.File('w'))
-def main(tagged_dir, tokens, outfile):
+@click.argument('outdir', default='gold', type=click.Path(exists=True, file_okay=False))
+def main(tagged_dir, tokens, outdir):
     pos_data = load_pos_data(tagged_dir)
     tokens = [l.strip() for l in tokens]
     sentences = filter_sentences_by_chunk(pos_data, tokens)
-    outfile.write('\n'.join(sentences).encode('utf8'))
+    save_sentences(sentences, outdir)
 
 
 if __name__ == "__main__":

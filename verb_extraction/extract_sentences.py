@@ -52,5 +52,6 @@ def main(input_file, token_list, output_dir, min_words, max_words):
 
     print >> sys.stderr, 'Processed %d articles, extracted %d sentences' % (i, count)
 
+
 if __name__ == '__main__':
     main()
