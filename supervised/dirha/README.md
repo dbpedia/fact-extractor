@@ -1,5 +1,5 @@
 **Installation**
-1. Install the required offline dependency `mvn install:install-file -Dfile=jcore-alone.jar -DgroupId=org.fbk.cit.hlt -DartifactId=core -Dversion=1.0 -Dpackaging=jar -DgeneratePom=true`
+ 1. Install the required offline dependency `mvn install:install-file -Dfile=jcore-alone.jar -DgroupId=org.fbk.cit.hlt -DartifactId=core -Dversion=1.0 -Dpackaging=jar -DgeneratePom=true`
  2. Compile and build fat jar `mvn compile assembly:assembly`
 
 **Frames and annotation guidelines**
