@@ -1,0 +1,39 @@
+{
+  "Centrocampista centrale, giocò, tra le altre, per il Milan e il Venezia.": [
+    {
+      "start": 0, 
+      "chunk": "Centrocampista centrale", 
+      "end": 23
+    }, 
+    {
+      "start": 37, 
+      "chunk": "le altre", 
+      "end": 45
+    }, 
+    {
+      "start": 54, 
+      "chunk": "Milan", 
+      "end": 59
+    }, 
+    {
+      "start": 62, 
+      "chunk": "il", 
+      "end": 64
+    }, 
+    {
+      "start": 62, 
+      "chunk": "il", 
+      "end": 64
+    }, 
+    {
+      "start": 65, 
+      "chunk": "Venezia", 
+      "end": 72
+    }, 
+    {
+      "start": 47, 
+      "chunk": "per", 
+      "end": 50
+    }
+  ]
+}

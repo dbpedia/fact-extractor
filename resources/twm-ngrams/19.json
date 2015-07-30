@@ -1,0 +1,39 @@
+{
+  "Ha giocato 7 partite per la Nazionale cipriota tra il 1999 e il 2004.": [
+    {
+      "start": 28, 
+      "chunk": "Nazionale cipriota", 
+      "end": 46
+    }, 
+    {
+      "start": 61, 
+      "chunk": "il", 
+      "end": 63
+    }, 
+    {
+      "start": 61, 
+      "chunk": "il", 
+      "end": 63
+    }, 
+    {
+      "start": 13, 
+      "chunk": "partite", 
+      "end": 20
+    }, 
+    {
+      "start": 0, 
+      "chunk": "Ha", 
+      "end": 2
+    }, 
+    {
+      "start": 21, 
+      "chunk": "per", 
+      "end": 24
+    }, 
+    {
+      "start": 25, 
+      "chunk": "la", 
+      "end": 27
+    }
+  ]
+}

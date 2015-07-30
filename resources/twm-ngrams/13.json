@@ -1,0 +1,29 @@
+{
+  "Ha giocato sia con la Nazionale greca che successivamente con quella cipriota.": [
+    {
+      "start": 22, 
+      "chunk": "Nazionale greca", 
+      "end": 37
+    }, 
+    {
+      "start": 69, 
+      "chunk": "cipriota", 
+      "end": 77
+    }, 
+    {
+      "start": 0, 
+      "chunk": "Ha", 
+      "end": 2
+    }, 
+    {
+      "start": 62, 
+      "chunk": "quella", 
+      "end": 68
+    }, 
+    {
+      "start": 19, 
+      "chunk": "la", 
+      "end": 21
+    }
+  ]
+}

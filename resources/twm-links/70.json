@@ -1,0 +1,54 @@
+{
+  "Ha giocato nella massima serie dei campionati islandese e svedese.": [
+    {
+      "start": 58, 
+      "chunk": "svedese", 
+      "end": 65, 
+      "uri": "http://it.wikipedia.org/wiki/Lingua_svedese", 
+      "types": [
+        "http://dbpedia.org/ontology/Language"
+      ]
+    }, 
+    {
+      "start": 46, 
+      "chunk": "islandese", 
+      "end": 55, 
+      "uri": "http://it.wikipedia.org/wiki/Lingua_islandese", 
+      "types": [
+        "http://dbpedia.org/ontology/Language"
+      ]
+    }, 
+    {
+      "start": 17, 
+      "chunk": "massima serie", 
+      "end": 30, 
+      "uri": "http://it.wikipedia.org/wiki/Úrvalsdeild", 
+      "types": [
+        "http://dbpedia.org/ontology/SoccerLeague", 
+        "http://dbpedia.org/ontology/SportsLeague", 
+        "http://dbpedia.org/ontology/Organisation", 
+        "http://dbpedia.org/ontology/Event"
+      ]
+    }, 
+    {
+      "start": 35, 
+      "chunk": "campionati", 
+      "end": 45, 
+      "uri": "http://it.wikipedia.org/wiki/Campionato_italiano_di_pallavolo_maschile", 
+      "types": [
+        "http://dbpedia.org/ontology/SportsLeague", 
+        "http://dbpedia.org/ontology/Organisation", 
+        "http://dbpedia.org/ontology/Event"
+      ]
+    }, 
+    {
+      "start": 0, 
+      "chunk": "Ha", 
+      "end": 2, 
+      "uri": "http://it.wikipedia.org/wiki/Ettaro", 
+      "types": [
+        "http://dbpedia.org/ontology/TopicalConcept"
+      ]
+    }
+  ]
+}

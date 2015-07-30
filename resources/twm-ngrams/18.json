@@ -1,0 +1,49 @@
+{
+  "Il 22 luglio 2012 torna in Argentina per giocare nelle file del Boca Juniors.": [
+    {
+      "start": 64, 
+      "chunk": "Boca Juniors", 
+      "end": 76
+    }, 
+    {
+      "start": 3, 
+      "chunk": "22 luglio", 
+      "end": 12
+    }, 
+    {
+      "start": 27, 
+      "chunk": "Argentina", 
+      "end": 36
+    }, 
+    {
+      "start": 55, 
+      "chunk": "file", 
+      "end": 59
+    }, 
+    {
+      "start": 41, 
+      "chunk": "giocare", 
+      "end": 48
+    }, 
+    {
+      "start": 0, 
+      "chunk": "Il", 
+      "end": 2
+    }, 
+    {
+      "start": 37, 
+      "chunk": "per", 
+      "end": 40
+    }, 
+    {
+      "start": 24, 
+      "chunk": "in", 
+      "end": 26
+    }, 
+    {
+      "start": 60, 
+      "chunk": "del", 
+      "end": 63
+    }
+  ]
+}

@@ -1,0 +1,29 @@
+{
+  "In Nazionale ha giocato 3 partite, nel 1967.": [
+    {
+      "start": 35, 
+      "chunk": "nel 1967", 
+      "end": 43
+    }, 
+    {
+      "start": 26, 
+      "chunk": "partite", 
+      "end": 33
+    }, 
+    {
+      "start": 3, 
+      "chunk": "Nazionale", 
+      "end": 12
+    }, 
+    {
+      "start": 0, 
+      "chunk": "In", 
+      "end": 2
+    }, 
+    {
+      "start": 13, 
+      "chunk": "ha", 
+      "end": 15
+    }
+  ]
+}

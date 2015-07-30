@@ -1,0 +1,34 @@
+{
+  "Ha esordito con la Nazionale cipriota nel 1982, giocando 6 partite fino al 1991.": [
+    {
+      "start": 19, 
+      "chunk": "Nazionale cipriota", 
+      "end": 37
+    }, 
+    {
+      "start": 38, 
+      "chunk": "nel 1982", 
+      "end": 46
+    }, 
+    {
+      "start": 59, 
+      "chunk": "partite", 
+      "end": 66
+    }, 
+    {
+      "start": 0, 
+      "chunk": "Ha", 
+      "end": 2
+    }, 
+    {
+      "start": 72, 
+      "chunk": "al", 
+      "end": 74
+    }, 
+    {
+      "start": 16, 
+      "chunk": "la", 
+      "end": 18
+    }
+  ]
+}

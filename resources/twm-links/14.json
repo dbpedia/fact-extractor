@@ -1,0 +1,52 @@
+{
+  "Ha esordito con la Nazionale cipriota nel 1982, giocando 6 partite fino al 1991.": [
+    {
+      "start": 19, 
+      "chunk": "Nazionale cipriota", 
+      "end": 37, 
+      "uri": "http://it.wikipedia.org/wiki/Nazionale_di_calcio_di_Cipro", 
+      "types": [
+        "http://dbpedia.org/ontology/SoccerClub", 
+        "http://dbpedia.org/ontology/SportsTeam", 
+        "http://dbpedia.org/ontology/Organisation", 
+        "http://dbpedia.org/ontology/Agent"
+      ]
+    }, 
+    {
+      "start": 16, 
+      "chunk": "la", 
+      "end": 18, 
+      "uri": "http://it.wikipedia.org/wiki/La_(nota)", 
+      "types": [
+        "http://dbpedia.org/ontology/TopicalConcept"
+      ]
+    }, 
+    {
+      "start": 59, 
+      "chunk": "partite", 
+      "end": 66, 
+      "uri": "http://it.wikipedia.org/wiki/Partita_(musica)", 
+      "types": [
+        "http://dbpedia.org/ontology/TopicalConcept"
+      ]
+    }, 
+    {
+      "start": 72, 
+      "chunk": "al", 
+      "end": 74, 
+      "uri": "http://it.wikipedia.org/wiki/Anno_luce", 
+      "types": [
+        "http://dbpedia.org/ontology/TopicalConcept"
+      ]
+    }, 
+    {
+      "start": 0, 
+      "chunk": "Ha", 
+      "end": 2, 
+      "uri": "http://it.wikipedia.org/wiki/Ettaro", 
+      "types": [
+        "http://dbpedia.org/ontology/TopicalConcept"
+      ]
+    }
+  ]
+}

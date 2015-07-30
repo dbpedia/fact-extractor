@@ -1,0 +1,24 @@
+{
+  "Ha sempre giocato nel campionato botswano.": [
+    {
+      "start": 22, 
+      "chunk": "campionato", 
+      "end": 32, 
+      "uri": "http://it.wikipedia.org/wiki/Serie_A_2011-2012", 
+      "types": [
+        "http://dbpedia.org/ontology/SoccerTournament", 
+        "http://dbpedia.org/ontology/SportsEvent", 
+        "http://dbpedia.org/ontology/Event"
+      ]
+    }, 
+    {
+      "start": 0, 
+      "chunk": "Ha", 
+      "end": 2, 
+      "uri": "http://it.wikipedia.org/wiki/Ettaro", 
+      "types": [
+        "http://dbpedia.org/ontology/TopicalConcept"
+      ]
+    }
+  ]
+}

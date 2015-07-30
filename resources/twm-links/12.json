@@ -1,0 +1,80 @@
+{
+  "Thépot giocò per il Brest, FEC Levallois, Red Star FC, e l'USL Dunkerque.": [
+    {
+      "start": 22, 
+      "chunk": "Brest", 
+      "end": 27, 
+      "uri": "http://it.wikipedia.org/wiki/Brest_(Francia)", 
+      "types": [
+        "http://dbpedia.org/ontology/Municipality", 
+        "http://dbpedia.org/ontology/GovernmentalAdministrativeRegion", 
+        "http://dbpedia.org/ontology/AdministrativeRegion", 
+        "http://dbpedia.org/ontology/Region", 
+        "http://dbpedia.org/ontology/PopulatedPlace", 
+        "http://dbpedia.org/ontology/Place"
+      ]
+    }, 
+    {
+      "start": 65, 
+      "chunk": "Dunkerque", 
+      "end": 74, 
+      "uri": "http://it.wikipedia.org/wiki/Dunkerque", 
+      "types": [
+        "http://dbpedia.org/ontology/Municipality", 
+        "http://dbpedia.org/ontology/GovernmentalAdministrativeRegion", 
+        "http://dbpedia.org/ontology/AdministrativeRegion", 
+        "http://dbpedia.org/ontology/Region", 
+        "http://dbpedia.org/ontology/PopulatedPlace", 
+        "http://dbpedia.org/ontology/Place"
+      ]
+    }, 
+    {
+      "start": 33, 
+      "chunk": "Levallois", 
+      "end": 42, 
+      "uri": "http://it.wikipedia.org/wiki/Levallois-Perret", 
+      "types": [
+        "http://dbpedia.org/ontology/Municipality", 
+        "http://dbpedia.org/ontology/GovernmentalAdministrativeRegion", 
+        "http://dbpedia.org/ontology/AdministrativeRegion", 
+        "http://dbpedia.org/ontology/Region", 
+        "http://dbpedia.org/ontology/PopulatedPlace", 
+        "http://dbpedia.org/ontology/Place"
+      ]
+    }, 
+    {
+      "start": 53, 
+      "chunk": "FC", 
+      "end": 55, 
+      "uri": "http://it.wikipedia.org/wiki/Provincia_di_Forlì-Cesena", 
+      "types": [
+        "http://dbpedia.org/ontology/District", 
+        "http://dbpedia.org/ontology/GovernmentalAdministrativeRegion", 
+        "http://dbpedia.org/ontology/AdministrativeRegion", 
+        "http://dbpedia.org/ontology/Region", 
+        "http://dbpedia.org/ontology/PopulatedPlace", 
+        "http://dbpedia.org/ontology/Place"
+      ]
+    }, 
+    {
+      "start": 44, 
+      "chunk": "Red", 
+      "end": 47, 
+      "uri": "http://it.wikipedia.org/wiki/Red_(album_Taylor_Swift)", 
+      "types": [
+        "http://dbpedia.org/ontology/Album", 
+        "http://dbpedia.org/ontology/MusicalWork", 
+        "http://dbpedia.org/ontology/Work"
+      ]
+    }, 
+    {
+      "start": 15, 
+      "chunk": "per", 
+      "end": 18, 
+      "uri": "http://it.wikipedia.org/wiki/Per_(matematica)", 
+      "types": [
+        "http://dbpedia.org/ontology/TopicalConcept"
+      ]
+    }
+  ]
+}

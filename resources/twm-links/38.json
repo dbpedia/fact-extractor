@@ -1,0 +1,48 @@
+{
+  "Ha giocato nella massima serie del campionato australiano con il Brisbane Roar.": [
+    {
+      "start": 65, 
+      "chunk": "Brisbane Roar", 
+      "end": 78, 
+      "uri": "http://it.wikipedia.org/wiki/Brisbane_Roar_Football_Club", 
+      "types": [
+        "http://dbpedia.org/ontology/SoccerClub", 
+        "http://dbpedia.org/ontology/SportsTeam", 
+        "http://dbpedia.org/ontology/Organisation", 
+        "http://dbpedia.org/ontology/Agent"
+      ]
+    }, 
+    {
+      "start": 17, 
+      "chunk": "massima serie", 
+      "end": 30, 
+      "uri": "http://it.wikipedia.org/wiki/Primera_Categoría_Serie_A", 
+      "types": [
+        "http://dbpedia.org/ontology/SoccerLeague", 
+        "http://dbpedia.org/ontology/SportsLeague", 
+        "http://dbpedia.org/ontology/Organisation", 
+        "http://dbpedia.org/ontology/Event"
+      ]
+    }, 
+    {
+      "start": 35, 
+      "chunk": "campionato", 
+      "end": 45, 
+      "uri": "http://it.wikipedia.org/wiki/Serie_A_2010-2011", 
+      "types": [
+        "http://dbpedia.org/ontology/SoccerTournament", 
+        "http://dbpedia.org/ontology/SportsEvent", 
+        "http://dbpedia.org/ontology/Event"
+      ]
+    }, 
+    {
+      "start": 0, 
+      "chunk": "Ha", 
+      "end": 2, 
+      "uri": "http://it.wikipedia.org/wiki/Ettaro", 
+      "types": [
+        "http://dbpedia.org/ontology/TopicalConcept"
+      ]
+    }
+  ]
+}

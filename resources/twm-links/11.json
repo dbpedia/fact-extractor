@@ -1,0 +1,44 @@
+{
+  "In Nazionale ha giocato 3 partite, nel 1967.": [
+    {
+      "start": 3, 
+      "chunk": "Nazionale", 
+      "end": 12, 
+      "uri": "http://it.wikipedia.org/wiki/Nazionale_di_calcio_dell'Italia", 
+      "types": [
+        "http://dbpedia.org/ontology/SoccerClub", 
+        "http://dbpedia.org/ontology/SportsTeam", 
+        "http://dbpedia.org/ontology/Organisation", 
+        "http://dbpedia.org/ontology/Agent"
+      ]
+    }, 
+    {
+      "start": 13, 
+      "chunk": "ha", 
+      "end": 15, 
+      "uri": "http://it.wikipedia.org/wiki/Ettaro", 
+      "types": [
+        "http://dbpedia.org/ontology/TopicalConcept"
+      ]
+    }, 
+    {
+      "start": 0, 
+      "chunk": "In", 
+      "end": 2, 
+      "uri": "http://it.wikipedia.org/wiki/Indio", 
+      "types": [
+        "http://dbpedia.org/ontology/TopicalConcept"
+      ]
+    }, 
+    {
+      "start": 35, 
+      "chunk": "nel 1967", 
+      "end": 43, 
+      "uri": "http://it.wikipedia.org/wiki/Coppa_del_Mondo_di_sci_alpino_1967", 
+      "types": [
+        "http://dbpedia.org/ontology/SportsEvent", 
+        "http://dbpedia.org/ontology/Event"
+      ]
+    }
+  ]
+}

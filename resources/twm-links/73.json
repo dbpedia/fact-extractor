@@ -1,0 +1,58 @@
+{
+  "Ha giocato in massima serie anche con le maglie di ACIVI Vicenza e Triestina.": [
+    {
+      "start": 14, 
+      "chunk": "massima serie", 
+      "end": 27, 
+      "uri": "http://it.wikipedia.org/wiki/Serie_A", 
+      "types": [
+        "http://dbpedia.org/ontology/Event", 
+        "http://dbpedia.org/ontology/Organisation", 
+        "http://dbpedia.org/ontology/SoccerLeague", 
+        "http://dbpedia.org/ontology/SportsLeague"
+      ]
+    }, 
+    {
+      "start": 67, 
+      "chunk": "Triestina", 
+      "end": 76, 
+      "uri": "http://it.wikipedia.org/wiki/Unione_Triestina_2012_Società_Sportiva_Dilettantistica", 
+      "types": [
+        "http://dbpedia.org/ontology/SoccerClub", 
+        "http://dbpedia.org/ontology/SportsTeam", 
+        "http://dbpedia.org/ontology/Organisation", 
+        "http://dbpedia.org/ontology/Agent"
+      ]
+    }, 
+    {
+      "start": 57, 
+      "chunk": "Vicenza", 
+      "end": 64, 
+      "uri": "http://it.wikipedia.org/wiki/Vicenza_Calcio", 
+      "types": [
+        "http://dbpedia.org/ontology/SoccerClub", 
+        "http://dbpedia.org/ontology/SportsTeam", 
+        "http://dbpedia.org/ontology/Organisation", 
+        "http://dbpedia.org/ontology/Agent"
+      ]
+    }, 
+    {
+      "start": 11, 
+      "chunk": "in", 
+      "end": 13, 
+      "uri": "http://it.wikipedia.org/wiki/Pollice_(unità_di_misura)", 
+      "types": [
+        "http://dbpedia.org/ontology/TopicalConcept"
+      ]
+    }, 
+    {
+      "start": 0, 
+      "chunk": "Ha", 
+      "end": 2, 
+      "uri": "http://it.wikipedia.org/wiki/Ettaro", 
+      "types": [
+        "http://dbpedia.org/ontology/TopicalConcept"
+      ]
+    }
+  ]
+}

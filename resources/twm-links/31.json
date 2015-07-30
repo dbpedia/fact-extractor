@@ -1,0 +1,37 @@
+{
+  "Centrocampista centrale, giocò, tra le altre, per il Milan e il Venezia.": [
+    {
+      "start": 54, 
+      "chunk": "Milan", 
+      "end": 59, 
+      "uri": "http://it.wikipedia.org/wiki/Associazione_Calcio_Milan", 
+      "types": [
+        "http://dbpedia.org/ontology/SoccerClub", 
+        "http://dbpedia.org/ontology/SportsTeam", 
+        "http://dbpedia.org/ontology/Organisation", 
+        "http://dbpedia.org/ontology/Agent"
+      ]
+    }, 
+    {
+      "start": 65, 
+      "chunk": "Venezia", 
+      "end": 72, 
+      "uri": "http://it.wikipedia.org/wiki/Foot_Ball_Club_Unione_Venezia", 
+      "types": [
+        "http://dbpedia.org/ontology/SoccerClub", 
+        "http://dbpedia.org/ontology/SportsTeam", 
+        "http://dbpedia.org/ontology/Organisation", 
+        "http://dbpedia.org/ontology/Agent"
+      ]
+    }, 
+    {
+      "start": 0, 
+      "chunk": "Centrocampista centrale", 
+      "end": 23, 
+      "uri": "http://it.wikipedia.org/wiki/Centrocampista", 
+      "types": [
+        "http://dbpedia.org/ontology/TopicalConcept"
+      ]
+    }
+  ]
+}

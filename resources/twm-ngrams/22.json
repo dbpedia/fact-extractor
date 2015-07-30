@@ -1,0 +1,39 @@
+{
+  "Dal 1932 a 1934 gioca 4 partite in Serie A con il Padova.": [
+    {
+      "start": 35, 
+      "chunk": "Serie A", 
+      "end": 42
+    }, 
+    {
+      "start": 50, 
+      "chunk": "Padova", 
+      "end": 56
+    }, 
+    {
+      "start": 16, 
+      "chunk": "gioca", 
+      "end": 21
+    }, 
+    {
+      "start": 24, 
+      "chunk": "partite", 
+      "end": 31
+    }, 
+    {
+      "start": 0, 
+      "chunk": "Dal", 
+      "end": 3
+    }, 
+    {
+      "start": 47, 
+      "chunk": "il", 
+      "end": 49
+    }, 
+    {
+      "start": 32, 
+      "chunk": "in", 
+      "end": 34
+    }
+  ]
+}

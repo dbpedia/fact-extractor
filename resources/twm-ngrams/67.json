@@ -1,0 +1,54 @@
+{
+  "Sempre durante il periodo del college, Stephens giocò due anni col Chicago Fire Premier.": [
+    {
+      "start": 68, 
+      "chunk": "Chicago Fire", 
+      "end": 80
+    }, 
+    {
+      "start": 55, 
+      "chunk": "due anni", 
+      "end": 63
+    }, 
+    {
+      "start": 39, 
+      "chunk": "Stephens", 
+      "end": 47
+    }, 
+    {
+      "start": 81, 
+      "chunk": "Premier", 
+      "end": 88
+    }, 
+    {
+      "start": 30, 
+      "chunk": "college", 
+      "end": 37
+    }, 
+    {
+      "start": 0, 
+      "chunk": "Sempre", 
+      "end": 6
+    }, 
+    {
+      "start": 64, 
+      "chunk": "col", 
+      "end": 67
+    }, 
+    {
+      "start": 18, 
+      "chunk": "periodo", 
+      "end": 25
+    }, 
+    {
+      "start": 15, 
+      "chunk": "il", 
+      "end": 17
+    }, 
+    {
+      "start": 26, 
+      "chunk": "del", 
+      "end": 29
+    }
+  ]
+}

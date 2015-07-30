@@ -1,0 +1,39 @@
+{
+  "Ha giocato tredici stagioni nella massima serie cipriota con l'Apollon Limassol.": [
+    {
+      "start": 63, 
+      "chunk": "Apollon Limassol", 
+      "end": 79
+    }, 
+    {
+      "start": 34, 
+      "chunk": "massima serie", 
+      "end": 47
+    }, 
+    {
+      "start": 48, 
+      "chunk": "cipriota", 
+      "end": 56
+    }, 
+    {
+      "start": 11, 
+      "chunk": "tredici", 
+      "end": 18
+    }, 
+    {
+      "start": 19, 
+      "chunk": "stagioni", 
+      "end": 27
+    }, 
+    {
+      "start": 0, 
+      "chunk": "Ha", 
+      "end": 2
+    }, 
+    {
+      "start": 28, 
+      "chunk": "nella", 
+      "end": 33
+    }
+  ]
+}

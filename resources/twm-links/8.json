@@ -1,0 +1,70 @@
+{
+  "In carriera ha giocato complessivamente 74 partite in Serie B, con 21 gol segnati.": [
+    {
+      "start": 54, 
+      "chunk": "Serie B", 
+      "end": 61, 
+      "uri": "http://it.wikipedia.org/wiki/Serie_B", 
+      "types": [
+        "http://dbpedia.org/ontology/Event", 
+        "http://dbpedia.org/ontology/Organisation", 
+        "http://dbpedia.org/ontology/SoccerLeague", 
+        "http://dbpedia.org/ontology/SportsLeague"
+      ]
+    }, 
+    {
+      "start": 70, 
+      "chunk": "gol", 
+      "end": 73, 
+      "uri": "http://it.wikipedia.org/wiki/Gol", 
+      "types": [
+        "http://dbpedia.org/ontology/TopicalConcept"
+      ]
+    }, 
+    {
+      "start": 3, 
+      "chunk": "carriera", 
+      "end": 11, 
+      "uri": "http://it.wikipedia.org/wiki/Carriera", 
+      "types": [
+        "http://dbpedia.org/ontology/TopicalConcept"
+      ]
+    }, 
+    {
+      "start": 51, 
+      "chunk": "in", 
+      "end": 53, 
+      "uri": "http://it.wikipedia.org/wiki/Pollice_(unità_di_misura)", 
+      "types": [
+        "http://dbpedia.org/ontology/TopicalConcept"
+      ]
+    }, 
+    {
+      "start": 12, 
+      "chunk": "ha", 
+      "end": 14, 
+      "uri": "http://it.wikipedia.org/wiki/Ettaro", 
+      "types": [
+        "http://dbpedia.org/ontology/TopicalConcept"
+      ]
+    }, 
+    {
+      "start": 43, 
+      "chunk": "partite", 
+      "end": 50, 
+      "uri": "http://it.wikipedia.org/wiki/Partita_(musica)", 
+      "types": [
+        "http://dbpedia.org/ontology/TopicalConcept"
+      ]
+    }, 
+    {
+      "start": 0, 
+      "chunk": "In", 
+      "end": 2, 
+      "uri": "http://it.wikipedia.org/wiki/Indio", 
+      "types": [
+        "http://dbpedia.org/ontology/TopicalConcept"
+      ]
+    }
+  ]
+}

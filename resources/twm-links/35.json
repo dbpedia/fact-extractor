@@ -1,0 +1,57 @@
+{
+  "Nella stagione 2013-2014 ha giocato 23 partite nella massima serie uruguaiana con il Danubio.": [
+    {
+      "start": 6, 
+      "chunk": "stagione 2013-2014", 
+      "end": 24, 
+      "uri": "http://it.wikipedia.org/wiki/UEFA_Europa_League_2013-2014", 
+      "types": [
+        "http://dbpedia.org/ontology/SoccerTournament", 
+        "http://dbpedia.org/ontology/SportsEvent", 
+        "http://dbpedia.org/ontology/Event"
+      ]
+    }, 
+    {
+      "start": 53, 
+      "chunk": "massima", 
+      "end": 60, 
+      "uri": "http://it.wikipedia.org/wiki/Superligaen", 
+      "types": [
+        "http://dbpedia.org/ontology/SoccerLeague", 
+        "http://dbpedia.org/ontology/SportsLeague", 
+        "http://dbpedia.org/ontology/Organisation", 
+        "http://dbpedia.org/ontology/Event"
+      ]
+    }, 
+    {
+      "start": 85, 
+      "chunk": "Danubio", 
+      "end": 92, 
+      "uri": "http://it.wikipedia.org/wiki/Danubio_Fútbol_Club", 
+      "types": [
+        "http://dbpedia.org/ontology/SoccerClub", 
+        "http://dbpedia.org/ontology/SportsTeam", 
+        "http://dbpedia.org/ontology/Organisation", 
+        "http://dbpedia.org/ontology/Agent"
+      ]
+    }, 
+    {
+      "start": 25, 
+      "chunk": "ha", 
+      "end": 27, 
+      "uri": "http://it.wikipedia.org/wiki/Ettaro", 
+      "types": [
+        "http://dbpedia.org/ontology/TopicalConcept"
+      ]
+    }, 
+    {
+      "start": 61, 
+      "chunk": "serie", 
+      "end": 66, 
+      "uri": "http://it.wikipedia.org/wiki/Serie", 
+      "types": [
+        "http://dbpedia.org/ontology/TopicalConcept"
+      ]
+    }
+  ]
+}

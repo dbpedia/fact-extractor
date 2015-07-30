@@ -1,0 +1,29 @@
+{
+  "Ha giocato in Ligue 1 con Boulogne e Digione.": [
+    {
+      "start": 14, 
+      "chunk": "Ligue 1", 
+      "end": 21
+    }, 
+    {
+      "start": 37, 
+      "chunk": "Digione", 
+      "end": 44
+    }, 
+    {
+      "start": 26, 
+      "chunk": "Boulogne", 
+      "end": 34
+    }, 
+    {
+      "start": 0, 
+      "chunk": "Ha", 
+      "end": 2
+    }, 
+    {
+      "start": 11, 
+      "chunk": "in", 
+      "end": 13
+    }
+  ]
+}

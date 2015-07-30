@@ -1,0 +1,34 @@
+{
+  "Ha giocato 7 partite (segnando un gol) nella Nazionale Under 21 della Germania Ovest.": [
+    {
+      "start": 45, 
+      "chunk": "Nazionale Under 21", 
+      "end": 63
+    }, 
+    {
+      "start": 70, 
+      "chunk": "Germania Ovest", 
+      "end": 84
+    }, 
+    {
+      "start": 34, 
+      "chunk": "gol", 
+      "end": 37
+    }, 
+    {
+      "start": 13, 
+      "chunk": "partite", 
+      "end": 20
+    }, 
+    {
+      "start": 0, 
+      "chunk": "Ha", 
+      "end": 2
+    }, 
+    {
+      "start": 39, 
+      "chunk": "nella", 
+      "end": 44
+    }
+  ]
+}

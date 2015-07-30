@@ -1,0 +1,66 @@
+{
+  "In patria gioca tra le file del Don Bosco Football Club.": [
+    {
+      "start": 51, 
+      "chunk": "Club", 
+      "end": 55, 
+      "uri": "http://it.wikipedia.org/wiki/Győri_Egyetértés_Torna_Osztály_Football_Club", 
+      "types": [
+        "http://dbpedia.org/ontology/SoccerClub", 
+        "http://dbpedia.org/ontology/SportsTeam", 
+        "http://dbpedia.org/ontology/Organisation", 
+        "http://dbpedia.org/ontology/Agent"
+      ]
+    }, 
+    {
+      "start": 42, 
+      "chunk": "Football", 
+      "end": 50, 
+      "uri": "http://it.wikipedia.org/wiki/Football_americano", 
+      "types": [
+        "http://dbpedia.org/ontology/Sport", 
+        "http://dbpedia.org/ontology/Activity"
+      ]
+    }, 
+    {
+      "start": 23, 
+      "chunk": "file", 
+      "end": 27, 
+      "uri": "http://it.wikipedia.org/wiki/File", 
+      "types": [
+        "http://dbpedia.org/ontology/TopicalConcept"
+      ]
+    }, 
+    {
+      "start": 10, 
+      "chunk": "gioca", 
+      "end": 15, 
+      "uri": "http://it.wikipedia.org/wiki/Gioco", 
+      "types": [
+        "http://dbpedia.org/ontology/TopicalConcept"
+      ]
+    }, 
+    {
+      "start": 0, 
+      "chunk": "In", 
+      "end": 2, 
+      "uri": "http://it.wikipedia.org/wiki/Indio", 
+      "types": [
+        "http://dbpedia.org/ontology/TopicalConcept"
+      ]
+    }, 
+    {
+      "start": 32, 
+      "chunk": "Don", 
+      "end": 35, 
+      "uri": "http://it.wikipedia.org/wiki/Don_(fiume_russo)", 
+      "types": [
+        "http://dbpedia.org/ontology/River", 
+        "http://dbpedia.org/ontology/Stream", 
+        "http://dbpedia.org/ontology/BodyOfWater", 
+        "http://dbpedia.org/ontology/NaturalPlace", 
+        "http://dbpedia.org/ontology/Place"
+      ]
+    }
+  ]
+}

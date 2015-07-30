@@ -1,0 +1,54 @@
+{
+  "Con la Portuguesa ha giocato in Série A e nella Copa Sudamericana.": [
+    {
+      "start": 7, 
+      "chunk": "Portuguesa", 
+      "end": 17, 
+      "uri": "http://it.wikipedia.org/wiki/Associação_Portuguesa_de_Desportos", 
+      "types": [
+        "http://dbpedia.org/ontology/SoccerClub", 
+        "http://dbpedia.org/ontology/SportsTeam", 
+        "http://dbpedia.org/ontology/Organisation", 
+        "http://dbpedia.org/ontology/Agent"
+      ]
+    }, 
+    {
+      "start": 49, 
+      "chunk": "Copa Sudamericana", 
+      "end": 66, 
+      "uri": "http://it.wikipedia.org/wiki/Coppa_Sudamericana", 
+      "types": [
+        "http://dbpedia.org/ontology/SoccerTournament", 
+        "http://dbpedia.org/ontology/SportsEvent", 
+        "http://dbpedia.org/ontology/Event"
+      ]
+    }, 
+    {
+      "start": 18, 
+      "chunk": "ha", 
+      "end": 20, 
+      "uri": "http://it.wikipedia.org/wiki/Ettaro", 
+      "types": [
+        "http://dbpedia.org/ontology/TopicalConcept"
+      ]
+    }, 
+    {
+      "start": 29, 
+      "chunk": "in", 
+      "end": 31, 
+      "uri": "http://it.wikipedia.org/wiki/Pollice_(unità_di_misura)", 
+      "types": [
+        "http://dbpedia.org/ontology/TopicalConcept"
+      ]
+    }, 
+    {
+      "start": 4, 
+      "chunk": "la", 
+      "end": 6, 
+      "uri": "http://it.wikipedia.org/wiki/La_(nota)", 
+      "types": [
+        "http://dbpedia.org/ontology/TopicalConcept"
+      ]
+    }
+  ]
+}

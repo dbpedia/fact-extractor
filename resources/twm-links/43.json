@@ -1,0 +1,75 @@
+{
+  "Con la Nazionale del suo paese, ha giocato la Coppa d'Africa 2010.": [
+    {
+      "start": 7, 
+      "chunk": "Nazionale del suo paese", 
+      "end": 30, 
+      "uri": "http://it.wikipedia.org/wiki/Nazionale_di_calcio_dell'Islanda", 
+      "types": [
+        "http://dbpedia.org/ontology/SoccerClub", 
+        "http://dbpedia.org/ontology/SportsTeam", 
+        "http://dbpedia.org/ontology/Organisation", 
+        "http://dbpedia.org/ontology/Agent"
+      ]
+    }, 
+    {
+      "start": 54, 
+      "chunk": "Africa", 
+      "end": 60, 
+      "uri": "http://it.wikipedia.org/wiki/Africa", 
+      "types": [
+        "http://dbpedia.org/ontology/Continent", 
+        "http://dbpedia.org/ontology/Place", 
+        "http://dbpedia.org/ontology/PopulatedPlace"
+      ]
+    }, 
+    {
+      "start": 32, 
+      "chunk": "ha", 
+      "end": 34, 
+      "uri": "http://it.wikipedia.org/wiki/Ettaro", 
+      "types": [
+        "http://dbpedia.org/ontology/TopicalConcept"
+      ]
+    }, 
+    {
+      "start": 46, 
+      "chunk": "Coppa", 
+      "end": 51, 
+      "uri": "http://it.wikipedia.org/wiki/Santino_Coppa", 
+      "types": [
+        "http://dbpedia.org/ontology/Athlete", 
+        "http://dbpedia.org/ontology/Person", 
+        "http://dbpedia.org/ontology/Agent"
+      ]
+    }, 
+    {
+      "start": 43, 
+      "chunk": "la", 
+      "end": 45, 
+      "uri": "http://it.wikipedia.org/wiki/La_(nota)", 
+      "types": [
+        "http://dbpedia.org/ontology/TopicalConcept"
+      ]
+    }, 
+    {
+      "start": 43, 
+      "chunk": "la", 
+      "end": 45, 
+      "uri": "http://it.wikipedia.org/wiki/La_(nota)", 
+      "types": [
+        "http://dbpedia.org/ontology/TopicalConcept"
+      ]
+    }, 
+    {
+      "start": 0, 
+      "chunk": "Con", 
+      "end": 3, 
+      "uri": "http://it.wikipedia.org/wiki/Lugaid_mac_Con", 
+      "types": [
+        "http://dbpedia.org/ontology/Person", 
+        "http://dbpedia.org/ontology/Agent"
+      ]
+    }
+  ]
+}

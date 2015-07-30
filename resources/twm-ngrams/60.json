@@ -1,0 +1,44 @@
+{
+  "Con la Nazionale Under-21 ha giocato sia amichevoli che partite di qualificazione agli Europei.": [
+    {
+      "start": 7, 
+      "chunk": "Nazionale Under-21", 
+      "end": 25
+    }, 
+    {
+      "start": 41, 
+      "chunk": "amichevoli", 
+      "end": 51
+    }, 
+    {
+      "start": 87, 
+      "chunk": "Europei", 
+      "end": 94
+    }, 
+    {
+      "start": 67, 
+      "chunk": "qualificazione", 
+      "end": 81
+    }, 
+    {
+      "start": 56, 
+      "chunk": "partite", 
+      "end": 63
+    }, 
+    {
+      "start": 0, 
+      "chunk": "Con", 
+      "end": 3
+    }, 
+    {
+      "start": 82, 
+      "chunk": "agli", 
+      "end": 86
+    }, 
+    {
+      "start": 26, 
+      "chunk": "ha", 
+      "end": 28
+    }
+  ]
+}

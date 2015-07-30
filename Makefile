@@ -18,6 +18,7 @@ CL_GAZETTEER=supervised/resources/it/soccer-gaz.tsv
 CL_EVAL_OUTPUT=/tmp/classifierEvaluationOutput
 CL_SENTENCES_FILE=
 CL_ANNOTATED_GOLD=
+LINKED_DIR=../links_new  # coming from entity linking (external repo, sorry)
 
 default:
 	@echo "Ciao"
@@ -117,3 +118,13 @@ supervised-evaluate:
 		$(CL_MAIN_PACKAGE).Annotator -g $(CL_GAZETTEER) -m $(CL_TRAINING_SET) \
 		-l $(LANGCODE) -r $(CL_EVAL_OUTPUT) -a $(CL_SENTENCES_FILE) \
 		-e $(CL_ANNOTATED_GOLD)
+
+crowdflower-create-input:
+	python unsupervised/produce_labeled_data.py $(LINKED_DIR) \
+		$(WORK_DIR)/labeled_data.json
+	# FIXME generate twm links, twm ngrams and textpro chunks somehow
+	python crowdflower/combine_chunks.py resources/ $(WORK_DIR)/chunks.json
+	python crowdflower/create_crowdflower_input.py resources/labeled_data.sample \
+		$(WORK_DIR)/chunks.json -o $(WORK_DIR)/crowdflower_input.csv
+	python crowdflower/generate_crowdflower_interface_template.py \
+		$(WORK_DIR)/crowdflower_input.csv $(WORK_DIR)/crowdflower_template.html

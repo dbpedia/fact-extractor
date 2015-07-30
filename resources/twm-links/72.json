@@ -1,0 +1,25 @@
+{
+  "Eriksen giocò con la maglia dell'Odd.": [
+    {
+      "start": 0, 
+      "chunk": "Eriksen", 
+      "end": 7, 
+      "uri": "http://it.wikipedia.org/wiki/William_Eriksen", 
+      "types": [
+        "http://dbpedia.org/ontology/NameEntity"
+      ]
+    }, 
+    {
+      "start": 34, 
+      "chunk": "Odd", 
+      "end": 37, 
+      "uri": "http://it.wikipedia.org/wiki/Odds_Ballklubb", 
+      "types": [
+        "http://dbpedia.org/ontology/SoccerClub", 
+        "http://dbpedia.org/ontology/SportsTeam", 
+        "http://dbpedia.org/ontology/Organisation", 
+        "http://dbpedia.org/ontology/Agent"
+      ]
+    }
+  ]
+}

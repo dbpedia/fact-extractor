@@ -1,0 +1,39 @@
+{
+  "In totale ha giocato 136 partite (con 5 reti) in Serie B.": [
+    {
+      "start": 49, 
+      "chunk": "Serie B", 
+      "end": 56
+    }, 
+    {
+      "start": 40, 
+      "chunk": "reti", 
+      "end": 44
+    }, 
+    {
+      "start": 25, 
+      "chunk": "partite", 
+      "end": 32
+    }, 
+    {
+      "start": 3, 
+      "chunk": "totale", 
+      "end": 9
+    }, 
+    {
+      "start": 0, 
+      "chunk": "In", 
+      "end": 2
+    }, 
+    {
+      "start": 10, 
+      "chunk": "ha", 
+      "end": 12
+    }, 
+    {
+      "start": 46, 
+      "chunk": "in", 
+      "end": 48
+    }
+  ]
+}

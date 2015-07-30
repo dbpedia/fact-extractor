@@ -1,0 +1,67 @@
+{
+  "Ha giocato tredici stagioni nella massima serie cipriota con l'Apollon Limassol.": [
+    {
+      "start": 71, 
+      "chunk": "Limassol", 
+      "end": 79, 
+      "uri": "http://it.wikipedia.org/wiki/Limisso", 
+      "types": [
+        "http://dbpedia.org/ontology/City", 
+        "http://dbpedia.org/ontology/Settlement", 
+        "http://dbpedia.org/ontology/PopulatedPlace", 
+        "http://dbpedia.org/ontology/Place"
+      ]
+    }, 
+    {
+      "start": 63, 
+      "chunk": "Apollon", 
+      "end": 70, 
+      "uri": "http://it.wikipedia.org/wiki/Apollon_Lemesou", 
+      "types": [
+        "http://dbpedia.org/ontology/SoccerClub", 
+        "http://dbpedia.org/ontology/SportsTeam", 
+        "http://dbpedia.org/ontology/Organisation", 
+        "http://dbpedia.org/ontology/Agent"
+      ]
+    }, 
+    {
+      "start": 34, 
+      "chunk": "massima serie", 
+      "end": 47, 
+      "uri": "http://it.wikipedia.org/wiki/Prem'er-Liga", 
+      "types": [
+        "http://dbpedia.org/ontology/SoccerLeague", 
+        "http://dbpedia.org/ontology/SportsLeague", 
+        "http://dbpedia.org/ontology/Organisation", 
+        "http://dbpedia.org/ontology/Event"
+      ]
+    }, 
+    {
+      "start": 19, 
+      "chunk": "stagioni", 
+      "end": 27, 
+      "uri": "http://it.wikipedia.org/wiki/Stagione", 
+      "types": [
+        "http://dbpedia.org/ontology/TopicalConcept"
+      ]
+    }, 
+    {
+      "start": 0, 
+      "chunk": "Ha", 
+      "end": 2, 
+      "uri": "http://it.wikipedia.org/wiki/Ettaro", 
+      "types": [
+        "http://dbpedia.org/ontology/TopicalConcept"
+      ]
+    }, 
+    {
+      "start": 11, 
+      "chunk": "tredici", 
+      "end": 18, 
+      "uri": "http://it.wikipedia.org/wiki/13_(numero)", 
+      "types": [
+        "http://dbpedia.org/ontology/TopicalConcept"
+      ]
+    }
+  ]
+}
