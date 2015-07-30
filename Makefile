@@ -122,9 +122,15 @@ supervised-evaluate:
 crowdflower-create-input:
 	python unsupervised/produce_labeled_data.py $(LINKED_DIR) \
 		$(WORK_DIR)/labeled_data.json
-	# FIXME generate twm links, twm ngrams and textpro chunks somehow
+	# TODO generate twm links, twm ngrams and textpro chunks somehow
 	python crowdflower/combine_chunks.py resources/ $(WORK_DIR)/chunks.json
 	python crowdflower/create_crowdflower_input.py resources/labeled_data.sample \
 		$(WORK_DIR)/chunks.json -o $(WORK_DIR)/crowdflower_input.csv
 	python crowdflower/generate_crowdflower_interface_template.py \
 		$(WORK_DIR)/crowdflower_input.csv $(WORK_DIR)/crowdflower_template.html
+
+crowdflower-to-training:
+	# TODO use sentences from gold
+	python crowdflower/crowdflower_results_into_training_data.py \
+		resources/crowdflower-results.sample resources/treetagger-output-sample/ \
+		$(WORK_DIR)/training-data.tsv
