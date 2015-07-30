@@ -93,8 +93,7 @@ def to_assertions(labeled_results, id_to_title, namespace_manager, namespaces,
     except Exception as e:
         # If something goes wrong, probably it's due to exotic URIs
         # so encode the exception to UTF-8!
-        print "Couldn't serialize the dataset (%s)" % e.encode('utf8')
-        pass
+        print "Couldn't serialize the dataset (%s)" % e.message.encode('utf8')
     return processed, discarded
 
 
@@ -131,6 +130,6 @@ def serialize_fe(fe, reified, namespaces, wiki_title, assertions, format):
             assertions.parse(data='<%s> <%s> %s .' % (reified, pe, o1['end']),
                              format=format)
         else:
-            print "Don't know how to serialize", literal
+            raise Exception("Don't know how to serialize: " + repr(literal))
     else:
-        print >> sys.stderr, "FE not tagged as either literal or uri, skipped", fe
+        raise Exception("FE not tagged as either literal or uri, skipped " + repr(fe))

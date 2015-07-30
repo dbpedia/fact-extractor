@@ -12,20 +12,9 @@ import sys
 from collections import defaultdict
 from urllib import quote
 from rfc3987 import parse  # URI/IRI validation
-from rdflib import Graph, URIRef
-from rdflib.namespace import Namespace, NamespaceManager
 from date_normalizer import DateNormalizer
 from resources.soccer_lu2frame_dbtypes import LU_FRAME_MAP
-from lib.to_assertions import to_assertions
-
-# Namespace prefixes for RDF serialization
-RESOURCE_NS = Namespace('http://it.dbpedia.org/resource/')
-FACT_EXTRACTION_NS = Namespace('http://dbpedia.org/fact-extraction/')
-ONTOLOGY_NS = Namespace('http://dbpedia.org/ontology/')
-NAMESPACE_MANAGER = NamespaceManager(Graph())
-NAMESPACE_MANAGER.bind('resource', RESOURCE_NS)
-NAMESPACE_MANAGER.bind('fact', FACT_EXTRACTION_NS)
-NAMESPACE_MANAGER.bind('ontology', ONTOLOGY_NS)
+import click
 
 
 def label_sentence(entity_linking_results, debug):
@@ -172,28 +161,23 @@ def process_dir(indir, debug):
         for name in files:
             f = os.path.join(path, name)
             labeled = label_sentence(f, debug)
-            # Filename is {WIKI_ID}.{SENTENCE_ID}
-            labeled['id'] = name
+            # Filename is {WIKI_ID}.{SENTENCE_ID}(.{extension})?
+            labeled['id'] = '.'.join(name.split('.')[:2])
             processed.append(labeled)
             if debug:
                 print 'LABELED: %s' % labeled
     return processed
 
 
+@click.command()
+@click.argument('linked-dir', type=click.Path(exists=True, file_okay=False))
+@click.argument('labeled_out', default='labeled.json')
+@click.option('--debug/--no-debug', default=False)
+def main(linked_dir, labeled_out, debug):
+    labeled = process_dir(linked_dir, debug)
+    with codecs.open(labeled_out, 'wb', 'utf8') as f:
+        json.dump(labeled, f, ensure_ascii=False, indent=2)
+
+
 if __name__ == '__main__':
-    debug = True
-    labeled = process_dir(sys.argv[1], debug)
-    # labeled = json.load(codecs.open(sys.argv[1], 'rb', encoding='utf8'))
-    mapping = json.load(open(sys.argv[2]))
-    json.dump(labeled, codecs.open('labeled_data.json', 'wb', 'utf-8'), ensure_ascii=False, indent=2)
-    processed, discarded = to_assertions(labeled, mapping, NAMESPACE_MANAGER, {
-                                            'ontology': ONTOLOGY_NS,
-                                            'resource': RESOURCE_NS,
-                                            'fact_extraction': FACT_EXTRACTION_NS,
-                                         }, debug)
-    with codecs.open('processed', 'wb', 'utf-8') as p:
-        p.writelines([sentence + '\n' for sentence in processed])    
-    with codecs.open('discarded', 'wb', 'utf-8') as d:
-        d.writelines([sentence + '\n' for sentence in discarded])
-    if debug:
-        print '%d out of %d NOT DISAMBIGUATED' % (len(discarded), len(labeled))
+    main()
