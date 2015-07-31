@@ -9,8 +9,10 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Properties;
 
 /**
  * Created by admin on 4/20/15.
@@ -19,19 +21,27 @@ public class TheWikiMachineClient {
 
     public static final Logger logger = Logger.getLogger(TheWikiMachineClient.class.getName());
 
-    public static final String TWM_ENDPOINT = "http://hlt-services6.fbk.eu:6789/annotate";
-    public static final String APP_ID = "1";
-    public static final String APP_KEY = "1";
-    public static final String DEFAULT_LANGUAGE = "it";
-    public static final Map<String, String> API_PARAMS = new HashMap<String, String>() {{
-        put("app_id", APP_ID);
-        put("app_key", APP_KEY);
-        put("lang", DEFAULT_LANGUAGE);
-        put("min_weight", "0.01");
-    }};
+    private final String TWM_ENDPOINT;
+    private final String APP_ID;
+    private final String APP_KEY;
+    private final String DEFAULT_LANGUAGE = "it";
+    private final Map<String, String> API_PARAMS;
+
     public static final String SOCCER_WORDS = " calcio ronaldo attaccante beckham gol totti";
 
-    public TheWikiMachineClient() {
+    public TheWikiMachineClient() throws IOException {
+        Properties prop = new Properties(  );
+        prop.load( getClass( ).getClassLoader( ).getResourceAsStream( "secrets.properties" ) );
+        TWM_ENDPOINT = prop.getProperty( "TWM_ENDPOINT" );
+        APP_ID = prop.getProperty( "APP_ID" );
+        APP_KEY = prop.getProperty( "APP_KEY" );
+
+        API_PARAMS = new HashMap<String, String>() {{
+            put("app_id", APP_ID);
+            put("app_key", APP_KEY);
+            put("lang", DEFAULT_LANGUAGE);
+            put("min_weight", "0.01");
+        }};
     }
 
     public static void main(String[] args) throws Exception {

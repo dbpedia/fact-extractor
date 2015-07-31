@@ -18,7 +18,8 @@ CL_GAZETTEER=supervised/resources/it/soccer-gaz.tsv
 CL_EVAL_OUTPUT=/tmp/classifierEvaluationOutput
 CL_SENTENCES_FILE=
 CL_ANNOTATED_GOLD=
-LINKED_DIR=../linked  # coming from entity linking (external repo, sorry)
+LINK_MODE=twm  # twm or nex
+CF_RESULTS=resources/crowdflower-results.sample
 
 default:
 	@echo "Ciao"
@@ -80,9 +81,11 @@ gold-add:
 		$(GOLD_DIR)/$(LU)/tokens.txt $(GOLD_DIR)/$(LU)/gold
 
 gold-finalize:
-	mkdir -p $(GOLD_DIR)/gold
+	mkdir -p $(GOLD_DIR)/sentences $(GOLD_DIR)/tagged
 	find $(GOLD_DIR)/*/gold/* | shuf | head -n $(GOLD_LU_NUM) | xargs -i cp {} \
-		$(GOLD_DIR)/gold/
+		$(GOLD_DIR)/sentences/
+	find $(GOLD_DIR)/sentences/* -exec sh -c 'echo $$1 && cat "$$1" | \
+		$(TREETAGGER) > $(GOLD_DIR)/tagged/$$(basename $$1)' 'gold-finalize' {} \;
 	find $(GOLD_DIR)/gold/* -type f -exec sh -c 'cat $$1; echo' _ "{}" \; \
 		| head -n 50 > $(WORK_DIR)/sample-50.txt
 
@@ -120,9 +123,13 @@ supervised-evaluate:
 		-e $(CL_ANNOTATED_GOLD)
 
 crowdflower-create-input:
-	python unsupervised/produce_labeled_data.py $(LINKED_DIR) \
+	# TODO generate twm ngrams and textpro chunks somehow
+	mkdir -p $(WORK_DIR)/linked
+	python lib/entity_linking.py $(LINK_MODE) $(GOLD_DIR)/sentences $(WORK_DIR)/linked
+	python unsupervised/produce_labeled_data.py $(WORK_DIR)/linked \
 		$(WORK_DIR)/labeled_data.json
-	# TODO generate twm links, twm ngrams and textpro chunks somehow
+	# TODO change combine_chunks so that you can specify where to get individual parts
+	mv $(WORK_DIR)/linked resources/twm-links
 	python crowdflower/combine_chunks.py resources/ $(WORK_DIR)/chunks.json
 	python crowdflower/create_crowdflower_input.py resources/labeled_data.sample \
 		$(WORK_DIR)/chunks.json -o $(WORK_DIR)/crowdflower_input.csv
@@ -130,15 +137,15 @@ crowdflower-create-input:
 		$(WORK_DIR)/crowdflower_input.csv $(WORK_DIR)/crowdflower_template.html
 
 crowdflower-to-training:
-	# TODO use sentences from gold
-	python crowdflower/crowdflower_results_into_training_data.py \
-		resources/crowdflower-results.sample resources/treetagger-output-sample/ \
-		$(WORK_DIR)/training-data.tsv
+	python crowdflower/crowdflower_results_into_training_data.py $(CF_RESULTS) \
+		$(GOLD_DIR)/tagged $(WORK_DIR)/training-data.tsv
 
 run-unsupervised:
-	# TODO produce linked sentences as well
-	mkdir -p $(WORK_DIR)/unsupervised
-	python unsupervised/produce_labeled_data.py $(LINKED_DIR) \
+	# you need to run extract-soccer before
+	mkdir -p $(WORK_DIR)/unsupervised/linked
+	python lib/entity_linking.py $(LINK_MODE) $(SOCCER_DIR) \
+		$(WORK_DIR)/unsupervised/linked
+	python unsupervised/produce_labeled_data.py $(WORK_DIR)/unsupervised/linked \
 		$(WORK_DIR)/labeled_data.json
 	python unsupervised/labeled_to_assertions.py $(WORK_DIR)/labeled_data.json \
 		$(WORK_DIR)/wiki-id-to-title-mapping.json $(WORK_DIR)/unsupervised/processed \
