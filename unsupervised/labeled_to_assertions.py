@@ -16,7 +16,7 @@ from lib.to_assertions import to_assertions
 @click.argument('wid-title-mapping', type=click.File('r', 'utf8'))
 @click.argument('processed_out', default='processed')
 @click.argument('discarded_out', default='discarded')
-@click.argument('dataset', default='dataset')
+@click.argument('dataset', default='dataset.nt')
 @click.option('--format', default='nt')
 @click.option('--resource-namespace', default='http://it.dbpedia.org/resource/')
 @click.option('--fact-namespace', default='http://dbpedia.org/fact-extraction/')
@@ -41,7 +41,7 @@ def main(labeled, wid_title_mapping, processed_out, discarded_out, dataset, form
                                             'ontology': ONTOLOGY_NS,
                                             'resource': RESOURCE_NS,
                                             'fact_extraction': FACT_EXTRACTION_NS,
-                                         })
+                                         }, outfile=dataset, format=format)
     with codecs.open(processed_out, 'wb', 'utf8') as f:
         f.writelines('\n'.join(processed))
 

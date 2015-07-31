@@ -18,7 +18,7 @@ CL_GAZETTEER=supervised/resources/it/soccer-gaz.tsv
 CL_EVAL_OUTPUT=/tmp/classifierEvaluationOutput
 CL_SENTENCES_FILE=
 CL_ANNOTATED_GOLD=
-LINKED_DIR=../links_new  # coming from entity linking (external repo, sorry)
+LINKED_DIR=../linked  # coming from entity linking (external repo, sorry)
 
 default:
 	@echo "Ciao"
@@ -134,3 +134,12 @@ crowdflower-to-training:
 	python crowdflower/crowdflower_results_into_training_data.py \
 		resources/crowdflower-results.sample resources/treetagger-output-sample/ \
 		$(WORK_DIR)/training-data.tsv
+
+run-unsupervised:
+	# TODO produce linked sentences as well
+	mkdir -p $(WORK_DIR)/unsupervised
+	python unsupervised/produce_labeled_data.py $(LINKED_DIR) \
+		$(WORK_DIR)/labeled_data.json
+	python unsupervised/labeled_to_assertions.py $(WORK_DIR)/labeled_data.json \
+		$(WORK_DIR)/wiki-id-to-title-mapping.json $(WORK_DIR)/unsupervised/processed \
+		$(WORK_DIR)/unsupervised/discarded $(WORK_DIR)/unsupervised/dataset.nt
