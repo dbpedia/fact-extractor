@@ -45,7 +45,7 @@ def read_full_results(results_file):
                 processed[sentence_id][entity]['judgments'] += 1
                 processed[sentence_id][entity]['answers'].append({
                     'answer': answer,
-                    'trust': row['_trust'],
+                    'trust': row.get('_trust', row.get('fe%02d:confidence' % n))
                 })
 
     return processed
