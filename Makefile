@@ -20,6 +20,8 @@ CL_SENTENCES_FILE=
 CL_ANNOTATED_GOLD=
 LINK_MODE=twm  # twm or nex
 CF_RESULTS=resources/crowdflower-results.sample
+UNS_SCORING=f-score
+UNS_CORE_WEIGHT=2
 
 default:
 	@echo "Ciao"
@@ -146,7 +148,8 @@ run-unsupervised:
 	python lib/entity_linking.py $(LINK_MODE) $(SOCCER_DIR) \
 		$(WORK_DIR)/unsupervised/linked
 	python unsupervised/produce_labeled_data.py $(WORK_DIR)/unsupervised/linked \
-		$(WORK_DIR)/labeled_data.json
+		$(WORK_DIR)/labeled_data.json --score $(UNS_SCORING) \
+        --core-weight $(UNS_CORE_WEIGHT) --score-fes
 	python unsupervised/labeled_to_assertions.py $(WORK_DIR)/labeled_data.json \
 		$(WORK_DIR)/wiki-id-to-title-mapping.json $(WORK_DIR)/unsupervised/processed \
 		$(WORK_DIR)/unsupervised/discarded $(WORK_DIR)/unsupervised/dataset.nt

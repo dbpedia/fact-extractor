@@ -19,12 +19,14 @@ def to_assertions(labeled_results, id_to_title, namespace_manager, namespaces,
         'frame': '',
         'lu': '',
         'sentence': '',
+        'score': float  # optional
         'FEs': [
           {
             'chunk': '',
             'type': '',
             'uri/literal': '',  # specify either uri or literal
-            'FE': ''
+            'FE': '',
+            'score': float  # optional
           },
         ]
       },
