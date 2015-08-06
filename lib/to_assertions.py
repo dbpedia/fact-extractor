@@ -7,7 +7,7 @@ from os import sys
 
 
 def to_assertions(labeled_results, id_to_title, namespace_manager, namespaces,
-                  outfile='dataset.nt', format='nt'):
+                  outfile='dataset.nt', score_dataset=None, format='nt'):
     """
     Serialize the labeled results into RDF NTriples
 
@@ -36,8 +36,9 @@ def to_assertions(labeled_results, id_to_title, namespace_manager, namespaces,
 
 
     processed, discarded = [], []
-    assertions = Graph()
+    assertions, score_triples= Graph(), Graph()
     assertions.namespace_manager = namespace_manager
+    score_triples.namespace_manager = namespace_manager
     for result in labeled_results:
         print >> sys.stderr, '---', result.get('sentence')
 
@@ -47,11 +48,13 @@ def to_assertions(labeled_results, id_to_title, namespace_manager, namespaces,
                                   result['sentence'])
             discarded.append(result['sentence'])
             continue
+
         fes = result.get('FEs')
         if not fes:
             print >> sys.stderr, 'No FEs found in "%s"' % result['sentence']
             discarded.append(result['sentence'])
             continue
+
         processed.append(result['sentence'])
         parts = result['id'].split('.')
         wiki_id, sentence_id = parts[0], parts[1]  # there might be the extension
@@ -60,6 +63,7 @@ def to_assertions(labeled_results, id_to_title, namespace_manager, namespaces,
         else:
             wiki_title = str(wiki_id)
             print '**WARNING** No title for sentence %s, using id as title' % result['id']
+
         # Mint a URI unicode string
         subject = namespaces['resource'] + wiki_title
         # URI sanity check
@@ -84,6 +88,12 @@ def to_assertions(labeled_results, id_to_title, namespace_manager, namespaces,
             print "Invalid triple: %s (%s). Skipping ..." % (frame_triple, e)
             continue
 
+        if result.get('score') is not None:
+            predicate = namespaces['fact_extraction'] + 'confidence'
+            score = '"%f"^^<http://www.w3.org/2001/XMLSchema#float>' % result['score']
+            score_triple = '<%s> <%s> %s .' % (object, predicate, score)
+            score_triples.parse(data=score_triple, format=format)
+
         for fe in fes:
             try:
                 serialize_fe(fe, object, namespaces, wiki_title, assertions, format)
@@ -92,6 +102,8 @@ def to_assertions(labeled_results, id_to_title, namespace_manager, namespaces,
                 continue
     try:
         assertions.serialize(outfile, format)
+        if score_dataset:
+            score_triples.serialize(score_dataset, format)
     except Exception as e:
         # If something goes wrong, probably it's due to exotic URIs
         # so encode the exception to UTF-8!

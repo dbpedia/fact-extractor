@@ -6,3 +6,4 @@ numpy==1.9.2
 click==4.0
 rfc3987==1.3.4
 lxml==3.4.4
+requests==2.7.0
