@@ -32,7 +32,7 @@ def read_sentences(rows):
     return sentences
 
 
-def to_labeled(sentences):
+def to_labeled(sentences, sentence_to_wid):
     normalizer = DateNormalizer()
     labeled = []
     for sentence_id, rows in sentences.iteritems():
@@ -43,20 +43,26 @@ def to_labeled(sentences):
         else:
             lu = lu[0]
         
+        fe_list = []
+        for fe in rows:
+            if fe[-1] not in {'O', 'LU'}:
+                uri, score = fe[5].split('~(') if fe[4] == 'ENT' else fe[5], None
+                fe_list.append({
+                    'chunk': fe[2],
+                    'type': 'core',
+                    'uri': uri,
+                    'FE': fe[-1],
+                    'score': score,
+                })
+
         sentence = ' '.join(x[2] for x in rows)
+        norm = ''.join(c for c in sentence if c.isalnum())
         labels = {
-            'id': sentence_id,
+            'id': sentence_to_wid[norm],
             'frame': lu[-2],
             'lu': lu[2],
             'sentence': sentence,
-            'FEs': [
-                {
-                    'chunk': fe[2],
-                    'type': 'core',
-                    'uri': fe[4],  # classifier returns linked FEs
-                    'FE': fe[-1],
-                } for fe in rows if fe[-1] not in {'O', 'LU'}
-            ]
+            'FEs': fe_list,
         }
 
         # normalize and annotate numerical expressions
@@ -74,12 +80,13 @@ def to_labeled(sentences):
 
 @click.command()
 @click.argument('classified-output', type=click.File('r'))
-@click.argument('output-file', type=click.File('w'))
+@click.argument('sentence-to-wid', type=click.File('r'))
 @click.argument('id-to-title', type=click.File('r'))
+@click.argument('output-file', type=click.File('w'))
 @click.option('--format', default='nt')
-def main(classified_output, output_file, id_to_title, format):
+def main(classified_output, output_file, sentence_to_wid, id_to_title, format):
     sentences = read_sentences(classified_output)
-    labeled = to_labeled(sentences)
+    labeled = to_labeled(sentences, json.load(sentence_to_wid))
     mapping = json.load(id_to_title)
     processed, discarded = to_assertions(labeled, mapping, NAMESPACE_MANAGER, {
                                             'ontology': ONTOLOGY_NS,

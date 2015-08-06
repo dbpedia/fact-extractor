@@ -165,7 +165,8 @@ def produce_training_data(annotations, pos_tagged_sentences_dir, debug):
         sentence_id = sentence_id.lstrip('0')
         if not sentence_id: sentence_id = '0'
         # open treetagger output with tagged words
-        with(codecs.open(pos_tagged_sentences_dir + sentence_id, 'rb', 'utf-8')) as i:
+        with(codecs.open(os.path.join(pos_tagged_sentences_dir, sentence_id),
+                         'rb', 'utf-8')) as i:
             lines = []
             for line in i:
                 items = line.strip().split('\t')

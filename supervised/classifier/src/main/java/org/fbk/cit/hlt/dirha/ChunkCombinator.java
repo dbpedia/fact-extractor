@@ -13,10 +13,34 @@ import java.util.*;
  */
 public class ChunkCombinator {
 
+    public class ChunkToUri {
+        private String chunk;
+        private String uri;
+        private Double confidence;
+
+        public ChunkToUri(String chunk, String uri, Double confidence) {
+            this.chunk = chunk;
+            this.uri = uri;
+            this.confidence = confidence;
+        }
+
+        public String getChunk( ) {
+            return chunk;
+        }
+
+        public String getUri( ) {
+            return uri;
+        }
+
+        public Double getConfidence( ) {
+            return confidence;
+        }
+    }
+
     private final TheWikiMachineClient twm = new TheWikiMachineClient();
     private final TextProRunner tpr = new TextProRunner();
 
-    public ChunkCombinator() {
+    public ChunkCombinator() throws IOException {
     }
 
     public static void main(String[] args) throws Exception {
@@ -31,19 +55,32 @@ public class ChunkCombinator {
 
 
     public Set<String> getTheWikiMachineChunks( String sentence, boolean disambiguation ) throws Exception {
-        return getTheWikiMachineChunkToUri( sentence, disambiguation ).keySet( );
+        return getTheWikiMachineChunkToUriWithConfidence( sentence, disambiguation ).keySet( );
     }
 
     public Map<String, String> getTheWikiMachineChunkToUri( String sentence, boolean disambiguation ) throws Exception {
+        Map<String, ChunkToUri> resolved = getTheWikiMachineChunkToUriWithConfidence( sentence, disambiguation );
         Map<String, String> chunkToUri = new HashMap<>( );
+
+        for ( String chunk : resolved.keySet( ) ) {
+            chunkToUri.put( chunk, resolved.get( chunk ).getUri( ) );
+        }
+
+        return chunkToUri;
+    }
+
+    public Map<String, ChunkToUri> getTheWikiMachineChunkToUriWithConfidence( String sentence, boolean disambiguation )
+            throws Exception {
+
+        Map<String, ChunkToUri> chunkToUri = new HashMap<>( );
 
         JSONObject response = twm.linkText( sentence, disambiguation );
         JSONArray chunks = twm.extractEntities( response, disambiguation );
         for ( int i = 0; i < chunks.length( ); i++ ) {
             JSONObject link = chunks.getJSONObject( i );
-            String chunk = link.getString( "chunk" ),
-                    uri = link.getString( "uri" );
-            chunkToUri.put( chunk, uri );
+            String chunk = link.getString( "chunk" );
+            chunkToUri.put( chunk, new ChunkToUri( chunk, link.getString( "uri" ),
+                                                   link.getDouble( "score" ) ) );
         }
 
         return chunkToUri;

@@ -118,8 +118,6 @@ public class Annotator {
 		roleModel = svm.svm_load_model(roleLibsvmModelFile.getAbsolutePath());
 		frameModel = svm.svm_load_model(frameLibsvmModelFile.getAbsolutePath());
 		gazetteerMap = readGazetteer(gazetteerFile);
-
-		//System.setProperty("treetagger.home", "/Users/giuliano/Applications/treetagger");
 	}
 
 	// todo: common
@@ -173,13 +171,6 @@ public class Annotator {
 		String[] eos = {"EOS", "EOS", "EOS"};
 		exampleList.add(eos);
 
-		//tt.setModel("/Users/giuliano/Applications/treetagger/lib/italian-utf8.par");
-		/*if (System.getProperty("treetagger.home") == null) {
-			tt.setModel("/Users/giuliano/Applications/treetagger/lib/italian-utf8.par");
-		}
-		else {
-			tt.setModel(System.getProperty("treetagger.home") + "/lib/italian-utf8.par");
-		} */
 		try {
 			TokenReader tokenReader = new TokenReader<String>(exampleList);
 
@@ -192,13 +183,15 @@ public class Annotator {
 		} catch (Exception e) {
 			logger.error(e);
 		}
-        Map<String, String> disambiguated = combinator.getTheWikiMachineChunkToUri( line, true );
+        Map<String, ChunkCombinator.ChunkToUri> disambiguated = combinator.getTheWikiMachineChunkToUriWithConfidence( line, true );
 		exampleList = mergeChunksIntoExampleList(exampleList, disambiguated);
  		exampleList.add(eos);
 		return exampleList;
 	}
 
-    private List<String[]> mergeChunksIntoExampleList( List<String[]> exampleList, Map<String, String> combinedChunks ) {
+    private List<String[]> mergeChunksIntoExampleList( List<String[]> exampleList, Map<String,
+            ChunkCombinator.ChunkToUri> combinedChunks ) {
+
         List<String[]> merged = new ArrayList<>( exampleList );
         for ( String chunk : combinedChunks.keySet( ) ) {
             String[] tokens = chunk.split( "\\s+" );
@@ -225,9 +218,22 @@ public class Annotator {
                 String[] replacement;
 
                 // Use the 'ENT' tag only if the n-gram has more than 1 token, otherwise keep the original POS tag
-                if ( tokens.length > 1 )
-                    replacement = new String[]{ chunk.replace( ' ', '_' ), "ENT", combinedChunks.get( chunk ) };
-                else replacement = new String[]{ chunk, toReplace[ 1 ], combinedChunks.get( chunk ) };
+                if ( tokens.length > 1 ) {
+                    replacement = new String[] {
+                            chunk.replace( ' ', '_' ),
+                            "ENT",
+                            combinedChunks.get( chunk ).getUri( ) + "~(" +
+                                    combinedChunks.get( chunk ).getConfidence( ).toString( ) + ")"
+                    };
+                }
+                else {
+                    replacement = new String[] {
+                            chunk,
+                            toReplace[ 1 ],
+                            combinedChunks.get( chunk ).getUri( ) + "~(" +
+                                    combinedChunks.get( chunk ).getConfidence( ).toString( ) + ")"
+                    };
+                }
 
                 List<String[]> startSubList = merged.subList( 0, matchStartIndex );
                 List<String[]> endSubList = merged.subList( i + 1, merged.size( ) );
@@ -285,7 +291,7 @@ public class Annotator {
 			String libsvmExample = "-1 " + roleFeatureExtraction.extractVector(i);
 			logger.debug(libsvmExample);
 
-			String y = predictRole(libsvmExample, 0);
+			String y = predictRole(libsvmExample, false);
 			//logger.debug(y);
 			String l = roleLabelIndex.getTerm((int) Double.parseDouble(y.trim()));
 			//logger.info(l + "\t" + example[0]);
@@ -307,7 +313,7 @@ public class Annotator {
 			String libsvmExample = "-1 " + frameFeatureExtraction.extractVector(i);
 			logger.debug(libsvmExample);
 
-			String y = predictFrame(libsvmExample, 0);
+			String y = predictFrame(libsvmExample, false);
 			logger.debug(y);
 			String l = frameLabelIndex.getTerm((int) Double.parseDouble(y.trim()));
 			if (l == null) {
@@ -412,7 +418,7 @@ public class Annotator {
 				String libsvmExample = "-1 " + roleFeatureExtraction.extractVector(i);
 				logger.debug(libsvmExample);
 
-				String y = predictRole(libsvmExample, 0);
+				String y = predictRole(libsvmExample, false);
 				logger.debug(y);
 				String l = roleLabelIndex.getTerm((int) Double.parseDouble(y.trim()));
 				//logger.info(l + "\t" + example[0]);
@@ -430,7 +436,7 @@ public class Annotator {
 				String libsvmExample = "-1 " + frameFeatureExtraction.extractVector(i);
 				logger.debug(libsvmExample);
 
-				String y = predictFrame(libsvmExample, 0);
+				String y = predictFrame(libsvmExample, false);
 				logger.debug(y);
 				String l = frameLabelIndex.getTerm((int) Double.parseDouble(y.trim()));
 				logger.info(l + "\t" + example[0]);
@@ -453,7 +459,7 @@ public class Annotator {
 		return Integer.parseInt(s);
 	}
 
-	private String predictRole(String line, int predict_probability) throws IOException {
+	private String predictRole(String line, boolean predict_probability) throws IOException {
 
 		StringBuilder sb = new StringBuilder();
 		int correct = 0;
@@ -465,7 +471,7 @@ public class Annotator {
 		int nr_class = svm.svm_get_nr_class(roleModel);
 		double[] prob_estimates = null;
 
-		if (predict_probability == 1) {
+		if (predict_probability) {
 			if (svm_type == svm_parameter.EPSILON_SVR ||
 					svm_type == svm_parameter.NU_SVR) {
 				logger.info("Prob. roleModel for test data: target value = predicted value + z,\nz: Laplace distribution e^(-|z|/sigma)/(2sigma),sigma=" + svm.svm_get_svr_probability(roleModel) + "\n");
@@ -500,7 +506,7 @@ public class Annotator {
 			}
 			logger.debug(svm_node.toString(x));
 			double v;
-			if (predict_probability == 1 && (svm_type == svm_parameter.C_SVC || svm_type == svm_parameter.NU_SVC)) {
+			if (predict_probability && (svm_type == svm_parameter.C_SVC || svm_type == svm_parameter.NU_SVC)) {
 				v = svm.svm_predict_probability(roleModel, x, prob_estimates);
 				sb.append(v + " ");
 				for (int j = 0; j < nr_class; j++) {
@@ -542,7 +548,7 @@ public class Annotator {
 		return sb.toString();
 	}
 
-	private String predictFrame(String line, int predict_probability) throws IOException {
+	private String predictFrame(String line, boolean predict_probability) throws IOException {
 
 		StringBuilder sb = new StringBuilder();
 		int correct = 0;
@@ -554,7 +560,7 @@ public class Annotator {
 		int nr_class = svm.svm_get_nr_class(frameModel);
 		double[] prob_estimates = null;
 
-		if (predict_probability == 1) {
+		if (predict_probability) {
 			if (svm_type == svm_parameter.EPSILON_SVR ||
 					svm_type == svm_parameter.NU_SVR) {
 				logger.info("Prob. roleModel for test data: target value = predicted value + z,\nz: Laplace distribution e^(-|z|/sigma)/(2sigma),sigma=" + svm.svm_get_svr_probability(roleModel) + "\n");
@@ -589,7 +595,7 @@ public class Annotator {
 			}
 			logger.debug(svm_node.toString(x));
 			double v;
-			if (predict_probability == 1 && (svm_type == svm_parameter.C_SVC || svm_type == svm_parameter.NU_SVC)) {
+			if (predict_probability && (svm_type == svm_parameter.C_SVC || svm_type == svm_parameter.NU_SVC)) {
 				v = svm.svm_predict_probability(frameModel, x, prob_estimates);
 				sb.append(v + " ");
 				for (int j = 0; j < nr_class; j++) {

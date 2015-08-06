@@ -5,6 +5,7 @@ PAGES_DIR=$(WORK_DIR)/pages
 PAGES_DIR=$(WORK_DIR)/pages
 SOCCER_DIR=$(WORK_DIR)/soccer
 SENTENCES_DIR=$(WORK_DIR)/sentences
+TAGGED_DIR=$(WORK_DIR)/tagged
 GOLD_DIR=$(WORK_DIR)/gold
 TREETAGGER_HOME=../tree-tagger
 TREETAGGER=$(TREETAGGER_HOME)/cmd/tree-tagger-$(LANGUAGE)
@@ -16,7 +17,8 @@ CL_JAVA_OPTS=-Dlog-config=supervised/classifier/log-config.txt -Xmx2G -Dfile.enc
 CL_TRAINING_SET=supervised/resources/training.sample
 CL_GAZETTEER=supervised/resources/it/soccer-gaz.tsv
 CL_EVAL_OUTPUT=/tmp/classifierEvaluationOutput
-CL_SENTENCES_FILE=
+CL_SENTENCES_FILE=$(WORK_DIR)/sample-5.txt
+CL_OUTPUT=$(WORK_DIR)/sample-5-classified.txt
 CL_ANNOTATED_GOLD=
 LINK_MODE=twm  # twm or nex
 CF_RESULTS=resources/crowdflower-results.sample
@@ -48,9 +50,11 @@ extract-verbs:
 		$(WORK_DIR)/vocabulary.txt
 
 extract-sentences:
-	mkdir -p $(SENTENCES_DIR)
+	mkdir -p $(SENTENCES_DIR) $(TAGGED_DIR)
 	python verb_extraction/extract_sentences.py $(WORK_DIR)/all-soccer.txt \
-		resources/tokens.list $(SENTENCES_DIR)
+		resources/tokens.list $(WORK_DIR)/sentence-to-wikiid.json $(SENTENCES_DIR)
+	find $(SENTENCES_DIR) -type f -exec sh -c 'echo $$1 && cat "$$1" | \
+		$(TREETAGGER) > $(TAGGED_DIR)/$$(basename $$1) 2> /dev/null' 'extract' {} \;
 
 rank-verbs:
 	cut -f 2 $(WORK_DIR)/token2lemma.txt | python verb_ranking/make_lemma_freq.py - \
@@ -71,25 +75,24 @@ rank-verbs:
 		$(WORK_DIR)/verbs-stdev.json $(WORK_DIR)/lemma-stdev.json
 
 gold-add:
-	mkdir -p $(GOLD_DIR)/$(LU)/sentences $(GOLD_DIR)/$(LU)/tagged $(GOLD_DIR)/$(LU)/gold
+	mkdir -p $(GOLD_DIR)/$(LU)/sentences $(GOLD_DIR)/$(LU)/gold
 	grep -w $(LU) $(WORK_DIR)/top-50-token2lemma.txt | cut -f 1 \
 		> $(GOLD_DIR)/$(LU)/tokens.txt
 	python verb_extraction/extract_sentences.py $(WORK_DIR)/all-soccer.txt \
 		$(GOLD_DIR)/$(LU)/tokens.txt $(GOLD_DIR)/$(LU)/sentences \
 		--min-words 5 --max-words 15
-	find $(GOLD_DIR)/$(LU)/sentences/* -exec sh -c 'echo $$1 && cat "$$1" | \
-		$(TREETAGGER) > $(GOLD_DIR)/$(LU)/tagged/$$(basename $$1)' 'gold-add' {} \;
-	python seed_selection/get_meaningful_sentences.py $(GOLD_DIR)/$(LU)/tagged \
+	python seed_selection/get_meaningful_sentences.py $(TAGGED_DIR) \
 		$(GOLD_DIR)/$(LU)/tokens.txt $(GOLD_DIR)/$(LU)/gold
 
 gold-finalize:
-	mkdir -p $(GOLD_DIR)/sentences $(GOLD_DIR)/tagged
+	mkdir -p $(GOLD_DIR)/sentences
 	find $(GOLD_DIR)/*/gold/* | shuf | head -n $(GOLD_LU_NUM) | xargs -i cp {} \
 		$(GOLD_DIR)/sentences/
-	find $(GOLD_DIR)/sentences/* -exec sh -c 'echo $$1 && cat "$$1" | \
-		$(TREETAGGER) > $(GOLD_DIR)/tagged/$$(basename $$1)' 'gold-finalize' {} \;
 	find $(GOLD_DIR)/gold/* -type f -exec sh -c 'cat $$1; echo' _ "{}" \; \
 		| head -n 50 > $(WORK_DIR)/sample-50.txt
+
+supervised-build-classifier:
+	cd supervised/classifier && mvn compile assembly:assembly
 
 supervised-learn-roles:
 	java $(CL_JAVA_OPTS) $(CL_MAIN_PACKAGE).SpreadSheetToRoleTrainingSet \
@@ -111,18 +114,22 @@ supervised-run-interactive:
 		-l $(LANGCODE) -i
 
 supervised-run-batch:
-	ifndef CL_SENTENCES_FILE $(error CL_SENTENCES_FILE is not set) endif
 	java $(CL_JAVA_OPTS) -Dtreetagger.home=$(TREETAGGER_HOME) \
 		$(CL_MAIN_PACKAGE).Annotator -g $(CL_GAZETTEER) -m $(CL_TRAINING_SET) \
-		-l $(LANGCODE) -r $(CL_EVAL_OUTPUT)  -a $(CL_SENTENCES_FILE)
+		-l $(LANGCODE) -r $(CL_EVAL_OUTPUT)  -a $(CL_SENTENCES_FILE) \
+		-o $(CL_OUTPUT)
 
 supervised-evaluate:
 	ifndef CL_ANNOTATED_GOLD $(error CL_ANNOTATED_GOLD is not set) endif
-	ifndef CL_SENTENCES_FILE $(error CL_SENTENCES_FILE is not set) endif
 	java $(CL_JAVA_OPTS) -Dtreetagger.home=$(TREETAGGER_HOME) \
 		$(CL_MAIN_PACKAGE).Annotator -g $(CL_GAZETTEER) -m $(CL_TRAINING_SET) \
 		-l $(LANGCODE) -r $(CL_EVAL_OUTPUT) -a $(CL_SENTENCES_FILE) \
 		-e $(CL_ANNOTATED_GOLD)
+
+supervised-results-to-assertions:
+	python supervised/produce_triples.py $(CL_OUTPUT) \
+		$(WORK_DIR)/sentence-to-wikiid.json $(WORK_DIR)/wiki-id-to-title-mapping.json \
+		$(WORK_DIR)/supervised-triples.nt --format nt
 
 crowdflower-create-input:
 	# TODO generate twm ngrams and textpro chunks somehow
@@ -140,7 +147,7 @@ crowdflower-create-input:
 
 crowdflower-to-training:
 	python crowdflower/crowdflower_results_into_training_data.py $(CF_RESULTS) \
-		$(GOLD_DIR)/tagged $(WORK_DIR)/training-data.tsv
+		$(TAGGED_DIR) $(WORK_DIR)/training-data.tsv
 
 run-unsupervised:
 	# you need to run extract-soccer before

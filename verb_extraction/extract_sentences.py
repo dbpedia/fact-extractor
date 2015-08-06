@@ -14,7 +14,7 @@ def iter_split(iterator, split):
             acc = []
 
 
-def process_article(content, tokens, output_dir, min_words, max_words):
+def process_article(content, tokens, sentence_wid, output_dir, min_words, max_words):
     attrs = dict(re.findall(r'([^\s=]+)="([^"]+)"', content))
 
     i = 0
@@ -25,7 +25,10 @@ def process_article(content, tokens, output_dir, min_words, max_words):
             if min_words < len(snt_tokens) < max_words and \
                     any(token in snt_tokens for token in tokens):
 
-                fout = os.path.join(output_dir, '%s.%d' % (attrs['id'], i))
+                wid = '%s.%d' % (attrs['id'], i)
+                norm = ''.join(c for c in sentence if c.isalnum())
+                sentence_wid[norm] = wid
+                fout = os.path.join(output_dir, wid)
                 with open(fout, 'w') as f:
                     f.write(sentence.encode('utf8'))
                 i += 1
@@ -39,17 +42,20 @@ def process_article(content, tokens, output_dir, min_words, max_words):
 @click.command()
 @click.argument('input_file', type=click.File('r'))
 @click.argument('token_list', type=click.File('r'))
+@click.argument('sentence-to-wid', type=click.File('w'))
 @click.argument('output_dir', type=click.Path(exists=True, file_okay=False))
 @click.option('--min-words', default=5)
 @click.option('--max-words', default=25)
-def main(input_file, token_list, output_dir, min_words, max_words):
+def main(input_file, token_list,sentence_to_wid, output_dir, min_words, max_words):
     tokens = {row.strip().decode('utf8') for row in token_list}
 
     mapping, count = {}, 0
     for i, rows in enumerate(iter_split(input_file, lambda row: '</doc>' in row)):
         article = '\n'.join(rows).decode('utf8')
-        count += process_article(article, tokens, output_dir, min_words, max_words)
-
+        count += process_article(article, tokens, mapping, output_dir,
+                                 min_words, max_words)
+    json.dump({k.encode('utf8'): v for k, v in mapping.iteritems()},
+               sentence_to_wid, indent=2)
     print >> sys.stderr, 'Processed %d articles, extracted %d sentences' % (i, count)
 
 
