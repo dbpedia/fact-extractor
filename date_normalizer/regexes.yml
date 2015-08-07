@@ -61,7 +61,7 @@ Tempo:
       '"{:02d}"^^<{schema}>'.format(month_to_num(match.group('month')),
                                     schema=schema['month'])
 
-  - (nel\s|il\s|nell'\s?)(\w+(\s|\b)){{,2}}(?P<year>\d{{4}})(?!\s*[-/]): >
+  - (nel\s|il\s|nell'\s?)(?P<year>\d{{4}})(?!\s*[-/]): >
       '"{}"^^<{schema}>'.format(match.group('year'),
                                 schema=schema['year'])
 
@@ -96,7 +96,7 @@ Durata:
   - fino al((l'\s?|la\s|\s)?(\w+(\b|\s)){{,3}} del(l')?)? (?P<year>\d{{2,4}}): >
       '"to {}"'.format(match.group('year'))
 
-  - dal (?P<year>\d{{2,4}})\b(?! al): >
+  - dal (?P<year>\d{{4}})\b(?! al): >
       '"from {}"'.format(match.group('year'))
 
   - (per )?(?P<num>{lit_digit}|\d+)( sol[iae])? (stagion[ei]|ann[oi]|annat[ae]): >
@@ -129,4 +129,4 @@ Classifica:
   - secondo: >
       '"II"'
   - terzo: >
-      '"II"'
+      '"III"'
