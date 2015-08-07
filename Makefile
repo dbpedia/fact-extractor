@@ -58,8 +58,8 @@ extract-sentences:
 	mkdir -p $(SENTENCES_DIR) $(TAGGED_DIR)
 	python extraction/extract_sentences.py $(WORK_DIR)/all-soccer.txt \
 		resources/tokens.list $(WORK_DIR)/sentence-to-wikiid.json $(SENTENCES_DIR)
-	find $(SENTENCES_DIR) -type f -exec sh -c 'echo $$1 && cat "$$1" | \
-		$(TREETAGGER) > $(TAGGED_DIR)/$$(basename $$1) 2> /dev/null' 'extract' {} \;
+	find $(SENTENCES_DIR) -type f | xargs -I{} -P 4 sh -c \
+		'echo {} && $(TREETAGGER) {} > $(TAGGED_DIR)/$$(basename {}) 2> /dev/null';
 
 rank-verbs:
 	cut -f 2 $(WORK_DIR)/token2lemma.txt | python verb_ranking/make_lemma_freq.py - \
@@ -81,15 +81,19 @@ rank-verbs:
 
 sample-add:
 	if [ -z "$(LU)" ]; then echo "Error: LU not set" && exit 1; fi
-	mkdir -p $(SAMPLE_DIR)/$(LU)/sentences $(SAMPLE_DIR)/$(LU)/sample
+	mkdir -p $(SAMPLE_DIR)/$(LU)/all-sentences $(SAMPLE_DIR)/$(LU)/tagged \
+		$(SAMPLE_DIR)/$(LU)/meaningful
 	grep -w $(LU) $(WORK_DIR)/top-50-token2lemma.txt | cut -f 1 \
 		> $(SAMPLE_DIR)/$(LU)/tokens.txt
 	python extraction/extract_sentences.py $(WORK_DIR)/all-soccer.txt \
 		$(SAMPLE_DIR)/$(LU)/tokens.txt $(SAMPLE_DIR)/$(LU)/title-to-wid.json \
-		$(SAMPLE_DIR)/$(LU)/sentences --min-words $(SAMPLE_MIN_WORDS) \
+		$(SAMPLE_DIR)/$(LU)/all-sentences --min-words $(SAMPLE_MIN_WORDS) \
 		--max-words $(SAMPLE_MAX_WORDS)
 	python seed_selection/get_meaningful_sentences.py $(TAGGED_DIR) \
-		$(SAMPLE_DIR)/$(LU)/tokens.txt $(SAMPLE_DIR)/$(LU)/sample
+		$(SAMPLE_DIR)/$(LU)/tokens.txt $(SAMPLE_DIR)/$(LU)/meaningful
+	find $(SAMPLE_DIR)/$(LU)/all-sentences -type f | xargs -I{} -P 4 sh -c 'echo {} && \
+		$(TREETAGGER) {} > $(SAMPLE_DIR)/$(LU)/tagged/$$(basename {}) 2> /dev/null';
+
 
 sample-finalize:
 	mkdir -p $(SAMPLE_DIR)/sentences
