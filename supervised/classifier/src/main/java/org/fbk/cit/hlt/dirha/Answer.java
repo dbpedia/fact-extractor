@@ -8,7 +8,6 @@ import org.apache.log4j.Logger;
 import java.io.IOException;
 import java.io.StringWriter;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
 /*
@@ -43,24 +42,32 @@ public class Answer {
 	 * Logger instance named <code>Answer</code>.
 	 */
 	static Logger logger = Logger.getLogger(Answer.class.getName());
-
-
 	private int id;
 
 
 	List<Entry> list;
 
 	class Entry {
-		private String[] example;
 		private int id;
 		private String frame;
 		private String role;
+        private String token;
+        private String pos;
+        private String lemma;
+		private Double roleConfidence;
+		private Double frameConfidence;
 
-		Entry(int id, String frame, String role, String[] example) {
+		Entry(int id, String token, String pos, String lemma, String frame, String role,
+              Double roleConfidence, Double frameConfidence ) {
+
 			this.id = id;
 			this.frame = frame;
 			this.role = role;
-			this.example = example;
+			this.token = token;
+            this.pos = pos;
+            this.lemma = lemma;
+            this.roleConfidence = roleConfidence;
+            this.setFrameConfidence( frameConfidence );
 		}
 
 		String getFrame() {
@@ -71,44 +78,69 @@ public class Answer {
 			return role;
 		}
 
-		String[] getExample() {
-			return example;
-		}
-
 		int getId() {
 			return id;
 		}
-	}
+
+        public String getToken( ) {
+            return token;
+        }
+
+        public String getPos( ) {
+            return pos;
+        }
+
+        public String getLemma( ) {
+            return lemma;
+        }
+
+        public Double getRoleConfidence( ) {
+            return roleConfidence;
+        }
+
+        public void setRoleConfidence( Double roleConfidence ) {
+            this.roleConfidence = roleConfidence;
+        }
+
+        public void setFrameConfidence( Double frameConfidence ) {
+            this.frameConfidence = frameConfidence;
+        }
+
+        public Double getFrameConfidence( ) {
+            return frameConfidence;
+        }
+    }
 
 	public Sentence getSentence() {
 		Sentence sentence = new Sentence(0);
 		for (int i = 0; i < list.size(); i++) {
 			Entry entry = list.get(i);
-			sentence.add(entry.getId(), entry.getFrame(), entry.getRole(), entry.getExample()[0]);
+			sentence.add(entry.getId(), entry.getFrame(), entry.getRole(), entry.getToken());
 		}
 		return sentence;
 	}
 
-	public Answer(int id, List<String[]> roleExampleList, List<String> roleAnswerList, List<String> frameAnswerList) {
-		this.id = id;
-		list = new ArrayList<Entry>();
-		logger.debug("===");
-		logger.debug(roleExampleList.size());
-		logger.debug(roleAnswerList.size());
-		logger.debug(frameAnswerList.size());
-		String frame = frameAnswerList.get(0);
-		String prevRole = "O";
-		for (int i = 0; i < roleExampleList.size(); i++) {
-			String[] example = roleExampleList.get(i);
-			String role = roleAnswerList.get(i);
-			if (!example[0].equalsIgnoreCase("EOS")) {
-				if (role.equalsIgnoreCase("O")) {
-					logger.info(i + "\tO\t" + role + "\t" + Arrays.toString(example));
-					add(id, example, "O", "O");
-				}
-				else {
+	public Answer(int id, List<ClassifierResults> classifierResultsList ) {
+        this.id = id;
+        list = new ArrayList<>( );
+        logger.debug( "===" );
+        logger.debug( classifierResultsList.size( ) );
+        String frame = classifierResultsList.get( 0 ).getPredictedRoleLabel( );
+        String prevRole = "O";
+        for ( int i = 0; i < classifierResultsList.size( ); i++ ) {
+            ClassifierResults example = classifierResultsList.get( i );
+            String role = example.getPredictedRoleLabel( );
 
-					logger.info(i + "\t" + frame + "\t" + role + "\t" + Arrays.toString(example) + "\t");
+            if ( !example.getToken( ).equalsIgnoreCase( "EOS" ) ) {
+                if ( role.equalsIgnoreCase( "O" ) ) {
+                    logger.info( i + "\tO\t" + role + "\t" + example.toString( ) + "\t" + example.getLinkConfidence( ) +
+                                         "\t" + example.getFrameConfidence( ) );
+                    list.add( new Entry( id, example.getToken( ), example.getPos( ), example.getLemma( ),
+                                         "O", "O", example.getLinkConfidence( ), example.getFrameConfidence( ) ) );
+                }
+                else {
+
+					logger.info(i + "\t" + frame + "\t" + role + "\t" + example.toString() + "\t");
 					if (role.startsWith("I-")) {
 						logger.warn(role);
 						if (prevRole.startsWith("O")) {
@@ -122,8 +154,10 @@ public class Answer {
 							role = "I-" + role.substring(2, role.length());
 						}
 					}
-					add(id, example, frame, role);
-				}
+
+                    list.add( new Entry( id, example.getToken( ), example.getPos( ), example.getLemma( ),
+                                         frame, role, example.getLinkConfidence( ), example.getFrameConfidence( ) ) );
+                }
 
 			}
 			prevRole = role;
@@ -139,37 +173,48 @@ public class Answer {
 		return l1.equals(l2);
 	}
 
-	public void add(int id, String[] example, String frame, String role) {
-		list.add(new Entry(id, frame, role, example));
-	}
-
 	public String toTSV() {
 		StringBuilder sb = new StringBuilder();
 		for (int i = 0; i < list.size(); i++) {
-			Entry entry = list.get(i);
-			int id = entry.getId();
-			String[] example = entry.getExample();
-			String frame = entry.getFrame();
-			String role = entry.getRole();
-			sb.append(id);
-			sb.append("\t");
-			sb.append(i + 1);
-			sb.append("\t");
-			sb.append(example[0]);
-			sb.append("\t");
-			sb.append(example[1]);
-			sb.append("\t");
-			sb.append(example[2]);
-			sb.append("\t");
-			sb.append(frame);
-			sb.append("\t");
-			sb.append(role);
-			sb.append("\n");
-		}
+            Entry entry = list.get( i );
+            int id = entry.getId( );
+            String frame = entry.getFrame( );
+            String role = entry.getRole( );
+            sb.append( id );
+            sb.append( "\t" );
+            sb.append( i + 1 );
+            sb.append( "\t" );
+            sb.append( entry.getToken( ) );
+            sb.append( "\t" );
+            sb.append( entry.getPos( ) );
+            sb.append( "\t" );
+            sb.append( entry.getLemma( ) );
+            sb.append( "\t" );
+            sb.append( frame );
+            sb.append( "\t" );
+            sb.append( role );
+            sb.append( "\n" );
+        }
 		sb.append("\n");
 		return sb.toString();
 	}
 
+    public String confidenceToTSV( ) {
+        StringBuilder sb = new StringBuilder( );
+        for ( int i = 0; i < list.size( ); i++ ) {
+            Entry entry = list.get( i );
+            sb.append( entry.getId( ) );
+            sb.append( "\t" );
+            sb.append( i + 1 );
+            sb.append( "\t" );
+            sb.append( entry.getFrameConfidence( ) );
+            sb.append( "\t" );
+            sb.append( entry.getRoleConfidence( ) );
+            sb.append( "\t" );
+            sb.append( "\n" );
+        }
+        return sb.toString( );
+    }
 
 	public String toJSon() {
 		StringWriter w = new StringWriter();
@@ -184,20 +229,19 @@ public class Answer {
 
 			for (int i = 0; i < list.size(); i++) {
 				Entry entry = list.get(i);
-				int id = entry.getId();
-				String[] example = entry.getExample();
-				String frame = entry.getFrame();
-				String role = entry.getRole();
-				g.writeStartObject();
-				g.writeNumberField("sid", i + 1);
-				g.writeNumberField("tid", i + 1);
-				g.writeStringField("token", example[0]);
-				g.writeStringField("pos", example[1]);
-				g.writeStringField("lemma", example[2]);
-				g.writeStringField("frame", frame);
-				g.writeStringField("role", role);
-				g.writeEndObject();
-			}
+                int id = entry.getId( );
+                String frame = entry.getFrame( );
+                String role = entry.getRole( );
+                g.writeStartObject( );
+                g.writeNumberField( "sid", i + 1 );
+                g.writeNumberField( "tid", i + 1 );
+                g.writeStringField( "token", entry.getToken( ) );
+                g.writeStringField( "pos", entry.getPos( ) );
+                g.writeStringField( "lemma", entry.getLemma( ) );
+                g.writeStringField( "frame", frame );
+                g.writeStringField( "role", role );
+                g.writeEndObject( );
+            }
 			g.writeEndArray();
 			g.writeEndObject();
 			g.close();
@@ -263,7 +307,7 @@ public class Answer {
 				}
 			}
 
-			sb.append(StringEscapeUtils.escapeHtml(entry.getExample()[0]));
+			sb.append(StringEscapeUtils.escapeHtml(entry.getToken()));
 
 			prevRole = currentRole;
 			prevFrame = currentFrame;

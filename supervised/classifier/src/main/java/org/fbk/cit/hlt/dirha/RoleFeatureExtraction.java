@@ -42,30 +42,41 @@ public class RoleFeatureExtraction extends FeatureExtraction {
 
 	private FeatureIndex featureIndex;
 
-	private List<String[]> exampleList;
+	private List<ClassifierResults> exampleList;
 
 	private Map<String, String> gazetteerMap;
 
 	public String[] columnArray = {"TERM", "POS", "LEMMA"};
 
-	public RoleFeatureExtraction(FeatureIndex featureIndex, List<String[]> exampleList, Map<String, String> gazetteerMap) throws IOException {
+	public RoleFeatureExtraction(FeatureIndex featureIndex, List<ClassifierResults> exampleList,
+								 Map<String, String> gazetteerMap) throws IOException {
 		this.featureIndex= featureIndex;
 		this.exampleList = exampleList;
 		this.gazetteerMap = gazetteerMap;
 	}
 
-	private int extractColumnFeature(int i, int column, int position) throws ArrayIndexOutOfBoundsException {
-		int k = i + position;
-		if (k < 0 || k >= exampleList.size()) {
-			return -1;
-		}
+    private int extractColumnFeature( int i, int column, int position ) throws ArrayIndexOutOfBoundsException {
+        int k = i + position;
+        if ( k < 0 || k >= exampleList.size( ) ) {
+            return -1;
+        }
 
-		String term = exampleList.get(k)[column].toLowerCase() + "_" + columnArray[column] + (position < 0 ? position : "+" + position);
+        ClassifierResults example = exampleList.get( k );
+        String feature;
+        if ( column == 0 )
+            feature = example.getToken( );
+        else if ( column == 1 )
+            feature = example.getPos( );
+        else if ( column == 2 )
+            feature = example.getLemma( );
+        else throw new ArrayIndexOutOfBoundsException( );
 
-		int j = featureIndex.put(term);
-		logger.trace("[" + j + "\t" + term + "] " + featureIndex.size());
-		return j;
-	}
+        String term = feature.toLowerCase( ) + "_" + columnArray[ column ] + ( position < 0 ? position : "+" + position );
+
+        int j = featureIndex.put( term );
+        logger.trace( "[" + j + "\t" + term + "] " + featureIndex.size( ) );
+        return j;
+    }
 
 	private int extractGazetteerFeature(int i, int position) throws ArrayIndexOutOfBoundsException {
 		int k = i + position;
@@ -73,7 +84,7 @@ public class RoleFeatureExtraction extends FeatureExtraction {
 			return -1;
 		}
 
-		String category = gazetteerMap.get(exampleList.get(k)[2].toLowerCase());
+		String category = gazetteerMap.get( exampleList.get( k ).getLemma( ).toLowerCase( ) );
 		if (category == null) {
 			return -1;
 		}
@@ -121,7 +132,7 @@ public class RoleFeatureExtraction extends FeatureExtraction {
 			//add(extractGazetteerFeature(i, 2), set); //gazetteer +1
 
 		} catch (ArrayIndexOutOfBoundsException e) {
-			logger.error("error at line " + i + " (" + Arrays.toString(exampleList.get(i)).replace("\t", "#") + ")");
+			logger.error("error at line " + i + " (" + exampleList.get(i).toString().replace( "\t", "#" ) + ")");
 			logger.error(e);
 		}
 
