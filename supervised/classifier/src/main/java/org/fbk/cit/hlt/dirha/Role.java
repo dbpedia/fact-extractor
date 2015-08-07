@@ -17,7 +17,7 @@ public class Role {
 	 */
 	static Logger logger = Logger.getLogger(Role.class.getName());
 
-	private int id;
+	private String id;
 	private String name;
 	private String value;
 
@@ -27,13 +27,13 @@ public class Role {
 		this.value = role.getValue();
 	}
 
-	Role(int id, String name, String value) {
+	Role(String id, String name, String value) {
 		this.id = id;
 		this.name = name;
 		this.value = value;
 	}
 
-	void setId(int id) {
+	void setId(String id) {
 		this.id = id;
 	}
 
@@ -53,7 +53,7 @@ public class Role {
 		return value;
 	}
 
-	int getId() {
+	String getId() {
 		return id;
 	}
 

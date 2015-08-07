@@ -322,20 +322,27 @@ public class Annotator {
 		LineNumberReader lr = new LineNumberReader(new FileReader(fin));
 		String line = null;
 		int count = 0;
+        String sentence_id = null;
+
 		while ((line = lr.readLine()) != null) {
 			try {
-				if (line.length() > 0) {
-					logger.debug(count + "\t" + line);
-					/*List<String[]> roleExampleList = toRoleExampleList(line.trim());
-					List<String> roleAnswerList = classifyRoles(roleExampleList);
-					logger.debug(count + "\t" + roleAnswerList);
-					List<String> frameAnswerList = classifyFrames(roleExampleList);
-					logger.debug(count + "\t" + frameAnswerList);
-					printAnswer(roleExampleList, roleAnswerList, frameAnswerList);
-					list.add(new Answer(count, roleExampleList, roleAnswerList, frameAnswerList));  */
-					list.add(classify(line, count));
-					count++;
-				}
+				if (line.length() == 0)
+                    continue;
+
+                try {
+                    Double.parseDouble( line );
+                    sentence_id = line;
+                }
+                catch(NumberFormatException ex) {
+                    logger.debug(count + "\t" + line);
+                    String sid;
+                    if(sentence_id == null) sid = Integer.toString( count++ );
+                    else {
+                        sid = sentence_id;
+                        sentence_id = null;
+                    }
+                    list.add(classify(line, sid));
+                }
 
 			} catch (Exception e) {
 				logger.error(e);
@@ -346,16 +353,16 @@ public class Annotator {
 
 	public Answer classify(String line) throws Exception {
 		//logger.debug("classifying " + line + "...");
-		return classify(line, 0);
+		return classify(line, "0");
 	}
 
-	public Answer classify(String line, int count) throws Exception {
-		logger.info("classifying " + line + " (" + count + ")...");
+	public Answer classify(String line, String sentence_id) throws Exception {
+		logger.info("classifying " + line + " (" + sentence_id + ")...");
 		List<ClassifierResults> classifierResultsList = toRoleExampleList(line.trim());
 		classifyRoles( classifierResultsList );
 		classifyFrames( classifierResultsList );
 		printAnswer( classifierResultsList );
-		return new Answer(count, classifierResultsList );
+		return new Answer(sentence_id, classifierResultsList );
 	}
 
 	private void printAnswer(List<ClassifierResults> classifierResultsList ) {
