@@ -141,11 +141,10 @@ supervised-evaluate:
 		-e $(CL_ANNOTATED_GOLD)
 
 supervised-results-to-assertions:
-	python supervised/produce_triples.py $(CL_OUTPUT) \
-		$(WORK_DIR)/sentence-to-wikiid.json $(WORK_DIR)/wiki-id-to-title-mapping.json \
-		$(WORK_DIR)/supervised-triples.nt $(WORK_DIR)/supervised-scores.nt --format nt \
-        --sentence-score $(SCORING_TYPE) --core-weight $(SCORING_CORE_WEIGHT) \
-        --score-fes --fe-score $(FE_SCORE) --format nt
+	python supervised/produce_triples.py $(CL_OUTPUT) $(CL_CONF_OUTPUT) \
+		$(WORK_DIR)/wiki-id-to-title-mapping.json $(WORK_DIR)/supervised-triples.nt \
+        $(WORK_DIR)/supervised-scores.nt --format nt --sentence-score $(SCORING_TYPE) \
+        --core-weight $(SCORING_CORE_WEIGHT) --fe-score $(FE_SCORE) --format nt
 
 crowdflower-create-input:
 	# TODO generate twm ngrams and textpro chunks somehow

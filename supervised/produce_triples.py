@@ -77,7 +77,7 @@ def to_labeled(sentences, confidence, fe_score_type):
                     'type': 'core',
                     fe_format: fe[4],
                     'FE': fe[-1],
-                    'score': float(score) if score else None
+                    'score': float(score) if score is not None else None
                 })
 
         sentence = ' '.join(x[2] for x in rows)

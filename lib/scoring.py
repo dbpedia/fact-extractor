@@ -12,9 +12,10 @@ def compute_score(sentence, score, core_fes_weight):
     if score == 'arithmetic-mean':
         score = (sum(fe['score'] for fe in scored_fes) / len(scored_fes))
     elif score == 'weighted-mean':
-        score = sum(
-                fe['score'] * core_fes_weight if fe['type'] == 'core' else 1
-                for fe in scored_fes) / len(scored_fes)
+        score = sum(fe['score'] * core_fes_weight if fe['type'] == 'core' else 1
+                    for fe in scored_fes)
+        score /= sum(core_fes_weight if fe['type'] == 'core' else 1
+                     for fe in scored_fes)
     elif score == 'f-score':
         score_weight = [(fe['score'], core_fes_weight if fe['type'] == 'core' else 1)
                         for fe in scored_fes]
