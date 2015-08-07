@@ -42,13 +42,20 @@ public class Answer {
 	 * Logger instance named <code>Answer</code>.
 	 */
 	static Logger logger = Logger.getLogger(Answer.class.getName());
-	private int id;
+	private String sentenceID;
 
 
 	List<Entry> list;
 
-	class Entry {
-		private int id;
+    public String getSentenceID( ) {
+        return sentenceID;
+    }
+
+    public void setSentenceID( String sentenceID ) {
+        this.sentenceID = sentenceID;
+    }
+
+    class Entry {
 		private String frame;
 		private String role;
         private String token;
@@ -56,18 +63,19 @@ public class Answer {
         private String lemma;
 		private Double roleConfidence;
 		private Double frameConfidence;
+        private Double linkConfidence;
 
-		Entry(int id, String token, String pos, String lemma, String frame, String role,
-              Double roleConfidence, Double frameConfidence ) {
+		Entry(String token, String pos, String lemma, String frame, String role,
+              Double roleConfidence, Double frameConfidence, Double linkConfidence ) {
 
-			this.id = id;
 			this.frame = frame;
 			this.role = role;
 			this.token = token;
             this.pos = pos;
             this.lemma = lemma;
             this.roleConfidence = roleConfidence;
-            this.setFrameConfidence( frameConfidence );
+            this.frameConfidence = frameConfidence;
+            this.linkConfidence = linkConfidence;
 		}
 
 		String getFrame() {
@@ -76,10 +84,6 @@ public class Answer {
 
 		String getRole() {
 			return role;
-		}
-
-		int getId() {
-			return id;
 		}
 
         public String getToken( ) {
@@ -98,30 +102,26 @@ public class Answer {
             return roleConfidence;
         }
 
-        public void setRoleConfidence( Double roleConfidence ) {
-            this.roleConfidence = roleConfidence;
-        }
-
-        public void setFrameConfidence( Double frameConfidence ) {
-            this.frameConfidence = frameConfidence;
-        }
-
         public Double getFrameConfidence( ) {
             return frameConfidence;
+        }
+
+        public Double getLinkConfidence( ) {
+            return linkConfidence;
         }
     }
 
 	public Sentence getSentence() {
-		Sentence sentence = new Sentence(0);
+		Sentence sentence = new Sentence(sentenceID);
 		for (int i = 0; i < list.size(); i++) {
 			Entry entry = list.get(i);
-			sentence.add(entry.getId(), entry.getFrame(), entry.getRole(), entry.getToken());
+			sentence.add( getSentenceID( ), entry.getFrame(), entry.getRole(), entry.getToken());
 		}
 		return sentence;
 	}
 
-	public Answer(int id, List<ClassifierResults> classifierResultsList ) {
-        this.id = id;
+	public Answer(String sentenceID, List<ClassifierResults> classifierResultsList ) {
+        this.setSentenceID( sentenceID );
         list = new ArrayList<>( );
         logger.debug( "===" );
         logger.debug( classifierResultsList.size( ) );
@@ -135,8 +135,9 @@ public class Answer {
                 if ( role.equalsIgnoreCase( "O" ) ) {
                     logger.info( i + "\tO\t" + role + "\t" + example.toString( ) + "\t" + example.getLinkConfidence( ) +
                                          "\t" + example.getFrameConfidence( ) );
-                    list.add( new Entry( id, example.getToken( ), example.getPos( ), example.getLemma( ),
-                                         "O", "O", example.getLinkConfidence( ), example.getFrameConfidence( ) ) );
+                    list.add( new Entry( example.getToken( ), example.getPos( ), example.getLemma( ),
+                                         "O", "O", example.getRoleConfidence( ), example.getFrameConfidence( ),
+                                         example.getLinkConfidence( ) ) );
                 }
                 else {
 
@@ -155,8 +156,9 @@ public class Answer {
 						}
 					}
 
-                    list.add( new Entry( id, example.getToken( ), example.getPos( ), example.getLemma( ),
-                                         frame, role, example.getLinkConfidence( ), example.getFrameConfidence( ) ) );
+                    list.add( new Entry( example.getToken( ), example.getPos( ), example.getLemma( ),
+                                         frame, role, example.getRoleConfidence( ), example.getFrameConfidence( ),
+                                         example.getLinkConfidence( ) ) );
                 }
 
 			}
@@ -177,10 +179,9 @@ public class Answer {
 		StringBuilder sb = new StringBuilder();
 		for (int i = 0; i < list.size(); i++) {
             Entry entry = list.get( i );
-            int id = entry.getId( );
             String frame = entry.getFrame( );
             String role = entry.getRole( );
-            sb.append( id );
+            sb.append( getSentenceID( ) );
             sb.append( "\t" );
             sb.append( i + 1 );
             sb.append( "\t" );
@@ -203,7 +204,7 @@ public class Answer {
         StringBuilder sb = new StringBuilder( );
         for ( int i = 0; i < list.size( ); i++ ) {
             Entry entry = list.get( i );
-            sb.append( entry.getId( ) );
+            sb.append( getSentenceID( ) );
             sb.append( "\t" );
             sb.append( i + 1 );
             sb.append( "\t" );
@@ -211,6 +212,7 @@ public class Answer {
             sb.append( "\t" );
             sb.append( entry.getRoleConfidence( ) );
             sb.append( "\t" );
+            sb.append( entry.getLinkConfidence( ) );
             sb.append( "\n" );
         }
         return sb.toString( );
@@ -229,7 +231,6 @@ public class Answer {
 
 			for (int i = 0; i < list.size(); i++) {
 				Entry entry = list.get(i);
-                int id = entry.getId( );
                 String frame = entry.getFrame( );
                 String role = entry.getRole( );
                 g.writeStartObject( );

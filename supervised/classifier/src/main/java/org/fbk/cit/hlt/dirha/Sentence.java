@@ -20,15 +20,15 @@ public class Sentence {
 	static Logger logger = Logger.getLogger(Sentence.class.getName());
 
 	private Map<String, List<Role>> frameMap;
-	private int id;
+	private String id;
 
 
-	Sentence(int id) {
+	Sentence(String id) {
 		this.id = id;
 		frameMap = new HashMap<String, List<Role>>();
 	}
 
-	int getId() {
+	String getId() {
 		return id;
 	}
 
@@ -36,7 +36,7 @@ public class Sentence {
 		return frameMap.keySet();
 	}
 
-	public void add(int id, String frame, String role, String value) {
+	public void add(String id, String frame, String role, String value) {
 		//logger.debug("adding role " + frame + "\t" + role + "\t" + value);
 		if (frame == null||frame.length() == 0 || frame.equalsIgnoreCase("o")) {
 			return;

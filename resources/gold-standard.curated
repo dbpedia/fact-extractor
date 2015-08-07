@@ -4,7 +4,7 @@
 0	3	con	PRE	con	Attività	O
 0	4	cui	PRO:rela	cui	Attività	O
 0	5	gioca	VER:pres	giocare	Attività	LU
-0	6	per tre stagioni	ENT	per tre stagioni	Attività	O
+0	-	per tre stagioni	ENT	per tre stagioni	Attività	Durata
 0	7	in	PRE	in	Attività	O
 0	8	Serie C	ENT	Serie C	Attività	Competizione
 0	9	0	SENT	0	Sconfitta	O
@@ -31,7 +31,7 @@
 2	6	in	PRE	in	Attività	O
 2	7	Championship	NOM	Championship	Attività	Competizione
 2	8	0	SENT	0	Attività	O
-3	0	Il 6 gennaio	ENT	Il 6 gennaio	Sconfitta	O
+3	-	Il 6 gennaio	ENT	Il 6 gennaio	Sconfitta	Tempo
 3	1	,	PON	,	Sconfitta	O
 3	2	alla	PRE:det	al	Sconfitta	O
 3	3	prima	ADJ	primo	Sconfitta	O
@@ -51,7 +51,7 @@
 3	17	casalinga	ADJ	casalingo	Sconfitta	O
 3	18	persa	VER:pper	perdere	Sconfitta	LU
 3	19	per	PRE	per	Sconfitta	O
-3	20	2-1	ENT	2-1	Sconfitta	O
+3	-	2-1	ENT	2-1	Sconfitta	Punteggio
 3	21	contro	PRE	contro	Sconfitta	O
 3	22	la	DET:def	il	Sconfitta	O
 3	23	Sampdoria	NPR	Sampdoria	Sconfitta	Vincitore
@@ -74,7 +74,7 @@
 4	15	al	PRE:det	al	Attività	O
 4	16	ritiro	NOM	ritiro	Attività	O
 4	17	,	PON	,	Attività	O
-4	18	nel 2003	ENT	nel 2003	Attività	O
+4	-	nel 2003	ENT	nel 2003	Attività	Tempo
 4	19	0	SENT	0	Attività	O
 5	0	Ha	VER:pres	avere	Attività	O
 5	1	giocato	VER:pper	giocare	Attività	LU
@@ -93,7 +93,7 @@
 6	6	Coppa Italia	ENT	Coppa Italia	Trofeo	Competizione
 6	7	0	SENT	0	Trofeo	O
 7	0	Nella	PRE:det	nel	Sconfitta	O
-7	1	stagione 1965-1966	ENT	stagione 1965-1966	Sconfitta	O
+7	-	stagione 1965-1966	ENT	stagione 1965-1966	Sconfitta	Durata
 7	2	ha	VER:pres	avere	Sconfitta	O
 7	3	giocato	VER:pper	giocare	Sconfitta	O
 7	4	la	DET:def	il	Sconfitta	O
@@ -112,7 +112,7 @@
 7	17	la	DET:def	il	Sconfitta	O
 7	18	Fiorentina	NPR	Fiorentina	Sconfitta	Vincitore
 7	19	per	PRE	per	Sconfitta	O
-7	20	2-1	ENT	2-1	Sconfitta	O
+7	-	2-1	ENT	2-1	Sconfitta	Punteggio
 7	21	0	SENT	0	Sconfitta	O
 8	0	Ha	VER:pres	avere	Attività	O
 8	1	giocato	VER:pper	giocare	Attività	LU
@@ -126,7 +126,7 @@
 8	9	internazionali	ADJ	internazionale	Attività	O
 8	10	0	SENT	0	Attività	O
 9	0	Nella	PRE:det	nel	Sconfitta	O
-9	1	stagione 2008-2009	ENT	stagione 2008-2009	Sconfitta	O
+9	-	stagione 2008-2009	ENT	stagione 2008-2009	Sconfitta	Durata
 9	2	Exteberria	NOM	<unknown>	Sconfitta	O
 9	3	arriva	VER:pres	arrivare	Sconfitta	O
 9	4	con	PRE	con	Sconfitta	O
@@ -140,10 +140,10 @@
 9	12	,	PON	,	Sconfitta	O
 9	13	perdendola	VER:geru	perdere	Sconfitta	LU
 9	14	per	PRE	per	Sconfitta	O
-9	15	4-1	ENT	4-1	Sconfitta	O
+9	-	4-1	ENT	4-1	Sconfitta	Punteggio
 9	16	0	SENT	0	Sconfitta	O
 10	0	Nella	PRE:det	nel	Sconfitta	O
-10	1	stagione successiva	ENT	stagione successiva	Sconfitta	O
+10	-	stagione successiva	ENT	stagione successiva	Sconfitta	Tempo
 10	2	le	DET:def	il	Sconfitta	O
 10	3	presenze	NOM	presenza	Sconfitta	O
 10	4	in	PRE	in	Sconfitta	O
@@ -165,7 +165,7 @@
 10	20	il	DET:def	il	Sconfitta	O
 10	21	Real Madrid	ENT	Real Madrid	Sconfitta	Vincitore
 10	22	0	SENT	0	Sconfitta	O
-11	0	Il 22 luglio 2014	ENT	Il 22 luglio 2014	Stato	O
+11	-	Il 22 luglio 2014	ENT	Il 22 luglio 2014	Stato	Tempo
 11	1	,	PON	,	Stato	O
 11	2	dopo	PRE	dopo	Stato	O
 11	3	la	DET:def	il	Stato	O
@@ -185,10 +185,10 @@
 12	1	esordito	VER:pper	esordire	Attività	LU
 12	2	in	PRE	in	Attività	O
 12	3	Nazionale	NOM	Nazionale	Attività	Squadra
-12	4	nel 2007	ENT	nel 2007	Attività	O
+12	-	nel 2007	ENT	nel 2007	Attività	Tempo
 12	5	0	SENT	0	Attività	O
 13	0	Debutta	VER:pres	debuttare	Attività	O
-13	1	nel 2006	ENT	nel 2006	Attività	O
+13	-	nel 2006	ENT	nel 2006	Attività	Tempo
 13	2	con	PRE	con	Attività	O
 13	3	la	DET:def	il	Attività	O
 13	4	Nazionale azera	ENT	Nazionale azera	Attività	Squadra
@@ -203,7 +203,7 @@
 14	0	Alla	PRE:det	al	Stato	O
 14	1	fine	NOM	fine	Stato	O
 14	2	della	PRE:det	del	Stato	O
-14	3	stagione 2010-2011	ENT	stagione 2010-2011	Stato	O
+14	-	stagione 2010-2011	ENT	stagione 2010-2011	Stato	Durata
 14	4	,	PON	,	Stato	O
 14	5	in	PRE	in	Stato	O
 14	6	cui	PRO:rela	cui	Stato	O
@@ -231,12 +231,12 @@
 15	2	con	PRE	con	Attività	O
 15	3	la	DET:def	il	Attività	O
 15	4	Nazionale cipriota	ENT	Nazionale cipriota	Attività	Squadra
-15	5	nel 1982	ENT	nel 1982	Attività	O
+15	-	nel 1982	ENT	nel 1982	Attività	Tempo
 15	6	,	PON	,	Attività	O
 15	7	giocando	VER:geru	giocare	Attività	LU
 15	8	10	NUM	@card@	Attività	O
 15	9	partite	NOM	partita	Attività	O
-15	10	fino al 1985	ENT	fino al 1985	Attività	O
+15	-	fino al 1985	ENT	fino al 1985	Attività	Durata
 15	11	0	SENT	0	Attività	O
 16	0	In	PRE	in	Attività	O
 16	1	totale	NOM	totale	Attività	O
@@ -263,7 +263,7 @@
 18	0	Esordisce	VER:pres	esordire	Sconfitta	O
 18	1	nella	PRE:det	nel	Sconfitta	O
 18	2	nazionale maggiore svedese	ENT	nazionale maggiore svedese	Sconfitta	Perdente
-18	3	il 22 gennaio 2004	ENT	il 22 gennaio 2004	Sconfitta	O
+18	-	il 22 gennaio 2004	ENT	il 22 gennaio 2004	Sconfitta	Tempo
 18	4	,	PON	,	Sconfitta	O
 18	5	amichevole	NOM	amichevole	Sconfitta	Competizione
 18	6	partita	NOM	partita	Sconfitta	O
@@ -273,7 +273,7 @@
 18	10	nella	PRE:det	nel	Sconfitta	O
 18	11	persa	VER:pres	perdere	Sconfitta	LU
 18	12	per	PRE	per	Sconfitta	O
-18	13	3-0	ENT	3-0	Sconfitta	O
+18	-	3-0	ENT	3-0	Sconfitta	Punteggio
 18	14	contro	PRE	contro	Sconfitta	O
 18	15	la	DET:def	il	Sconfitta	O
 18	16	Norvegia	NPR	Norvegia	Sconfitta	Vincitore
@@ -294,7 +294,7 @@
 20	5	l'	DET:def	il	Attività	O
 20	6	Argentinos Juniors	ENT	Argentinos Juniors	Attività	Squadra
 20	7	nella	PRE:det	nel	Attività	O
-20	8	stagione 2011-2012	ENT	stagione 2011-2012	Attività	O
+20	-	stagione 2011-2012	ENT	stagione 2011-2012	Attività	Durata
 20	9	.	SENT	.	Attività	O
 22	0	In	PRE	in	Attività	O
 22	1	Serie A	ENT	Serie A	Attività	Competizione
@@ -344,18 +344,18 @@
 25	1	esordito	VER:pper	esordire	Attività	LU
 25	2	in	PRE	in	Attività	O
 25	3	Nazionale maggiore	ENT	Nazionale maggiore	Attività	Squadra
-25	4	il 15 novembre 2013	ENT	il 15 novembre 2013	Attività	O
+25	-	il 15 novembre 2013	ENT	il 15 novembre 2013	Attività	Tempo
 25	5	nell'	PRE:det	nel	Attività	O
 25	6	amichevole	ADJ	amichevole	Attività	Competizione
 25	7	Albania-Bielorussia	NOM	<unknown>	Attività	O
 25	8	(	PON	(	Attività	O
-25	9	0-0	ENT	0-0	Attività	O
+25	-	0-0	ENT	0-0	Attività	Punteggio
 25	10	)	PON	)	Attività	O
 25	11	.	SENT	.	Attività	O
 26	0	Inizia	VER:pres	iniziare	Sconfitta	O
 26	1	la	DET:def	il	Sconfitta	O
 26	2	carriera	NOM	carriera	Sconfitta	O
-26	3	nel 1975	ENT	nel 1975	Sconfitta	O
+26	-	nel 1975	ENT	nel 1975	Sconfitta	Tempo
 26	4	con	PRE	con	Sconfitta	O
 26	5	il	DET:def	il	Sconfitta	O
 26	6	Mount Wellington	ENT	Mount Wellington	Sconfitta	Perdente
@@ -374,7 +374,7 @@
 26	19	il	DET:def	il	Sconfitta	O
 26	20	Nelson United	ENT	Nelson United	Sconfitta	Vincitore
 26	21	.	SENT	.	Sconfitta	O
-27	0	Nel 1969	ENT	Nel 1969	Trofeo	O
+27	-	Nel 1969	ENT	Nel 1969	Trofeo	Tempo
 27	1	fu	VER:remo	essere	Trofeo	O
 27	2	acquistato	VER:pper	acquistare	Trofeo	O
 27	3	per	PRE	per	Trofeo	O
@@ -392,7 +392,7 @@
 27	15	)	PON	)	Trofeo	O
 27	16	.	SENT	.	Trofeo	O
 28	0	Nella	PRE:det	nel	Attività	O
-28	1	stagione 2011-2012	ENT	stagione 2011-2012	Attività	O
+28	-	stagione 2011-2012	ENT	stagione 2011-2012	Attività	Durata
 28	2	ha	VER:pres	avere	Attività	O
 28	3	giocato	VER:pper	giocare	Attività	LU
 28	4	22	NUM	@card@	Attività	O
@@ -407,7 +407,7 @@
 29	1	esordito	VER:pper	esordire	Sconfitta	O
 29	2	e	CON	e	Sconfitta	O
 29	3	segnato	VER:pper	segnare	Sconfitta	O
-29	4	il 15 agosto	ENT	il 15 agosto	Sconfitta	O
+29	-	il 15 agosto	ENT	il 15 agosto	Sconfitta	Tempo
 29	5	alla	PRE:det	al	Sconfitta	O
 29	6	prima	NOM	prima|primo	Sconfitta	O
 29	7	di	PRE	di	Sconfitta	O
@@ -415,7 +415,7 @@
 29	9	nella	PRE:det	nel	Sconfitta	O
 29	10	partita	NOM	partita	Sconfitta	O
 29	11	persa	VER:pper	perdere	Sconfitta	LU
-29	12	2-1	ENT	2-1	Sconfitta	O
+29	-	2-1	ENT	2-1	Sconfitta	Punteggio
 29	13	a	PRE	a	Sconfitta	O
 29	14	Londra	NPR	Londra	Sconfitta	Luogo
 29	15	contro	PRE	contro	Sconfitta	O
@@ -427,7 +427,7 @@
 30	2	con	PRE	con	Attività	O
 30	3	la	DET:def	il	Attività	O
 30	4	Nazionale	NOM	nazionale	Attività	Squadra
-30	5	nel 2004	ENT	nel 2004	Attività	O
+30	-	nel 2004	ENT	nel 2004	Attività	Tempo
 30	6	.	SENT	.	Attività	O
 31	0	Con	PRE	con	Sconfitta	O
 31	1	la	DET:def	il	Sconfitta	O
@@ -446,11 +446,11 @@
 31	14	.	SENT	.	Sconfitta	O
 32	0	Ha	VER:pres	avere	Attività	O
 32	1	esordito	VER:pper	esordire	Attività	LU
-32	2	nel 2009	ENT	nel 2009	Attività	O
+32	-	nel 2009	ENT	nel 2009	Attività	Tempo
 32	3	in	PRE	in	Attività	O
 32	4	prima squadra	ENT	prima squadra	Attività	Squadra
 32	5	0	SENT	0	Attività	O
-33	0	Nel 2013	ENT	Nel 2013	Attività	O
+33	-	Nel 2013	ENT	Nel 2013	Attività	Tempo
 33	1	ha	VER:pres	avere	Attività	O
 33	2	esordito	VER:pper	esordire	Attività	LU
 33	3	con	PRE	con	Attività	O
@@ -497,7 +497,7 @@
 35	18	del	PRE:det	del	Attività	O
 35	19	Fredrikstad	NOM	Fredrikstad	Attività	Squadra
 35	20	0	SENT	0	Attività	O
-36	0	Nel 1998	ENT	Nel 1998	Attività	O
+36	-	Nel 1998	ENT	Nel 1998	Attività	Tempo
 36	1	,	PON	,	Attività	O
 36	2	diventò	VER:remo	diventare	Attività	O
 36	3	allenatore	NOM	allenatore	Attività	O
@@ -506,7 +506,7 @@
 36	6	0	SENT	0	Attività	O
 36	7	Vi	PRO:refl	vi	Attività	O
 36	8	rimase	VER:remo	rimanere	Attività	LU
-36	9	fino al 2005	ENT	fino al 2005	Attività	O
+36	-	fino al 2005	ENT	fino al 2005	Attività	Durata
 36	10	,	PON	,	Attività	O
 36	11	anno	NOM	anno	Attività	O
 36	12	in	PRE	in	Attività	O
@@ -520,14 +520,14 @@
 36	20	Göteborg	NOM	Göteborg	Attività	Squadra
 36	21	0	SENT	0	Attività	O
 37	0	0	SENT	0	Attività	O
-37	1	Nel 1924	ENT	Nel 1924	Attività	O
+37	-	Nel 1924	ENT	Nel 1924	Attività	Tempo
 37	2	si	PRO:pers	si	Attività	O
 37	3	trasferì	VER:remo	trasferire	Attività	O
 37	4	nel	PRE:det	nel	Attività	O
 37	5	Fluminense	NOM	Fluminense	Attività	Squadra
 37	6	dove	PRO:rela	dove	Attività	O
 37	7	rimase	VER:remo	rimanere	Attività	LU
-37	8	per tre anni	ENT	per tre anni	Attività	O
+37	-	per tre anni	ENT	per tre anni	Attività	Durata
 37	9	Durante	PRE	durante	Attività	O
 37	10	questo	PRO:demo	questo	Attività	O
 37	11	periodo	NOM	periodo	Attività	O
@@ -565,7 +565,7 @@
 39	13	Real Saragozza	ENT	Real Saragozza	Attività	Squadra
 39	14	.	SENT	.	Attività	O
 40	0	Dopo	ADV	dopo	Attività	O
-40	1	2 anni	ENT	2 anni	Attività	O
+40	-	2 anni	ENT	2 anni	Attività	Durata
 40	2	nelle	PRE:det	nel	Attività	O
 40	3	giovanili	ADJ	giovanili	Attività	Squadra
 40	4	,	PON	,	Attività	O
@@ -576,7 +576,7 @@
 40	9	dove	PRO:rela	dove	Attività	O
 40	10	ci	PRO:refl	ci	Attività	O
 40	11	rimane	VER:pres	rimanere	Attività	LU
-40	12	dal 2000 al 2006	ENT	dal 2000 al 2006	Attività	O
+40	-	dal 2000 al 2006	ENT	dal 2000 al 2006	Attività	Durata
 40	13	0	SENT	0	Attività	O
 40	14	Gioca	VER:pres	giocare	Attività	O
 40	15	totalmente	ADV	totalmente	Attività	O
@@ -610,7 +610,7 @@
 42	14	i	DET:def	il	Vittoria	O
 42	15	verdi	NOM	verdi	Vittoria	O
 42	16	vinsero	VER:remo	vincere	Vittoria	LU
-42	17	4-1	ENT	4-1	Vittoria	O
+42	-	4-1	ENT	4-1	Vittoria	Punteggio
 42	18	0	SENT	0	Vittoria	O
 43	0	Ha	VER:pres	avere	Attività	O
 43	1	esordito	VER:pper	esordire	Attività	LU
@@ -622,9 +622,9 @@
 43	7	amichevole	NOM	amichevole	Attività	Competizione
 43	8	contro	PRE	contro	Attività	O
 43	9	la	DET:def	il	Attività	O
-43	10	nel febbraio del 2007	ENT	nel febbraio del 2007	Attività	O
+43	-	nel febbraio del 2007	ENT	nel febbraio del 2007	Attività	Tempo
 43	11	0	SENT	0	Attività	O
-44	0	Il 3 maggio 2014	ENT	Il 3 maggio 2014	Trofeo	O
+44	-	Il 3 maggio 2014	ENT	Il 3 maggio 2014	Trofeo	Tempo
 44	1	conquista	NOM	conquista	Trofeo	O
 44	2	il	DET:def	il	Trofeo	O
 44	3	suo	PRO:poss	suo	Trofeo	O
@@ -637,7 +637,7 @@
 44	10	Coppa di Francia 2013-2014	ENT	Coppa di Francia 2013-2014	Trofeo	Competizione
 44	11	0	SENT	0	Trofeo	O
 45	0	Nella	PRE:det	nel	Attività	O
-45	1	stagione 2013-2014	ENT	stagione 2013-2014	Attività	O
+45	-	stagione 2013-2014	ENT	stagione 2013-2014	Attività	Durata
 45	2	ha	VER:pres	avere	Attività	O
 45	3	esordito	VER:pper	esordire	Attività	LU
 45	4	nella	PRE:det	nel	Attività	O
@@ -653,7 +653,7 @@
 46	2	i leoni di Banie	ENT	i leoni di Banie	Sconfitta	Perdente
 46	3	"	PON	"	Sconfitta	O
 46	4	disputò	VER:remo	disputare	Sconfitta	O
-46	5	il 13 maggio 2000	ENT	il 13 maggio 2000	Sconfitta	O
+46	-	il 13 maggio 2000	ENT	il 13 maggio 2000	Sconfitta	Tempo
 46	6	la	DET:def	il	Sconfitta	O
 46	7	finale	NOM	finale	Sconfitta	O
 46	8	di	PRE	di	Sconfitta	O
@@ -662,7 +662,7 @@
 46	11	,	PON	,	Sconfitta	O
 46	12	persa	VER:pper	perdere	Sconfitta	LU
 46	13	per	PRE	per	Sconfitta	O
-46	14	2-0	ENT	2-0	Sconfitta	O
+46	-	2-0	ENT	2-0	Sconfitta	Punteggio
 46	15	contro	PRE	contro	Sconfitta	O
 46	16	la	DET:def	il	Sconfitta	O
 46	17	Dinamo Bucarest	ENT	Dinamo Bucarest	Sconfitta	Vincitore
@@ -672,7 +672,7 @@
 47	2	con	PRE	con	Attività	O
 47	3	la	DET:def	il	Attività	O
 47	4	Nazionale lussemburghese	ENT	Nazionale lussemburghese	Attività	Squadra
-47	5	nel 2006	ENT	nel 2006	Attività	O
+47	-	nel 2006	ENT	nel 2006	Attività	Tempo
 47	6	0	SENT	0	Attività	O
 48	0	Dopo	ADV	dopo	Attività	O
 48	1	aver	VER:infi	avere	Attività	O
@@ -700,7 +700,7 @@
 49	7	,	PON	,	Attività	O
 49	8	dove	PRO:rela	dove	Attività	O
 49	9	rimase	VER:remo	rimanere	Attività	LU
-49	10	fino al 1967	ENT	fino al 1967	Attività	O
+49	-	fino al 1967	ENT	fino al 1967	Attività	Durata
 49	11	,	PON	,	Attività	O
 49	12	anno	NOM	anno	Attività	O
 49	13	in	PRE	in	Attività	O
@@ -719,13 +719,13 @@
 50	3	vinse	VER:remo	vincere	Trofeo	LU
 50	4	il	DET:def	il	Trofeo	O
 50	5	campionato francese	ENT	campionato francese	Trofeo	Competizione
-50	6	nel 1954	ENT	nel 1954	Trofeo	O
+50	-	nel 1954	ENT	nel 1954	Trofeo	Tempo
 50	7	e	CON	e	Trofeo	O
 50	8	la	DET:def	il	Trofeo	O
 50	9	Coppa di Francia	ENT	Coppa di Francia	Trofeo	Competizione
-50	10	nel 1953	ENT	nel 1953	Trofeo	O
+50	-	nel 1953	ENT	nel 1953	Trofeo	Tempo
 50	11	e	CON	e	Trofeo	O
-50	12	nel 1955	ENT	nel 1955	Trofeo	O
+50	-	nel 1955	ENT	nel 1955	Trofeo	Tempo
 50	13	.	SENT	.	Trofeo	O
 51	0	Con	PRE	con	Sconfitta	O
 51	1	la	DET:def	il	Sconfitta	O
@@ -740,12 +740,12 @@
 51	10	la	DET:def	il	Sconfitta	O
 51	11	Roma	NPR	Roma	Sconfitta	Vincitore
 51	12	.	SENT	.	Sconfitta	O
-52	0	Il 6 luglio 2010	ENT	Il 6 luglio 2010	Sconfitta	O
+52	-	Il 6 luglio 2010	ENT	Il 6 luglio 2010	Sconfitta	Tempo
 52	1	ha	VER:pres	avere	Sconfitta	O
 52	2	realizzato	VER:pper	realizzare	Sconfitta	O
 52	3	il	DET:def	il	Sconfitta	O
 52	4	suo	PRO:poss	suo	Sconfitta	O
-52	5	primo	ENT	primo	Sconfitta	O
+52	-	primo	ENT	primo	Sconfitta	Classifica
 52	6	gol	NOM	gol	Sconfitta	O
 52	7	in	PRE	in	Sconfitta	O
 52	8	Nazionale uruguaiana	ENT	Nazionale uruguaiana	Sconfitta	Perdente
@@ -754,14 +754,14 @@
 52	11	semifinale	NOM	semifinale	Sconfitta	Competizione
 52	12	del	PRE:det	del	Sconfitta	O
 52	13	persa	VER:pper	perdere	Sconfitta	LU
-52	14	2-3	ENT	2-3	Sconfitta	O
+52	-	2-3	ENT	2-3	Sconfitta	Punteggio
 52	15	contro	PRE	contro	Sconfitta	O
 52	16	l'	DET:def	il	Sconfitta	O
 52	17	Olanda	NPR	Olanda	Sconfitta	Vincitore
 52	18	.	SENT	.	Sconfitta	O
 53	0	Dopo	PRE	dopo	Attività	O
 53	1	le	DET:def	il	Attività	O
-53	2	tre stagioni	ENT	tre stagioni	Attività	O
+53	-	tre stagioni	ENT	tre stagioni	Attività	Durata
 53	3	,	PON	,	Attività	O
 53	4	rimane	VER:pres	rimanere	Attività	LU
 53	5	in	PRE	in	Attività	O
@@ -800,15 +800,15 @@
 55	7	la	DET:def	il	Attività	O
 55	8	Finlandia	NPR	Finlandia	Attività	Squadra
 55	9	disputata	VER:pper	disputare	Attività	O
-55	10	il 9 agosto 1925	ENT	il 9 agosto 1925	Attività	O
+55	-	il 9 agosto 1925	ENT	il 9 agosto 1925	Attività	Tempo
 55	11	.	SENT	.	Attività	O
-56	0	Nel 1986	ENT	Nel 1986	Trofeo	O
+56	-	Nel 1986	ENT	Nel 1986	Trofeo	Tempo
 56	1	ha	VER:pres	avere	Trofeo	O
 56	2	vinto	VER:pper	vincere	Trofeo	LU
 56	3	il	DET:def	il	Trofeo	O
 56	4	Campionato Europeo Under 21	ENT	Campionato Europeo Under 21	Trofeo	Competizione
 56	5	.	SENT	.	Trofeo	O
-57	0	Nel gennaio 2012	ENT	Nel gennaio 2012	Attività	O
+57	-	Nel gennaio 2012	ENT	Nel gennaio 2012	Attività	Tempo
 57	1	viene	VER:pres	venire	Attività	O
 57	2	ceduto	VER:pper	cedere	Attività	O
 57	3	al	PRE:det	al	Attività	O
@@ -816,10 +816,10 @@
 57	5	con	PRE	con	Attività	O
 57	6	cui	PRO:rela	cui	Attività	O
 57	7	esordisce	VER:pres	esordire	Attività	LU
-57	8	in maggio	ENT	in maggio	Attività	O
+57	-	in maggio	ENT	in maggio	Attività	Tempo
 57	9	.	SENT	.	Attività	O
 58	0	Nella	PRE:det	nel	Trofeo	O
-58	1	stagione successiva	ENT	stagione successiva	Trofeo	O
+58	-	stagione successiva	ENT	stagione successiva	Trofeo	Tempo
 58	2	scese	VER:pper	scendere	Trofeo	O
 58	3	in	PRE	in	Trofeo	O
 58	4	campo	NOM	campo	Trofeo	O
@@ -846,9 +846,9 @@
 60	2	con	PRE	con	Attività	O
 60	3	la	DET:def	il	Attività	O
 60	4	Nazionale salomonese	ENT	Nazionale salomonese	Attività	Squadra
-60	5	nel 2012	ENT	nel 2012	Attività	O
+60	-	nel 2012	ENT	nel 2012	Attività	Tempo
 60	6	.	SENT	.	Attività	O
-61	0	Nel 1999	ENT	Nel 1999	Attività	O
+61	-	Nel 1999	ENT	Nel 1999	Attività	Tempo
 61	1	ha	VER:pres	avere	Attività	O
 61	2	giocato	VER:pper	giocare	Attività	LU
 61	3	la	DET:def	il	Attività	O
@@ -875,13 +875,13 @@
 62	13	Catania	NPR	Catania	Sconfitta	Perdente
 62	14	.	SENT	.	Sconfitta	O
 62	15	Debutta	VER:pres	debuttare	Sconfitta	O
-62	16	il 13 dicembre	ENT	il 13 dicembre	Sconfitta	O
+62	-	il 13 dicembre	ENT	il 13 dicembre	Sconfitta	Tempo
 62	17	perdendo	VER:geru	perdere	Sconfitta	LU
 62	18	contro	ADV	contro	Sconfitta	O
 62	19	il	DET:def	il	Sconfitta	O
 62	20	Livorno	NPR	Livorno	Sconfitta	Vincitore
 62	21	(	PON	(	Sconfitta	O
-62	22	0-1	ENT	0-1	Sconfitta	O
+62	-	0-1	ENT	0-1	Sconfitta	Punteggio
 62	23	)	PON	)	Sconfitta	O
 62	24	.	SENT	.	Sconfitta	O
 63	0	Prese	ADJ	preso	Trofeo	O
@@ -902,7 +902,7 @@
 64	0	Ha	VER:pres	avere	Sconfitta	O
 64	1	partecipato	VER:pper	partecipare	Sconfitta	O
 64	2	,	PON	,	Sconfitta	O
-64	3	nel 2004	ENT	nel 2004	Sconfitta	O
+64	-	nel 2004	ENT	nel 2004	Sconfitta	Tempo
 64	4	,	PON	,	Sconfitta	O
 64	5	ai	PRE:det	al	Sconfitta	O
 64	6	Campionati Europei Under-21	ENT	Campionati Europei Under-21	Sconfitta	Competizione
@@ -950,7 +950,7 @@
 65	18	)	PON	)	Trofeo	O
 65	19	.	SENT	.	Trofeo	O
 66	0	Nella	PRE:det	nel	Attività	O
-66	1	stagione 2013-2014	ENT	stagione 2013-2014	Attività	O
+66	-	stagione 2013-2014	ENT	stagione 2013-2014	Attività	Durata
 66	2	esordisce	VER:pres	esordire	Attività	LU
 66	3	in	PRE	in	Attività	O
 66	4	Eredivisie	NOM	Eredivisie	Attività	Competizione
@@ -961,7 +961,7 @@
 66	9	l'	DET:def	il	Attività	O
 66	10	Ajax	NPR	Ajax	Attività	Squadra
 66	11	.	SENT	.	Attività	O
-67	0	Nel 1974	ENT	Nel 1974	Attività	O
+67	-	Nel 1974	ENT	Nel 1974	Attività	Tempo
 67	1	si	PRO:pers	si	Attività	O
 67	2	è	VER:pres	essere	Attività	O
 67	3	trasferito	VER:pper	trasferire	Attività	O
@@ -971,7 +971,7 @@
 67	7	cui	PRO:rela	cui	Attività	O
 67	8	è	VER:pres	essere	Attività	O
 67	9	rimasto	VER:pper	rimanere	Attività	LU
-67	10	fino al 1985	ENT	fino al 1985	Attività	O
+67	-	fino al 1985	ENT	fino al 1985	Attività	Durata
 67	11	,	PON	,	Attività	O
 67	12	disputando	VER:geru	disputare	Attività	O
 67	13	407	NUM	@card@	Attività	O
@@ -981,7 +981,7 @@
 67	17	27	NUM	@card@	Attività	O
 67	18	gol	NOM	gol	Attività	O
 67	19	.	SENT	.	Attività	O
-68	0	Il 30 luglio	ENT	Il 30 luglio	Sconfitta	O
+68	-	Il 30 luglio	ENT	Il 30 luglio	Sconfitta	Tempo
 68	1	seguente	ADJ	seguente	Sconfitta	O
 68	2	perde	VER:pres	perdere	Sconfitta	LU
 68	3	da	PRE	da	Sconfitta	O
@@ -992,9 +992,9 @@
 68	8	il	DET:def	il	Sconfitta	O
 68	9	Twente	NOM	Twente	Sconfitta	Vincitore
 68	10	per	PRE	per	Sconfitta	O
-68	11	2-1	ENT	2-1	Sconfitta	O
+68	-	2-1	ENT	2-1	Sconfitta	Punteggio
 68	12	.	SENT	.	Sconfitta	O
-69	0	Il 2 maggio	ENT	Il 2 maggio	Trofeo	O
+69	-	Il 2 maggio	ENT	Il 2 maggio	Trofeo	Tempo
 69	1	seguente	ADJ	seguente	Trofeo	O
 69	2	vince	VER:pres	vincere	Trofeo	LU
 69	3	la	DET:def	il	Trofeo	O
@@ -1041,7 +1041,7 @@
 71	8	rimarrà	VER:futu	rimanere	Attività	LU
 71	9	per	PRE	per	Attività	O
 71	10	altre	PRO:indef	altro	Attività	O
-71	11	2 stagioni	ENT	2 stagioni	Attività	O
+71	-	2 stagioni	ENT	2 stagioni	Attività	Durata
 71	12	,	PON	,	Attività	O
 71	13	per	PRE	per	Attività	O
 71	14	un	DET:indef	un	Attività	O
@@ -1064,7 +1064,7 @@
 72	8	esordisce	VER:pres	esordire	Sconfitta	O
 72	9	in	PRE	in	Sconfitta	O
 72	10	Serie A	ENT	Serie A	Sconfitta	Competizione
-72	11	il 29 settembre 2002	ENT	il 29 settembre 2002	Sconfitta	O
+72	-	il 29 settembre 2002	ENT	il 29 settembre 2002	Sconfitta	Tempo
 72	12	nella	PRE:det	nel	Sconfitta	O
 72	13	partita	NOM	partita	Sconfitta	O
 72	14	persa	VER:pper	perdere	Sconfitta	LU
@@ -1077,9 +1077,9 @@
 72	21	la	DET:def	il	Sconfitta	O
 72	22	Roma	NPR	Roma	Sconfitta	Vincitore
 72	23	per	PRE	per	Sconfitta	O
-72	24	3-2	ENT	3-2	Sconfitta	O
+72	-	3-2	ENT	3-2	Sconfitta	Punteggio
 72	25	0	SENT	0	Sconfitta	O
-73	0	Nel 1944	ENT	Nel 1944	Trofeo	O
+73	-	Nel 1944	ENT	Nel 1944	Trofeo	Tempo
 73	1	,	PON	,	Trofeo	O
 73	2	in	PRE	in	Trofeo	O
 73	3	piena	ADJ	pieno	Trofeo	O
@@ -1117,9 +1117,9 @@
 76	2	con	PRE	con	Attività	O
 76	3	la	DET:def	il	Attività	O
 76	4	Nazionale islandese	ENT	Nazionale islandese	Attività	Squadra
-76	5	nel 2012	ENT	nel 2012	Attività	O
+76	-	nel 2012	ENT	nel 2012	Attività	Tempo
 76	6	0	SENT	0	Attività	O
-77	0	Nel 1987	ENT	Nel 1987	Trofeo	O
+77	-	Nel 1987	ENT	Nel 1987	Trofeo	Tempo
 77	1	torna	VER:pres	tornare	Trofeo	O
 77	2	al	PRE:det	al	Trofeo	O
 77	3	Genoa	NPR	Genoa	Trofeo	Squadra
@@ -1138,7 +1138,7 @@
 77	16	massima serie	ENT	massima serie	Trofeo	O
 77	17	0	SENT	0	Trofeo	O
 78	0	Nella	PRE:det	nel	Attività	O
-78	1	stagione 2013-2014	ENT	stagione 2013-2014	Attività	O
+78	-	stagione 2013-2014	ENT	stagione 2013-2014	Attività	Durata
 78	2	giocherà	VER:futu	giocare	Attività	LU
 78	3	nella	PRE:det	nel	Attività	O
 78	4	Rivoltana	NOM	<unknown>	Attività	Squadra
@@ -1163,12 +1163,12 @@
 79	14	allenatore	NOM	allenatore	Sconfitta	O
 79	15	,	PON	,	Sconfitta	O
 79	16	giocata	VER:pper	giocare	Sconfitta	O
-79	17	il 22 aprile 2009	ENT	il 22 aprile 2009	Sconfitta	O
+79	-	il 22 aprile 2009	ENT	il 22 aprile 2009	Sconfitta	Tempo
 79	18	e	CON	e	Sconfitta	O
 79	19	persa	VER:pper	perdere	Sconfitta	LU
-79	20	5-0	ENT	5-0	Sconfitta	O
+79	-	5-0	ENT	5-0	Sconfitta	Punteggio
 79	21	0	SENT	0	Sconfitta	O
-80	0	Il 4 agosto 2011	ENT	Il 4 agosto 2011	Stato	O
+80	-	Il 4 agosto 2011	ENT	Il 4 agosto 2011	Stato	Tempo
 80	1	,	PON	,	Stato	O
 80	2	dopo	PRE	dopo	Stato	O
 80	3	aver	VER:infi	avere	Stato	O
@@ -1197,17 +1197,17 @@
 81	3	maglia	NOM	maglia	Sconfitta	O
 81	4	della	PRE:det	del	Sconfitta	O
 81	5	Nazionale maggiore	ENT	Nazionale maggiore	Sconfitta	Perdente
-81	6	il 4 febbraio 2009	ENT	il 4 febbraio 2009	Sconfitta	O
+81	-	il 4 febbraio 2009	ENT	il 4 febbraio 2009	Sconfitta	Tempo
 81	7	nell'	PRE:det	nel	Sconfitta	O
 81	8	amichevole	ENT	amichevole persa	Sconfitta	Competizione
 81	9	persa	VER:pres	perdere	Sconfitta	LU
-81	10	5-1	ENT	5-1	Sconfitta	O
+81	-	5-1	ENT	5-1	Sconfitta	Punteggio
 81	11	contro	PRE	contro	Sconfitta	O
 81	12	il	DET:def	il	Sconfitta	O
 81	13	Giappone	NPR	Giappone	Sconfitta	Vincitore
 81	14	0	SENT	0	Sconfitta	O
 82	0	Nella	PRE:det	nel	Attività	O
-82	1	stagione 2012-2013	ENT	stagione 2012-2013	Attività	O
+82	-	stagione 2012-2013	ENT	stagione 2012-2013	Attività	Durata
 82	2	ha	VER:pres	avere	Attività	O
 82	3	esordito	VER:pper	esordire	Attività	O
 82	4	in	PRE	in	Attività	O
@@ -1223,11 +1223,11 @@
 83	1	esordito	VER:pper	esordire	Attività	LU
 83	2	in	PRE	in	Attività	O
 83	3	Serie A	ENT	Serie A	Attività	Competizione
-83	4	il 15 marzo 1942	ENT	il 15 marzo 1942	Attività	O
+83	-	il 15 marzo 1942	ENT	il 15 marzo 1942	Attività	Tempo
 83	5	in	PRE	in	Attività	O
 83	6	Livorno-Liguria	NOM	<unknown>	Attività	O
 83	7	(	PON	(	Attività	O
-83	8	2-0	ENT	2-0	Attività	O
+83	-	2-0	ENT	2-0	Attività	Punteggio
 83	9	)	PON	)	Attività	O
 83	10	0	SENT	0	Attività	O
 84	0	Vestì	VER:remo	vestire	Attività	O
@@ -1279,12 +1279,12 @@
 86	22	il	DET:def	il	Sconfitta	O
 86	23	Regno Unito	ENT	Regno Unito	Sconfitta	Perdente
 86	24	perse	ADJ	perso	Sconfitta	LU
-86	25	3-1	ENT	3-1	Sconfitta	O
+86	-	3-1	ENT	3-1	Sconfitta	Punteggio
 86	26	contro	PRE	contro	Sconfitta	O
 86	27	la	DET:def	il	Sconfitta	O
 86	28	Norvegia	NPR	Norvegia	Sconfitta	Vincitore
 86	29	0	SENT	0	Sconfitta	O
-87	0	Il 31 gennaio 2005	ENT	Il 31 gennaio 2005	Stato	O
+87	-	Il 31 gennaio 2005	ENT	Il 31 gennaio 2005	Stato	Tempo
 87	1	,	PON	,	Stato	O
 87	2	alla	PRE:det	al	Stato	O
 87	3	scadenza	NOM	scadenza	Stato	O
@@ -1311,7 +1311,7 @@
 87	24	all'	PRE:det	al	Stato	O
 87	25	Hellas Verona	ENT	Hellas Verona	Stato	Squadra
 87	26	0	SENT	0	Stato	O
-88	0	Il 18 gennaio 2014	ENT	Il 18 gennaio 2014	Attività	O
+88	-	Il 18 gennaio 2014	ENT	Il 18 gennaio 2014	Attività	Tempo
 88	1	ha	VER:pres	avere	Attività	O
 88	2	esordito	VER:pper	esordire	Attività	LU
 88	3	in	PRE	in	Attività	O
@@ -1320,18 +1320,18 @@
 88	6	amichevole	ADJ	amichevole	Attività	Competizione
 88	7	Polonia-Norvegia	NOM	<unknown>	Attività	O
 88	8	(	PON	(	Attività	O
-88	9	3-0	ENT	3-0	Attività	O
+88	-	3-0	ENT	3-0	Attività	Punteggio
 88	10	)	PON	)	Attività	O
 88	11	0	SENT	0	Attività	O
 89	0	Ha	VER:pres	avere	Attività	O
 89	1	esordito	VER:pper	esordire	Attività	LU
 89	2	in	PRE	in	Attività	O
 89	3	Nazionale	NOM	Nazionale	Attività	Squadra
-89	4	il 15 novembre 2013	ENT	il 15 novembre 2013	Attività	O
+89	-	il 15 novembre 2013	ENT	il 15 novembre 2013	Attività	Tempo
 89	5	in	PRE	in	Attività	O
 89	6	Lussemburgo-Montenegro	NOM	<unknown>	Attività	O
 89	7	(	PON	(	Attività	O
-89	8	1-4	ENT	1-4	Attività	O
+89	-	1-4	ENT	1-4	Attività	Punteggio
 89	9	)	PON	)	Attività	O
 89	10	0	SENT	0	Attività	O
 90	0	Ha	VER:pres	avere	Attività	O
@@ -1339,23 +1339,23 @@
 90	2	con	PRE	con	Attività	O
 90	3	la	DET:def	il	Attività	O
 90	4	Nazionale cipriota	ENT	Nazionale cipriota	Attività	Squadra
-90	5	nel 2000	ENT	nel 2000	Attività	O
+90	-	nel 2000	ENT	nel 2000	Attività	Tempo
 90	6	,	PON	,	Attività	O
 90	7	giocando	VER:geru	giocare	Attività	LU
 90	8	25	NUM	@card@	Attività	O
 90	9	partite	NOM	partita	Attività	O
-90	10	fino al 2003	ENT	fino al 2003	Attività	O
+90	-	fino al 2003	ENT	fino al 2003	Attività	Durata
 90	11	.	SENT	.	Attività	O
 91	0	Ha	VER:pres	avere	Attività	O
 91	1	esordito	VER:pper	esordire	Attività	LU
 91	2	con	PRE	con	Attività	O
 91	3	la	DET:def	il	Attività	O
 91	4	Nazionale etiope	ENT	Nazionale etiope	Attività	Squadra
-91	5	nel 2011	ENT	nel 2011	Attività	O
+91	-	nel 2011	ENT	nel 2011	Attività	Tempo
 91	6	.	SENT	.	Attività	O
 92	0	Risulta	VER:impe	risultare	Trofeo	O
 92	1	,	PON	,	Trofeo	O
-92	2	secondo	ENT	secondo	Trofeo	O
+92	-	secondo	ENT	secondo	Trofeo	Classifica
 92	3	alcune	PRO:indef	alcun|alcune	Trofeo	O
 92	4	fonti	NOM	fonte	Trofeo	O
 92	5	nella	PRE:det	nel	Trofeo	O
@@ -1377,10 +1377,10 @@
 93	7	insieme	ADV	insieme	Trofeo	O
 93	8	alla	PRE:det	al	Trofeo	O
 93	9	supercoppa	NOM	<unknown>	Trofeo	Competizione
-93	10	nel 2005	ENT	nel 2005	Trofeo	O
+93	-	nel 2005	ENT	nel 2005	Trofeo	Tempo
 93	11	.	SENT	.	Trofeo	O
 94	0	Nella	PRE:det	nel	Sconfitta	O
-94	1	stagione 2004-2005	ENT	stagione 2004-2005	Sconfitta	O
+94	-	stagione 2004-2005	ENT	stagione 2004-2005	Sconfitta	Durata
 94	2	torna	VER:pres	tornare	Sconfitta	O
 94	3	nuovamente	ADV	nuovamente	Sconfitta	O
 94	4	al	PRE:det	al	Sconfitta	O
@@ -1409,7 +1409,7 @@
 94	27	il	DET:def	il	Sconfitta	O
 94	28	Torino	NPR	Torino	Sconfitta	Vincitore
 94	29	.	SENT	.	Sconfitta	O
-95	0	Nel 2013	ENT	Nel 2013	Attività	O
+95	-	Nel 2013	ENT	Nel 2013	Attività	Tempo
 95	1	ha	VER:pres	avere	Attività	O
 95	2	giocato	VER:pper	giocare	Attività	LU
 95	3	una	DET:indef	una	Attività	O
@@ -1431,13 +1431,13 @@
 97	3	vinse	VER:remo	vincere	Trofeo	LU
 97	4	la	DET:def	il	Trofeo	O
 97	5	Bundesliga	NOM	Bundesliga	Trofeo	Competizione
-97	6	nel 1976	ENT	nel 1976	Trofeo	O
+97	-	nel 1976	ENT	nel 1976	Trofeo	Tempo
 97	7	e	CON	e	Trofeo	O
-97	8	nel 1977	ENT	nel 1977	Trofeo	O
+97	-	nel 1977	ENT	nel 1977	Trofeo	Tempo
 97	9	e	CON	e	Trofeo	O
 97	10	la	DET:def	il	Trofeo	O
 97	11	Coppa UEFA	ENT	Coppa UEFA	Trofeo	Competizione
-97	12	nel 1979	ENT	nel 1979	Trofeo	O
+97	-	nel 1979	ENT	nel 1979	Trofeo	Tempo
 97	13	.	SENT	.	Trofeo	O
 98	0	Fa	VER:pres	fare	Vittoria	O
 98	1	il	DET:def	il	Vittoria	O
@@ -1450,14 +1450,14 @@
 98	8	Maradona	NPR	Maradona	Vittoria	O
 98	9	nell'	PRE:det	nel	Vittoria	O
 98	10	amichevole	NOM	amichevole	Vittoria	Competizione
-98	11	del 10 febbraio 2010	ENT	del 10 febbraio 2010	Vittoria	O
+98	-	del 10 febbraio 2010	ENT	del 10 febbraio 2010	Vittoria	Tempo
 98	12	vinta	VER:pper	vincere	Vittoria	LU
-98	13	2-1	ENT	2-1	Vittoria	O
+98	-	2-1	ENT	2-1	Vittoria	Punteggio
 98	14	contro	PRE	contro	Vittoria	O
 98	15	la	DET:def	il	Vittoria	O
 98	16	Giamaica	NPR	Giamaica	Vittoria	Perdente
 98	17	.	SENT	.	Vittoria	O
-99	0	Nel 1953	ENT	Nel 1953	Attività	O
+99	-	Nel 1953	ENT	Nel 1953	Attività	Tempo
 99	1	passò	VER:remo	passare	Attività	O
 99	2	all'	PRE:det	al	Attività	O
 99	3	Atalanta	NPR	Atalanta	Attività	Squadra
@@ -1468,9 +1468,9 @@
 99	8	giocò	VER:remo	giocare	Attività	LU
 99	9	nella	PRE:det	nel	Attività	O
 99	10	massima serie	ENT	massima serie	Attività	Competizione
-99	11	fino al 1958	ENT	fino al 1958	Attività	O
+99	-	fino al 1958	ENT	fino al 1958	Attività	Durata
 99	12	.	SENT	.	Attività	O
-100	0	Il 23 giugno 2013	ENT	Il 23 giugno 2013	Sconfitta	O
+100	-	Il 23 giugno 2013	ENT	Il 23 giugno 2013	Sconfitta	Tempo
 100	1	gioca	VER:pres	giocare	Sconfitta	O
 100	2	da	PRE	da	Sconfitta	O
 100	3	titolare	NOM	titolare	Sconfitta	O
@@ -1491,12 +1491,12 @@
 101	1	esordito	VER:pper	esordire	Attività	LU
 101	2	in	PRE	in	Attività	O
 101	3	Nazionale	NOM	Nazionale	Attività	Squadra
-101	4	il 5 marzo 2014	ENT	il 5 marzo 2014	Attività	O
+101	-	il 5 marzo 2014	ENT	il 5 marzo 2014	Attività	Tempo
 101	5	nell'	PRE:det	nel	Attività	O
 101	6	amichevole	ADJ	amichevole	Attività	Competizione
 101	7	Turchia-Svezia	NOM	<unknown>	Attività	O
 101	8	(	PON	(	Attività	O
-101	9	2-1	ENT	2-1	Attività	O
+101	-	2-1	ENT	2-1	Attività	Punteggio
 101	10	)	PON	)	Attività	O
 101	11	.	SENT	.	Attività	O
 102	0	Nonostante	PRE	nonostante	Stato	O
@@ -1512,7 +1512,7 @@
 102	10	prima	ADJ	primo	Stato	O
 102	11	metà	NOM	metà	Stato	O
 102	12	della	PRE:det	del	Stato	O
-102	13	stagione calcistica 2010-2011	ENT	stagione calcistica 2010-2011	Stato	O
+102	-	stagione calcistica 2010-2011	ENT	stagione calcistica 2010-2011	Stato	Durata
 102	14	.	SENT	.	Stato	O
 103	0	Fu	VER:remo	essere	Sconfitta	O
 103	1	commissario	NOM	commissario	Sconfitta	O
@@ -1527,7 +1527,7 @@
 103	10	Nazionale	NOM	Nazionale	Sconfitta	Perdente
 103	11	uscì	VER:remo	uscire	Sconfitta	O
 103	12	al	PRE:det	al	Sconfitta	O
-103	13	primo	ENT	primo	Sconfitta	O
+103	-	primo	ENT	primo	Sconfitta	Classifica
 103	14	turno	NOM	turno	Sconfitta	O
 103	15	dopo	PRE	dopo	Sconfitta	O
 103	16	aver	VER:infi	avere	Sconfitta	O
@@ -1576,7 +1576,7 @@
 106	7	in	PRE	in	Trofeo	O
 106	8	Estonia	NPR	Estonia	Trofeo	Luogo
 106	9	.	SENT	.	Trofeo	O
-107	0	Il 5 marzo 2014	ENT	Il 5 marzo 2014	Attività	O
+107	-	Il 5 marzo 2014	ENT	Il 5 marzo 2014	Attività	Tempo
 107	1	ha	VER:pres	avere	Attività	O
 107	2	esordito	VER:pper	esordire	Attività	LU
 107	3	in	PRE	in	Attività	O
@@ -1585,7 +1585,7 @@
 107	6	amichevole	ADJ	amichevole	Attività	Competizione
 107	7	Portogallo-Camerun	NOM	<unknown>	Attività	O
 107	8	(	PON	(	Attività	O
-107	9	5-1	ENT	5-1	Attività	O
+107	-	5-1	ENT	5-1	Attività	Punteggio
 107	10	)	PON	)	Attività	O
 107	11	.	SENT	.	Attività	O
 108	0	Con	PRE	con	Trofeo	O
@@ -1605,7 +1605,7 @@
 108	14	Copa América 2001	ENT	Copa América 2001	Trofeo	Competizione
 108	15	.	SENT	.	Trofeo	O
 109	0	Partecipò	VER:remo	partecipare	Trofeo	O
-109	1	nel 1945	ENT	nel 1945	Trofeo	O
+109	-	nel 1945	ENT	nel 1945	Trofeo	Tempo
 109	2	alla	PRE:det	al	Trofeo	O
 109	3	Coppa Città di Genova	ENT	Coppa Città di Genova	Trofeo	Competizione
 109	4	per	PRE	per	Trofeo	O
@@ -1619,7 +1619,7 @@
 109	12	dal	PRE:det	dal	Trofeo	O
 109	13	Genova 1893	ENT	Genova 1893	Trofeo	Vincitore
 109	14	.	SENT	.	Trofeo	O
-110	0	Il 10 settembre 2012	ENT	Il 10 settembre 2012	Sconfitta	O
+110	-	Il 10 settembre 2012	ENT	Il 10 settembre 2012	Sconfitta	Tempo
 110	1	ha	VER:pres	avere	Sconfitta	O
 110	2	esordito	VER:pper	esordire	Sconfitta	O
 110	3	in	PRE	in	Sconfitta	O
@@ -1633,7 +1633,7 @@
 110	11	Europei di categoria	ENT	Europei di categoria	Sconfitta	Competizione
 110	12	persa	VER:pper	perdere	Sconfitta	LU
 110	13	per	PRE	per	Sconfitta	O
-110	14	6-0	ENT	6-0	Sconfitta	O
+110	-	6-0	ENT	6-0	Sconfitta	Punteggio
 110	15	contro	PRE	contro	Sconfitta	O
 110	16	la	DET:def	il	Sconfitta	O
 110	17	Spagna	NPR	Spagna	Sconfitta	Vincitore
@@ -1655,7 +1655,7 @@
 112	7	e	CON	e	Attività	O
 112	8	Frigg	NOM	Frigg	Attività	Squadra
 112	9	.	SENT	.	Attività	O
-113	0	La stagione successiva	ENT	La stagione successiva	Attività	O
+113	-	La stagione successiva	ENT	La stagione successiva	Attività	Tempo
 113	1	il	DET:def	il	Attività	O
 113	2	Real Madrid	ENT	Real Madrid	Attività	Squadra
 113	3	decide	VER:pres	decidere	Attività	O
@@ -1672,7 +1672,7 @@
 113	14	merengues	NOM	<unknown>	Attività	O
 113	15	"	PON	"	Attività	O
 113	16	rimarrà	VER:futu	rimanere	Attività	LU
-113	17	tre anni	ENT	tre anni	Attività	O
+113	-	tre anni	ENT	tre anni	Attività	Durata
 113	18	nelle	PRE:det	nel	Attività	O
 113	19	quali	PRO:rela	quale	Attività	O
 113	20	disputerà	VER:futu	disputare	Attività	O
@@ -1685,7 +1685,7 @@
 113	27	reti	NOM	rete	Attività	O
 113	28	)	PON	)	Attività	O
 113	29	.	SENT	.	Attività	O
-114	0	Il 14 dicembre 2012	ENT	Il 14 dicembre 2012	Sconfitta	O
+114	-	Il 14 dicembre 2012	ENT	Il 14 dicembre 2012	Sconfitta	Tempo
 114	1	esordisce	VER:pres	esordire	Sconfitta	O
 114	2	con	PRE	con	Sconfitta	O
 114	3	la	DET:def	il	Sconfitta	O
@@ -1697,9 +1697,9 @@
 114	9	Polonia	NPR	Polonia	Sconfitta	Vincitore
 114	10	persa	VER:pper	perdere	Sconfitta	LU
 114	11	per	PRE	per	Sconfitta	O
-114	12	4-1	ENT	4-1	Sconfitta	O
+114	-	4-1	ENT	4-1	Sconfitta	Punteggio
 114	13	.	SENT	.	Sconfitta	O
-115	0	Il 12 giugno	ENT	Il 12 giugno	Attività	O
+115	-	Il 12 giugno	ENT	Il 12 giugno	Attività	Tempo
 115	1	del	PRE:det	del	Attività	O
 115	2	1966	NUM	@card@	Attività	O
 115	3	esordisce	VER:pres	esordire	Attività	LU
@@ -1707,7 +1707,7 @@
 115	5	il	DET:def	il	Attività	O
 115	6	Brasile	NPR	Brasile	Attività	Squadra
 115	7	(	PON	(	Attività	O
-115	8	2-1	ENT	2-1	Attività	O
+115	-	2-1	ENT	2-1	Attività	Punteggio
 115	9	)	PON	)	Attività	O
 115	10	.	SENT	.	Attività	O
 116	0	Gundersen	NOM	Gundersen	Trofeo	Vincitore
@@ -1725,7 +1725,7 @@
 116	12	Coppa di Norvegia 1929	ENT	Coppa di Norvegia 1929	Trofeo	Competizione
 116	13	.	SENT	.	Trofeo	O
 117	0	Nella	PRE:det	nel	Attività	O
-117	1	stagione 1999-2000	ENT	stagione 1999-2000	Attività	O
+117	-	stagione 1999-2000	ENT	stagione 1999-2000	Attività	Durata
 117	2	esordì	VER:remo	esordire	Attività	LU
 117	3	in	PRE	in	Attività	O
 117	4	Serie A	ENT	Serie A	Attività	Competizione
@@ -1751,7 +1751,7 @@
 119	1	la	DET:def	il	Sconfitta	O
 119	2	Nazionale Under-18	ENT	Nazionale Under-18	Sconfitta	Perdente
 119	3	,	PON	,	Sconfitta	O
-119	4	nel luglio 1995	ENT	nel luglio 1995	Sconfitta	O
+119	-	nel luglio 1995	ENT	nel luglio 1995	Sconfitta	Tempo
 119	5	,	PON	,	Sconfitta	O
 119	6	è	VER:pres	essere	Sconfitta	O
 119	7	ancora	ADV	ancora	Sconfitta	O
@@ -1762,7 +1762,7 @@
 119	12	finale	NOM	finale	Sconfitta	Competizione
 119	13	persa	VER:pper	perdere	Sconfitta	LU
 119	14	per	PRE	per	Sconfitta	O
-119	15	4-1	ENT	4-1	Sconfitta	O
+119	-	4-1	ENT	4-1	Sconfitta	Punteggio
 119	16	contro	PRE	contro	Sconfitta	O
 119	17	la	DET:def	il	Sconfitta	O
 119	18	Spagna	NPR	Spagna	Sconfitta	Vincitore
@@ -1775,7 +1775,7 @@
 119	25	degli	PRE:det	del	Sconfitta	O
 119	26	azzurrini	NOM	azzurrino	Sconfitta	O
 119	27	.	SENT	.	Sconfitta	O
-122	0	Dal 2002	ENT	Dal 2002	Trofeo	O
+122	-	Dal 2002	ENT	Dal 2002	Trofeo	Durata
 122	1	gioca	VER:pres	giocare	Trofeo	O
 122	2	con	PRE	con	Trofeo	O
 122	3	il	DET:def	il	Trofeo	O
@@ -1790,7 +1790,7 @@
 122	12	due	ADJ	due	Trofeo	O
 122	13	campionati	NOM	campionato	Trofeo	Competizione
 122	14	0	SENT	0	Trofeo	O
-123	0	Nel 2005	ENT	Nel 2005	Attività	O
+123	-	Nel 2005	ENT	Nel 2005	Attività	Tempo
 123	1	si	PRO:refl	si	Attività	O
 123	2	accasa	VER:pres	accasare	Attività	O
 123	3	in	PRE	in	Attività	O
@@ -1802,9 +1802,9 @@
 123	9	,	PON	,	Attività	O
 123	10	dove	PRO:rela	dove	Attività	O
 123	11	rimane	VER:pres	rimanere	Attività	LU
-123	12	per tre anni	ENT	per tre anni	Attività	O
+123	-	per tre anni	ENT	per tre anni	Attività	Durata
 123	13	0	SENT	0	Attività	O
-125	0	Nel 1969	ENT	Nel 1969	Trofeo	O
+125	-	Nel 1969	ENT	Nel 1969	Trofeo	Tempo
 125	1	decide	VER:pres	decidere	Trofeo	O
 125	2	di	PRE	di	Trofeo	O
 125	3	chiudere	VER:infi	chiudere	Trofeo	O
@@ -1829,19 +1829,19 @@
 126	4	vinto	VER:pper	vincere	Trofeo	LU
 126	5	il	DET:def	il	Trofeo	O
 126	6	Campionato europeo di categoria	ENT	Campionato europeo di categoria	Trofeo	Competizione
-126	7	nel 2006	ENT	nel 2006	Trofeo	O
+126	-	nel 2006	ENT	nel 2006	Trofeo	Tempo
 126	8	0	SENT	0	Trofeo	O
 127	0	Cresce	VER:pres	crescere	Attività	O
 127	1	nella	PRE:det	nel	Attività	O
 127	2	Cormonese	NOM	<unknown>	Attività	Squadra
 127	3	,	PON	,	Attività	O
 127	4	che	PRO:rela	che	Attività	O
-127	5	nel 1941	ENT	nel 1941	Attività	O
+127	-	nel 1941	ENT	nel 1941	Attività	Tempo
 127	6	lo	PRO:pers	lo	Attività	O
 127	7	cede	VER:pres	cedere	Attività	O
 127	8	in	PRE	in	Attività	O
 127	9	prestito	NOM	prestito	Attività	O
-127	10	per una stagione	ENT	per una stagione	Attività	O
+127	-	per una stagione	ENT	per una stagione	Attività	Durata
 127	11	al	PRE:det	al	Attività	O
 127	12	Potenza	NPR	Potenza	Attività	Squadra
 127	13	0	SENT	0	Attività	O
@@ -1852,14 +1852,14 @@
 127	18	,	PON	,	Attività	O
 127	19	dove	PRO:rela	dove	Attività	O
 127	20	rimane	VER:pres	rimanere	Attività	LU
-127	21	fino al 1948	ENT	fino al 1948	Attività	O
+127	-	fino al 1948	ENT	fino al 1948	Attività	Durata
 127	22	0	SENT	0	Attività	O
 128	0	Ha	VER:pres	avere	Attività	O
 128	1	esordito	VER:pper	esordire	Attività	LU
 128	2	con	PRE	con	Attività	O
 128	3	la	DET:def	il	Attività	O
 128	4	Nazionale cipriota	ENT	Nazionale cipriota	Attività	Squadra
-128	5	nel 2001	ENT	nel 2001	Attività	O
+128	-	nel 2001	ENT	nel 2001	Attività	Tempo
 128	6	,	PON	,	Attività	O
 128	7	disputando	VER:geru	disputare	Attività	O
 128	8	un	DET:indef	un	Attività	O
@@ -1887,7 +1887,7 @@
 129	18	l'	DET:def	il	Trofeo	O
 129	19	Olympiacos	NOM	Olympiacos	Trofeo	Squadra
 129	20	0	SENT	0	Trofeo	O
-130	0	Nel 1985	ENT	Nel 1985	Attività	O
+130	-	Nel 1985	ENT	Nel 1985	Attività	Tempo
 130	1	approda	VER:pres	approdare	Attività	O
 130	2	al	PRE:det	al	Attività	O
 130	3	Catanzaro	NPR	Catanzaro	Attività	Squadra
@@ -1905,7 +1905,7 @@
 130	15	Cremonese	NPR	Cremonese	Attività	Squadra
 130	16	dove	PRO:rela	dove	Attività	O
 130	17	disputa	VER:impe	disputare	Attività	O
-130	18	3 stagioni	ENT	3 stagioni	Attività	O
+130	-	3 stagioni	ENT	3 stagioni	Attività	Durata
 130	19	di	PRE	di	Attività	O
 130	20	B	NPR	B	Attività	Competizione
 130	21	e	CON	e	Attività	O
@@ -1927,7 +1927,7 @@
 131	12	0	SENT	0	Attività	O
 132	0	Ha	VER:pres	avere	Attività	O
 132	1	esordito	VER:pper	esordire	Attività	LU
-132	2	nel 2008	ENT	nel 2008	Attività	O
+132	-	nel 2008	ENT	nel 2008	Attività	Tempo
 132	3	con	PRE	con	Attività	O
 132	4	il	DET:def	il	Attività	O
 132	5	Ried	NOM	Ried	Attività	Squadra
@@ -1965,7 +1965,7 @@
 134	11	file	NOM	fila|file	Attività	O
 134	12	del	PRE:det	del	Attività	O
 134	13	Modena	NPR	Modena	Attività	Squadra
-134	14	per una sola stagione	ENT	per una sola stagione	Attività	O
+134	-	per una sola stagione	ENT	per una sola stagione	Attività	Durata
 134	15	0	SENT	0	Attività	O
 135	0	La	DET:def	il	Attività	O
 135	1	carriera	NOM	carriera	Attività	O
@@ -1974,7 +1974,7 @@
 135	4	cominciò	VER:remo	cominciare	Attività	O
 135	5	nel	PRE:det	nel	Attività	O
 135	6	GKS Katowice	ENT	GKS Katowice	Attività	Squadra
-135	7	nel 1991	ENT	nel 1991	Attività	O
+135	-	nel 1991	ENT	nel 1991	Attività	Tempo
 135	8	e	CON	e	Attività	O
 135	9	vi	PRO:refl	vi	Attività	O
 135	10	rimase	VER:remo	rimanere	Attività	LU
@@ -1982,7 +1982,7 @@
 135	12	molti	PRO:indef	molto	Attività	O
 135	13	anni	NOM	anno	Attività	O
 135	14	,	PON	,	Attività	O
-135	15	fino al 1997	ENT	fino al 1997	Attività	O
+135	-	fino al 1997	ENT	fino al 1997	Attività	Durata
 135	16	,	PON	,	Attività	O
 135	17	collezionando	VER:geru	collezionare	Attività	O
 135	18	in	PRE	in	Attività	O
@@ -2013,16 +2013,16 @@
 137	4	maglia	NOM	maglia	Attività	O
 137	5	della	PRE:det	del	Attività	O
 137	6	Nazionale	NOM	Nazionale	Attività	Squadra
-137	7	nel 2011	ENT	nel 2011	Attività	O
+137	-	nel 2011	ENT	nel 2011	Attività	Tempo
 137	8	0	SENT	0	Attività	O
 138	0	Ha	VER:pres	avere	Attività	O
 138	1	esordito	VER:pper	esordire	Attività	LU
 138	2	con	PRE	con	Attività	O
 138	3	la	DET:def	il	Attività	O
 138	4	Nazionale albanese	ENT	Nazionale albanese	Attività	Squadra
-138	5	nel 2002	ENT	nel 2002	Attività	O
+138	-	nel 2002	ENT	nel 2002	Attività	Tempo
 138	6	0	SENT	0	Attività	O
-139	0	Nel 2001	ENT	Nel 2001	Attività	O
+139	-	Nel 2001	ENT	Nel 2001	Attività	Tempo
 139	1	rimane	VER:pres	rimanere	Attività	LU
 139	2	in	PRE	in	Attività	O
 139	3	compartecipazione	NOM	compartecipazione	Attività	O
@@ -2074,7 +2074,7 @@
 141	13	persa	VER:pper	perdere	Sconfitta	LU
 141	14	dal	PRE:det	dal	Sconfitta	O
 141	15	Beşiktaş	NOM	Beşiktaş	Sconfitta	Perdente
-141	16	2-1	ENT	2-1	Sconfitta	O
+141	-	2-1	ENT	2-1	Sconfitta	Punteggio
 141	17	0	SENT	0	Sconfitta	O
 142	0	Caudera	NOM	Caudera	Sconfitta	Perdente
 142	1	giocò	VER:remo	giocare	Sconfitta	O
@@ -2085,10 +2085,10 @@
 142	6	con	PRE	con	Sconfitta	O
 142	7	la	DET:def	il	Sconfitta	O
 142	8	Juventus	NPR	Juventus	Sconfitta	Perdente
-142	9	il 27 giugno 1926	ENT	il 27 giugno 1926	Sconfitta	O
+142	-	il 27 giugno 1926	ENT	il 27 giugno 1926	Sconfitta	Tempo
 142	10	,	PON	,	Sconfitta	O
 142	11	persa	VER:pper	perdere	Sconfitta	LU
-142	12	0-2	ENT	0-2	Sconfitta	O
+142	-	0-2	ENT	0-2	Sconfitta	Punteggio
 142	13	contro	PRE	contro	Sconfitta	O
 142	14	la	DET:def	il	Sconfitta	O
 142	15	Reggiana	NPR	Reggiana	Sconfitta	Vincitore
@@ -2132,7 +2132,7 @@
 144	13	la	DET:def	il	Trofeo	O
 144	14	Coppa della Costa d'Avorio 2006	ENT	Coppa della Costa d'Avorio 2006	Trofeo	Competizione
 144	15	0	SENT	0	Trofeo	O
-145	0	Nel 2001	ENT	Nel 2001	Attività	O
+145	-	Nel 2001	ENT	Nel 2001	Attività	Tempo
 145	1	debutta	VER:pres	debuttare	Attività	O
 145	2	in	PRE	in	Attività	O
 145	3	Serie B	ENT	Serie B	Attività	Competizione
@@ -2140,12 +2140,12 @@
 145	5	il	DET:def	il	Attività	O
 145	6	Messina	NPR	Messina	Attività	Squadra
 145	7	rimanendovi	VER:geru	rimanere	Attività	LU
-145	8	due annate	ENT	due annate	Attività	O
+145	-	due annate	ENT	due annate	Attività	Durata
 145	9	,	PON	,	Attività	O
 145	10	prima	CON	prima	Attività	O
 145	11	di	PRE	di	Attività	O
 145	12	scendere	VER:infi	scendere	Attività	O
-145	13	per una stagione	ENT	per una stagione	Attività	O
+145	-	per una stagione	ENT	per una stagione	Attività	Durata
 145	14	al	PRE:det	al	Attività	O
 145	15	Martina	NPR	Martina	Attività	Squadra
 145	16	in	PRE	in	Attività	O
@@ -2184,7 +2184,7 @@
 147	20	viene	VER:pres	venire	Sconfitta	O
 147	21	ingaggiato	VER:pper	ingaggiare	Sconfitta	LU
 147	22	persa	VER:pres	perdere	Sconfitta	O
-147	23	1-0	ENT	1-0	Sconfitta	O
+147	-	1-0	ENT	1-0	Sconfitta	Punteggio
 147	24	dal	PRE:det	dal	Sconfitta	O
 147	25	)	PON	)	Sconfitta	O
 147	26	Prato	NPR	Prato	Sconfitta	Perdente
@@ -2192,7 +2192,7 @@
 147	28	in	PRE	in	Sconfitta	O
 147	29	Prima Divisione	ENT	Prima Divisione	Sconfitta	Competizione
 147	30	0	SENT	0	Sconfitta	O
-148	0	Nel 1942	ENT	Nel 1942	Trofeo	O
+148	-	Nel 1942	ENT	Nel 1942	Trofeo	Tempo
 148	1	passa	ADJ	passo	Trofeo	O
 148	2	al	PRE:det	al	Trofeo	O
 148	3	Valencia	NPR	Valencia	Trofeo	Squadra
@@ -2200,12 +2200,12 @@
 148	5	con	PRE	con	Trofeo	O
 148	6	cui	PRO:rela	cui	Trofeo	O
 148	7	gioca	VER:pres	giocare	Trofeo	O
-148	8	per quattro stagioni	ENT	per quattro stagioni	Trofeo	O
+148	-	per quattro stagioni	ENT	per quattro stagioni	Trofeo	Durata
 148	9	vincendo	VER:geru	vincere	Trofeo	LU
 148	10	il	DET:def	il	Trofeo	O
 148	11	campionato	NOM	campionato	Trofeo	Competizione
 148	12	nella	PRE:det	nel	Trofeo	O
-148	13	stagione 1943-1944	ENT	stagione 1943-1944	Trofeo	O
+148	-	stagione 1943-1944	ENT	stagione 1943-1944	Trofeo	Durata
 148	14	0	SENT	0	Trofeo	O
 149	0	In	PRE	in	Attività	O
 149	1	seguito	NOM	seguito	Attività	O
@@ -2229,7 +2229,7 @@
 150	7	del	PRE:det	del	Sconfitta	O
 150	8	Liechtenstein	NPR	Liechtenstein	Sconfitta	Perdente
 150	9	arriva	VER:pres	arrivare	Sconfitta	O
-150	10	il 25 aprile 2001	ENT	il 25 aprile 2001	Sconfitta	O
+150	-	il 25 aprile 2001	ENT	il 25 aprile 2001	Sconfitta	Tempo
 150	11	,	PON	,	Sconfitta	O
 150	12	nella	PRE:det	nel	Sconfitta	O
 150	13	partita	NOM	partita	Sconfitta	O
@@ -2242,7 +2242,7 @@
 150	20	persa	VER:pper	perdere	Sconfitta	LU
 150	21	dal	PRE:det	dal	Sconfitta	O
 150	22	Liechtenstein	NPR	Liechtenstein	Sconfitta	Perdente
-150	23	2-0	ENT	2-0	Sconfitta	O
+150	-	2-0	ENT	2-0	Sconfitta	Punteggio
 150	24	contro	PRE	contro	Sconfitta	O
 150	25	l'	DET:def	il	Sconfitta	O
 150	26	Austria	NPR	Austria	Sconfitta	Vincitore
@@ -2273,14 +2273,14 @@
 153	2	con	PRE	con	Attività	O
 153	3	la	DET:def	il	Attività	O
 153	4	Nazionale lituana	ENT	Nazionale lituana	Attività	Squadra
-153	5	il 7 giugno 2013	ENT	il 7 giugno 2013	Attività	O
+153	-	il 7 giugno 2013	ENT	il 7 giugno 2013	Attività	Tempo
 153	6	in	PRE	in	Attività	O
 153	7	Lituania-Grecia	NOM	<unknown>	Attività	O
 153	8	(	PON	(	Attività	O
-153	9	0-1	ENT	0-1	Attività	O
+153	-	0-1	ENT	0-1	Attività	Punteggio
 153	10	)	PON	)	Attività	O
 153	11	.	SENT	.	Attività	O
-154	0	Dal 2009	ENT	Dal 2009	Attività	O
+154	-	Dal 2009	ENT	Dal 2009	Attività	Durata
 154	1	gioca	VER:pres	giocare	Attività	LU
 154	2	nella	PRE:det	nel	Attività	O
 154	3	massima serie argentina	ENT	massima serie argentina	Attività	Competizione
@@ -2295,19 +2295,19 @@
 155	7	questa	PRO:demo	questo	Trofeo	O
 155	8	squadra	NOM	squadra	Trofeo	O
 155	9	rimane	VER:pres	rimanere	Trofeo	O
-155	10	per cinque stagioni	ENT	per cinque stagioni	Trofeo	O
+155	-	per cinque stagioni	ENT	per cinque stagioni	Trofeo	Durata
 155	11	,	PON	,	Trofeo	O
 155	12	vincendo	VER:geru	vincere	Trofeo	LU
 155	13	due	ADJ	due	Trofeo	O
 155	14	campionati	NOM	campionato	Trofeo	Competizione
 155	15	.	SENT	.	Trofeo	O
-156	0	Nel 1963	ENT	Nel 1963	Attività	O
+156	-	Nel 1963	ENT	Nel 1963	Attività	Tempo
 156	1	passa	ADJ	passo	Attività	O
 156	2	al	PRE:det	al	Attività	O
 156	3	Padova	NPR	Padova	Attività	Squadra
 156	4	dove	PRO:rela	dove	Attività	O
 156	5	rimane	VER:pres	rimanere	Attività	LU
-156	6	fino al 1965	ENT	fino al 1965	Attività	O
+156	-	fino al 1965	ENT	fino al 1965	Attività	Durata
 156	7	per	PRE	per	Attività	O
 156	8	poi	ADV	poi	Attività	O
 156	9	passare	VER:infi	passare	Attività	O
@@ -2322,7 +2322,7 @@
 157	5	un	DET:indef	un	Trofeo	O
 157	6	campionato Primavera	ENT	campionato Primavera	Trofeo	Competizione
 157	7	nella	PRE:det	nel	Trofeo	O
-157	8	stagione 2010-11	ENT	stagione 2010-11	Trofeo	O
+157	-	stagione 2010-11	ENT	stagione 2010-11	Trofeo	Durata
 157	9	battendo	VER:geru	battere	Trofeo	O
 157	10	in	PRE	in	Trofeo	O
 157	11	finale	ADJ	finale	Trofeo	O
@@ -2333,9 +2333,9 @@
 158	1	esordito	VER:pper	esordire	Attività	LU
 158	2	in	PRE	in	Attività	O
 158	3	Nazionale	NOM	Nazionale	Attività	Squadra
-158	4	nel 2008	ENT	nel 2008	Attività	O
+158	-	nel 2008	ENT	nel 2008	Attività	Tempo
 158	5	;	PON	;	Attività	O
-158	6	nel 2010	ENT	nel 2010	Attività	O
+158	-	nel 2010	ENT	nel 2010	Attività	Tempo
 158	7	ha	VER:pres	avere	Attività	O
 158	8	partecipato	VER:pper	partecipare	Attività	O
 158	9	alla	PRE:det	al	Attività	O
@@ -2346,7 +2346,7 @@
 159	2	con	PRE	con	Attività	O
 159	3	la	DET:def	il	Attività	O
 159	4	Nazionale togolese	ENT	Nazionale togolese	Attività	Squadra
-159	5	nel 2011	ENT	nel 2011	Attività	O
+159	-	nel 2011	ENT	nel 2011	Attività	Tempo
 159	6	0	SENT	0	Attività	O
 160	0	Nonostante	CON	nonostante	Trofeo	O
 160	1	sia	VER:cpre	essere	Trofeo	O
@@ -2366,7 +2366,7 @@
 160	15	l'	DET:def	il	Trofeo	O
 160	16	Athletic Club Sparta Praha	ENT	Athletic Club Sparta Praha	Trofeo	Squadra
 160	17	0	SENT	0	Trofeo	O
-161	0	Nel 1945	ENT	Nel 1945	Trofeo	O
+161	-	Nel 1945	ENT	Nel 1945	Trofeo	Tempo
 161	1	milita	VER:pres	militare	Trofeo	O
 161	2	nel	PRE:det	nel	Trofeo	O
 161	3	Genova 1893	ENT	Genova 1893	Trofeo	Squadra
@@ -2403,12 +2403,12 @@
 163	7	biancoverdi	NOM	<unknown>	Trofeo	O
 163	8	il	DET:def	il	Trofeo	O
 163	9	suo	PRO:poss	suo	Trofeo	O
-163	10	primo	ENT	primo	Trofeo	O
+163	-	primo	ENT	primo	Trofeo	Classifica
 163	11	campionato	NOM	campionato	Trofeo	Competizione
 163	12	nella	PRE:det	nel	Trofeo	O
-163	13	stagione 1913-1914	ENT	stagione 1913-1914	Trofeo	O
+163	-	stagione 1913-1914	ENT	stagione 1913-1914	Trofeo	Durata
 163	14	0	SENT	0	Trofeo	O
-164	0	Il 15 ottobre	ENT	Il 15 ottobre	Sconfitta	O
+164	-	Il 15 ottobre	ENT	Il 15 ottobre	Sconfitta	Tempo
 164	1	ha	VER:pres	avere	Sconfitta	O
 164	2	debuttato	VER:pper	debuttare	Sconfitta	O
 164	3	con	PRE	con	Sconfitta	O
@@ -2418,7 +2418,7 @@
 164	7	partita	NOM	partita	Sconfitta	O
 164	8	persa	VER:pper	perdere	Sconfitta	LU
 164	9	per	PRE	per	Sconfitta	O
-164	10	2-0	ENT	2-0	Sconfitta	O
+164	-	2-0	ENT	2-0	Sconfitta	Punteggio
 164	11	Olanda	NPR	Olanda	Sconfitta	Vincitore
 164	12	contro	PRE	contro	Sconfitta	O
 164	13	l	VER:infi	<unknown>	Sconfitta	O
@@ -2428,7 +2428,7 @@
 165	1	esordito	VER:pper	esordire	Attività	LU
 165	2	in	PRE	in	Attività	O
 165	3	nazionale	ADJ	nazionale	Attività	Squadra
-165	4	il 7 giugno 2008	ENT	il 7 giugno 2008	Attività	O
+165	-	il 7 giugno 2008	ENT	il 7 giugno 2008	Attività	Tempo
 165	5	,	PON	,	Attività	O
 165	6	in	PRE	in	Attività	O
 165	7	una	DET:indef	una	Attività	O
@@ -2442,12 +2442,12 @@
 166	2	con	PRE	con	Attività	O
 166	3	la	DET:def	il	Attività	O
 166	4	Nazionale ungherese	ENT	Nazionale ungherese	Attività	Squadra
-166	5	il 4 giugno 2014	ENT	il 4 giugno 2014	Attività	O
+166	-	il 4 giugno 2014	ENT	il 4 giugno 2014	Attività	Tempo
 166	6	nell'	PRE:det	nel	Attività	O
 166	7	amichevole	ADJ	amichevole	Attività	O
 166	8	Ungheria-Albania	NOM	<unknown>	Attività	O
 166	9	(	PON	(	Attività	O
-166	10	1-0	ENT	1-0	Attività	O
+166	-	1-0	ENT	1-0	Attività	Punteggio
 166	11	)	PON	)	Attività	O
 166	12	0	SENT	0	Attività	O
 167	0	Ha	VER:pres	avere	Attività	O
@@ -2468,7 +2468,7 @@
 168	1	esordito	VER:pper	esordire	Attività	LU
 168	2	nella	PRE:det	nel	Attività	O
 168	3	Nazionale cilena	ENT	Nazionale cilena	Attività	Squadra
-168	4	nel 2002	ENT	nel 2002	Attività	O
+168	-	nel 2002	ENT	nel 2002	Attività	Tempo
 168	5	0	SENT	0	Attività	O
 169	0	Ha	VER:pres	avere	Attività	O
 169	1	giocato	VER:pper	giocare	Attività	LU
@@ -2480,7 +2480,7 @@
 169	7	della	PRE:det	del	Attività	O
 169	8	Ternana	NOM	Ternana	Attività	Squadra
 169	9	nella	PRE:det	nel	Attività	O
-169	10	stagione 1972-1973	ENT	stagione 1972-1973	Attività	O
+169	-	stagione 1972-1973	ENT	stagione 1972-1973	Attività	Durata
 169	11	.	SENT	.	Attività	O
 170	0	Dopo	PRE	dopo	Attività	O
 170	1	la	DET:def	il	Attività	O
@@ -2488,7 +2488,7 @@
 170	3	delle	PRE:det	del	Attività	O
 170	4	giovanili	ADJ	giovanili	Attività	Squadra
 170	5	,	PON	,	Attività	O
-170	6	nel 1999	ENT	nel 1999	Attività	O
+170	-	nel 1999	ENT	nel 1999	Attività	Tempo
 170	7	arriva	VER:pres	arrivare	Attività	O
 170	8	nella	PRE:det	nel	Attività	O
 170	9	prima squadra	ENT	prima squadra	Attività	Squadra
@@ -2496,7 +2496,7 @@
 170	11	Vllaznia	NOM	Vllaznia	Attività	Squadra
 170	12	,	PON	,	Attività	O
 170	13	rimanendoci	VER:geru	rimanere	Attività	LU
-170	14	per 4 stagioni	ENT	per 4 stagioni	Attività	O
+170	-	per 4 stagioni	ENT	per 4 stagioni	Attività	Durata
 170	15	,	PON	,	Attività	O
 170	16	nelle	PRE:det	nel	Attività	O
 170	17	quali	PRO:rela	quale	Attività	O
@@ -2509,7 +2509,7 @@
 170	24	6	NUM	@card@	Attività	O
 170	25	gol	NOM	gol	Attività	O
 170	26	0	SENT	0	Attività	O
-171	0	Nel 2012	ENT	Nel 2012	Trofeo	O
+171	-	Nel 2012	ENT	Nel 2012	Trofeo	Tempo
 171	1	vinse	VER:remo	vincere	Trofeo	LU
 171	2	la	DET:def	il	Trofeo	O
 171	3	Coppa del Baltico	ENT	Coppa del Baltico	Trofeo	Competizione
@@ -2530,7 +2530,7 @@
 172	4	convocazione	NOM	convocazione	Sconfitta	O
 172	5	in	PRE	in	Sconfitta	O
 172	6	Nazionale maggiore	ENT	Nazionale maggiore	Sconfitta	Perdente
-172	7	il 19 maggio 2014	ENT	il 19 maggio 2014	Sconfitta	O
+172	-	il 19 maggio 2014	ENT	il 19 maggio 2014	Sconfitta	Tempo
 172	8	,	PON	,	Sconfitta	O
 172	9	per	PRE	per	Sconfitta	O
 172	10	la	DET:def	il	Sconfitta	O
@@ -2539,15 +2539,15 @@
 172	13	la	DET:def	il	Sconfitta	O
 172	14	Romania	NPR	Romania	Sconfitta	Vincitore
 172	15	disputata	VER:pper	disputare	Sconfitta	O
-172	16	il 31 maggio	ENT	il 31 maggio	Sconfitta	O
+172	-	il 31 maggio	ENT	il 31 maggio	Sconfitta	Tempo
 172	17	seguente	ADJ	seguente	Sconfitta	O
 172	18	e	CON	e	Sconfitta	O
 172	19	persa	VER:pper	perdere	Sconfitta	LU
 172	20	per	PRE	per	Sconfitta	O
-172	21	1-0	ENT	1-0	Sconfitta	O
+172	-	1-0	ENT	1-0	Sconfitta	Punteggio
 172	22	0	SENT	0	Sconfitta	O
 173	0	Nella	PRE:det	nel	Attività	O
-173	1	stagione 2013-2014	ENT	stagione 2013-2014	Attività	O
+173	-	stagione 2013-2014	ENT	stagione 2013-2014	Attività	Durata
 173	2	rimane	VER:pres	rimanere	Attività	LU
 173	3	a	PRE	a	Attività	O
 173	4	Vicenza	NPR	Vicenza	Attività	Squadra
@@ -2619,7 +2619,7 @@
 175	12	l'	DET:def	il	Attività	O
 175	13	Anorthosis	NOM	Anorthosis	Attività	Squadra
 175	14	0	SENT	0	Attività	O
-176	0	Il 5 luglio 2013	ENT	Il 5 luglio 2013	Stato	O
+176	-	Il 5 luglio 2013	ENT	Il 5 luglio 2013	Stato	Tempo
 176	1	rescinde	VER:pres	rescindere	Stato	O
 176	2	il	DET:def	il	Stato	O
 176	3	contratto	NOM	contratto	Stato	O
@@ -2635,14 +2635,14 @@
 177	2	con	PRE	con	Attività	O
 177	3	la	DET:def	il	Attività	O
 177	4	Nazionale cipriota	ENT	Nazionale cipriota	Attività	Squadra
-177	5	nel 2001	ENT	nel 2001	Attività	O
+177	-	nel 2001	ENT	nel 2001	Attività	Tempo
 177	6	,	PON	,	Attività	O
 177	7	giocando	VER:geru	giocare	Attività	LU
 177	8	11	NUM	@card@	Attività	O
 177	9	partite	NOM	partita	Attività	O
-177	10	fino al 2008	ENT	fino al 2008	Attività	O
+177	-	fino al 2008	ENT	fino al 2008	Attività	Durata
 177	11	0	SENT	0	Attività	O
-178	0	Nel 2005	ENT	Nel 2005	Attività	O
+178	-	Nel 2005	ENT	Nel 2005	Attività	Tempo
 178	1	scende	VER:pres	scendere	Attività	O
 178	2	in	PRE	in	Attività	O
 178	3	Serie C1	ENT	Serie C1	Attività	Competizione
@@ -2669,7 +2669,7 @@
 178	24	il	DET:def	il	Attività	O
 178	25	Foligno	NOM	Foligno	Attività	Squadra
 178	26	0	SENT	0	Attività	O
-179	0	Nel 1971	ENT	Nel 1971	Attività	O
+179	-	Nel 1971	ENT	Nel 1971	Attività	Tempo
 179	1	viene	VER:pres	venire	Attività	O
 179	2	ceduto	VER:pper	cedere	Attività	O
 179	3	al	PRE:det	al	Attività	O
@@ -2678,7 +2678,7 @@
 179	6	squadra	VER:pres	squadrare	Attività	O
 179	7	dove	PRO:rela	dove	Attività	O
 179	8	rimane	VER:pres	rimanere	Attività	LU
-179	9	fino al 1978	ENT	fino al 1978	Attività	O
+179	-	fino al 1978	ENT	fino al 1978	Attività	Durata
 179	10	,	PON	,	Attività	O
 179	11	quando	CON	quando	Attività	O
 179	12	conclude	VER:pres	concludere	Attività	O
@@ -2686,7 +2686,7 @@
 179	14	propria	ADJ	proprio	Attività	O
 179	15	carriera	NOM	carriera	Attività	O
 179	16	0	SENT	0	Attività	O
-180	0	Il 26 maggio 2012	ENT	Il 26 maggio 2012	Sconfitta	O
+180	-	Il 26 maggio 2012	ENT	Il 26 maggio 2012	Sconfitta	Tempo
 180	1	esordisce	VER:pres	esordire	Sconfitta	O
 180	2	da	PRE	da	Sconfitta	O
 180	3	titolare	VER:infi	titolare	Sconfitta	O
@@ -2701,13 +2701,13 @@
 180	12	amichevole	NOM	amichevole	Sconfitta	Competizione
 180	13	persa	VER:pper	perdere	Sconfitta	LU
 180	14	per	PRE	per	Sconfitta	O
-180	15	5-3	ENT	5-3	Sconfitta	O
+180	-	5-3	ENT	5-3	Sconfitta	Punteggio
 180	16	contro	PRE	contro	Sconfitta	O
 180	17	la	DET:def	il	Sconfitta	O
 180	18	Svizzera	NPR	Svizzera	Sconfitta	Vincitore
 180	19	0	SENT	0	Sconfitta	O
 181	0	Nella	PRE:det	nel	Trofeo	O
-181	1	stagione 1994-1995	ENT	stagione 1994-1995	Trofeo	O
+181	-	stagione 1994-1995	ENT	stagione 1994-1995	Trofeo	Durata
 181	2	vince	VER:pres	vincere	Trofeo	LU
 181	3	la	DET:def	il	Trofeo	O
 181	4	Premier League	ENT	Premier League	Trofeo	Competizione
@@ -2721,7 +2721,7 @@
 182	6	il	DET:def	il	Attività	O
 182	7	Rosenborg	NOM	Rosenborg	Attività	Squadra
 182	8	,	PON	,	Attività	O
-182	9	dal 1979 al 1991	ENT	dal 1979 al 1991	Attività	O
+182	-	dal 1979 al 1991	ENT	dal 1979 al 1991	Attività	Durata
 182	10	0	SENT	0	Attività	O
 182	11	Vinse	VER:remo	vincere	Attività	O
 182	12	tre	ADJ	tre	Attività	O
@@ -2731,22 +2731,22 @@
 183	1	esordito	VER:pper	esordire	Attività	LU
 183	2	in	PRE	in	Attività	O
 183	3	Nazionale	NOM	Nazionale	Attività	Squadra
-183	4	nel 2012	ENT	nel 2012	Attività	O
+183	-	nel 2012	ENT	nel 2012	Attività	Tempo
 183	5	0	SENT	0	Attività	O
-185	0	Nel 2000	ENT	Nel 2000	Attività	O
+185	-	Nel 2000	ENT	Nel 2000	Attività	Tempo
 185	1	entra	VER:pres	entrare	Attività	O
 185	2	nelle	PRE:det	nel	Attività	O
 185	3	giovanili del Metz	ENT	giovanili del Metz	Attività	Squadra
 185	4	dove	PRO:rela	dove	Attività	O
 185	5	rimane	VER:pres	rimanere	Attività	LU
-185	6	fino al 2003	ENT	fino al 2003	Attività	O
+185	-	fino al 2003	ENT	fino al 2003	Attività	Durata
 185	7	quando	CON	quando	Attività	O
 185	8	passa	ADJ	passo	Attività	O
 185	9	nelle	PRE:det	nel	Attività	O
 185	10	giovanili dell'ASC Lascabas	ENT	giovanili dell'ASC Lascabas	Attività	Squadra
 185	11	0	SENT	0	Attività	O
 186	0	Nella	PRE:det	nel	Attività	O
-186	1	stagione 2011-2012	ENT	stagione 2011-2012	Attività	O
+186	-	stagione 2011-2012	ENT	stagione 2011-2012	Attività	Durata
 186	2	ha	VER:pres	avere	Attività	O
 186	3	giocato	VER:pper	giocare	Attività	LU
 186	4	16	NUM	@card@	Attività	O
@@ -2761,9 +2761,9 @@
 187	1	esordito	VER:pper	esordire	Attività	LU
 187	2	in	PRE	in	Attività	O
 187	3	Nazionale	NOM	Nazionale	Attività	Squadra
-187	4	nel 2010	ENT	nel 2010	Attività	O
+187	-	nel 2010	ENT	nel 2010	Attività	Tempo
 187	5	0	SENT	0	Attività	O
-188	0	Nel 2013	ENT	Nel 2013	Attività	O
+188	-	Nel 2013	ENT	Nel 2013	Attività	Tempo
 188	1	esordisce	VER:pres	esordire	Attività	LU
 188	2	in	PRE	in	Attività	O
 188	3	Nazionale Under-21	ENT	Nazionale Under-21	Attività	Squadra
@@ -2791,10 +2791,10 @@
 190	13	sua	PRO:poss	suo	Trofeo	O
 190	14	terza	ADJ	terzo	Trofeo	O
 190	15	Chatham Cup	ENT	Chatham Cup	Trofeo	Competizione
-190	16	nel 1990	ENT	nel 1990	Trofeo	O
+190	-	nel 1990	ENT	nel 1990	Trofeo	Tempo
 190	17	.	SENT	.	Trofeo	O
 191	0	Al	PRE:det	al	Attività	O
-191	1	terzo	ENT	terzo	Attività	O
+191	-	terzo	ENT	terzo	Attività	Classifica
 191	2	anno	NOM	anno	Attività	O
 191	3	delle	PRE:det	del	Attività	O
 191	4	giovanili	ADJ	giovanile	Attività	O
@@ -2810,9 +2810,9 @@
 191	14	Reus	NOM	Reus	Attività	Squadra
 191	15	dove	PRO:rela	dove	Attività	O
 191	16	rimane	VER:pres	rimanere	Attività	LU
-191	17	per due stagioni	ENT	per due stagioni	Attività	O
+191	-	per due stagioni	ENT	per due stagioni	Attività	Durata
 191	18	.	SENT	.	Attività	O
-192	0	Dal 1973 al 1984	ENT	Dal 1973 al 1984	Attività	O
+192	-	Dal 1973 al 1984	ENT	Dal 1973 al 1984	Attività	Durata
 192	1	ha	VER:pres	avere	Attività	O
 192	2	giocato	VER:pper	giocare	Attività	LU
 192	3	nell'	PRE:det	nel	Attività	O
@@ -2831,21 +2831,21 @@
 193	10	e	CON	e	Attività	O
 193	11	Beroe	NOM	Beroe	Attività	Squadra
 193	12	.	SENT	.	Attività	O
-194	0	Nel 1959	ENT	Nel 1959	Attività	O
+194	-	Nel 1959	ENT	Nel 1959	Attività	Tempo
 194	1	passò	VER:remo	passare	Attività	O
 194	2	allo	PRE:det	al	Attività	O
 194	3	Sporting Cristal	ENT	Sporting Cristal	Attività	Squadra
 194	4	,	PON	,	Attività	O
 194	5	dove	PRO:rela	dove	Attività	O
 194	6	rimase	VER:remo	rimanere	Attività	LU
-194	7	per quattro anni	ENT	per quattro anni	Attività	O
+194	-	per quattro anni	ENT	per quattro anni	Attività	Durata
 194	8	,	PON	,	Attività	O
 194	9	prima	CON	prima	Attività	O
 194	10	di	PRE	di	Attività	O
 194	11	ritirarsi	VER:infi	ritirare	Attività	O
-194	12	nel 1962	ENT	nel 1962	Attività	O
+194	-	nel 1962	ENT	nel 1962	Attività	Tempo
 194	13	;	PON	;	Attività	O
-194	14	nel 1961	ENT	nel 1961	Attività	O
+194	-	nel 1961	ENT	nel 1961	Attività	Tempo
 194	15	conquista	NOM	conquista	Attività	O
 194	16	il	DET:def	il	Attività	O
 194	17	Campionato di calcio peruviano	ENT	Campionato di calcio peruviano	Attività	Competizione
@@ -2869,12 +2869,12 @@
 195	16	perso	VER:pper	perdere	Trofeo	O
 195	17	la	DET:def	il	Trofeo	O
 195	18	finale	ADJ	finale	Trofeo	O
-195	19	3-0	ENT	3-0	Trofeo	O
+195	-	3-0	ENT	3-0	Trofeo	Punteggio
 195	20	contro	PRE	contro	Trofeo	O
 195	21	l'	DET:def	il	Trofeo	O
 195	22	Uruguay	NPR	Uruguay	Trofeo	O
 195	23	.	SENT	.	Trofeo	O
-196	0	Nel 2000	ENT	Nel 2000	Attività	O
+196	-	Nel 2000	ENT	Nel 2000	Attività	Tempo
 196	1	si	PRO:pers	si	Attività	O
 196	2	trasferì	VER:remo	trasferire	Attività	O
 196	3	(	PON	(	Attività	O
@@ -2890,7 +2890,7 @@
 196	13	la	DET:def	il	Attività	O
 196	14	quale	PRO:rela	quale	Attività	O
 196	15	rimase	VER:remo	rimanere	Attività	LU
-196	16	per due stagioni	ENT	per due stagioni	Attività	O
+196	-	per due stagioni	ENT	per due stagioni	Attività	Durata
 196	17	.	SENT	.	Attività	O
 197	0	Con	PRE	con	Sconfitta	O
 197	1	la	DET:def	il	Sconfitta	O
@@ -2900,7 +2900,7 @@
 197	5	dell'	PRE:det	del	Sconfitta	O
 197	6	Austria	NPR	Austria	Sconfitta	Perdente
 197	7	partecipò	VER:remo	partecipare	Sconfitta	O
-197	8	nel 1936	ENT	nel 1936	Sconfitta	O
+197	-	nel 1936	ENT	nel 1936	Sconfitta	Tempo
 197	9	al	PRE:det	al	Sconfitta	O
 197	10	torneo	NOM	torneo	Sconfitta	O
 197	11	di	PRE	di	Sconfitta	O
@@ -2916,7 +2916,7 @@
 197	21	,	PON	,	Sconfitta	O
 197	22	persa	VER:pper	perdere	Sconfitta	LU
 197	23	per	PRE	per	Sconfitta	O
-197	24	2 a 1	ENT	2 a 1	Sconfitta	O
+197	-	2 a 1	ENT	2 a 1	Sconfitta	Punteggio
 197	25	contro	PRE	contro	Sconfitta	O
 197	26	l'	DET:def	il	Sconfitta	O
 197	27	Italia	NPR	Italia	Sconfitta	Vincitore
@@ -2926,7 +2926,7 @@
 198	2	esordito	VER:pper	esordire	Attività	LU
 198	3	nella	PRE:det	nel	Attività	O
 198	4	Nazionale sudcoreana	ENT	Nazionale sudcoreana	Attività	Squadra
-198	5	nel giugno 2001	ENT	nel giugno 2001	Attività	O
+198	-	nel giugno 2001	ENT	nel giugno 2001	Attività	Tempo
 198	6	contro	PRE	contro	Attività	O
 198	7	la	DET:def	il	Attività	O
 198	8	Macedonia	NPR	Macedonia	Attività	O
@@ -2936,13 +2936,13 @@
 199	2	con	PRE	con	Vittoria	O
 199	3	l'	DET:def	il	Vittoria	O
 199	4	Under-21	NOM	Under-21	Vittoria	Vincitore
-199	5	l' 8 giugno 2009	ENT	l' 8 giugno 2009	Vittoria	O
+199	-	l' 8 giugno 2009	ENT	l' 8 giugno 2009	Vittoria	Tempo
 199	6	in	PRE	in	Vittoria	O
 199	7	una	DET:indef	una	Vittoria	O
 199	8	partita	NOM	partita	Vittoria	O
 199	9	vinta	VER:pper	vincere	Vittoria	LU
 199	10	per	PRE	per	Vittoria	O
-199	11	7-0	ENT	7-0	Vittoria	O
+199	-	7-0	ENT	7-0	Vittoria	Punteggio
 199	12	contro	PRE	contro	Vittoria	O
 199	13	l'	DET:def	il	Vittoria	O
 199	14	Azerbaigian	NPR	Azerbaigian	Vittoria	Perdente
@@ -2951,7 +2951,7 @@
 200	1	vinto	VER:pper	vincere	Trofeo	LU
 200	2	un	DET:indef	un	Trofeo	O
 200	3	titolo nazionale	ENT	titolo nazionale	Trofeo	Competizione
-200	4	nel 1981	ENT	nel 1981	Trofeo	O
+200	-	nel 1981	ENT	nel 1981	Trofeo	Tempo
 200	5	con	PRE	con	Trofeo	O
 200	6	il	DET:def	il	Trofeo	O
 200	7	Boca Juniors	ENT	Boca Juniors	Trofeo	Squadra
@@ -2964,7 +2964,7 @@
 201	5	il	DET:def	il	Attività	O
 201	6	Rennes	NOM	Rennes	Attività	Squadra
 201	7	nella	PRE:det	nel	Attività	O
-201	8	stagione 2013-2014	ENT	stagione 2013-2014	Attività	O
+201	-	stagione 2013-2014	ENT	stagione 2013-2014	Attività	Durata
 201	9	.	SENT	.	Stato	O
 202	0	In	PRE	in	Attività	O
 202	1	seguito	NOM	seguito	Attività	O
@@ -2985,7 +2985,7 @@
 203	1	esordito	VER:pper	esordire	Attività	LU
 203	2	in	PRE	in	Attività	O
 203	3	Nazionale	NOM	Nazionale	Attività	Squadra
-203	4	nel 2014	ENT	nel 2014	Attività	O
+203	-	nel 2014	ENT	nel 2014	Attività	Tempo
 203	5	.	SENT	.	Attività	O
 204	0	Ha	VER:pres	avere	Attività	O
 204	1	esordito	VER:pper	esordire	Attività	LU
@@ -2995,9 +2995,9 @@
 204	5	il	DET:def	il	Attività	O
 204	6	Guingamp	NOM	Guingamp	Attività	Squadra
 204	7	nella	PRE:det	nel	Attività	O
-204	8	stagione 2013-2014	ENT	stagione 2013-2014	Attività	O
+204	-	stagione 2013-2014	ENT	stagione 2013-2014	Attività	Durata
 204	9	.	SENT	.	Attività	O
-205	0	Nel 1986	ENT	Nel 1986	Sconfitta	O
+205	-	Nel 1986	ENT	Nel 1986	Sconfitta	Tempo
 205	1	sbagliò	VER:remo	sbagliare	Sconfitta	O
 205	2	un	DET:indef	un	Sconfitta	O
 205	3	rigore	NOM	rigore	Sconfitta	O
@@ -3029,9 +3029,9 @@
 206	7	del	PRE:det	del	Attività	O
 206	8	Villarreal	NOM	Villarreal	Attività	Squadra
 206	9	nella	PRE:det	nel	Attività	O
-206	10	stagione 2007-2008	ENT	stagione 2007-2008	Attività	O
+206	-	stagione 2007-2008	ENT	stagione 2007-2008	Attività	Durata
 206	11	.	SENT	.	Attività	O
-207	0	Nel 1960	ENT	Nel 1960	Sconfitta	O
+207	-	Nel 1960	ENT	Nel 1960	Sconfitta	Tempo
 207	1	,	PON	,	Sconfitta	O
 207	2	appena	ADV	appena	Sconfitta	O
 207	3	risaliti	VER:pper	risalire	Sconfitta	O
@@ -3058,7 +3058,7 @@
 207	24	del	PRE:det	del	Sconfitta	O
 207	25	Liverpool	NPR	Liverpool	Sconfitta	Vincitore
 207	26	.	SENT	.	Sconfitta	O
-208	0	Il 22 luglio 2014	ENT	Il 22 luglio 2014	Stato	O
+208	-	Il 22 luglio 2014	ENT	Il 22 luglio 2014	Stato	Tempo
 208	1	,	PON	,	Stato	O
 208	2	dopo	PRE	dopo	Stato	O
 208	3	la	DET:def	il	Stato	O
@@ -3083,9 +3083,9 @@
 209	6	dove	PRO:rela	dove	Attività	O
 209	7	è	VER:pres	essere	Attività	O
 209	8	rimasto	VER:pper	rimanere	Attività	LU
-209	9	4 stagioni	ENT	4 stagioni	Attività	O
+209	-	4 stagioni	ENT	4 stagioni	Attività	Durata
 209	10	,	PON	,	Attività	O
-209	11	fino al 1969	ENT	fino al 1969	Attività	O
+209	-	fino al 1969	ENT	fino al 1969	Attività	Durata
 209	12	,	PON	,	Attività	O
 209	13	passando	VER:geru	passare	Attività	O
 209	14	alla	PRE:det	al	Attività	O
@@ -3098,7 +3098,7 @@
 210	0	Ha	VER:pres	avere	Sconfitta	O
 210	1	realizzato	VER:pper	realizzare	Sconfitta	O
 210	2	il	DET:def	il	Sconfitta	O
-210	3	primo	ENT	primo	Sconfitta	O
+210	-	primo	ENT	primo	Sconfitta	Classifica
 210	4	gol	NOM	gol	Sconfitta	O
 210	5	con	PRE	con	Sconfitta	O
 210	6	i	DET:def	il	Sconfitta	O
@@ -3110,9 +3110,9 @@
 210	12	la	DET:def	il	Sconfitta	O
 210	13	Lazio	NPR	Lazio	Sconfitta	Vincitore
 210	14	(	PON	(	Sconfitta	O
-210	15	1-2	ENT	1-2	Sconfitta	O
+210	-	1-2	ENT	1-2	Sconfitta	Punteggio
 210	16	)	PON	)	Sconfitta	O
-210	17	del 21 settembre 2011	ENT	del 21 settembre 2011	Sconfitta	O
+210	-	del 21 settembre 2011	ENT	del 21 settembre 2011	Sconfitta	Tempo
 210	18	.	SENT	.	Sconfitta	O
 211	0	Allenò	VER:remo	allenare	Sconfitta	O
 211	1	la	DET:def	il	Sconfitta	O
@@ -3132,14 +3132,14 @@
 211	15	l'	DET:def	il	Sconfitta	O
 211	16	Egitto	NPR	Egitto	Sconfitta	Vincitore
 211	17	per	PRE	per	Sconfitta	O
-211	18	3-0	ENT	3-0	Sconfitta	O
+211	-	3-0	ENT	3-0	Sconfitta	Punteggio
 211	19	.	SENT	.	Sconfitta	O
 212	0	Ha	VER:pres	avere	Sconfitta	O
 212	1	partecipato	VER:pper	partecipare	Sconfitta	O
 212	2	alla	PRE:det	al	Sconfitta	O
 212	3	stessa	ADJ	stesso	Sconfitta	O
 212	4	competizione	NOM	competizione	Sconfitta	O
-212	5	nel 2002	ENT	nel 2002	Sconfitta	O
+212	-	nel 2002	ENT	nel 2002	Sconfitta	Tempo
 212	6	,	PON	,	Sconfitta	O
 212	7	segnando	VER:geru	segnare	Sconfitta	O
 212	8	1	NUM	@card@	Sconfitta	O
@@ -3157,7 +3157,7 @@
 212	20	il	DET:def	il	Sconfitta	O
 212	21	Camerun	NPR	Camerun	Sconfitta	Vincitore
 212	22	.	SENT	.	Sconfitta	O
-213	0	Il 15 settembre	ENT	Il 15 settembre	Sconfitta	O
+213	-	Il 15 settembre	ENT	Il 15 settembre	Sconfitta	Tempo
 213	1	seguente	ADJ	seguente	Sconfitta	O
 213	2	perde	VER:pres	perdere	Sconfitta	LU
 213	3	la	DET:def	il	Sconfitta	O
@@ -3167,7 +3167,7 @@
 213	7	di	PRE	di	Sconfitta	O
 213	8	Emirates Cup	ENT	Emirates Cup	Sconfitta	Competizione
 213	9	per	PRE	per	Sconfitta	O
-213	10	4-3	ENT	4-3	Sconfitta	O
+213	-	4-3	ENT	4-3	Sconfitta	Punteggio
 213	11	contro	PRE	contro	Sconfitta	O
 213	12	l'	DET:def	il	Sconfitta	O
 213	13	Al-Jazira	NOM	Al-Jazira	Sconfitta	Vincitore
@@ -3176,9 +3176,9 @@
 214	1	esordito	VER:pper	esordire	Attività	LU
 214	2	in	PRE	in	Attività	O
 214	3	Nazionale	NOM	nazionale	Attività	Squadra
-214	4	nel 2004	ENT	nel 2004	Attività	O
+214	-	nel 2004	ENT	nel 2004	Attività	Tempo
 214	5	.	SENT	.	Attività	O
-215	0	Il 31 gennaio 2011	ENT	Il 31 gennaio 2011	Stato	O
+215	-	Il 31 gennaio 2011	ENT	Il 31 gennaio 2011	Stato	Tempo
 215	1	viene	VER:pres	venire	Stato	O
 215	2	ceduto	VER:pper	cedere	Stato	O
 215	3	a	PRE	a	Stato	O
@@ -3190,18 +3190,18 @@
 215	9	Alla	PRE:det	al	Stato	O
 215	10	fine	NOM	fine	Stato	O
 215	11	della	PRE:det	del	Stato	O
-215	12	stagione 2011-2012	ENT	stagione 2011-2012	Stato	O
+215	-	stagione 2011-2012	ENT	stagione 2011-2012	Stato	Durata
 215	13	rimane	VER:pres	rimanere	Stato	LU
 215	14	svincolato	VER:pper	svincolare	Stato	Stato
 215	15	.	SENT	.	Stato	O
-216	0	Nel 1933-1934	ENT	Nel 1933-1934	Attività	O
+216	-	Nel 1933-1934	ENT	Nel 1933-1934	Attività	Durata
 216	1	gioca	VER:pres	giocare	Attività	LU
 216	2	nel	PRE:det	nel	Attività	O
 216	3	Savoia	NPR	Savoia	Attività	Squadra
 216	4	di	PRE	di	Attività	O
 216	5	Torre Annunziata	ENT	Torre Annunziata	Attività	Luogo
 216	6	.	SENT	.	Attività	O
-217	0	Il 21 maggio 2014	ENT	Il 21 maggio 2014	Vittoria	O
+217	-	Il 21 maggio 2014	ENT	Il 21 maggio 2014	Vittoria	Tempo
 217	1	ha	VER:pres	avere	Vittoria	O
 217	2	esordito	VER:pper	esordire	Vittoria	O
 217	3	con	PRE	con	Vittoria	O
@@ -3211,7 +3211,7 @@
 217	7	amichevole	NOM	amichevole	Vittoria	Competizione
 217	8	vinta	VER:pper	vincere	Vittoria	LU
 217	9	per	PRE	per	Vittoria	O
-217	10	1-6	ENT	1-6	Vittoria	O
+217	-	1-6	ENT	1-6	Vittoria	Punteggio
 217	11	contro	PRE	contro	Vittoria	O
 217	12	il	DET:def	il	Vittoria	O
 217	13	Kosovo	NPR	Kosovo	Vittoria	Perdente
@@ -3230,7 +3230,7 @@
 218	11	il	DET:def	il	Sconfitta	O
 218	12	PSG	NOM	PSG	Sconfitta	Vincitore
 218	13	(	PON	(	Sconfitta	O
-218	14	0-1	ENT	0-1	Sconfitta	O
+218	-	0-1	ENT	0-1	Sconfitta	Punteggio
 218	15	)	PON	)	Sconfitta	O
 218	16	.	SENT	.	Sconfitta	O
 219	0	Ha	VER:pres	avere	Sconfitta	O
@@ -3251,26 +3251,26 @@
 219	15	le	DET:def	il	Sconfitta	O
 219	16	Fær Øer	ENT	Fær Øer	Sconfitta	Vincitore
 219	17	(	PON	(	Sconfitta	O
-219	18	1-4	ENT	1-4	Sconfitta	O
+219	-	1-4	ENT	1-4	Sconfitta	Punteggio
 219	19	)	PON	)	Sconfitta	O
 219	20	.	SENT	.	Sconfitta	O
 220	0	Ha	VER:pres	avere	Attività	O
 220	1	esordito	VER:pper	esordire	Attività	LU
 220	2	in	PRE	in	Attività	O
 220	3	Nazionale maggiore	ENT	Nazionale maggiore	Attività	Squadra
-220	4	l' 11 ottobre 2013	ENT	l' 11 ottobre 2013	Attività	O
+220	-	l' 11 ottobre 2013	ENT	l' 11 ottobre 2013	Attività	Tempo
 220	5	nell'	PRE:det	nel	Attività	O
 220	6	amichevole	ADJ	amichevole	Attività	Competizione
 220	7	Serbia-Giappone	NOM	<unknown>	Attività	O
 220	8	(	PON	(	Attività	O
-220	9	2-0	ENT	2-0	Attività	O
+220	-	2-0	ENT	2-0	Attività	Punteggio
 220	10	)	PON	)	Attività	O
 220	11	.	SENT	.	Attività	O
 221	0	Ha	VER:pres	avere	Attività	O
 221	1	esordito	VER:pper	esordire	Attività	LU
 221	2	in	PRE	in	Attività	O
 221	3	Nazionale	NOM	Nazionale	Attività	Squadra
-221	4	nel 1999	ENT	nel 1999	Attività	O
+221	-	nel 1999	ENT	nel 1999	Attività	Tempo
 221	5	,	PON	,	Attività	O
 221	6	vestendone	VER:geru	vestire	Attività	O
 221	7	la	DET:def	il	Attività	O
@@ -3290,14 +3290,14 @@
 222	6	amichevole	ADJ	amichevole	Attività	Competizione
 222	7	Italia-Lussemburgo	NOM	<unknown>	Attività	O
 222	8	(	PON	(	Attività	O
-222	9	1-1	ENT	1-1	Attività	O
+222	-	1-1	ENT	1-1	Attività	Punteggio
 222	10	)	PON	)	Attività	O
 222	11	disputata	VER:pper	disputare	Attività	O
-222	12	il 4 giugno 2014	ENT	il 4 giugno 2014	Attività	O
+222	-	il 4 giugno 2014	ENT	il 4 giugno 2014	Attività	Tempo
 222	13	.	SENT	.	Attività	O
 223	0	Dopo	PRE	dopo	Stato	O
 223	1	circa	ADV	circa	Stato	O
-223	2	2 anni	ENT	2 anni	Stato	O
+223	-	2 anni	ENT	2 anni	Stato	Durata
 223	3	passati	ADJ	passato	Stato	O
 223	4	con	PRE	con	Stato	O
 223	5	il	DET:def	il	Stato	O
@@ -3315,14 +3315,14 @@
 224	1	esordito	VER:pper	esordire	Attività	LU
 224	2	in	PRE	in	Attività	O
 224	3	Nazionale	NOM	Nazionale	Attività	Squadra
-224	4	il 19 novembre 2013	ENT	il 19 novembre 2013	Attività	O
+224	-	il 19 novembre 2013	ENT	il 19 novembre 2013	Attività	Tempo
 224	5	nell'	PRE:det	nel	Attività	O
 224	6	amichevole	ADJ	amichevole	Attività	Competizione
 224	7	Malta-Isole	NOM	<unknown>	Attività	O
 224	8	Fær	NOM	<unknown>	Attività	O
 224	9	Øer	NOM	<unknown>	Attività	O
 224	10	(	PON	(	Attività	O
-224	11	3-2	ENT	3-2	Attività	O
+224	-	3-2	ENT	3-2	Attività	Punteggio
 224	12	)	PON	)	Attività	O
 224	13	0	SENT	0	Attività	O
 225	0	Ha	VER:pres	avere	Trofeo	O
@@ -3341,9 +3341,9 @@
 225	13	vinto	VER:pper	vincere	Trofeo	LU
 225	14	l'	DET:def	il	Trofeo	O
 225	15	Europeo di categoria	ENT	Europeo di categoria	Trofeo	Competizione
-225	16	nel 1992	ENT	nel 1992	Trofeo	O
+225	-	nel 1992	ENT	nel 1992	Trofeo	Tempo
 225	17	0	SENT	0	Trofeo	O
-226	0	Nel 2013	ENT	Nel 2013	Attività	O
+226	-	Nel 2013	ENT	Nel 2013	Attività	Tempo
 226	1	esordisce	VER:pres	esordire	Attività	LU
 226	2	con	PRE	con	Attività	O
 226	3	la	DET:def	il	Attività	O
@@ -3358,13 +3358,13 @@
 227	6	finale	NOM	finale	Sconfitta	Competizione
 227	7	di	PRE	di	Sconfitta	O
 227	8	Coppa dei Campioni	ENT	Coppa dei Campioni	Sconfitta	Competizione
-227	9	nel 1976	ENT	nel 1976	Sconfitta	O
+227	-	nel 1976	ENT	nel 1976	Sconfitta	Tempo
 227	10	contro	PRE	contro	Sconfitta	O
 227	11	il	DET:def	il	Sconfitta	O
 227	12	Bayern Monaco	ENT	Bayern Monaco	Sconfitta	Vincitore
 227	13	,	PON	,	Sconfitta	O
 227	14	perdendola	VER:geru	perdere	Sconfitta	LU
-227	15	1-0	ENT	1-0	Sconfitta	O
+227	-	1-0	ENT	1-0	Sconfitta	Punteggio
 227	16	0	SENT	0	Sconfitta	O
 229	0	Da	PRE	da	Trofeo	O
 229	1	calciatore	NOM	calciatore	Trofeo	O
@@ -3376,15 +3376,15 @@
 229	7	il	DET:def	il	Trofeo	O
 229	8	campionato ungherese	ENT	campionato ungherese	Trofeo	Competizione
 229	9	tra	PRE	tra	Trofeo	O
-229	10	il 1920	ENT	il 1920	Trofeo	O
+229	-	il 1920	ENT	il 1920	Trofeo	Tempo
 229	11	e	CON	e	Trofeo	O
-229	12	il 1925	ENT	il 1925	Trofeo	O
+229	-	il 1925	ENT	il 1925	Trofeo	Tempo
 229	13	con	PRE	con	Trofeo	O
 229	14	l'	DET:def	il	Trofeo	O
 229	15	MTK	NOM	MTK	Trofeo	Squadra
 229	16	.	SENT	.	Trofeo	O
 230	0	Nella	PRE:det	nel	Sconfitta	O
-230	1	stagione 2010-2011	ENT	stagione 2010-2011	Sconfitta	O
+230	-	stagione 2010-2011	ENT	stagione 2010-2011	Sconfitta	Durata
 230	2	raggiunge	VER:pres	raggiungere	Sconfitta	O
 230	3	con	PRE	con	Sconfitta	O
 230	4	il	DET:def	il	Sconfitta	O
@@ -3406,7 +3406,7 @@
 231	2	Argentina	NPR	Argentina	Trofeo	Squadra
 231	3	ha	VER:pres	avere	Trofeo	O
 231	4	partecipato	VER:pper	partecipare	Trofeo	O
-231	5	nel 2008	ENT	nel 2008	Trofeo	O
+231	-	nel 2008	ENT	nel 2008	Trofeo	Tempo
 231	6	ai	PRE:det	al	Trofeo	O
 231	7	Giochi olimpici di Pechino	ENT	Giochi olimpici di Pechino	Trofeo	Competizione
 231	8	,	PON	,	Trofeo	O
@@ -3414,7 +3414,7 @@
 231	10	l'	DET:def	il	Trofeo	O
 231	11	oro	NOM	oro	Trofeo	Premio
 231	12	0	SENT	0	Trofeo	O
-232	0	Nel 2011	ENT	Nel 2011	Attività	O
+232	-	Nel 2011	ENT	Nel 2011	Attività	Tempo
 232	1	torna	VER:pres	tornare	Attività	O
 232	2	a	PRE	a	Attività	O
 232	3	giocare	VER:infi	giocare	Attività	LU
@@ -3427,7 +3427,7 @@
 232	10	Division 2	ENT	Division 2	Attività	Competizione
 232	11	,	PON	,	Attività	O
 232	12	rimanendo	VER:geru	rimanere	Attività	O
-232	13	una stagione	ENT	una stagione	Attività	O
+232	-	una stagione	ENT	una stagione	Attività	Durata
 232	14	0	SENT	0	Attività	O
 233	0	Centromediano	NOM	centromediano	Attività	O
 233	1	metodista	ADJ	metodista	Attività	O
@@ -3438,7 +3438,7 @@
 233	6	nel	PRE:det	nel	Attività	O
 233	7	Casale	NPR	Casale	Attività	Squadra
 233	8	disputa	VER:pres	disputare	Attività	O
-233	9	una stagione	ENT	una stagione	Attività	O
+233	-	una stagione	ENT	una stagione	Attività	Durata
 233	10	nel	PRE:det	nel	Attività	O
 233	11	Livorno	NPR	Livorno	Attività	Squadra
 233	12	,	PON	,	Attività	O
@@ -3451,7 +3451,7 @@
 233	19	:	PON	:	Attività	O
 233	20	qui	ADV	qui	Attività	O
 233	21	rimane	VER:pres	rimanere	Attività	LU
-233	22	fino al 1929	ENT	fino al 1929	Attività	O
+233	-	fino al 1929	ENT	fino al 1929	Attività	Durata
 233	23	,	PON	,	Attività	O
 233	24	totalizzando	VER:geru	totalizzare	Attività	O
 233	25	100	NUM	@card@	Attività	O
@@ -3460,7 +3460,7 @@
 233	28	4	NUM	@card@	Attività	O
 233	29	reti	NOM	rete	Attività	O
 233	30	0	SENT	0	Attività	O
-234	0	Il 18 giugno 2014	ENT	Il 18 giugno 2014	Sconfitta	O
+234	-	Il 18 giugno 2014	ENT	Il 18 giugno 2014	Sconfitta	Tempo
 234	1	esordisce	VER:pres	esordire	Sconfitta	O
 234	2	con	PRE	con	Sconfitta	O
 234	3	la	DET:def	il	Sconfitta	O
@@ -3472,10 +3472,10 @@
 234	9	Cina	ENT	Cina	Sconfitta	Vincitore
 234	10	persa	VER:pres	perdere	Sconfitta	LU
 234	11	per	PRE	per	Sconfitta	O
-234	12	2-0	ENT	2-0	Sconfitta	O
+234	-	2-0	ENT	2-0	Sconfitta	Punteggio
 234	13	0	SENT	0	Sconfitta	O
 235	0	Gioca	VER:pres	giocare	Sconfitta	O
-235	1	tre stagioni	ENT	tre stagioni	Sconfitta	O
+235	-	tre stagioni	ENT	tre stagioni	Sconfitta	Durata
 235	2	con	PRE	con	Sconfitta	O
 235	3	la	DET:def	il	Sconfitta	O
 235	4	maglia	NOM	maglia	Sconfitta	O
@@ -3486,7 +3486,7 @@
 235	9	all'	PRE:det	al	Sconfitta	O
 235	10	ultima	ADJ	ultimo	Sconfitta	O
 235	11	giornata	NOM	giornata	Sconfitta	O
-235	12	nel 1934-1935	ENT	nel 1934-1935	Sconfitta	O
+235	-	nel 1934-1935	ENT	nel 1934-1935	Sconfitta	Durata
 235	13	e	CON	e	Sconfitta	O
 235	14	una	DET:indef	una	Sconfitta	O
 235	15	finale	NOM	finale	Sconfitta	O
@@ -3501,7 +3501,7 @@
 235	24	in	PRE	in	Sconfitta	O
 235	25	Italia	NPR	Italia	Sconfitta	Luogo
 235	26	0	SENT	0	Sconfitta	O
-236	0	Nel 2003	ENT	Nel 2003	Attività	O
+236	-	Nel 2003	ENT	Nel 2003	Attività	Tempo
 236	1	ha	VER:pres	avere	Attività	O
 236	2	esordito	VER:pper	esordire	Attività	O
 236	3	con	PRE	con	Attività	O
@@ -3540,13 +3540,13 @@
 237	21	(	PON	(	Attività	O
 237	22	nel	PRE:det	nel	Attività	O
 237	23	pareggio	NOM	pareggio	Attività	O
-237	24	1-1	ENT	1-1	Attività	O
+237	-	1-1	ENT	1-1	Attività	Punteggio
 237	25	contro	PRE	contro	Attività	O
 237	26	la	DET:def	il	Attività	O
 237	27	Cremonese	NPR	Cremonese	Attività	O
 237	28	)	PON	)	Attività	O
 237	29	0	SENT	0	Attività	O
-238	0	Nel 2005	ENT	Nel 2005	Attività	O
+238	-	Nel 2005	ENT	Nel 2005	Attività	Tempo
 238	1	è	VER:pres	essere	Attività	O
 238	2	l'	DET:def	il	Attività	O
 238	3	unico	ADJ	unico	Attività	O
@@ -3562,9 +3562,9 @@
 238	13	,	PON	,	Attività	O
 238	14	e	CON	e	Attività	O
 238	15	dalla	PRE:det	dal	Attività	O
-238	16	stagione 2005/2006	ENT	stagione 2005/2006	Attività	O
+238	-	stagione 2005/2006	ENT	stagione 2005/2006	Attività	Durata
 238	17	,	PON	,	Attività	O
-238	18	per 3 stagioni	ENT	per 3 stagioni	Attività	O
+238	-	per 3 stagioni	ENT	per 3 stagioni	Attività	Durata
 238	19	,	PON	,	Attività	O
 238	20	fu	VER:remo	essere	Attività	O
 238	21	il	DET:def	il	Attività	O
@@ -3575,7 +3575,7 @@
 238	26	in	PRE	in	Attività	O
 238	27	Serie C1	ENT	Serie C1	Attività	Competizione
 238	28	0	SENT	0	Attività	O
-239	0	Nel 1998	ENT	Nel 1998	Attività	O
+239	-	Nel 1998	ENT	Nel 1998	Attività	Tempo
 239	1	viene	VER:pres	venire	Attività	O
 239	2	notato	VER:pper	notare	Attività	O
 239	3	dall'	PRE:det	dal	Attività	O
@@ -3597,7 +3597,7 @@
 239	19	e	CON	e	Attività	O
 239	20	vi	PRO:refl	vi	Attività	O
 239	21	rimane	VER:pres	rimanere	Attività	LU
-239	22	due stagioni	ENT	due stagioni	Attività	O
+239	-	due stagioni	ENT	due stagioni	Attività	Durata
 239	23	,	PON	,	Attività	O
 239	24	divenendone	VER:geru	divenire	Attività	O
 239	25	uno	DET:indef	uno	Attività	O
@@ -3620,7 +3620,7 @@
 240	12	,	PON	,	Sconfitta	O
 240	13	persa	VER:pper	perdere	Sconfitta	LU
 240	14	per	PRE	per	Sconfitta	O
-240	15	3-0	ENT	3-0	Sconfitta	O
+240	-	3-0	ENT	3-0	Sconfitta	Punteggio
 240	16	contro	PRE	contro	Sconfitta	O
 240	17	il	DET:def	il	Sconfitta	O
 240	18	Fredrikstad	NOM	Fredrikstad	Sconfitta	Vincitore
@@ -3630,7 +3630,7 @@
 240	22	il	DET:def	il	Sconfitta	O
 240	23	Tønsberg	NOM	<unknown>	Sconfitta	O
 240	24	0	SENT	0	Sconfitta	O
-241	0	Nel dicembre 2002	ENT	Nel dicembre 2002	Attività	O
+241	-	Nel dicembre 2002	ENT	Nel dicembre 2002	Attività	Tempo
 241	1	ha	VER:pres	avere	Attività	O
 241	2	firmato	VER:pper	firmare	Attività	O
 241	3	per	PRE	per	Attività	O
@@ -3651,7 +3651,7 @@
 243	1	esordito	VER:pper	esordire	Attività	LU
 243	2	in	PRE	in	Attività	O
 243	3	Nazionale	NOM	Nazionale	Attività	Squadra
-243	4	nel 2008	ENT	nel 2008	Attività	O
+243	-	nel 2008	ENT	nel 2008	Attività	Tempo
 243	5	0	SENT	0	Attività	O
 244	0	Ha	VER:pres	avere	Attività	O
 244	1	giocato	VER:pper	giocare	Attività	LU
@@ -3665,7 +3665,7 @@
 244	9	Dinamo Zagabria	ENT	Dinamo Zagabria	Attività	Squadra
 244	10	0	SENT	0	Attività	O
 245	0	Nella	PRE:det	nel	Attività	O
-245	1	stagione 2014-2015	ENT	stagione 2014-2015	Attività	O
+245	-	stagione 2014-2015	ENT	stagione 2014-2015	Attività	Durata
 245	2	,	PON	,	Attività	O
 245	3	dopo	PRE	dopo	Attività	O
 245	4	aver	VER:infi	avere	Attività	O
@@ -3678,7 +3678,7 @@
 245	11	all'	PRE:det	al	Attività	O
 245	12	attivo	NOM	attivo	Attività	O
 245	13	,	PON	,	Attività	O
-245	14	il 26 giugno 2014	ENT	il 26 giugno 2014	Attività	O
+245	-	il 26 giugno 2014	ENT	il 26 giugno 2014	Attività	Tempo
 245	15	viene	VER:pres	venire	Attività	O
 245	16	ceduto	VER:pper	cedere	Attività	O
 245	17	in	PRE	in	Attività	O
@@ -3698,11 +3698,11 @@
 246	4	la	PRO:pers	la	Trofeo	O
 246	5	gli	DET:def	il	Trofeo	O
 246	6	europei	NOM	europei	Trofeo	Competizione
-246	7	nel 2010	ENT	nel 2010	Trofeo	O
+246	-	nel 2010	ENT	nel 2010	Trofeo	Tempo
 246	8	e	CON	e	Trofeo	O
-246	9	nel 2012	ENT	nel 2012	Trofeo	O
+246	-	nel 2012	ENT	nel 2012	Trofeo	Tempo
 246	10	0	SENT	0	Trofeo	O
-247	0	Nel 2004	ENT	Nel 2004	Trofeo	O
+247	-	Nel 2004	ENT	Nel 2004	Trofeo	Tempo
 247	1	torna	VER:pres	tornare	Trofeo	O
 247	2	a	PRE	a	Trofeo	O
 247	3	sedersi	VER:infi	sedere	Trofeo	O
@@ -3717,7 +3717,7 @@
 247	12	il	DET:def	il	Trofeo	O
 247	13	campionato	NOM	campionato	Trofeo	Competizione
 247	14	nella	PRE:det	nel	Trofeo	O
-247	15	stagione 2004-2005	ENT	stagione 2004-2005	Trofeo	O
+247	-	stagione 2004-2005	ENT	stagione 2004-2005	Trofeo	Durata
 247	16	0	SENT	0	Trofeo	O
 248	0	Ha	VER:pres	avere	Attività	O
 248	1	giocato	VER:pper	giocare	Attività	LU
@@ -3733,13 +3733,13 @@
 248	11	dell'	PRE:det	del	Attività	O
 248	12	IFA	NOM	IFA	Attività	Squadra
 248	13	0	SENT	0	Attività	O
-249	0	Il 27 ottobre 1946	ENT	Il 27 ottobre 1946	Attività	O
+249	-	Il 27 ottobre 1946	ENT	Il 27 ottobre 1946	Attività	Tempo
 249	1	esordisce	VER:pres	esordire	Attività	LU
 249	2	contro	ADV	contro	Attività	O
 249	3	la	DET:def	il	Attività	O
 249	4	Cecoslovacchia	NPR	Cecoslovacchia	Attività	O
 249	5	(	PON	(	Attività	O
-249	6	3-4	ENT	3-4	Attività	O
+249	-	3-4	ENT	3-4	Attività	Punteggio
 249	7	)	PON	)	Attività	O
 249	8	,	PON	,	Attività	O
 249	9	segnando	VER:geru	segnare	Attività	O
@@ -3763,10 +3763,10 @@
 250	14	ex	ADJ	ex	Sconfitta	O
 250	15	squadra	NOM	squadra	Sconfitta	O
 250	16	perdendo	VER:geru	perdere	Sconfitta	LU
-250	17	1-0	ENT	1-0	Sconfitta	O
+250	-	1-0	ENT	1-0	Sconfitta	Punteggio
 250	18	.	SENT	.	Sconfitta	O
 251	0	Dopo	PRE	dopo	Attività	O
-251	1	due anni	ENT	due anni	Attività	O
+251	-	due anni	ENT	due anni	Attività	Durata
 251	2	nel	PRE:det	nel	Attività	O
 251	3	campionato cadetto	ENT	campionato cadetto	Attività	Competizione
 251	4	,	PON	,	Attività	O
@@ -3777,7 +3777,7 @@
 251	9	Serie C	ENT	Serie C	Attività	Competizione
 251	10	,	PON	,	Attività	O
 251	11	rimanendovi	VER:geru	rimanere	Attività	LU
-251	12	per due stagioni	ENT	per due stagioni	Attività	O
+251	-	per due stagioni	ENT	per due stagioni	Attività	Durata
 251	13	.	SENT	.	Attività	O
 252	0	Bassett	ADJ	Bassett	Attività	Agente
 252	1	rimane	VER:pres	rimanere	Attività	LU
@@ -3820,7 +3820,7 @@
 254	17	l'	DET:def	il	Sconfitta	O
 254	18	Olanda	NPR	Olanda	Sconfitta	Vincitore
 254	19	.	SENT	.	Sconfitta	O
-255	0	Nel 1990	ENT	Nel 1990	Attività	O
+255	-	Nel 1990	ENT	Nel 1990	Attività	Tempo
 255	1	torna	VER:pres	tornare	Attività	O
 255	2	a	PRE	a	Attività	O
 255	3	calcare	VER:infi	calcare	Attività	O
@@ -3848,7 +3848,7 @@
 255	25	in	PRE	in	Attività	O
 255	26	Serie C1	ENT	Serie C1	Attività	Competizione
 255	27	.	SENT	.	Attività	O
-256	0	Nel 2013	ENT	Nel 2013	Trofeo	O
+256	-	Nel 2013	ENT	Nel 2013	Trofeo	Tempo
 256	1	ritorna	VER:pres	ritornare	Trofeo	O
 256	2	di	PRE	di	Trofeo	O
 256	3	nuovo	ADJ	nuovo	Trofeo	O
@@ -3870,7 +3870,7 @@
 257	3	disputa	NOM	disputa	Sconfitta	O
 257	4	,	PON	,	Sconfitta	O
 257	5	il	DET:def	il	Sconfitta	O
-257	6	primo	ENT	primo	Sconfitta	O
+257	-	primo	ENT	primo	Sconfitta	Classifica
 257	7	anno	NOM	anno	Sconfitta	O
 257	8	,	PON	,	Sconfitta	O
 257	9	i	DET:def	il	Sconfitta	O
@@ -3916,9 +3916,9 @@
 259	5	in	PRE	in	Attività	O
 259	6	Eredivisie	NOM	Eredivisie	Attività	Competizione
 259	7	nella	PRE:det	nel	Attività	O
-259	8	stagione 2008-2009	ENT	stagione 2008-2009	Attività	O
+259	-	stagione 2008-2009	ENT	stagione 2008-2009	Attività	Durata
 259	9	.	SENT	.	Attività	O
-260	0	Nel 1961	ENT	Nel 1961	Sconfitta	O
+260	-	Nel 1961	ENT	Nel 1961	Sconfitta	Tempo
 260	1	si	PRO:refl	si	Sconfitta	O
 260	2	trasferisce	VER:pres	trasferire	Sconfitta	O
 260	3	in	PRE	in	Sconfitta	O
@@ -3947,7 +3947,7 @@
 260	26	della	PRE:det	del	Sconfitta	O
 260	27	Coppa di Germania 1965	ENT	Coppa di Germania 1965	Sconfitta	Competizione
 260	28	.	SENT	.	Sconfitta	O
-261	0	Il 22 marzo 2013	ENT	Il 22 marzo 2013	Sconfitta	O
+261	-	Il 22 marzo 2013	ENT	Il 22 marzo 2013	Sconfitta	Tempo
 261	1	scende	VER:pres	scendere	Sconfitta	O
 261	2	in	PRE	in	Sconfitta	O
 261	3	campo	NOM	campo	Sconfitta	O
@@ -3957,7 +3957,7 @@
 261	7	partita	NOM	partita	Sconfitta	O
 261	8	persa	VER:pper	perdere	Sconfitta	LU
 261	9	per	PRE	per	Sconfitta	O
-261	10	2-0	ENT	2-0	Sconfitta	O
+261	-	2-0	ENT	2-0	Sconfitta	Punteggio
 261	11	a	PRE	a	Sconfitta	O
 261	12	Zagabria	NPR	Zagabria	Sconfitta	Luogo
 261	13	contro	PRE	contro	Sconfitta	O
@@ -3971,7 +3971,7 @@
 261	21	ai	PRE:det	al	Sconfitta	O
 261	22	Mondiali del 2014	ENT	Mondiali del 2014	Sconfitta	Competizione
 261	23	.	SENT	.	Sconfitta	O
-262	0	Il 4 settembre 2014	ENT	Il 4 settembre 2014	Vittoria	O
+262	-	Il 4 settembre 2014	ENT	Il 4 settembre 2014	Vittoria	Tempo
 262	1	esordisce	VER:pres	esordire	Vittoria	O
 262	2	in	PRE	in	Vittoria	O
 262	3	Nazionale maggiore	ENT	Nazionale maggiore	Vittoria	Vincitore
@@ -3979,7 +3979,7 @@
 262	5	amichevole	NOM	amichevole	Vittoria	Competizione
 262	6	vinta	VER:pper	vincere	Vittoria	LU
 262	7	per	PRE	per	Vittoria	O
-262	8	2-0	ENT	2-0	Vittoria	O
+262	-	2-0	ENT	2-0	Vittoria	Punteggio
 262	9	contro	PRE	contro	Vittoria	O
 262	10	l'	DET:def	il	Vittoria	O
 262	11	Estonia	NPR	Estonia	Vittoria	Perdente
@@ -3987,16 +3987,16 @@
 263	0	Ritornato	VER:pper	ritornare	Attività	O
 263	1	al	PRE:det	al	Attività	O
 263	2	Padova	NPR	Padova	Attività	Squadra
-263	3	nel 1945	ENT	nel 1945	Attività	O
+263	-	nel 1945	ENT	nel 1945	Attività	Tempo
 263	4	ci	PRO:refl	ci	Attività	O
 263	5	rimane	VER:pres	rimanere	Attività	LU
-263	6	per due stagioni	ENT	per due stagioni	Attività	O
-263	7	fino al 1947	ENT	fino al 1947	Attività	O
+263	-	per due stagioni	ENT	per due stagioni	Attività	Durata
+263	-	fino al 1947	ENT	fino al 1947	Attività	Durata
 263	8	collezionando	VER:geru	collezionare	Attività	O
 263	9	57	NUM	@card@	Attività	O
 263	10	presenze	NOM	presenza	Attività	O
 263	11	.	SENT	.	Attività	O
-264	0	Nel 1964	ENT	Nel 1964	Trofeo	O
+264	-	Nel 1964	ENT	Nel 1964	Trofeo	Tempo
 264	1	venne	VER:remo	venire	Trofeo	O
 264	2	ingaggiato	VER:pper	ingaggiare	Trofeo	O
 264	3	dallo	PRE:det	dal	Trofeo	O
@@ -4027,45 +4027,45 @@
 266	2	con	PRE	con	Attività	O
 266	3	la	DET:def	il	Attività	O
 266	4	Nazionale etiope	NOM	Nazionale etiope	Attività	Squadra
-266	5	nel 2010	ENT	nel 2010	Attività	O
+266	-	nel 2010	ENT	nel 2010	Attività	Tempo
 266	6	.	SENT	.	Attività	O
-267	0	L' anno seguente	ENT	L' anno seguente	Attività	O
+267	-	L' anno seguente	ENT	L' anno seguente	Attività	Tempo
 267	1	passa	ADJ	passo	Attività	O
 267	2	al	PRE:det	al	Attività	O
 267	3	Genoa	NPR	Genoa	Attività	Squadra
 267	4	,	PON	,	Attività	O
 267	5	dove	PRO:rela	dove	Attività	O
 267	6	rimane	VER:pres	rimanere	Attività	LU
-267	7	quattro stagioni	ENT	quattro stagioni	Attività	O
+267	-	quattro stagioni	ENT	quattro stagioni	Attività	Durata
 267	8	,	PON	,	Attività	O
 267	9	conquistando	VER:geru	conquistare	Attività	O
 267	10	due	ADJ	due	Attività	O
 267	11	scudetti	NOM	scudetto	Attività	O
 267	12	.	SENT	.	Attività	O
-268	0	Il 12 maggio 1935	ENT	Il 12 maggio 1935	Attività	O
+268	-	Il 12 maggio 1935	ENT	Il 12 maggio 1935	Attività	Tempo
 268	1	esordisce	VER:pres	esordire	Attività	LU
 268	2	contro	ADV	contro	Attività	O
 268	3	la	DET:def	il	Attività	O
 268	4	Polonia	NPR	Polonia	Attività	Squadra
 268	5	(	PON	(	Attività	O
-268	6	5-2	ENT	5-2	Attività	O
+268	-	5-2	ENT	5-2	Attività	Punteggio
 268	7	)	PON	)	Attività	O
 268	8	.	SENT	.	Attività	O
 269	0	Ha	VER:pres	avere	Attività	O
 269	1	esordito	VER:pper	esordire	Attività	LU
 269	2	in	PRE	in	Attività	O
 269	3	Nazionale	NOM	Nazionale	Attività	Squadra
-269	4	il 5 marzo 2014	ENT	il 5 marzo 2014	Attività	O
+269	-	il 5 marzo 2014	ENT	il 5 marzo 2014	Attività	Tempo
 269	5	nell'	PRE:det	nel	Attività	O
 269	6	amichevole	ADJ	amichevole	Attività	Competizione
 269	7	Israele-Slovacchia	NOM	<unknown>	Attività	O
 269	8	(	PON	(	Attività	O
-269	9	1-3	ENT	1-3	Attività	O
+269	-	1-3	ENT	1-3	Attività	Punteggio
 269	10	)	PON	)	Attività	O
 269	11	.	SENT	.	Attività	O
 270	0	Ha	VER:pres	avere	Attività	O
 270	1	esordito	VER:pper	esordire	Attività	LU
-270	2	nel 2010	ENT	nel 2010	Attività	O
+270	-	nel 2010	ENT	nel 2010	Attività	Tempo
 270	3	con	PRE	con	Attività	O
 270	4	il	DET:def	il	Attività	O
 270	5	Deportivo Cali	ENT	Deportivo Cali	Attività	Squadra
@@ -4074,7 +4074,7 @@
 271	1	tornato	VER:pper	tornare	Attività	O
 271	2	in	PRE	in	Attività	O
 271	3	Brasile	NPR	Brasile	Attività	O
-271	4	nel 2008	ENT	nel 2008	Attività	O
+271	-	nel 2008	ENT	nel 2008	Attività	Tempo
 271	5	,	PON	,	Attività	O
 271	6	per	PRE	per	Attività	O
 271	7	giocare	VER:infi	giocare	Attività	LU
@@ -4105,7 +4105,7 @@
 273	2	in	PRE	in	Attività	O
 273	3	Eredivisie	NOM	Eredivisie	Attività	Competizione
 273	4	nella	PRE:det	nel	Attività	O
-273	5	stagione 2013-2014	ENT	stagione 2013-2014	Attività	O
+273	-	stagione 2013-2014	ENT	stagione 2013-2014	Attività	Durata
 273	6	con	PRE	con	Attività	O
 273	7	l'	DET:def	il	Attività	O
 273	8	RKC Waalwijk	ENT	RKC Waalwijk	Attività	Squadra
@@ -4116,7 +4116,7 @@
 274	3	sua	PRO:poss	suo	Trofeo	O
 274	4	carriera	NOM	carriera	Trofeo	O
 274	5	professionistica	ADJ	professionistico	Trofeo	O
-274	6	nel 1956	ENT	nel 1956	Trofeo	O
+274	-	nel 1956	ENT	nel 1956	Trofeo	Tempo
 274	7	nelle	PRE:det	nel	Trofeo	O
 274	8	file	NOM	fila|file	Trofeo	O
 274	9	del	PRE:det	del	Trofeo	O
@@ -4124,7 +4124,7 @@
 274	11	in	PRE	in	Trofeo	O
 274	12	cui	PRO:rela	cui	Trofeo	O
 274	13	rimase	VER:remo	rimanere	Trofeo	O
-274	14	fino al 1961	ENT	fino al 1961	Trofeo	O
+274	-	fino al 1961	ENT	fino al 1961	Trofeo	Durata
 274	15	vincendo	VER:geru	vincere	Trofeo	LU
 274	16	un	DET:indef	un	Trofeo	O
 274	17	Torneo Rio-San Paolo	ENT	Torneo Rio-San Paolo	Trofeo	Competizione
@@ -4163,7 +4163,7 @@
 276	11	,	PON	,	Attività	O
 276	12	dove	PRO:rela	dove	Attività	O
 276	13	rimane	VER:pres	rimanere	Attività	LU
-276	14	per due anni	ENT	per due anni	Attività	O
+276	-	per due anni	ENT	per due anni	Attività	Durata
 276	15	prima	ADJ	primo	Attività	O
 276	16	di	PRE	di	Attività	O
 276	17	tornare	VER:infi	tornare	Attività	O
@@ -4186,7 +4186,7 @@
 277	3	con	PRE	con	Sconfitta	O
 277	4	l'	DET:def	il	Sconfitta	O
 277	5	Alessandria	NPR	Alessandria	Sconfitta	Perdente
-277	6	il 27 gennaio 1935	ENT	il 27 gennaio 1935	Sconfitta	O
+277	-	il 27 gennaio 1935	ENT	il 27 gennaio 1935	Sconfitta	Tempo
 277	7	nell'	PRE:det	nel	Sconfitta	O
 277	8	incontro	NOM	incontro	Sconfitta	O
 277	9	esterno	ADJ	esterno	Sconfitta	O
@@ -4196,12 +4196,12 @@
 277	13	grigi	NOM	grigio	Sconfitta	O
 277	14	"	PON	"	Sconfitta	O
 277	15	per	PRE	per	Sconfitta	O
-277	16	4-1	ENT	4-1	Sconfitta	O
+277	-	4-1	ENT	4-1	Sconfitta	Punteggio
 277	17	contro	PRE	contro	Sconfitta	O
 277	18	la	DET:def	il	Sconfitta	O
 277	19	Fiorentina	NPR	Fiorentina	Sconfitta	Vincitore
 277	20	0	SENT	0	Sconfitta	O
-278	0	Nel 1987	ENT	Nel 1987	Attività	O
+278	-	Nel 1987	ENT	Nel 1987	Attività	Tempo
 278	1	è	VER:pres	essere	Attività	O
 278	2	stato	VER:pper	essere|stare	Attività	O
 278	3	ingaggiato	VER:pper	ingaggiare	Attività	O
@@ -4225,7 +4225,7 @@
 278	21	un	DET:indef	un	Attività	O
 278	22	anno	NOM	anno	Attività	O
 278	23	0	SENT	0	Attività	O
-279	0	L' 11 dicembre 2009	ENT	L' 11 dicembre 2009	Sconfitta	O
+279	-	L' 11 dicembre 2009	ENT	L' 11 dicembre 2009	Sconfitta	Tempo
 279	1	viene	VER:pres	venire	Sconfitta	O
 279	2	mandato	VER:pper	mandare	Sconfitta	O
 279	3	al	PRE:det	al	Sconfitta	O
@@ -4255,7 +4255,7 @@
 279	27	incontro	ADV	incontro	Sconfitta	O
 279	28	perso	VER:pper	perdere	Sconfitta	LU
 279	29	per	PRE	per	Sconfitta	O
-279	30	5-0	ENT	5-0	Sconfitta	O
+279	-	5-0	ENT	5-0	Sconfitta	Punteggio
 279	31	0	SENT	0	Sconfitta	O
 280	0	Convocato	VER:pper	convocare	Vittoria	O
 280	1	per	PRE	per	Vittoria	O
@@ -4273,7 +4273,7 @@
 280	13	l'	DET:def	il	Vittoria	O
 280	14	Algeria	NPR	Algeria	Vittoria	Perdente
 280	15	per	PRE	per	Vittoria	O
-280	16	2-1	ENT	2-1	Vittoria	O
+280	-	2-1	ENT	2-1	Vittoria	Punteggio
 280	17	all'	PRE:det	al	Vittoria	O
 280	18	esordio	NOM	esordio	Vittoria	O
 280	19	.	SENT	.	Vittoria	O
@@ -4317,10 +4317,10 @@
 283	13	vinto	VER:pper	vincere	Trofeo	LU
 283	14	un	DET:indef	un	Trofeo	O
 283	15	campionato	NOM	campionato	Trofeo	Competizione
-283	16	nel 1913	ENT	nel 1913	Trofeo	O
+283	-	nel 1913	ENT	nel 1913	Trofeo	Tempo
 283	17	.	SENT	.	Trofeo	O
 284	0	Nella	PRE:det	nel	Attività	O
-284	1	stagione 2013-2014	ENT	stagione 2013-2014	Attività	O
+284	-	stagione 2013-2014	ENT	stagione 2013-2014	Attività	Durata
 284	2	ha	VER:pres	avere	Attività	O
 284	3	giocato	VER:pper	giocare	Attività	LU
 284	4	11	NUM	@card@	Attività	O
@@ -4344,13 +4344,13 @@
 285	10	;	PON	;	Sconfitta	O
 285	11	Emanuele	NPR	Emanuele	Sconfitta	O
 285	12	esordisce	VER:pres	esordire	Sconfitta	O
-285	13	il 7 febbraio	ENT	il 7 febbraio	Sconfitta	O
+285	-	il 7 febbraio	ENT	il 7 febbraio	Sconfitta	Tempo
 285	14	,	PON	,	Sconfitta	O
 285	15	nell'	PRE:det	nel	Sconfitta	O
 285	16	incontro	NOM	incontro	Sconfitta	O
 285	17	casalingo	ADJ	casalingo	Sconfitta	O
 285	18	perso	VER:pper	perdere	Sconfitta	LU
-285	19	1-2	ENT	1-2	Sconfitta	O
+285	-	1-2	ENT	1-2	Sconfitta	Punteggio
 285	20	con	PRE	con	Sconfitta	O
 285	21	la	DET:def	il	Sconfitta	O
 285	22	Ternana	NOM	Ternana	Sconfitta	Vincitore
@@ -4379,7 +4379,7 @@
 287	5	un	DET:indef	un	Trofeo	O
 287	6	campionato Primavera	ENT	campionato Primavera	Trofeo	Competizione
 287	7	nella	PRE:det	nel	Trofeo	O
-287	8	stagione 2011/12	ENT	stagione 2011/12	Trofeo	O
+287	-	stagione 2011/12	ENT	stagione 2011/12	Trofeo	Durata
 287	9	battendo	VER:geru	battere	Trofeo	O
 287	10	in	PRE	in	Trofeo	O
 287	11	finale	ADJ	finale	Trofeo	O
@@ -4390,12 +4390,12 @@
 288	1	esordito	VER:pper	esordire	Vittoria	O
 288	2	in	PRE	in	Vittoria	O
 288	3	Nazionale	NOM	Nazionale	Vittoria	Vincitore
-288	4	il 15 novembre 2013	ENT	il 15 novembre 2013	Vittoria	O
+288	-	il 15 novembre 2013	ENT	il 15 novembre 2013	Vittoria	Tempo
 288	5	nell'	PRE:det	nel	Vittoria	O
 288	6	amichevole	NOM	amichevole	Vittoria	Competizione
 288	7	vinta	VER:pper	vincere	Vittoria	LU
 288	8	per	PRE	per	Vittoria	O
-288	9	1-0	ENT	1-0	Vittoria	O
+288	-	1-0	ENT	1-0	Vittoria	Punteggio
 288	10	sull'	PRE:det	sul	Vittoria	O
 288	11	Irlanda del Nord	ENT	Irlanda del Nord	Vittoria	Perdente
 288	12	.	SENT	.	Vittoria	O
@@ -4411,29 +4411,29 @@
 289	9	squadra	NOM	squadra	Trofeo	O
 289	10	giovanissimo	ADJ	giovane	Trofeo	O
 289	11	,	PON	,	Trofeo	O
-289	12	nel 2003	ENT	nel 2003	Trofeo	O
+289	-	nel 2003	ENT	nel 2003	Trofeo	Tempo
 289	13	,	PON	,	Trofeo	O
 289	14	e	CON	e	Trofeo	O
 289	15	vi	PRO:refl	vi	Trofeo	O
 289	16	rimane	VER:pres	rimanere	Trofeo	O
-289	17	fino al 2007	ENT	fino al 2007	Trofeo	O
+289	-	fino al 2007	ENT	fino al 2007	Trofeo	Durata
 289	18	vincendo	VER:geru	vincere	Trofeo	LU
 289	19	il	DET:def	il	Trofeo	O
-289	20	campionato 2004-2005	ENT	campionato 2004-2005	Trofeo	Competizione
+289	-	campionato 2004-2005	ENT	campionato 2004-2005	Trofeo	Durata
 289	21	.	SENT	.	Trofeo	O
 290	0	Ha	VER:pres	avere	Attività	O
 290	1	esordito	VER:pper	esordire	Attività	LU
 290	2	in	PRE	in	Attività	O
 290	3	Nazionale	NOM	Nazionale	Attività	Squadra
-290	4	il 27 maggio 2012	ENT	il 27 maggio 2012	Attività	O
+290	-	il 27 maggio 2012	ENT	il 27 maggio 2012	Attività	Tempo
 290	5	nell'	PRE:det	nel	Attività	O
 290	6	amichevole	ADJ	amichevole	Attività	O
 290	7	Tunisia-Ruanda	NOM	<unknown>	Attività	O
 290	8	(	PON	(	Attività	O
-290	9	5-1	ENT	5-1	Attività	O
+290	-	5-1	ENT	5-1	Attività	Punteggio
 290	10	)	PON	)	Attività	O
 290	11	0	SENT	0	Attività	O
-291	0	L' anno seguente	ENT	L' anno seguente	Sconfitta	O
+291	-	L' anno seguente	ENT	L' anno seguente	Sconfitta	Tempo
 291	1	Brehme	NOM	<unknown>	Trofeo	Vincitore
 291	2	vince	VER:pres	vincere	Trofeo	LU
 291	3	la	DET:def	il	Trofeo	O
@@ -4450,12 +4450,12 @@
 292	1	esordito	VER:pper	esordire	Attività	LU
 292	2	in	PRE	in	Attività	O
 292	3	Premier League	ENT	Premier League	Attività	Competizione
-292	4	il 24 maggio 2009	ENT	il 24 maggio 2009	Attività	O
+292	-	il 24 maggio 2009	ENT	il 24 maggio 2009	Attività	Tempo
 292	5	contro	PRE	contro	Attività	O
 292	6	il	DET:def	il	Attività	O
 292	7	Portsmouth	NOM	Portsmouth	Attività	Squadra
 292	8	0	SENT	0	Attività	O
-293	0	Nell' agosto del 1982	ENT	Nell' agosto del 1982	Attività	O
+293	-	Nell' agosto del 1982	ENT	Nell' agosto del 1982	Attività	Tempo
 293	1	si	PRO:pers	si	Attività	O
 293	2	trasferisce	VER:pres	trasferire	Attività	O
 293	3	allo	PRE:det	al	Attività	O
@@ -4470,7 +4470,7 @@
 293	12	carriera	NOM	carriera	Attività	O
 293	13	,	PON	,	Attività	O
 293	14	avvenuta	VER:pper	avvenire	Attività	O
-293	15	nel 1987	ENT	nel 1987	Attività	O
+293	-	nel 1987	ENT	nel 1987	Attività	Tempo
 293	16	,	PON	,	Attività	O
 293	17	salvo	PRE	salvo	Attività	O
 293	18	una	DET:indef	una	Attività	O
@@ -4481,11 +4481,11 @@
 293	23	al	PRE:det	al	Attività	O
 293	24	Darlington	NOM	Darlington	Attività	Squadra
 293	25	0	SENT	0	Attività	O
-294	0	Nel luglio 2009	ENT	Nel luglio 2009	Attività	O
+294	-	Nel luglio 2009	ENT	Nel luglio 2009	Attività	Tempo
 294	1	passa	VER:pres	passare	Attività	O
 294	2	in	PRE	in	Attività	O
 294	3	prestito	NOM	prestito	Attività	O
-294	4	per una stagione	ENT	per una stagione	Attività	O
+294	-	per una stagione	ENT	per una stagione	Attività	Durata
 294	5	al	PRE:det	al	Attività	O
 294	6	Bolton Wanderers	ENT	Bolton Wanderers	Attività	Squadra
 294	7	0	SENT	0	Attività	O
@@ -4494,7 +4494,7 @@
 294	10	questi	PRO:demo	questo	Attività	O
 294	11	vi	PRO:refl	vi	Attività	O
 294	12	rimane	VER:pres	rimanere	Attività	LU
-294	13	fino al 2012	ENT	fino al 2012	Attività	O
+294	-	fino al 2012	ENT	fino al 2012	Attività	Durata
 294	14	,	PON	,	Attività	O
 294	15	anno	NOM	anno	Attività	O
 294	16	in	PRE	in	Attività	O
@@ -4506,7 +4506,7 @@
 295	0	Esordisce	VER:pres	esordire	Sconfitta	O
 295	1	in	PRE	in	Sconfitta	O
 295	2	Nazionale	NOM	Nazionale	Sconfitta	Perdente
-295	3	l' 11 agosto	ENT	l' 11 agosto	Sconfitta	O
+295	-	l' 11 agosto	ENT	l' 11 agosto	Sconfitta	Tempo
 295	4	del	PRE:det	del	Sconfitta	O
 295	5	1993	NUM	@card@	Sconfitta	O
 295	6	in	PRE	in	Sconfitta	O
@@ -4519,12 +4519,12 @@
 295	13	partita	NOM	partita	Sconfitta	O
 295	14	persa	ADJ	perso	Sconfitta	LU
 295	15	per	PRE	per	Sconfitta	O
-295	16	7-0	ENT	7-0	Sconfitta	O
+295	-	7-0	ENT	7-0	Sconfitta	Punteggio
 295	17	0	SENT	0	Sconfitta	O
 295	18	Viene	VER:pres	venire	Sconfitta	O
 295	19	convocato	VER:pper	convocare	Sconfitta	O
 295	20	nuovamente	ADV	nuovamente	Sconfitta	O
-295	21	nel 1997	ENT	nel 1997	Sconfitta	O
+295	-	nel 1997	ENT	nel 1997	Sconfitta	Tempo
 295	22	,	PON	,	Sconfitta	O
 295	23	giocando	VER:geru	giocare	Sconfitta	O
 295	24	un'	DET:indef	un'	Sconfitta	O
@@ -4534,7 +4534,7 @@
 295	28	l'	DET:def	il	Sconfitta	O
 295	29	Islanda	NPR	Islanda	Sconfitta	Perdente
 295	30	(	PON	(	Sconfitta	O
-295	31	1-0	ENT	1-0	Sconfitta	O
+295	-	1-0	ENT	1-0	Sconfitta	Punteggio
 295	32	)	PON	)	Sconfitta	O
 295	33	0	SENT	0	Sconfitta	O
 296	0	Ha	VER:pres	avere	Attività	O
@@ -4542,7 +4542,7 @@
 296	2	con	PRE	con	Attività	O
 296	3	la	DET:def	il	Attività	O
 296	4	Nazionale cambogiana	ENT	Nazionale cambogiana	Attività	Squadra
-296	5	nel 2011	ENT	nel 2011	Attività	O
+296	-	nel 2011	ENT	nel 2011	Attività	Tempo
 296	6	0	SENT	0	Attività	O
 297	0	Ha	VER:pres	avere	Attività	O
 297	1	esordito	VER:pper	esordire	Attività	LU
@@ -4550,7 +4550,7 @@
 297	3	la	DET:def	il	Attività	O
 297	4	Nazionale maggiore	ENT	Nazionale maggiore	Attività	Squadra
 297	5	invece	ADV	invece	Attività	O
-297	6	nel 2002	ENT	nel 2002	Attività	O
+297	-	nel 2002	ENT	nel 2002	Attività	Tempo
 297	7	0	SENT	0	Attività	O
 298	0	Gioca	VER:pres	giocare	Sconfitta	O
 298	1	l'	DET:def	il	Sconfitta	O
@@ -4567,12 +4567,12 @@
 298	12	contro	PRE	contro	Sconfitta	O
 298	13	il	DET:def	il	Sconfitta	O
 298	14	ChievoVerona	NOM	ChievoVerona	Sconfitta	Vincitore
-298	15	il 18 maggio 2014	ENT	il 18 maggio 2014	Sconfitta	O
+298	-	il 18 maggio 2014	ENT	il 18 maggio 2014	Sconfitta	Tempo
 298	16	e	CON	e	Sconfitta	O
 298	17	persa	VER:pper	perdere	Sconfitta	LU
-298	18	2-1	ENT	2-1	Sconfitta	O
+298	-	2-1	ENT	2-1	Sconfitta	Punteggio
 298	19	0	SENT	0	Sconfitta	O
-299	0	Il 31 maggio 2014	ENT	Il 31 maggio 2014	Attività	O
+299	-	Il 31 maggio 2014	ENT	Il 31 maggio 2014	Attività	Tempo
 299	1	ha	VER:pres	avere	Attività	O
 299	2	esordito	VER:pper	esordire	Attività	LU
 299	3	con	PRE	con	Attività	O
@@ -4582,7 +4582,7 @@
 299	7	amichevole	ADJ	amichevole	Attività	Competizione
 299	8	Albania-Romania	NOM	<unknown>	Attività	O
 299	9	(	PON	(	Attività	O
-299	10	0-1	ENT	0-1	Attività	O
+299	-	0-1	ENT	0-1	Attività	Punteggio
 299	11	)	PON	)	Attività	O
 299	12	0	SENT	0	Attività	O
 300	0	Inizia	VER:pres	iniziare	Attività	O
@@ -4599,7 +4599,7 @@
 300	11	nella	PRE:det	nel	Attività	O
 300	12	Serie B 1974-1975	ENT	Serie B 1974-1975	Attività	Competizione
 300	13	0	SENT	0	Attività	O
-302	0	Nel 1970	ENT	Nel 1970	Attività	O
+302	-	Nel 1970	ENT	Nel 1970	Attività	Tempo
 302	1	passa	ADJ	passo	Attività	O
 302	2	al	PRE:det	al	Attività	O
 302	3	Brescia	NPR	Brescia	Attività	Squadra
@@ -4613,7 +4613,7 @@
 302	11	incontro	NOM	incontro	Attività	O
 302	12	ufficiale	ADJ	ufficiale	Attività	O
 302	13	0	SENT	0	Attività	O
-303	0	Nel 2009	ENT	Nel 2009	Attività	O
+303	-	Nel 2009	ENT	Nel 2009	Attività	Tempo
 303	1	ha	VER:pres	avere	Attività	O
 303	2	giocato	VER:pper	giocare	Attività	LU
 303	3	3	NUM	@card@	Attività	O
@@ -4642,7 +4642,7 @@
 305	15	del	PRE:det	del	Trofeo	O
 305	16	1988	NUM	@card@	Trofeo	O
 305	17	0	SENT	0	Trofeo	O
-306	0	Il 2003	ENT	Il 2003	Attività	O
+306	-	Il 2003	ENT	Il 2003	Attività	Tempo
 306	1	è	VER:pres	essere	Attività	O
 306	2	l'	DET:def	il	Attività	O
 306	3	anno	NOM	anno	Attività	O
@@ -4655,7 +4655,7 @@
 306	10	in	PRE	in	Attività	O
 306	11	cui	PRO:rela	cui	Attività	O
 306	12	rimane	VER:pres	rimanere	Attività	LU
-306	13	per tre anni	ENT	per tre anni	Attività	O
+306	-	per tre anni	ENT	per tre anni	Attività	Durata
 306	14	,	PON	,	Attività	O
 306	15	comandando	VER:geru	comandare	Attività	O
 306	16	il	DET:def	il	Attività	O
@@ -4674,7 +4674,7 @@
 307	3	da	PRE	da	Attività	O
 307	4	giocatore	NOM	giocatore	Attività	O
 307	5	,	PON	,	Attività	O
-307	6	nel 1956	ENT	nel 1956	Attività	O
+307	-	nel 1956	ENT	nel 1956	Attività	Tempo
 307	7	venne	VER:remo	venire	Attività	O
 307	8	nominato	VER:pper	nominare	Attività	O
 307	9	allenatore	NOM	allenatore	Attività	O
@@ -4685,9 +4685,9 @@
 307	14	Fulham	NOM	Fulham	Attività	Squadra
 307	15	,	PON	,	Attività	O
 307	16	rimanendovi	VER:geru	rimanere	Attività	LU
-307	17	fino al 1965	ENT	fino al 1965	Attività	O
+307	-	fino al 1965	ENT	fino al 1965	Attività	Durata
 307	18	0	SENT	0	Attività	O
-308	0	Il 21 maggio 2014	ENT	Il 21 maggio 2014	Attività	O
+308	-	Il 21 maggio 2014	ENT	Il 21 maggio 2014	Attività	Tempo
 308	1	esordisce	VER:pres	esordire	Attività	LU
 308	2	con	PRE	con	Attività	O
 308	3	la	DET:def	il	Attività	O
@@ -4696,10 +4696,10 @@
 308	6	amichevole	ADJ	amichevole	Attività	O
 308	7	Kosovo-Turchia	NOM	<unknown>	Attività	O
 308	8	(	PON	(	Attività	O
-308	9	1-6	ENT	1-6	Attività	O
+308	-	1-6	ENT	1-6	Attività	Punteggio
 308	10	)	PON	)	Attività	O
 308	11	0	SENT	0	Attività	O
-309	0	Il 15 agosto 2012	ENT	Il 15 agosto 2012	Sconfitta	O
+309	-	Il 15 agosto 2012	ENT	Il 15 agosto 2012	Sconfitta	Tempo
 309	1	esordisce	VER:pres	esordire	Sconfitta	O
 309	2	con	PRE	con	Sconfitta	O
 309	3	la	DET:def	il	Sconfitta	O
@@ -4709,7 +4709,7 @@
 309	7	amichevole	NOM	amichevole	Sconfitta	Competizione
 309	8	persa	VER:pres	perdere	Sconfitta	LU
 309	9	per	PRE	per	Sconfitta	O
-309	10	3-1	ENT	3-1	Sconfitta	O
+309	-	3-1	ENT	3-1	Sconfitta	Punteggio
 309	11	contro	PRE	contro	Sconfitta	O
 309	12	la	DET:def	il	Sconfitta	O
 309	13	Slovacchia	NPR	Slovacchia	Sconfitta	Vincitore
@@ -4741,7 +4741,7 @@
 310	24	rimanendo	VER:geru	rimanere	Stato	LU
 310	25	svincolato	VER:pper	svincolare	Stato	Stato
 310	26	0	SENT	0	Stato	O
-311	0	Nel 1999	ENT	Nel 1999	Trofeo	O
+311	-	Nel 1999	ENT	Nel 1999	Trofeo	Tempo
 311	1	ha	VER:pres	avere	Trofeo	O
 311	2	vinto	VER:pper	vincere	Trofeo	LU
 311	3	la	DET:def	il	Trofeo	O
@@ -4752,7 +4752,7 @@
 311	8	Paraguay	NPR	Paraguay	Trofeo	Luogo
 311	9	,	PON	,	Trofeo	O
 311	10	e	CON	e	Trofeo	O
-311	11	nel 2005	ENT	nel 2005	Trofeo	O
+311	-	nel 2005	ENT	nel 2005	Trofeo	Tempo
 311	12	la	DET:def	il	Trofeo	O
 311	13	Confederations Cup	ENT	Confederations Cup	Trofeo	Competizione
 311	14	,	PON	,	Trofeo	O
@@ -4783,10 +4783,10 @@
 313	7	contro	PRE	contro	Attività	O
 313	8	il	DET:def	il	Attività	O
 313	9	Congo	NOM	Congo	Attività	O
-313	10	del 3 marzo 2010	ENT	del 3 marzo 2010	Attività	O
+313	-	del 3 marzo 2010	ENT	del 3 marzo 2010	Attività	Tempo
 313	11	vinta	VER:pper	vincere	Attività	O
 313	12	per	PRE	per	Attività	O
-313	13	5-2	ENT	5-2	Attività	O
+313	-	5-2	ENT	5-2	Attività	Punteggio
 313	14	0	SENT	0	Attività	O
 314	0	Di Bari	ENT	Di Bari	Attività	Agente
 314	1	in	PRE	in	Attività	O
@@ -4801,7 +4801,7 @@
 314	10	e	CON	e	Attività	O
 314	11	vi	PRO:refl	vi	Attività	O
 314	12	rimane	VER:pres	rimanere	Attività	LU
-314	13	per cinque stagioni	ENT	per cinque stagioni	Attività	O
+314	-	per cinque stagioni	ENT	per cinque stagioni	Attività	Durata
 314	14	(	PON	(	Attività	O
 314	15	di	PRE	di	Attività	O
 314	16	cui	PRO:rela	cui	Attività	O
@@ -4820,7 +4820,7 @@
 315	5	il	DET:def	il	Trofeo	O
 315	6	campionato mondiale di calcio Under-20 2009	ENT	campionato mondiale di calcio Under-20 2009	Trofeo	Competizione
 315	7	0	SENT	0	Trofeo	O
-317	0	Nel 1988	ENT	Nel 1988	Attività	O
+317	-	Nel 1988	ENT	Nel 1988	Attività	Tempo
 317	1	passa	ADJ	passo	Attività	O
 317	2	alla	PRE:det	al	Attività	O
 317	3	Sambenedettese	NOM	Sambenedettese	Attività	Squadra
@@ -4867,7 +4867,7 @@
 321	2	Nazionale maltese	ENT	Nazionale maltese	Attività	Squadra
 321	3	ha	VER:pres	avere	Attività	O
 321	4	esordito	VER:pper	esordire	Attività	LU
-321	5	nel 2011	ENT	nel 2011	Attività	O
+321	-	nel 2011	ENT	nel 2011	Attività	Tempo
 321	6	.	SENT	.	Attività	O
 322	0	Scoperto	VER:pper	scoprire	Trofeo	O
 322	1	da	PRE	da	Trofeo	O
@@ -4892,12 +4892,12 @@
 323	2	con	PRE	con	Attività	O
 323	3	la	DET:def	il	Attività	O
 323	4	Nazionale	NOM	Nazionale	Attività	Squadra
-323	5	nel 1997	ENT	nel 1997	Attività	O
+323	-	nel 1997	ENT	nel 1997	Attività	Tempo
 323	6	,	PON	,	Attività	O
 323	7	rimanendoci	VER:geru	rimanere	Attività	O
-323	8	fino al 2001	ENT	fino al 2001	Attività	O
+323	-	fino al 2001	ENT	fino al 2001	Attività	Durata
 323	9	0	SENT	0	Attività	O
-324	0	Nel 2003	ENT	Nel 2003	Attività	O
+324	-	Nel 2003	ENT	Nel 2003	Attività	Tempo
 324	1	passa	ADJ	passo	Attività	O
 324	2	all'	PRE:det	al	Attività	O
 324	3	Utrecht	NOM	Utrecht	Attività	Squadra
@@ -4925,7 +4925,7 @@
 325	6	esordendo	VER:geru	esordire	Sconfitta	O
 325	7	in	PRE	in	Sconfitta	O
 325	8	massima divisione	ENT	massima divisione	Sconfitta	Competizione
-325	9	il 12 ottobre 1919	ENT	il 12 ottobre 1919	Sconfitta	O
+325	-	il 12 ottobre 1919	ENT	il 12 ottobre 1919	Sconfitta	Tempo
 325	10	,	PON	,	Sconfitta	O
 325	11	nella	PRE:det	nel	Sconfitta	O
 325	12	partita	NOM	partita	Sconfitta	O
@@ -4935,7 +4935,7 @@
 325	16	Bologna	ENT	Bologna	Sconfitta	Vincitore
 325	17	persa	VER:pper	perdere	Sconfitta	LU
 325	18	per	PRE	per	Sconfitta	O
-325	19	8-0	ENT	8-0	Sconfitta	O
+325	-	8-0	ENT	8-0	Sconfitta	Punteggio
 325	20	.	SENT	.	Sconfitta	O
 327	0	Apre	VER:pres	aprire	Sconfitta	O
 327	1	la	DET:def	il	Sconfitta	O
@@ -4953,13 +4953,13 @@
 327	13	Supercoppa italiana	ENT	Supercoppa italiana	Sconfitta	Competizione
 327	14	persa	VER:pper	perdere	Sconfitta	LU
 327	15	per	PRE	per	Sconfitta	O
-327	16	4-2	ENT	4-2	Sconfitta	O
+327	-	4-2	ENT	4-2	Sconfitta	Punteggio
 327	17	in	PRE	in	Sconfitta	O
 327	18	favore	NOM	favore	Sconfitta	O
 327	19	della	PRE:det	del	Sconfitta	O
 327	20	Juventus	NPR	Juventus	Sconfitta	Vincitore
 327	21	.	SENT	.	Sconfitta	O
-328	0	Nell' agosto 2007	ENT	Nell' agosto 2007	Trofeo	O
+328	-	Nell' agosto 2007	ENT	Nell' agosto 2007	Trofeo	Tempo
 328	1	viene	VER:pres	venire	Trofeo	O
 328	2	ingaggiato	VER:pper	ingaggiare	Trofeo	O
 328	3	dal	PRE:det	dal	Trofeo	O
@@ -4970,7 +4970,7 @@
 328	8	cui	PRO:rela	cui	Trofeo	O
 328	9	vince	VER:pres	vincere	Trofeo	LU
 328	10	il	DET:def	il	Trofeo	O
-328	11	primo	ENT	primo	Trofeo	O
+328	-	primo	ENT	primo	Trofeo	Classifica
 328	12	campionato russo	ENT	campionato russo	Trofeo	Competizione
 328	13	nella	PRE:det	nel	Trofeo	O
 328	14	storia	NOM	storia	Trofeo	O
@@ -4978,7 +4978,7 @@
 328	16	club	NOM	club	Trofeo	O
 328	17	.	SENT	.	Trofeo	O
 329	0	Gioca	VER:pres	giocare	Trofeo	O
-329	1	dal 2009	ENT	dal 2009	Trofeo	O
+329	-	dal 2009	ENT	dal 2009	Trofeo	Durata
 329	2	per	PRE	per	Trofeo	O
 329	3	Al-Wahda	NOM	Al-Wahda	Trofeo	Squadra
 329	4	con	PRE	con	Trofeo	O
@@ -4987,9 +4987,9 @@
 329	7	vinto	VER:pper	vincere	Trofeo	LU
 329	8	una	DET:indef	una	Trofeo	O
 329	9	UAE Pro-League	ENT	UAE Pro-League	Trofeo	Competizione
-329	10	nel 2009-2010	ENT	nel 2009-2010	Trofeo	O
+329	-	nel 2009-2010	ENT	nel 2009-2010	Trofeo	Durata
 329	11	.	SENT	.	Trofeo	O
-330	0	Il 4 luglio 2003	ENT	Il 4 luglio 2003	Sconfitta	O
+330	-	Il 4 luglio 2003	ENT	Il 4 luglio 2003	Sconfitta	Tempo
 330	1	viene	VER:pres	venire	Sconfitta	O
 330	2	ceduto	VER:pper	cedere	Sconfitta	O
 330	3	a	PRE	a	Sconfitta	O
@@ -5016,7 +5016,7 @@
 330	24	Viterbese	NOM	Viterbese	Sconfitta	Vincitore
 330	25	.	SENT	.	Sconfitta	O
 332	0	Nella	PRE:det	nel	Sconfitta	O
-332	1	stagione 1993-1994	ENT	stagione 1993-1994	Sconfitta	O
+332	-	stagione 1993-1994	ENT	stagione 1993-1994	Sconfitta	Durata
 332	2	la	DET:def	il	Sconfitta	O
 332	3	Juve Stabia	ENT	Juve Stabia	Sconfitta	Perdente
 332	4	è	VER:pres	essere	Sconfitta	O
@@ -5035,7 +5035,7 @@
 332	17	la	DET:def	il	Sconfitta	O
 332	18	Salernitana	NPR	Salernitana	Sconfitta	Vincitore
 332	19	.	SENT	.	Sconfitta	O
-333	0	Nel 1972	ENT	Nel 1972	Attività	O
+333	-	Nel 1972	ENT	Nel 1972	Attività	Tempo
 333	1	viene	VER:pres	venire	Attività	O
 333	2	nominato	VER:pper	nominare	Attività	O
 333	3	responsabile	ADJ	responsabile	Attività	O
@@ -5046,7 +5046,7 @@
 333	8	Piacenza	NPR	Piacenza	Attività	Squadra
 333	9	,	PON	,	Attività	O
 333	10	rimanendovi	VER:geru	rimanere	Attività	LU
-333	11	per due anni	ENT	per due anni	Attività	O
+333	-	per due anni	ENT	per due anni	Attività	Durata
 333	12	.	SENT	.	Attività	O
 334	0	Ha	VER:pres	avere	Attività	O
 334	1	esordito	VER:pper	esordire	Attività	LU
@@ -5055,7 +5055,7 @@
 334	4	maglia	NOM	maglia	Attività	O
 334	5	della	PRE:det	del	Attività	O
 334	6	Nazionale	NOM	Nazionale	Attività	Squadra
-334	7	nel 2014	ENT	nel 2014	Attività	O
+334	-	nel 2014	ENT	nel 2014	Attività	Tempo
 334	8	.	SENT	.	Attività	O
 335	0	Festeggia	VER:pres	festeggiare	Sconfitta	O
 335	1	le	DET:def	il	Sconfitta	O
@@ -5066,7 +5066,7 @@
 335	6	nella	PRE:det	nel	Sconfitta	O
 335	7	trasferta	NOM	trasferta	Sconfitta	O
 335	8	persa	VER:pper	perdere	Sconfitta	LU
-335	9	4-2	ENT	4-2	Sconfitta	O
+335	-	4-2	ENT	4-2	Sconfitta	Punteggio
 335	10	a	PRE	a	Sconfitta	O
 335	11	Lecce	NPR	Lecce	Sconfitta	Vincitore
 335	12	.	SENT	.	Sconfitta	O
@@ -5094,7 +5094,7 @@
 337	10	.	SENT	.	Attività	O
 338	0	Per	PRE	per	Sconfitta	O
 338	1	la	DET:def	il	Sconfitta	O
-338	2	stagione 2013-2014	ENT	stagione 2013-2014	Sconfitta	O
+338	-	stagione 2013-2014	ENT	stagione 2013-2014	Sconfitta	Durata
 338	3	viene	VER:pres	venire	Sconfitta	O
 338	4	promosso	VER:pper	promuovere	Sconfitta	O
 338	5	in	PRE	in	Sconfitta	O
@@ -5103,7 +5103,7 @@
 338	8	,	PON	,	Sconfitta	O
 338	9	dove	PRO:rela	dove	Sconfitta	O
 338	10	esordisce	VER:pres	esordire	Sconfitta	O
-338	11	il 24 agosto 2013	ENT	il 24 agosto 2013	Sconfitta	O
+338	-	il 24 agosto 2013	ENT	il 24 agosto 2013	Sconfitta	Tempo
 338	12	nel	PRE:det	nel	Sconfitta	O
 338	13	corso	NOM	corso	Sconfitta	O
 338	14	della	PRE:det	del	Sconfitta	O
@@ -5113,7 +5113,7 @@
 338	18	campionato	NOM	campionato	Sconfitta	Competizione
 338	19	per	PRE	per	Sconfitta	O
 338	20	persa	VER:pper	perdere	Sconfitta	LU
-338	21	2-1	ENT	2-1	Sconfitta	O
+338	-	2-1	ENT	2-1	Sconfitta	Punteggio
 338	22	in casa	ENT	in casa	Sconfitta	Luogo
 338	23	dell'	PRE:det	del	Sconfitta	O
 338	24	Hellas Verona	ENT	Hellas Verona	Sconfitta	Vincitore
@@ -5122,7 +5122,7 @@
 339	1	esordito	VER:pper	esordire	Attività	LU
 339	2	in	PRE	in	Attività	O
 339	3	Premier League	ENT	Premier League	Attività	Competizione
-339	4	il 15 agosto 2009	ENT	il 15 agosto 2009	Attività	O
+339	-	il 15 agosto 2009	ENT	il 15 agosto 2009	Attività	Tempo
 339	5	contro	PRE	contro	Attività	O
 339	6	il	DET:def	il	Attività	O
 339	7	West Ham	ENT	West Ham	Attività	Squadra
@@ -5132,7 +5132,7 @@
 340	2	in	PRE	in	Attività	O
 340	3	Ligue 1	ENT	Ligue 1	Attività	Competizione
 340	4	nella	PRE:det	nel	Attività	O
-340	5	stagione 2013-2014	ENT	stagione 2013-2014	Attività	O
+340	-	stagione 2013-2014	ENT	stagione 2013-2014	Attività	Durata
 340	6	con	PRE	con	Attività	O
 340	7	la	DET:def	il	Attività	O
 340	8	maglia	NOM	maglia	Attività	O
@@ -5141,7 +5141,7 @@
 340	11	0	SENT	0	Attività	O
 342	0	Segna	VER:pres	segnare	Sconfitta	O
 342	1	il	DET:def	il	Sconfitta	O
-342	2	primo	ENT	primo	Sconfitta	O
+342	-	primo	ENT	primo	Sconfitta	Classifica
 342	3	gol	NOM	gol	Sconfitta	O
 342	4	in	PRE	in	Sconfitta	O
 342	5	campionato	NOM	campionato	Sconfitta	Competizione
@@ -5162,9 +5162,9 @@
 342	20	Manchester City	ENT	Manchester City	Sconfitta	Vincitore
 342	21	,	PON	,	Sconfitta	O
 342	22	persa	VER:pper	perdere	Sconfitta	LU
-342	23	2-1	ENT	2-1	Sconfitta	O
+342	-	2-1	ENT	2-1	Sconfitta	Punteggio
 342	24	0	SENT	0	Sconfitta	O
-343	0	A giugno 2012	ENT	A giugno 2012	Stato	O
+343	-	A giugno 2012	ENT	A giugno 2012	Stato	Tempo
 343	1	non	ADV	non	Stato	O
 343	2	rinnova	VER:pres	rinnovare	Stato	O
 343	3	il	DET:def	il	Stato	O
@@ -5182,7 +5182,7 @@
 343	15	2012	NUM	@card@	Stato	O
 343	16	0	SENT	0	Stato	O
 344	0	Nella	PRE:det	nel	Attività	O
-344	1	stagione 1976-1977	ENT	stagione 1976-1977	Attività	O
+344	-	stagione 1976-1977	ENT	stagione 1976-1977	Attività	Durata
 344	2	gioca	VER:pres	giocare	Attività	LU
 344	3	nel	PRE:det	nel	Attività	O
 344	4	Granada	NOM	Granada	Attività	Squadra
@@ -5208,7 +5208,7 @@
 345	8	Con	PRE	con	Trofeo	O
 345	9	l'	DET:def	il	Trofeo	O
 345	10	Under 19	ENT	Under 19	Trofeo	Squadra
-345	11	nel 2003	ENT	nel 2003	Trofeo	O
+345	-	nel 2003	ENT	nel 2003	Trofeo	Tempo
 345	12	ha	VER:pres	avere	Trofeo	O
 345	13	vinto	VER:pper	vincere	Trofeo	LU
 345	14	l'	DET:def	il	Trofeo	O
@@ -5233,7 +5233,7 @@
 346	13	novanta	ADJ	novanta	Attività	O
 346	14	minuti	NOM	minuto	Attività	O
 346	15	0	SENT	0	Attività	O
-347	0	Nel 2008	ENT	Nel 2008	Attività	O
+347	-	Nel 2008	ENT	Nel 2008	Attività	Tempo
 347	1	passa	ADJ	passo	Attività	O
 347	2	ai	PRE:det	al	Attività	O
 347	3	colombiani	NOM	colombiano	Attività	O
@@ -5241,7 +5241,7 @@
 347	5	Deportivo Calì	ENT	Deportivo Calì	Attività	Squadra
 347	6	,	PON	,	Attività	O
 347	7	rimanendovi	VER:geru	rimanere	Attività	LU
-347	8	una stagione	ENT	una stagione	Attività	O
+347	-	una stagione	ENT	una stagione	Attività	Durata
 347	9	0	SENT	0	Attività	O
 349	0	Con	PRE	con	Sconfitta	O
 349	1	l'	DET:def	il	Sconfitta	O
@@ -5271,13 +5271,13 @@
 351	1	i	DET:def	il	Attività	O
 351	2	sardi	NOM	sardo	Attività	O
 351	3	gioca	VER:pres	giocare	Attività	O
-351	4	due stagioni	ENT	due stagioni	Attività	O
+351	-	due stagioni	ENT	due stagioni	Attività	Durata
 351	5	e	CON	e	Attività	O
 351	6	retrocede	VER:pres	retrocedere	Attività	O
 351	7	in	PRE	in	Attività	O
 351	8	C1	NPR	C1	Attività	Competizione
 351	9	0	SENT	0	Attività	O
-351	10	Nel 1987-1988	ENT	Nel 1987-1988	Attività	O
+351	-	Nel 1987-1988	ENT	Nel 1987-1988	Attività	Durata
 351	11	viene	VER:pres	venire	Attività	O
 351	12	ceduto	VER:pper	cedere	Attività	O
 351	13	al	PRE:det	al	Attività	O
@@ -5293,9 +5293,9 @@
 351	23	al	PRE:det	al	Attività	O
 351	24	termine	NOM	termine	Attività	O
 351	25	della	PRE:det	del	Attività	O
-351	26	stagione 1988-1989	ENT	stagione 1988-1989	Attività	O
+351	-	stagione 1988-1989	ENT	stagione 1988-1989	Attività	Durata
 351	27	0	SENT	0	Attività	O
-352	0	Nel 1987	ENT	Nel 1987	Attività	O
+352	-	Nel 1987	ENT	Nel 1987	Attività	Tempo
 352	1	Mazza	NPR	Mazza	Attività	Agente
 352	2	viene	VER:pres	venire	Attività	O
 352	3	ceduto	VER:pper	cedere	Attività	O
@@ -5311,7 +5311,7 @@
 352	13	nella	PRE:det	nel	Attività	O
 352	14	quale	PRO:rela	quale	Attività	O
 352	15	rimane	VER:pres	rimanere	Attività	LU
-352	16	fino al 1989	ENT	fino al 1989	Attività	O
+352	-	fino al 1989	ENT	fino al 1989	Attività	Durata
 352	17	0	SENT	0	Attività	O
 353	0	Nel	PRE:det	nel	Attività	O
 353	1	biennio	NOM	biennio	Attività	O
@@ -5325,7 +5325,7 @@
 353	9	all'	PRE:det	al	Attività	O
 353	10	Europeo Under-21	ENT	Europeo Under-21	Attività	Competizione
 353	11	0	SENT	0	Attività	O
-354	0	Il 26 maggio 2013	ENT	Il 26 maggio 2013	Sconfitta	O
+354	-	Il 26 maggio 2013	ENT	Il 26 maggio 2013	Sconfitta	Tempo
 354	1	perde	VER:pres	perdere	Sconfitta	LU
 354	2	la	DET:def	il	Sconfitta	O
 354	3	finale	NOM	finale	Sconfitta	Competizione
@@ -5338,11 +5338,11 @@
 354	10	della	PRE:det	del	Sconfitta	O
 354	11	Lazio	NPR	Lazio	Sconfitta	Vincitore
 354	12	e	CON	e	Sconfitta	O
-354	13	Il 10 giugno 2013	ENT	Il 10 giugno 2013	Sconfitta	O
+354	-	Il 10 giugno 2013	ENT	Il 10 giugno 2013	Sconfitta	Tempo
 354	14	viene	VER:pres	venire	Sconfitta	O
 354	15	esonerato	VER:pper	esonerare	Sconfitta	O
 354	16	come	PRE	come	Sconfitta	O
-354	17	primo	ENT	primo	Sconfitta	O
+354	-	primo	ENT	primo	Sconfitta	Classifica
 354	18	allenatore	NOM	allenatore	Sconfitta	O
 354	19	dalla	PRE:det	dal	Sconfitta	O
 354	20	Roma	NPR	Roma	Sconfitta	Perdente
@@ -5364,7 +5364,7 @@
 356	5	Triestina	NOM	Triestina	Attività	Squadra
 356	6	,	PON	,	Attività	O
 356	7	rimanendovi	VER:geru	rimanere	Attività	LU
-356	8	per tre stagioni	ENT	per tre stagioni	Attività	O
+356	-	per tre stagioni	ENT	per tre stagioni	Attività	Durata
 356	9	,	PON	,	Attività	O
 356	10	giocando	VER:geru	giocare	Attività	O
 356	11	come	PRE	come	Attività	O
@@ -5407,7 +5407,7 @@
 358	14	dove	PRO:rela	dove	Attività	O
 358	15	è	VER:pres	essere	Attività	O
 358	16	rimasto	VER:pper	rimanere	Attività	LU
-358	17	per tre stagioni	ENT	per tre stagioni	Attività	O
+358	-	per tre stagioni	ENT	per tre stagioni	Attività	Durata
 358	18	,	PON	,	Attività	O
 358	19	prima	CON	prima	Attività	O
 358	20	di	PRE	di	Attività	O
@@ -5442,11 +5442,11 @@
 360	4	ha	VER:pres	avere	Trofeo	O
 360	5	vinto	VER:pper	vincere	Trofeo	LU
 360	6	il	DET:def	il	Trofeo	O
-360	7	campionato 1976-1977	ENT	campionato 1976-1977	Trofeo	Competizione
+360	-	campionato 1976-1977	ENT	campionato 1976-1977	Trofeo	Durata
 360	8	e	CON	e	Trofeo	Competizione
 360	9	1986-1987	NUM	@card@	Trofeo	Competizione
 360	10	0	SENT	0	Trofeo	O
-361	0	Nel 1997	ENT	Nel 1997	Attività	O
+361	-	Nel 1997	ENT	Nel 1997	Attività	Tempo
 361	1	passa	ADJ	passo	Attività	O
 361	2	per	PRE	per	Attività	O
 361	3	un	DET:indef	un	Attività	O
@@ -5461,7 +5461,7 @@
 361	12	nella	PRE:det	nel	Attività	O
 361	13	stessa	ADJ	stesso	Attività	O
 361	14	serie	NOM	serie	Attività	O
-361	15	per tre stagioni	ENT	per tre stagioni	Attività	O
+361	-	per tre stagioni	ENT	per tre stagioni	Attività	Durata
 361	16	all'	PRE:det	al	Attività	O
 361	17	Ascoli	NPR	Ascoli	Attività	Squadra
 361	18	.	SENT	.	Attività	O
@@ -5469,11 +5469,11 @@
 362	1	esordito	VER:pper	esordire	Attività	LU
 362	2	in	PRE	in	Attività	O
 362	3	Nazionale	NOM	Nazionale	Attività	Squadra
-362	4	il 19 novembre 2013	ENT	il 19 novembre 2013	Attività	O
+362	-	il 19 novembre 2013	ENT	il 19 novembre 2013	Attività	Tempo
 362	5	nell'	PRE:det	nel	Attività	O
 362	6	amichevole	NOM	amichevole	Attività	Competizione
 362	7	pareggiata	ADJ	pareggiato	Attività	O
-362	8	0-0	ENT	0-0	Attività	O
+362	-	0-0	ENT	0-0	Attività	Punteggio
 362	9	contro	PRE	contro	Attività	O
 362	10	Gibilterra	NPR	Gibilterra	Attività	O
 362	11	.	SENT	.	Attività	O
@@ -5493,7 +5493,7 @@
 364	2	trasferì	VER:remo	trasferire	Attività	O
 364	3	al	PRE:det	al	Attività	O
 364	4	Louhans-Cuiseaux	NOM	Louhans-Cuiseaux	Attività	Squadra
-364	5	nel 2000	ENT	nel 2000	Attività	O
+364	-	nel 2000	ENT	nel 2000	Attività	Tempo
 364	6	.	SENT	.	Attività	O
 364	7	Con	PRE	con	Attività	O
 364	8	i	DET:def	il	Attività	O
@@ -5510,7 +5510,7 @@
 364	19	De Carvalho	ENT	De Carvalho	Attività	Agente
 364	20	vi	PRO:refl	vi	Attività	O
 364	21	rimase	VER:remo	rimanere	Attività	LU
-364	22	fino al 2002	ENT	fino al 2002	Attività	O
+364	-	fino al 2002	ENT	fino al 2002	Attività	Durata
 364	23	.	SENT	.	Attività	O
 365	0	Con	PRE	con	Trofeo	O
 365	1	la	DET:def	il	Trofeo	O
@@ -5526,9 +5526,9 @@
 366	1	esordito	VER:pper	esordire	Attività	LU
 366	2	nella	PRE:det	nel	Attività	O
 366	3	Nazionale cilena	ENT	Nazionale cilena	Attività	Squadra
-366	4	nel 2007	ENT	nel 2007	Attività	O
+366	-	nel 2007	ENT	nel 2007	Attività	Tempo
 366	5	.	SENT	.	Attività	O
-367	0	Nel 1970	ENT	Nel 1970	Attività	O
+367	-	Nel 1970	ENT	Nel 1970	Attività	Tempo
 367	1	fu	VER:remo	essere	Attività	O
 367	2	ceduto	VER:pper	cedere	Attività	O
 367	3	al	PRE:det	al	Attività	O
@@ -5537,14 +5537,14 @@
 367	6	Serie B	ENT	Serie B	Attività	Competizione
 367	7	,	PON	,	Attività	O
 367	8	rimanendovi	VER:geru	rimanere	Attività	LU
-367	9	per due stagioni	ENT	per due stagioni	Attività	O
+367	-	per due stagioni	ENT	per due stagioni	Attività	Durata
 367	10	;	PON	;	Attività	O
 367	11	successivamente	ADV	successivamente	Attività	O
 367	12	passò	VER:remo	passare	Attività	O
 367	13	al	PRE:det	al	Attività	O
 367	14	Livorno	NPR	Livorno	Attività	Squadra
 367	15	.	SENT	.	Attività	O
-368	0	Il 3 giugno 2011	ENT	Il 3 giugno 2011	Sconfitta	O
+368	-	Il 3 giugno 2011	ENT	Il 3 giugno 2011	Sconfitta	Tempo
 368	1	debutta	VER:pres	debuttare	Sconfitta	O
 368	2	con	PRE	con	Sconfitta	O
 368	3	la	DET:def	il	Sconfitta	O
@@ -5562,9 +5562,9 @@
 368	15	,	PON	,	Sconfitta	O
 368	16	e	CON	e	Sconfitta	O
 368	17	persa	VER:pper	perdere	Sconfitta	LU
-368	18	2-1	ENT	2-1	Sconfitta	O
+368	-	2-1	ENT	2-1	Sconfitta	Punteggio
 368	19	.	SENT	.	Sconfitta	O
-369	0	Dal 1994 al 1999	ENT	Dal 1994 al 1999	Trofeo	O
+369	-	Dal 1994 al 1999	ENT	Dal 1994 al 1999	Trofeo	Durata
 369	1	giocò	VER:remo	giocare	Trofeo	O
 369	2	nel	PRE:det	nel	Trofeo	O
 369	3	Real Madrid	ENT	Real Madrid	Trofeo	Squadra
@@ -5580,7 +5580,7 @@
 369	13	Coppa Intercontinentale	ENT	Coppa Intercontinentale	Trofeo	Competizione
 369	14	0	SENT	0	Trofeo	O
 370	0	Nella	PRE:det	nel	Attività	O
-370	1	stagione 1952-1953	ENT	stagione 1952-1953	Attività	O
+370	-	stagione 1952-1953	ENT	stagione 1952-1953	Attività	Durata
 370	2	si	PRO:pers	si	Attività	O
 370	3	trasferisce	VER:pres	trasferire	Attività	O
 370	4	al	PRE:det	al	Attività	O
@@ -5588,7 +5588,7 @@
 370	6	,	PON	,	Attività	O
 370	7	dove	PRO:rela	dove	Attività	O
 370	8	rimane	VER:pres	rimanere	Attività	LU
-370	9	per una sola stagione	ENT	per una sola stagione	Attività	O
+370	-	per una sola stagione	ENT	per una sola stagione	Attività	Durata
 370	10	nella	PRE:det	nel	Attività	O
 370	11	quale	PRO:rela	quale	Attività	O
 370	12	termina	VER:pres	terminare	Attività	O
@@ -5605,7 +5605,7 @@
 371	1	esordito	VER:pper	esordire	Attività	LU
 371	2	in	PRE	in	Attività	O
 371	3	Nazionale azera	ENT	Nazionale azera	Attività	Squadra
-371	4	nel 2012	ENT	nel 2012	Attività	O
+371	-	nel 2012	ENT	nel 2012	Attività	Tempo
 371	5	.	SENT	.	Attività	O
 372	0	È	VER:pres	essere	Sconfitta	O
 372	1	nella	PRE:det	nel	Sconfitta	O
@@ -5620,7 +5620,7 @@
 372	10	in	PRE	in	Sconfitta	O
 372	11	cui	PRO:rela	cui	Sconfitta	O
 372	12	esordisce	VER:pres	esordire	Sconfitta	O
-372	13	il 15 giugno 2014	ENT	il 15 giugno 2014	Sconfitta	O
+372	-	il 15 giugno 2014	ENT	il 15 giugno 2014	Sconfitta	Tempo
 372	14	giocando	VER:geru	giocare	Sconfitta	O
 372	15	da	PRE	da	Sconfitta	O
 372	16	titolare	VER:infi	titolare	Sconfitta	O
@@ -5630,7 +5630,7 @@
 372	20	del	PRE:det	del	Sconfitta	O
 372	21	girone	NOM	girone	Sconfitta	O
 372	22	persa	VER:pper	perdere	Sconfitta	LU
-372	23	2-1	ENT	2-1	Sconfitta	O
+372	-	2-1	ENT	2-1	Sconfitta	Punteggio
 372	24	contro	PRE	contro	Sconfitta	O
 372	25	l'	DET:def	il	Sconfitta	O
 372	26	Italia	NPR	Italia	Sconfitta	Vincitore
@@ -5640,7 +5640,7 @@
 373	2	con	PRE	con	Attività	O
 373	3	la	DET:def	il	Attività	O
 373	4	Nazionale togolese	ENT	Nazionale togolese	Attività	Squadra
-373	5	nel 2000	ENT	nel 2000	Attività	O
+373	-	nel 2000	ENT	nel 2000	Attività	Tempo
 373	6	.	SENT	.	Attività	O
 374	0	Galliquio	NOM	Galliquio	Sconfitta	O
 374	1	conta	VER:pres	contare	Sconfitta	O
@@ -5656,7 +5656,7 @@
 374	11	sua	PRO:poss	suo	Sconfitta	O
 374	12	prima	ADJ	primo	Sconfitta	O
 374	13	partita	NOM	partita	Sconfitta	O
-374	14	il 30 marzo	ENT	il 30 marzo	Sconfitta	O
+374	-	il 30 marzo	ENT	il 30 marzo	Sconfitta	Tempo
 374	15	del	PRE:det	del	Sconfitta	O
 374	16	2003	NUM	@card@	Sconfitta	O
 374	17	persa	VER:pper	perdere	Sconfitta	LU
@@ -5664,20 +5664,20 @@
 374	19	il	DET:def	il	Sconfitta	O
 374	20	Cile	NPR	Cile	Sconfitta	Vincitore
 374	21	per	PRE	per	Sconfitta	O
-374	22	2-0	ENT	2-0	Sconfitta	O
+374	-	2-0	ENT	2-0	Sconfitta	Punteggio
 374	23	.	SENT	.	Sconfitta	O
 375	0	Con	PRE	con	Trofeo	O
 375	1	il	DET:def	il	Trofeo	O
 375	2	Liverpool	NPR	Liverpool	Trofeo	Squadra
 375	3	,	PON	,	Trofeo	O
-375	4	negli anni ottanta	ENT	negli anni ottanta	Trofeo	O
+375	-	negli anni ottanta	ENT	negli anni ottanta	Trofeo	Durata
 375	5	,	PON	,	Trofeo	O
 375	6	ha	VER:pres	avere	Trofeo	O
 375	7	vinto	VER:pper	vincere	Trofeo	LU
 375	8	17	NUM	@card@	Trofeo	O
 375	9	trofei	NOM	trofeo	Trofeo	Premio
 375	10	.	SENT	.	Trofeo	O
-376	0	Nel 2006	ENT	Nel 2006	Trofeo	O
+376	-	Nel 2006	ENT	Nel 2006	Trofeo	Tempo
 376	1	viene	VER:pres	venire	Trofeo	O
 376	2	convocato	VER:pper	convocare	Trofeo	O
 376	3	Giochi Asiatici	ENT	Giochi Asiatici	Trofeo	Competizione
@@ -5740,7 +5740,7 @@
 378	2	con	PRE	con	Attività	O
 378	3	la	DET:def	il	Attività	O
 378	4	Nazionale cubana	ENT	Nazionale	Attività	Squadra
-378	5	nel 2003	ENT	nel 2003	Attività	O
+378	-	nel 2003	ENT	nel 2003	Attività	Tempo
 378	6	,	PON	,	Attività	O
 378	7	giocando	VER:geru	giocare	Attività	LU
 378	8	64	NUM	@card@	Attività	O
@@ -5777,7 +5777,7 @@
 380	9	vi	PRO:refl	vi	Attività	O
 380	10	è	VER:pres	essere	Attività	O
 380	11	rimasto	VER:pper	rimanere	Attività	LU
-380	12	fino al 2009	ENT	fino al 2009	Attività	O
+380	-	fino al 2009	ENT	fino al 2009	Attività	Durata
 380	13	,	PON	,	Attività	O
 380	14	quando	CON	quando	Attività	O
 380	15	è	VER:pres	essere	Attività	O
@@ -5799,7 +5799,7 @@
 381	5	passò	VER:remo	passare	Attività	O
 381	6	al	PRE:det	al	Attività	O
 381	7	Genoa	NPR	Genoa	Attività	Squadra
-381	8	nel 1919	ENT	nel 1919	Attività	O
+381	-	nel 1919	ENT	nel 1919	Attività	Tempo
 381	9	dove	PRO:rela	dove	Attività	O
 381	10	rimase	VER:remo	rimanere	Attività	LU
 381	11	sino	PRE	sino	Attività	O
@@ -5824,13 +5824,13 @@
 383	1	esordito	VER:pper	esordire	Attività	O
 383	2	in	PRE	in	Attività	O
 383	3	Nazionale	NOM	nazionale	Attività	Squadra
-383	4	nel 2004	ENT	nel 2004	Attività	O
+383	-	nel 2004	ENT	nel 2004	Attività	Tempo
 383	5	,	PON	,	Attività	O
 383	6	giocando	VER:geru	giocare	Attività	LU
 383	7	una	DET:indef	una	Attività	O
 383	8	partita	NOM	partita	Attività	O
 383	9	.	SENT	.	Attività	O
-384	0	Nel 1992	ENT	Nel 1992	Attività	O
+384	-	Nel 1992	ENT	Nel 1992	Attività	Tempo
 384	1	ha	VER:pres	avere	Attività	O
 384	2	esordito	VER:pper	esordire	Attività	O
 384	3	con	PRE	con	Attività	O
@@ -5840,7 +5840,7 @@
 384	7	giocando	VER:geru	giocare	Attività	LU
 384	8	23	NUM	@card@	Attività	O
 384	9	partite	NOM	partita	Attività	O
-384	10	fino al 1997	ENT	fino al 1997	Attività	O
+384	-	fino al 1997	ENT	fino al 1997	Attività	Durata
 384	11	.	SENT	.	Attività	O
 385	0	Ha	VER:pres	avere	Attività	O
 385	1	esordito	VER:pper	esordire	Attività	LU
@@ -5848,7 +5848,7 @@
 385	3	la	DET:def	il	Attività	O
 385	4	Nazionale maggiore	ENT	Nazionale maggiore	Attività	Squadra
 385	5	invece	ADV	invece	Attività	O
-385	6	nel 2010	ENT	nel 2010	Attività	O
+385	-	nel 2010	ENT	nel 2010	Attività	Tempo
 385	7	.	SENT	.	Attività	O
 386	0	Da	PRE	da	Trofeo	O
 386	1	allenatore	NOM	allenatore	Trofeo	O
@@ -5860,11 +5860,11 @@
 386	7	lo	DET:def	il	Trofeo	O
 386	8	Standard Liegi	ENT	Standard Liegi	Trofeo	Squadra
 386	9	,	PON	,	Trofeo	O
-386	10	nel 1969	ENT	nel 1969	Trofeo	O
+386	-	nel 1969	ENT	nel 1969	Trofeo	Tempo
 386	11	,	PON	,	Trofeo	O
 386	12	1970	NUM	@card@	Trofeo	O
 386	13	e	CON	e	Trofeo	O
-386	14	nel 1971	ENT	nel 1971	Trofeo	O
+386	-	nel 1971	ENT	nel 1971	Trofeo	Tempo
 386	15	0	SENT	0	Trofeo	O
 387	0	Con	PRE	con	Trofeo	O
 387	1	lo	DET:def	il	Trofeo	O
@@ -5880,7 +5880,7 @@
 387	11	la	DET:def	il	Trofeo	O
 387	12	Coppa di Lettonia 2011-2012	ENT	Coppa di Lettonia 2011-2012	Trofeo	Competizione
 387	13	0	SENT	0	Trofeo	O
-388	0	Il 17 novembre 2010	ENT	Il 17 novembre 2010	Vittoria	O
+388	-	Il 17 novembre 2010	ENT	Il 17 novembre 2010	Vittoria	Tempo
 388	1	esordisce	VER:pres	esordire	Vittoria	O
 388	2	con	PRE	con	Vittoria	O
 388	3	la	DET:def	il	Vittoria	O
@@ -5896,13 +5896,13 @@
 388	13	la	DET:def	il	Vittoria	O
 388	14	Turchia	NPR	Turchia	Vittoria	Perdente
 388	15	(	PON	(	Vittoria	O
-388	16	2-1	ENT	2-1	Vittoria	O
+388	-	2-1	ENT	2-1	Vittoria	Punteggio
 388	17	)	PON	)	Vittoria	O
 388	18	0	SENT	0	Vittoria	O
 389	0	Lasciato	VER:pper	lasciare	Trofeo	O
 389	1	il	DET:def	il	Trofeo	O
 389	2	Manurewa	NOM	<unknown>	Trofeo	O
-389	3	nel 1987	ENT	nel 1987	Trofeo	O
+389	-	nel 1987	ENT	nel 1987	Trofeo	Tempo
 389	4	passa	ADJ	passo	Trofeo	O
 389	5	al	PRE:det	al	Trofeo	O
 389	6	Gisborne City	ENT	Gisborne City	Trofeo	Squadra
@@ -5916,7 +5916,7 @@
 389	14	altra	ADJ	altro	Trofeo	O
 389	15	Chatham Cup	ENT	Chatham Cup	Trofeo	Competizione
 389	16	0	SENT	0	Trofeo	O
-390	0	Il 13 agosto 2014	ENT	Il 13 agosto 2014	Vittoria	O
+390	-	Il 13 agosto 2014	ENT	Il 13 agosto 2014	Vittoria	Tempo
 390	1	passa	VER:pres	passare	Vittoria	O
 390	2	in	PRE	in	Vittoria	O
 390	3	prestito	NOM	prestito	Vittoria	O
@@ -5933,7 +5933,7 @@
 390	14	L'	NOM	<unknown>	Vittoria	O
 390	15	Aquila	NPR	Aquila	Vittoria	Perdente
 390	16	vinta	VER:pper	vincere	Vittoria	LU
-390	17	3-0	ENT	3-0	Vittoria	O
+390	-	3-0	ENT	3-0	Vittoria	Punteggio
 390	18	.	SENT	.	Vittoria	O
 391	0	Burgueño	NOM	Burgueño	Attività	Agente
 391	1	a	PRE	a	Attività	O
@@ -5952,18 +5952,18 @@
 392	1	con	PRE	con	Vittoria	O
 392	2	la	DET:def	il	Vittoria	O
 392	3	Nazionale maggiore	ENT	Nazionale maggiore	Vittoria	Vincitore
-392	4	il 20 maggio 2009	ENT	il 20 maggio 2009	Vittoria	O
+392	-	il 20 maggio 2009	ENT	il 20 maggio 2009	Vittoria	Tempo
 392	5	nella	PRE:det	nel	Vittoria	O
 392	6	partita	NOM	partita	Vittoria	O
 392	7	vinta	VER:pper	vincere	Vittoria	LU
-392	8	3-1	ENT	3-1	Vittoria	O
+392	-	3-1	ENT	3-1	Vittoria	Punteggio
 392	9	contro	PRE	contro	Vittoria	O
 392	10	il	DET:def	il	Vittoria	O
 392	11	Panama	NPR	Panama	Vittoria	Perdente
 392	12	.	SENT	.	Vittoria	O
 393	0	Fino	CON	fino	Attività	O
 393	1	alla	PRE:det	al	Attività	O
-393	2	stagione 2004-2005	ENT	stagione 2004-2005	Attività	O
+393	-	stagione 2004-2005	ENT	stagione 2004-2005	Attività	Durata
 393	3	rimane	VER:pres	rimanere	Attività	LU
 393	4	fedele	ADJ	fedele	Attività	O
 393	5	a	PRE	a	Attività	O
@@ -5971,11 +5971,11 @@
 393	7	società	NOM	società	Attività	O
 393	8	,	PON	,	Attività	O
 393	9	che	PRO:rela	che	Attività	O
-393	10	nel 2000	ENT	nel 2000	Attività	O
+393	-	nel 2000	ENT	nel 2000	Attività	Tempo
 393	11	diventa	VER:pres	diventare	Attività	O
 393	12	Juvenes/Dogana	NOM	Juvenes/Dogana	Attività	Squadra
 393	13	.	SENT	.	Attività	O
-394	0	Nel giugno del 2010	ENT	Nel giugno del 2010	Stato	O
+394	-	Nel giugno del 2010	ENT	Nel giugno del 2010	Stato	Tempo
 394	1	rimane	VER:pres	rimanere	Stato	LU
 394	2	svincolato	VER:pper	svincolare	Stato	Stato
 394	3	per	PRE	per	Stato	O
@@ -6017,7 +6017,7 @@
 395	20	settore	NOM	settore	Attività	O
 395	21	giovanile	ADJ	giovanile	Attività	O
 395	22	.	SENT	.	Attività	O
-396	0	Nel 2009	ENT	Nel 2009	Attività	O
+396	-	Nel 2009	ENT	Nel 2009	Attività	Tempo
 396	1	ha	VER:pres	avere	Attività	O
 396	2	giocato	VER:pper	giocare	Attività	LU
 396	3	un	DET:indef	un	Attività	O
@@ -6028,7 +6028,7 @@
 397	2	con	PRE	con	Attività	O
 397	3	la	DET:def	il	Attività	O
 397	4	Nazionale libica	ENT	Nazionale libica	Attività	Squadra
-397	5	nel 2011	ENT	nel 2011	Attività	O
+397	-	nel 2011	ENT	nel 2011	Attività	Tempo
 397	6	.	SENT	.	Attività	O
 398	0	In	PRE	in	Attività	O
 398	1	carriera	NOM	carriera	Attività	O
@@ -6082,7 +6082,7 @@
 401	5	partita	NOM	partita	Attività	O
 401	6	in	PRE	in	Attività	O
 401	7	Nazionale	NOM	Nazionale	Attività	Squadra
-401	8	nel 2000	ENT	nel 2000	Attività	O
+401	-	nel 2000	ENT	nel 2000	Attività	Tempo
 401	9	0	SENT	0	Attività	O
 402	0	A	PRE	a	Trofeo	O
 402	1	fine	ADJ	fine	Trofeo	O
@@ -6111,13 +6111,13 @@
 403	5	,	PON	,	Attività	O
 403	6	dove	PRO:rela	dove	Attività	O
 403	7	rimane	VER:pres	rimanere	Attività	LU
-403	8	fino al 1930	ENT	fino al 1930	Attività	O
+403	-	fino al 1930	ENT	fino al 1930	Attività	Durata
 403	9	.	SENT	.	Attività	O
 404	0	Bekker	NOM	Bekker	Attività	Agente
 404	1	gioca	VER:pres	giocare	Attività	LU
 404	2	per	PRE	per	Attività	O
 404	3	il	DET:def	il	Attività	O
-404	4	dal 2013	ENT	dal 2013	Attività	O
+404	-	dal 2013	ENT	dal 2013	Attività	Durata
 404	5	.	SENT	.	Attività	O
 404	6	È	VER:pres	essere	Attività	O
 404	7	stato	VER:pper	essere|stare	Attività	O
@@ -6132,12 +6132,12 @@
 405	2	con	PRE	con	Attività	O
 405	3	la	DET:def	il	Attività	O
 405	4	Nazionale maggiore	ENT	Nazionale maggiore	Attività	Squadra
-405	5	il 19 novembre 2013	ENT	il 19 novembre 2013	Attività	O
+405	-	il 19 novembre 2013	ENT	il 19 novembre 2013	Attività	Tempo
 405	6	nell'	PRE:det	nel	Attività	O
 405	7	amichevole	ADJ	amichevole	Attività	Competizione
 405	8	Liechtenstein-Estonia	NOM	<unknown>	Attività	O
 405	9	(	PON	(	Attività	O
-405	10	0-3	ENT	0-3	Attività	O
+405	-	0-3	ENT	0-3	Attività	Punteggio
 405	11	)	PON	)	Attività	O
 405	12	.	SENT	.	Attività	O
 406	0	Convocato	VER:pper	convocare	Sconfitta	O
@@ -6158,13 +6158,13 @@
 406	15	i	DET:def	il	Sconfitta	O
 406	16	leoni	NOM	leoni	Sconfitta	Perdente
 406	17	perdono	Ver:pres	perdere	Sconfitta	LU
-406	18	1-0	ENT	1-0	Sconfitta	O
+406	-	1-0	ENT	1-0	Sconfitta	Punteggio
 406	19	.	SENT	.	Sconfitta	O
-407	0	Il 5 maggio 2013	ENT	Il 5 maggio 2013	Trofeo	O
+407	-	Il 5 maggio 2013	ENT	Il 5 maggio 2013	Trofeo	Tempo
 407	1	vince	VER:pres	vincere	Trofeo	LU
 407	2	il	DET:def	il	Trofeo	O
 407	3	suo	PRO:poss	suo	Trofeo	O
-407	4	primo	ENT	primo	Trofeo	O
+407	-	primo	ENT	primo	Trofeo	Classifica
 407	5	campionato olandese	ENT	campionato olandese	Trofeo	Competizione
 407	6	con	PRE	con	Trofeo	O
 407	7	l'	DET:def	il	Trofeo	O
@@ -6182,9 +6182,9 @@
 408	9	giocando	VER:geru	giocare	Attività	LU
 408	10	2	NUM	@card@	Attività	O
 408	11	partite	NOM	partita	Attività	O
-408	12	nel 2012	ENT	nel 2012	Attività	O
+408	-	nel 2012	ENT	nel 2012	Attività	Tempo
 408	13	0	SENT	0	Attività	O
-409	0	Nel 1987	ENT	Nel 1987	Trofeo	O
+409	-	Nel 1987	ENT	Nel 1987	Trofeo	Tempo
 409	1	,	PON	,	Trofeo	O
 409	2	guidando	VER:geru	guidare	Trofeo	O
 409	3	la	DET:def	il	Trofeo	O
@@ -6198,7 +6198,7 @@
 409	11	la	DET:def	il	Trofeo	O
 409	12	Coppa del Brasile	ENT	Coppa del Brasile	Trofeo	Competizione
 409	13	.	SENT	.	Trofeo	O
-410	0	Nel 2003	ENT	Nel 2003	Attività	O
+410	-	Nel 2003	ENT	Nel 2003	Attività	Tempo
 410	1	lascia	VER:pres	lasciare	Attività	O
 410	2	perdere	VER:infi	perdere	Attività	O
 410	3	l'	DET:def	il	Attività	O
@@ -6254,7 +6254,7 @@
 413	3	per	PRE	per	Sconfitta	O
 413	4	la	PRO:pers	la	Sconfitta	O
 413	5	.	SENT	.	Sconfitta	O
-413	6	Il 19 giugno 1949	ENT	Il 19 giugno 1949	Sconfitta	O
+413	-	Il 19 giugno 1949	ENT	Il 19 giugno 1949	Sconfitta	Tempo
 413	7	,	PON	,	Sconfitta	O
 413	8	infatti	ADV	infatti	Sconfitta	O
 413	9	,	PON	,	Sconfitta	O
@@ -6266,11 +6266,11 @@
 413	15	sfida	NOM	sfida	Sconfitta	O
 413	16	persa	VER:pper	perdere	Sconfitta	LU
 413	17	per	PRE	per	Sconfitta	O
-413	18	1-3	ENT	1-3	Sconfitta	O
+413	-	1-3	ENT	1-3	Sconfitta	Punteggio
 413	19	contro	PRE	contro	Sconfitta	O
 413	20	la	PRO:pers	la	Sconfitta	O
 413	21	.	SENT	.	Sconfitta	O
-414	0	Nel 1979-1980	ENT	Nel 1979-1980	Trofeo	O
+414	-	Nel 1979-1980	ENT	Nel 1979-1980	Trofeo	Durata
 414	1	vinse	VER:remo	vincere	Trofeo	LU
 414	2	entrambe	ADJ	entrambi	Trofeo	O
 414	3	le	DET:def	il	Trofeo	O
@@ -6312,7 +6312,7 @@
 415	17	partecipazione	NOM	partecipazione	Sconfitta	O
 415	18	al	PRE:det	al	Sconfitta	O
 415	19	.	SENT	.	Sconfitta	O
-416	0	Nel 1934	ENT	Nel 1934	Attività	O
+416	-	Nel 1934	ENT	Nel 1934	Attività	Tempo
 416	1	scrisse	VER:remo	scrivere	Attività	O
 416	2	il	DET:def	il	Attività	O
 416	3	libro	NOM	libro	Attività	O
@@ -6330,13 +6330,13 @@
 417	4	la	PRO:pers	la	Sconfitta	O
 417	5	.	SENT	.	Sconfitta	O
 417	6	Esordì	VER:remo	esordire	Sconfitta	O
-417	7	il 31 agosto 1920	ENT	il 31 agosto 1920	Sconfitta	O
+417	-	il 31 agosto 1920	ENT	il 31 agosto 1920	Sconfitta	Tempo
 417	8	,	PON	,	Sconfitta	O
 417	9	nella	PRE:det	nel	Sconfitta	O
 417	10	sfida	NOM	sfida	Sconfitta	O
 417	11	persa	VER:pper	perdere	Sconfitta	LU
 417	12	per	PRE	per	Sconfitta	O
-417	13	2-1	ENT	2-1	Sconfitta	O
+417	-	2-1	ENT	2-1	Sconfitta	Punteggio
 417	14	contro	PRE	contro	Sconfitta	O
 417	15	l	VER:infi	<unknown>	Sconfitta	O
 417	16	'	PON	'	Sconfitta	O
@@ -6381,12 +6381,12 @@
 419	19	dove	ADV	dove	Stato	O
 419	20	è	VER:pres	essere	Stato	O
 419	21	morto	VER:pper	morire	Stato	O
-419	22	il 5 luglio 2010	ENT	il 5 luglio 2010	Stato	O
+419	-	il 5 luglio 2010	ENT	il 5 luglio 2010	Stato	Tempo
 419	23	.	SENT	.	Stato	O
-420	0	Il 15 giugno 2010	ENT	Il 15 giugno 2010	Sconfitta	O
+420	-	Il 15 giugno 2010	ENT	Il 15 giugno 2010	Sconfitta	Tempo
 420	1	segna	VER:pres	segnare	Sconfitta	O
 420	2	il	DET:def	il	Sconfitta	O
-420	3	primo	ENT	primo	Sconfitta	O
+420	-	primo	ENT	primo	Sconfitta	Classifica
 420	4	ed	CON	ed	Sconfitta	O
 420	5	unico	ADJ	unico	Sconfitta	O
 420	6	gol	NOM	gol	Sconfitta	O
@@ -6401,7 +6401,7 @@
 420	15	nella	PRE:det	nel	Sconfitta	O
 420	16	partita	NOM	partita	Sconfitta	Competizione
 420	17	persa	ADJ	perso	Sconfitta	LU
-420	18	2-1	ENT	2-1	Sconfitta	O
+420	-	2-1	ENT	2-1	Sconfitta	Punteggio
 420	19	contro	PRE	contro	Sconfitta	O
 420	20	il	DET:def	il	Sconfitta	O
 420	21	.	SENT	.	Sconfitta	O
@@ -6460,7 +6460,7 @@
 424	5	la	PRO:pers	la	Sconfitta	O
 424	6	.	SENT	.	Sconfitta	O
 424	7	Debuttò	VER:remo	debuttare	Sconfitta	O
-424	8	il 12 settembre 1990	ENT	il 12 settembre 1990	Sconfitta	O
+424	-	il 12 settembre 1990	ENT	il 12 settembre 1990	Sconfitta	Tempo
 424	9	,	PON	,	Sconfitta	O
 424	10	nella	PRE:det	nel	Sconfitta	O
 424	11	partita	NOM	partita	Sconfitta	O
@@ -6473,7 +6473,7 @@
 424	18	l	VER:impe	<unknown>	Sconfitta	O
 424	19	'	PON	'	Sconfitta	O
 424	20	.	SENT	.	Sconfitta	O
-425	0	Nel 1970	ENT	Nel 1970	Trofeo	O
+425	-	Nel 1970	ENT	Nel 1970	Trofeo	Tempo
 425	1	vinse	VER:remo	vincere	Trofeo	LU
 425	2	il	DET:def	il	Trofeo	O
 425	3	Premio Bruno Roghi	ENT	Premio Bruno Roghi	Trofeo	Premio
@@ -6527,11 +6527,11 @@
 428	10	,	PON	,	Trofeo	O
 428	11	vincendola	VER:geru	vincere	Trofeo	LU
 428	12	.	SENT	.	Trofeo	O
-429	0	Dal 2003	ENT	Dal 2003	Stato	O
+429	-	Dal 2003	ENT	Dal 2003	Stato	Durata
 429	1	gioca	VER:pres	giocare	Stato	O
 429	2	nel	PRE:det	nel	Stato	O
 429	3	Teleoptik	NOM	<unknown>	Stato	O
-429	4	per una stagione	ENT	per una stagione	Stato	O
+429	-	per una stagione	ENT	per una stagione	Stato	Durata
 429	5	,	PON	,	Stato	O
 429	6	prima	CON	prima	Stato	O
 429	7	di	PRE	di	Stato	O
@@ -6541,7 +6541,7 @@
 429	11	,	PON	,	Stato	O
 429	12	dove	PRO:rela	dove	Stato	O
 429	13	rimane	VER:pres	rimanere	Stato	LU
-429	14	per due anni	ENT	per due anni	Stato	O
+429	-	per due anni	ENT	per due anni	Stato	Durata
 429	15	.	SENT	.	Stato	O
 430	0	Inizia	VER:pres	iniziare	Attività	O
 430	1	a	PRE	a	Attività	O
@@ -6606,7 +6606,7 @@
 434	15	posto	VER:pper	porre	Sconfitta	O
 434	16	persa	VER:pper	perdere	Sconfitta	LU
 434	17	per	PRE	per	Sconfitta	O
-434	18	4-3	ENT	4-3	Sconfitta	O
+434	-	4-3	ENT	4-3	Sconfitta	Punteggio
 434	19	contro	PRE	contro	Sconfitta	O
 434	20	la	DET:def	il	Sconfitta	O
 434	21	Nuova Zelanda	ENT	Nuova Zelanda	Sconfitta	Vincitore
@@ -6640,7 +6640,7 @@
 435	26	stagione	NOM	stagione	Sconfitta	O
 435	27	agonistica	ADJ	agonistico	Sconfitta	O
 435	28	.	SENT	.	Sconfitta	O
-436	0	Nel 2004	ENT	Nel 2004	Sconfitta	O
+436	-	Nel 2004	ENT	Nel 2004	Sconfitta	Tempo
 436	1	ha	VER:pres	avere	Sconfitta	O
 436	2	disputato	VER:pper	disputare	Sconfitta	O
 436	3	l'	DET:def	il	Sconfitta	O
@@ -6682,7 +6682,7 @@
 437	13	King's Cup	ENT	King's Cup	Trofeo	Competizione
 437	14	.	SENT	.	Trofeo	O
 438	0	A	PRE	a	Stato	O
-438	1	17 anni	ENT	17 anni	Stato	O
+438	-	17 anni	ENT	17 anni	Stato	Durata
 438	2	viene	VER:pres	venire	Stato	O
 438	3	portato	VER:pper	portare	Stato	O
 438	4	in	PRE	in	Stato	O
@@ -6693,7 +6693,7 @@
 438	9	in	PRE	in	Stato	O
 438	10	panchina	NOM	panchina	Stato	O
 438	11	.	SENT	.	Stato	O
-439	0	Il 28 gennaio 2003	ENT	Il 28 gennaio 2003	Vittoria	O
+439	-	Il 28 gennaio 2003	ENT	Il 28 gennaio 2003	Vittoria	Tempo
 439	1	,	PON	,	Vittoria	O
 439	2	ha	VER:pres	avere	Vittoria	O
 439	3	debuttato	VER:pper	debuttare	Vittoria	O
@@ -6726,13 +6726,13 @@
 440	11	(	PON	(	Sconfitta	O
 440	12	persa	VER:pper	perdere	Sconfitta	LU
 440	13	per	PRE	per	Sconfitta	O
-440	14	3 a 2	ENT	3 a 2	Sconfitta	O
+440	-	3 a 2	ENT	3 a 2	Sconfitta	Punteggio
 440	15	)	PON	)	Sconfitta	O
 440	16	sia	CON	sia	Sconfitta	O
 440	17	nella	PRE:det	nel	Sconfitta	O
 440	18	vittoria	NOM	vittoria	Sconfitta	O
 440	19	per	PRE	per	Sconfitta	O
-440	20	1 a 0	ENT	1 a 0	Sconfitta	O
+440	-	1 a 0	ENT	1 a 0	Sconfitta	Punteggio
 440	21	contro	PRE	contro	Sconfitta	O
 440	22	la	DET:def	il	Sconfitta	O
 440	23	Svezia	NPR	Svezia	Sconfitta	O
@@ -6804,7 +6804,7 @@
 446	4	calciatore	NOM	calciatore	Sconfitta	O
 446	5	professionista	NOM	professionista	Sconfitta	O
 446	6	inizia	VER:pres	iniziare	Sconfitta	O
-446	7	nel 2011	ENT	nel 2011	Sconfitta	O
+446	-	nel 2011	ENT	nel 2011	Sconfitta	Tempo
 446	8	,	PON	,	Sconfitta	O
 446	9	esattamente	ADV	esattamente	Sconfitta	O
 446	10	il	DET:def	il	Sconfitta	O
@@ -6827,7 +6827,7 @@
 447	2	con	PRE	con	Attività	O
 447	3	la	DET:def	il	Attività	O
 447	4	nazionale italiana	ENT	nazionale italiana	Attività	Squadra
-447	5	nel giugno del 2002	ENT	nel giugno del 2002	Attività	O
+447	-	nel giugno del 2002	ENT	nel giugno del 2002	Attività	Tempo
 447	6	contro	PRE	contro	Attività	O
 447	7	la	DET:def	il	Attività	O
 447	8	Serbia-Montenegro	NPR	Serbia-Montenegro	Attività	O
@@ -6837,7 +6837,7 @@
 448	2	il	DET:def	il	Attività	O
 448	3	calcio	NOM	calcio	Attività	O
 448	4	giocato	VER:pper	giocare	Attività	LU
-448	5	nel luglio del 2000	ENT	nel luglio del 2000	Attività	O
+448	-	nel luglio del 2000	ENT	nel luglio del 2000	Attività	Tempo
 449	0	L'	DET:def	il	Sconfitta	O
 449	1	esordio	NOM	esordio	Sconfitta	O
 449	2	in	PRE	in	Sconfitta	O
@@ -6853,7 +6853,7 @@
 449	12	squadra	NOM	squadra	Sconfitta	O
 449	13	perde	VER:pres	perdere	Sconfitta	LU
 449	14	per	PRE	per	Sconfitta	O
-449	15	1-3	ENT	1-3	Sconfitta	O
+449	-	1-3	ENT	1-3	Sconfitta	Punteggio
 449	16	contro	PRE	contro	Sconfitta	O
 449	17	la	DET:def	il	Sconfitta	O
 449	18	Dinamo Briansk	ENT	Dinamo Briansk	Sconfitta	Vincitore
@@ -6868,9 +6868,9 @@
 450	7	due	ADJ	due	Trofeo	O
 450	8	Coppe di Polonia	ENT	Coppe di Polonia	Trofeo	Competizione
 450	9	,	PON	,	Trofeo	O
-450	10	nel 2011	ENT	nel 2011	Trofeo	O
+450	-	nel 2011	ENT	nel 2011	Trofeo	Tempo
 450	11	e	CON	e	Trofeo	O
-450	12	nel 2012	ENT	nel 2012	Trofeo	O
+450	-	nel 2012	ENT	nel 2012	Trofeo	Tempo
 450	13	.	SENT	.	Trofeo	O
 451	0	Ala	NOM	ala	Attività	O
 451	1	destra	ADJ	destro	Attività	O
@@ -6889,11 +6889,11 @@
 451	14	anche	ADV	anche	Attività	O
 451	15	attaccante	ADJ	attaccante	Attività	O
 451	16	.	SENT	.	Attività	O
-452	0	Il 30 giugno 2013	ENT	Il 30 giugno 2013	Stato	O
+452	-	Il 30 giugno 2013	ENT	Il 30 giugno 2013	Stato	Tempo
 452	1	rimane	VER:pres	rimanere	Stato	LU
 452	2	svincolato	VER:pper	svincolare	Stato	Stato
 452	3	e	CON	e	Stato	O
-452	4	il 22 luglio	ENT	il 22 luglio	Stato	O
+452	-	il 22 luglio	ENT	il 22 luglio	Stato	Tempo
 452	5	seguente	ADJ	seguente	Stato	O
 452	6	parte	NOM	parte	Stato	O
 452	7	per	PRE	per	Stato	O
@@ -6928,13 +6928,13 @@
 453	13	in	PRE	in	Attività	O
 453	14	nazionale	ADJ	nazionale	Attività	Squadra
 453	15	.	SENT	.	Attività	O
-454	0	Il 3 dicembre 1939	ENT	Il 3 dicembre 1939	Attività	O
+454	-	Il 3 dicembre 1939	ENT	Il 3 dicembre 1939	Attività	Tempo
 454	1	esordisce	VER:pres	esordire	Attività	LU
 454	2	contro	ADV	contro	Attività	O
 454	3	la	DET:def	il	Attività	O
 454	4	Germania nazista	ENT	Germania nazista	Attività	O
 454	5	(	PON	(	Attività	O
-454	6	3-1	ENT	3-1	Attività	O
+454	-	3-1	ENT	3-1	Attività	Punteggio
 454	7	)	PON	)	Attività	O
 454	8	.	SENT	.	Attività	O
 455	0	Dopo	ADV	dopo	Stato	O
@@ -6962,7 +6962,7 @@
 456	7	la	PRO:pers	la	Sconfitta	O
 456	8	.	SENT	.	Sconfitta	O
 456	9	Esordì	VER:remo	esordire	Sconfitta	O
-456	10	il 10 ottobre 1926	ENT	il 10 ottobre 1926	Sconfitta	O
+456	-	il 10 ottobre 1926	ENT	il 10 ottobre 1926	Sconfitta	Tempo
 456	11	,	PON	,	Sconfitta	O
 456	12	segnando	VER:geru	segnare	Sconfitta	O
 456	13	una	DET:indef	una	Sconfitta	O
@@ -6971,11 +6971,11 @@
 456	16	sfida	NOM	sfida	Sconfitta	O
 456	17	persa	VER:pper	perdere	Sconfitta	LU
 456	18	per	PRE	per	Sconfitta	O
-456	19	3-4	ENT	3-4	Sconfitta	O
+456	-	3-4	ENT	3-4	Sconfitta	Punteggio
 456	20	contro	PRE	contro	Sconfitta	O
 456	21	la	PRO:pers	la	Sconfitta	O
 456	22	.	SENT	.	Sconfitta	O
-457	0	Nel 1951	ENT	Nel 1951	Sconfitta	O
+457	-	Nel 1951	ENT	Nel 1951	Sconfitta	Tempo
 457	1	,	PON	,	Sconfitta	O
 457	2	durante	PRE	durante	Sconfitta	O
 457	3	il	DET:def	il	Sconfitta	O
@@ -7026,7 +7026,7 @@
 459	14	del	PRE:det	del	Sconfitta	O
 459	15	vantaggio	NOM	vantaggio	Sconfitta	O
 459	16	del	PRE:det	del	Sconfitta	O
-459	17	2-1	ENT	2-1	Sconfitta	O
+459	-	2-1	ENT	2-1	Sconfitta	Punteggio
 459	18	ancora	VER:pres	ancorare	Sconfitta	O
 459	19	una	DET:indef	una	Sconfitta	O
 459	20	volta	NOM	volta	Sconfitta	O
@@ -7039,9 +7039,9 @@
 459	27	poi	ADV	poi	Sconfitta	O
 459	28	persa	VER:pper	perdere	Sconfitta	LU
 459	29	per	PRE	per	Sconfitta	O
-459	30	2-3	ENT	2-3	Sconfitta	O
+459	-	2-3	ENT	2-3	Sconfitta	Punteggio
 459	31	.	SENT	.	Sconfitta	O
-460	0	Nel gennaio 2011	ENT	Nel gennaio 2011	Sconfitta	O
+460	-	Nel gennaio 2011	ENT	Nel gennaio 2011	Sconfitta	Tempo
 460	1	viene	VER:pres	venire	Sconfitta	O
 460	2	ricoverato	VER:pper	ricoverare	Sconfitta	O
 460	3	in	PRE	in	Sconfitta	O
@@ -7067,7 +7067,7 @@
 460	23	di	PRE	di	Sconfitta	O
 460	24	peso	NOM	peso	Sconfitta	O
 460	25	.	SENT	.	Sconfitta	O
-461	0	Il 7 settembre 2012	ENT	Il 7 settembre 2012	Sconfitta	O
+461	-	Il 7 settembre 2012	ENT	Il 7 settembre 2012	Sconfitta	Tempo
 461	1	è	VER:pres	essere	Sconfitta	O
 461	2	in	PRE	in	Sconfitta	O
 461	3	panchina	NOM	panchina	Sconfitta	O
@@ -7084,7 +7084,7 @@
 461	14	squadra	NOM	squadra	Sconfitta	Perdente
 461	15	perde	VER:pres	perdere	Sconfitta	LU
 461	16	per	PRE	per	Sconfitta	O
-461	17	4-0	ENT	4-0	Sconfitta	O
+461	-	4-0	ENT	4-0	Sconfitta	Punteggio
 461	18	in	PRE	in	Sconfitta	O
 461	19	trasferta	NOM	trasferta	Sconfitta	O
 461	20	contro	PRE	contro	Sconfitta	O
@@ -7097,7 +7097,7 @@
 462	3	quella	PRO:demo	quello	Attività	O
 462	4	partita	NOM	partita	Attività	O
 462	5	,	PON	,	Attività	O
-462	6	il 10 febbraio	ENT	il 10 febbraio	Attività	O
+462	-	il 10 febbraio	ENT	il 10 febbraio	Attività	Tempo
 462	7	.	SENT	.	Attività	O
 463	0	Cresce	VER:pres	crescere	Attività	O
 463	1	nell'	PRE:det	nel	Attività	O
@@ -7112,7 +7112,7 @@
 463	10	quale	PRO:rela	quale	Attività	O
 463	11	gioca	VER:pres	giocare	Attività	LU
 463	12	nella	PRE:det	nel	Attività	O
-463	13	stagione 1925-1926	ENT	stagione 1925-1926	Attività	Durata
+463	-	stagione 1925-1926	ENT	stagione 1925-1926	Attività	Durata
 463	14	.	SENT	.	Attività	O
 464	0	All'	PRE:det	al	Stato	O
 464	1	apertura	NOM	apertura	Stato	O
@@ -7194,7 +7194,7 @@
 468	10	del	PRE:det	del	Stato	O
 468	11	calcio	NOM	calcio	Stato	O
 468	12	.	SENT	.	Stato	O
-469	0	Dal 1986 al 1990	ENT	Dal 1986 al 1990	Attività	O
+469	-	Dal 1986 al 1990	ENT	Dal 1986 al 1990	Attività	Durata
 469	1	giocò	VER:remo	giocare	Attività	LU
 469	2	per	PRE	per	Attività	O
 469	3	Bruce	NPR	Bruce	Attività	O
@@ -7291,21 +7291,21 @@
 475	11	partita	NOM	partita	Sconfitta	O
 475	12	di	PRE	di	Sconfitta	O
 475	13	calcio	NOM	calcio	Sconfitta	O
-475	14	nel 2005	ENT	nel 2005	Sconfitta	O
+475	-	nel 2005	ENT	nel 2005	Sconfitta	Tempo
 475	15	.	SENT	.	Sconfitta	O
 476	0	Ha	VER:pres	avere	Attività	O
 476	1	esordito	VER:pper	esordire	Attività	LU
 476	2	con	PRE	con	Attività	O
 476	3	la	DET:def	il	Attività	O
 476	4	Guinea-Bissau	NOM	Guinea-Bissau	Attività	Squadra
-476	5	nel 2011	ENT	nel 2011	Attività	O
+476	-	nel 2011	ENT	nel 2011	Attività	Tempo
 476	6	,	PON	,	Attività	O
 476	7	dopo	PRE	dopo	Attività	O
 476	8	una	DET:indef	una	Attività	O
 476	9	convocazione	NOM	convocazione	Attività	O
-476	10	nel dicembre 2010	ENT	nel dicembre 2010	Attività	O
+476	-	nel dicembre 2010	ENT	nel dicembre 2010	Attività	Tempo
 476	11	.	SENT	.	Attività	O
-477	0	Nel 2013	ENT	Nel 2013	Trofeo	O
+477	-	Nel 2013	ENT	Nel 2013	Trofeo	Tempo
 477	1	partecipa	VER:pres	partecipare	Trofeo	O
 477	2	al	PRE:det	al	Trofeo	O
 477	3	OFC Under-20 Championship	ENT	OFC Under-20 Championship	Trofeo	Competizione
@@ -7333,7 +7333,7 @@
 479	4	la	PRO:pers	la	Sconfitta	O
 479	5	.	SENT	.	Sconfitta	O
 479	6	Esordì	VER:remo	esordire	Sconfitta	O
-479	7	il 25 maggio 1931	ENT	il 25 maggio 1931	Sconfitta	O
+479	-	il 25 maggio 1931	ENT	il 25 maggio 1931	Sconfitta	Tempo
 479	8	,	PON	,	Sconfitta	O
 479	9	schierato	VER:pper	schierare	Sconfitta	O
 479	10	in	PRE	in	Sconfitta	O
@@ -7342,7 +7342,7 @@
 479	13	sfida	NOM	sfida	Sconfitta	O
 479	14	persa	VER:pper	perdere	Sconfitta	LU
 479	15	per	PRE	per	Sconfitta	O
-479	16	3-1	ENT	3-1	Sconfitta	O
+479	-	3-1	ENT	3-1	Sconfitta	Punteggio
 479	17	contro	PRE	contro	Sconfitta	O
 479	18	la	PRO:pers	la	Sconfitta	O
 479	19	Danimarca	NPR	Danimarca	Sconfitta	Vincitore
@@ -7375,7 +7375,7 @@
 481	4	per	PRE	per	Attività	O
 481	5	il	DET:def	il	Attività	O
 481	6	Brasile	NPR	Brasile	Attività	Squadra
-481	7	nel 1986	ENT	nel 1986	Attività	O
+481	-	nel 1986	ENT	nel 1986	Attività	Tempo
 481	8	,	PON	,	Attività	O
 481	9	segnando	VER:geru	segnare	Attività	O
 481	10	una	DET:indef	una	Attività	O
@@ -7477,7 +7477,7 @@
 486	14	a	PRE	a	Sconfitta	O
 486	15	piazzarsi	VER:infi	piazzare	Sconfitta	O
 486	16	al	PRE:det	al	Sconfitta	O
-486	17	secondo	ENT	secondo	Sconfitta	O
+486	-	secondo	ENT	secondo	Sconfitta	Classifica
 486	18	posto	NOM	posto	Sconfitta	O
 486	19	in	PRE	in	Sconfitta	O
 486	20	seguito	NOM	seguito	Sconfitta	O
