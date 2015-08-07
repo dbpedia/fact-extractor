@@ -41,18 +41,18 @@ __meta_funcs__:
             return tens
 
 Tempo:
-  - (del\s|il\s|l'\s?)(?P<day>\d{{1,2}}) (?P<month>{month}) (?P<year>\d{{4}}): >
+  - \b(del\s|il\s|l'\s?)(?P<day>\d{{1,2}}) (?P<month>{month}) (?P<year>\d{{4}}): >
       '"{}-{:02d}-{:02d}"^^<{schema}>'.format(match.group('year'),
                                               month_to_num(match.group('month')),
                                               int(match.group('day')),
                                               schema=schema['date'])
 
-  - (del\s|il\s|l'\s?)(?P<day>\d{{1,2}}) (?P<month>{month})(?!\s+\d): >
+  - \b(del\s|il\s|l'\s?)(?P<day>\d{{1,2}}) (?P<month>{month})(?!\s+\d): >
       '"{:02d}-{:02d}"^^<{schema}>'.format(month_to_num(match.group('month')),
                                            int(match.group('day')),
                                            schema=schema['monthDay'])
 
-  - (del\s|a\s|nel\s|nell'\s?)(?P<month>{month}) (del|dell')?\s*(?P<year>\d{{4}}): >
+  - \b(del\s|a\s|nel\s|nell'\s?)(?P<month>{month}) (del|dell')?\s*(?P<year>\d{{4}}): >
       '"{}-{:02d}"^^<{schema}>'.format(match.group('year'),
                                        month_to_num(match.group('month')),
                                        schema=schema['yearMonth'])
@@ -61,14 +61,14 @@ Tempo:
       '"{:02d}"^^<{schema}>'.format(month_to_num(match.group('month')),
                                     schema=schema['month'])
 
-  - (nel\s|il\s|nell'\s?)(?P<year>\d{{4}})(?!\s*[-/]): >
+  - \b(nel\s|il\s|nell'\s?)(?P<year>\d{{4}})(?!\s*[-/]): >
       '"{}"^^<{schema}>'.format(match.group('year'),
                                 schema=schema['year'])
 
-  - l'\s?anno seguente: >
+  - \bl'\s?anno seguente: >
       '"$YEAR + 1"'
 
-  - (la )?stagione successiva: >
+  - \b(la )?stagione successiva: >
       '"$YEAR + 1"'
 
 Durata:
