@@ -56,9 +56,10 @@ public class Answer {
         private String lemma;
 		private Double roleConfidence;
 		private Double frameConfidence;
+        private Double linkConfidence;
 
 		Entry(int id, String token, String pos, String lemma, String frame, String role,
-              Double roleConfidence, Double frameConfidence ) {
+              Double roleConfidence, Double frameConfidence, Double linkConfidence ) {
 
 			this.id = id;
 			this.frame = frame;
@@ -67,7 +68,8 @@ public class Answer {
             this.pos = pos;
             this.lemma = lemma;
             this.roleConfidence = roleConfidence;
-            this.setFrameConfidence( frameConfidence );
+            this.frameConfidence = frameConfidence;
+            this.linkConfidence = linkConfidence;
 		}
 
 		String getFrame() {
@@ -98,16 +100,12 @@ public class Answer {
             return roleConfidence;
         }
 
-        public void setRoleConfidence( Double roleConfidence ) {
-            this.roleConfidence = roleConfidence;
-        }
-
-        public void setFrameConfidence( Double frameConfidence ) {
-            this.frameConfidence = frameConfidence;
-        }
-
         public Double getFrameConfidence( ) {
             return frameConfidence;
+        }
+
+        public Double getLinkConfidence( ) {
+            return linkConfidence;
         }
     }
 
@@ -136,7 +134,8 @@ public class Answer {
                     logger.info( i + "\tO\t" + role + "\t" + example.toString( ) + "\t" + example.getLinkConfidence( ) +
                                          "\t" + example.getFrameConfidence( ) );
                     list.add( new Entry( id, example.getToken( ), example.getPos( ), example.getLemma( ),
-                                         "O", "O", example.getLinkConfidence( ), example.getFrameConfidence( ) ) );
+                                         "O", "O", example.getRoleConfidence( ), example.getFrameConfidence( ),
+                                         example.getLinkConfidence( ) ) );
                 }
                 else {
 
@@ -156,7 +155,8 @@ public class Answer {
 					}
 
                     list.add( new Entry( id, example.getToken( ), example.getPos( ), example.getLemma( ),
-                                         frame, role, example.getLinkConfidence( ), example.getFrameConfidence( ) ) );
+                                         frame, role, example.getRoleConfidence( ), example.getFrameConfidence( ),
+                                         example.getLinkConfidence( ) ) );
                 }
 
 			}
@@ -211,6 +211,7 @@ public class Answer {
             sb.append( "\t" );
             sb.append( entry.getRoleConfidence( ) );
             sb.append( "\t" );
+            sb.append( entry.getLinkConfidence( ) );
             sb.append( "\n" );
         }
         return sb.toString( );
