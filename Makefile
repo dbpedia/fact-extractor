@@ -9,7 +9,7 @@ TAGGED_DIR=$(WORK_DIR)/tagged
 GOLD_DIR=$(WORK_DIR)/gold
 TREETAGGER_HOME=../tree-tagger
 TREETAGGER=$(TREETAGGER_HOME)/cmd/tree-tagger-$(LANGUAGE)
-SOCCER_IDS=../soccer_ids
+SOCCER_IDS=extraction/resources/soccer_ids
 GOLD_LU_NUM=10
 DUMP=../$(LANGCODE)wiki-latest-pages-articles.xml.bz2
 CL_MAIN_PACKAGE=org.fbk.cit.hlt.dirha
@@ -17,13 +17,15 @@ CL_JAVA_OPTS=-Dlog-config=supervised/classifier/log-config.txt -Xmx2G -Dfile.enc
 CL_TRAINING_SET=supervised/resources/training.sample
 CL_GAZETTEER=supervised/resources/it/soccer-gaz.tsv
 CL_EVAL_OUTPUT=/tmp/classifierEvaluationOutput
-CL_SENTENCES_FILE=$(WORK_DIR)/sample-5.txt
-CL_OUTPUT=$(WORK_DIR)/sample-5-classified.txt
+CL_SENTENCES_FILE=$(WORK_DIR)/sample-50.txt
+CL_OUTPUT=$(WORK_DIR)/sample-50-classified.txt
+CL_CONF_OUTPUT=$(WORK_DIR)/sample-50-confidences.txt
 CL_ANNOTATED_GOLD=
 LINK_MODE=twm  # twm or nex
 CF_RESULTS=resources/crowdflower-results.sample
-UNS_SCORING=f-score
-UNS_CORE_WEIGHT=2
+SCORING_TYPE=f-score
+FE_SCORE=both
+SCORING_CORE_WEIGHT=2
 
 default:
 	@echo "Ciao"
@@ -35,7 +37,8 @@ extract-pages:
 
 extract-soccer:
 	mkdir -p $(SOCCER_DIR)
-	python verb_extraction/process_articles.py $(SOCCER_IDS) \
+	python extraction/get_soccer_ids.py $(SOCCER_IDS) --lang $(LANGCODE)
+	python extraction/process_articles.py $(SOCCER_IDS) \
 		$(WORK_DIR)/all-articles.txt $(SOCCER_DIR) \
 		$(WORK_DIR)/wiki-id-to-title-mapping.json
 	find $(SOCCER_DIR)/* -type f -exec cat '{}' \; > $(WORK_DIR)/all-soccer.txt
@@ -46,12 +49,12 @@ extract-verbs:
 	sort -u $(WORK_DIR)/raw-verbs.txt -o $(WORK_DIR)/token2lemma.txt
 	cut -f 1 $(WORK_DIR)/token2lemma.txt > $(WORK_DIR)/tokens.txt
 	cut -f 2 $(WORK_DIR)/token2lemma.txt | sort -u -o $(WORK_DIR)/lemmas.txt
-	python verb_extraction/bag_of_words.py $(WORK_DIR)/all-soccer.txt \
+	python extraction/bag_of_words.py $(WORK_DIR)/all-soccer.txt \
 		$(WORK_DIR)/vocabulary.txt
 
 extract-sentences:
 	mkdir -p $(SENTENCES_DIR) $(TAGGED_DIR)
-	python verb_extraction/extract_sentences.py $(WORK_DIR)/all-soccer.txt \
+	python extraction/extract_sentences.py $(WORK_DIR)/all-soccer.txt \
 		resources/tokens.list $(WORK_DIR)/sentence-to-wikiid.json $(SENTENCES_DIR)
 	find $(SENTENCES_DIR) -type f -exec sh -c 'echo $$1 && cat "$$1" | \
 		$(TREETAGGER) > $(TAGGED_DIR)/$$(basename $$1) 2> /dev/null' 'extract' {} \;
@@ -78,7 +81,7 @@ gold-add:
 	mkdir -p $(GOLD_DIR)/$(LU)/sentences $(GOLD_DIR)/$(LU)/gold
 	grep -w $(LU) $(WORK_DIR)/top-50-token2lemma.txt | cut -f 1 \
 		> $(GOLD_DIR)/$(LU)/tokens.txt
-	python verb_extraction/extract_sentences.py $(WORK_DIR)/all-soccer.txt \
+	python extraction/extract_sentences.py $(WORK_DIR)/all-soccer.txt \
 		$(GOLD_DIR)/$(LU)/tokens.txt $(GOLD_DIR)/$(LU)/sentences \
 		--min-words 5 --max-words 15
 	python seed_selection/get_meaningful_sentences.py $(TAGGED_DIR) \
@@ -88,8 +91,8 @@ gold-finalize:
 	mkdir -p $(GOLD_DIR)/sentences
 	find $(GOLD_DIR)/*/gold/* | shuf | head -n $(GOLD_LU_NUM) | xargs -i cp {} \
 		$(GOLD_DIR)/sentences/
-	find $(GOLD_DIR)/gold/* -type f -exec sh -c 'cat $$1; echo' _ "{}" \; \
-		| head -n 50 > $(WORK_DIR)/sample-50.txt
+	find $(GOLD_DIR)/gold/* -type f -exec sh -c 'echo $$(basename $$1); cat $$1; echo' \
+        _ "{}" \; | head -n 100 > $(WORK_DIR)/sample-50.txt
 
 supervised-build-classifier:
 	cd supervised/classifier && mvn compile assembly:assembly
@@ -117,7 +120,7 @@ supervised-run-batch:
 	java $(CL_JAVA_OPTS) -Dtreetagger.home=$(TREETAGGER_HOME) \
 		$(CL_MAIN_PACKAGE).Annotator -g $(CL_GAZETTEER) -m $(CL_TRAINING_SET) \
 		-l $(LANGCODE) -r $(CL_EVAL_OUTPUT)  -a $(CL_SENTENCES_FILE) \
-		-o $(CL_OUTPUT)
+		-o $(CL_OUTPUT) -c $(CL_CONF_OUTPUT)
 
 supervised-evaluate:
 	ifndef CL_ANNOTATED_GOLD $(error CL_ANNOTATED_GOLD is not set) endif
@@ -129,7 +132,10 @@ supervised-evaluate:
 supervised-results-to-assertions:
 	python supervised/produce_triples.py $(CL_OUTPUT) \
 		$(WORK_DIR)/sentence-to-wikiid.json $(WORK_DIR)/wiki-id-to-title-mapping.json \
-		$(WORK_DIR)/supervised-triples.nt --format nt
+		$(WORK_DIR)/supervised-triples.nt $(WORK_DIR)/supervised-scores.nt --format nt \
+        --sentence-score $(SCORING_TYPE) --core-weight $(SCORING_CORE_WEIGHT) \
+        --score-fes --fe-score $(FE_SCORE) --format nt
+
 
 crowdflower-create-input:
 	# TODO generate twm ngrams and textpro chunks somehow
@@ -155,8 +161,8 @@ run-unsupervised:
 	python lib/entity_linking.py $(LINK_MODE) $(SOCCER_DIR) \
 		$(WORK_DIR)/unsupervised/linked
 	python unsupervised/produce_labeled_data.py $(WORK_DIR)/unsupervised/linked \
-		$(WORK_DIR)/labeled_data.json --score $(UNS_SCORING) \
-        --core-weight $(UNS_CORE_WEIGHT) --score-fes
+		$(WORK_DIR)/labeled_data.json --score $(SCORING_TYPE) \
+        --core-weight $(SCORING_CORE_WEIGHT) --score-fes
 	python unsupervised/labeled_to_assertions.py $(WORK_DIR)/labeled_data.json \
 		$(WORK_DIR)/wiki-id-to-title-mapping.json $(WORK_DIR)/unsupervised/processed \
 		$(WORK_DIR)/unsupervised/discarded $(WORK_DIR)/unsupervised/dataset.nt

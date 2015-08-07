@@ -11,6 +11,7 @@ from lib.to_assertions import to_assertions
 from collections import defaultdict
 from rdflib.namespace import Namespace, NamespaceManager
 from date_normalizer import DateNormalizer
+from lib.scoring import compute_score, AVAILABLE_SCORES
 from rdflib import Graph
 
 
@@ -32,7 +33,20 @@ def read_sentences(rows):
     return sentences
 
 
-def to_labeled(sentences, sentence_to_wid):
+def read_classifier_confidence(file_in):
+    confidence = {}
+    for row in file_in:
+        sentence_id, token_id, frame_conf, role_conf, link_conf = row.split('\t')
+        if not sentence_id in confidence:
+            confidence[sentence_id] = {}
+        confidence[sentence_id][token_id] = (float(frame_conf), 
+                                             float(role_conf),
+                                             float(link_conf))
+    return confidence
+
+
+
+def to_labeled(sentences, confidence, fe_score_type):
     normalizer = DateNormalizer()
     labeled = []
     for sentence_id, rows in sentences.iteritems():
@@ -46,19 +60,29 @@ def to_labeled(sentences, sentence_to_wid):
         fe_list = []
         for fe in rows:
             if fe[-1] not in {'O', 'LU'}:
-                uri, score = fe[5].split('~(') if fe[4] == 'ENT' else fe[5], None
+                frame_conf, role_conf, link_conf = confidence[sentence_id][fe[1]]
+                if fe[4].startswith('http://'):
+                    fe_format = 'uri'
+                    if fe_score_type == 'svm':
+                        score = role_conf
+                    elif fe_score_type == 'link':
+                        score = link_conf
+                    elif fe_score_type == 'both':
+                        score = 2 * (role_conf * link_conf) / (role_conf + link_conf)
+                else:
+                    fe_format, score = 'literal', role_conf
+
                 fe_list.append({
                     'chunk': fe[2],
                     'type': 'core',
-                    'uri': uri,
+                    fe_format: fe[4],
                     'FE': fe[-1],
-                    'score': score,
+                    'score': float(score) if score else None
                 })
 
         sentence = ' '.join(x[2] for x in rows)
-        norm = ''.join(c for c in sentence if c.isalnum())
         labels = {
-            'id': sentence_to_wid[norm],
+            'id': lu[0],
             'frame': lu[-2],
             'lu': lu[2],
             'sentence': sentence,
@@ -80,19 +104,31 @@ def to_labeled(sentences, sentence_to_wid):
 
 @click.command()
 @click.argument('classified-output', type=click.File('r'))
-@click.argument('sentence-to-wid', type=click.File('r'))
+@click.argument('classified-confidence', type=click.File('r'))
 @click.argument('id-to-title', type=click.File('r'))
 @click.argument('output-file', type=click.File('w'))
+@click.argument('triple-scores', type=click.File('w'))
+@click.option('--sentence-score', type=click.Choice(['arithmetic-mean', 'weighted-mean',
+                                                     'f-score']))
+@click.option('--fe-score', type=click.Choice(['svm', 'link', 'both']))
+@click.option('--core-weight', default=2)
 @click.option('--format', default='nt')
-def main(classified_output, output_file, sentence_to_wid, id_to_title, format):
+def main(classified_output, classified_confidence, output_file, id_to_title,
+         triple_scores, format, sentence_score, core_weight, fe_score):
+
     sentences = read_sentences(classified_output)
-    labeled = to_labeled(sentences, json.load(sentence_to_wid))
+    confidence = read_classifier_confidence(classified_confidence)
+    labeled = to_labeled(sentences, confidence, fe_score)
+
+    for sentence in labeled:
+        sentence['score'] = compute_score(sentence, sentence_score, core_weight)
+
     mapping = json.load(id_to_title)
     processed, discarded = to_assertions(labeled, mapping, NAMESPACE_MANAGER, {
                                             'ontology': ONTOLOGY_NS,
                                             'resource': RESOURCE_NS,
                                             'fact_extraction': FACT_EXTRACTION_NS,
-                                         }, output_file, format)
+                                         }, output_file, triple_scores, format)
 
 
 if __name__ == '__main__':

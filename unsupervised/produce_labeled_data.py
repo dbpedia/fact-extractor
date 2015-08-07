@@ -14,6 +14,7 @@ from urllib import quote
 from rfc3987 import parse  # URI/IRI validation
 from date_normalizer import DateNormalizer
 from resources.soccer_lu2frame_dbtypes import LU_FRAME_MAP
+from lib.scoring import compute_score, AVAILABLE_SCORES
 import click
 
 
@@ -161,36 +162,6 @@ def label_sentence(entity_linking_results, debug):
     return labeled
 
 
-def compute_score(labeled, score, core_fes_weight, score_fes, debug):
-    """ computes the confidency score for each sentence based on FE scores """
-    for sentence in labeled:
-        if not sentence['FEs']:
-            continue
-
-        if score == 'arithmetic-mean':
-            sentence['score'] = (sum(fe['score'] for fe in sentence['FEs']) /
-                                 len(sentence['FEs']))
-        elif score == 'weighted-mean':
-            sentence['score'] = sum(
-                    fe['score'] * core_fes_weight if fe['type'] == 'core' else 1
-                    for fe in sentence['FEs']) / len(sentence['FEs'])
-        elif score == 'f-score':
-            score_weight = [(fe['score'], core_fes_weight if fe['type'] == 'core' else 1)
-                            for fe in sentence['FEs']]
-            sentence['score'] = (sum(w for s, w in score_weight) /
-                                 sum(w / s for s, w in score_weight))
-        else:
-            raise Exception('Unknown score measure: ' + score)
-
-        if debug:
-            print '[%s] weights %s give score %f' % (sentence['id'],
-                    ', '.join(str(fe['score']) for fe in sentence['FEs']),
-                    sentence['score'])
-
-        if not score_fes:
-            [fe.pop('score') for fe in sentence['FEs']]
-
-
 def process_dir(indir, score_fes, debug):
     """Walk into the input directory and process all the entity linking results"""
     processed = []
@@ -219,7 +190,10 @@ def main(linked_dir, labeled_out, score, core_weight, score_fes, debug):
     labeled = process_dir(linked_dir, score_fes, debug)
 
     if score:
-        compute_score(labeled, score, core_weight, score_fes, debug)
+        for sentence in labeled:
+            sentence['score'] = compute_score(sentence, score, core_weight)
+            if not score_fes:
+                [fe.pop('score') for fe in sentence['FEs']]
 
     with codecs.open(labeled_out, 'wb', 'utf8') as f:
         json.dump(labeled, f, ensure_ascii=False, indent=2)
