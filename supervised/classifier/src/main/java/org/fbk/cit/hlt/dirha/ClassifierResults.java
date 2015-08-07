@@ -1,11 +1,11 @@
 package org.fbk.cit.hlt.dirha;
 
 
-public class ClassifierResults {
+public class ClassifierResults implements Token {
     public static FeatureIndex FrameLabelList;
     public static FeatureIndex RoleLabelList;
 
-    public static final String FRAME_NOT_FOUND_LABEL = "O";
+    public static final String FRAME_NOT_FOUND_LABEL = "FRAME_NOT_FOUND";
 
     private String token;
     private String pos;

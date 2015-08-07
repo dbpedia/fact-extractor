@@ -11,8 +11,8 @@ TREETAGGER_HOME=../tree-tagger
 TREETAGGER=$(TREETAGGER_HOME)/cmd/tree-tagger-$(LANGUAGE)
 SOCCER_IDS=extraction/resources/soccer_ids
 SAMPLE_LU_NUM=10
-SAMPLE_MIN_WORDS=5
-SAMPLE_MAX_WORDS=25
+SENTENCES_MIN_WORDS=5
+SENTENCES_MAX_WORDS=25
 DUMP=../$(LANGCODE)wiki-latest-pages-articles.xml.bz2
 CL_MAIN_PACKAGE=org.fbk.cit.hlt.dirha
 CL_JAVA_OPTS=-Dlog-config=supervised/classifier/log-config.txt -Xmx2G -Dfile.encoding=UTF-8 -cp supervised/classifier/target/fatJar.jar
@@ -57,7 +57,8 @@ extract-verbs:
 extract-sentences:
 	mkdir -p $(SENTENCES_DIR) $(TAGGED_DIR)
 	python extraction/extract_sentences.py $(WORK_DIR)/all-soccer.txt \
-		resources/tokens.list $(WORK_DIR)/sentence-to-wikiid.json $(SENTENCES_DIR)
+		resources/tokens.list $(WORK_DIR)/sentence-to-wikiid.json $(SENTENCES_DIR) \
+        --min-words $(SENTENCES_MIN_WORDS) --max-words $(SENTENCES_MAX_WORDS)
 	find $(SENTENCES_DIR) -type f | xargs -I{} -P 4 sh -c \
 		'echo {} && $(TREETAGGER) {} > $(TAGGED_DIR)/$$(basename {}) 2> /dev/null';
 
@@ -87,8 +88,8 @@ sample-add:
 		> $(SAMPLE_DIR)/$(LU)/tokens.txt
 	python extraction/extract_sentences.py $(WORK_DIR)/all-soccer.txt \
 		$(SAMPLE_DIR)/$(LU)/tokens.txt $(SAMPLE_DIR)/$(LU)/title-to-wid.json \
-		$(SAMPLE_DIR)/$(LU)/all-sentences --min-words $(SAMPLE_MIN_WORDS) \
-		--max-words $(SAMPLE_MAX_WORDS)
+		$(SAMPLE_DIR)/$(LU)/all-sentences --min-words $(SENTENCES_MIN_WORDS) \
+		--max-words $(SENTENCES_MAX_WORDS)
 	python seed_selection/get_meaningful_sentences.py $(TAGGED_DIR) \
 		$(SAMPLE_DIR)/$(LU)/tokens.txt $(SAMPLE_DIR)/$(LU)/meaningful
 	find $(SAMPLE_DIR)/$(LU)/all-sentences -type f | xargs -I{} -P 4 sh -c 'echo {} && \

@@ -42,13 +42,13 @@ public class RoleFeatureExtraction extends FeatureExtraction {
 
 	private FeatureIndex featureIndex;
 
-	private List<ClassifierResults> exampleList;
+	private List<? extends Token> exampleList;
 
 	private Map<String, String> gazetteerMap;
 
 	public String[] columnArray = {"TERM", "POS", "LEMMA"};
 
-	public RoleFeatureExtraction(FeatureIndex featureIndex, List<ClassifierResults> exampleList,
+	public RoleFeatureExtraction(FeatureIndex featureIndex, List<? extends Token> exampleList,
 								 Map<String, String> gazetteerMap) throws IOException {
 		this.featureIndex= featureIndex;
 		this.exampleList = exampleList;
@@ -61,7 +61,7 @@ public class RoleFeatureExtraction extends FeatureExtraction {
             return -1;
         }
 
-        ClassifierResults example = exampleList.get( k );
+		Token example = (Token)exampleList.get( k );
         String feature;
         if ( column == 0 )
             feature = example.getToken( );
@@ -84,11 +84,12 @@ public class RoleFeatureExtraction extends FeatureExtraction {
 			return -1;
 		}
 
-		String category = gazetteerMap.get( exampleList.get( k ).getLemma( ).toLowerCase( ) );
+		Token example = (Token) exampleList.get(k);
+		String category = gazetteerMap.get( example.getLemma( ).toLowerCase( ) );
 		if (category == null) {
 			return -1;
 		}
-		String term =category + (position < 0 ? position : "+" + position);
+		String term = category + (position < 0 ? position : "+" + position);
 
 		int j = featureIndex.put(term);
 		logger.trace("{" + j + "\t" + term + "} " + featureIndex.size());

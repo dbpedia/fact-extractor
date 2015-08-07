@@ -53,26 +53,10 @@ public class SpreadSheetToRoleTrainingSet {
 
 		while ((line = lr.readLine()) != null) {
 			String[] s = line.split("\t");
-			if (s.length > 5) {
-				logger.trace(line);
-				if (s[0].matches("\\d+")) {
-					//if (s.length > 6) {
-					//if(!s[6].equals("O")) {
-					pw.println(s[2] + " " + s[3] + " " + s[4] + " " + s[6]);
-					//} else {
-					//	pw.println(s[2] + " " + s[3] + " " + s[4] + " O");
-					//}
-					//}
-				}
-				else {
-					pw.println("EOS EOS EOS O");
-				}
-			} else{
-				pw.println("EOS EOS EOS O");
-			}
-
+			logger.trace( line );
+			pw.println( s[ 2 ] + "\t" + s[ 3 ] + "\t" + s[ 4 ] + "\t" + s[ 6 ] );
 		}
-		pw.println("EOS EOS EOS O");
+		pw.println("EOS\tEOS\tEOS\tO");
 		pw.close();
 		logger.info(fout +" created");
 	}

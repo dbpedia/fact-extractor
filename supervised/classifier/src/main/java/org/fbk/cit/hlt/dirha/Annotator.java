@@ -254,14 +254,14 @@ public class Annotator {
         return merged;
     }
 
-    private void classifyRoles( List<ClassifierResults> classifierResultsList ) throws Exception {
+    private void classifyRoles( List<? extends Token> classifierResultsList ) throws Exception {
         RoleFeatureExtraction roleFeatureExtraction = new RoleFeatureExtraction( roleFeatureIndex,
                                                                                  classifierResultsList,
                                                                                  gazetteerMap );
 
         Map<Integer, Double> probabilities = new HashMap<>( );
         for ( int i = 0; i < classifierResultsList.size( ); i++ ) {
-            ClassifierResults example = classifierResultsList.get( i );
+            ClassifierResults example = (ClassifierResults) classifierResultsList.get( i );
             logger.debug( example.toString( ) );
 
             String libsvmExample = "-1 " + roleFeatureExtraction.extractVector( i );
@@ -274,7 +274,7 @@ public class Annotator {
         }
     }
 
-    private void classifyFrames( List<ClassifierResults> classifierResultsList ) throws Exception {
+    private void classifyFrames( List<? extends Token> classifierResultsList ) throws Exception {
         String[] example = toFrameExample( classifierResultsList );
         List<String[]> frameExampleList = new ArrayList<String[]>();
         frameExampleList.add( example );
@@ -287,21 +287,22 @@ public class Annotator {
         logger.debug( libsvmExample );
 
         int y = predict( libsvmExample, frameModel, true, probabilities );
-        for ( ClassifierResults cr : classifierResultsList ) {
-            cr.setPredictedFrame( y );
-            cr.setFrameConfidence( probabilities.get( y ) );
+        for ( Object cr : classifierResultsList ) {
+            ClassifierResults res = (ClassifierResults) cr;
+            res.setPredictedFrame( y );
+            res.setFrameConfidence( probabilities.get( y ) );
         }
     }
 
-    private String[] toFrameExample( List<ClassifierResults> classifierResultsList ) throws Exception {
+    private String[] toFrameExample( List<? extends Token> classifierResultsList ) throws Exception {
         Set<String> wordSet = new HashSet<>();
         Set<String> lemmaSet = new HashSet<>();
         Set<String> roleSet = new HashSet<>();
 
         for (int i = 0; i < classifierResultsList.size(); i++) {
             logger.debug(i + "\t" + classifierResultsList.get(i).toString( ));
-            String word = classifierResultsList.get( i ).getToken( );
-            String lemma = classifierResultsList.get( i ).getLemma( );
+            String word = ( ( Token ) classifierResultsList.get( i ) ).getToken( );
+            String lemma = ( ( Token ) classifierResultsList.get( i ) ).getLemma( );
             if (!word.equalsIgnoreCase("EOS")) {
                 wordSet.add(word);
                 lemmaSet.add(lemma);
@@ -365,13 +366,13 @@ public class Annotator {
 		return new Answer(sentence_id, classifierResultsList );
 	}
 
-	private void printAnswer(List<ClassifierResults> classifierResultsList ) {
+	private void printAnswer(List<? extends Token> classifierResultsList ) {
 		logger.debug("===");
 		logger.debug( classifierResultsList.size());
-		String frame = classifierResultsList.get(0).getPredictedFrameLabel();
+		String frame = ((ClassifierResults) classifierResultsList.get(0)).getPredictedFrameLabel();
 		for (int i = 0; i < classifierResultsList.size(); i++) {
-			ClassifierResults example = classifierResultsList.get(i);
-			String role = classifierResultsList.get(i).getPredictedRoleLabel();
+            ClassifierResults example = (ClassifierResults) classifierResultsList.get(i);
+			String role = example.getPredictedRoleLabel( );
 			if (role.equalsIgnoreCase("O")) {
 				logger.info(i + "\tO\t" + role + "\t" + example.toString( ) );
 			}
@@ -399,7 +400,8 @@ public class Annotator {
 			List<ClassifierResults> classifierResultsList = toRoleExampleList(query);
 			logger.debug( classifierResultsList );
 			//todo: put outside the while, add a setRoleExampleList in RoleFeatureExtraction...
-			RoleFeatureExtraction roleFeatureExtraction = new RoleFeatureExtraction(roleFeatureIndex, classifierResultsList, gazetteerMap);
+			RoleFeatureExtraction roleFeatureExtraction = new RoleFeatureExtraction(
+                    roleFeatureIndex, classifierResultsList, gazetteerMap);
 			for (int i = 0; i < classifierResultsList.size(); i++) {
 
 				ClassifierResults example = classifierResultsList.get(i);

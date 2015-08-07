@@ -96,10 +96,10 @@ public class Evaluator {
 	// todo: comparison must be done based on the type b-lu, b-device... otherwise I compare b-lu with b-device...
 	void evaluateRole(Sentence goldSentence, Sentence testSentence, Evaluation frameEvaluation) {
         logger.info("----------- Evaluating roles... -----------");
-        int goldId = goldSentence.getId();
+        String goldId = goldSentence.getId();
 		Set<String> gold = goldSentence.frames();
 		//logger.debug(i + "\tgold\t" + goldSentenceFrames);
-        int testId = testSentence.getId();
+		String testId = testSentence.getId();
 		Set<String> test = testSentence.frames();
         logger.trace("Test frames: " + test);
         String testFrame = null;
@@ -237,7 +237,7 @@ public class Evaluator {
 
 	void evaluateFrame(Sentence goldSentence, Sentence testSentence, Evaluation frameEvaluation) {
         logger.info("----------- Evaluating frames... -----------");
-        int goldId = goldSentence.getId();
+		String goldId = goldSentence.getId();
 		Set<String> gold = goldSentence.frames();
 		//logger.debug(i + "\tgold\t" + goldSentenceFrames);
 		Set<String> test = testSentence.frames();
@@ -481,25 +481,23 @@ public class Evaluator {
 			String[] s = line.split("\t");
 			if (s.length > 5) {
 
-				if (s[0].matches("\\d+")) {
-					if (sid == null) {
-						sid = s[0];
-						sentence = new Sentence(Integer.parseInt(sid));
-					}
-					//logger.debug(count + "\t" + line);
-					//logger.debug(">\t" + sid + "\t" + s[0] + "\t>" + line);
-					if (!s[0].equalsIgnoreCase(sid)) {
-						//logger.debug("add sentence " + sid + "\t" + sentence);
-						sentenceMap.put(Integer.parseInt(sid), sentence);
-						sid = s[0];
-						sentence = new Sentence(Integer.parseInt(sid));
-					}
-					if (!s[6].trim().equalsIgnoreCase("O")) {
-						//logger.debug(fin.getName() + "\t" + line);
-						sentence.add(Integer.parseInt(s[0]), s[5].toLowerCase(), s[6].toLowerCase(), s[2].toLowerCase());
-					}
-
+				if (sid == null) {
+					sid = s[0];
+					sentence = new Sentence(sid);
 				}
+				//logger.debug(count + "\t" + line);
+				//logger.debug(">\t" + sid + "\t" + s[0] + "\t>" + line);
+				if (!s[0].equalsIgnoreCase(sid)) {
+					//logger.debug("add sentence " + sid + "\t" + sentence);
+					sentenceMap.put(Integer.parseInt(sid), sentence);
+					sid = s[0];
+					sentence = new Sentence(sid);
+				}
+				if (!s[6].trim().equalsIgnoreCase("O")) {
+					//logger.debug(fin.getName() + "\t" + line);
+					sentence.add(s[0], s[5].toLowerCase(), s[6].toLowerCase(), s[2].toLowerCase());
+				}
+
 			}
 
 		}

@@ -47,37 +47,36 @@ public class RoleTrainingSetToLibsvm {
 	static Logger logger = Logger.getLogger(RoleTrainingSetToLibsvm.class.getName());
 
 
-	public RoleTrainingSetToLibsvm(File featureFile, File instanceFile, File libsvnFile, File labelFile, File gazetteerFile) throws IOException {
-		logger.info("processing " + instanceFile + "...");
-		PrintWriter pw = new PrintWriter(new BufferedWriter(new OutputStreamWriter(new FileOutputStream(libsvnFile), "UTF-8")));
-		FeatureIndex featureIndex = new FeatureIndex();
-		FeatureIndex labelIndex = new FeatureIndex();
-		//featureIndex.readExampleList(new InputStreamReader(new FileInputStream(featureFile), "UTF-8"));
-		List<ClassifierResults> exampleList = readExampleList(instanceFile);
-		Map<String, String> gazetteerMap = readGazetteer(gazetteerFile);
-		RoleFeatureExtraction roleFeatureExtraction = new RoleFeatureExtraction(featureIndex, exampleList, gazetteerMap);
-		for (int i = 0; i < exampleList.size(); i++) {
+    public RoleTrainingSetToLibsvm( File featureFile, File instanceFile, File libsvnFile, File labelFile, File gazetteerFile ) throws IOException {
+        logger.info( "processing " + instanceFile + "..." );
+        PrintWriter pw = new PrintWriter( new BufferedWriter( new OutputStreamWriter( new FileOutputStream( libsvnFile ), "UTF-8" ) ) );
+        FeatureIndex featureIndex = new FeatureIndex( );
+        FeatureIndex labelIndex = new FeatureIndex( );
+        List<Token> exampleList = readExampleList( instanceFile );
+        Map<String, String> gazetteerMap = readGazetteer( gazetteerFile );
+        RoleFeatureExtraction roleFeatureExtraction = new RoleFeatureExtraction(
+                featureIndex,
+                exampleList,
+                gazetteerMap );
 
-			ClassifierResults example = exampleList.get(i);
-			logger.trace(example.toString());
-			int label = labelIndex.put(example.getLemma());
+        for ( int i = 0; i < exampleList.size( ); i++ ) {
+            GenericToken example = ( GenericToken ) exampleList.get( i );
+            logger.trace( example.toString( ) );
+            int label = labelIndex.put( example.getTag( ) );
 
-			//SortedSet<Integer> set = roleFeatureExtraction.extract(i);
-			//String libsvmExample = label + " " + setToString(set);
-			String libsvmExample = label + " " + roleFeatureExtraction.extractVector(i);
-			logger.trace(libsvmExample);
-			pw.println(libsvmExample);
+            String libsvmExample = label + " " + roleFeatureExtraction.extractVector( i );
+            logger.trace( libsvmExample );
+            pw.println( libsvmExample );
 
-		}
-		pw.close();
-		featureIndex.write(new OutputStreamWriter(new FileOutputStream(featureFile), "UTF-8"));
-		labelIndex.write(new OutputStreamWriter(new FileOutputStream(labelFile), "UTF-8"));
+        }
+        pw.close( );
+        featureIndex.write( new OutputStreamWriter( new FileOutputStream( featureFile ), "UTF-8" ) );
+        labelIndex.write( new OutputStreamWriter( new FileOutputStream( labelFile ), "UTF-8" ) );
 
-		logger.info(featureFile + " created");
-		logger.info(libsvnFile + " created");
-		logger.info(labelFile + " created");
-
-	}
+        logger.info( featureFile + " created" );
+        logger.info( libsvnFile + " created" );
+        logger.info( labelFile + " created" );
+    }
 
 	private Map<String, String> readGazetteer(File fin) throws IOException {
 		Map<String, String> map = new HashMap<String, String>();
@@ -94,18 +93,18 @@ public class RoleTrainingSetToLibsvm {
 		return map;
 	}
 
-	private List<ClassifierResults> readExampleList(File fin) throws IOException {
-		List<ClassifierResults> list = new ArrayList<>();
-		LineNumberReader lr = new LineNumberReader(new InputStreamReader(new FileInputStream(fin), "UTF-8"));
+    private List<Token> readExampleList( File fin ) throws IOException {
+        List<Token> list = new ArrayList<>( );
+        LineNumberReader lr = new LineNumberReader( new InputStreamReader( new FileInputStream( fin ), "UTF-8" ) );
 
-		String line = null;
+        String line = null;
 
-		while ((line = lr.readLine()) != null) {
-			String[] s = line.split("\\s+");
-			list.add(new ClassifierResults( s[0], s[1], s[2], 0., 0., 0., -1, -1 ));
-		}
-		return list;
-	}
+        while ( ( line = lr.readLine( ) ) != null ) {
+            String[] s = line.split( "\\t" );
+            list.add( new GenericToken( s[ 0 ], s[ 1 ], s[ 2 ], "", s[ 3 ] ) );
+        }
+        return list;
+    }
 
 	private String setToString(SortedSet<Integer> set) {
 		StringBuilder sb = new StringBuilder();
