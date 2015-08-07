@@ -57,7 +57,7 @@ def save_sentences(sentences, outdir):
 @click.argument('outdir', default='gold', type=click.Path(exists=True, file_okay=False))
 def main(tagged_dir, tokens, outdir):
     pos_data = load_pos_data(tagged_dir)
-    tokens = [l.strip() for l in tokens]
+    tokens = [l.strip().decode('utf8') for l in tokens]
     sentences = filter_sentences_by_chunk(pos_data, tokens)
     save_sentences(sentences, outdir)
 

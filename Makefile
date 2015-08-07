@@ -6,11 +6,13 @@ PAGES_DIR=$(WORK_DIR)/pages
 SOCCER_DIR=$(WORK_DIR)/soccer
 SENTENCES_DIR=$(WORK_DIR)/sentences
 TAGGED_DIR=$(WORK_DIR)/tagged
-GOLD_DIR=$(WORK_DIR)/gold
+SAMPLE_DIR=$(WORK_DIR)/samples
 TREETAGGER_HOME=../tree-tagger
 TREETAGGER=$(TREETAGGER_HOME)/cmd/tree-tagger-$(LANGUAGE)
 SOCCER_IDS=extraction/resources/soccer_ids
-GOLD_LU_NUM=10
+SAMPLE_LU_NUM=10
+SAMPLE_MIN_WORDS=5
+SAMPLE_MAX_WORDS=25
 DUMP=../$(LANGCODE)wiki-latest-pages-articles.xml.bz2
 CL_MAIN_PACKAGE=org.fbk.cit.hlt.dirha
 CL_JAVA_OPTS=-Dlog-config=supervised/classifier/log-config.txt -Xmx2G -Dfile.encoding=UTF-8 -cp supervised/classifier/target/fatJar.jar
@@ -77,22 +79,24 @@ rank-verbs:
 	python verb_ranking/compute_stdev_by_lemma.py $(WORK_DIR)/top-50-token2lemma.txt \
 		$(WORK_DIR)/verbs-stdev.json $(WORK_DIR)/lemma-stdev.json
 
-gold-add:
-	mkdir -p $(GOLD_DIR)/$(LU)/sentences $(GOLD_DIR)/$(LU)/gold
+sample-add:
+	if [ -z "$(LU)" ]; then echo "Error: LU not set" && exit 1; fi
+	mkdir -p $(SAMPLE_DIR)/$(LU)/sentences $(SAMPLE_DIR)/$(LU)/sample
 	grep -w $(LU) $(WORK_DIR)/top-50-token2lemma.txt | cut -f 1 \
-		> $(GOLD_DIR)/$(LU)/tokens.txt
+		> $(SAMPLE_DIR)/$(LU)/tokens.txt
 	python extraction/extract_sentences.py $(WORK_DIR)/all-soccer.txt \
-		$(GOLD_DIR)/$(LU)/tokens.txt $(GOLD_DIR)/$(LU)/sentences \
-		--min-words 5 --max-words 15
+		$(SAMPLE_DIR)/$(LU)/tokens.txt $(SAMPLE_DIR)/$(LU)/title-to-wid.json \
+		$(SAMPLE_DIR)/$(LU)/sentences --min-words $(SAMPLE_MIN_WORDS) \
+		--max-words $(SAMPLE_MAX_WORDS)
 	python seed_selection/get_meaningful_sentences.py $(TAGGED_DIR) \
-		$(GOLD_DIR)/$(LU)/tokens.txt $(GOLD_DIR)/$(LU)/gold
+		$(SAMPLE_DIR)/$(LU)/tokens.txt $(SAMPLE_DIR)/$(LU)/sample
 
-gold-finalize:
-	mkdir -p $(GOLD_DIR)/sentences
-	find $(GOLD_DIR)/*/gold/* | shuf | head -n $(GOLD_LU_NUM) | xargs -i cp {} \
-		$(GOLD_DIR)/sentences/
-	find $(GOLD_DIR)/gold/* -type f -exec sh -c 'echo $$(basename $$1); cat $$1; echo' \
-        _ "{}" \; | head -n 100 > $(WORK_DIR)/sample-50.txt
+sample-finalize:
+	mkdir -p $(SAMPLE_DIR)/sentences
+	find $(SAMPLE_DIR)/*/sample/* | shuf | head -n $(SAMPLE_LU_NUM) | xargs -i cp {} \
+		$(SAMPLE_DIR)/sentences/
+	find $(SAMPLE_DIR)/*/sample/* -type f | head -n 100 | xargs -I{} sh -c \
+		'echo $$(basename {}); cat {}; echo' > $(WORK_DIR)/sample-50.txt
 
 supervised-build-classifier:
 	cd supervised/classifier && mvn compile assembly:assembly
@@ -123,7 +127,9 @@ supervised-run-batch:
 		-o $(CL_OUTPUT) -c $(CL_CONF_OUTPUT)
 
 supervised-evaluate:
-	ifndef CL_ANNOTATED_GOLD $(error CL_ANNOTATED_GOLD is not set) endif
+	[ -z "$(CL_ANNOTATED_GOLD)" ] && (echo "Error: CL_ANNOTATED_GOLD not set"; exit 1)
+	if [ -z "$(CL_ANNOTATED_GOLD)" ]; then echo "Error: CL_ANNOTATED_GOLD not set" && \
+		exit 1; fi
 	java $(CL_JAVA_OPTS) -Dtreetagger.home=$(TREETAGGER_HOME) \
 		$(CL_MAIN_PACKAGE).Annotator -g $(CL_GAZETTEER) -m $(CL_TRAINING_SET) \
 		-l $(LANGCODE) -r $(CL_EVAL_OUTPUT) -a $(CL_SENTENCES_FILE) \
@@ -136,11 +142,10 @@ supervised-results-to-assertions:
         --sentence-score $(SCORING_TYPE) --core-weight $(SCORING_CORE_WEIGHT) \
         --score-fes --fe-score $(FE_SCORE) --format nt
 
-
 crowdflower-create-input:
 	# TODO generate twm ngrams and textpro chunks somehow
 	mkdir -p $(WORK_DIR)/linked
-	python lib/entity_linking.py $(LINK_MODE) $(GOLD_DIR)/sentences $(WORK_DIR)/linked
+	python lib/entity_linking.py $(LINK_MODE) $(SAMPLE_DIR)/sentences $(WORK_DIR)/linked
 	python unsupervised/produce_labeled_data.py $(WORK_DIR)/linked \
 		$(WORK_DIR)/labeled_data.json
 	# TODO change combine_chunks so that you can specify where to get individual parts
@@ -153,7 +158,7 @@ crowdflower-create-input:
 
 crowdflower-to-training:
 	python crowdflower/crowdflower_results_into_training_data.py $(CF_RESULTS) \
-		$(TAGGED_DIR) $(WORK_DIR)/training-data.tsv
+		$(TAGGED_DIR) $(WORK_DIR)/training-data.tsv -d
 
 run-unsupervised:
 	# you need to run extract-soccer before
