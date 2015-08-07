@@ -53,14 +53,14 @@ public class RoleTrainingSetToLibsvm {
 		FeatureIndex featureIndex = new FeatureIndex();
 		FeatureIndex labelIndex = new FeatureIndex();
 		//featureIndex.readExampleList(new InputStreamReader(new FileInputStream(featureFile), "UTF-8"));
-		List<String[]> exampleList = readExampleList(instanceFile);
+		List<ClassifierResults> exampleList = readExampleList(instanceFile);
 		Map<String, String> gazetteerMap = readGazetteer(gazetteerFile);
 		RoleFeatureExtraction roleFeatureExtraction = new RoleFeatureExtraction(featureIndex, exampleList, gazetteerMap);
 		for (int i = 0; i < exampleList.size(); i++) {
 
-			String[] example = exampleList.get(i);
-			logger.trace(example.length + "\t" + Arrays.toString(example));
-			int label = labelIndex.put(example[3]);
+			ClassifierResults example = exampleList.get(i);
+			logger.trace(example.toString());
+			int label = labelIndex.put(example.getLemma());
 
 			//SortedSet<Integer> set = roleFeatureExtraction.extract(i);
 			//String libsvmExample = label + " " + setToString(set);
@@ -94,15 +94,15 @@ public class RoleTrainingSetToLibsvm {
 		return map;
 	}
 
-	private List<String[]> readExampleList(File fin) throws IOException {
-		List<String[]> list = new ArrayList<String[]>();
+	private List<ClassifierResults> readExampleList(File fin) throws IOException {
+		List<ClassifierResults> list = new ArrayList<>();
 		LineNumberReader lr = new LineNumberReader(new InputStreamReader(new FileInputStream(fin), "UTF-8"));
 
 		String line = null;
 
 		while ((line = lr.readLine()) != null) {
 			String[] s = line.split("\\s+");
-			list.add(s);
+			list.add(new ClassifierResults( s[0], s[1], s[2], 0., 0., 0., -1, -1 ));
 		}
 		return list;
 	}

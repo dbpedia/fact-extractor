@@ -1,5 +1,6 @@
 package org.fbk.cit.hlt.dirha;
 
+import org.annolab.tt4j.TokenHandler;
 import org.annolab.tt4j.TreeTaggerWrapper;
 import org.apache.commons.cli.*;
 import org.apache.log4j.Logger;
@@ -100,6 +101,7 @@ public class Annotator {
 		roleLabelIndex = new FeatureIndex(true);
 		roleLabelIndex.read(new InputStreamReader(new FileInputStream(roleLabelFile), "UTF-8"));
 		logger.info(roleLabelIndex.size() + " role labels " + roleLabelFile);
+        ClassifierResults.RoleLabelList = roleLabelIndex;
 
 		File frameFeatureFile = new File(frameFile + ".feat");
 		File frameLibsvmModelFile = new File(frameFile + ".model");
@@ -112,6 +114,7 @@ public class Annotator {
 		frameLabelIndex = new FeatureIndex(true);
 		frameLabelIndex.read(new InputStreamReader(new FileInputStream(frameLabelFile), "UTF-8"));
 		logger.info(frameLabelIndex.size() + " frame labels from " + frameLabelFile);
+        ClassifierResults.FrameLabelList = frameLabelIndex;
 
 		tokenier = new HardTokenizer();
 
@@ -165,78 +168,83 @@ public class Annotator {
 		return list;
 	}
 
-	private List<String[]> toRoleExampleList(String line) throws Exception {
+    private List<ClassifierResults> toRoleExampleList( String line ) throws Exception {
 
-		List<String[]> exampleList = new ArrayList<String[]>();
-		String[] eos = {"EOS", "EOS", "EOS"};
-		exampleList.add(eos);
+        final List<ClassifierResults> exampleList = new ArrayList<>( );
+        ClassifierResults eos = new ClassifierResults( "EOS", "EOS", "EOS", 0., 0., 0., -1, -1 );
+        exampleList.add( eos );
 
-		try {
-			TokenReader tokenReader = new TokenReader<String>(exampleList);
+        try {
+            tt.setHandler( new TokenHandler( ) {
+                @Override
+                public void token( Object token, String pos, String lemma ) {
+                    exampleList.add( new ClassifierResults( ( String ) token, pos, lemma, 1., 0., 0., -1, -1 ) );
+                }
+            } );
 
-			tt.setHandler(tokenReader);
-
-			//pw.println("sid\ttid\ttoken\tpos\tlemma\tframe\tLU/FE\tnotes\tstart/end time");
-			String[] tokens = tokenier.stringArray(line);
-			//logger.debug(Arrays.toString(tokens));
-			tt.process(tokens);
-		} catch (Exception e) {
-			logger.error(e);
-		}
+            String[] tokens = tokenier.stringArray( line );
+            tt.process( tokens );
+        }
+        catch ( Exception e ) {
+            logger.error( e );
+        }
         Map<String, ChunkCombinator.ChunkToUri> disambiguated = combinator.getTheWikiMachineChunkToUriWithConfidence( line, true );
-		exampleList = mergeChunksIntoExampleList(exampleList, disambiguated);
- 		exampleList.add(eos);
-		return exampleList;
-	}
+        List<ClassifierResults> merged = mergeChunksIntoExampleList( exampleList, disambiguated );
+        merged.add( eos );
+        return merged;
+    }
 
-    private List<String[]> mergeChunksIntoExampleList( List<String[]> exampleList, Map<String,
+    private List<ClassifierResults> mergeChunksIntoExampleList( List<ClassifierResults> exampleList, Map<String,
             ChunkCombinator.ChunkToUri> combinedChunks ) {
 
-        List<String[]> merged = new ArrayList<>( exampleList );
+        List<ClassifierResults> merged = new ArrayList<>( exampleList );
         for ( String chunk : combinedChunks.keySet( ) ) {
             String[] tokens = chunk.split( "\\s+" );
             boolean found = false;
             int i = 0, j = 0;
             while ( i < merged.size( ) ) {
-                String word = merged.get( i )[ 0 ];
+                String word = merged.get( i ).getToken( );
                 if ( tokens[ j ].equals( word ) ) {
                     j += 1;
                     if ( j == tokens.length ) {
                         found = true;
                         break;
                     }
-                } else {
+                }
+                else {
                     j = 0;
                 }
                 i += 1;
             }
 
             if ( found ) {
-                List<String[]> tmpList = new ArrayList<>( );
+                List<ClassifierResults> tmpList = new ArrayList<>( );
                 int matchStartIndex = i - tokens.length + 1;
-                String[] toReplace = merged.get( i );
-                String[] replacement;
+                ClassifierResults toReplace = merged.get( i );
+                ClassifierResults replacement;
 
                 // Use the 'ENT' tag only if the n-gram has more than 1 token, otherwise keep the original POS tag
                 if ( tokens.length > 1 ) {
-                    replacement = new String[] {
-                            chunk.replace( ' ', '_' ),
-                            "ENT",
-                            combinedChunks.get( chunk ).getUri( ) + "~(" +
-                                    combinedChunks.get( chunk ).getConfidence( ).toString( ) + ")"
-                    };
+                    replacement = new ClassifierResults( chunk.replace( ' ', '_' ), "ENT",
+                                                         combinedChunks.get( chunk ).getUri( ),
+                                                         combinedChunks.get( chunk ).getConfidence( ),
+                                                         toReplace.getFrameConfidence( ),
+                                                         toReplace.getRoleConfidence( ),
+                                                         toReplace.getPredictedRole( ),
+                                                         toReplace.getPredictedFrame( ) );
                 }
                 else {
-                    replacement = new String[] {
-                            chunk,
-                            toReplace[ 1 ],
-                            combinedChunks.get( chunk ).getUri( ) + "~(" +
-                                    combinedChunks.get( chunk ).getConfidence( ).toString( ) + ")"
-                    };
+                    replacement = new ClassifierResults( chunk, toReplace.getPos( ),
+                                                         combinedChunks.get( chunk ).getUri( ),
+                                                         combinedChunks.get( chunk ).getConfidence( ),
+                                                         toReplace.getFrameConfidence( ),
+                                                         toReplace.getRoleConfidence( ),
+                                                         toReplace.getPredictedRole( ),
+                                                         toReplace.getPredictedFrame( ) );
                 }
 
-                List<String[]> startSubList = merged.subList( 0, matchStartIndex );
-                List<String[]> endSubList = merged.subList( i + 1, merged.size( ) );
+                List<ClassifierResults> startSubList = merged.subList( 0, matchStartIndex );
+                List<ClassifierResults> endSubList = merged.subList( i + 1, merged.size( ) );
                 tmpList.addAll( startSubList );
                 tmpList.add( replacement );
                 tmpList.addAll( endSubList );
@@ -246,85 +254,68 @@ public class Annotator {
         return merged;
     }
 
-	private List<String[]> toFrameExampleList(List<String[]> roleExampleList) throws Exception {
-		List<String[]> exampleList = new ArrayList<String[]>();
-		//String[] s = new String[1];
-		//s[0] = "-1";
-		//s[1] = "-1";
-		Set<String> wordSet = new HashSet<String>();
-		Set<String> lemmaSet = new HashSet<String>();
-		Set<String> roleSet = new HashSet<String>();
+    private void classifyRoles( List<ClassifierResults> classifierResultsList ) throws Exception {
+        RoleFeatureExtraction roleFeatureExtraction = new RoleFeatureExtraction( roleFeatureIndex,
+                                                                                 classifierResultsList,
+                                                                                 gazetteerMap );
 
-		for (int i = 0; i < roleExampleList.size(); i++) {
-			logger.debug(i + "\t" + Arrays.toString(roleExampleList.get(i)));
-			String word = roleExampleList.get(i)[0];
-			String lemma = roleExampleList.get(i)[2];
-			if (!word.equalsIgnoreCase("EOS")) {
-				wordSet.add(word);
-				lemmaSet.add(lemma);
+        Map<Integer, Double> probabilities = new HashMap<>( );
+        for ( int i = 0; i < classifierResultsList.size( ); i++ ) {
+            ClassifierResults example = classifierResultsList.get( i );
+            logger.debug( example.toString( ) );
 
-			}
-			//wordSet.add(roleExampleList.get(i)[0]);
-		}
-		String[] s = new String[4];
-		s[0] = "-1";
-		s[1] = SpreadSheetToFrameTrainingSet.replace(wordSet.toString());
-		s[2] = SpreadSheetToFrameTrainingSet.replace(lemmaSet.toString());
-		exampleList.add(s);
+            String libsvmExample = "-1 " + roleFeatureExtraction.extractVector( i );
+            logger.debug( libsvmExample );
 
+            int y = predict( libsvmExample, roleModel, true, probabilities );
+            example.setPredictedRole( y );
+            example.setRoleConfidence( probabilities.get( y ) );
+            logger.info( example.getToken( ) + "\t" + y );
+        }
+    }
 
-		return exampleList;
-	}
+    private void classifyFrames( List<ClassifierResults> classifierResultsList ) throws Exception {
+        String[] example = toFrameExample( classifierResultsList );
+        List<String[]> frameExampleList = new ArrayList<String[]>();
+        frameExampleList.add( example );
+        FrameFeatureExtraction frameFeatureExtraction = new FrameFeatureExtraction( frameFeatureIndex,
+                                                                                    frameExampleList,
+                                                                                    gazetteerMap );
+		Map<Integer, Double> probabilities = new HashMap<>( );
+        logger.debug( Arrays.toString( example ) );
+        String libsvmExample = "-1 " + frameFeatureExtraction.extractVector( 0 );
+        logger.debug( libsvmExample );
 
-	private List<String> roleClassifier(List<String[]> roleExampleList) throws Exception {
-		List<String> answerList = new ArrayList<String>(roleExampleList.size());
-		//logger.debug(roleExampleList);
-		RoleFeatureExtraction roleFeatureExtraction = new RoleFeatureExtraction(roleFeatureIndex, roleExampleList, gazetteerMap);
-		for (int i = 0; i < roleExampleList.size(); i++) {
+        int y = predict( libsvmExample, frameModel, true, probabilities );
+        for ( ClassifierResults cr : classifierResultsList ) {
+            cr.setPredictedFrame( y );
+            cr.setFrameConfidence( probabilities.get( y ) );
+        }
+    }
 
-			String[] example = roleExampleList.get(i);
-			logger.debug(example.length + "\t" + Arrays.toString(example));
+    private String[] toFrameExample( List<ClassifierResults> classifierResultsList ) throws Exception {
+        Set<String> wordSet = new HashSet<>();
+        Set<String> lemmaSet = new HashSet<>();
+        Set<String> roleSet = new HashSet<>();
 
+        for (int i = 0; i < classifierResultsList.size(); i++) {
+            logger.debug(i + "\t" + classifierResultsList.get(i).toString( ));
+            String word = classifierResultsList.get( i ).getToken( );
+            String lemma = classifierResultsList.get( i ).getLemma( );
+            if (!word.equalsIgnoreCase("EOS")) {
+                wordSet.add(word);
+                lemmaSet.add(lemma);
 
-			//SortedSet<Integer> set = roleFeatureExtraction.extract(i);
-			//String libsvmExample =  "-1 " + setToString(set);
-			String libsvmExample = "-1 " + roleFeatureExtraction.extractVector(i);
-			logger.debug(libsvmExample);
+            }
+            //wordSet.add(classifierResultsList.get(i)[0]);
+        }
+        String[] s = new String[4];
+        s[0] = "-1";
+        s[1] = SpreadSheetToFrameTrainingSet.replace(wordSet.toString());
+        s[2] = SpreadSheetToFrameTrainingSet.replace(lemmaSet.toString());
 
-			String y = predictRole(libsvmExample, false);
-			//logger.debug(y);
-			String l = roleLabelIndex.getTerm((int) Double.parseDouble(y.trim()));
-			//logger.info(l + "\t" + example[0]);
-			logger.info(example[0] + "\t" + l + "\t"+y);
-			//sb.append(example[0] + "\t" + l + "\n");
-			answerList.add(l);
-			//logger.debug("");
-		}
-		return answerList;
-	}
-
-	private List<String> frameClassifier(List<String[]> roleExampleList) throws Exception {
-		List<String[]> frameExampleList = toFrameExampleList(roleExampleList);
-		List<String> answerList = new ArrayList<String>(frameExampleList.size());
-		FrameFeatureExtraction frameFeatureExtraction = new FrameFeatureExtraction(frameFeatureIndex, frameExampleList, gazetteerMap);
-		for (int i = 0; i < frameExampleList.size(); i++) {
-			String[] example = frameExampleList.get(i);
-			logger.debug(i + "\t" + Arrays.toString(example));
-			String libsvmExample = "-1 " + frameFeatureExtraction.extractVector(i);
-			logger.debug(libsvmExample);
-
-			String y = predictFrame(libsvmExample, false);
-			logger.debug(y);
-			String l = frameLabelIndex.getTerm((int) Double.parseDouble(y.trim()));
-			if (l == null) {
-				l=FRAME_NOT_FOUND_LABEL;
-			}
-			logger.info(l + "\t" + example[0]);
-			//sb.append(example[0] + "\t" + l + "\n");
-			answerList.add(l);
-		}
-		return answerList;
-	}
+        return s;
+    }
 
 	public List<Answer> classify(File fin) throws IOException {
 		List<Answer> list = new ArrayList<Answer>();
@@ -336,9 +327,9 @@ public class Annotator {
 				if (line.length() > 0) {
 					logger.debug(count + "\t" + line);
 					/*List<String[]> roleExampleList = toRoleExampleList(line.trim());
-					List<String> roleAnswerList = roleClassifier(roleExampleList);
+					List<String> roleAnswerList = classifyRoles(roleExampleList);
 					logger.debug(count + "\t" + roleAnswerList);
-					List<String> frameAnswerList = frameClassifier(roleExampleList);
+					List<String> frameAnswerList = classifyFrames(roleExampleList);
 					logger.debug(count + "\t" + frameAnswerList);
 					printAnswer(roleExampleList, roleAnswerList, frameAnswerList);
 					list.add(new Answer(count, roleExampleList, roleAnswerList, frameAnswerList));  */
@@ -349,7 +340,6 @@ public class Annotator {
 			} catch (Exception e) {
 				logger.error(e);
 			}
-
 		}
 		return list;
 	}
@@ -361,29 +351,25 @@ public class Annotator {
 
 	public Answer classify(String line, int count) throws Exception {
 		logger.info("classifying " + line + " (" + count + ")...");
-		List<String[]> roleExampleList = toRoleExampleList(line.trim());
-		List<String> roleAnswerList = roleClassifier(roleExampleList);
-		logger.debug(count + "\t" + roleAnswerList);
-		List<String> frameAnswerList = frameClassifier(roleExampleList);
-		logger.debug(count + "\t" + frameAnswerList);
-		printAnswer(roleExampleList, roleAnswerList, frameAnswerList);
-		return new Answer(count, roleExampleList, roleAnswerList, frameAnswerList);
+		List<ClassifierResults> classifierResultsList = toRoleExampleList(line.trim());
+		classifyRoles( classifierResultsList );
+		classifyFrames( classifierResultsList );
+		printAnswer( classifierResultsList );
+		return new Answer(count, classifierResultsList );
 	}
 
-	private void printAnswer(List<String[]> roleExampleList, List<String> roleAnswerList, List<String> frameAnswerList) {
+	private void printAnswer(List<ClassifierResults> classifierResultsList ) {
 		logger.debug("===");
-		logger.debug(roleExampleList.size());
-		logger.debug(roleAnswerList.size());
-		logger.debug(frameAnswerList.size());
-		String frame = frameAnswerList.get(0);
-		for (int i = 0; i < roleExampleList.size(); i++) {
-			String[] example = roleExampleList.get(i);
-			String role = roleAnswerList.get(i);
+		logger.debug( classifierResultsList.size());
+		String frame = classifierResultsList.get(0).getPredictedFrameLabel();
+		for (int i = 0; i < classifierResultsList.size(); i++) {
+			ClassifierResults example = classifierResultsList.get(i);
+			String role = classifierResultsList.get(i).getPredictedRoleLabel();
 			if (role.equalsIgnoreCase("O")) {
-				logger.info(i + "\tO\t" + role + "\t" + Arrays.toString(example));
+				logger.info(i + "\tO\t" + role + "\t" + example.toString( ) );
 			}
 			else {
-				logger.info(i + "\t" + frame + "\t" + role + "\t" + Arrays.toString(example));
+				logger.info(i + "\t" + frame + "\t" + role + "\t" + example.toString( ) );
 			}
 
 		}
@@ -395,7 +381,7 @@ public class Annotator {
 		BufferedReader myInput = null;
 		long begin = 0, end = 0;
 		while (true) {
-			System.out.println("\nPlease write a sentence and type <return> to continue (CTRL C to exit):");
+			System.out.println("\nPlease write a sentence and pos <return> to continue (CTRL C to exit):");
 			isr = new InputStreamReader(System.in);
 			myInput = new BufferedReader(isr);
 			String query = myInput.readLine().toString();
@@ -403,14 +389,14 @@ public class Annotator {
 
 			StringBuilder sb = new StringBuilder();
 			sb.append(query + "\n");
-			List<String[]> roleExampleList = toRoleExampleList(query);
-			logger.debug(roleExampleList);
+			List<ClassifierResults> classifierResultsList = toRoleExampleList(query);
+			logger.debug( classifierResultsList );
 			//todo: put outside the while, add a setRoleExampleList in RoleFeatureExtraction...
-			RoleFeatureExtraction roleFeatureExtraction = new RoleFeatureExtraction(roleFeatureIndex, roleExampleList, gazetteerMap);
-			for (int i = 0; i < roleExampleList.size(); i++) {
+			RoleFeatureExtraction roleFeatureExtraction = new RoleFeatureExtraction(roleFeatureIndex, classifierResultsList, gazetteerMap);
+			for (int i = 0; i < classifierResultsList.size(); i++) {
 
-				String[] example = roleExampleList.get(i);
-				logger.debug(example.length + "\t" + Arrays.toString(example));
+				ClassifierResults example = classifierResultsList.get(i);
+				logger.debug( example.toString( ) );
 
 
 				//SortedSet<Integer> set = roleFeatureExtraction.extract(i);
@@ -418,30 +404,32 @@ public class Annotator {
 				String libsvmExample = "-1 " + roleFeatureExtraction.extractVector(i);
 				logger.debug(libsvmExample);
 
-				String y = predictRole(libsvmExample, false);
+				int y = predict( libsvmExample, roleModel, false, null );
 				logger.debug(y);
-				String l = roleLabelIndex.getTerm((int) Double.parseDouble(y.trim()));
+				String l = roleLabelIndex.getTerm(y);
 				//logger.info(l + "\t" + example[0]);
-				logger.info(example[0] + "\t" + l);
-				sb.append(example[0] + "\t" + l + "\n");
+				logger.info(example.getToken( ) + "\t" + l);
+				sb.append(example.getToken( ) + "\t" + l + "\n");
 				logger.debug("");
 			}
 
-			List<String[]> frameExampleList = toFrameExampleList(roleExampleList);
-			//todo: put outside the while, add a setFrameExampleList in FrameFeatureExtraction...
-			FrameFeatureExtraction frameFeatureExtraction = new FrameFeatureExtraction(frameFeatureIndex, frameExampleList, gazetteerMap);
-			for (int i = 0; i < frameExampleList.size(); i++) {
-				String[] example = frameExampleList.get(i);
-				logger.debug(i + "\t" + Arrays.toString(example));
-				String libsvmExample = "-1 " + frameFeatureExtraction.extractVector(i);
-				logger.debug(libsvmExample);
+            //todo: put outside the while, add a setFrameExampleList in FrameFeatureExtraction...
+			String[] frameExample= toFrameExample( classifierResultsList );
+            List<String[]> frameExampleList = new ArrayList<String[]>();
+            frameExampleList.add( frameExample );
+			FrameFeatureExtraction frameFeatureExtraction = new FrameFeatureExtraction(frameFeatureIndex,
+                                                                                       frameExampleList,
+                                                                                       gazetteerMap);
 
-				String y = predictFrame(libsvmExample, false);
-				logger.debug(y);
-				String l = frameLabelIndex.getTerm((int) Double.parseDouble(y.trim()));
-				logger.info(l + "\t" + example[0]);
-				sb.append(example[0] + "\t" + l + "\n");
-			}
+            logger.debug(Arrays.toString(frameExample));
+            String libsvmExample = "-1 " + frameFeatureExtraction.extractVector(0);
+            logger.debug(libsvmExample);
+
+            int y = predict( libsvmExample, frameModel, false, null );
+            logger.debug( y );
+            String l = frameLabelIndex.getTerm(y);
+            logger.info(l + "\t" + frameExample[0]);
+            sb.append(frameExample[0] + "\t" + l + "\n");
 
 			logger.info(sb.toString());
 
@@ -459,195 +447,86 @@ public class Annotator {
 		return Integer.parseInt(s);
 	}
 
-	private String predictRole(String line, boolean predict_probability) throws IOException {
+    private int predict(String line, svm_model model, boolean predict_probability,
+                               Map<Integer, Double> probabilities) throws IOException {
+        if (line == null) return -1;
 
-		StringBuilder sb = new StringBuilder();
-		int correct = 0;
-		int total = 0;
-		double error = 0;
-		double sumv = 0, sumy = 0, sumvv = 0, sumyy = 0, sumvy = 0;
+        int correct = 0;
+        int total = 0;
+        double error = 0;
+        double sumv = 0, sumy = 0, sumvv = 0, sumyy = 0, sumvy = 0;
 
-		int svm_type = svm.svm_get_svm_type(roleModel);
-		int nr_class = svm.svm_get_nr_class(roleModel);
-		double[] prob_estimates = null;
+		int svm_type = svm.svm_get_svm_type(model);
+		int nr_class = svm.svm_get_nr_class(model);
 
-		if (predict_probability) {
-			if (svm_type == svm_parameter.EPSILON_SVR ||
-					svm_type == svm_parameter.NU_SVR) {
-				logger.info("Prob. roleModel for test data: target value = predicted value + z,\nz: Laplace distribution e^(-|z|/sigma)/(2sigma),sigma=" + svm.svm_get_svr_probability(roleModel) + "\n");
-			}
-			else {
-				int[] labels = new int[nr_class];
-				svm.svm_get_labels(roleModel, labels);
-				prob_estimates = new double[nr_class];
-				sb.append("labels");
-				for (int j = 0; j < nr_class; j++) {
-					sb.append(" " + labels[j]);
-				}
-				sb.append("\n");
-			}
-		}
+        if (predict_probability && (svm_type == svm_parameter.EPSILON_SVR ||
+                svm_type == svm_parameter.NU_SVR)) {
+            logger.info("Prob. model for test data: target value = predicted value + z,");
+            logger.info("z: Laplace distribution e^(-|z|/sigma)/(2sigma),sigma=" + svm.svm_get_svr_probability(roleModel));
+        }
 
-		{
+        StringTokenizer st = new StringTokenizer(line, " \t\n\r\f:");
 
-			if (line == null) {
-				return "";
-			}
+        double target = atof(st.nextToken());
+        int m = st.countTokens() / 2;
+        svm_node[] x = new svm_node[m];
+        for (int j = 0; j < m; j++) {
+            x[j] = new svm_node();
+            x[j].index = atoi(st.nextToken());
+            x[j].value = atof(st.nextToken());
+        }
+        logger.debug(svm_node.toString(x));
 
-			StringTokenizer st = new StringTokenizer(line, " \t\n\r\f:");
+        double v;
+        if (predict_probability && (svm_type == svm_parameter.C_SVC || svm_type == svm_parameter.NU_SVC)) {
+            double[] prob_estimates = new double[nr_class];
+            v = svm.svm_predict_probability(model, x, prob_estimates);
+            for(int i = 0; i  < prob_estimates.length; i++)
+                probabilities.put(i, prob_estimates[i]);
+        }
+        else v = svm.svm_predict(model, x);
 
-			double target = atof(st.nextToken());
-			int m = st.countTokens() / 2;
-			svm_node[] x = new svm_node[m];
-			for (int j = 0; j < m; j++) {
-				x[j] = new svm_node();
-				x[j].index = atoi(st.nextToken());
-				x[j].value = atof(st.nextToken());
-			}
-			logger.debug(svm_node.toString(x));
-			double v;
-			if (predict_probability && (svm_type == svm_parameter.C_SVC || svm_type == svm_parameter.NU_SVC)) {
-				v = svm.svm_predict_probability(roleModel, x, prob_estimates);
-				sb.append(v + " ");
-				for (int j = 0; j < nr_class; j++) {
-					sb.append(prob_estimates[j] + " ");
-				}
-				sb.append("\n");
-			}
-			else {
-				// original
-				v = svm.svm_predict(roleModel, x);
-				//sb.append(v + "\n");
-				sb.append(v);
-			}
+        if (v == target) correct += 1;
+        error += (v - target) * (v - target);
+        sumv += v;
+        sumy += target;
+        sumvv += v * v;
+        sumyy += target * target;
+        sumvy += v * target;
+        ++total;
 
-			if (v == target) {
-				++correct;
-			}
-			error += (v - target) * (v - target);
-			sumv += v;
-			sumy += target;
-			sumvv += v * v;
-			sumyy += target * target;
-			sumvy += v * target;
-			++total;
-		}
-		if (svm_type == svm_parameter.EPSILON_SVR ||
-				svm_type == svm_parameter.NU_SVR) {
-			logger.debug("Mean squared error = " + error / total + " (regression)");
-			logger.debug("Squared correlation coefficient = " +
-					((total * sumvy - sumv * sumy) * (total * sumvy - sumv * sumy)) /
-							((total * sumvv - sumv * sumv) * (total * sumyy - sumy * sumy)) +
-					" (regression)");
-		}
-		else {
-			logger.debug("Accuracy = " + (double) correct / total * 100 +
-					"% (" + correct + "/" + total + ") (classification)");
-		}
+        if (svm_type == svm_parameter.EPSILON_SVR ||
+                svm_type == svm_parameter.NU_SVR) {
+            logger.debug("Mean squared error = " + error / total + " (regression)");
+            logger.debug("Squared correlation coefficient = " +
+                                 ((total * sumvy - sumv * sumy) * (total * sumvy - sumv * sumy)) /
+                                         ((total * sumvv - sumv * sumv) * (total * sumyy - sumy * sumy)) +
+                                 " (regression)");
+        }
+        else {
+            logger.debug("Accuracy = " + (double) correct / total * 100 +
+                                 "% (" + correct + "/" + total + ") (classification)");
+        }
 
-		return sb.toString();
-	}
+        return ( int ) v;
+    }
 
-	private String predictFrame(String line, boolean predict_probability) throws IOException {
+	public void write(List<Answer> list, File fout, File confidences_out, String format) throws IOException {
+        PrintWriter pw_answer = new PrintWriter( new BufferedWriter( new OutputStreamWriter(
+                new FileOutputStream( fout ), "UTF-8" ) ) );
+        PrintWriter pw_conf = new PrintWriter( new BufferedWriter( new OutputStreamWriter(
+                new FileOutputStream( confidences_out ), "UTF-8" ) ) );
 
-		StringBuilder sb = new StringBuilder();
-		int correct = 0;
-		int total = 0;
-		double error = 0;
-		double sumv = 0, sumy = 0, sumvv = 0, sumyy = 0, sumvy = 0;
-
-		int svm_type = svm.svm_get_svm_type(frameModel);
-		int nr_class = svm.svm_get_nr_class(frameModel);
-		double[] prob_estimates = null;
-
-		if (predict_probability) {
-			if (svm_type == svm_parameter.EPSILON_SVR ||
-					svm_type == svm_parameter.NU_SVR) {
-				logger.info("Prob. roleModel for test data: target value = predicted value + z,\nz: Laplace distribution e^(-|z|/sigma)/(2sigma),sigma=" + svm.svm_get_svr_probability(roleModel) + "\n");
-			}
-			else {
-				int[] labels = new int[nr_class];
-				svm.svm_get_labels(frameModel, labels);
-				prob_estimates = new double[nr_class];
-				sb.append("labels");
-				for (int j = 0; j < nr_class; j++) {
-					sb.append(" " + labels[j]);
-				}
-				sb.append("\n");
-			}
-		}
-
-		{
-
-			if (line == null) {
-				return "";
-			}
-
-			StringTokenizer st = new StringTokenizer(line, " \t\n\r\f:");
-
-			double target = atof(st.nextToken());
-			int m = st.countTokens() / 2;
-			svm_node[] x = new svm_node[m];
-			for (int j = 0; j < m; j++) {
-				x[j] = new svm_node();
-				x[j].index = atoi(st.nextToken());
-				x[j].value = atof(st.nextToken());
-			}
-			logger.debug(svm_node.toString(x));
-			double v;
-			if (predict_probability && (svm_type == svm_parameter.C_SVC || svm_type == svm_parameter.NU_SVC)) {
-				v = svm.svm_predict_probability(frameModel, x, prob_estimates);
-				sb.append(v + " ");
-				for (int j = 0; j < nr_class; j++) {
-					sb.append(prob_estimates[j] + " ");
-				}
-				sb.append("\n");
-			}
-			else {
-				// original
-				v = svm.svm_predict(frameModel, x);
-				//sb.append(v + "\n");
-				sb.append(v);
-			}
-
-			if (v == target) {
-				++correct;
-			}
-			error += (v - target) * (v - target);
-			sumv += v;
-			sumy += target;
-			sumvv += v * v;
-			sumyy += target * target;
-			sumvy += v * target;
-			++total;
-		}
-		if (svm_type == svm_parameter.EPSILON_SVR ||
-				svm_type == svm_parameter.NU_SVR) {
-			logger.debug("Mean squared error = " + error / total + " (regression)\n");
-			logger.debug("Squared correlation coefficient = " +
-					((total * sumvy - sumv * sumy) * (total * sumvy - sumv * sumy)) /
-							((total * sumvv - sumv * sumv) * (total * sumyy - sumy * sumy)) +
-					" (regression)\n");
-		}
-		else {
-			logger.debug("Accuracy = " + (double) correct / total * 100 +
-					"% (" + correct + "/" + total + ") (classification)\n");
-		}
-
-		return sb.toString();
-	}
-
-	public void write(List<Answer> list, File fout, String format) throws IOException {
-		PrintWriter pw = new PrintWriter(new BufferedWriter(new OutputStreamWriter(new FileOutputStream(fout), "UTF-8")));
-		for (int i = 0; i < list.size(); i++) {
-			Answer answer = list.get(i);
-			if (format.equalsIgnoreCase("tsv")) {
-				pw.print(answer.toTSV());
-			}
-
-		}
-		pw.close();
-	}
+        for ( int i = 0; i < list.size( ); i++ ) {
+            Answer answer = list.get( i );
+            if ( format.equalsIgnoreCase( "tsv" ) ) {
+                pw_answer.print( answer.toTSV( ) );
+                pw_conf.print( answer.confidenceToTSV( ) );
+            }
+        }
+        pw_answer.close( );
+        pw_conf.close( );
+    }
 
 	public static void main(String[] args) throws Exception {
 
@@ -673,7 +552,7 @@ public class Annotator {
 			Option hostOpt = OptionBuilder.withArgName("url").hasArg().withDescription("server name (default name is " + DEFAULT_HOST + ")").withLongOpt("host").create();
 			Option portOpt = OptionBuilder.withArgName("int").hasArg().withDescription("server port (default name is " + DEFAULT_PORT + ")").withLongOpt("port").create();
 			Option langOpt = OptionBuilder.withArgName("string").hasArg().withDescription("language").isRequired().withLongOpt("lang").create("l");
-
+            Option confOutOpt =OptionBuilder.withArgName("file").hasArg().withDescription("file in which to write the confidence of annotated results").withLongOpt("conf-output").create( "c" );
 			options.addOption(OptionBuilder.withDescription("trace mode").withLongOpt("trace").create());
 			options.addOption(OptionBuilder.withDescription("debug mode").withLongOpt("debug").create());
 
@@ -698,6 +577,7 @@ public class Annotator {
 			options.addOption(hostOpt);
 			options.addOption(portOpt);
 			options.addOption(langOpt);
+            options.addOption( confOutOpt );
 
 			CommandLineParser parser = new PosixParser();
 			CommandLine line = parser.parse(options, args);
@@ -754,15 +634,16 @@ public class Annotator {
 			if (line.hasOption("annotate")) {
 				File textFile = new File(line.getOptionValue("annotate"));
 				List<Answer> list = annotator.classify(textFile);
-				File fout = null;
+				File fout = null, confOut = null;
 
-				if (line.hasOption("output")) {
+				if (line.hasOption("output"))
 					fout = new File(line.getOptionValue("output"));
-				}
-				else {
-					//fout = File.createTempFile("dirha", new Date().toString());
-					fout = new File(textFile.getAbsoluteFile() + ".output.tsv");
-				}
+				else fout = new File(textFile.getAbsoluteFile() + ".output.tsv");
+
+                if ( line.hasOption( "conf-output" ) )
+                    confOut = new File( line.getOptionValue( "conf-output" ) );
+                else confOut = new File( textFile.getAbsoluteFile( ) + ".confidence.output.tsv" );
+
 				File evaluationReportFile = null;
 				if (line.hasOption("report")) {
 					evaluationReportFile = new File(line.getOptionValue("report"));
@@ -771,11 +652,12 @@ public class Annotator {
 					evaluationReportFile = new File(textFile.getAbsoluteFile() + ".report.tsv");
 				}
 				logger.info("output file: " + fout);
+                logger.info("confidence file: " + confOut);
 				if (line.hasOption("format")) {
-					annotator.write(list, fout, line.getOptionValue("format"));
+					annotator.write(list, fout, confOut, line.getOptionValue("format"));
 				}
 				else {
-					annotator.write(list, fout, "tsv");
+					annotator.write(list, fout, confOut, "tsv");
 				}
 
 				if (line.hasOption("eval")) {
