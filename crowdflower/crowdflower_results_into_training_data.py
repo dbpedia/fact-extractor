@@ -112,19 +112,25 @@ def normalize_numerical_fes(sentence_id, tokens):
     normalizer = DateNormalizer()
     sentence = ' '.join(x[2] for x in tokens)
 
-    for (start, end), category, norm in normalizer.normalize_many(sentence):
+    for (start, end), _, _ in normalizer.normalize_many(sentence):
         original = sentence[start:end]
 
         # find the first token of the match
         cursor = i = 0
-        while cursor < start:
+        while cursor != start and i < len(tokens):
             cursor += len(tokens[i][2]) + 1  # remember the space between tokens
             i += 1
 
+        if i == len(tokens):
+            continue  # the normalized token is a sub-token of another token
+
         # find the last token of the match
         j = i + 1
-        while ' '.join(x[2] for x in tokens[i:j]) != original:
+        while ' '.join(x[2] for x in tokens[i:j]) != original and j < len(tokens):
             j += 1
+
+        if j == len(tokens):
+            continue  # the normalized token is a sub-token of another token
 
         # find an appropriate tag (i.e. anything different from 'O'
         # if exists among the matching tokens)
