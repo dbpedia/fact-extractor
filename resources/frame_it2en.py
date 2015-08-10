@@ -1,6 +1,6 @@
 #!/usr/bin/env python
 # -*- encoding: utf-8 -*-
-FRAME_DBPO_MAP = {
+FRAME_IT_TO_EN = {
     "frames":
     {
         # Kicktionary
