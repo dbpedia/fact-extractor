@@ -4,28 +4,29 @@ FRAME_DBPO_MAP = {
     "frames":
     {
         u"Attività": "careerStation",
-        "Partita": "",
-        "Sconfitta": "",
-        "Stato": "",
-        "Vittoria": "",        
+        "Partita": None,
+        "Sconfitta": None,
+        "Stato": None,
+        "Trofeo": "award",
+        "Vittoria": None
     },
     "FEs": {
-        "Agente": "",
-        "Classifica": "",
-        "Competizione": "",
-        "Concorrente": "",
-        "Durata": "",
-        u"Entità": "",
-        "Luogo": "",
-        "Perdente": "",
-        "Premio": "",
+        "Agente": None,
+        "Classifica": "rank",
+        "Competizione": None,
+        "Concorrente": None,
+        "Durata": "duration",
+        u"Entità": None,
+        "Luogo": None,
+        "Perdente": None,
+        "Premio": None,
         "Punteggio": "score",
         "Squadra": "team",
-        "Squadra_1": "",
-        "Squadra_2": "",
-        "Stato": "",
-        "Tempo": "",
-        "Vincitore": ""
+        "Squadra_1": None,
+        "Squadra_2": None,
+        "Stato": "playerStatus",
+        "Tempo": None,
+        "Vincitore": None
     }
 
 }
