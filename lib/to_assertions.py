@@ -1,9 +1,15 @@
 # -*- encoding: utf-8 -*-
 
+import os
+if __name__ == '__main__' and __package__ is None:
+    os.sys.path.append(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
+
 from rdflib import Graph
 from urllib import quote
 from rfc3987 import parse  # URI/IRI validation
 from os import sys
+from resources import FRAME_IT_TO_EN
+from resources import FRAME_DBPO_MAP
 
 
 def to_assertions(labeled_results, id_to_title, namespace_manager, namespaces,
@@ -39,8 +45,12 @@ def to_assertions(labeled_results, id_to_title, namespace_manager, namespaces,
     assertions, score_triples= Graph(), Graph()
     assertions.namespace_manager = namespace_manager
     score_triples.namespace_manager = namespace_manager
+
+    add_triple = triple_adder(assertions, format)
+    add_score = triple_adder(score_triples, format)
+
     for result in labeled_results:
-        print >> sys.stderr, '---', result.get('sentence')
+        print >> sys.stderr, '-' * 50, '\n', result.get('sentence'), '\n', result
 
         frame = result.get('frame')
         if not frame:
@@ -74,32 +84,24 @@ def to_assertions(labeled_results, id_to_title, namespace_manager, namespaces,
             print "Couldn't parse '%s' (%s). Skipping ..." % (subject, e)
             continue
 
-        frame_label = quote(frame.encode('utf8'))
-        predicate = namespaces['fact_extraction'] + frame_label
-        object = (namespaces['fact_extraction'] + frame_label + '_' +
-                  wiki_id + '_' + sentence_id)
-        try:
-            # Craft an NTriple string
-            frame_triple = '<%s> <%s> <%s> .' % (subject, predicate, object)
-            # Sanity check + addition
-            assertions.parse(data=frame_triple, format=format)
-            print >> sys.stderr, 'Frame triple added: %s' % frame_triple
-        except Exception as e:
-            print "Invalid triple: %s (%s). Skipping ..." % (frame_triple, e)
+        predicate = _uri_for(namespaces, 'frame', frame)
+        object = predicate + '_%s_%s' % (wiki_id, sentence_id)
+
+        if not add_triple(subject, predicate, object):
             continue
 
         if result.get('score') is not None:
             predicate = namespaces['fact_extraction'] + 'confidence'
             score = '"%f"^^<http://www.w3.org/2001/XMLSchema#float>' % result['score']
-            score_triple = '<%s> <%s> %s .' % (object, predicate, score)
-            score_triples.parse(data=score_triple, format=format)
+            add_score(object, predicate, score)
 
         for fe in fes:
             try:
-                serialize_fe(fe, object, namespaces, wiki_title, assertions, format)
+                serialize_fe(fe, object, namespaces, wiki_title, add_triple, format)
             except Exception as ex:
                 print "Exception while serializing", fe, ex
                 continue
+
     try:
         assertions.serialize(outfile, format)
         if score_dataset:
@@ -111,10 +113,9 @@ def to_assertions(labeled_results, id_to_title, namespace_manager, namespaces,
     return processed, discarded
 
 
-def serialize_fe(fe, reified, namespaces, wiki_title, assertions, format):
+def serialize_fe(fe, reified, namespaces, wiki_title, add_triple, format):
     # The FE predicate takes the FE label
-    fe_label = quote(fe['FE'].encode('utf8'))
-    p1 = '%shas%s' % (namespaces['fact_extraction'], fe_label)
+    p1 = _uri_for(namespaces, 'FE', fe['FE'])
 
     # The FE object takes the linked entity URI or the literal
     le_uri = fe.get('uri')
@@ -124,26 +125,56 @@ def serialize_fe(fe, reified, namespaces, wiki_title, assertions, format):
         wiki_title = quote(le_uri.split('/')[-1].encode('utf8'))
         o1 = namespaces['resource'] + wiki_title
         parsed = parse(o1, rule='URI_reference')  # URI sanity check
-        fe_triple = '<%s> <%s> <%s> .' % (reified, p1, o1)  # Craft an NTriple string
-        assertions.parse(data=fe_triple, format=format)  # NTriple sanity check
-        print >> sys.stderr, 'FE triple added: %s' % fe_triple
+        assert add_triple(reified, p1, o1)
 
     elif literal:  # It's a literal
-        o1 = literal
         if type(literal) in {str, unicode}:
-            fe_triple = '<%s> <%s> %s .' % (reified, p1, o1)  # Craft an NTriple string
-            assertions.parse(data=fe_triple, format=format)  # NTriple sanity check
-            print >> sys.stderr, 'FE triple added: %s' % fe_triple
+            assert add_triple(reified, p1, literal)
+
         elif type(literal) == dict and 'duration' in literal:
-            assertions.parse(data='<%s> <%s> %s .' % (reified, p1, o1['duration']),
-                             format=format)
             ps = '%sstartYear' % namespaces['ontology']
-            assertions.parse(data='<%s> <%s> %s .' % (reified, ps, o1['start']),
-                             format=format)
             pe = '%sendYear' % namespaces['ontology']
-            assertions.parse(data='<%s> <%s> %s .' % (reified, pe, o1['end']),
-                             format=format)
+
+            assert add_triple(reified, p1, literal['duration'])
+            assert add_triple(reified, ps, literal['start'])
+            assert add_triple(reified, pe, literal['end'])
+
         else:
             raise Exception("Don't know how to serialize: " + repr(literal))
     else:
         raise Exception("FE not tagged as either literal or uri, skipped " + repr(fe))
+
+
+def triple_adder(graph, format):
+    def add_triple(subject, predicate, object):
+        try:
+            s = _to_nt_term(subject)
+            p = _to_nt_term(predicate)
+            o = _to_nt_term(object)
+            triple = '%s %s %s .' % (s, p, o)
+            graph.parse(data=triple, format=format)
+            print >> sys.stderr, 'Frame triple added: %s' % triple
+            return True
+        except Exception as e:
+            print "Invalid triple: %s %s %s (%s). Skipping ..." % (subject, predicate,
+                                                                   object, e.message)
+            return False
+    return add_triple
+
+
+def _to_nt_term(x):
+    if x.startswith('http://'):
+        return '<%s>' % x
+    elif not x.startswith('"'):
+        return '"%s"' % x
+    else:
+        return x
+
+
+def _uri_for(namespaces, _type, term):
+    dbpo = FRAME_DBPO_MAP[_type].get(term)
+    if dbpo:
+        return namespaces['ontology'] + quote(dbpo.encode('utf8'))
+    else:
+        label = FRAME_IT_TO_EN[_type].get(term) or term
+        return namespaces['fact_extraction'] + quote(label.encode('utf8'))

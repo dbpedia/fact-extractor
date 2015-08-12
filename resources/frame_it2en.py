@@ -1,38 +1,38 @@
 #!/usr/bin/env python
 # -*- encoding: utf-8 -*-
 FRAME_IT_TO_EN = {
-    "frames":
+    "frame":
     {
         # Kicktionary
-        "Partita": "match",
-        "Sconfitta": "defeat",
-        "Vittoria": "victory",
+        u"Partita": u"match",
+        u"Sconfitta": u"defeat",
+        u"Vittoria": u"victory",
         # Direct translation
-        "Stato": "status",
+        u"Stato": u"status",
         # Mapped to DBPO
         u"Attività": None,
-        "Trofeo": None
+        u"Trofeo": None
     },
-    "FEs": {
+    "FE": {
         # FrameNet
-        "Perdente": "loser", # Beat_opponent
-        "Vincitore": "winner", # Beat_opponent
-        "Competizione": "competition", # Finish_competition
-        "Squadra_1": "competitor", # Finish_competition
-        "Squadra_2": "opponent", # Finish_competition
-        "Luogo": "place", # Beat_opponent / Finish_competition
-        "Tempo": "time", # Beat_opponent / Finish_competition
+        u"Perdente": u"hasLoser", # Beat_opponent
+        u"Vincitore": u"hasWinner", # Beat_opponent
+        u"Competizione": u"hasCompetition", # Finish_competition
+        u"Squadra_1": u"hasCompetitor", # Finish_competition
+        u"Squadra_2": u"hasOpponent", # Finish_competition
+        u"Luogo": u"hasPlace", # Beat_opponent / Finish_competition
+        u"Tempo": u"hasTime", # Beat_opponent / Finish_competition
         # Direct translation
-        "Agente": "agent",
-        "Concorrente": "participant",
-        u"Entità": "entity",
-        "Premio": "prize",
+        u"Agente": u"hasAgent",
+        u"Concorrente": u"hasParticipant",
+        u"Entità": u"hasEntity",
+        u"Premio": u"hasPrize",
         # Mapped to DBPO
-        "Classifica": None,
-        "Durata": None,
-        "Punteggio": None,
-        "Squadra": None,
-        "Stato": None
+        u"Classifica": None,
+        u"Durata": None,
+        u"Punteggio": None,
+        u"Squadra": None,
+        u"Stato": None
     }
 
 }

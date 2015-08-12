@@ -1,32 +1,32 @@
 #!/usr/bin/env python
 # -*- encoding: utf-8 -*-
 FRAME_DBPO_MAP = {
-    "frames":
+    "frame":
     {
-        u"Attività": "careerStation",
-        "Partita": None,
-        "Sconfitta": None,
-        "Stato": None,
-        "Trofeo": "award",
-        "Vittoria": None
+        u"Attività": u"careerStation",
+        u"Partita": None,
+        u"Sconfitta": None,
+        u"Stato": None,
+        u"Trofeo": u"award",
+        u"Vittoria": None
     },
-    "FEs": {
-        "Agente": None,
-        "Classifica": "rank",
-        "Competizione": None,
-        "Concorrente": None,
-        "Durata": "duration",
+    "FE": {
+        u"Agente": None,
+        u"Classifica": u"hasRank",
+        u"Competizione": None,
+        u"Concorrente": None,
+        u"Durata": u"hasDuration",
         u"Entità": None,
-        "Luogo": None,
-        "Perdente": None,
-        "Premio": None,
-        "Punteggio": "score",
-        "Squadra": "team",
-        "Squadra_1": None,
-        "Squadra_2": None,
-        "Stato": "playerStatus",
-        "Tempo": None,
-        "Vincitore": None
+        u"Luogo": None,
+        u"Perdente": None,
+        u"Premio": None,
+        u"Punteggio": u"hasScore",
+        u"Squadra": u"hasTeam",
+        u"Squadra_1": None,
+        u"Squadra_2": None,
+        u"Stato": u"hasPlayerStatus",
+        u"Tempo": None,
+        u"Vincitore": None
     }
 
 }
