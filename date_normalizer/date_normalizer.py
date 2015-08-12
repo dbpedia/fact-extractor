@@ -32,7 +32,8 @@ class DateNormalizer(object):
         self.regexes = {}
         for category, regexes in specs.iteritems():
             regexes = sum((x.items() for x in regexes), [])
-            self.regexes[category] = [(re.compile(pattern.format(**basic_r)), result)
+            self.regexes[category] = [(re.compile(pattern.format(**basic_r),
+                                                  re.IGNORECASE), result)
                                       for pattern, result in regexes]
 
     def _meta_init(self, specs):
@@ -75,6 +76,7 @@ class DateNormalizer(object):
 
 
 if __name__ == '__main__':
+    from pprint import pprint
     with open('tests.yml') as f:
         test_cases = yaml.load(f)
 

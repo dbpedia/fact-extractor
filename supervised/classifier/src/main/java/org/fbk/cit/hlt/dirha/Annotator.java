@@ -188,10 +188,59 @@ public class Annotator {
         catch ( Exception e ) {
             logger.error( e );
         }
+
+        List<ClassifierResults> normalized = normalizeNumericalExpressions( exampleList );
         Map<String, ChunkCombinator.ChunkToUri> disambiguated = combinator.getTheWikiMachineChunkToUriWithConfidence( line, true );
-        List<ClassifierResults> merged = mergeChunksIntoExampleList( exampleList, disambiguated );
+        List<ClassifierResults> merged = mergeChunksIntoExampleList( normalized, disambiguated );
         merged.add( eos );
         return merged;
+    }
+
+    private List<ClassifierResults> normalizeNumericalExpressions( List<ClassifierResults> tokens ) {
+        StringBuilder sb = new StringBuilder( );
+
+        // skip first "EOS" token
+        for ( ListIterator<ClassifierResults> iter = tokens.listIterator( 1 ); iter.hasNext( ); ) {
+            sb.append( iter.next( ).getToken( ).replace( '_', ' ' ) );
+            sb.append( " " );
+        }
+        String sentence = sb.toString( );
+
+        for ( NormalizerResult res : DateNormalizer.NormalizeMany( sentence ) ) {
+            String original = sentence.substring( res.getStart( ), res.getEnd( ) );
+
+            // find the first token of the match (remember first token is EOS)
+            int cursor = 0, i = 1;
+            while ( cursor != res.getStart( ) && i < tokens.size( ) ) {
+                cursor += tokens.get( i ).getToken( ).length( ) + 1;  // remember space between tokens
+                i += 1;
+            }
+
+            if ( i == tokens.size( ) )
+                continue;  // the normalized token is a sub-token of another token
+
+            // find the last token of the match
+            int j = i;
+            cursor -= 1;  // we add a space for every token, but the spaces between tokens are len(tokens) - 1
+            while ( cursor != res.getEnd( ) && j < tokens.size( ) ) {
+                cursor += tokens.get( j ).getToken( ).length( ) + 1;
+                j += 1;
+            }
+
+            if ( cursor != res.getEnd( ) )
+                continue;  // the normalized token is a sub-token of another token
+
+            // replace the old tokens with the new one
+            String the_token = original.replace( ' ', '_' );
+            List<ClassifierResults> new_tokens = new ArrayList<>( tokens.size( ) );
+            new_tokens.addAll( tokens.subList( 0, i ) );
+            new_tokens.add( new ClassifierResults( the_token, "ENT", the_token, 0., 0., 0., -1, -1 ) );
+            if ( j < tokens.size( ) )
+                new_tokens.addAll( tokens.subList( j, tokens.size( ) ) );
+            tokens = new_tokens;
+        }
+
+        return tokens;
     }
 
     private List<ClassifierResults> mergeChunksIntoExampleList( List<ClassifierResults> exampleList, Map<String,

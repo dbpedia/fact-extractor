@@ -2,6 +2,7 @@ __meta_vars__:
   month: (gennaio|febbraio|marzo|aprile|maggio|giugno|luglio|agosto|settembre|ottobre|novembre|dicembre)
   lit_digit: (uno|una|due|tre|quattro|cinque|sei|sette|otto|nove)
   tens: (dieci|venti|trenta|quaranta|cinquanta|sessanta|settanta|ottanta|novanta)
+  prep_art: (il\s|l\s?'\s?|nel\s|nell\s?'\s?|del\s|dell\s?'\s?)
   schema:
     year: http://www.w3.org/2001/XMLSchema#gYear
     month: http://www.w3.org/2001/XMLSchema#gMonth
@@ -41,18 +42,18 @@ __meta_funcs__:
             return tens
 
 Tempo:
-  - \b(del\s|il\s|l'\s?)(?P<day>\d{{1,2}}) (?P<month>{month}) (?P<year>\d{{4}}): >
+  - \b{prep_art}(?P<day>\d{{1,2}}) (?P<month>{month}) {prep_art}?\s*(?P<year>\d{{4}}): >
       '"{}-{:02d}-{:02d}"^^<{schema}>'.format(match.group('year'),
                                               month_to_num(match.group('month')),
                                               int(match.group('day')),
                                               schema=schema['date'])
 
-  - \b(del\s|il\s|l'\s?)(?P<day>\d{{1,2}}) (?P<month>{month})(?!\s+\d): >
+  - \b{prep_art}(?P<day>\d{{1,2}}) {prep_art}?\s*(?P<month>{month})(?!\s+\d): >
       '"{:02d}-{:02d}"^^<{schema}>'.format(month_to_num(match.group('month')),
                                            int(match.group('day')),
                                            schema=schema['monthDay'])
 
-  - \b(del\s|a\s|nel\s|nell'\s?)(?P<month>{month}) (del|dell')?\s*(?P<year>\d{{4}}): >
+  - \b{prep_art}(?P<month>{month}) {prep_art}?\s*(?P<year>\d{{4}}): >
       '"{}-{:02d}"^^<{schema}>'.format(match.group('year'),
                                        month_to_num(match.group('month')),
                                        schema=schema['yearMonth'])
@@ -61,11 +62,11 @@ Tempo:
       '"{:02d}"^^<{schema}>'.format(month_to_num(match.group('month')),
                                     schema=schema['month'])
 
-  - \b(nel\s|il\s|nell'\s?)(?P<year>\d{{4}})(?!\s*[-/]): >
+  - \b{prep_art}(?P<year>\d{{4}})(?!\s*[-/]): >
       '"{}"^^<{schema}>'.format(match.group('year'),
                                 schema=schema['year'])
 
-  - \bl'\s?anno seguente: >
+  - \bl\s?'\s?anno seguente: >
       '"$YEAR + 1"'
 
   - \b(la )?stagione successiva: >
@@ -93,7 +94,7 @@ Durata:
         'end': '"{}"^^<{}>'.format(abs_year(match.group('y2')), schema['year']),
       }
 
-  - fino al((l'\s?|la\s|\s)?(\w+(\b|\s)){{,3}} del(l')?)? (?P<year>\d{{2,4}}): >
+  - fino al((l\s?'\s?|la\s|\s)?(\w+(\b|\s)){{,3}} del(l\s?')?)? (?P<year>\d{{2,4}}): >
       '"to {}"'.format(match.group('year'))
 
   - dal (?P<year>\d{{4}})\b(?! al): >
