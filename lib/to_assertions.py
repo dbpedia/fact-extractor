@@ -86,9 +86,17 @@ def to_assertions(labeled_results, id_to_title, namespace_manager, namespaces,
 
         predicate = _uri_for(namespaces, 'frame', frame)
         object = predicate + '_%s_%s' % (wiki_id, sentence_id)
-
         if not add_triple(subject, predicate, object):
             continue
+
+        if predicate.startswith(namespaces['ontology']):
+            # Classes start with un upper case, properties with a lower case
+            class_start = len(namespaces['ontology'])
+            ontology_class = namespaces['ontology'] + \
+                             predicate[class_start].upper() + \
+                             predicate[class_start + 1:]
+            add_triple(object, 'http://www.w3.org/1999/02/22-rdf-syntax-ns#type',
+                       ontology_class)
 
         if result.get('score') is not None:
             predicate = namespaces['fact_extraction'] + 'confidence'
