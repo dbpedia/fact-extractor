@@ -5,9 +5,7 @@ import org.apache.log4j.Logger;
 import org.apache.log4j.PropertyConfigurator;
 
 import java.io.*;
-import java.util.HashSet;
-import java.util.Properties;
-import java.util.Set;
+import java.util.*;
 
 /*
  * Licensed to the Apache Software Foundation (ASF) under one
@@ -54,40 +52,44 @@ public class SpreadSheetToFrameTrainingSet {
 		logger.info("processing " + fin + "...");
 		LineNumberReader lr = new LineNumberReader(new InputStreamReader(new FileInputStream(fin), "UTF-8"));
 		PrintWriter pw = new PrintWriter(new BufferedWriter(new OutputStreamWriter(new FileOutputStream(fout), "UTF-8")));
-		String line = null;
+		String line;
 
-		Set<String> wordSet = new HashSet<String>();
-		Set<String> lemmaSet = new HashSet<String>();
-		Set<String> roleSet = new HashSet<String>();
-		String frame = null;
-
+		Map<String, List<String[]>> sentences = new HashMap<>();
 		while ((line = lr.readLine()) != null) {
-			String[] s = line.split("\t");
-			if (s.length >= 5) {
-				logger.trace(line);
-				//if (s[0].matches("\\d+") && (s[6].equalsIgnoreCase("B-LU") || s[6].equalsIgnoreCase("I-LU")))
-				// only terms with role are used?
-				//if (s[0].matches("\\d+") && !s[6].equalsIgnoreCase("O")) {
-					wordSet.add(s[2]);
-					lemmaSet.add(s[4]);
-					if (!s[5].equals("")) {
-						frame = s[5];
-					}
-
-					roleSet.add(s[6]);
-
-				//}
+			String[] items = line.split("\t");
+			if (items.length != 7) {
+				logger.fatal("Malformed line: [" + line + "]. Please check " + fin.getAbsolutePath() + " and try again");
+				System.exit(1);
 			}
-            if (frame != null) {
-                pw.println(frame + "\t" + replace(wordSet.toString()) + "\t" + replace(lemmaSet.toString()) + "\t" + replace(roleSet.toString()));
-            }
-
-            wordSet = new HashSet<String>();
-            lemmaSet = new HashSet<String>();
-            roleSet = new HashSet<String>();
-            frame = null;
-
+			if (!sentences.containsKey(items[0])) {
+				sentences.put(items[0], new ArrayList<String[]>());
+			}
+			List<String[]> current = sentences.get(items[0]);
+			current.add(items);
+			sentences.put(items[0], current);
 		}
+
+		for (String sentenceID : sentences.keySet()) {
+			List<String[]> tokens = sentences.get(sentenceID);
+			String frame = null;
+			Set<String> bagOfWords = new HashSet<>();
+			Set<String> bagOfLemmas = new HashSet<>();
+			Set<String> bagOfRoles = new HashSet<>();
+
+			for (String[] token : tokens) {
+//				Only add tokens that are not 'O'
+				if (!token[6].equalsIgnoreCase("O")) {
+					frame = token[5];
+					bagOfWords.add(token[2]);
+					bagOfLemmas.add(token[4]);
+					bagOfRoles.add(token[6]);
+				}
+			}
+			if (frame != null) {
+				pw.println(frame + "\t" + replace(bagOfWords.toString()) + "\t" + replace(bagOfLemmas.toString()) + "\t" + replace(bagOfRoles.toString()));
+			}
+		}
+
 		pw.close();
 		logger.info(fout +" created");
 	}
