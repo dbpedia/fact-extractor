@@ -223,11 +223,12 @@ public class Annotator {
                 int matchStartIndex = i - tokens.length + 1;
 				String[] toReplace = merged.get(i);
 				String[] replacement = null;
-//				Use the 'ENT' tag only if the n-gram has more than 1 token, otherwise keep the original POS tag
+//				Use the 'ENT' tag only if the n-gram has more than 1 token, otherwise keep the original POS tag and the lemma
 				if (tokens.length > 1) {
 					replacement = new String[]{chunk.replace(' ', '_'), "ENT", chunk.replace(' ', '_')};
 				} else {
-					replacement = new String[]{chunk, toReplace[1], chunk};
+//					// Remember to keep the lemma
+					replacement = new String[]{chunk, toReplace[1], toReplace[2]};
 				}
                 List<String[]> startSubList = merged.subList(0, matchStartIndex);
                 List<String[]> endSubList = merged.subList(i + 1, merged.size());
@@ -398,7 +399,6 @@ public class Annotator {
 			StringBuilder sb = new StringBuilder();
 			sb.append(query + "\n");
 			List<String[]> roleExampleList = toRoleExampleList(query);
-			logger.debug(roleExampleList);
 			//todo: put outside the while, add a setRoleExampleList in RoleFeatureExtraction...
 			RoleFeatureExtraction roleFeatureExtraction = new RoleFeatureExtraction(roleFeatureIndex, roleExampleList, gazetteerMap);
 			for (int i = 0; i < roleExampleList.size(); i++) {
