@@ -241,14 +241,20 @@ public class Annotator {
         return merged;
     }
 
-	private List<String[]> toFrameExampleList(List<String[]> roleExampleList) throws Exception {
+	private List<String[]> toFrameExampleList(List<String[]> roleExampleList, List<String> roleAnswerList) throws Exception {
 		List<String[]> exampleList = new ArrayList<String[]>();
 		//String[] s = new String[1];
 		//s[0] = "-1";
 		//s[1] = "-1";
-		Set<String> wordSet = new HashSet<String>();
-		Set<String> lemmaSet = new HashSet<String>();
-		Set<String> roleSet = new HashSet<String>();
+		Set<String> wordSet = new HashSet<>();
+		Set<String> lemmaSet = new HashSet<>();
+		Set<String> roleSet = new HashSet<>();
+		for (String roleAnswer : roleAnswerList) {
+//			Skip "O"
+			if (!roleAnswer.equalsIgnoreCase("O")) {
+				roleSet.add(roleAnswer);
+			}
+		}
 
 		for (int i = 0; i < roleExampleList.size(); i++) {
 			logger.debug(i + "\t" + Arrays.toString(roleExampleList.get(i)));
@@ -265,6 +271,7 @@ public class Annotator {
 		s[0] = "-1";
 		s[1] = SpreadSheetToFrameTrainingSet.replace(wordSet.toString());
 		s[2] = SpreadSheetToFrameTrainingSet.replace(lemmaSet.toString());
+		s[3] = SpreadSheetToFrameTrainingSet.replace(roleSet.toString());
 		exampleList.add(s);
 
 
@@ -298,8 +305,8 @@ public class Annotator {
 		return answerList;
 	}
 
-	private List<String> frameClassifier(List<String[]> roleExampleList) throws Exception {
-		List<String[]> frameExampleList = toFrameExampleList(roleExampleList);
+	private List<String> frameClassifier(List<String[]> roleExampleList, List<String> roleAnswersList) throws Exception {
+		List<String[]> frameExampleList = toFrameExampleList(roleExampleList, roleAnswersList);
 		List<String> answerList = new ArrayList<String>(frameExampleList.size());
 		FrameFeatureExtraction frameFeatureExtraction = new FrameFeatureExtraction(frameFeatureIndex, frameExampleList, gazetteerMap);
 		for (int i = 0; i < frameExampleList.size(); i++) {
@@ -359,7 +366,7 @@ public class Annotator {
 		List<String[]> roleExampleList = toRoleExampleList(line.trim());
 		List<String> roleAnswerList = roleClassifier(roleExampleList);
 		logger.debug(count + "\t" + roleAnswerList);
-		List<String> frameAnswerList = frameClassifier(roleExampleList);
+		List<String> frameAnswerList = frameClassifier(roleExampleList, roleAnswerList);
 		logger.debug(count + "\t" + frameAnswerList);
 		printAnswer(roleExampleList, roleAnswerList, frameAnswerList);
 		return new Answer(count, roleExampleList, roleAnswerList, frameAnswerList);
@@ -399,6 +406,7 @@ public class Annotator {
 			StringBuilder sb = new StringBuilder();
 			sb.append(query + "\n");
 			List<String[]> roleExampleList = toRoleExampleList(query);
+			List<String> roleAnswerList = new ArrayList<>(roleExampleList.size());
 			//todo: put outside the while, add a setRoleExampleList in RoleFeatureExtraction...
 			RoleFeatureExtraction roleFeatureExtraction = new RoleFeatureExtraction(roleFeatureIndex, roleExampleList, gazetteerMap);
 			for (int i = 0; i < roleExampleList.size(); i++) {
@@ -418,10 +426,11 @@ public class Annotator {
 				//logger.info(l + "\t" + example[0]);
 				logger.info(example[0] + "\t" + l);
 				sb.append(example[0] + "\t" + l + "\n");
+				roleAnswerList.add(l);
 				logger.debug("");
 			}
 
-			List<String[]> frameExampleList = toFrameExampleList(roleExampleList);
+			List<String[]> frameExampleList = toFrameExampleList(roleExampleList, roleAnswerList);
 			//todo: put outside the while, add a setFrameExampleList in FrameFeatureExtraction...
 			FrameFeatureExtraction frameFeatureExtraction = new FrameFeatureExtraction(frameFeatureIndex, frameExampleList, gazetteerMap);
 			for (int i = 0; i < frameExampleList.size(); i++) {
