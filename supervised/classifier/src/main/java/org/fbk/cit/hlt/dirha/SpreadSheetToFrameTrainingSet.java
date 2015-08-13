@@ -77,11 +77,11 @@ public class SpreadSheetToFrameTrainingSet {
 			Set<String> bagOfRoles = new HashSet<>();
 
 			for (String[] token : tokens) {
-//				Only add tokens that are not 'O'
-				if (!token[6].equalsIgnoreCase("O")) {
 					frame = token[5];
 					bagOfWords.add(token[2]);
 					bagOfLemmas.add(token[4]);
+//					Only add roles that are not 'O'
+				if (!token[6].equalsIgnoreCase("O")) {
 					bagOfRoles.add(token[6]);
 				}
 			}
