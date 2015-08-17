@@ -24,6 +24,7 @@ CL_OUTPUT=$(WORK_DIR)/sample-50-classified.txt
 CL_CONF_OUTPUT=$(WORK_DIR)/sample-50-confidences.txt
 CL_ANNOTATED_GOLD=
 LINK_MODE=twm  # twm or nex
+MIN_LINK_CONFIDENCE=0.01
 CF_RESULTS=resources/crowdflower-results.sample
 SCORING_TYPE=f-score
 FE_SCORE=both
@@ -167,7 +168,7 @@ crowdflower-to-training:
 run-unsupervised:
 	# you need to run extract-soccer before
 	mkdir -p $(WORK_DIR)/unsupervised/linked
-	python lib/entity_linking.py $(LINK_MODE) $(SOCCER_DIR) \
+	python lib/entity_linking.py -d -c $(MIN_LINK_CONFIDENCE) $(LINK_MODE) $(SOCCER_DIR) \
 		$(WORK_DIR)/unsupervised/linked
 	python unsupervised/produce_labeled_data.py $(WORK_DIR)/unsupervised/linked \
 		$(WORK_DIR)/labeled_data.json --score $(SCORING_TYPE) \
