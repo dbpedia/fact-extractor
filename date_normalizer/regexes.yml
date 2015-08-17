@@ -128,7 +128,9 @@ Durata:
       }
 
   - dal (?P<year>\d{{4}})\b(?! al): >
-      '"from {}"'.format(match.group('year'))
+      {
+        'start': '"{}"^^<{}>'.format(abs_year(match.group('year')), schema['year'])
+      }
 
   - (per )?(?P<num>{lit_digit}|\d+)( sol[iae])? (stagion[ei]|ann[oi]|annat[ae]): >
       '"P{}Y"^^<{}>'.format(lit_digit_to_num(match.group('num')), schema['duration'])
