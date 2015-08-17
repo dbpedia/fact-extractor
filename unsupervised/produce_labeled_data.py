@@ -7,7 +7,7 @@ if __name__ == '__main__' and __package__ is None:
 import codecs
 import json
 import random
-from resources import stopwords
+from lib import stopwords
 import sys
 from collections import defaultdict
 from urllib import quote
