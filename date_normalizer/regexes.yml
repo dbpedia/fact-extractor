@@ -79,7 +79,7 @@ Tempo:
       '"{}"^^<{schema}>'.format(match.group('year'),
                                 schema=schema['year'])
 
-  - \bl\s?'\s?anno seguente: >
+  - \bl\s?'\s?anno (seguente|successivo): >
       '"$YEAR + 1"'
 
   - \b(la )?stagione successiva: >
