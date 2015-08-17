@@ -4392,7 +4392,7 @@
 290	-	5-1	ENT	5-1	Attività	Punteggio
 290	10	)	PON	)	Attività	O
 290	11	0	SENT	0	Attività	O
-291	-	L' anno seguente	ENT	L' anno seguente	Sconfitta	Tempo
+291	-	L' anno seguente	ENT	L' anno seguente	Trofeo	Tempo
 291	1	Brehme	NOM	<unknown>	Trofeo	Vincitore
 291	2	vince	VER:pres	vincere	Trofeo	LU
 291	3	la	DET:def	il	Trofeo	O
