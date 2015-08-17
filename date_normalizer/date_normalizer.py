@@ -76,8 +76,48 @@ class DateNormalizer(object):
         return match.span(), category, result
 
 
+_normalizer = DateNormalizer()
+def normalize_numerical_fes(sentence_id, tokens):
+    """ normalize numerical FEs such as dates, durations, etc """
+    sentence = ' '.join(x[2] for x in tokens)
+
+    for (start, end), _, _ in _normalizer.normalize_many(sentence):
+        original = sentence[start:end]
+
+        # find the first token of the match
+        cursor = i = 0
+        while cursor != start and i < len(tokens):
+            cursor += len(tokens[i][2]) + 1  # remember the space between tokens
+            i += 1
+
+        if i == len(tokens):
+            continue  # the normalized token is a sub-token of another token
+
+        # find the last token of the match
+        j = i + 1
+        while ' '.join(x[2] for x in tokens[i:j]) != original and j < len(tokens):
+            j += 1
+
+        if j == len(tokens):
+            continue  # the normalized token is a sub-token of another token
+
+        # find an appropriate tag (i.e. anything different from 'O'
+        # if exists among the matching tokens)
+        tags = set(x[-1] for x in tokens[i:j] if x[-1] != 'O')
+        assert len(tags) in {0, 1}, 'Cannot decide which tag to use for %s: %r' % (
+                                    original, tags)
+        tag = tags.pop() if tags else 'O'
+
+        # replace the old tokens with a new one
+        tokens = (tokens[:i] +
+                  [[sentence_id, '-', original, 'ENT', original, tokens[0][-2], tag]] +
+                  tokens[j:])
+        assert ' '.join(x[2] for x in tokens) == sentence, 'Failed to rebuild sentence'
+
+    return tokens
+
+
 if __name__ == '__main__':
-    from pprint import pprint
     with open('tests.yml') as f:
         test_cases = yaml.load(f)
 
