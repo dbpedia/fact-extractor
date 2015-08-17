@@ -111,6 +111,14 @@ Durata:
       {
         'end': '"{}"^^<{}>'.format(abs_year(match.group('year')), schema['year'])
       }
+      
+  - ((f|s)ino)?\s?al((l\s?'\s?|la\s|\s)?)? (?P<day>\d{{1,2}}) (?P<month>{month}) {prep_art}?\s*(?P<year>\d{{4}}): >
+      {
+        'end': '"{}-{:02d}-{:02d}"^^<{schema}>'.format(match.group('year'),
+                                                    month_to_num(match.group('month')),
+                                                    int(match.group('day')),
+                                                    schema=schema['date'])
+      }
 
   - dal (?P<year>\d{{4}})\b(?! al): >
       '"from {}"'.format(match.group('year'))
