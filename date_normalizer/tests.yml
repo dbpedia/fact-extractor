@@ -10,7 +10,7 @@ in maggio: '"05"^^<http://www.w3.org/2001/XMLSchema#gMonth>'
 del 1924: '"1924"^^<http://www.w3.org/2001/XMLSchema#gYear>'
 nel 2014: '"2014"^^<http://www.w3.org/2001/XMLSchema#gYear>'
 il 2004: '"2004"^^<http://www.w3.org/2001/XMLSchema#gYear>'
-1984: '"1984"^^<http://www.w3.org/2001/XMLSchema#gYear>'
+"1984": '"1984"^^<http://www.w3.org/2001/XMLSchema#gYear>'
 l'anno seguente: '"$YEAR + 1"'
 l'anno successivo: '"$YEAR + 1"'
 l ' anno seguente: '"$YEAR + 1"'
@@ -39,6 +39,8 @@ tra il 1920 e il 1925:
   duration: '"P5Y"^^<http://www.w3.org/2001/XMLSchema#duration>'
   start: '"1920"^^<http://www.w3.org/2001/XMLSchema#gYear>'
   end: '"1925"^^<http://www.w3.org/2001/XMLSchema#gYear>'
+dal 16 novembre 1984:
+  start: '"1984-11-16"^^<http://www.w3.org/2001/XMLSchema#date>'
 dall'8 dicembre 2009:
   start: '"2009-12-08"^^<http://www.w3.org/2001/XMLSchema#date>'
 dal 2006:
