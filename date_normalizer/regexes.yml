@@ -1,6 +1,6 @@
 __meta_vars__:
   month: (gennaio|febbraio|marzo|aprile|maggio|giugno|luglio|agosto|settembre|ottobre|novembre|dicembre)
-  lit_digit: (uno|una|due|tre|quattro|cinque|sei|sette|otto|nove)
+  lit_digit: (zero|uno|una|due|tre|quattro|cinque|sei|sette|otto|nove)
   tens: (dieci|venti|trenta|quaranta|cinquanta|sessanta|settanta|ottanta|novanta)
   prep_art: (il\s|l\s?'\s?|nel\s|nell\s?'\s?|del\s|dell\s?'\s?)
   schema:
@@ -26,9 +26,22 @@ __meta_funcs__:
   - >
     def lit_digit_to_num(digit):
         """ uno -> 1, due -> 2, ..., nove -> 9 """
+        translation = {
+            "zero": "0",
+            "uno": "1",
+            "una": "1",
+            "due": "2",
+            "tre": "3",
+            "quattro": "4",
+            "cinque": "5",
+            "sei": "6",
+            "sette": "7",
+            "otto": "8",
+            "nove": "9"
+        }
         try:
-            return max(1, index_in_or(meta_vars['lit_digit'], digit))
-        except ValueError:
+            return translation[digit]
+        except KeyError:
             return digit
   - >
     def abs_year(year):
@@ -121,5 +134,5 @@ Durata:
       }
 
 Punteggio:
-  - \b(?P<s1>\d{{1,2}})\s*[-a]\s*(?P<s2>\d{{1,2}})\b: >
-      '"{}-{}"'.format(match.group('s1'), match.group('s2'))
+  - \b(?P<s1>\d{{1,2}}|{lit_digit})\s*[-a]\s*(?P<s2>\d{{1,2}}|{lit_digit})\b: >
+      '"{}-{}"'.format(lit_digit_to_num(match.group('s1')), lit_digit_to_num(match.group('s2')))
