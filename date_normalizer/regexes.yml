@@ -61,7 +61,7 @@ Tempo:
                                               int(match.group('day')),
                                               schema=schema['date'])
 
-  - \b{prep_art}(?P<day>\d{{1,2}}) {prep_art}?\s*(?P<month>{month})(?!\s+\d): >
+  - \b{prep_art}?(?P<day>\d{{1,2}}) {prep_art}?\s*(?P<month>{month})(?!\s+\d): >
       '"{:02d}-{:02d}"^^<{schema}>'.format(month_to_num(match.group('month')),
                                            int(match.group('day')),
                                            schema=schema['monthDay'])
