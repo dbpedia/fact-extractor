@@ -101,7 +101,7 @@ public class ConfusionMatrix {
         return sb.toString( );
     }
 
-    public String toCSV( ) {
+    public String toCSV( FeatureIndex labels ) {
         StringBuilder sb = new StringBuilder( );
         int columnSum[] = new int[ size ];
         AverageCalculator precisionAverage = new AverageCalculator( ),
@@ -111,14 +111,14 @@ public class ConfusionMatrix {
         sb.append( "actual -->;" );
         for ( int i = 0; i < size; i++ ) {
             columnSum[ i ] = 0;
-            sb.append( i );
+            sb.append( labels.getTerm( i ) );
             sb.append( ";" );
         }
         sb.append( "count;precision;recall;f1\n" );
 
         for ( int i = 0; i < size; i++ ) {
             int rowSum = 0;
-            sb.append( i );
+            sb.append( labels.getTerm( i ) );
             sb.append( ";" );
 
             for ( int j = 0; j < size; j++ ) {

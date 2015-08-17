@@ -49,8 +49,8 @@ public class Evaluator {
 	Evaluation frameEvaluation;
 	Evaluation roleEvaluation;
 
-    Map<String, Integer> frameLabels;
-    Map<String, Integer> roleLabels;
+    FeatureIndex frameLabels;
+    FeatureIndex roleLabels;
 
     ConfusionMatrix rolesConfusionMatrix;
     ConfusionMatrix framesConfusionMatrix;
@@ -59,15 +59,20 @@ public class Evaluator {
 		this.goldFile = goldFile;
 		this.testFile = testFile;
 
-		Map<Integer, Sentence> goldSentences = read(goldFile);
-		Map<Integer, Sentence> testSentences = read(testFile);
-        frameLabels = readLabels( frameLabelsFile );
-        frameLabels.put( "vittoria", frameLabels.size() );  // FIXME missing in training!!!
-        frameLabels.put( "partita", frameLabels.size() );
-        frameLabels.put( "o", frameLabels.size() );
-        roleLabels = readLabels( roleLabelsFile );
+        frameLabels = InputReader.ReadFeatureIndex( frameLabelsFile, false );
+        frameLabels.put( "Vittoria" );  // FIXME missing in training!!!
+        frameLabels.put( "Partita" );
+        frameLabels.put( "O" );
+        roleLabels = InputReader.ReadFeatureIndex( roleLabelsFile, false );
+        frameLabels.put( "O" );
 
-		logger.info("gold: " + goldFile);
+        ClassifierResults.FrameLabelList = frameLabels;
+        ClassifierResults.RoleLabelList = roleLabels;
+
+        Map<Integer, Sentence> goldSentences = read(goldFile);
+        Map<Integer, Sentence> testSentences = read(testFile);
+
+		logger.info( "gold: " + goldFile );
 		logger.info("test: " + testFile);
 		logger.debug("Total sentences: gold = " + goldSentences.size() + ", test = " + testSentences.size());
 
@@ -185,8 +190,8 @@ public class Evaluator {
                     if (goldRoleValue.contains(testRoleValue)) {
                         partialMatches += 1;
                         logger.debug("Current gold role value = [" + goldRoleValue + "], test = [" + testRoleValue + "]. At least a partial match");
-                        confusionMatrix.AddResult( roleLabels.get( testRoleName ),
-                                                   roleLabels.get( goldRoleName ) );
+                        confusionMatrix.AddResult( roleLabels.getIndex( testRoleName ),
+                                                   roleLabels.getIndex( goldRoleName ) );
 
                         if (goldRoleName.equalsIgnoreCase(testRoleName)) {
                             logger.debug("Gold sentence #" + goldId + ", gold role: " + goldRoleName + ", test role: " + testRoleName);
@@ -206,8 +211,8 @@ public class Evaluator {
                     logger.warn("Gold role value [" + goldRoleValue + "] not in test roles " + testRoleList);
                     frameEvaluation.incFn();
                     logger.warn("+1 roles FN, total = " + frameEvaluation.getFn());
-                    confusionMatrix.AddResult( roleLabels.get( "o" ),
-                                               roleLabels.get( goldRoleName ) );
+                    confusionMatrix.AddResult( roleLabels.getIndex( "O" ),
+                                               roleLabels.getIndex( goldRoleName ) );
                 }
 			}
 
@@ -225,8 +230,8 @@ public class Evaluator {
                     logger.warn("Test role " + testRole + " not in gold roles " + goldRoleList);
                     frameEvaluation.incFp();
                     logger.warn("+1 FP, total = " + frameEvaluation.getTp());
-					confusionMatrix.AddResult( roleLabels.get( testRole.getName() ),
-											   roleLabels.get( "o" ) );
+					confusionMatrix.AddResult( roleLabels.getIndex( testRole.getName( ) ),
+											   roleLabels.getIndex( "O" ) );
                 }
             }
 
@@ -277,10 +282,10 @@ public class Evaluator {
         Set<String> test = testSentence.getFrames( );
         Set<String> gold = goldSentence.getFrames( );
 
-        String predictedFrame = test.size() == 1 ? test.iterator().next() : "o";
+        String predictedFrame = test.size() == 1 ? test.iterator().next() : "O";
         String actualFrame = gold.iterator().next();
 
-        confusionMatrix.AddResult( frameLabels.get(predictedFrame), frameLabels.get(actualFrame) );
+        confusionMatrix.AddResult( frameLabels.getIndex( predictedFrame ), frameLabels.getIndex( actualFrame ) );
 
 		Iterator<String> goldIterator = gold.iterator();
 		for (int i = 0; goldIterator.hasNext(); i++) {
@@ -291,7 +296,7 @@ public class Evaluator {
                 frameEvaluation.incTp();
                 logger.warn("+1 frame TP, total = " + frameEvaluation.getTp());
 
-                confusionMatrix.AddResult( frameLabels.get( goldFrame ), frameLabels.get( goldFrame ) );
+                confusionMatrix.AddResult( frameLabels.getIndex( goldFrame ), frameLabels.getIndex( goldFrame ) );
             }
 			else {
 				frameEvaluation.incFn();
@@ -519,24 +524,21 @@ public class Evaluator {
 		Sentence sentence = null;
 		while ((line = lr.readLine()) != null) {
 
-			String[] s = line.split("\t");
+			String[] s = line.split("\t", -1);
 			if (s.length > 5) {
 
 				if (sid == null) {
 					sid = s[0];
 					sentence = new Sentence(sid);
 				}
-				//logger.debug(count + "\t" + line);
-				//logger.debug(">\t" + sid + "\t" + s[0] + "\t>" + line);
 				if (!s[0].equalsIgnoreCase(sid)) {
-					//logger.debug("addMeasure sentence " + sid + "\t" + sentence);
 					sentenceMap.put(Integer.parseInt(sid), sentence);
 					sid = s[0];
 					sentence = new Sentence(sid);
 				}
 				if (!s[6].trim().equalsIgnoreCase("O")) {
-					//logger.debug(fin.getName() + "\t" + line);
-					sentence.add(s[0], s[5].toLowerCase(), s[6].toLowerCase(), s[2].toLowerCase());
+					ClassifierResults res = ClassifierResults.fromTSV( s, 2 );
+                    sentence.add(s[0], res.getFrame(), res.getRole(), res.getToken());
 				}
 
 			}
@@ -545,18 +547,6 @@ public class Evaluator {
 		sentenceMap.put(Integer.parseInt(sid), sentence);
 		return sentenceMap;
 	}
-
-    private Map<String, Integer> readLabels( File fin ) throws IOException {
-        LineNumberReader lr = new LineNumberReader( new InputStreamReader( new FileInputStream( fin ), "UTF-8" ) );
-        String line;
-
-        Map<String, Integer> labels = new TreeMap<>( );
-        while ( ( line = lr.readLine( ) ) != null ) {
-            String[] parts = line.split( "\t" );
-            labels.put( parts[ 1 ].toLowerCase( ), Integer.parseInt( parts[ 0 ] ) );
-        }
-        return labels;
-    }
 
 	public void write(File f) throws IOException {
 		PrintWriter pw = new PrintWriter(new BufferedWriter(new OutputStreamWriter(new FileOutputStream(f), "UTF-8")));
@@ -574,12 +564,12 @@ public class Evaluator {
 
         File rolesCf = new File( f.getAbsolutePath( ) + ".roles.confusion.csv" );
         pw = new PrintWriter( new BufferedWriter( new OutputStreamWriter( new FileOutputStream( rolesCf ), "UTF-8" ) ) );
-        pw.write( rolesConfusionMatrix.toCSV( ) );
+        pw.write( rolesConfusionMatrix.toCSV( ClassifierResults.RoleLabelList ) );
         pw.close( );
 
         File framesCf = new File( f.getAbsolutePath( ) + ".frames.confusion.csv" );
         pw = new PrintWriter( new BufferedWriter( new OutputStreamWriter( new FileOutputStream( framesCf ), "UTF-8" ) ) );
-        pw.write( framesConfusionMatrix.toCSV( ) );
+        pw.write( framesConfusionMatrix.toCSV( ClassifierResults.FrameLabelList ) );
         pw.close( );
     }
 	public static void main(String[] args) {

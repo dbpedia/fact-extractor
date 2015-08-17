@@ -11,6 +11,7 @@ import org.fbk.cit.hlt.core.mylibsvm.svm;
 import org.fbk.cit.hlt.core.mylibsvm.svm_model;
 import org.fbk.cit.hlt.core.mylibsvm.svm_node;
 import org.fbk.cit.hlt.core.mylibsvm.svm_parameter;
+import org.glassfish.grizzly.nio.transport.DefaultStreamReader;
 
 import java.io.*;
 import java.text.DecimalFormat;
@@ -50,10 +51,7 @@ public class Annotator {
 	static Logger logger = Logger.getLogger(Annotator.class.getName());
 
 	private svm_model roleModel;
-
 	private svm_model frameModel;
-
-	private Tokenizer tokenier;
 
 	private TreeTaggerWrapper treeTagger;
 
@@ -88,31 +86,25 @@ public class Annotator {
         File roleLibsvmModelFile = new File(roleFile + ".model");
         File roleLabelFile = new File(roleFile + ".label");
 
-		roleFeatureIndex = new FeatureIndex(true);
-		roleFeatureIndex.read(new InputStreamReader(new FileInputStream(roleFeatureFile), "UTF-8"));
-        roleFeatureExtractor = new RoleFeatureExtractor( roleFeatureIndex, gazetteerMap );
-		logger.info(roleFeatureIndex.size() + " role features from " + roleFeatureFile);
+        File frameFeatureFile = new File(frameFile + ".feat");
+        File frameLibsvmModelFile = new File(frameFile + ".model");
+        File frameLabelFile = new File(frameFile + ".label");
 
-		roleLabelIndex = new FeatureIndex(true);
-		roleLabelIndex.read(new InputStreamReader(new FileInputStream(roleLabelFile), "UTF-8"));
+        roleFeatureIndex = InputReader.ReadFeatureIndex( roleFeatureFile, true );
+        roleFeatureExtractor = new RoleFeatureExtractor( roleFeatureIndex, gazetteerMap );
+        logger.info(roleFeatureIndex.size() + " role features from " + roleFeatureFile);
+
+        roleLabelIndex = InputReader.ReadFeatureIndex( roleLabelFile, true );
 		logger.info(roleLabelIndex.size() + " role labels " + roleLabelFile);
         ClassifierResults.RoleLabelList = roleLabelIndex;
 
-		File frameFeatureFile = new File(frameFile + ".feat");
-		File frameLibsvmModelFile = new File(frameFile + ".model");
-		File frameLabelFile = new File(frameFile + ".label");
-
-		frameFeatureIndex = new FeatureIndex(true);
-		frameFeatureIndex.read(new InputStreamReader(new FileInputStream(frameFeatureFile), "UTF-8"));
+        frameFeatureIndex = InputReader.ReadFeatureIndex( frameFeatureFile, true );
         frameFeatureExtractor = new FrameFeatureExtractor( frameFeatureIndex, gazetteerMap );
-		logger.info(frameFeatureIndex.size() + " frame features from " + frameFeatureFile);
+        logger.info(frameFeatureIndex.size() + " frame features from " + frameFeatureFile);
 
-		frameLabelIndex = new FeatureIndex(true);
-		frameLabelIndex.read(new InputStreamReader(new FileInputStream(frameLabelFile), "UTF-8"));
-		logger.info(frameLabelIndex.size() + " frame labels from " + frameLabelFile);
+        frameLabelIndex = InputReader.ReadFeatureIndex( frameLabelFile, true );
         ClassifierResults.FrameLabelList = frameLabelIndex;
-
-		tokenier = new HardTokenizer();
+        logger.info(frameLabelIndex.size() + " frame labels from " + frameLabelFile);
 
 		roleModel = svm.svm_load_model(roleLibsvmModelFile.getAbsolutePath());
 		frameModel = svm.svm_load_model(frameLibsvmModelFile.getAbsolutePath());
@@ -123,18 +115,18 @@ public class Annotator {
      */
     private List<ClassifierResults> tokenizeSentence( String line ) throws Exception {
         final List<ClassifierResults> sentence = new ArrayList<>( );
-        ClassifierResults eos = new ClassifierResults( "EOS", "EOS", "EOS", 0., 0., 0., -1, -1 );
+        ClassifierResults eos = new ClassifierResults( "EOS", "EOS", "EOS", 0., 0., 0., -1, -1, "" );
         sentence.add( eos );
 
         try {
             treeTagger.setHandler( new TokenHandler( ) {
                 @Override
                 public void token( Object token, String pos, String lemma ) {
-                    sentence.add( new ClassifierResults( ( String ) token, pos, lemma, 1., 0., 0., -1, -1 ) );
+                    sentence.add( new ClassifierResults( ( String ) token, pos, lemma, 1., 0., 0., -1, -1, "" ) );
                 }
             } );
 
-            String[] tokens = tokenier.stringArray( line );
+            String[] tokens = new HardTokenizer().stringArray( line );
             treeTagger.process( tokens );
         }
         catch ( Exception e ) {
@@ -182,23 +174,23 @@ public class Annotator {
                 // Use the 'ENT' tag only if the n-gram has more than 1 token, otherwise keep the original POS tag
                 if ( tokens.length > 1 ) {
                     replacement = new ClassifierResults( chunk, "ENT",
-                                                         //combinedChunks.get( chunk ).getUri( ),
                                                          chunk,
                                                          combinedChunks.get( chunk ).getConfidence( ),
                                                          toReplace.getFrameConfidence( ),
                                                          toReplace.getRoleConfidence( ),
                                                          toReplace.getPredictedRole( ),
-                                                         toReplace.getPredictedFrame( ) );
+                                                         toReplace.getPredictedFrame( ),
+                                                         combinedChunks.get( chunk ).getUri( ) );
                 }
                 else {
                     replacement = new ClassifierResults( chunk, toReplace.getPos( ),
-                                                         //combinedChunks.get( chunk ).getUri( ),
                                                          chunk,
                                                          combinedChunks.get( chunk ).getConfidence( ),
                                                          toReplace.getFrameConfidence( ),
                                                          toReplace.getRoleConfidence( ),
                                                          toReplace.getPredictedRole( ),
-                                                         toReplace.getPredictedFrame( ) );
+                                                         toReplace.getPredictedFrame( ),
+                                                         combinedChunks.get( chunk ).getUri( ));
                 }
 
                 List<ClassifierResults> startSubList = merged.subList( 0, matchStartIndex );
@@ -223,7 +215,8 @@ public class Annotator {
 
             int y = predict( featureVector, roleModel, probabilities );
             example.setPredictedRole( y );
-            example.setRoleConfidence( probabilities.get( y ) );
+            if ( probabilities.containsKey( y ) )  // fixme doesn't always happen
+                example.setRoleConfidence( probabilities.get( y ) );
             logger.info( example.getToken( ) + "\t" + y + "\t" + probabilities.get( y ) );
         }
     }
@@ -270,7 +263,7 @@ public class Annotator {
     */
 
 	public List<Answer> classify(File fin) throws IOException {
-		List<Answer> list = new ArrayList<Answer>();
+		List<Answer> list = new ArrayList<>();
 		LineNumberReader lr = new LineNumberReader(new FileReader(fin));
 		String line = null;
 		int count = 0;
@@ -380,7 +373,7 @@ public class Annotator {
             double[] prob_estimates = new double[nr_class];
             v = svm.svm_predict_probability(model, x, prob_estimates);
             for(int i = 0; i  < prob_estimates.length; i++)
-                probabilities.put(i, prob_estimates[i]);
+                probabilities.put( i, prob_estimates[ i ] );
         }
         else v = svm.svm_predict(model, x);
 
@@ -409,20 +402,13 @@ public class Annotator {
         return ( int ) v;
     }
 
-	public void write(List<Answer> list, File fout, File confidences_out, String format) throws IOException {
+	public void write(List<Answer> list, File fout ) throws IOException {
         PrintWriter pw_answer = new PrintWriter( new BufferedWriter( new OutputStreamWriter(
                 new FileOutputStream( fout ), "UTF-8" ) ) );
-        PrintWriter pw_conf = new PrintWriter( new BufferedWriter( new OutputStreamWriter(
-                new FileOutputStream( confidences_out ), "UTF-8" ) ) );
 
-        for(Answer answer: list) {
-            if ( format.equalsIgnoreCase( "tsv" ) ) {
-                pw_answer.print( answer.toTSV( ) );
-                pw_conf.print( answer.confidenceToTSV( ) );
-            }
-        }
+        for(Answer answer: list)
+            pw_answer.print( answer.toTSV( ) );
         pw_answer.close( );
-        pw_conf.close( );
     }
 
 	public static void main(String[] args) throws Exception {
@@ -441,7 +427,6 @@ public class Annotator {
 			Option outputFileOpt = OptionBuilder.withArgName("file").hasArg().withDescription("file in which to write the annotated the offline annotation in tsv format").withLongOpt("output").create("o");
 			Option interactiveModeOpt = OptionBuilder.withDescription("enter in the interactive mode").withLongOpt("interactive-mode").create("i");
 			Option langOpt = OptionBuilder.withArgName("string").hasArg().withDescription("language").isRequired().withLongOpt("lang").create("l");
-            Option confOutOpt =OptionBuilder.withArgName("file").hasArg().withDescription("file in which to write the confidence of annotated results").withLongOpt("conf-output").create( "c" );
 			options.addOption(OptionBuilder.withDescription("trace mode").withLongOpt("trace").create());
 			options.addOption(OptionBuilder.withDescription("debug mode").withLongOpt("debug").create());
 
@@ -456,7 +441,6 @@ public class Annotator {
 			options.addOption(outputFileOpt);
 			options.addOption(reportFileOpt);
 			options.addOption(langOpt);
-            options.addOption( confOutOpt );
 
 			CommandLineParser parser = new PosixParser();
 			CommandLine line = parser.parse(options, args);
@@ -477,7 +461,6 @@ public class Annotator {
 			String frame = line.getOptionValue("model") + ".frame";
 			String lang = line.getOptionValue("lang");
 
-
 			Annotator annotator = new Annotator(iob2, frame, gazetteerFile, lang);
 			if (line.hasOption("interactive-mode")) {
 				annotator.interactive();
@@ -492,10 +475,6 @@ public class Annotator {
 					fout = new File(line.getOptionValue("output"));
 				else fout = new File(textFile.getAbsoluteFile() + ".output.tsv");
 
-                if ( line.hasOption( "conf-output" ) )
-                    confOut = new File( line.getOptionValue( "conf-output" ) );
-                else confOut = new File( textFile.getAbsoluteFile( ) + ".confidence.output.tsv" );
-
 				File evaluationReportFile;
 				if (line.hasOption("report")) {
 					evaluationReportFile = new File(line.getOptionValue("report"));
@@ -504,13 +483,7 @@ public class Annotator {
 					evaluationReportFile = new File(textFile.getAbsoluteFile() + ".report.tsv");
 				}
 				logger.info("output file: " + fout);
-                logger.info("confidence file: " + confOut);
-				if (line.hasOption("format")) {
-					annotator.write(list, fout, confOut, line.getOptionValue("format"));
-				}
-				else {
-					annotator.write(list, fout, confOut, "tsv");
-				}
+                annotator.write(list, fout);
 
 				if (line.hasOption("eval")) {
 					File evalFile = new File(line.getOptionValue("eval"));

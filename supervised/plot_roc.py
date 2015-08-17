@@ -18,15 +18,15 @@ def calc_tpr_fpr(n, confmat):
 @click.option('--first-col', default=1)
 @click.option('--last-col', default=-4)
 def main(confusion_matrix, first_row, first_col, last_row, last_col):
-    data = [r[:-1].split(';') for r in confusion_matrix]
-
+    data = [r[:-1].decode('utf8').split(';') for r in confusion_matrix]
     confmat = [[int(x) if x else 0 for x in row[first_col:last_col]]
                        for row in data[first_row:last_row]]
+    labels = data[first_row-1][first_col:last_col]
 
     for i in range(len(confmat)):
         tpr, fpr = calc_tpr_fpr(i, confmat)
         plt.plot(fpr, tpr, 'b+')
-        plt.annotate('Class %d' % i, xy=(fpr, tpr), xytext=(1, 1),
+        plt.annotate(labels[i], xy=(fpr, tpr), xytext=(1, 1),
                      textcoords='offset points')
 
     plt.plot([0., 1.], [0., 1.], 'b--')

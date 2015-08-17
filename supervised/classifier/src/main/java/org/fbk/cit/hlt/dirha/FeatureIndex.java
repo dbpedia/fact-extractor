@@ -140,14 +140,13 @@ public class FeatureIndex
 
 		if (index == null)
 			return -1;
-
-		return index.intValue();
+		else return index;
 	} // end get
 
 	//
 	public String getTerm(int i)
 	{
-		return (String) inverseMap.get(new Integer(i));
+		return (String) inverseMap.get(i);
 	}
 	//
 	public Set termSet()

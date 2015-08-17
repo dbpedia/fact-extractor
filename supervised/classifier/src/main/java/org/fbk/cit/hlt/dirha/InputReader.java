@@ -45,4 +45,10 @@ public class InputReader {
 
         return list;
     }
+
+    public static FeatureIndex ReadFeatureIndex(File fin, boolean readonly) throws IOException {
+        FeatureIndex labelIndex = new FeatureIndex(readonly);
+        labelIndex.read(new InputStreamReader(new FileInputStream(fin), "UTF-8"));
+        return labelIndex;
+    }
 }

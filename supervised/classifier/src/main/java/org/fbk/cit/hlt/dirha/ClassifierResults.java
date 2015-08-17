@@ -15,10 +15,11 @@ public class ClassifierResults implements Token {
     private Double frameConfidence;
     private int predictedRole;
     private int predictedFrame;
+    private String uri;
 
     public ClassifierResults( String token, String pos, String lemma, Double linkConfidence,
                               Double frameConfidence, Double roleConfidence, int predictedRole,
-                              int predictedFrame ) {
+                              int predictedFrame, String uri ) {
         setToken( token );
         setPos( pos );
         setLemma( lemma );
@@ -27,6 +28,7 @@ public class ClassifierResults implements Token {
         setRoleConfidence( roleConfidence );
         setPredictedRole( predictedRole );
         setPredictedFrame( predictedFrame );
+        setUri( uri );
     }
 
     public String getToken( ) {
@@ -122,5 +124,44 @@ public class ClassifierResults implements Token {
 
     public void setRole( String role ) {
         setPredictedRole( RoleLabelList.getIndex( role ) );
+    }
+
+    public String getUri( ) {
+        return uri;
+    }
+
+    public void setUri( String uri ) {
+        this.uri = uri;
+    }
+
+    public String toTSV( ) {
+        return getToken( ).replace( '_', ' ' ) + "\t" +
+                getPos( ).replace( '_', ' ' ) + "\t" +
+                getLemma( ).replace( '_', ' ' ) + "\t" +
+                getFrame( ) + "\t" +
+                getRole( ) + "\t" +
+                getFrameConfidence( ) + "\t" +
+                getRoleConfidence( ) + "\t" +
+                getLinkConfidence( ) + "\t" +
+                getUri( );
+    }
+
+    public static ClassifierResults fromTSV( String[] parts, int first ) {
+        if ( parts.length == 3 + first )
+            return new ClassifierResults( parts[ first ], parts[ first + 1 ], parts[ first + 2 ],
+                                          0., 0., 0., -1, -1, null );
+        else if ( parts.length == 5 + first )
+            return new ClassifierResults( parts[ first ], parts[ first + 1 ], parts[ first + 2 ], 0., 0., 0.,
+                                          RoleLabelList.getIndex( parts[ first + 4 ] ),
+                                          FrameLabelList.getIndex( parts[ first + 3 ] ), "" );
+        else if ( parts.length == 9 + first )
+            return new ClassifierResults( parts[ first ], parts[ first + 1 ], parts[ first + 2 ],
+                                          Double.parseDouble( parts[ first + 7 ] ),
+                                          Double.parseDouble( parts[ first + 5 ] ),
+                                          Double.parseDouble( parts[ first + 6 ] ),
+                                          RoleLabelList.getIndex( parts[ first + 4 ] ),
+                                          FrameLabelList.getIndex( parts[ first + 3 ] ),
+                                          parts[first + 8]);
+        else return null;
     }
 }

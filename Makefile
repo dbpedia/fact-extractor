@@ -18,15 +18,13 @@ CL_MAIN_PACKAGE=org.fbk.cit.hlt.dirha
 CL_JAVA_OPTS=-Dlog-config=supervised/classifier/log-config.txt -Xmx2G -Dfile.encoding=UTF-8 -cp supervised/classifier/target/fatJar.jar
 CL_TRAINING_SET=supervised/resources/training.sample
 CL_GAZETTEER=supervised/resources/it/soccer-gaz.tsv
-CL_EVAL_OUTPUT=$(CL_TRAINING_SET).evaluation
 CL_SENTENCES_FILE=$(WORK_DIR)/sample-50.txt
 CL_OUTPUT=$(WORK_DIR)/sample-50-classified.txt
-CL_CONF_OUTPUT=$(WORK_DIR)/sample-50-confidences.txt
 CL_ANNOTATED_GOLD=resources/gold-standard.curated
 CL_SVM_TRAIN_ARGS=-b 1 -t 0 -m 6000 -s 0
 LINK_MODE=twm  # twm or nex
 CF_RESULTS=resources/crowdflower-results.sample
-SCORING_TYPE=f-score
+SCORING_TYPE=weighted-mean
 FE_SCORE=both
 SCORING_CORE_WEIGHT=2
 
@@ -128,8 +126,8 @@ supervised-run-batch:
 	python date_normalizer/rpc.py 2>/dev/null &
 	java $(CL_JAVA_OPTS) -Dtreetagger.home=$(TREETAGGER_HOME) \
 		$(CL_MAIN_PACKAGE).Annotator -g $(CL_GAZETTEER) -m $(CL_TRAINING_SET) \
-		-l $(LANGCODE) -r $(CL_EVAL_OUTPUT)  -a $(CL_SENTENCES_FILE) \
-		-o $(CL_OUTPUT) -c $(CL_CONF_OUTPUT)
+		-l $(LANGCODE) -r $(CL_SENTENCES_FILE).eval  -a $(CL_SENTENCES_FILE) \
+		-o $(CL_OUTPUT)
 
 supervised-evaluate:
 	python date_normalizer/rpc.py 2>/dev/null &
@@ -137,13 +135,12 @@ supervised-evaluate:
 		$(CL_MAIN_PACKAGE).Annotator -g $(CL_GAZETTEER) -m $(CL_TRAINING_SET) \
 		-l $(LANGCODE) -r $(CL_ANNOTATED_GOLD).report \
         -a $(CL_ANNOTATED_GOLD).sentences -e $(CL_ANNOTATED_GOLD) \
-        -r $(CL_ANNOTATED_GOLD).report -o $(CL_ANNOTATED_GOLD).classified \
-        -c $(CL_ANNOTATED_GOLD).confidence
+        -r $(CL_ANNOTATED_GOLD).report -o $(CL_ANNOTATED_GOLD).classified
 
 supervised-results-to-assertions:
-	python supervised/produce_triples.py $(CL_OUTPUT) $(CL_CONF_OUTPUT) \
-		$(WORK_DIR)/wiki-id-to-title-mapping.json $(WORK_DIR)/supervised-triples.nt \
-        $(WORK_DIR)/supervised-scores.nt --format nt --sentence-score $(SCORING_TYPE) \
+	python supervised/produce_triples.py $(CL_OUTPUT) \
+        $(WORK_DIR)/wiki-id-to-title-mapping.json $(CL_OUTPUT).triples.nt \
+        $(CL_OUTPUT).triples.scores.nt --format nt --sentence-score $(SCORING_TYPE) \
         --core-weight $(SCORING_CORE_WEIGHT) --fe-score $(FE_SCORE) --format nt
 
 crowdflower-create-input:
