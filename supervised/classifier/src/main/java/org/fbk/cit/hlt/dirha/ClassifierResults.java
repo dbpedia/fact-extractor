@@ -107,4 +107,20 @@ public class ClassifierResults implements Token {
     public void setRoleConfidence( Double roleConfidence ) {
         this.roleConfidence = roleConfidence;
     }
+
+    public String getFrame( ) {
+        return getPredictedFrameLabel( );
+    }
+
+    public String getRole( ) {
+        return getPredictedRoleLabel( );
+    }
+
+    public void setFrame( String frame ) {
+        setPredictedFrame( FrameLabelList.getIndex( frame ) );
+    }
+
+    public void setRole( String role ) {
+        setPredictedRole( RoleLabelList.getIndex( role ) );
+    }
 }

@@ -179,7 +179,7 @@ public class FeatureIndex
 			sb.append("\n");
 		}
 		return sb.toString();
-	} // end toString
+	} // end toTable
 
 	/**
 	 * Writes the feature ngramIndex into the specified
@@ -238,13 +238,13 @@ public class FeatureIndex
 	 * if there are no remaining  characters, the feature is the
 	 * empty string "".
 	 *
-	 * @param in						a <code>Reader</code> object to
+	 * @param in						a <code>InputReader</code> object to
 	 *											provide the underlying stream.
 	 * @throws IOException	if reading this feature ngramIndex 
 	 *											from the specified  input stream
 	 *											throws an <code>IOException</code>.
 	 */
-	public void read(Reader in) throws IOException
+	public void read(InputStreamReader in) throws IOException
 	{
 		long begin = System.currentTimeMillis();
 		logger.info("reading vocabulary...");
@@ -253,7 +253,6 @@ public class FeatureIndex
 
 		String line;
 		String[] s;
-		Integer id;
 		while ((line = lnr.readLine()) != null)
 		{
 			line = line.trim();

@@ -6,14 +6,14 @@ public class GenericToken implements Token {
     private String pos;
     private String lemma;
     private String frame;
-    private String tag;
+    private String role;
 
-    public GenericToken( String token, String pos, String lemma, String frame, String tag ) {
+    public GenericToken( String token, String pos, String lemma, String frame, String role ) {
         setToken( token );
         setPos( pos );
         setLemma( lemma );
         setFrame( frame );
-        setTag( tag );
+        setRole( role );
     }
 
     @Override
@@ -51,16 +51,16 @@ public class GenericToken implements Token {
         this.frame = frame;
     }
 
-    public String getTag( ) {
-        return tag;
+    public String getRole( ) {
+        return role;
     }
 
-    public void setTag( String tag ) {
-        this.tag = tag;
+    public void setRole( String role ) {
+        this.role = role;
     }
 
     public String toString( ) {
         return getToken( ) + "\t" + getPos( ) + "\t" + getLemma( ) + "\t"
-                + getFrame( ) + "\t" + getTag( );
+                + getFrame( ) + "\t" + getRole( );
     }
 }

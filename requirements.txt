@@ -8,3 +8,4 @@ rfc3987==1.3.4
 lxml==3.4.4
 requests==2.7.0
 Pyro4==4.39
+matplotlib==1.4.3

@@ -7,6 +7,7 @@ import org.apache.log4j.PropertyConfigurator;
 import java.io.*;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.ListIterator;
 import java.util.Properties;
 
 public class DateNormalizer {
@@ -62,6 +63,61 @@ public class DateNormalizer {
         proxy = null;
         getProxy( );  // better failing now so everybody knows what went wrong
     }
+
+
+    public static <T extends Token> List<T> normalizeNumericalExpressions( List<T> tokens ) {
+        StringBuilder sb = new StringBuilder( );
+
+        // skip first "EOS" token
+        for ( ListIterator<T> iter = tokens.listIterator( 1 ); iter.hasNext( ); ) {
+            sb.append( iter.next( ).getToken( ).replace( '_', ' ' ) );
+            sb.append( " " );
+        }
+        String sentence = sb.toString( );
+
+        for ( NormalizerResult res : DateNormalizer.NormalizeMany( sentence ) ) {
+            String original = sentence.substring( res.getStart( ), res.getEnd( ) );
+
+            // find the first token of the match (remember first token is EOS)
+            int cursor = 0, i = 1;
+            while ( cursor != res.getStart( ) && i < tokens.size( ) ) {
+                cursor += tokens.get( i ).getToken( ).length( ) + 1;  // remember space between tokens
+                i += 1;
+            }
+
+            if ( i == tokens.size( ) )
+                continue;  // the normalized token is a sub-token of another token
+
+            // find the last token of the match
+            int j = i;
+            cursor -= 1;  // we addMeasure a space for every token, but the spaces between tokens are len(tokens) - 1
+            while ( cursor != res.getEnd( ) && j < tokens.size( ) ) {
+                cursor += tokens.get( j ).getToken( ).length( ) + 1;
+                j += 1;
+            }
+
+            if ( cursor != res.getEnd( ) )
+                continue;  // the normalized token is a sub-token of another token
+
+            // replace the old tokens with the new one (obtained by editing the first matched token)
+            T replacement = tokens.get( i );
+            String the_token = original.replace( ' ', '_' );
+            replacement.setToken( the_token );
+            replacement.setPos( "ENT" );
+            replacement.setLemma( the_token );
+            replacement.setRole( res.getCategory( ) );
+
+            List<T> new_tokens = new ArrayList<>( tokens.size( ) );
+            new_tokens.addAll( tokens.subList( 0, i ) );
+            new_tokens.add( replacement );
+            if ( j < tokens.size( ) )
+                new_tokens.addAll( tokens.subList( j, tokens.size( ) ) );
+            tokens = new_tokens;
+        }
+
+        return tokens;
+    }
+
 
     public static void main( String[] args ) throws IOException {
         BufferedReader in = new BufferedReader( new InputStreamReader( System.in ) );
