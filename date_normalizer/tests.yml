@@ -1,13 +1,24 @@
 il 4 settembre 2010: '"2010-09-04"^^<http://www.w3.org/2001/XMLSchema#date>'
 il 4 settembre del 2010: '"2010-09-04"^^<http://www.w3.org/2001/XMLSchema#date>'
+il 12 giugno del 1966: '"1966-06-12"^^<http://www.w3.org/2001/XMLSchema#date>'
+l'11 agosto del 1993: '"1993-08-11"^^<http://www.w3.org/2001/XMLSchema#date>'
+1º marzo 2014: '"2014-03-01"^^<http://www.w3.org/2001/XMLSchema#date>'
 il 5 agosto: '"08-05"^^<http://www.w3.org/2001/XMLSchema#gMonthDay>'
+9 ottobre: '"10-09"^^<http://www.w3.org/2001/XMLSchema#gMonthDay>'
 nel giugno 2012: '"2012-06"^^<http://www.w3.org/2001/XMLSchema#gYearMonth>'
 in maggio: '"05"^^<http://www.w3.org/2001/XMLSchema#gMonth>'
+del 1924: '"1924"^^<http://www.w3.org/2001/XMLSchema#gYear>'
 nel 2014: '"2014"^^<http://www.w3.org/2001/XMLSchema#gYear>'
 il 2004: '"2004"^^<http://www.w3.org/2001/XMLSchema#gYear>'
+1984: '"1984"^^<http://www.w3.org/2001/XMLSchema#gYear>'
 l'anno seguente: '"$YEAR + 1"'
+l'anno successivo: '"$YEAR + 1"'
 l ' anno seguente: '"$YEAR + 1"'
 la stagione successiva: '"$YEAR + 1"'
+1999-2000:
+  duration: '"P1Y"^^<http://www.w3.org/2001/XMLSchema#duration>'
+  start: '"1999"^^<http://www.w3.org/2001/XMLSchema#gYear>'
+  end: '"2000"^^<http://www.w3.org/2001/XMLSchema#gYear>'
 stagione 1984-1985:
   duration: '"P1Y"^^<http://www.w3.org/2001/XMLSchema#duration>'
   start: '"1984"^^<http://www.w3.org/2001/XMLSchema#gYear>'
@@ -16,11 +27,40 @@ campionato 1921-1922:
   duration: '"P1Y"^^<http://www.w3.org/2001/XMLSchema#duration>'
   start: '"1921"^^<http://www.w3.org/2001/XMLSchema#gYear>'
   end: '"1922"^^<http://www.w3.org/2001/XMLSchema#gYear>'
-fino al 1999: '"to 1999"'
-fino all'estate del 2006: '"to 2006"'
-fino all ' estate del 2006: '"to 2006"'
-fino alla primavera del 2006: '"to 2006"'
-fino alla seconda parte del 2006: '"to 2006"'
+campionato 1976-1977:
+  duration: '"P1Y"^^<http://www.w3.org/2001/XMLSchema#duration>'
+  start: '"1976"^^<http://www.w3.org/2001/XMLSchema#gYear>'
+  end: '"1977"^^<http://www.w3.org/2001/XMLSchema#gYear>'
+biennio 2009-2010:
+  duration: '"P1Y"^^<http://www.w3.org/2001/XMLSchema#duration>'
+  start: '"2009"^^<http://www.w3.org/2001/XMLSchema#gYear>'
+  end: '"2010"^^<http://www.w3.org/2001/XMLSchema#gYear>'
+tra il 1920 e il 1925:
+  duration: '"P5Y"^^<http://www.w3.org/2001/XMLSchema#duration>'
+  start: '"1920"^^<http://www.w3.org/2001/XMLSchema#gYear>'
+  end: '"1925"^^<http://www.w3.org/2001/XMLSchema#gYear>'
+dall'8 dicembre 2009:
+  start: '"2009-12-08"^^<http://www.w3.org/2001/XMLSchema#date>'
+dal 2006:
+  start: '"2006"^^<http://www.w3.org/2001/XMLSchema#gYear>'
+al 27 maggio 1923:
+  end: '"1923-05-27"^^<http://www.w3.org/2001/XMLSchema#date>'
+fino al 1999:
+  end: '"1999"^^<http://www.w3.org/2001/XMLSchema#gYear>'
+sino al 2000:
+  end: '"2000"^^<http://www.w3.org/2001/XMLSchema#gYear>'
+fino all'estate 2004:
+  end: '"2004"^^<http://www.w3.org/2001/XMLSchema#gYear>'
+fino all'estate del 2006:
+  end: '"2006"^^<http://www.w3.org/2001/XMLSchema#gYear>'
+fino all ' estate del 2006:
+  end: '"2006"^^<http://www.w3.org/2001/XMLSchema#gYear>'
+fino alla primavera del 2006:
+  end: '"2006"^^<http://www.w3.org/2001/XMLSchema#gYear>'
+fino alla seconda parte del 2006:
+  end: '"2006"^^<http://www.w3.org/2001/XMLSchema#gYear>'
+fino al 2 gennaio 2008:
+  end: '"2008-01-02"^^<http://www.w3.org/2001/XMLSchema#date>'
 per due stagioni: '"P2Y"^^<http://www.w3.org/2001/XMLSchema#duration>'
 per due anni: '"P2Y"^^<http://www.w3.org/2001/XMLSchema#duration>'
 dal 1996 al 2005:
@@ -41,6 +81,7 @@ zero a zero: '"0-0"'
 tre annate: '"P3Y"^^<http://www.w3.org/2001/XMLSchema#duration>'
 2 stagioni: '"P2Y"^^<http://www.w3.org/2001/XMLSchema#duration>'
 nell'estate del 2006: '"2006"^^<http://www.w3.org/2001/XMLSchema#gYear>'
+nell'estate del 1926: '"1926"^^<http://www.w3.org/2001/XMLSchema#gYear>'
 nell ' estate del 2006: '"2006"^^<http://www.w3.org/2001/XMLSchema#gYear>'
 Bekker gioca per il ciao dal 2013: '"from 2013"'
 nell'amichevole del 10 febbraio 2010: '"2010-02-10"^^<http://www.w3.org/2001/XMLSchema#date>'
