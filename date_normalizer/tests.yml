@@ -85,7 +85,8 @@ tre annate: '"P3Y"^^<http://www.w3.org/2001/XMLSchema#duration>'
 nell'estate del 2006: '"2006"^^<http://www.w3.org/2001/XMLSchema#gYear>'
 nell'estate del 1926: '"1926"^^<http://www.w3.org/2001/XMLSchema#gYear>'
 nell ' estate del 2006: '"2006"^^<http://www.w3.org/2001/XMLSchema#gYear>'
-Bekker gioca per il ciao dal 2013: '"from 2013"'
+Bekker gioca per il ciao dal 2013:
+  start: '"2013"^^<http://www.w3.org/2001/XMLSchema#gYear>'
 nell'amichevole del 10 febbraio 2010: '"2010-02-10"^^<http://www.w3.org/2001/XMLSchema#date>'
 nell ' amichevole del 10 febbraio 2010: '"2010-02-10"^^<http://www.w3.org/2001/XMLSchema#date>'
 negli anni 20:
