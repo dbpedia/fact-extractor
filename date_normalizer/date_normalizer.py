@@ -68,6 +68,7 @@ class DateNormalizer(object):
         for category, regexes in self.regexes.iteritems():
             for regex, transform in regexes:
                 for match in regex.finditer(expression):
+                    expression = expression[match.start():]
                     yield self._process_match(category, transform, match)
 
     def _process_match(self, category, transform, match):
