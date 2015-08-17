@@ -86,6 +86,13 @@ Tempo:
       '"$YEAR + 1"'
 
 Durata:
+  - (?P<y1>\d{{2,4}})[-/](?P<y2>\d{{2,4}}): >
+      {
+        'duration': '"P1Y"^^<{}>'.format(schema['duration']),
+        'start': '"{}"^^<{}>'.format(abs_year(match.group('y1')), schema['year']),
+        'end': '"{}"^^<{}>'.format(abs_year(match.group('y2')), schema['year']),
+      }
+
   - stagione (calcistica )?(?P<y1>\d{{2,4}})[-/](?P<y2>\d{{2,4}}): >
       {
         'duration': '"P1Y"^^<{}>'.format(schema['duration']),
