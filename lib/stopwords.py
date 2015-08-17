@@ -1,5 +1,9 @@
+#!/usr/bin/env python
+# -*- encoding: utf-8 -*-
+
 import codecs
 import os
+
 
 class StopWords(object):
     """
@@ -19,7 +23,7 @@ class StopWords(object):
         'spanish': 'stop-words_spanish.txt'
     }
     #directory containing the above files
-    _stopword_directory = os.path.join('..', 'resources', 'stop-words')
+    _stopword_directory = os.path.join('resources', 'stop-words')
 
     @classmethod
     def words(self,language):
