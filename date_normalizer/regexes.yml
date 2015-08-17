@@ -123,11 +123,3 @@ Durata:
 Punteggio:
   - \b(?P<s1>\d{{1,2}})\s*[-a]\s*(?P<s2>\d{{1,2}})\b: >
       '"{}-{}"'.format(match.group('s1'), match.group('s2'))
-
-Classifica:
-  - primo: >
-      '"I"'
-  - secondo: >
-      '"II"'
-  - terzo: >
-      '"III"'
