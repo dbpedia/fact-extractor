@@ -107,8 +107,10 @@ Durata:
         'end': '"{}"^^<{}>'.format(abs_year(match.group('y2')), schema['year']),
       }
 
-  - fino al((l\s?'\s?|la\s|\s)?(\w+(\b|\s)){{,3}} del(l\s?')?)? (?P<year>\d{{2,4}}): >
-      '"to {}"'.format(match.group('year'))
+  - (f|s)ino al((l\s?'\s?|la\s|\s)?(\w+(\b|\s)){{,3}} del(l\s?')?)? (?P<year>\d{{2,4}}): >
+      {
+        'end': '"{}"^^<{}>'.format(abs_year(match.group('year')), schema['year'])
+      }
 
   - dal (?P<year>\d{{4}})\b(?! al): >
       '"from {}"'.format(match.group('year'))
