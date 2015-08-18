@@ -77,6 +77,11 @@ public class FrameTrainingSetToLibSvm {
             pw.println(featureVector);
         }
 
+        // FIXME missing in training!!!
+        labelIndex.put( "Vittoria" );
+        labelIndex.put( "Partita" );
+        labelIndex.put( "O" );
+
         pw.close( );
         featureIndex.write( new OutputStreamWriter( new FileOutputStream( featureFile ), "UTF-8" ) );
         labelIndex.write( new OutputStreamWriter( new FileOutputStream( labelFile ), "UTF-8" ) );
@@ -125,8 +130,7 @@ public class FrameTrainingSetToLibSvm {
             File libsvmFile = new File(training + ".frame.svm");
             File labelFile = new File(training + ".frame.label");
 
-
-            File gazetteerFile = new File(args[1]);
+            File gazetteerFile = new File(line.getOptionValue( "gazetteer" ));
             new FrameTrainingSetToLibSvm(featureFile, exampleFile, libsvmFile, labelFile, gazetteerFile).convert();
         } catch (ParseException e) {
             // oops, something went wrong

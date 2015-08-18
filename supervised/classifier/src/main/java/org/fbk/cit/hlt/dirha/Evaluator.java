@@ -60,13 +60,7 @@ public class Evaluator {
 		this.testFile = testFile;
 
         frameLabels = InputReader.ReadFeatureIndex( frameLabelsFile, false );
-        frameLabels.put( "Vittoria" );  // FIXME missing in training!!!
-        frameLabels.put( "Partita" );
-        frameLabels.put( "O" );
         roleLabels = InputReader.ReadFeatureIndex( roleLabelsFile, false );
-        frameLabels.put( "O" );
-		roleLabels.put( "Squadra_1" );
-		roleLabels.put( "Squadra_2" );
 
         ClassifierResults.FrameLabelList = frameLabels;
         ClassifierResults.RoleLabelList = roleLabels;

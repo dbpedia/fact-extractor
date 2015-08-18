@@ -40,6 +40,8 @@ public class RoleTrainingSetToLibSvm {
 		labelIndex.put("Punteggio");
 		labelIndex.put("Classifica");
 		labelIndex.put("Tempo");
+		labelIndex.put( "Squadra_1" );
+		labelIndex.put( "Squadra_2" );
 
         Map<String, String> gazetteerMap = InputReader.ReadGazetteer( gazetteerFile );
 

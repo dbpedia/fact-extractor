@@ -1,10 +1,7 @@
 package org.fbk.cit.hlt.dirha;
 
 import java.io.*;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 public class InputReader {
     public static Map<String, String> ReadGazetteer( File fin ) throws IOException {
@@ -22,33 +19,26 @@ public class InputReader {
     }
 
     public static List<List<GenericToken>> ReadSentences( File fin ) throws IOException {
-        List<List<GenericToken>> list = new ArrayList<>( );
         LineNumberReader lr = new LineNumberReader( new InputStreamReader( new FileInputStream( fin ), "UTF-8" ) );
-        String line, sentence_id = null;
-        ArrayList<GenericToken> sentence = null;
+        Map<Integer, List<GenericToken>> sentences = new HashMap<>( );
+        String line;
 
         while ( ( line = lr.readLine( ) ) != null ) {
             String[] parts = line.split( "\t" );
 
-            if ( sentence_id == null ) {
-                sentence_id = parts[ 0 ];
-                sentence = new ArrayList<>( );
-            }
-            else if ( !parts[ 0 ].equals( sentence_id ) ) {
-                list.add( sentence );
-                sentence_id = parts[ 0 ];
-                sentence = new ArrayList<>( );
-            }
+            int sentence_id = Integer.parseInt( parts[ 0 ] );
+            if ( !sentences.containsKey( sentence_id ) )
+                sentences.put( sentence_id, new ArrayList<GenericToken>( ) );
 
-            sentence.add( new GenericToken( parts[ 2 ], parts[ 3 ], parts[ 4 ], parts[ 5 ], parts[ 6 ] ) );
+            sentences.get( sentence_id ).add( new GenericToken( parts[ 2 ], parts[ 3 ], parts[ 4 ], parts[ 5 ], parts[ 6 ] ) );
         }
 
-        return list;
+        return new ArrayList<>( sentences.values( ) );
     }
 
-    public static FeatureIndex ReadFeatureIndex(File fin, boolean readonly) throws IOException {
-        FeatureIndex labelIndex = new FeatureIndex(readonly);
-        labelIndex.read(new InputStreamReader(new FileInputStream(fin), "UTF-8"));
+    public static FeatureIndex ReadFeatureIndex( File fin, boolean readonly ) throws IOException {
+        FeatureIndex labelIndex = new FeatureIndex( readonly );
+        labelIndex.read( new InputStreamReader( new FileInputStream( fin ), "UTF-8" ) );
         return labelIndex;
     }
 }
