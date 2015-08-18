@@ -2,7 +2,6 @@ LANGCODE=it
 LANGUAGE=italian
 WORK_DIR=./workspace-$(LANGCODE)
 PAGES_DIR=$(WORK_DIR)/pages
-PAGES_DIR=$(WORK_DIR)/pages
 SOCCER_DIR=$(WORK_DIR)/soccer
 SENTENCES_DIR=$(WORK_DIR)/sentences
 TAGGED_DIR=$(WORK_DIR)/tagged
@@ -29,6 +28,8 @@ CF_RESULTS=resources/crowdflower-results.sample
 SCORING_TYPE=f-score
 FE_SCORE=both
 SCORING_CORE_WEIGHT=2
+GOLD_SENTENCES=resources/gold-standard.sentences
+GOLD_STANDARD=resources/gold-standard.final
 
 default:
 	@echo "Ciao"
@@ -176,3 +177,14 @@ run-unsupervised:
 	python unsupervised/labeled_to_assertions.py $(WORK_DIR)/labeled_data.json \
 		$(WORK_DIR)/wiki-id-to-title-mapping.json $(WORK_DIR)/unsupervised/processed \
 		$(WORK_DIR)/unsupervised/discarded $(WORK_DIR)/unsupervised/dataset.nt
+
+evaluate-unsupervised:
+	mkdir -p $(WORK_DIR)/unsupervised/evaluation/{linked,sentences}
+	i=0; while read f; do printf -v j "%04d" $$i; echo $$f > $(WORK_DIR)/unsupervised/evaluation/sentences/$$j; let i++; done < $(GOLD_SENTENCES)
+	python lib/entity_linking.py -d -c $(MIN_LINK_CONFIDENCE) $(LINK_MODE) \
+		$(WORK_DIR)/unsupervised/evaluation/sentences \
+		$(WORK_DIR)/unsupervised/evaluation/linked
+	python unsupervised/produce_labeled_data.py $(WORK_DIR)/unsupervised/evaluation/linked \
+		$(WORK_DIR)/unsupervised/evaluation/test_data.json --score $(SCORING_TYPE) \
+        --core-weight $(SCORING_CORE_WEIGHT) --score-fes
+	python unsupervised/evaluate.py $(WORK_DIR)/unsupervised/evaluation/test_data.json $(GOLD_STANDARD) --partial
