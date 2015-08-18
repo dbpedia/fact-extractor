@@ -19,7 +19,7 @@ CL_TRAINING_SET=supervised/resources/training.sample
 CL_GAZETTEER=supervised/resources/it/dbpedia-gaz.tsv
 CL_SENTENCES_FILE=$(WORK_DIR)/sample-50.txt
 CL_OUTPUT=$(WORK_DIR)/sample-50-classified.txt
-CL_ANNOTATED_GOLD=resources/gold-standard.curated
+CL_ANNOTATED_GOLD=resources/gold-standard.final
 CL_SVM_TRAIN_ARGS=-b 1 -t 0 -m 6000 -s 0
 LINK_MODE=twm  # twm or nex
 MIN_LINK_CONFIDENCE=0.01
@@ -27,8 +27,6 @@ CF_RESULTS=resources/crowdflower-results.sample
 SCORING_TYPE=weighted-mean
 FE_SCORE=both
 SCORING_CORE_WEIGHT=2
-GOLD_SENTENCES=resources/gold-standard.sentences
-GOLD_STANDARD=resources/gold-standard.final
 
 default:
 	@echo "Ciao"
