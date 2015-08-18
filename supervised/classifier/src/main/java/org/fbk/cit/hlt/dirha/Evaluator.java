@@ -65,6 +65,8 @@ public class Evaluator {
         frameLabels.put( "O" );
         roleLabels = InputReader.ReadFeatureIndex( roleLabelsFile, false );
         frameLabels.put( "O" );
+		roleLabels.put( "Squadra_1" );
+		roleLabels.put( "Squadra_2" );
 
         ClassifierResults.FrameLabelList = frameLabels;
         ClassifierResults.RoleLabelList = roleLabels;

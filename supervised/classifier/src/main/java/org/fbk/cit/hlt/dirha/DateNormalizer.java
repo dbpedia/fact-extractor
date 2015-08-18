@@ -101,7 +101,10 @@ public class DateNormalizer {
 
             // replace the old tokens with the new one (obtained by editing the first matched token)
             T replacement = tokens.get( i );
-            String the_token = original.replace( ' ', '_' );
+            String the_token;
+            if(res.getCategory().equals( "Punteggio"))
+                the_token = original.replace( " ", "" );
+            else the_token = original.replace( ' ', '_' );
             replacement.setToken( the_token );
             replacement.setPos( "ENT" );
             replacement.setLemma( the_token );
