@@ -42,7 +42,7 @@ public class CharKernel {
 	//
 	private double k(char[] s, char[] t, int n)
 	{
-		//logger.debug(Arrays.toString(s) + "," + Arrays.toString(t));
+		//logger.debug(Arrays.toTable(s) + "," + Arrays.toTable(t));
 		//logger.debug("k('" + new String(s) + "', '" + new String(t) + "', " + n + ")");
 		//logger.debug("k(" + s + ", " + t +")");
 		if (Math.min(s.length, t.length) < n)

@@ -29,28 +29,15 @@ def read_sentences(rows):
     sentences = defaultdict(list)
     for row in rows:
         cols = row[:-1].decode('utf8').split('\t')
-        sentences[cols[0]].append(cols)
+        if cols[0]:
+            sentences[cols[0]].append(cols)
     return sentences
 
 
-def read_classifier_confidence(file_in):
-    confidence = {}
-    for row in file_in:
-        sentence_id, token_id, frame_conf, role_conf, link_conf = row.split('\t')
-        if not sentence_id in confidence:
-            confidence[sentence_id] = {}
-        confidence[sentence_id][token_id] = (float(frame_conf), 
-                                             float(role_conf),
-                                             float(link_conf))
-    return confidence
-
-
-
-def score_fe(fe, fe_format, confidence, fe_score_type):
+def score_fe(fe_format, fe_score_type, frame_conf, role_conf, link_conf):
     if fe_score_type == 'nothing':
         return 
 
-    frame_conf, role_conf, link_conf = confidence[fe[1]]
     if fe_format == 'uri':
         if fe_score_type == 'svm':
             return role_conf
@@ -62,37 +49,43 @@ def score_fe(fe, fe_format, confidence, fe_score_type):
         return role_conf
 
 
-def to_labeled(sentences, confidence, fe_score_type):
+def to_labeled(sentences, fe_score_type):
     normalizer = DateNormalizer()
     labeled = []
     for sentence_id, rows in sentences.iteritems():
-        lu = [x for x in rows if x[-1] == 'LU']
-        if len(lu) != 1:
+        lu = [x for x in rows if x[6] == 'LU']
+        if len(lu) == 0:
             print 'Could not find LU for sentence %s' % sentence_id
-            continue
+        elif len(lu) > 1:
+            print 'More than 1 LU for sentence %s, taking first' % sentence_id
+            lu = lu[0]
         else:
             lu = lu[0]
         
+        if sentence_id == '1115184.2':
+            import pdb; pdb.set_trace()
+
         fe_list = []
-        for fe in rows:
-            if fe[-1] not in {'O', 'LU'}:
-                fe_format = 'uri' if fe[4].startswith('http://') else 'literal'
-                score = score_fe(fe, fe_format, confidence.get(sentence_id),
-                                 fe_score_type)
+        for _, _, token, pos, lemma, frame, role, frame_c, role_c, link_c, uri in rows:
+
+            if role not in {'O', 'LU'}:
+                fe_format = 'uri' if uri.startswith('http://') else 'literal'
+                score = score_fe(fe_format, fe_score_type, float(frame_c),
+                                 float(role_c), float(link_c))
 
                 fe_list.append({
-                    'chunk': fe[2],
+                    'chunk': token,
                     'type': 'core',
-                    fe_format: fe[4],
-                    'FE': fe[-1],
+                    fe_format: uri if fe_format == 'uri' else lemma,
+                    'FE': role,
                     'score': float(score) if score is not None else None
                 })
 
         sentence = ' '.join(x[2] for x in rows)
         labels = {
-            'id': lu[0],
-            'frame': lu[-2],
-            'lu': lu[2],
+            'id': sentence_id,
+            'frame': frame,
+            'lu': lu[2] if lu else None,
             'sentence': sentence,
             'FEs': fe_list,
         }
@@ -112,21 +105,21 @@ def to_labeled(sentences, confidence, fe_score_type):
 
 @click.command()
 @click.argument('classified-output', type=click.File('r'))
-@click.argument('classified-confidence', type=click.File('r'))
 @click.argument('id-to-title', type=click.File('r'))
 @click.argument('output-file', type=click.File('w'))
 @click.argument('triple-scores', type=click.File('w'))
 @click.option('--sentence-score', type=click.Choice(['arithmetic-mean', 'weighted-mean',
-                                                     'f-score', 'nothing']))
-@click.option('--fe-score', type=click.Choice(['svm', 'link', 'both', 'nothing']))
+                                                     'f-score', 'nothing']),
+              default='weighted-mean')
+@click.option('--fe-score', type=click.Choice(['svm', 'link', 'both', 'nothing']),
+              default='nothing')
 @click.option('--core-weight', default=2)
 @click.option('--format', default='nt')
-def main(classified_output, classified_confidence, output_file, id_to_title,
-         triple_scores, format, sentence_score, core_weight, fe_score):
+def main(classified_output, output_file, id_to_title, triple_scores, \
+         format, sentence_score, core_weight, fe_score):
 
     sentences = read_sentences(classified_output)
-    confidence = read_classifier_confidence(classified_confidence)
-    labeled = to_labeled(sentences, confidence, fe_score)
+    labeled = to_labeled(sentences, fe_score)
 
     if sentence_score != 'nothing':
         for sentence in labeled:

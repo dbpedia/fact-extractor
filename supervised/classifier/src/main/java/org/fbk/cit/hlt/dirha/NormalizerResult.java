@@ -1,5 +1,10 @@
 package org.fbk.cit.hlt.dirha;
 
+import org.fbk.cit.hlt.dirha.kernel.StringKernel;
+
+import java.util.HashMap;
+import java.util.Map;
+
 public class NormalizerResult {
     public static NormalizerResult FAILURE = new NormalizerResult( false, -1, -1, null, null );
 
@@ -13,7 +18,14 @@ public class NormalizerResult {
         start = ( int ) ( ( Object[] ) result[ 0 ] )[ 0 ];
         end = ( int ) ( ( Object[] ) result[ 0 ] )[ 1 ];
         category = ( String ) result[ 1 ];
-        normalized = ( String ) result[ 2 ];
+
+
+        if(result[2] instanceof String)
+            normalized = ( String ) result[ 2 ];
+        else {
+            Map<String, String> obj = (HashMap<String, String>) result[2];
+            normalized = obj.get("duration");
+        }
         success = ( start >= 0 ) && ( end >= 0 ) && ( category != null ) && ( normalized != null );
     }
 

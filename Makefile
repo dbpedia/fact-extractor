@@ -16,16 +16,15 @@ DUMP=../$(LANGCODE)wiki-latest-pages-articles.xml.bz2
 CL_MAIN_PACKAGE=org.fbk.cit.hlt.dirha
 CL_JAVA_OPTS=-Dlog-config=supervised/classifier/log-config.txt -Xmx2G -Dfile.encoding=UTF-8 -cp supervised/classifier/target/fatJar.jar
 CL_TRAINING_SET=supervised/resources/training.sample
-CL_GAZETTEER=supervised/resources/it/soccer-gaz.tsv
-CL_EVAL_OUTPUT=/tmp/classifierEvaluationOutput
+CL_GAZETTEER=supervised/resources/it/dbpedia-gaz.tsv
 CL_SENTENCES_FILE=$(WORK_DIR)/sample-50.txt
 CL_OUTPUT=$(WORK_DIR)/sample-50-classified.txt
-CL_CONF_OUTPUT=$(WORK_DIR)/sample-50-confidences.txt
-CL_ANNOTATED_GOLD=
+CL_ANNOTATED_GOLD=resources/gold-standard.curated
+CL_SVM_TRAIN_ARGS=-b 1 -t 0 -m 6000 -s 0
 LINK_MODE=twm  # twm or nex
 MIN_LINK_CONFIDENCE=0.01
 CF_RESULTS=resources/crowdflower-results.sample
-SCORING_TYPE=f-score
+SCORING_TYPE=weighted-mean
 FE_SCORE=both
 SCORING_CORE_WEIGHT=2
 GOLD_SENTENCES=resources/gold-standard.sentences
@@ -109,44 +108,48 @@ supervised-build-classifier:
 	cd supervised/classifier && mvn compile assembly:assembly
 
 supervised-learn-roles:
-	java $(CL_JAVA_OPTS) $(CL_MAIN_PACKAGE).SpreadSheetToRoleTrainingSet \
-		-t $(CL_TRAINING_SET)
-	java $(CL_JAVA_OPTS) $(CL_MAIN_PACKAGE).RoleTrainingSetToLibsvm \
-		-t $(CL_TRAINING_SET).iob2 -g $(CL_GAZETTEER)
-	svm-train -t 0 -m 10000 $(CL_TRAINING_SET).iob2.svm $(CL_TRAINING_SET).iob2.model
+	java $(CL_JAVA_OPTS) $(CL_MAIN_PACKAGE).RoleTrainingSetToLibSvm \
+		-t $(CL_TRAINING_SET) -g $(CL_GAZETTEER)
+	svm-train $(CL_SVM_TRAIN_ARGS) $(CL_TRAINING_SET).iob2.svm \
+        $(CL_TRAINING_SET).iob2.model
 
 supervised-learn-frames:
-	java $(CL_JAVA_OPTS) $(CL_MAIN_PACKAGE).SpreadSheetToFrameTrainingSet \
-		-t $(CL_TRAINING_SET) 
-	java $(CL_JAVA_OPTS) $(CL_MAIN_PACKAGE).FrameTrainingSetToLibsvm \
-		-t $(CL_TRAINING_SET).frame -g $(CL_GAZETTEER)
-	svm-train -t 0 -m 10000 $(CL_TRAINING_SET).frame.svm $(CL_TRAINING_SET).frame.model
+	java $(CL_JAVA_OPTS) $(CL_MAIN_PACKAGE).FrameTrainingSetToLibSvm \
+		-t $(CL_TRAINING_SET) -g $(CL_GAZETTEER)
+	svm-train $(CL_SVM_TRAIN_ARGS) $(CL_TRAINING_SET).frame.svm \
+        $(CL_TRAINING_SET).frame.model
 
 supervised-run-interactive:
 	java $(CL_JAVA_OPTS) -Dtreetagger.home=$(TREETAGGER_HOME) \
 		$(CL_MAIN_PACKAGE).Annotator -g $(CL_GAZETTEER) -m $(CL_TRAINING_SET) \
-		-l $(LANGCODE) -i
+		-l $(LANGCODE) -i -n
 
 supervised-run-batch:
+	python date_normalizer/rpc.py 2>/dev/null &
 	java $(CL_JAVA_OPTS) -Dtreetagger.home=$(TREETAGGER_HOME) \
 		$(CL_MAIN_PACKAGE).Annotator -g $(CL_GAZETTEER) -m $(CL_TRAINING_SET) \
-		-l $(LANGCODE) -r $(CL_EVAL_OUTPUT)  -a $(CL_SENTENCES_FILE) \
-		-o $(CL_OUTPUT) -c $(CL_CONF_OUTPUT)
+		-l $(LANGCODE) -r $(CL_SENTENCES_FILE).eval  -a $(CL_SENTENCES_FILE) \
+		-o $(CL_OUTPUT) -n
 
 supervised-evaluate:
-	[ -z "$(CL_ANNOTATED_GOLD)" ] && (echo "Error: CL_ANNOTATED_GOLD not set"; exit 1)
-	if [ -z "$(CL_ANNOTATED_GOLD)" ]; then echo "Error: CL_ANNOTATED_GOLD not set" && \
-		exit 1; fi
+	python date_normalizer/rpc.py 2>/dev/null &
 	java $(CL_JAVA_OPTS) -Dtreetagger.home=$(TREETAGGER_HOME) \
 		$(CL_MAIN_PACKAGE).Annotator -g $(CL_GAZETTEER) -m $(CL_TRAINING_SET) \
-		-l $(LANGCODE) -r $(CL_EVAL_OUTPUT) -a $(CL_SENTENCES_FILE) \
-		-e $(CL_ANNOTATED_GOLD)
+		-l $(LANGCODE) -r $(CL_ANNOTATED_GOLD).report \
+        -a $(CL_ANNOTATED_GOLD).sentences -e $(CL_ANNOTATED_GOLD) \
+        -r $(CL_ANNOTATED_GOLD).report -o $(CL_ANNOTATED_GOLD).classified -n
 
 supervised-results-to-assertions:
-	python supervised/produce_triples.py $(CL_OUTPUT) $(CL_CONF_OUTPUT) \
-		$(WORK_DIR)/wiki-id-to-title-mapping.json $(WORK_DIR)/supervised-triples.nt \
-        $(WORK_DIR)/supervised-scores.nt --format nt --sentence-score $(SCORING_TYPE) \
+	python supervised/produce_triples.py $(CL_OUTPUT) \
+        $(WORK_DIR)/wiki-id-to-title-mapping.json $(CL_OUTPUT).triples.nt \
+        $(CL_OUTPUT).triples.scores.nt --format nt --sentence-score $(SCORING_TYPE) \
         --core-weight $(SCORING_CORE_WEIGHT) --fe-score $(FE_SCORE) --format nt
+
+supervised-plot-results:
+	python supervised/plot.py $(CL_ANNOTATED_GOLD).report.frames.confusion.csv roc &
+	python supervised/plot.py $(CL_ANNOTATED_GOLD).report.frames.confusion.csv confpr &
+	python supervised/plot.py $(CL_ANNOTATED_GOLD).report.roles.confusion.csv roc &
+	python supervised/plot.py $(CL_ANNOTATED_GOLD).report.roles.confusion.csv confpr &
 
 crowdflower-create-input:
 	# TODO generate twm ngrams and textpro chunks somehow

@@ -49,7 +49,7 @@ This class takes as input a file in IOB2 format and a gazetteer and returns
 3 files: (1) the example file in svmlib format; (2) the feature
 file in tsv format; (c) the label file in tsv format
 
-`java -Dfile.encoding=UTF-8 -cp target/fatJar.jar org.fbk.cit.hlt.dirha.RoleTrainingSetToLibsvm -t data/whole-train/whole-train.tab.iob2 -g resources/gazetteer.tsv`
+`java -Dfile.encoding=UTF-8 -cp target/fatJar.jar org.fbk.cit.hlt.dirha.RoleTrainingSetToLibSvm -t data/whole-train/whole-train.tab.iob2 -g resources/gazetteer.tsv`
 
 Train the svm:
 
@@ -66,7 +66,7 @@ This class takes as input a file in text categorization format and a gazetteer a
 3 files: (1) the example file in svmlib format; (2) the feature
 file in tsv format; (c) the label file in tsv format
 
-`java -Dfile.encoding=UTF-8 -cp target/fatJar.jar org.fbk.cit.hlt.dirha.FrameTrainingSetToLibsvm -t data/whole-train/whole-train.tab.frame -g resources/gazetteer.tsv`
+`java -Dfile.encoding=UTF-8 -cp target/fatJar.jar org.fbk.cit.hlt.dirha.FrameTrainingSetToLibSvm -t data/whole-train/whole-train.tab.frame -g resources/gazetteer.tsv`
 
 
 Train the svm:

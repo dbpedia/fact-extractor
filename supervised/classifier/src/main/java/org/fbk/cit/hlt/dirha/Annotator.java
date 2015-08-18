@@ -11,7 +11,7 @@ import org.fbk.cit.hlt.core.mylibsvm.svm;
 import org.fbk.cit.hlt.core.mylibsvm.svm_model;
 import org.fbk.cit.hlt.core.mylibsvm.svm_node;
 import org.fbk.cit.hlt.core.mylibsvm.svm_parameter;
-import org.glassfish.grizzly.http.server.HttpServer;
+import org.glassfish.grizzly.nio.transport.DefaultStreamReader;
 
 import java.io.*;
 import java.text.DecimalFormat;
@@ -50,29 +50,21 @@ public class Annotator {
 	 */
 	static Logger logger = Logger.getLogger(Annotator.class.getName());
 
-	public static final String DEFAULT_HOST = "localhost";
-
-	DecimalFormat df = new DecimalFormat("###,###,###");
-
-	public static final String DEFAULT_PORT = "8080";
-
-	public static final String FRAME_NOT_FOUND_LABEL = "FRAME_NOT_FOUND";
-
 	private svm_model roleModel;
-
 	private svm_model frameModel;
 
-	private Tokenizer tokenier;
-
-	private TreeTaggerWrapper tt;
+	private TreeTaggerWrapper treeTagger;
 
 	FeatureIndex roleFeatureIndex;
-
 	FeatureIndex roleLabelIndex;
 
 	FeatureIndex frameFeatureIndex;
-
 	FeatureIndex frameLabelIndex;
+
+    FrameFeatureExtractor frameFeatureExtractor;
+    RoleFeatureExtractor roleFeatureExtractor;
+
+    boolean normalizeNumericalFEs;
 
 	private static DecimalFormat tf = new DecimalFormat("000,000,000.#");
 
@@ -80,167 +72,73 @@ public class Annotator {
     private final ChunkCombinator combinator = new ChunkCombinator();
 
     public Annotator(String roleFile, String frameFile, File gazetteerFile, String lang) throws IOException {
+		treeTagger = new TreeTaggerWrapper<>();
 
-		File roleFeatureFile = new File(roleFile + ".feat");
-		File roleLibsvmModelFile = new File(roleFile + ".model");
-		File roleLabelFile = new File(roleFile + ".label");
-
-		tt = new TreeTaggerWrapper<String>();
 		if (lang.equalsIgnoreCase("it")){
-			tt.setModel(System.getProperty("treetagger.home") + "/lib/italian-utf8.par");
+			treeTagger.setModel( System.getProperty( "treetagger.home" ) + "/lib/italian-utf8.par" );
 		} else if(lang.equalsIgnoreCase("en")){
-			tt.setModel(System.getProperty("treetagger.home") + "/lib/english.par");
+			treeTagger.setModel( System.getProperty( "treetagger.home" ) + "/lib/english.par" );
 		} else if(lang.equalsIgnoreCase("de")){
-			tt.setModel(System.getProperty("treetagger.home") + "/lib/german.par");
+			treeTagger.setModel( System.getProperty( "treetagger.home" ) + "/lib/german.par" );
 		}
 
-		roleFeatureIndex = new FeatureIndex(true);
-		roleFeatureIndex.read(new InputStreamReader(new FileInputStream(roleFeatureFile), "UTF-8"));
-		logger.info(roleFeatureIndex.size() + " role features from " + roleFeatureFile);
+        gazetteerMap = InputReader.ReadGazetteer( gazetteerFile );
 
-		roleLabelIndex = new FeatureIndex(true);
-		roleLabelIndex.read(new InputStreamReader(new FileInputStream(roleLabelFile), "UTF-8"));
+        File roleFeatureFile = new File(roleFile + ".feat");
+        File roleLibsvmModelFile = new File(roleFile + ".model");
+        File roleLabelFile = new File(roleFile + ".label");
+
+        File frameFeatureFile = new File(frameFile + ".feat");
+        File frameLibsvmModelFile = new File(frameFile + ".model");
+        File frameLabelFile = new File(frameFile + ".label");
+
+        roleFeatureIndex = InputReader.ReadFeatureIndex( roleFeatureFile, true );
+        roleFeatureExtractor = new RoleFeatureExtractor( roleFeatureIndex, gazetteerMap );
+        logger.info(roleFeatureIndex.size() + " role features from " + roleFeatureFile);
+
+        roleLabelIndex = InputReader.ReadFeatureIndex( roleLabelFile, true );
 		logger.info(roleLabelIndex.size() + " role labels " + roleLabelFile);
         ClassifierResults.RoleLabelList = roleLabelIndex;
 
-		File frameFeatureFile = new File(frameFile + ".feat");
-		File frameLibsvmModelFile = new File(frameFile + ".model");
-		File frameLabelFile = new File(frameFile + ".label");
+        frameFeatureIndex = InputReader.ReadFeatureIndex( frameFeatureFile, true );
+        frameFeatureExtractor = new FrameFeatureExtractor( frameFeatureIndex, gazetteerMap );
+        logger.info(frameFeatureIndex.size() + " frame features from " + frameFeatureFile);
 
-		frameFeatureIndex = new FeatureIndex(true);
-		frameFeatureIndex.read(new InputStreamReader(new FileInputStream(frameFeatureFile), "UTF-8"));
-		logger.info(frameFeatureIndex.size() + " frame features from " + frameFeatureFile);
-
-		frameLabelIndex = new FeatureIndex(true);
-		frameLabelIndex.read(new InputStreamReader(new FileInputStream(frameLabelFile), "UTF-8"));
-		logger.info(frameLabelIndex.size() + " frame labels from " + frameLabelFile);
+        frameLabelIndex = InputReader.ReadFeatureIndex( frameLabelFile, true );
         ClassifierResults.FrameLabelList = frameLabelIndex;
-
-		tokenier = new HardTokenizer();
+        logger.info(frameLabelIndex.size() + " frame labels from " + frameLabelFile);
 
 		roleModel = svm.svm_load_model(roleLibsvmModelFile.getAbsolutePath());
 		frameModel = svm.svm_load_model(frameLibsvmModelFile.getAbsolutePath());
-		gazetteerMap = readGazetteer(gazetteerFile);
 	}
 
-	// todo: common
-	private String setToString(SortedSet<Integer> set) {
-		StringBuilder sb = new StringBuilder();
-		Iterator<Integer> it = set.iterator();
-		for (int i = 0; it.hasNext(); i++) {
-			if (i > 0) {
-				sb.append(" ");
-			}
-			int j = it.next();
-			sb.append(j);
-			sb.append(":1");
-		}
-		return sb.toString();
-	}
-
-	// todo: common
-	private Map<String, String> readGazetteer(File fin) throws IOException {
-		Map<String, String> map = new HashMap<String, String>();
-		LineNumberReader lr = new LineNumberReader(new InputStreamReader(new FileInputStream(fin), "UTF-8"));
-
-		String line = null;
-
-		while ((line = lr.readLine()) != null) {
-			String[] s = line.split("\\t+");
-			for (int i = 1; i < s.length; i++) {
-				map.put(s[i].toLowerCase(), s[0].toUpperCase());
-			}
-		}
-		return map;
-	}
-
-	private List<String[]> readExampleList(Reader reader) throws IOException {
-		List<String[]> list = new ArrayList<String[]>();
-		//LineNumberReader lr = new LineNumberReader(new InputStreamReader(new FileInputStream(fin), "UTF-8"));
-		LineNumberReader lr = new LineNumberReader(reader);
-
-		String line = null;
-
-		while ((line = lr.readLine()) != null) {
-			String[] s = line.split("\\s+");
-			list.add(s);
-		}
-		return list;
-	}
-
-    private List<ClassifierResults> toRoleExampleList( String line ) throws Exception {
-
-        final List<ClassifierResults> exampleList = new ArrayList<>( );
-        ClassifierResults eos = new ClassifierResults( "EOS", "EOS", "EOS", 0., 0., 0., -1, -1 );
-        exampleList.add( eos );
+    /**
+     * Splits a sentence into tokens, performs entity linking and normalizes numerical expressions
+     */
+    private List<ClassifierResults> tokenizeSentence( String line ) throws Exception {
+        final List<ClassifierResults> sentence = new ArrayList<>( );
+        ClassifierResults eos = new ClassifierResults( "EOS", "EOS", "EOS", 0., 0., 0., -1, -1, "" );
+        sentence.add( eos );
 
         try {
-            tt.setHandler( new TokenHandler( ) {
+            treeTagger.setHandler( new TokenHandler( ) {
                 @Override
                 public void token( Object token, String pos, String lemma ) {
-                    exampleList.add( new ClassifierResults( ( String ) token, pos, lemma, 1., 0., 0., -1, -1 ) );
+                    sentence.add( new ClassifierResults( ( String ) token, pos, lemma, 1., 0., 0., -1, -1, "" ) );
                 }
             } );
 
-            String[] tokens = tokenier.stringArray( line );
-            tt.process( tokens );
+            String[] tokens = new HardTokenizer().stringArray( line );
+            treeTagger.process( tokens );
         }
         catch ( Exception e ) {
             logger.error( e );
         }
 
-        List<ClassifierResults> normalized = normalizeNumericalExpressions( exampleList );
         Map<String, ChunkCombinator.ChunkToUri> disambiguated = combinator.getTheWikiMachineChunkToUriWithConfidence( line, true );
-        List<ClassifierResults> merged = mergeChunksIntoExampleList( normalized, disambiguated );
+        List<ClassifierResults> merged = mergeChunksIntoExampleList( sentence, disambiguated );
         merged.add( eos );
         return merged;
-    }
-
-    private List<ClassifierResults> normalizeNumericalExpressions( List<ClassifierResults> tokens ) {
-        StringBuilder sb = new StringBuilder( );
-
-        // skip first "EOS" token
-        for ( ListIterator<ClassifierResults> iter = tokens.listIterator( 1 ); iter.hasNext( ); ) {
-            sb.append( iter.next( ).getToken( ).replace( '_', ' ' ) );
-            sb.append( " " );
-        }
-        String sentence = sb.toString( );
-
-        for ( NormalizerResult res : DateNormalizer.NormalizeMany( sentence ) ) {
-            String original = sentence.substring( res.getStart( ), res.getEnd( ) );
-
-            // find the first token of the match (remember first token is EOS)
-            int cursor = 0, i = 1;
-            while ( cursor != res.getStart( ) && i < tokens.size( ) ) {
-                cursor += tokens.get( i ).getToken( ).length( ) + 1;  // remember space between tokens
-                i += 1;
-            }
-
-            if ( i == tokens.size( ) )
-                continue;  // the normalized token is a sub-token of another token
-
-            // find the last token of the match
-            int j = i;
-            cursor -= 1;  // we add a space for every token, but the spaces between tokens are len(tokens) - 1
-            while ( cursor != res.getEnd( ) && j < tokens.size( ) ) {
-                cursor += tokens.get( j ).getToken( ).length( ) + 1;
-                j += 1;
-            }
-
-            if ( cursor != res.getEnd( ) )
-                continue;  // the normalized token is a sub-token of another token
-
-            // replace the old tokens with the new one
-            String the_token = original.replace( ' ', '_' );
-            List<ClassifierResults> new_tokens = new ArrayList<>( tokens.size( ) );
-            new_tokens.addAll( tokens.subList( 0, i ) );
-            new_tokens.add( new ClassifierResults( the_token, "ENT", the_token, 0., 0., 0., -1, -1 ) );
-            if ( j < tokens.size( ) )
-                new_tokens.addAll( tokens.subList( j, tokens.size( ) ) );
-            tokens = new_tokens;
-        }
-
-        return tokens;
     }
 
     private List<ClassifierResults> mergeChunksIntoExampleList( List<ClassifierResults> exampleList, Map<String,
@@ -248,6 +146,9 @@ public class Annotator {
 
         List<ClassifierResults> merged = new ArrayList<>( exampleList );
         for ( String chunk : combinedChunks.keySet( ) ) {
+            if ( combinedChunks.get( chunk ).getConfidence( ) < 0.2 )
+                continue;
+
             String[] tokens = chunk.split( "\\s+" );
             boolean found = false;
             int i = 0, j = 0;
@@ -274,22 +175,24 @@ public class Annotator {
 
                 // Use the 'ENT' tag only if the n-gram has more than 1 token, otherwise keep the original POS tag
                 if ( tokens.length > 1 ) {
-                    replacement = new ClassifierResults( chunk.replace( ' ', '_' ), "ENT",
-                                                         combinedChunks.get( chunk ).getUri( ),
+                    replacement = new ClassifierResults( chunk, "ENT",
+                                                         chunk,
                                                          combinedChunks.get( chunk ).getConfidence( ),
                                                          toReplace.getFrameConfidence( ),
                                                          toReplace.getRoleConfidence( ),
                                                          toReplace.getPredictedRole( ),
-                                                         toReplace.getPredictedFrame( ) );
+                                                         toReplace.getPredictedFrame( ),
+                                                         combinedChunks.get( chunk ).getUri( ) );
                 }
                 else {
                     replacement = new ClassifierResults( chunk, toReplace.getPos( ),
-                                                         combinedChunks.get( chunk ).getUri( ),
+                                                         chunk,
                                                          combinedChunks.get( chunk ).getConfidence( ),
                                                          toReplace.getFrameConfidence( ),
                                                          toReplace.getRoleConfidence( ),
                                                          toReplace.getPredictedRole( ),
-                                                         toReplace.getPredictedFrame( ) );
+                                                         toReplace.getPredictedFrame( ),
+                                                         combinedChunks.get( chunk ).getUri( ));
                 }
 
                 List<ClassifierResults> startSubList = merged.subList( 0, matchStartIndex );
@@ -304,38 +207,29 @@ public class Annotator {
     }
 
     private void classifyRoles( List<? extends Token> classifierResultsList ) throws Exception {
-        RoleFeatureExtraction roleFeatureExtraction = new RoleFeatureExtraction( roleFeatureIndex,
-                                                                                 classifierResultsList,
-                                                                                 gazetteerMap );
-
         Map<Integer, Double> probabilities = new HashMap<>( );
         for ( int i = 0; i < classifierResultsList.size( ); i++ ) {
             ClassifierResults example = (ClassifierResults) classifierResultsList.get( i );
             logger.debug( example.toString( ) );
 
-            String libsvmExample = "-1 " + roleFeatureExtraction.extractVector( i );
-            logger.debug( libsvmExample );
+            String featureVector = "-1 " + roleFeatureExtractor.extractFeatures( classifierResultsList, i );
+            logger.debug( featureVector );
 
-            int y = predict( libsvmExample, roleModel, true, probabilities );
+            int y = predict( featureVector, roleModel, probabilities );
             example.setPredictedRole( y );
-            example.setRoleConfidence( probabilities.get( y ) );
-            logger.info( example.getToken( ) + "\t" + y );
+            if ( probabilities.containsKey( y ) )  // fixme doesn't always happen
+                example.setRoleConfidence( probabilities.get( y ) );
+            logger.info( example.getToken( ) + "\t" + y + "\t" + probabilities.get( y ) );
         }
     }
 
     private void classifyFrames( List<? extends Token> classifierResultsList ) throws Exception {
-        String[] example = toFrameExample( classifierResultsList );
-        List<String[]> frameExampleList = new ArrayList<String[]>();
-        frameExampleList.add( example );
-        FrameFeatureExtraction frameFeatureExtraction = new FrameFeatureExtraction( frameFeatureIndex,
-                                                                                    frameExampleList,
-                                                                                    gazetteerMap );
-		Map<Integer, Double> probabilities = new HashMap<>( );
-        logger.debug( Arrays.toString( example ) );
-        String libsvmExample = "-1 " + frameFeatureExtraction.extractVector( 0 );
-        logger.debug( libsvmExample );
+        Map<Integer, Double> probabilities = new HashMap<>( );
+        String featureVector = "-1 " + frameFeatureExtractor.extractFeatures( classifierResultsList );
 
-        int y = predict( libsvmExample, frameModel, true, probabilities );
+        logger.debug( featureVector );
+
+        int y = predict( featureVector, frameModel, probabilities );
         for ( Object cr : classifierResultsList ) {
             ClassifierResults res = (ClassifierResults) cr;
             res.setPredictedFrame( y );
@@ -343,32 +237,8 @@ public class Annotator {
         }
     }
 
-    private String[] toFrameExample( List<? extends Token> classifierResultsList ) throws Exception {
-        Set<String> wordSet = new HashSet<>();
-        Set<String> lemmaSet = new HashSet<>();
-        Set<String> roleSet = new HashSet<>();
-
-        for (int i = 0; i < classifierResultsList.size(); i++) {
-            logger.debug(i + "\t" + classifierResultsList.get(i).toString( ));
-            String word = ( ( Token ) classifierResultsList.get( i ) ).getToken( );
-            String lemma = ( ( Token ) classifierResultsList.get( i ) ).getLemma( );
-            if (!word.equalsIgnoreCase("EOS")) {
-                wordSet.add(word);
-                lemmaSet.add(lemma);
-
-            }
-            //wordSet.add(classifierResultsList.get(i)[0]);
-        }
-        String[] s = new String[4];
-        s[0] = "-1";
-        s[1] = SpreadSheetToFrameTrainingSet.replace(wordSet.toString());
-        s[2] = SpreadSheetToFrameTrainingSet.replace(lemmaSet.toString());
-
-        return s;
-    }
-
 	public List<Answer> classify(File fin) throws IOException {
-		List<Answer> list = new ArrayList<Answer>();
+		List<Answer> list = new ArrayList<>();
 		LineNumberReader lr = new LineNumberReader(new FileReader(fin));
 		String line = null;
 		int count = 0;
@@ -401,112 +271,53 @@ public class Annotator {
 		return list;
 	}
 
-	public Answer classify(String line) throws Exception {
-		//logger.debug("classifying " + line + "...");
-		return classify(line, "0");
-	}
-
 	public Answer classify(String line, String sentence_id) throws Exception {
 		logger.info("classifying " + line + " (" + sentence_id + ")...");
-		List<ClassifierResults> classifierResultsList = toRoleExampleList(line.trim());
+		List<ClassifierResults> classifierResultsList = tokenizeSentence( line.trim( ) );
 		classifyRoles( classifierResultsList );
 		classifyFrames( classifierResultsList );
-		printAnswer( classifierResultsList );
-		return new Answer(sentence_id, classifierResultsList );
+
+        List<ClassifierResults> normalized;
+        if(normalizeNumericalFEs)
+            normalized = DateNormalizer.normalizeNumericalExpressions( classifierResultsList );
+        else normalized = classifierResultsList;
+
+		printAnswer( normalized );
+		return new Answer(sentence_id, normalized );
 	}
 
 	private void printAnswer(List<? extends Token> classifierResultsList ) {
 		logger.debug("===");
 		logger.debug( classifierResultsList.size());
-		String frame = ((ClassifierResults) classifierResultsList.get(0)).getPredictedFrameLabel();
 		for (int i = 0; i < classifierResultsList.size(); i++) {
             ClassifierResults example = (ClassifierResults) classifierResultsList.get(i);
-			String role = example.getPredictedRoleLabel( );
-			if (role.equalsIgnoreCase("O")) {
-				logger.info(i + "\tO\t" + role + "\t" + example.toString( ) );
-			}
-			else {
-				logger.info(i + "\t" + frame + "\t" + role + "\t" + example.toString( ) );
-			}
-
-		}
+            logger.info( i + "\t" + example.getPredictedFrameLabel() + "\t" + example.getFrameConfidence( ) +
+                                 "\t" + example.getPredictedRoleLabel( ) + "\t" + example.getRoleConfidence( ) +
+                                 "\t" + example.getToken( ) + "\t" + example.getPos( ) +
+                                 "\t" + example.getLemma( ) );
+        }
 		logger.debug("+++");
 	}
 
 	public void interactive() throws Exception {
-		InputStreamReader isr = null;
-		BufferedReader myInput = null;
-		long begin = 0, end = 0;
+		InputStreamReader isr;
+		BufferedReader myInput;
+		long begin, end;
 		while (true) {
 			System.out.println("\nPlease write a sentence and pos <return> to continue (CTRL C to exit):");
 			isr = new InputStreamReader(System.in);
 			myInput = new BufferedReader(isr);
-			String query = myInput.readLine().toString();
+			String query = myInput.readLine();
 			begin = System.nanoTime();
 
-			StringBuilder sb = new StringBuilder();
-			sb.append(query + "\n");
-			List<ClassifierResults> classifierResultsList = toRoleExampleList(query);
-			logger.debug( classifierResultsList );
-			//todo: put outside the while, add a setRoleExampleList in RoleFeatureExtraction...
-			RoleFeatureExtraction roleFeatureExtraction = new RoleFeatureExtraction(
-                    roleFeatureIndex, classifierResultsList, gazetteerMap);
-			for (int i = 0; i < classifierResultsList.size(); i++) {
-
-				ClassifierResults example = classifierResultsList.get(i);
-				logger.debug( example.toString( ) );
-
-
-				//SortedSet<Integer> set = roleFeatureExtraction.extract(i);
-				//String libsvmExample =  "-1 " + setToString(set);
-				String libsvmExample = "-1 " + roleFeatureExtraction.extractVector(i);
-				logger.debug(libsvmExample);
-
-				int y = predict( libsvmExample, roleModel, false, null );
-				logger.debug(y);
-				String l = roleLabelIndex.getTerm(y);
-				//logger.info(l + "\t" + example[0]);
-				logger.info(example.getToken( ) + "\t" + l);
-				sb.append(example.getToken( ) + "\t" + l + "\n");
-				logger.debug("");
-			}
-
-            //todo: put outside the while, add a setFrameExampleList in FrameFeatureExtraction...
-			String[] frameExample= toFrameExample( classifierResultsList );
-            List<String[]> frameExampleList = new ArrayList<String[]>();
-            frameExampleList.add( frameExample );
-			FrameFeatureExtraction frameFeatureExtraction = new FrameFeatureExtraction(frameFeatureIndex,
-                                                                                       frameExampleList,
-                                                                                       gazetteerMap);
-
-            logger.debug(Arrays.toString(frameExample));
-            String libsvmExample = "-1 " + frameFeatureExtraction.extractVector(0);
-            logger.debug(libsvmExample);
-
-            int y = predict( libsvmExample, frameModel, false, null );
-            logger.debug( y );
-            String l = frameLabelIndex.getTerm(y);
-            logger.info(l + "\t" + frameExample[0]);
-            sb.append(frameExample[0] + "\t" + l + "\n");
-
-			logger.info(sb.toString());
+            classify( query, "0" );
 
 			end = System.nanoTime();
-			//logger.info("query\tdf\tlf\tratio\ttime");
 			logger.info("done in " + tf.format(end - begin) + " ns");
 		}
 	}
 
-	private static double atof(String s) {
-		return Double.valueOf(s).doubleValue();
-	}
-
-	private static int atoi(String s) {
-		return Integer.parseInt(s);
-	}
-
-    private int predict(String line, svm_model model, boolean predict_probability,
-                               Map<Integer, Double> probabilities) throws IOException {
+    private int predict(String line, svm_model model, Map<Integer, Double> probabilities) throws IOException {
         if (line == null) return -1;
 
         int correct = 0;
@@ -517,7 +328,7 @@ public class Annotator {
 		int svm_type = svm.svm_get_svm_type(model);
 		int nr_class = svm.svm_get_nr_class(model);
 
-        if (predict_probability && (svm_type == svm_parameter.EPSILON_SVR ||
+        if (probabilities != null && (svm_type == svm_parameter.EPSILON_SVR ||
                 svm_type == svm_parameter.NU_SVR)) {
             logger.info("Prob. model for test data: target value = predicted value + z,");
             logger.info("z: Laplace distribution e^(-|z|/sigma)/(2sigma),sigma=" + svm.svm_get_svr_probability(roleModel));
@@ -525,22 +336,22 @@ public class Annotator {
 
         StringTokenizer st = new StringTokenizer(line, " \t\n\r\f:");
 
-        double target = atof(st.nextToken());
+        double target = Double.parseDouble( st.nextToken( ) );
         int m = st.countTokens() / 2;
         svm_node[] x = new svm_node[m];
         for (int j = 0; j < m; j++) {
             x[j] = new svm_node();
-            x[j].index = atoi(st.nextToken());
-            x[j].value = atof(st.nextToken());
+            x[j].index = Integer.parseInt( st.nextToken( ) );
+            x[j].value = Double.parseDouble( st.nextToken( ) );
         }
         logger.debug(svm_node.toString(x));
 
         double v;
-        if (predict_probability && (svm_type == svm_parameter.C_SVC || svm_type == svm_parameter.NU_SVC)) {
+        if (probabilities != null && (svm_type == svm_parameter.C_SVC || svm_type == svm_parameter.NU_SVC)) {
             double[] prob_estimates = new double[nr_class];
             v = svm.svm_predict_probability(model, x, prob_estimates);
             for(int i = 0; i  < prob_estimates.length; i++)
-                probabilities.put(i, prob_estimates[i]);
+                probabilities.put( i, prob_estimates[ i ] );
         }
         else v = svm.svm_predict(model, x);
 
@@ -569,34 +380,21 @@ public class Annotator {
         return ( int ) v;
     }
 
-	public void write(List<Answer> list, File fout, File confidences_out, String format) throws IOException {
+	public void write(List<Answer> list, File fout ) throws IOException {
         PrintWriter pw_answer = new PrintWriter( new BufferedWriter( new OutputStreamWriter(
                 new FileOutputStream( fout ), "UTF-8" ) ) );
-        PrintWriter pw_conf = new PrintWriter( new BufferedWriter( new OutputStreamWriter(
-                new FileOutputStream( confidences_out ), "UTF-8" ) ) );
 
-        for ( int i = 0; i < list.size( ); i++ ) {
-            Answer answer = list.get( i );
-            if ( format.equalsIgnoreCase( "tsv" ) ) {
-                pw_answer.print( answer.toTSV( ) );
-                pw_conf.print( answer.confidenceToTSV( ) );
-            }
-        }
+        for(Answer answer: list)
+            pw_answer.print( answer.toTSV( ) );
         pw_answer.close( );
-        pw_conf.close( );
     }
 
 	public static void main(String[] args) throws Exception {
-
 		String logConfig = System.getProperty("log-config");
 		if (logConfig == null) {
 			logConfig = "log-config.txt";
 		}
-		//PropertyConfigurator.configure(logConfig);
-		/*if (args.length != 2) {
-			logger.error("java -Dfile.encoding=UTF-8 -cp dist/dirha.jar org.fbk.cit.hlt.dirha.Annotator spreadsheet.tab gaz.tsv");
-			System.exit(-1);
-		}*/
+
 		Options options = new Options();
 		try {
 			Option inputFileOpt = OptionBuilder.withArgName("file").hasArg().withDescription("root of files from which to read the frame and role models").isRequired().withLongOpt("model").create("m");
@@ -606,23 +404,13 @@ public class Annotator {
 			Option classifyFileOpt = OptionBuilder.withArgName("file").hasArg().withDescription("annotate offline the specified file in one sentence per line format").withLongOpt("annotate").create("a");
 			Option outputFileOpt = OptionBuilder.withArgName("file").hasArg().withDescription("file in which to write the annotated the offline annotation in tsv format").withLongOpt("output").create("o");
 			Option interactiveModeOpt = OptionBuilder.withDescription("enter in the interactive mode").withLongOpt("interactive-mode").create("i");
-			Option serverOpt = OptionBuilder.withDescription("start the server").withLongOpt("server").create("s");
-			Option hostOpt = OptionBuilder.withArgName("url").hasArg().withDescription("server name (default name is " + DEFAULT_HOST + ")").withLongOpt("host").create();
-			Option portOpt = OptionBuilder.withArgName("int").hasArg().withDescription("server port (default name is " + DEFAULT_PORT + ")").withLongOpt("port").create();
 			Option langOpt = OptionBuilder.withArgName("string").hasArg().withDescription("language").isRequired().withLongOpt("lang").create("l");
-            Option confOutOpt =OptionBuilder.withArgName("file").hasArg().withDescription("file in which to write the confidence of annotated results").withLongOpt("conf-output").create( "c" );
 			options.addOption(OptionBuilder.withDescription("trace mode").withLongOpt("trace").create());
 			options.addOption(OptionBuilder.withDescription("debug mode").withLongOpt("debug").create());
-
-
-			//Option roleExtractionOpt = OptionBuilder.withDescription("extract roles").withLongOpt("role-extraction").create("r");
-			//Option frameExtractionOpt = OptionBuilder.withDescription("extract frames").withLongOpt("frame-extraction").create("f");
-			//Option crossValidationOpt = OptionBuilder.withArgName("int").hasArg().withDescription("run n-fold cross-validation").withLongOpt("n-fold").create("n");
-			//Option libsvmOpt = OptionBuilder.withDescription("use the libsvm c").withLongOpt("use-c").create("c");
+            Option normalizeNumOpt = OptionBuilder.withDescription("normalize numerical FEs").withLongOpt("normalize-fes").create("n");
 
 			options.addOption("h", "help", false, "print this message");
 			options.addOption("v", "version", false, "output version information and exit");
-
 
 			options.addOption(inputFileOpt);
 			options.addOption(interactiveModeOpt);
@@ -631,27 +419,21 @@ public class Annotator {
 			options.addOption(classifyFileOpt);
 			options.addOption(outputFileOpt);
 			options.addOption(reportFileOpt);
-			options.addOption(serverOpt);
-			options.addOption(hostOpt);
-			options.addOption(portOpt);
 			options.addOption(langOpt);
-            options.addOption( confOutOpt );
+            options.addOption( normalizeNumOpt );
 
 			CommandLineParser parser = new PosixParser();
 			CommandLine line = parser.parse(options, args);
 
 			Properties defaultProps = new Properties();
 			defaultProps.load(new InputStreamReader(new FileInputStream(logConfig), "UTF-8"));
-			//defaultProps.setProperty("log4j.rootLogger", "info,stdout");
 			if (line.hasOption("trace")) {
 				defaultProps.setProperty("log4j.rootLogger", "trace,stdout");
 			}
 			else if (line.hasOption("debug")) {
 				defaultProps.setProperty("log4j.rootLogger", "debug,stdout");
 			}
-			else if (logConfig == null) {
-				defaultProps.setProperty("log4j.rootLogger", "info,stdout");
-			}
+
 			PropertyConfigurator.configure(defaultProps);
 
 			File gazetteerFile = new File(line.getOptionValue("gazetteer"));
@@ -659,50 +441,22 @@ public class Annotator {
 			String frame = line.getOptionValue("model") + ".frame";
 			String lang = line.getOptionValue("lang");
 
-
 			Annotator annotator = new Annotator(iob2, frame, gazetteerFile, lang);
+            annotator.normalizeNumericalFEs = line.hasOption( "normalize-fes" );
 			if (line.hasOption("interactive-mode")) {
 				annotator.interactive();
-			}
-
-			if (line.hasOption("server")) {
-				String host = line.getOptionValue("host");
-				if (host == null) {
-					host = DEFAULT_HOST;
-				}
-				String port = line.getOptionValue("port");
-				if (port == null) {
-					port = DEFAULT_PORT;
-				}
-
-				HttpServer httpServer = HttpServer.createSimpleServer(host, new Integer(port).intValue());
-				httpServer.getServerConfiguration().addHttpHandler(new AnnotationHttpHandler(annotator, host, port, lang), "/tu");
-
-				long end = System.currentTimeMillis();
-				logger.debug("starting " + host + "\t" + port + "...");
-				try {
-					httpServer.start();
-					Thread.currentThread().join();
-				} catch (Exception e) {
-					logger.error("error running " + host + ":" + port);
-					logger.error(e);
-				}
 			}
 
 			if (line.hasOption("annotate")) {
 				File textFile = new File(line.getOptionValue("annotate"));
 				List<Answer> list = annotator.classify(textFile);
-				File fout = null, confOut = null;
+				File fout, confOut;
 
 				if (line.hasOption("output"))
 					fout = new File(line.getOptionValue("output"));
 				else fout = new File(textFile.getAbsoluteFile() + ".output.tsv");
 
-                if ( line.hasOption( "conf-output" ) )
-                    confOut = new File( line.getOptionValue( "conf-output" ) );
-                else confOut = new File( textFile.getAbsoluteFile( ) + ".confidence.output.tsv" );
-
-				File evaluationReportFile = null;
+				File evaluationReportFile;
 				if (line.hasOption("report")) {
 					evaluationReportFile = new File(line.getOptionValue("report"));
 				}
@@ -710,29 +464,20 @@ public class Annotator {
 					evaluationReportFile = new File(textFile.getAbsoluteFile() + ".report.tsv");
 				}
 				logger.info("output file: " + fout);
-                logger.info("confidence file: " + confOut);
-				if (line.hasOption("format")) {
-					annotator.write(list, fout, confOut, line.getOptionValue("format"));
-				}
-				else {
-					annotator.write(list, fout, confOut, "tsv");
-				}
+                annotator.write(list, fout);
 
 				if (line.hasOption("eval")) {
 					File evalFile = new File(line.getOptionValue("eval"));
-					Evaluator evaluator = new Evaluator(evalFile, fout);
+					Evaluator evaluator = new Evaluator(evalFile, fout, new File(line.getOptionValue("model") + ".frame.label"),
+                                                        new File(line.getOptionValue("model") + ".iob2.label"));
 					evaluator.write(evaluationReportFile);
 				}
-
 			}
-
 		} catch (ParseException e) {
 			// oops, something went wrong
 			System.out.println("Parsing failed: " + e.getMessage() + "\n");
 			HelpFormatter formatter = new HelpFormatter();
 			formatter.printHelp(400, "java -Dfile.encoding=UTF-8 -cp dist/dirha.jar org.fbk.cit.hlt.dirha.Annotator", "\n", options, "\n", true);
 		}
-
 	}
-
 }

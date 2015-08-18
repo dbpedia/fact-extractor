@@ -7,6 +7,7 @@ import org.apache.log4j.PropertyConfigurator;
 import java.io.*;
 import java.text.DecimalFormat;
 import java.util.*;
+import java.util.List;
 
 /*
  * Licensed to the Apache Software Foundation (ASF) under one
@@ -46,20 +47,37 @@ public class Evaluator {
 	protected static DecimalFormat df = new DecimalFormat("0.00");
 
 	Evaluation frameEvaluation;
-
 	Evaluation roleEvaluation;
 
-	public Evaluator(File goldFile, File testFile) throws IOException {
+    FeatureIndex frameLabels;
+    FeatureIndex roleLabels;
+
+    ConfusionMatrix rolesConfusionMatrix;
+    ConfusionMatrix framesConfusionMatrix;
+
+    public Evaluator(File goldFile, File testFile, File frameLabelsFile, File roleLabelsFile) throws IOException {
 		this.goldFile = goldFile;
 		this.testFile = testFile;
 
-		Map<Integer, Sentence> goldSentences = read(goldFile);
-		Map<Integer, Sentence> testSentences = read(testFile);
-		logger.info("gold: " + goldFile);
+        frameLabels = InputReader.ReadFeatureIndex( frameLabelsFile, false );
+        roleLabels = InputReader.ReadFeatureIndex( roleLabelsFile, false );
+
+        ClassifierResults.FrameLabelList = frameLabels;
+        ClassifierResults.RoleLabelList = roleLabels;
+
+        Map<Integer, Sentence> goldSentences = read(goldFile);
+        Map<Integer, Sentence> testSentences = read(testFile);
+
+		logger.info( "gold: " + goldFile );
 		logger.info("test: " + testFile);
 		logger.debug("Total sentences: gold = " + goldSentences.size() + ", test = " + testSentences.size());
+
 		frameEvaluation = new Evaluation();
 		roleEvaluation = new Evaluation();
+
+        rolesConfusionMatrix = new ConfusionMatrix( roleLabels.size( ) );
+        framesConfusionMatrix = new ConfusionMatrix( frameLabels.size( ) );
+
 		for (int testId: testSentences.keySet()) {
             logger.info("============ Evaluating test sentence #" + testId + "... ============");
             Sentence testSentence = testSentences.get(testId);
@@ -73,17 +91,27 @@ public class Evaluator {
                 logger.warn("No gold found for test sentence #" + testId + ": " + testSentence + " Skipping ...");
                 continue;
             }
-            evaluateFrame(goldSentence, testSentence, frameEvaluation);
-            evaluateRole(goldSentence, testSentence, roleEvaluation);
-
+            evaluateFrame(goldSentence, testSentence, frameEvaluation, framesConfusionMatrix);
+            evaluateRole(goldSentence, testSentence, roleEvaluation, rolesConfusionMatrix);
         }
 
 		System.out.println("gold: " + goldFile.getAbsolutePath());
 		System.out.println("test: " + testFile.getAbsolutePath());
+
+        System.out.println("Micro averaged statistics");
 		System.out.println("\ttp\tfp\tfn\ttot\tP\tR\tF1");
 		System.out.println("frm\t" + frameEvaluation);
 		System.out.println("rol\t" + roleEvaluation);
-	}
+
+        System.out.println("Macro averaged statistics");
+        System.out.println("\n***  Roles Confusion Matrix  ***");
+        System.out.println(roleLabels);
+        System.out.println(rolesConfusionMatrix.toTable( ));
+
+        System.out.println("\n***  Frames Confusion Matrix  ***");
+        System.out.println(frameLabels);
+        System.out.println(framesConfusionMatrix.toTable( ));
+    }
 
 	public Evaluation getRoleEvaluation() {
 		return roleEvaluation;
@@ -94,21 +122,21 @@ public class Evaluator {
 	}
 
 	// todo: comparison must be done based on the type b-lu, b-device... otherwise I compare b-lu with b-device...
-	void evaluateRole(Sentence goldSentence, Sentence testSentence, Evaluation frameEvaluation) {
+	void evaluateRole(Sentence goldSentence, Sentence testSentence, Evaluation frameEvaluation, ConfusionMatrix confusionMatrix ) {
         logger.info("----------- Evaluating roles... -----------");
         String goldId = goldSentence.getId();
-		Set<String> gold = goldSentence.frames();
+		Set<String> gold = goldSentence.getFrames( );
 		//logger.debug(i + "\tgold\t" + goldSentenceFrames);
 		String testId = testSentence.getId();
-		Set<String> test = testSentence.frames();
-        logger.trace("Test frames: " + test);
+		Set<String> test = testSentence.getFrames( );
+        logger.trace("Test getFrames: " + test);
         String testFrame = null;
         if (!test.isEmpty()) {
             //		Only consider the first test frame
             testFrame = test.iterator().next();
         }
         else {
-            logger.warn("No frames for test sentence #" + testId);
+            logger.warn("No getFrames for test sentence #" + testId);
         }
 		if (test.size() > 1) {
             logger.warn("More than 1 frame detected in test sentence #" + testId + ". Evaluating only [" + testFrame + "] roles...");
@@ -122,7 +150,7 @@ public class Evaluator {
                 logger.warn("No annotated roles for gold sentence #" + goldId);
                 goldRoleList = new ArrayList<>();
             }
-			// If the test frame is wrong, it doesn't mean the roles are wrong too (as many overlap across frames), so evaluate less strictly
+			// If the test frame is wrong, it doesn't mean the roles are wrong too (as many overlap across getFrames), so evaluate less strictly
             List<Role> testRoleList = testSentence.getRoleList(testFrame);
             if (testRoleList == null) {
                 logger.warn("No annotated roles for test sentence #" + testId);
@@ -154,9 +182,13 @@ public class Evaluator {
                 for (Role testRole : testRoleList) {
                     String testRoleValue = testRole.getValue();
                     String testRoleName = testRole.getName();
+
                     if (goldRoleValue.contains(testRoleValue)) {
                         partialMatches += 1;
                         logger.debug("Current gold role value = [" + goldRoleValue + "], test = [" + testRoleValue + "]. At least a partial match");
+                        confusionMatrix.AddResult( roleLabels.getIndex( testRoleName ),
+                                                   roleLabels.getIndex( goldRoleName ) );
+
                         if (goldRoleName.equalsIgnoreCase(testRoleName)) {
                             logger.debug("Gold sentence #" + goldId + ", gold role: " + goldRoleName + ", test role: " + testRoleName);
                             frameEvaluation.incTp();
@@ -175,6 +207,8 @@ public class Evaluator {
                     logger.warn("Gold role value [" + goldRoleValue + "] not in test roles " + testRoleList);
                     frameEvaluation.incFn();
                     logger.warn("+1 roles FN, total = " + frameEvaluation.getFn());
+                    confusionMatrix.AddResult( roleLabels.getIndex( "O" ),
+                                               roleLabels.getIndex( goldRoleName ) );
                 }
 			}
 
@@ -192,6 +226,8 @@ public class Evaluator {
                     logger.warn("Test role " + testRole + " not in gold roles " + goldRoleList);
                     frameEvaluation.incFp();
                     logger.warn("+1 FP, total = " + frameEvaluation.getTp());
+					confusionMatrix.AddResult( roleLabels.getIndex( testRole.getName( ) ),
+											   roleLabels.getIndex( "O" ) );
                 }
             }
 
@@ -235,21 +271,28 @@ public class Evaluator {
 		return list;
 	}
 
-	void evaluateFrame(Sentence goldSentence, Sentence testSentence, Evaluation frameEvaluation) {
-        logger.info("----------- Evaluating frames... -----------");
+	void evaluateFrame(Sentence goldSentence, Sentence testSentence, Evaluation frameEvaluation, ConfusionMatrix confusionMatrix) {
+        logger.info("----------- Evaluating getFrames... -----------");
 		String goldId = goldSentence.getId();
-		Set<String> gold = goldSentence.frames();
-		//logger.debug(i + "\tgold\t" + goldSentenceFrames);
-		Set<String> test = testSentence.frames();
 
+        Set<String> test = testSentence.getFrames( );
+        Set<String> gold = goldSentence.getFrames( );
+
+        String predictedFrame = test.size() == 1 ? test.iterator().next() : "O";
+        String actualFrame = gold.iterator().next();
+
+        confusionMatrix.AddResult( frameLabels.getIndex( predictedFrame ), frameLabels.getIndex( actualFrame ) );
 
 		Iterator<String> goldIterator = gold.iterator();
 		for (int i = 0; goldIterator.hasNext(); i++) {
 			String goldFrame = goldIterator.next();
-            logger.debug("Gold sentence #" + goldId + ", gold frame [" + goldFrame + "], test frames " + test);
+            logger.debug("Gold sentence #" + goldId + ", gold frame [" + goldFrame + "], test getFrames " + test);
+
 			if (test.contains(goldFrame)) {
                 frameEvaluation.incTp();
                 logger.warn("+1 frame TP, total = " + frameEvaluation.getTp());
+
+                confusionMatrix.AddResult( frameLabels.getIndex( goldFrame ), frameLabels.getIndex( goldFrame ) );
             }
 			else {
 				frameEvaluation.incFn();
@@ -265,7 +308,6 @@ public class Evaluator {
                 logger.warn("+1 frame FP, total = " + frameEvaluation.getTp());
             }
 		}
-
 	}
 
 	/*class Role {
@@ -345,7 +387,7 @@ public class Evaluator {
 		}
 
 		@Override
-		public String toString() {
+		public String toTable() {
 			return "Role{" +
 					"id=" + id +
 					", name='" + name + '\'' +
@@ -438,11 +480,11 @@ public class Evaluator {
 			return id;
 		}
 
-		public Set<String> frames() {
+		public Set<String> getFrames() {
 			return frameMap.keySet();
 		}
 
-		public void add(int id, String frame, String role, String value) {
+		public void addMeasure(int id, String frame, String role, String value) {
 			//logger.debug("adding role " + frame + "\t" + role + "\t" + value);
 			if (frame.length() == 0) {
 				return;
@@ -452,7 +494,7 @@ public class Evaluator {
 				roleList = new ArrayList<Role>();
 				frameMap.put(frame, roleList);
 			}
-			roleList.add(new Role(id, role, value));
+			roleList.addMeasure(new Role(id, role, value));
 		}
 
 		public List<Role> getRoleList(String frame) {
@@ -460,7 +502,7 @@ public class Evaluator {
 		}
 
 		@Override
-		public String toString() {
+		public String toTable() {
 			return "Sentence{" +
 					"frameMap=" + frameMap +
 					", id=" + id +
@@ -478,24 +520,21 @@ public class Evaluator {
 		Sentence sentence = null;
 		while ((line = lr.readLine()) != null) {
 
-			String[] s = line.split("\t");
+			String[] s = line.split("\t", -1);
 			if (s.length > 5) {
 
 				if (sid == null) {
 					sid = s[0];
 					sentence = new Sentence(sid);
 				}
-				//logger.debug(count + "\t" + line);
-				//logger.debug(">\t" + sid + "\t" + s[0] + "\t>" + line);
 				if (!s[0].equalsIgnoreCase(sid)) {
-					//logger.debug("add sentence " + sid + "\t" + sentence);
 					sentenceMap.put(Integer.parseInt(sid), sentence);
 					sid = s[0];
 					sentence = new Sentence(sid);
 				}
 				if (!s[6].trim().equalsIgnoreCase("O")) {
-					//logger.debug(fin.getName() + "\t" + line);
-					sentence.add(s[0], s[5].toLowerCase(), s[6].toLowerCase(), s[2].toLowerCase());
+					ClassifierResults res = ClassifierResults.fromTSV( s, 2 );
+                    sentence.add(s[0], res.getFrame(), res.getRole(), res.getToken());
 				}
 
 			}
@@ -513,9 +552,22 @@ public class Evaluator {
 		pw.println("\ttp\tfp\tfn\ttot\tP\tR\tF1");
 		pw.println("frm\t" + frameEvaluation);
 		pw.println("rol\t" + roleEvaluation);
-		pw.close();
+        pw.println("\n*** Roles Confusion Matrix ***");
+        pw.println(rolesConfusionMatrix .toTable( ));
+        pw.println("\n*** Frames Confusion Matrix ***");
+        pw.println(framesConfusionMatrix.toTable( ));
+        pw.close( );
 
-	}
+        File rolesCf = new File( f.getAbsolutePath( ) + ".roles.confusion.csv" );
+        pw = new PrintWriter( new BufferedWriter( new OutputStreamWriter( new FileOutputStream( rolesCf ), "UTF-8" ) ) );
+        pw.write( rolesConfusionMatrix.toCSV( ClassifierResults.RoleLabelList ) );
+        pw.close( );
+
+        File framesCf = new File( f.getAbsolutePath( ) + ".frames.confusion.csv" );
+        pw = new PrintWriter( new BufferedWriter( new OutputStreamWriter( new FileOutputStream( framesCf ), "UTF-8" ) ) );
+        pw.write( framesConfusionMatrix.toCSV( ClassifierResults.FrameLabelList ) );
+        pw.close( );
+    }
 	public static void main(String[] args) {
 		String logConfig = System.getProperty("log-config");
 		if (logConfig == null) {
@@ -527,23 +579,28 @@ public class Evaluator {
 		try {
 			Option goldFileOpt = OptionBuilder.withArgName("file").hasArg().withDescription("file from which to read the gold file in tsv format").isRequired().withLongOpt("gold").create("g");
 			Option testFileOpt = OptionBuilder.withArgName("file").hasArg().withDescription("file from which to read the test file in tsv format").isRequired().withLongOpt("test").create("t");
+            Option roleLabelFileOpt = OptionBuilder.withArgName("file").hasArg().withDescription("file from which to read the gold file in tsv format").isRequired().withLongOpt("role-labels").create("r");
+            Option frameLabelFileOpt = OptionBuilder.withArgName("file").hasArg().withDescription("file from which to read the gold file in tsv format").isRequired().withLongOpt("frame-labels").create("f");
 
 			options.addOption("h", "help", false, "print this message");
 			options.addOption("v", "version", false, "output version information and exit");
 
-
-			options.addOption(goldFileOpt);
-			options.addOption(testFileOpt);
+			options.addOption( goldFileOpt );
+			options.addOption( testFileOpt );
+            options.addOption( roleLabelFileOpt );
+            options.addOption( frameLabelFileOpt );
 
 			CommandLineParser parser = new PosixParser();
 			CommandLine line = parser.parse(options, args);
 
 			File goldFile = new File(line.getOptionValue("gold"));
 			File testFile = new File(line.getOptionValue("test"));
+            File frameLabels = new File(line.getOptionValue( "frame-labels" ));
+            File roleLabels = new File(line.getOptionValue( "role-labels" ));
 
-			new Evaluator(goldFile, testFile);
-
-		} catch (ParseException e) {
+            Evaluator eval = new Evaluator( goldFile, testFile, frameLabels, roleLabels );
+            eval.write( new File( "/tmp/evaluation" ) );
+        } catch (ParseException e) {
 			// oops, something went wrong
 			System.out.println("Parsing failed: " + e.getMessage() + "\n");
 			HelpFormatter formatter = new HelpFormatter();

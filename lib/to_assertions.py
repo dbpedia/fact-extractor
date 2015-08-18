@@ -66,6 +66,7 @@ def to_assertions(labeled_results, id_to_title, namespace_manager, namespaces,
             continue
 
         processed.append(result['sentence'])
+
         parts = result['id'].split('.')
         wiki_id, sentence_id = parts[0], parts[1]  # there might be the extension
         if wiki_id in id_to_title:
@@ -143,9 +144,14 @@ def serialize_fe(fe, reified, namespaces, wiki_title, add_triple, format):
             ps = '%sstartYear' % namespaces['ontology']
             pe = '%sendYear' % namespaces['ontology']
 
-            assert add_triple(reified, p1, literal['duration'])
-            assert add_triple(reified, ps, literal['start'])
-            assert add_triple(reified, pe, literal['end'])
+            if 'duration' in literal:
+                assert add_triple(reified, p1, literal['duration'])
+
+            if 'start' in literal:
+                assert add_triple(reified, ps, literal['start'])
+
+            if 'end' in literal:
+                assert add_triple(reified, pe, literal['end'])
 
         else:
             raise Exception("Don't know how to serialize: " + repr(literal))

@@ -1,7 +1,6 @@
 package org.fbk.cit.hlt.dirha;
 
 import org.apache.log4j.Logger;
-import org.apache.log4j.PropertyConfigurator;
 
 import java.util.*;
 
@@ -32,7 +31,7 @@ public class Sentence {
 		return id;
 	}
 
-	public Set<String> frames() {
+	public Set<String> getFrames( ) {
 		return frameMap.keySet();
 	}
 
@@ -61,7 +60,7 @@ public class Sentence {
 	public Sentence collapse() {
 		//logger.debug("collapse");
 		Sentence sentence = new Sentence(id);
-		Iterator<String> it = frames().iterator();
+		Iterator<String> it = getFrames( ).iterator();
 		for (int i = 0; it.hasNext(); i++) {
 			String frame = it.next();
 
@@ -106,7 +105,7 @@ public class Sentence {
 	@Override
 	public String toString() {
 		StringBuilder sb = new StringBuilder();
-		Iterator<String> it = frames().iterator();
+		Iterator<String> it = getFrames( ).iterator();
 		for (int i = 0; it.hasNext(); i++) {
 			String frame = it.next();
 			List<Role> roles = frameMap.get(frame);

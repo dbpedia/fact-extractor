@@ -1,12 +1,6 @@
 package org.fbk.cit.hlt.dirha;
 
-import com.fasterxml.jackson.core.JsonFactory;
-import com.fasterxml.jackson.core.JsonGenerator;
-import org.apache.commons.lang.StringEscapeUtils;
 import org.apache.log4j.Logger;
-
-import java.io.IOException;
-import java.io.StringWriter;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -44,8 +38,7 @@ public class Answer {
 	static Logger logger = Logger.getLogger(Answer.class.getName());
 	private String sentenceID;
 
-
-	List<Entry> list;
+	List<ClassifierResults> list;
 
     public String getSentenceID( ) {
         return sentenceID;
@@ -55,68 +48,10 @@ public class Answer {
         this.sentenceID = sentenceID;
     }
 
-    class Entry {
-		private String frame;
-		private String role;
-        private String token;
-        private String pos;
-        private String lemma;
-		private Double roleConfidence;
-		private Double frameConfidence;
-        private Double linkConfidence;
-
-		Entry(String token, String pos, String lemma, String frame, String role,
-              Double roleConfidence, Double frameConfidence, Double linkConfidence ) {
-
-			this.frame = frame;
-			this.role = role;
-			this.token = token;
-            this.pos = pos;
-            this.lemma = lemma;
-            this.roleConfidence = roleConfidence;
-            this.frameConfidence = frameConfidence;
-            this.linkConfidence = linkConfidence;
-		}
-
-		String getFrame() {
-			return frame;
-		}
-
-		String getRole() {
-			return role;
-		}
-
-        public String getToken( ) {
-            return token;
-        }
-
-        public String getPos( ) {
-            return pos;
-        }
-
-        public String getLemma( ) {
-            return lemma;
-        }
-
-        public Double getRoleConfidence( ) {
-            return roleConfidence;
-        }
-
-        public Double getFrameConfidence( ) {
-            return frameConfidence;
-        }
-
-        public Double getLinkConfidence( ) {
-            return linkConfidence;
-        }
-    }
-
 	public Sentence getSentence() {
 		Sentence sentence = new Sentence(sentenceID);
-		for (int i = 0; i < list.size(); i++) {
-			Entry entry = list.get(i);
+        for(ClassifierResults entry: list)
 			sentence.add( getSentenceID( ), entry.getFrame(), entry.getRole(), entry.getToken());
-		}
 		return sentence;
 	}
 
@@ -125,206 +60,26 @@ public class Answer {
         list = new ArrayList<>( );
         logger.debug( "===" );
         logger.debug( classifierResultsList.size( ) );
-        String frame = classifierResultsList.get( 0 ).getPredictedRoleLabel( );
-        String prevRole = "O";
-        for ( int i = 0; i < classifierResultsList.size( ); i++ ) {
-            ClassifierResults example = classifierResultsList.get( i );
-            String role = example.getPredictedRoleLabel( );
 
-            if ( !example.getToken( ).equalsIgnoreCase( "EOS" ) ) {
-                if ( role.equalsIgnoreCase( "O" ) ) {
-                    logger.info( i + "\tO\t" + role + "\t" + example.toString( ) + "\t" + example.getLinkConfidence( ) +
-                                         "\t" + example.getFrameConfidence( ) );
-                    list.add( new Entry( example.getToken( ), example.getPos( ), example.getLemma( ),
-                                         "O", "O", example.getRoleConfidence( ), example.getFrameConfidence( ),
-                                         example.getLinkConfidence( ) ) );
-                }
-                else {
-
-					logger.info(i + "\t" + frame + "\t" + role + "\t" + example.toString() + "\t");
-					if (role.startsWith("I-")) {
-						logger.warn(role);
-						if (prevRole.startsWith("O")) {
-							logger.warn(prevRole);
-								//role = "B-" + role.substring(2, role.length());
-							role="O";
-						}
-					}
-					else if (role.startsWith("B-")) {
-						if (prevRole.startsWith("I-") && sameLabel(prevRole, role)) {
-							role = "I-" + role.substring(2, role.length());
-						}
-					}
-
-                    list.add( new Entry( example.getToken( ), example.getPos( ), example.getLemma( ),
-                                         frame, role, example.getRoleConfidence( ), example.getFrameConfidence( ),
-                                         example.getLinkConfidence( ) ) );
-                }
-
-			}
-			prevRole = role;
+        for(ClassifierResults example: classifierResultsList) {
+            if ( !example.getToken( ).equalsIgnoreCase( "EOS" ) )
+                list.add( example );
 		}
-		logger.debug("+++");
 	}
 
-	private boolean sameLabel(String r1, String r2) {
-		logger.debug(r1 + "\t" + r2);
-
-		String l1 = r1.substring(2, r1.length());
-		String l2 = r2.substring(2, r2.length());
-		return l1.equals(l2);
-	}
-
-	public String toTSV() {
-		StringBuilder sb = new StringBuilder();
-		for (int i = 0; i < list.size(); i++) {
-            Entry entry = list.get( i );
-            String frame = entry.getFrame( );
-            String role = entry.getRole( );
-            sb.append( getSentenceID( ) );
-            sb.append( "\t" );
-            sb.append( i + 1 );
-            sb.append( "\t" );
-            sb.append( entry.getToken( ) );
-            sb.append( "\t" );
-            sb.append( entry.getPos( ) );
-            sb.append( "\t" );
-            sb.append( entry.getLemma( ) );
-            sb.append( "\t" );
-            sb.append( frame );
-            sb.append( "\t" );
-            sb.append( role );
-            sb.append( "\n" );
-        }
-		sb.append("\n");
-		return sb.toString();
-	}
-
-    public String confidenceToTSV( ) {
+    public String toTSV( ) {
         StringBuilder sb = new StringBuilder( );
         for ( int i = 0; i < list.size( ); i++ ) {
-            Entry entry = list.get( i );
+            ClassifierResults entry = list.get( i );
             sb.append( getSentenceID( ) );
             sb.append( "\t" );
             sb.append( i + 1 );
             sb.append( "\t" );
-            sb.append( entry.getFrameConfidence( ) );
-            sb.append( "\t" );
-            sb.append( entry.getRoleConfidence( ) );
-            sb.append( "\t" );
-            sb.append( entry.getLinkConfidence( ) );
+            sb.append( entry.toTSV( ) );
             sb.append( "\n" );
         }
+        sb.append( "\n" );
         return sb.toString( );
     }
-
-	public String toJSon() {
-		StringWriter w = new StringWriter();
-		try {
-
-
-			JsonFactory f = new JsonFactory();
-			JsonGenerator g = f.createJsonGenerator(w);
-			g.writeStartObject();
-			g.writeFieldName("annotation");
-			g.writeStartArray();
-
-			for (int i = 0; i < list.size(); i++) {
-				Entry entry = list.get(i);
-                String frame = entry.getFrame( );
-                String role = entry.getRole( );
-                g.writeStartObject( );
-                g.writeNumberField( "sid", i + 1 );
-                g.writeNumberField( "tid", i + 1 );
-                g.writeStringField( "token", entry.getToken( ) );
-                g.writeStringField( "pos", entry.getPos( ) );
-                g.writeStringField( "lemma", entry.getLemma( ) );
-                g.writeStringField( "frame", frame );
-                g.writeStringField( "role", role );
-                g.writeEndObject( );
-            }
-			g.writeEndArray();
-			g.writeEndObject();
-			g.close();
-		} catch (IOException e) // Because we are writing to a String a
-		{
-			logger.error(e);
-		}
-		return w.toString();
-
-
-	}
-
-
-	public String toHtml() {
-
-		StringBuilder sb = new StringBuilder();
-		String prevRole = "o";
-		String prevFrame = "o";
-		String currentRole = null;
-		String currentFrame = null;
-		String sentenceFrame = null;
-		for (int i = 0; i < list.size(); i++) {
-			Entry entry = list.get(i);
-
-			currentRole = entry.getRole();
-			currentFrame = entry.getFrame();
-			if (!currentFrame.equalsIgnoreCase("o")) {
-				sentenceFrame = currentFrame;
-			}
-
-			logger.debug(i + "\t" + currentRole + "\t"+ currentFrame);
-			if (currentRole.startsWith("B-")) {
-				//logger.debug("a\t\t" + role);
-				if (!prevRole.equalsIgnoreCase("o")) {
-					sb.append("]");
-					sb.append("<sub>");
-					sb.append(prevRole.substring(2, prevRole.length()));
-					sb.append("</sub>");
-
-				}
-				if (i > 0) {
-					sb.append(" ");
-				}
-
-				sb.append("[");
-				//sb.append(entry.getExample()[0]);
-			}
-
-
-			else if (currentRole.equalsIgnoreCase("o") && !prevRole.equalsIgnoreCase("o")) {
-				sb.append("]");
-				sb.append("<sub>");
-				sb.append(prevRole.substring(2, prevRole.length()));
-				sb.append("</sub>");
-				if (i > 0) {
-					sb.append(" ");
-				}
-				//sb.append(entry.getExample()[0]);
-			}
-			else {
-				if (i > 0) {
-					sb.append(" ");
-				}
-			}
-
-			sb.append(StringEscapeUtils.escapeHtml(entry.getToken()));
-
-			prevRole = currentRole;
-			prevFrame = currentFrame;
-		}
-
-		if ((prevRole.startsWith("B-") || prevRole.startsWith("I-"))) {
-			sb.append("]");
-			sb.append("<sub>");
-			sb.append(prevRole.substring(2, prevRole.length()));
-			sb.append("</sub>");
-		}
-
-		//logger.debug("after\t" + list);
-		return sentenceFrame + ": " + sb.toString();
-	}
-
-
 }
 
