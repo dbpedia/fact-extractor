@@ -65,15 +65,20 @@ class DateNormalizer(object):
     def normalize_many(self, expression):
         """ find all the matching entities in the given expression expression """
         expression = expression.lower()
+        position = 0  # start matching from here, and move forward as new matches
+                      # are found so to avoid overlapping matches and return
+                      # the correct offset inside the original sentence
+
         for category, regexes in self.regexes.iteritems():
             for regex, transform in regexes:
-                for match in regex.finditer(expression):
-                    expression = expression[match.start():]
-                    yield self._process_match(category, transform, match)
+                for match in regex.finditer(expression[position:]):
+                    yield self._process_match(category, transform, match, position)
+                    position += match.end()
 
-    def _process_match(self, category, transform, match):
+    def _process_match(self, category, transform, match, first_position):
         result = eval(transform, self.globals, {'match': match})
-        return match.span(), category, result
+        start, end = match.span()
+        return (first_position + start, first_position + end) , category, result
 
 
 _normalizer = DateNormalizer()
