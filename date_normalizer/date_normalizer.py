@@ -32,7 +32,8 @@ class DateNormalizer(object):
         self.regexes = {}
         for category, regexes in specs.iteritems():
             regexes = sum((x.items() for x in regexes), [])
-            self.regexes[category] = [(re.compile(pattern.format(**basic_r),
+            self.regexes[category] = [(re.compile(pattern.replace(' ', '\\s+') \
+                                                         .format(**basic_r),
                                                   re.IGNORECASE), result)
                                       for pattern, result in regexes]
 

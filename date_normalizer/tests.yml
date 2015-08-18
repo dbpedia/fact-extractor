@@ -8,7 +8,7 @@ il 2004: '"2004"^^<http://www.w3.org/2001/XMLSchema#gYear>'
 l'anno seguente: '"$YEAR + 1"'
 l ' anno seguente: '"$YEAR + 1"'
 la stagione successiva: '"$YEAR + 1"'
-stagione 1984-1985:
+stagione 1984 -1985:
   duration: '"P1Y"^^<http://www.w3.org/2001/XMLSchema#duration>'
   start: '"1984"^^<http://www.w3.org/2001/XMLSchema#gYear>'
   end: '"1985"^^<http://www.w3.org/2001/XMLSchema#gYear>'
