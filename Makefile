@@ -120,14 +120,14 @@ supervised-learn-frames:
 supervised-run-interactive:
 	java $(CL_JAVA_OPTS) -Dtreetagger.home=$(TREETAGGER_HOME) \
 		$(CL_MAIN_PACKAGE).Annotator -g $(CL_GAZETTEER) -m $(CL_TRAINING_SET) \
-		-l $(LANGCODE) -i
+		-l $(LANGCODE) -i -n
 
 supervised-run-batch:
 	python date_normalizer/rpc.py 2>/dev/null &
 	java $(CL_JAVA_OPTS) -Dtreetagger.home=$(TREETAGGER_HOME) \
 		$(CL_MAIN_PACKAGE).Annotator -g $(CL_GAZETTEER) -m $(CL_TRAINING_SET) \
 		-l $(LANGCODE) -r $(CL_SENTENCES_FILE).eval  -a $(CL_SENTENCES_FILE) \
-		-o $(CL_OUTPUT)
+		-o $(CL_OUTPUT) -n
 
 supervised-evaluate:
 	python date_normalizer/rpc.py 2>/dev/null &
@@ -135,7 +135,7 @@ supervised-evaluate:
 		$(CL_MAIN_PACKAGE).Annotator -g $(CL_GAZETTEER) -m $(CL_TRAINING_SET) \
 		-l $(LANGCODE) -r $(CL_ANNOTATED_GOLD).report \
         -a $(CL_ANNOTATED_GOLD).sentences -e $(CL_ANNOTATED_GOLD) \
-        -r $(CL_ANNOTATED_GOLD).report -o $(CL_ANNOTATED_GOLD).classified
+        -r $(CL_ANNOTATED_GOLD).report -o $(CL_ANNOTATED_GOLD).classified -n
 
 supervised-results-to-assertions:
 	python supervised/produce_triples.py $(CL_OUTPUT) \

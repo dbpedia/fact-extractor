@@ -64,6 +64,8 @@ public class Annotator {
     FrameFeatureExtractor frameFeatureExtractor;
     RoleFeatureExtractor roleFeatureExtractor;
 
+    boolean normalizeNumericalFEs;
+
 	private static DecimalFormat tf = new DecimalFormat("000,000,000.#");
 
 	Map<String, String> gazetteerMap;
@@ -302,7 +304,10 @@ public class Annotator {
 		classifyRoles( classifierResultsList );
 		classifyFrames( classifierResultsList );
 
-        List<ClassifierResults> normalized = DateNormalizer.normalizeNumericalExpressions( classifierResultsList );
+        List<ClassifierResults> normalized;
+        if(normalizeNumericalFEs)
+            normalized = DateNormalizer.normalizeNumericalExpressions( classifierResultsList );
+        else normalized = classifierResultsList;
 
 		printAnswer( normalized );
 		return new Answer(sentence_id, normalized );
@@ -429,6 +434,7 @@ public class Annotator {
 			Option langOpt = OptionBuilder.withArgName("string").hasArg().withDescription("language").isRequired().withLongOpt("lang").create("l");
 			options.addOption(OptionBuilder.withDescription("trace mode").withLongOpt("trace").create());
 			options.addOption(OptionBuilder.withDescription("debug mode").withLongOpt("debug").create());
+            Option normalizeNumOpt = OptionBuilder.withDescription("normalize numerical FEs").withLongOpt("normalize-fes").create("n");
 
 			options.addOption("h", "help", false, "print this message");
 			options.addOption("v", "version", false, "output version information and exit");
@@ -441,6 +447,7 @@ public class Annotator {
 			options.addOption(outputFileOpt);
 			options.addOption(reportFileOpt);
 			options.addOption(langOpt);
+            options.addOption( normalizeNumOpt );
 
 			CommandLineParser parser = new PosixParser();
 			CommandLine line = parser.parse(options, args);
@@ -462,6 +469,7 @@ public class Annotator {
 			String lang = line.getOptionValue("lang");
 
 			Annotator annotator = new Annotator(iob2, frame, gazetteerFile, lang);
+            annotator.normalizeNumericalFEs = line.hasOption( "normalize-fes" );
 			if (line.hasOption("interactive-mode")) {
 				annotator.interactive();
 			}
