@@ -18,7 +18,7 @@ from lib.scoring import compute_score, AVAILABLE_SCORES
 import click
 
 
-def label_sentence(entity_linking_results, debug):
+def label_sentence(entity_linking_results, debug, numerical):
     """Produce a labeled sentence by comparing the linked entities to the frame definition"""
     labeled = {}
     links = json.load(codecs.open(entity_linking_results, 'rb', 'utf-8'))
@@ -143,7 +143,7 @@ def label_sentence(entity_linking_results, debug):
                             labeled['FEs'] = assigned_fes
 
     # Normalize + annotate numerical FEs (only if we could disambiguate the sentence)
-    if labeled.get('frame'):
+    if labeled.get('frame') and numerical:
         if debug:
             print 'LABELING AND NORMALIZING NUMERICAL FEs ...'
         normalizer = DateNormalizer()
@@ -162,13 +162,13 @@ def label_sentence(entity_linking_results, debug):
     return labeled
 
 
-def process_dir(indir, score_fes, debug):
+def process_dir(indir, score_fes, debug, numerical):
     """Walk into the input directory and process all the entity linking results"""
     processed = []
     for path, subdirs, files in os.walk(indir):
         for name in files:
             f = os.path.join(path, name)
-            labeled = label_sentence(f, debug)
+            labeled = label_sentence(f, debug, numerical)
             # Filename is {WIKI_ID}.{SENTENCE_ID}(.{extension})?
             labeled['id'] = '.'.join(name.split('.')[:2])
 
@@ -186,8 +186,9 @@ def process_dir(indir, score_fes, debug):
 @click.option('--core-weight', default=2)
 @click.option('--score-fes/--no-score-fes', help='Score individual FEs')
 @click.option('--debug/--no-debug', default=False)
-def main(linked_dir, labeled_out, score, core_weight, score_fes, debug):
-    labeled = process_dir(linked_dir, score_fes, debug)
+@click.option('--numerical/--no-numerical', default=True)
+def main(linked_dir, labeled_out, score, core_weight, score_fes, debug, numerical):
+    labeled = process_dir(linked_dir, score_fes, debug, numerical)
 
     if score:
         for sentence in labeled:
