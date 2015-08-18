@@ -143,6 +143,12 @@ supervised-results-to-assertions:
         $(CL_OUTPUT).triples.scores.nt --format nt --sentence-score $(SCORING_TYPE) \
         --core-weight $(SCORING_CORE_WEIGHT) --fe-score $(FE_SCORE) --format nt
 
+supervised-plot-results:
+	python supervised/plot.py $(CL_ANNOTATED_GOLD).report.frames.confusion.csv roc &
+	python supervised/plot.py $(CL_ANNOTATED_GOLD).report.frames.confusion.csv confpr &
+	python supervised/plot.py $(CL_ANNOTATED_GOLD).report.roles.confusion.csv roc &
+	python supervised/plot.py $(CL_ANNOTATED_GOLD).report.roles.confusion.csv confpr &
+
 crowdflower-create-input:
 	# TODO generate twm ngrams and textpro chunks somehow
 	mkdir -p $(WORK_DIR)/linked

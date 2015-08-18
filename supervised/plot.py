@@ -12,6 +12,17 @@ def calc_tpr_fpr(n, confmat):
     return float(tp) / p if p > 0 else 0, float(fp) / n if n > 0 else 0
 
 
+def calc_precision_recall(n, confmat):
+    tp = float(confmat[n][n])
+    cond_positive = sum(confmat[n])
+    test_positive = sum(confmat[i][n] for i in range(len(confmat)))
+
+    precision = tp / cond_positive if cond_positive > 0 else 0
+    recall = tp / test_positive if test_positive > 0 else 0
+
+    return precision, recall
+
+
 @click.group()
 @click.argument('confusion-matrix', type=click.File('r'))
 @click.option('--first-row', default=1,
@@ -47,21 +58,29 @@ def roc(obj):
 
 @plot.command()
 @click.pass_obj
-def confusion_matrix(obj):
+def confpr(obj):
     normalized = []
     for row in obj['confmat']:
         count = sum(row)
         normalized.append([float(x) / count if count > 0 else 0 for x in row])
 
+    precisions, recalls = zip(*(calc_precision_recall(i, obj['confmat'])
+                                for i in range(len(obj['confmat']))))
+
     fig, (ax1, ax2) = plt.subplots(1, 2)
-    ax1.set_title('Confusion Matrix')
-    ax1.set_xlabel('Actual Class'); ax1.set_ylabel('Predicted Class')
-    ax1.set_xticks(range(len(obj['labels'])))
+
+    num_classes, width = len(obj['confmat']), 0.4
+    ax1.set_title('Precision/Recall')
+    ax1.bar([x - width for x in range(num_classes)], precisions, width,
+            label='Precision', color='b')
+    ax1.bar(range(num_classes), recalls, width, label='Recall', color='r')
+    ax1.set_xticks(range(num_classes))
     ax1.set_xticklabels(obj['labels'], rotation=90)
-    ax1.set_yticks(range(len(obj['labels'])))
-    ax1.set_yticklabels(obj['labels'])
-    im1 = ax1.imshow(obj['confmat'], interpolation='nearest')
-    plt.colorbar(im1, ax=ax1, fraction=0.046, pad=0.04)
+    ax1.set_yticks([.0, .1, .2, .3, .4, .5, .6, .7, .8, .9, 1.])
+    ax1.set_xlim((-width, num_classes + width - 1))
+    ax1.grid()
+    ax1.legend()
+
 
     ax2.set_title('Normalized Confusion Matrix')
     ax2.set_xlabel('Actual Class'); ax2.set_ylabel('Predicted Class')
