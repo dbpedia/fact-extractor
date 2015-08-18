@@ -66,7 +66,7 @@ public class FrameTrainingSetToLibSvm {
         labelIndex = new FeatureIndex( );
     }
 
-    public void convert( ) throws IOException {  // TODO bag of words (tokens, lemmas,  roles)
+    public void convert( ) throws IOException {
         logger.info( "processing " + instanceFile + "..." );
         PrintWriter pw = new PrintWriter( new BufferedWriter( new OutputStreamWriter( new FileOutputStream( libsvnFile ), "UTF-8" ) ) );
         extractor = new FrameFeatureExtractor( featureIndex, gazetteerMap );
