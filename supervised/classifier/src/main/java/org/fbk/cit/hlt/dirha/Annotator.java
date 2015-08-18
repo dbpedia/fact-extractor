@@ -225,7 +225,6 @@ public class Annotator {
 
     private void classifyFrames( List<? extends Token> classifierResultsList ) throws Exception {
         Map<Integer, Double> probabilities = new HashMap<>( );
-        //String[] example = toFrameExample( classifierResultsList );
         String featureVector = "-1 " + frameFeatureExtractor.extractFeatures( classifierResultsList );
 
         logger.debug( featureVector );
@@ -237,32 +236,6 @@ public class Annotator {
             res.setFrameConfidence( probabilities.get( y ) );
         }
     }
-
-    /*
-    private String[] toFrameExample( List<? extends Token> classifierResultsList ) throws Exception {
-        Set<String> wordSet = new HashSet<>();
-        Set<String> lemmaSet = new HashSet<>();
-        Set<String> roleSet = new HashSet<>();
-
-        for (int i = 0; i < classifierResultsList.size(); i++) {
-            logger.debug(i + "\t" + classifierResultsList.get(i).toTable( ));
-            String word = classifierResultsList.get( i ).getToken( );
-            String lemma = classifierResultsList.get( i ).getLemma( );
-            if (!word.equalsIgnoreCase("EOS")) {
-                wordSet.addMeasure(word);
-                lemmaSet.addMeasure(lemma);
-
-            }
-            //wordSet.addMeasure(classifierResultsList.get(i)[0]);
-        }
-        String[] s = new String[4];
-        s[0] = "-1";
-        s[1] = SpreadSheetToFrameTrainingSet.replace(wordSet.toTable());
-        s[2] = SpreadSheetToFrameTrainingSet.replace(lemmaSet.toTable());
-
-        return s;
-    }
-    */
 
 	public List<Answer> classify(File fin) throws IOException {
 		List<Answer> list = new ArrayList<>();

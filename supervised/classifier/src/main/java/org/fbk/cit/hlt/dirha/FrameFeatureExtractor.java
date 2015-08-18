@@ -22,6 +22,9 @@ public class FrameFeatureExtractor extends FeatureExtraction {
         for ( Token t : sentence ) {
             set.addAll( extractColumnFeature( t, 1 ) );
             set.addAll( extractColumnFeature( t, 2 ) );
+//            Only add role label features if they are not "O"
+            if ( !t.getRole().equalsIgnoreCase("O") )
+                set.addAll( extractColumnFeature( t, 3 ) );
             set.addAll( extractGazetteerFeature( t ) );
         }
 
@@ -29,14 +32,15 @@ public class FrameFeatureExtractor extends FeatureExtraction {
     }
 
     Set<Integer> extractColumnFeature( Token t, int column ) {
-        String[] terms;
+        String[] terms = null;
         if ( column == 0 )
             terms = t.getFrame( ).split( " " );
         else if ( column == 1 )
             terms = t.getToken( ).split( " " );
         else if ( column == 2 )
             terms = t.getLemma( ).split( " " );
-        else terms = t.getRole( ).split( " " );
+        else if ( column == 3)
+            terms = t.getRole( ).split( " " );
 
         logger.trace( Arrays.toString( terms ) );
         Set<Integer> feat = new HashSet<>( );
