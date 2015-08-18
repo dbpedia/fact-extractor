@@ -17,7 +17,7 @@ DUMP=../$(LANGCODE)wiki-latest-pages-articles.xml.bz2
 CL_MAIN_PACKAGE=org.fbk.cit.hlt.dirha
 CL_JAVA_OPTS=-Dlog-config=supervised/classifier/log-config.txt -Xmx2G -Dfile.encoding=UTF-8 -cp supervised/classifier/target/fatJar.jar
 CL_TRAINING_SET=supervised/resources/training.sample
-CL_GAZETTEER=supervised/resources/it/soccer-gaz.tsv
+CL_GAZETTEER=supervised/resources/it/dbpedia-gaz.tsv
 CL_SENTENCES_FILE=$(WORK_DIR)/sample-50.txt
 CL_OUTPUT=$(WORK_DIR)/sample-50-classified.txt
 CL_ANNOTATED_GOLD=resources/gold-standard.curated
