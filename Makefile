@@ -168,9 +168,9 @@ crowdflower-to-training:
 		$(TAGGED_DIR) $(WORK_DIR)/training-data.tsv -d
 
 run-unsupervised:
-	# you need to run extract-soccer before
+	# you need to run extract-soccer + extract-sentences before
 	mkdir -p $(WORK_DIR)/unsupervised/linked
-	python lib/entity_linking.py -d -c $(MIN_LINK_CONFIDENCE) $(LINK_MODE) $(SOCCER_DIR) \
+	python lib/entity_linking.py -d -c $(MIN_LINK_CONFIDENCE) $(LINK_MODE) $(SENTENCES_DIR) \
 		$(WORK_DIR)/unsupervised/linked
 	python unsupervised/produce_labeled_data.py $(WORK_DIR)/unsupervised/linked \
 		$(WORK_DIR)/labeled_data.json --score $(SCORING_TYPE) \
