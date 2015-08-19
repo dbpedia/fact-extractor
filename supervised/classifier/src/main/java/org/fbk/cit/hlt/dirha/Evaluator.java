@@ -534,7 +534,7 @@ public class Evaluator {
 				}
 				if (!s[6].trim().equalsIgnoreCase("O")) {
 					ClassifierResults res = ClassifierResults.fromTSV( s, 2 );
-                    sentence.add(s[0], res.getFrame(), res.getRole(), res.getToken());
+                    sentence.add(s[0], res.getFrame(), res.getRole(), res.getToken().replace(" ", ""));
 				}
 
 			}
