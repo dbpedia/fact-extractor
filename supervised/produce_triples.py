@@ -50,10 +50,7 @@ def to_labeled(sentences, fe_score_type):
         else:
             lu = lu[0]
         
-        if sentence_id == '1115184.2':
-            import pdb; pdb.set_trace()
-
-        fe_list = []
+        fe_dict = {}
         for _, _, token, pos, lemma, frame, role, frame_c, role_c, link_c, uri in rows:
 
             if role not in {'O', 'LU'}:
@@ -61,33 +58,37 @@ def to_labeled(sentences, fe_score_type):
                 score = score_fe(fe_format, fe_score_type, float(frame_c),
                                  float(role_c), float(link_c))
 
-                fe_list.append({
+                fe_dict[token] = {
                     'chunk': token,
                     'type': 'core',
                     fe_format: uri if fe_format == 'uri' else lemma,
                     'FE': role,
                     'score': float(score) if score is not None else None
-                })
+                }
 
         sentence = ' '.join(x[2] for x in rows)
-        labels = {
+
+        # normalize and annotate numerical expressions
+        for (start, end), tag, norm in normalizer.normalize_many(sentence):
+            chunk = sentence[start:end]
+            for existing in fe_dict.keys():
+                 if existing in chunk or chunk in existing:
+                    fe_dict[existing]['literal'] = norm
+                 else:
+                    fe_dict[chunk] = {
+                        'chunk': chunk,
+                        'FE': tag,
+                        'type': 'extra',
+                        'literal': norm
+                    }
+
+        labeled.append({
             'id': sentence_id,
             'frame': frame,
             'lu': lu[2] if lu else None,
             'sentence': sentence,
-            'FEs': fe_list,
-        }
-
-        # normalize and annotate numerical expressions
-        for (start, end), tag, norm in normalizer.normalize_many(sentence):
-            labels['FEs'].append({
-                'chunk': sentence[start:end],
-                'FE': tag,
-                'type': 'extra',
-                'literal': norm
-            })
-
-        labeled.append(labels)
+            'FEs': fe_dict.values(),
+        })
     return labeled
 
 

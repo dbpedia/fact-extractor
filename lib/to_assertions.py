@@ -85,7 +85,11 @@ def to_assertions(labeled_results, id_to_title, outfile='dataset.nt',
         processed.append(result['sentence'])
 
         parts = result['id'].split('.')
-        wiki_id, sentence_id = parts[0], parts[1]  # there might be the extension
+        if len(parts) > 1:
+            wiki_id, sentence_id = parts[0], parts[1]
+        else:
+            wiki_id, sentence_id = parts[0], -1
+
         if wiki_id in id_to_title:
             wiki_title = quote(id_to_title[wiki_id].replace(' ', '_').encode('utf8'))
         else:
@@ -161,11 +165,11 @@ def serialize_fe(fe, reified, wiki_title, add_triple, format):
         parsed = parse(o1, rule='URI_reference')  # URI sanity check
         assert add_triple(reified, p1, o1)
 
-    elif literal:  # It's a literal
+    if literal:  # It's a literal
         if type(literal) in {str, unicode}:
             assert add_triple(reified, p1, literal)
 
-        elif type(literal) == dict and 'duration' in literal:
+        elif type(literal) == dict:
             ps = '%sstartYear' % NAMESPACES['ontology']
             pe = '%sendYear' % NAMESPACES['ontology']
 
