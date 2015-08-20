@@ -3,15 +3,6 @@ import matplotlib.pyplot as plt
 from mpl_toolkits.axes_grid1 import make_axes_locatable
 
 
-def calc_tpr_fpr(n, confmat):
-    tp = confmat[n][n]
-    fp = sum(x for x in confmat[n]) - tp
-    p = sum(confmat[i][n] for i in range(len(confmat)))
-    n = sum(sum(row) for row in confmat) - p
-
-    return float(tp) / p if p > 0 else 0, float(fp) / n if n > 0 else 0
-
-
 def calc_precision_recall(n, confmat):
     tp = float(confmat[n][n])
     cond_positive = sum(confmat[n])
@@ -43,16 +34,15 @@ def plot(obj, confusion_matrix, first_row, first_col, last_row, last_col):
 
 @plot.command()
 @click.pass_obj
-def roc(obj):
+def precall(obj):
     for i in range(len(obj['confmat'])):
-        tpr, fpr = calc_tpr_fpr(i, obj['confmat'])
-        plt.plot(fpr, tpr, 'b+')
-        plt.annotate(obj['labels'][i], xy=(fpr, tpr), xytext=(1, 1),
+        p, r = calc_precision_recall(i, obj['confmat'])
+        plt.plot(p, r, 'b+')
+        plt.annotate(obj['labels'][i], xy=(p, r), xytext=(1, 1),
                      textcoords='offset points')
 
-    plt.plot([0., 1.], [0., 1.], 'b--')
-    plt.xlabel('False Positive Ratio (FP / N)');
-    plt.ylabel('True Positive Ratio (TP / P)')
+    plt.xlabel('Precision');
+    plt.ylabel('Recall')
     plt.tight_layout(); plt.grid(); plt.show()
 
 
