@@ -23,6 +23,11 @@ NAMESPACE_MANAGER.bind('resource', RESOURCE_NS)
 NAMESPACE_MANAGER.bind('fact', FACT_EXTRACTION_NS)
 NAMESPACE_MANAGER.bind('ontology', ONTOLOGY_NS)
 
+NAMESPACES = {
+    'ontology': ONTOLOGY_NS,
+    'resource': RESOURCE_NS,
+    'fact_extraction': FACT_EXTRACTION_NS,
+}
 
 def to_assertions(labeled_results, id_to_title, outfile='dataset.nt',
                   score_dataset=None, format='nt'):
@@ -88,7 +93,7 @@ def to_assertions(labeled_results, id_to_title, outfile='dataset.nt',
             print '**WARNING** No title for sentence %s, using id as title' % result['id']
 
         # Mint a URI unicode string
-        subject = namespaces['resource'] + wiki_title
+        subject = NAMESPACES['resource'] + wiki_title
         # URI sanity check
         try:
             parsed = parse(subject, rule='URI_reference')
@@ -97,36 +102,36 @@ def to_assertions(labeled_results, id_to_title, outfile='dataset.nt',
             print "Couldn't parse '%s' (%s). Skipping ..." % (subject, e)
             continue
 
-        predicate = _uri_for(namespaces, 'frame', 'predicate', frame)
-        object = _uri_for(namespaces, 'frame', 'object', frame) + '_%s_%s' % (wiki_id, sentence_id)
+        predicate = _uri_for('frame', 'predicate', frame)
+        object = _uri_for('frame', 'object', frame) + '_%s_%s' % (wiki_id, sentence_id)
         if not add_triple(subject, predicate, object):
             continue
 
         # Always mint an instance type triple for reified nodes
-        if predicate.startswith(namespaces['ontology']):
+        if predicate.startswith(NAMESPACES['ontology']):
             # Classes start with un upper case, properties with a lower case
-            class_start = len(namespaces['ontology'])
-            ontology_class = namespaces['ontology'] + \
+            class_start = len(NAMESPACES['ontology'])
+            ontology_class = NAMESPACES['ontology'] + \
                              predicate[class_start].upper() + \
                              predicate[class_start + 1:]
             add_triple(object, 'http://www.w3.org/1999/02/22-rdf-syntax-ns#type',
                        ontology_class)
-        elif predicate.startswith(namespaces['fact_extraction']):
-            class_start = len(namespaces['fact_extraction'])
-            ontology_class = namespaces['fact_extraction'] + \
+        elif predicate.startswith(NAMESPACES['fact_extraction']):
+            class_start = len(NAMESPACES['fact_extraction'])
+            ontology_class = NAMESPACES['fact_extraction'] + \
                              predicate[class_start].upper() + \
                              predicate[class_start + 1:]
             add_triple(object, 'http://www.w3.org/1999/02/22-rdf-syntax-ns#type',
                        ontology_class)
 
         if result.get('score') is not None:
-            predicate = namespaces['fact_extraction'] + 'confidence'
+            predicate = NAMESPACES['fact_extraction'] + 'confidence'
             score = '"%f"^^<http://www.w3.org/2001/XMLSchema#float>' % result['score']
             add_score(object, predicate, score)
 
         for fe in fes:
             try:
-                serialize_fe(fe, object, namespaces, wiki_title, add_triple, format)
+                serialize_fe(fe, object, wiki_title, add_triple, format)
             except Exception as ex:
                 print "Exception while serializing", fe, ex
                 continue
@@ -142,9 +147,9 @@ def to_assertions(labeled_results, id_to_title, outfile='dataset.nt',
     return processed, discarded
 
 
-def serialize_fe(fe, reified, namespaces, wiki_title, add_triple, format):
+def serialize_fe(fe, reified, wiki_title, add_triple, format):
     # The FE predicate takes the FE label
-    p1 = _uri_for(namespaces, 'FE', 'predicate', fe['FE'])
+    p1 = _uri_for('FE', 'predicate', fe['FE'])
 
     # The FE object takes the linked entity URI or the literal
     le_uri = fe.get('uri')
@@ -152,7 +157,7 @@ def serialize_fe(fe, reified, namespaces, wiki_title, add_triple, format):
     
     if le_uri:  # It's a URI
         wiki_title = quote(le_uri.split('/')[-1].encode('utf8'))
-        o1 = namespaces['resource'] + wiki_title
+        o1 = NAMESPACES['resource'] + wiki_title
         parsed = parse(o1, rule='URI_reference')  # URI sanity check
         assert add_triple(reified, p1, o1)
 
@@ -161,8 +166,8 @@ def serialize_fe(fe, reified, namespaces, wiki_title, add_triple, format):
             assert add_triple(reified, p1, literal)
 
         elif type(literal) == dict and 'duration' in literal:
-            ps = '%sstartYear' % namespaces['ontology']
-            pe = '%sendYear' % namespaces['ontology']
+            ps = '%sstartYear' % NAMESPACES['ontology']
+            pe = '%sendYear' % NAMESPACES['ontology']
 
             if 'duration' in literal:
                 assert add_triple(reified, p1, literal['duration'])
@@ -205,24 +210,24 @@ def _to_nt_term(x):
         return x
 
 
-def _uri_for(namespaces, _type, _triple_term, term):
+def _uri_for(_type, _triple_term, term):
     dbpo = FRAME_DBPO_MAP[_type].get(term)
     if dbpo:
         if _triple_term == 'predicate':
-            return namespaces['ontology'] + quote(dbpo.encode('utf8'))
+            return NAMESPACES['ontology'] + quote(dbpo.encode('utf8'))
         elif _triple_term == 'object':
             # Uppercase first letter
             dbpo = dbpo[0].upper() + dbpo[1:]
-            return namespaces['resource'] + quote(dbpo.encode('utf8'))
+            return NAMESPACES['resource'] + quote(dbpo.encode('utf8'))
         else:
             raise ValueError("The triple term must be either 'predicate' or 'object', got " + _triple_term)
     else:
         label = FRAME_IT_TO_EN[_type].get(term) or term
         if _triple_term == 'predicate':
-            return namespaces['fact_extraction'] + quote(label.encode('utf8'))
+            return NAMESPACES['fact_extraction'] + quote(label.encode('utf8'))
         elif _triple_term == 'object':
             # Uppercase first letter
             label = label[0].upper() + label[1:]
-            return namespaces['resource'] + quote(label.encode('utf8'))
+            return NAMESPACES['resource'] + quote(label.encode('utf8'))
         else:
             raise ValueError("The triple term must be either 'predicate' or 'object', got " + _triple_term)
