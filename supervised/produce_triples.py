@@ -49,9 +49,6 @@ def to_labeled(sentences, fe_score_type):
             lu = lu[0]
         else:
             lu = lu[0]
-        
-        if sentence_id == '1115184.2':
-            import pdb; pdb.set_trace()
 
         fe_list = []
         for _, _, token, pos, lemma, frame, role, frame_c, role_c, link_c, uri in rows:
