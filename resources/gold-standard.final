@@ -294,6 +294,15 @@
 20	7	nella	PRE:det	nel	Attività	O
 20	-	stagione 2011-2012	ENT	stagione 2011-2012	Attività	Durata
 20	9	.	SENT	.	Attività	O
+21	0	Il	DET:def	il	Attività	O
+21	1	30 aprile 1972	ENT	30 aprile 1972	Attività	Tempo
+21	2	esordisce	VER:pres	esordire	Attività	LU
+21	3	in	PRE	in	Attività	O
+21	4	Austria-Malta	NOM	<unknown>	Attività	O
+21	5	(	PON	(	Attività	O
+21	6	4-0	ENT	4-0	Attività	Punteggio
+21	7	)	PON	)	Attività	O
+21	8	.	SENT	.	Attività	O
 22	0	In	PRE	in	Attività	O
 22	1	Serie A	ENT	Serie A	Attività	Competizione
 22	2	ha	VER:pres	avere	Attività	O
