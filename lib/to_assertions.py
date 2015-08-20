@@ -10,10 +10,22 @@ from rfc3987 import parse  # URI/IRI validation
 from os import sys
 from resources import FRAME_IT_TO_EN
 from resources import FRAME_DBPO_MAP
+from rdflib.namespace import Namespace, NamespaceManager
+from rdflib import Graph
 
 
-def to_assertions(labeled_results, id_to_title, namespace_manager, namespaces,
-                  outfile='dataset.nt', score_dataset=None, format='nt'):
+# Namespace prefixes for RDF serialization
+RESOURCE_NS = Namespace('http://it.dbpedia.org/resource/')
+FACT_EXTRACTION_NS = Namespace('http://dbpedia.org/fact-extraction/')
+ONTOLOGY_NS = Namespace('http://dbpedia.org/ontology/')
+NAMESPACE_MANAGER = NamespaceManager(Graph())
+NAMESPACE_MANAGER.bind('resource', RESOURCE_NS)
+NAMESPACE_MANAGER.bind('fact', FACT_EXTRACTION_NS)
+NAMESPACE_MANAGER.bind('ontology', ONTOLOGY_NS)
+
+
+def to_assertions(labeled_results, id_to_title, outfile='dataset.nt',
+                  score_dataset=None, format='nt'):
     """
     Serialize the labeled results into RDF NTriples
 
@@ -43,8 +55,8 @@ def to_assertions(labeled_results, id_to_title, namespace_manager, namespaces,
 
     processed, discarded = [], []
     assertions, score_triples= Graph(), Graph()
-    assertions.namespace_manager = namespace_manager
-    score_triples.namespace_manager = namespace_manager
+    assertions.namespace_manager = NAMESPACE_MANAGER
+    score_triples.namespace_manager = NAMESPACE_MANAGER
 
     add_triple = triple_adder(assertions, format)
     add_score = triple_adder(score_triples, format)
@@ -85,15 +97,23 @@ def to_assertions(labeled_results, id_to_title, namespace_manager, namespaces,
             print "Couldn't parse '%s' (%s). Skipping ..." % (subject, e)
             continue
 
-        predicate = _uri_for(namespaces, 'frame', frame)
-        object = predicate + '_%s_%s' % (wiki_id, sentence_id)
+        predicate = _uri_for(namespaces, 'frame', 'predicate', frame)
+        object = _uri_for(namespaces, 'frame', 'object', frame) + '_%s_%s' % (wiki_id, sentence_id)
         if not add_triple(subject, predicate, object):
             continue
 
+        # Always mint an instance type triple for reified nodes
         if predicate.startswith(namespaces['ontology']):
             # Classes start with un upper case, properties with a lower case
             class_start = len(namespaces['ontology'])
             ontology_class = namespaces['ontology'] + \
+                             predicate[class_start].upper() + \
+                             predicate[class_start + 1:]
+            add_triple(object, 'http://www.w3.org/1999/02/22-rdf-syntax-ns#type',
+                       ontology_class)
+        elif predicate.startswith(namespaces['fact_extraction']):
+            class_start = len(namespaces['fact_extraction'])
+            ontology_class = namespaces['fact_extraction'] + \
                              predicate[class_start].upper() + \
                              predicate[class_start + 1:]
             add_triple(object, 'http://www.w3.org/1999/02/22-rdf-syntax-ns#type',
@@ -124,7 +144,7 @@ def to_assertions(labeled_results, id_to_title, namespace_manager, namespaces,
 
 def serialize_fe(fe, reified, namespaces, wiki_title, add_triple, format):
     # The FE predicate takes the FE label
-    p1 = _uri_for(namespaces, 'FE', fe['FE'])
+    p1 = _uri_for(namespaces, 'FE', 'predicate', fe['FE'])
 
     # The FE object takes the linked entity URI or the literal
     le_uri = fe.get('uri')
@@ -185,10 +205,24 @@ def _to_nt_term(x):
         return x
 
 
-def _uri_for(namespaces, _type, term):
+def _uri_for(namespaces, _type, _triple_term, term):
     dbpo = FRAME_DBPO_MAP[_type].get(term)
     if dbpo:
-        return namespaces['ontology'] + quote(dbpo.encode('utf8'))
+        if _triple_term == 'predicate':
+            return namespaces['ontology'] + quote(dbpo.encode('utf8'))
+        elif _triple_term == 'object':
+            # Uppercase first letter
+            dbpo = dbpo[0].upper() + dbpo[1:]
+            return namespaces['resource'] + quote(dbpo.encode('utf8'))
+        else:
+            raise ValueError("The triple term must be either 'predicate' or 'object', got " + _triple_term)
     else:
         label = FRAME_IT_TO_EN[_type].get(term) or term
-        return namespaces['fact_extraction'] + quote(label.encode('utf8'))
+        if _triple_term == 'predicate':
+            return namespaces['fact_extraction'] + quote(label.encode('utf8'))
+        elif _triple_term == 'object':
+            # Uppercase first letter
+            label = label[0].upper() + label[1:]
+            return namespaces['resource'] + quote(label.encode('utf8'))
+        else:
+            raise ValueError("The triple term must be either 'predicate' or 'object', got " + _triple_term)

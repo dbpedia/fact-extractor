@@ -15,18 +15,18 @@ FRAME_IT_TO_EN = {
     },
     "FE": {
         # FrameNet
-        u"Perdente": u"hasLoser", # Beat_opponent
-        u"Vincitore": u"hasWinner", # Beat_opponent
-        u"Competizione": u"hasCompetition", # Finish_competition
-        u"Squadra_1": u"hasCompetitor", # Finish_competition
-        u"Squadra_2": u"hasOpponent", # Finish_competition
-        u"Luogo": u"hasPlace", # Beat_opponent / Finish_competition
-        u"Tempo": u"hasTime", # Beat_opponent / Finish_competition
+        u"Perdente": u"loser", # Beat_opponent
+        u"Vincitore": u"winner", # Beat_opponent
+        u"Competizione": u"competition", # Finish_competition
+        u"Squadra_1": u"competitor", # Finish_competition
+        u"Squadra_2": u"opponent", # Finish_competition
+        u"Luogo": u"place", # Beat_opponent / Finish_competition
+        u"Tempo": u"time", # Beat_opponent / Finish_competition
         # Direct translation
-        u"Agente": u"hasAgent",
-        u"Concorrente": u"hasParticipant",
-        u"Entità": u"hasEntity",
-        u"Premio": u"hasPrize",
+        u"Agente": u"agent",
+        u"Concorrente": u"participant",
+        u"Entità": u"entity",
+        u"Premio": u"prize",
         # Mapped to DBPO
         u"Classifica": None,
         u"Durata": None,
