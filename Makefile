@@ -4,7 +4,9 @@ WORK_DIR=./workspace-$(LANGCODE)
 PAGES_DIR=$(WORK_DIR)/pages
 SOCCER_DIR=$(WORK_DIR)/soccer
 SENTENCES_DIR=$(WORK_DIR)/sentences
+SHORT_DIR=$(WORK_DIR)/short
 TAGGED_DIR=$(WORK_DIR)/tagged
+SHORT_TAGGED_DIR=$(WORK_DIR)/short-tagged
 SAMPLE_DIR=$(WORK_DIR)/samples
 TREETAGGER_HOME=../tree-tagger
 TREETAGGER=$(TREETAGGER_HOME)/cmd/tree-tagger-$(LANGUAGE)
@@ -12,6 +14,7 @@ SOCCER_IDS=extraction/resources/soccer_ids
 SAMPLE_LU_NUM=10
 SENTENCES_MIN_WORDS=5
 SENTENCES_MAX_WORDS=25
+SPLITTER_MIN_CHARS=25
 DUMP=../$(LANGCODE)wiki-latest-pages-articles.xml.bz2
 CL_MAIN_PACKAGE=org.fbk.cit.hlt.dirha
 CL_JAVA_OPTS=-Dlog-config=supervised/classifier/log-config.txt -Xmx2G -Dfile.encoding=UTF-8 -cp supervised/classifier/target/fatJar.jar
@@ -37,6 +40,7 @@ extract-pages:
 	find $(PAGES_DIR)/*/* -type f -exec cat '{}' \; > $(WORK_DIR)/all-articles.txt
 
 extract-soccer:
+	# must run extract-pages before
 	mkdir -p $(SOCCER_DIR)
 	python extraction/get_soccer_ids.py $(SOCCER_IDS) --lang $(LANGCODE)
 	python extraction/process_articles.py $(SOCCER_IDS) \
@@ -45,30 +49,56 @@ extract-soccer:
 	find $(SOCCER_DIR)/* -type f -exec cat '{}' \; > $(WORK_DIR)/all-soccer.txt
 
 extract-verbs:
-	cat $(WORK_DIR)/all-soccer.txt | $(TREETAGGER) | grep VER | grep -v '<unknown>' | \
+	# must run extract-pages before
+	cat $(WORK_DIR)/all-articles.txt | $(TREETAGGER) | grep VER | grep -v '<unknown>' | \
 		cut -f 1,3 | tr '[:upper:]' '[:lower:]' > $(WORK_DIR)/raw-verbs.txt
 	sort -u $(WORK_DIR)/raw-verbs.txt -o $(WORK_DIR)/token2lemma.txt
 	cut -f 1 $(WORK_DIR)/token2lemma.txt > $(WORK_DIR)/tokens.txt
 	cut -f 2 $(WORK_DIR)/token2lemma.txt | sort -u -o $(WORK_DIR)/lemmas.txt
-	python extraction/bag_of_words.py $(WORK_DIR)/all-soccer.txt \
+	python extraction/bag_of_words.py $(WORK_DIR)/all-articles.txt \
 		$(WORK_DIR)/vocabulary.txt
 
-extract-sentences:
-	mkdir -p $(SENTENCES_DIR) $(TAGGED_DIR)
+extract-short-sentences:
+	# must run extract-soccer before
+	mkdir -p $(SHORT_DIR) $(SHORT_TAGGED_DIR)
 	python extraction/extract_sentences.py $(WORK_DIR)/all-soccer.txt \
-		resources/tokens.list $(WORK_DIR)/sentence-to-wikiid.json $(SENTENCES_DIR) \
+		resources/tokens.list $(WORK_DIR)/sentence-to-wikiid.json $(SHORT_DIR) \
         --min-words $(SENTENCES_MIN_WORDS) --max-words $(SENTENCES_MAX_WORDS)
-	find $(SENTENCES_DIR) -type f | xargs -I{} -P 4 sh -c \
-		'echo {} && $(TREETAGGER) {} > $(TAGGED_DIR)/$$(basename {}) 2> /dev/null';
+	find $(SHORT_DIR) -type f | xargs -I{} -P 4 sh -c 'echo {} && \
+		$(TREETAGGER) {} > $(SHORT_TAGGED_DIR)/$$(basename {}) 2> /dev/null';
+
+extract-sentences-synctactic:
+	# must run extract-short-sentences and rank-verbs before
+	mkdir -p $(SENTENCES_DIR)
+	python seed_selection/get_meaningful_sentences.py $(SHORT_TAGGED_DIR) \
+		$(WORK_DIR)/top-50-tokens.txt $(SENTENCES_DIR)
+
+extract-sentences-lexical:
+	# must run extract-short-sentences and rank-verbs before
+	mkdir -p $(SENTENCES_DIR)
+	pyhon seed_selection/generate_lexicalizazion_patterns.py \
+		$(WORK_DIR)/top-50-tokens.txt SoccerPlayer SoccerClub SoccerLeague \
+        SoccerTournament SoccerLeagueSeason $(WORK_DIR)/lexicalizations
+	sort -ou $(WORK_DIR)/lexicalizations
+	find $(SHORT_DIR) -type f -exec sh -c 'echo $$1 && grep -irhwf \
+		$(WORK_DIR)/lexicalizations $$1 | ifne "cat > $(SENTENCES_DIR)/$$(basename $$1)"' \
+		'extract-sentences-lexical' '{}' \;
+
+extract-sentences-splitter:
+	# must run extract-soccer before
+	mkdir -p $(SENTENCES_DIR)
+	python seed_selection/split_sentences.py resources/italian-splitter.pickle \
+		$(SOCCER_DIR) $(SENTENCES_DIR) --min-length $(SPLITTER_MIN_CHARS)
 
 rank-verbs:
+	# must run extract-verbs before
 	cut -f 2 $(WORK_DIR)/token2lemma.txt | python verb_ranking/make_lemma_freq.py - \
 		$(WORK_DIR)/lemma-freq.json
 	cut -d '"' -f 2 workspace-it/lemma-freq.json | grep -vP	\
 		'avere|essere|fare|potere|volere|dovere' | sed -n '2,52'p | sort \
 		> $(WORK_DIR)/top-50-lemmas.txt
-	grep -wf $(WORK_DIR)/top-50-lemmas.txt $(WORK_DIR)/token2lemma.txt | sort -u \
-		> $(WORK_DIR)/top-50-tokens.txt
+	grep -wf $(WORK_DIR)/top-50-lemmas.txt $(WORK_DIR)/token2lemma.txt | sort -u | \
+		cut -f 1 > $(WORK_DIR)/top-50-tokens.txt
 	grep -wf $(WORK_DIR)/top-50-lemmas.txt $(WORK_DIR)/token2lemma.txt \
 		> $(WORK_DIR)/top-50-token2lemma.txt
 	python verb_ranking/tf_idfize.py $(SOCCER_DIR) $(WORK_DIR)/top-50-tokens.txt \
@@ -78,29 +108,6 @@ rank-verbs:
 		--tfidf-rank-out $(WORK_DIR)/verbs-tfidf-rank.json
 	python verb_ranking/compute_stdev_by_lemma.py $(WORK_DIR)/top-50-token2lemma.txt \
 		$(WORK_DIR)/verbs-stdev.json $(WORK_DIR)/lemma-stdev.json
-
-sample-add:
-	if [ -z "$(LU)" ]; then echo "Error: LU not set" && exit 1; fi
-	mkdir -p $(SAMPLE_DIR)/$(LU)/all-sentences $(SAMPLE_DIR)/$(LU)/tagged \
-		$(SAMPLE_DIR)/$(LU)/meaningful
-	grep -w $(LU) $(WORK_DIR)/top-50-token2lemma.txt | cut -f 1 \
-		> $(SAMPLE_DIR)/$(LU)/tokens.txt
-	python extraction/extract_sentences.py $(WORK_DIR)/all-soccer.txt \
-		$(SAMPLE_DIR)/$(LU)/tokens.txt $(SAMPLE_DIR)/$(LU)/title-to-wid.json \
-		$(SAMPLE_DIR)/$(LU)/all-sentences --min-words $(SENTENCES_MIN_WORDS) \
-		--max-words $(SENTENCES_MAX_WORDS)
-	python seed_selection/get_meaningful_sentences.py $(TAGGED_DIR) \
-		$(SAMPLE_DIR)/$(LU)/tokens.txt $(SAMPLE_DIR)/$(LU)/meaningful
-	find $(SAMPLE_DIR)/$(LU)/all-sentences -type f | xargs -I{} -P 4 sh -c 'echo {} && \
-		$(TREETAGGER) {} > $(SAMPLE_DIR)/$(LU)/tagged/$$(basename {}) 2> /dev/null';
-
-
-sample-finalize:
-	mkdir -p $(SAMPLE_DIR)/sentences
-	find $(SAMPLE_DIR)/*/sample/* | shuf | head -n $(SAMPLE_LU_NUM) | xargs -i cp {} \
-		$(SAMPLE_DIR)/sentences/
-	find $(SAMPLE_DIR)/*/sample/* -type f | head -n 100 | xargs -I{} sh -c \
-		'echo $$(basename {}); cat {}; echo' > $(WORK_DIR)/sample-50.txt
 
 supervised-build-classifier:
 	cd supervised/classifier && mvn compile assembly:assembly
@@ -168,10 +175,10 @@ crowdflower-to-training:
 		$(TAGGED_DIR) $(WORK_DIR)/training-data.tsv -d
 
 run-unsupervised:
-	# you need to run extract-soccer + extract-sentences before
+	# you need to run extract-sentences-* before
 	mkdir -p $(WORK_DIR)/unsupervised/linked
-	python lib/entity_linking.py -d -c $(MIN_LINK_CONFIDENCE) $(LINK_MODE) $(SENTENCES_DIR) \
-		$(WORK_DIR)/unsupervised/linked
+	python lib/entity_linking.py -d -c $(MIN_LINK_CONFIDENCE) $(LINK_MODE) \
+		$(SENTENCES_DIR) $(WORK_DIR)/unsupervised/linked
 	python unsupervised/produce_labeled_data.py $(WORK_DIR)/unsupervised/linked \
 		$(WORK_DIR)/labeled_data.json --score $(SCORING_TYPE) \
         --core-weight $(SCORING_CORE_WEIGHT) --score-fes
@@ -179,13 +186,18 @@ run-unsupervised:
 		$(WORK_DIR)/wiki-id-to-title-mapping.json $(WORK_DIR)/unsupervised/processed \
 		$(WORK_DIR)/unsupervised/discarded $(WORK_DIR)/unsupervised/dataset.nt
 
-evaluate-unsupervised:
+unsupervised-evaluate:
 	mkdir -p $(WORK_DIR)/unsupervised/evaluation/{linked,sentences}
-	i=0; while read f; do printf -v j "%04d" $$i; echo $$f > $(WORK_DIR)/unsupervised/evaluation/sentences/$$j; let i++; done < $(GOLD_SENTENCES)
+	i=0; while read f; do \
+		printf -v j "%04d" $$i; \
+		echo $$f > $(WORK_DIR)/unsupervised/evaluation/sentences/$$j; \
+		let i++; \
+	done < $(GOLD_SENTENCES)
 	python lib/entity_linking.py -d -c $(MIN_LINK_CONFIDENCE) $(LINK_MODE) \
 		$(WORK_DIR)/unsupervised/evaluation/sentences \
 		$(WORK_DIR)/unsupervised/evaluation/linked
 	python unsupervised/produce_labeled_data.py $(WORK_DIR)/unsupervised/evaluation/linked \
 		$(WORK_DIR)/unsupervised/evaluation/test_data.json --score $(SCORING_TYPE) \
         --core-weight $(SCORING_CORE_WEIGHT) --score-fes
-	python unsupervised/evaluate.py $(WORK_DIR)/unsupervised/evaluation/test_data.json $(GOLD_STANDARD) --partial
+	python unsupervised/evaluate.py $(WORK_DIR)/unsupervised/evaluation/test_data.json \
+		$(GOLD_STANDARD) --partial
