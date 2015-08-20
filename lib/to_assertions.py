@@ -184,8 +184,6 @@ def serialize_fe(fe, reified, wiki_title, add_triple, format):
 
         else:
             raise Exception("Don't know how to serialize: " + repr(literal))
-    else:
-        raise Exception("FE not tagged as either literal or uri, skipped " + repr(fe))
 
 
 def triple_adder(graph, format):

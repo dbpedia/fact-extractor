@@ -348,10 +348,14 @@ public class Annotator {
 
         double v;
         if (probabilities != null && (svm_type == svm_parameter.C_SVC || svm_type == svm_parameter.NU_SVC)) {
+            int[] labels = new int[nr_class];
+            svm.svm_get_labels( model, labels );
+
             double[] prob_estimates = new double[nr_class];
             v = svm.svm_predict_probability(model, x, prob_estimates);
+
             for(int i = 0; i  < prob_estimates.length; i++)
-                probabilities.put( i, prob_estimates[ i ] );
+                probabilities.put( labels[ i ], prob_estimates[ i ] );
         }
         else v = svm.svm_predict(model, x);
 
