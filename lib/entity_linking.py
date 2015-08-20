@@ -104,8 +104,15 @@ def twm_link(text, disambiguation, debug):
     #  Constrain the context to the soccer domain by appending dummy words
     text += SOCCER_WORDS
     TWM_DATA['text'] = text
-    r = requests.get(TWM_URL, params=TWM_DATA)
-    response = r.json()
+    response = None
+    while response is None:
+        try:
+            r = requests.get(TWM_URL, params=TWM_DATA)
+            r.raise_for_status()
+            response = r.json()
+        except requests.exceptions.RequestException:
+            pass
+
     if debug:
         print 'URL SENT:'
         print r.url

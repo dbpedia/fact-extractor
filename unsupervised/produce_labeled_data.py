@@ -18,6 +18,9 @@ from lib.scoring import compute_score, AVAILABLE_SCORES
 import click
 
 
+NORMALIZER = DateNormalizer()
+
+
 def label_sentence(entity_linking_results, debug, numerical):
     """Produce a labeled sentence by comparing the linked entities to the frame definition"""
     labeled = {}
@@ -146,8 +149,7 @@ def label_sentence(entity_linking_results, debug, numerical):
     if labeled.get('frame') and numerical:
         if debug:
             print 'LABELING AND NORMALIZING NUMERICAL FEs ...'
-        normalizer = DateNormalizer()
-        for (start, end), tag, norm in normalizer.normalize_many(sentence):
+        for (start, end), tag, norm in NORMALIZER.normalize_many(sentence):
             chunk = sentence[start:end]
             if debug:
                 print 'Chunk [%s] normalized into [%s], tagged as [%s]' % (chunk, norm, tag)
