@@ -9,20 +9,8 @@ import click
 import json
 from lib.to_assertions import to_assertions
 from collections import defaultdict
-from rdflib.namespace import Namespace, NamespaceManager
 from date_normalizer import DateNormalizer
 from lib.scoring import compute_score, AVAILABLE_SCORES
-from rdflib import Graph
-
-
-# Namespace prefixes for RDF serialization
-RESOURCE_NS = Namespace('http://it.dbpedia.org/resource/')
-FACT_EXTRACTION_NS = Namespace('http://dbpedia.org/fact-extraction/')
-ONTOLOGY_NS = Namespace('http://dbpedia.org/ontology/')
-NAMESPACE_MANAGER = NamespaceManager(Graph())
-NAMESPACE_MANAGER.bind('resource', RESOURCE_NS)
-NAMESPACE_MANAGER.bind('fact', FACT_EXTRACTION_NS)
-NAMESPACE_MANAGER.bind('ontology', ONTOLOGY_NS)
 
 
 def read_sentences(rows):
@@ -126,11 +114,8 @@ def main(classified_output, output_file, id_to_title, triple_scores, \
             sentence['score'] = compute_score(sentence, sentence_score, core_weight)
 
     mapping = json.load(id_to_title)
-    processed, discarded = to_assertions(labeled, mapping, NAMESPACE_MANAGER, {
-                                            'ontology': ONTOLOGY_NS,
-                                            'resource': RESOURCE_NS,
-                                            'fact_extraction': FACT_EXTRACTION_NS,
-                                         }, output_file, triple_scores, format)
+    processed, discarded = to_assertions(labeled, mapping, output_file,
+                                         triple_scores, format)
 
 
 if __name__ == '__main__':

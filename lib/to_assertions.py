@@ -10,10 +10,22 @@ from rfc3987 import parse  # URI/IRI validation
 from os import sys
 from resources import FRAME_IT_TO_EN
 from resources import FRAME_DBPO_MAP
+from rdflib.namespace import Namespace, NamespaceManager
+from rdflib import Graph
 
 
-def to_assertions(labeled_results, id_to_title, namespace_manager, namespaces,
-                  outfile='dataset.nt', score_dataset=None, format='nt'):
+# Namespace prefixes for RDF serialization
+RESOURCE_NS = Namespace('http://it.dbpedia.org/resource/')
+FACT_EXTRACTION_NS = Namespace('http://dbpedia.org/fact-extraction/')
+ONTOLOGY_NS = Namespace('http://dbpedia.org/ontology/')
+NAMESPACE_MANAGER = NamespaceManager(Graph())
+NAMESPACE_MANAGER.bind('resource', RESOURCE_NS)
+NAMESPACE_MANAGER.bind('fact', FACT_EXTRACTION_NS)
+NAMESPACE_MANAGER.bind('ontology', ONTOLOGY_NS)
+
+
+def to_assertions(labeled_results, id_to_title, outfile='dataset.nt',
+                  score_dataset=None, format='nt'):
     """
     Serialize the labeled results into RDF NTriples
 
@@ -43,8 +55,8 @@ def to_assertions(labeled_results, id_to_title, namespace_manager, namespaces,
 
     processed, discarded = [], []
     assertions, score_triples= Graph(), Graph()
-    assertions.namespace_manager = namespace_manager
-    score_triples.namespace_manager = namespace_manager
+    assertions.namespace_manager = NAMESPACE_MANAGER
+    score_triples.namespace_manager = NAMESPACE_MANAGER
 
     add_triple = triple_adder(assertions, format)
     add_score = triple_adder(score_triples, format)
