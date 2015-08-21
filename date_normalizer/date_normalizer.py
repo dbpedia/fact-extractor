@@ -59,7 +59,7 @@ class DateNormalizer(object):
             for regex, transform in regexes:
                 match = regex.search(expression)
                 if match:
-                    return self._process_match(category, transform, match)
+                    return self._process_match(category, transform, match, 0)
         else:
             return (-1, -1), None, None
 
@@ -72,9 +72,11 @@ class DateNormalizer(object):
 
         for category, regexes in self.regexes.iteritems():
             for regex, transform in regexes:
+                end = 0
                 for match in regex.finditer(expression[position:]):
                     yield self._process_match(category, transform, match, position)
-                    position += match.end()
+                    end = max(end, match.end())
+                position += end
 
     def _process_match(self, category, transform, match, first_position):
         result = eval(transform, self.globals, {'match': match})

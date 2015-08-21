@@ -74,13 +74,14 @@ def to_labeled(sentences, fe_score_type):
             for existing in fe_dict.keys():
                  if existing in chunk or chunk in existing:
                     fe_dict[existing]['literal'] = norm
-                 else:
-                    fe_dict[chunk] = {
-                        'chunk': chunk,
-                        'FE': tag,
-                        'type': 'extra',
-                        'literal': norm
-                    }
+                    break
+            else:
+                fe_dict[chunk] = {
+                    'chunk': chunk,
+                    'FE': tag,
+                    'type': 'extra',
+                    'literal': norm
+                }
 
         labeled.append({
             'id': sentence_id,

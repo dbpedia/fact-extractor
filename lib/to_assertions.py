@@ -159,7 +159,7 @@ def serialize_fe(fe, reified, wiki_title, add_triple, format):
     # The FE predicate takes the FE label
     p1 = _uri_for('FE', 'predicate', fe['FE'])
 
-    # The FE object takes the linked entity URI or the literal
+    # The FE object takes the linked entity URI and/or the literal
     le_uri = fe.get('uri')
     literal = fe.get('literal')
     
@@ -174,17 +174,17 @@ def serialize_fe(fe, reified, wiki_title, add_triple, format):
             assert add_triple(reified, p1, literal)
 
         elif type(literal) == dict:
-            ps = '%sstartYear' % NAMESPACES['ontology']
-            pe = '%sendYear' % NAMESPACES['ontology']
 
             if 'duration' in literal:
                 assert add_triple(reified, p1, literal['duration'])
 
             if 'start' in literal:
-                assert add_triple(reified, ps, literal['start'])
+                assert add_triple(reified, '%sstartYear' % NAMESPACES['ontology'],
+                                  literal['start'])
 
             if 'end' in literal:
-                assert add_triple(reified, pe, literal['end'])
+                assert add_triple(reified, '%sendYear' % NAMESPACES['ontology'],
+                                  literal['end'])
 
         else:
             raise Exception("Don't know how to serialize: " + repr(literal))
@@ -208,6 +208,8 @@ def triple_adder(graph, format):
 
 
 def _to_nt_term(x):
+    if type(x) == unicode:
+        x = x.encode('utf8')
     if x.startswith('http://'):
         return '<%s>' % x
     elif not x.startswith('"'):
