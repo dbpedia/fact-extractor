@@ -11,7 +11,18 @@ from lib.to_assertions import to_assertions
 from collections import defaultdict
 from date_normalizer import DateNormalizer
 from lib.scoring import compute_score, AVAILABLE_SCORES
+from resources.soccer_lu2frame_dbtypes import LU_FRAME_MAP
 
+
+_frame_map = defaultdict(dict)
+def _get_fe_type(frame_name, fe_name):
+    if not _frame_map:
+        for lu in LU_FRAME_MAP:
+            for frame in lu['lu']['frames']:
+                for fe in frame['FEs']:
+                    _frame_map[frame['frame']][fe.keys()[0]] = fe.values()[0]
+
+    return _frame_map.get(frame_name, {}).get(fe_name)
 
 def read_sentences(rows):
     sentences = defaultdict(list)
@@ -60,7 +71,7 @@ def to_labeled(sentences, fe_score_type):
 
                 fe_dict[token] = {
                     'chunk': token,
-                    'type': 'core',
+                    'type': _get_fe_type(frame, role) or 'out_of_frame',
                     fe_format: uri if fe_format == 'uri' else lemma,
                     'FE': role,
                     'score': float(score) if score is not None else None
@@ -79,7 +90,7 @@ def to_labeled(sentences, fe_score_type):
                 fe_dict[chunk] = {
                     'chunk': chunk,
                     'FE': tag,
-                    'type': 'extra',
+                    'type': _get_fe_type(frame, tag) or 'extra',
                     'literal': norm
                 }
 
