@@ -111,6 +111,11 @@ def to_assertions(labeled_results, id_to_title, outfile='dataset.nt',
         if not add_triple(subject, predicate, object):
             continue
 
+        if 'sentence' in result:
+            add_triple(subject, _uri_for(None, 'predicate', 'extractedFrom'),
+                       u'"{}"^^<{}>'.format(result['sentence'],
+                                            'http://www.w3.org/2001/XMLSchema#string'))
+
         # Always mint an instance type triple for reified nodes
         if predicate.startswith(NAMESPACES['ontology']):
             # Classes start with un upper case, properties with a lower case
@@ -197,8 +202,8 @@ def triple_adder(graph, format):
             print >> sys.stderr, 'Frame triple added: %s' % triple
             return True
         except Exception as e:
-            print "Invalid triple: %s %s %s (%s). Skipping ..." % (subject, predicate,
-                                                                   object, e.message)
+            s = u"Invalid triple: %s %s %s (%s). Skipping ..." % (subject, predicate,
+                                                                  object, e.message)
             return False
     return add_triple
 
@@ -213,7 +218,7 @@ def _to_nt_term(x):
 
 
 def _uri_for(_type, _triple_term, term):
-    dbpo = FRAME_DBPO_MAP[_type].get(term)
+    dbpo = FRAME_DBPO_MAP.get(_type, {}).get(term)
     if dbpo:
         if _triple_term == 'predicate':
             return NAMESPACES['ontology'] + quote(dbpo.encode('utf8'))
@@ -222,9 +227,10 @@ def _uri_for(_type, _triple_term, term):
             dbpo = dbpo[0].upper() + dbpo[1:]
             return NAMESPACES['resource'] + quote(dbpo.encode('utf8'))
         else:
-            raise ValueError("The triple term must be either 'predicate' or 'object', got " + _triple_term)
+            raise ValueError("The triple term must be either 'predicate' or 'object', got " \
+                             + _triple_term)
     else:
-        label = FRAME_IT_TO_EN[_type].get(term) or term
+        label = FRAME_IT_TO_EN.get(_type, {}).get(term) or term
         if _triple_term == 'predicate':
             return NAMESPACES['fact_extraction'] + quote(label.encode('utf8'))
         elif _triple_term == 'object':
@@ -232,4 +238,5 @@ def _uri_for(_type, _triple_term, term):
             label = label[0].upper() + label[1:]
             return NAMESPACES['resource'] + quote(label.encode('utf8'))
         else:
-            raise ValueError("The triple term must be either 'predicate' or 'object', got " + _triple_term)
+            raise ValueError("The triple term must be either 'predicate' or 'object', got " \
+                             + _triple_term)
