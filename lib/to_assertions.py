@@ -88,7 +88,7 @@ def to_assertions(labeled_results, id_to_title, outfile='dataset.nt',
         if len(parts) > 1:
             wiki_id, sentence_id = parts[0], parts[1]
         else:
-            wiki_id, sentence_id = parts[0], -1
+            wiki_id, sentence_id = parts[0], 0
 
         if wiki_id in id_to_title:
             wiki_title = quote(id_to_title[wiki_id].replace(' ', '_').encode('utf8'))
@@ -112,9 +112,8 @@ def to_assertions(labeled_results, id_to_title, outfile='dataset.nt',
             continue
 
         if 'sentence' in result:
-            add_triple(subject, _uri_for(None, 'predicate', 'extractedFrom'),
-                       u'"{}"^^<{}>'.format(result['sentence'],
-                                            'http://www.w3.org/2001/XMLSchema#string'))
+            add_triple(object, _uri_for(None, 'predicate', 'extractedFrom'),
+                       u'"{}"@it'.format(result['sentence']))
 
         # Always mint an instance type triple for reified nodes
         if predicate.startswith(NAMESPACES['ontology']):

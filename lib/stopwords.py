@@ -23,7 +23,8 @@ class StopWords(object):
         'spanish': 'stop-words_spanish.txt'
     }
     #directory containing the above files
-    _stopword_directory = os.path.join('resources', 'stop-words')
+    _stopword_directory = os.path.join(os.path.dirname(os.path.abspath(__file__),
+                                       '..', 'resources', 'stop-words')
 
     @classmethod
     def words(self,language):
@@ -34,13 +35,16 @@ class StopWords(object):
         Returns:
           A list containing stop words if language is supported. Else an empty list
         """
-        #Check if we have a list of stop words for the requested language. If yes, read the corresponding file
+        #Check if we have a list of stop words for the requested language.
+        # If yes, read the corresponding file
         if language in self._language_to_file_mapping:
             stopWordFile = self._language_to_file_mapping[language]
             pathToStopWordFile = os.path.join(self._stopword_directory, stopWordFile)
-            stopWordList = [word.strip() for word in codecs.open(pathToStopWordFile, "r", "utf-8")]
+            stopWordList = [word.strip() for word in codecs.open(pathToStopWordFile,
+                                                                 "r", "utf-8")]
             return stopWordList
-        #If we do not have a stop word list for the requested language, return the stop words the user has specifically requested
+        #If we do not have a stop word list for the requested language,
+        # return the stop words the user has specifically requested
         else:
             return []
 
