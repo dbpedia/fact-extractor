@@ -271,20 +271,25 @@ public class Annotator {
 		return list;
 	}
 
-	public Answer classify(String line, String sentence_id) throws Exception {
-		logger.info("classifying " + line + " (" + sentence_id + ")...");
-		List<ClassifierResults> classifierResultsList = tokenizeSentence( line.trim( ) );
-		classifyRoles( classifierResultsList );
-		classifyFrames( classifierResultsList );
+    public Answer classify( String line, String sentence_id ) throws Exception {
+        logger.info( "classifying " + line + " (" + sentence_id + ")..." );
+        List<ClassifierResults> classifierResultsList = tokenizeSentence( line.trim( ) );
+        classifyRoles( classifierResultsList );
+        classifyFrames( classifierResultsList );
 
         List<ClassifierResults> normalized;
-        if(normalizeNumericalFEs)
+        if ( normalizeNumericalFEs )
             normalized = DateNormalizer.normalizeNumericalExpressions( classifierResultsList );
         else normalized = classifierResultsList;
 
-		printAnswer( normalized );
-		return new Answer(sentence_id, normalized );
-	}
+        for ( ClassifierResults res : normalized ) {
+            if ( res.getPredictedRoleLabel( ).equals( "O" ) )
+                res.setUri( "" );
+        }
+
+        printAnswer( normalized );
+        return new Answer( sentence_id, normalized );
+    }
 
 	private void printAnswer(List<? extends Token> classifierResultsList ) {
 		logger.debug("===");

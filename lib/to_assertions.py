@@ -113,7 +113,7 @@ def to_assertions(labeled_results, id_to_title, outfile='dataset.nt',
 
         if 'sentence' in result:
             add_triple(object, _uri_for(None, 'predicate', 'extractedFrom'),
-                       u'"{}"@it'.format(result['sentence']))
+                       result['sentence'])
 
         # Always mint an instance type triple for reified nodes
         if predicate.startswith(NAMESPACES['ontology']):
@@ -213,7 +213,7 @@ def _to_nt_term(x):
     if x.startswith('http://'):
         return '<%s>' % x
     elif not x.startswith('"'):
-        return '"%s"' % x
+        return '"%s"@it' % x
     else:
         return x
 

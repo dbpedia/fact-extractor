@@ -83,7 +83,7 @@ def to_labeled(sentences, fe_score_type):
         for (start, end), tag, norm in normalizer.normalize_many(sentence):
             chunk = sentence[start:end]
             for existing in fe_dict.keys():
-                 if existing in chunk or chunk in existing:
+                 if existing == chunk:  # was normalized by classifier
                     fe_dict[existing]['literal'] = norm
                     break
             else:
@@ -101,6 +101,7 @@ def to_labeled(sentences, fe_score_type):
             'sentence': sentence,
             'FEs': fe_dict.values(),
         })
+
     return labeled
 
 
