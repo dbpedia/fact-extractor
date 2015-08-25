@@ -23,8 +23,9 @@ class StopWords(object):
         'spanish': 'stop-words_spanish.txt'
     }
     #directory containing the above files
-    _stopword_directory = os.path.join(os.path.dirname(os.path.abspath(__file__),
+    _stopword_directory = os.path.join(os.path.dirname(os.path.abspath(__file__)),
                                        '..', 'resources', 'stop-words')
+
 
     @classmethod
     def words(self,language):
