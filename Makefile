@@ -4,11 +4,11 @@ WORK_DIR=./workspace-$(LANGCODE)
 PAGES_DIR=$(WORK_DIR)/pages
 SOCCER_DIR=$(WORK_DIR)/soccer
 SENTENCES_DIR=$(WORK_DIR)/sentences
-SHORT_DIR=$(WORK_DIR)/short
-TAGGED_DIR=$(WORK_DIR)/tagged
-SHORT_TAGGED_DIR=$(WORK_DIR)/short-tagged
+POS_TAGGED_DIR=$(WORK_DIR)/tagged
+SUPERVISED_DIR=$(WORK_DIR)/supervised
+UNSUPERVISED_DIR=$(WORK_DIR)/unsupervised
 SAMPLE_DIR=$(WORK_DIR)/samples
-TREETAGGER_HOME=../tree-tagger
+TREETAGGER_HOME=../treetagger
 TREETAGGER=$(TREETAGGER_HOME)/cmd/tree-tagger-$(LANGUAGE)
 SOCCER_IDS=extraction/resources/soccer_ids
 SAMPLE_LU_NUM=10
@@ -17,11 +17,11 @@ SENTENCES_MAX_WORDS=25
 SPLITTER_MIN_CHARS=25
 DUMP=../$(LANGCODE)wiki-latest-pages-articles.xml.bz2
 CL_MAIN_PACKAGE=org.fbk.cit.hlt.dirha
-CL_JAVA_OPTS=-Dlog-config=supervised/classifier/log-config.txt -Xmx2G -Dfile.encoding=UTF-8 -cp supervised/classifier/target/fatJar.jar
+CL_JAVA_OPTS=-Dlog-config=supervised/classifier/log-config.properties -Xmx2G -Dfile.encoding=UTF-8 -cp supervised/classifier/target/fatJar.jar
 CL_TRAINING_SET=supervised/resources/training.sample
 CL_GAZETTEER=supervised/resources/it/dbpedia-gaz.tsv
-CL_SENTENCES_FILE=$(WORK_DIR)/sample-50.txt
-CL_OUTPUT=$(WORK_DIR)/sample-50-classified.txt
+CL_SENTENCES_FILE=$(SUPERVISED_DIR)/all_sentences
+CL_OUTPUT=$(CL_SENTENCES_FILE).classified
 CL_ANNOTATED_GOLD=resources/gold-standard.final
 CL_SVM_TRAIN_ARGS=-b 1 -t 0 -m 6000 -s 0
 LINK_MODE=twm  # twm or nex
@@ -32,7 +32,7 @@ FE_SCORE=both
 SCORING_CORE_WEIGHT=2
 
 default:
-	@echo "Ciao"
+	@echo "Nothing to do. Please launch me with a target!"
 
 extract-pages:
 	mkdir -p $(WORK_DIR)
@@ -58,19 +58,22 @@ extract-verbs:
 	python extraction/bag_of_words.py $(WORK_DIR)/all-articles.txt \
 		$(WORK_DIR)/vocabulary.txt
 
-extract-short-sentences:
+pos-tag:
+	mkdir -p $(POS_TAGGED_DIR)
+	find $(SENTENCES_DIR) -type f | xargs -I{} -P 4 sh -c 'echo {} && \
+		$(TREETAGGER) {} > $(POS_TAGGED_DIR)/$$(basename {}) 2> /dev/null';
+
+extract-sentences-baseline:
 	# must run extract-soccer before
-	mkdir -p $(SHORT_DIR) $(SHORT_TAGGED_DIR)
+	mkdir -p $(SENTENCES_DIR)
 	python extraction/extract_sentences.py $(WORK_DIR)/all-soccer.txt \
-		resources/tokens.list $(WORK_DIR)/sentence-to-wikiid.json $(SHORT_DIR) \
+		resources/tokens.list $(WORK_DIR)/sentence-to-wikiid.json $(SENTENCES_DIR) \
         --min-words $(SENTENCES_MIN_WORDS) --max-words $(SENTENCES_MAX_WORDS)
-	find $(SHORT_DIR) -type f | xargs -I{} -P 4 sh -c 'echo {} && \
-		$(TREETAGGER) {} > $(SHORT_TAGGED_DIR)/$$(basename {}) 2> /dev/null';
 
 extract-sentences-synctactic:
-	# must run extract-short-sentences and rank-verbs before
+	# must run extract-sentences-baseline, pos-tag and rank-verbs before
 	mkdir -p $(SENTENCES_DIR)
-	python seed_selection/get_meaningful_sentences.py $(SHORT_TAGGED_DIR) \
+	python seed_selection/get_meaningful_sentences.py $(POS_TAGGED_DIR) \
 		$(WORK_DIR)/top-50-tokens.txt $(SENTENCES_DIR)
 
 extract-sentences-lexical:
@@ -130,6 +133,9 @@ supervised-run-interactive:
 		-l $(LANGCODE) -i -n
 
 supervised-run-batch:
+	mkdir -p $(SUPERVISED_DIR)
+	for s in $$(find $(SENTENCES_DIR) -type f); do echo $$(basename $$s) >> $(CL_SENTENCES_FILE); \
+		cat $$s >> $(CL_SENTENCES_FILE); echo >> $(CL_SENTENCES_FILE); done
 	python date_normalizer/rpc.py 2>/dev/null &
 	java $(CL_JAVA_OPTS) -Dtreetagger.home=$(TREETAGGER_HOME) \
 		$(CL_MAIN_PACKAGE).Annotator -g $(CL_GAZETTEER) -m $(CL_TRAINING_SET) \
@@ -174,10 +180,10 @@ crowdflower-to-training:
 	python crowdflower/crowdflower_results_into_training_data.py $(CF_RESULTS) \
 		$(TAGGED_DIR) $(WORK_DIR)/training-data.tsv -d
 
-run-unsupervised:
+unsupervised-run:
 	# you need to run extract-sentences-* before
 	mkdir -p $(WORK_DIR)/unsupervised/linked
-	python lib/entity_linking.py -d -c $(MIN_LINK_CONFIDENCE) $(LINK_MODE) \
+	python lib/entity_linking.py --debug -d -c $(MIN_LINK_CONFIDENCE) $(LINK_MODE) \
 		$(SENTENCES_DIR) $(WORK_DIR)/unsupervised/linked
 	python unsupervised/produce_labeled_data.py $(WORK_DIR)/unsupervised/linked \
 		$(WORK_DIR)/labeled_data.json --score $(SCORING_TYPE) \
