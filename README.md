@@ -36,7 +36,7 @@ would produce statements (triples) like:
 4. Dataset Production
 
 ## Get Ready
-- **Python** and **Java** should be there in your machine, aren't they?
+- **Python**, **pip** and **Java** should be there in your machine, aren't they?
 - Install all the Python requirements:
 ```
 $ pip install -r requirements.txt
