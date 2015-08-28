@@ -2,13 +2,13 @@
 Fact Extraction from Wikipedia Text
 
 ## Intro
-The DBpedia Extraction Framework is pretty much mature when dealing with Wikipedia semi-structured content like infoboxes, links and categories.  
+The [DBpedia Extraction Framework](http://dbpedia.org) is pretty much mature when dealing with Wikipedia semi-structured content like infoboxes, links and categories.  
 However, unstructured content (typically text) plays the most crucial role, due to the amount of knowledge it can deliver, and few efforts have been carried out to extract structured data out of it.  
 For instance, given the [Germany Football Team](http://en.wikipedia.org/wiki/Germany_national_football_team) article, we want to extract a set of meaningful facts and structure them in machine-readable statements.  
 The following sentence:
 > In Euro 1992, Germany reached the final, but lost 0–2 to Denmark
 
-would produce statements like:
+would produce statements (triples) like:
 ```
 <Germany, defeat, Denmark>
 <defeat, score, 0–2>
@@ -16,37 +16,55 @@ would produce statements like:
 <defeat, competition, Euro 1992>
 ```
 
-## Have you already?
-Introduced yourself in the [DBpedia mailing list](https://lists.sourceforge.net/lists/listinfo/dbpedia-discussion)?
-If not, please do so!
+## High-level Workflow
+**INPUT** = Wikipedia corpus
 
-## High-level Workflow + Related Code
-**INPUT** = Wikipedia corpus (e.g., [the latest Italian chapter](http://dumps.wikimedia.org/itwiki/latest/itwiki-latest-pages-articles.xml.bz2))
+### Corpus Analysis
+1. Corpus Raw Text Extraction
+2. Verb Extraction
+3. Verb Ranking
 
-1. Verb Extraction
-  1. [Extract raw text from Wikipedia dump](lib/WikiExtractor.py), forked from [this repo](https://github.com/attardi/wikiextractor)
-  2. [Extract a sub-corpus based on Wiki IDs](get_soccer_players_articles.py)
-  3. [Verb Extraction](extract_verbs.sh)
-2. Verb Ranking
-  1. [Build a frequency dictionary of lemmas](make_lemma_freq.py)
-  2. [TF/IDF-based token ranking](tf_idfize.py), using the TF/IDF module forked from [this repo](https://github.com/hrs/python-tf-idf)
-  3. [Lemma ranking based on the token-to-lemma map](compute_stdev_by_lemma.py)
-3. Training Set Creation
-  1. [Build CrowdFlower input spreadsheet](create_crowdflower_input.py)
-4. Frame Classifier Training
-  1. [Translate CrowdFlower results into training data format](crowdflower_results_into_training_data.py)
-  2. [Train classifier](supervised/classifier) (forked from [this repo](https://bitbucket.org/cgiuliano/dirha))
-5. Frame Extraction
+### Unsupervised Fact Extraction
+1. Entity Linking
+2. Frame Classification
+3. Dataset Production
 
-## Requirements
-- [TreeTagger](http://www.cis.uni-muenchen.de/~schmid/tools/TreeTagger/)
-- [libsvm](http://www.csie.ntu.edu.tw/~cjlin/libsvm/)
+### Supervised Fact Extraction
+1. Training Set Creation
+2. Classifier Training
+3. Frame Classification
+4. Dataset Production
 
-## Warm-up Tasks
-See the [issues](../../issues).
+## Get Ready
+- **Python**, **pip** and **Java** should be there in your machine, aren't they?
+- Install all the Python requirements:
+```
+$ pip install -r requirements.txt
+```
+- Install the third party dependencies:
+    - [TreeTagger](http://www.cis.uni-muenchen.de/~schmid/tools/TreeTagger/)
+    - [libsvm](http://www.csie.ntu.edu.tw/~cjlin/libsvm/)
+- [Request access to The Wiki Machine API](mailto:giuliano@fbk.eu);
+- Put your API credentials into a new file `lib/secrets.py` as follows:
+```
+TWM_URL = 'your service URL'
+TWM_APPID = 'your app ID'
+TWM_APPKEY = 'your app key'
+```
+
+## Get Started
+Here is how to produce the *unsupervised Italian soccer dataset*:
+```
+$ wget http://dumps.wikimedia.org/itwiki/latest/itwiki-latest-pages-articles.xml.bz2
+$ make extract-pages
+$ make extract-soccer
+$ make extract-sentences-baseline
+$ make unsupervised-run
+```
+Done!
 
 ## Development Policy
-Committers should follow the standard team development practices:
+Contributors should follow the standard team development practices:
 
 1. Start working on a task
 2. Branch out of master
