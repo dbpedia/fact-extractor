@@ -8,7 +8,7 @@ For instance, given the [Germany Football Team](http://en.wikipedia.org/wiki/Ger
 The following sentence:
 > In Euro 1992, Germany reached the final, but lost 0–2 to Denmark
 
-would produce statements like:
+would produce statements (triples) like:
 ```
 <Germany, defeat, Denmark>
 <defeat, score, 0–2>
