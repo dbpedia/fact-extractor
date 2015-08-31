@@ -9,7 +9,7 @@ from numpy import average
 @click.command()
 @click.argument('fact-dataset', type=click.File('r'))
 @click.argument('score-dataset', type=click.File('r'))
-@click.option('--output', type=click.File('w'), default='confident.nt')
+@click.argument('output', type=click.File('w'), default='confident.nt')
 @click.option('--debug/--no-debug', default=False)
 def main(fact_dataset, score_dataset, output, debug):
     all_scores = []
@@ -52,7 +52,10 @@ def main(fact_dataset, score_dataset, output, debug):
             if debug:
                 print 'Score [%f] >= threshold [%f]. Got a confident node [%s]' % (score, threshold, node)
             to_filter.append(node)
+    # Avoid in-memory load here, but keep track of the dataset size
+    fact_dataset_size = 0
     for triple in fact_dataset:
+        fact_dataset_size += 1
         for node in to_filter:
             if node in triple:
                 if debug:
@@ -60,7 +63,7 @@ def main(fact_dataset, score_dataset, output, debug):
                 filtered.append(triple)
     output.writelines(filtered)
     print 'Written confident dataset to [%s] with [%d] triples, ' % (abspath(output.name), len(filtered))
-    print 'Original dataset has [%d] triples. Difference = [%d] triples' % (len(score_dataset), len(score_dataset) - len(filtered))
+    print 'Original dataset has [%d] triples. Difference = [%d] triples' % (fact_dataset_size, fact_dataset_size - len(filtered))
     return 0
 
 
