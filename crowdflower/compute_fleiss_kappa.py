@@ -33,6 +33,10 @@ def compute_matrix(cf_results, num_judgments):
 @click.argument('crowdflower-output', type=click.File('r'))
 @click.option('--num-judgments', default=3)
 def main(crowdflower_output, num_judgments):
+    """
+    this script computes the agreement of judgments given in the crowdflower
+    job using a metric called Fleiss kappa
+    """
     cf_results = read_full_results(crowdflower_output)
     mat = compute_matrix(cf_results, num_judgments)
     print computeFleissKappa(mat)

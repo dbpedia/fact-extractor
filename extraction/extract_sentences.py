@@ -15,6 +15,12 @@ def iter_split(iterator, split):
 
 
 def process_article(content, tokens, sentence_wid, output_dir, min_words, max_words):
+    """
+    processes an article with format <doc id=... title=... url=...> ... </doc>
+    and extracts all the sentences whose length is between min_words and max_words
+
+    sentences are split by a dot followed by at least one space
+    """
     attrs = dict(re.findall(r'([^\s=]+)="([^"]+)"', content))
 
     i = 0

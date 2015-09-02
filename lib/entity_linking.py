@@ -1,5 +1,11 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
+"""
+this script performs the entity linking with optional disambiguation. it takes as input
+a directory with sentences to link, one per file, and the output directory where
+linked sentences are put (one per file). links with a confidence lower than a given
+threshold are discarded
+"""
 
 import argparse
 import codecs

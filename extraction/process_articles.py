@@ -1,3 +1,11 @@
+"""
+this script extracts all the articles whose id is contained in the input list
+(one id per line) and saves each article in a file whose name is the id of
+the article itself.
+the input of this script is a single big file with all the articles
+in the usual format <doc id=.. title=.. url=..> .. </doc>
+"""
+
 import click
 import re
 import os

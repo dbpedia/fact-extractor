@@ -1,5 +1,10 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
+"""
+given the corpus directory, in which there is one file per article,
+extracts al the files containing an article whose wikipedia id
+is contained in the input list (one id per like)
+"""
 
 import os
 import re

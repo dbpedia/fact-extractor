@@ -190,6 +190,10 @@ def process_dir(indir, score_fes, debug, numerical):
 @click.option('--debug/--no-debug', default=False)
 @click.option('--numerical/--no-numerical', default=True)
 def main(linked_dir, labeled_out, score, core_weight, score_fes, debug, numerical):
+    """
+    this script is the actual unsupervised approach which produces labeled data
+    out of entity linked sentences
+    """
     labeled = process_dir(linked_dir, score_fes, debug, numerical)
 
     if score:

@@ -112,13 +112,18 @@ def to_labeled(sentences, fe_score_type):
 @click.argument('triple-scores', type=click.File('w'))
 @click.option('--sentence-score', type=click.Choice(['arithmetic-mean', 'weighted-mean',
                                                      'f-score', 'nothing']),
-              default='weighted-mean')
+              default='weighted-mean',
+              help='How to combine FEs scores into a sentence score')
 @click.option('--fe-score', type=click.Choice(['svm', 'link', 'both', 'nothing']),
-              default='nothing')
-@click.option('--core-weight', default=2)
+              default='nothing', help='How to score FEs')
+@click.option('--core-weight', default=2, help='Weight of core FEs wrt extra FEs')
 @click.option('--format', default='nt')
 def main(classified_output, output_file, id_to_title, triple_scores, \
          format, sentence_score, core_weight, fe_score):
+    """
+    serializes the classification result into triples
+    optionally scoring sentences and/or frame elements
+    """
 
     sentences = read_sentences(classified_output)
     labeled = to_labeled(sentences, fe_score)

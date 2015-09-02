@@ -9,6 +9,7 @@ QUERY = 'SELECT ?id WHERE { ?s a dbpedia-owl:SoccerPlayer ; dbpedia-owl:wikiPage
 @click.argument('outfile', type=click.File('w'))
 @click.option('--lang', default='it')
 def main(outfile, lang):
+    """ gets all the wikipedia ids of pages about soccer players """
     ids = []
     finished = False
     offset = 0

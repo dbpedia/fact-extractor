@@ -26,6 +26,7 @@ def calc_precision_recall(n, confmat):
               help='Last column of the confusion matrix')
 @click.pass_obj
 def plot(obj, confusion_matrix, first_row, first_col, last_row, last_col):
+    """ graphical plots of some classification related metrics """
     data = [r[:-1].decode('utf8').split(';') for r in confusion_matrix]
     obj['confmat']= [[int(x) if x else 0 for x in row[first_col:last_col]]
                              for row in data[first_row:last_row]]
@@ -35,6 +36,7 @@ def plot(obj, confusion_matrix, first_row, first_col, last_row, last_col):
 @plot.command()
 @click.pass_obj
 def precall(obj):
+    """ precision-recall plot """
     for i in range(len(obj['confmat'])):
         p, r = calc_precision_recall(i, obj['confmat'])
         plt.plot(p, r, 'b+')
@@ -49,6 +51,7 @@ def precall(obj):
 @plot.command()
 @click.pass_obj
 def confpr(obj):
+    """ plots the confusion matrix and precision/recall bars for each class """
     normalized = []
     for row in obj['confmat']:
         count = sum(row)

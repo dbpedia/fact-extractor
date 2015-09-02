@@ -1,5 +1,11 @@
 #!/usr/bin/env python
 # -*- encoding: utf-8 -*-
+"""
+this script transforms the output of the crowdflower job, in csv form, into our standard
+training format, a tsv with <sentence id> <token id> <token> <POS> <lemma> <frame> <tag>
+"""
+
+
 import os
 if __name__ == '__main__' and __package__ is None:
     os.sys.path.append(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))

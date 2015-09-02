@@ -1,5 +1,9 @@
 #!/usr/bin/env python
 # coding: utf-8
+"""
+this script creates the input csv for the semantic role labeling crowdflower
+job given a json file with the labeled data and a json file with the chunks
+"""
 
 import argparse
 import codecs

@@ -24,6 +24,10 @@ from lib.to_assertions import to_assertions
 @click.option('--ontology-namespace', default='http://dbpedia.org/ontology/')
 def main(labeled, wid_title_mapping, scores, processed_out, discarded_out, dataset, format,
          resource_namespace, fact_namespace, ontology_namespace):
+    """
+    this script converts the labeled data produced by the unsupervised approach into
+    actual triples in nt format
+    """
 
     mapping = json.load(wid_title_mapping)
     with codecs.open(labeled, 'rb', 'utf8') as f:

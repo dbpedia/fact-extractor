@@ -271,6 +271,9 @@ def combine_chunks(sentence_id, values):
 @click.argument('combined_out')
 @click.option('--debug/--no-debug', default=False)
 def main(chunks_path, combined_out, debug):
+    """
+    combines the chunks found by three different chunking strategies
+    """
     global DEBUG
     DEBUG = debug
 
