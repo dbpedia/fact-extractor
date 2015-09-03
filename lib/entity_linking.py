@@ -52,7 +52,7 @@ TWM_DATA = {
     'lang': 'it'
 }
 
-# dataTXT NEX
+# Dandelion APIs
 NEX_URL = secrets.NEX_URL
 NEX_DATA = {
     '$app_id': secrets.NEX_APPID,
@@ -130,7 +130,7 @@ def twm_link(text, disambiguation, debug):
 
 
 def nex_link(text):
-    """Run dataTXT NEX on raw text"""
+    """Run using the Dandelion APIs on raw text"""
     NEX_DATA['text'] = text
     r = requests.post(NEX_URL, data=NEX_DATA)
     print r.json()
@@ -139,7 +139,7 @@ def nex_link(text):
 
 
 def nex_extract_entities(nex_response_json):
-    """Extract the list of entities from a dataTXT NEX JSON response"""
+    """Extract the list of entities from the Dandelion APIs JSON response"""
     entities = []
     for annotation in nex_response_json['annotations']:
         entities.append({k: v for k, v in annotation.iteritems() if k in ['uri', 'types', 'start', 'end']})
@@ -148,7 +148,7 @@ def nex_extract_entities(nex_response_json):
 
 def create_cli_parser():
     parser = argparse.ArgumentParser(description='Run an entity linking service of your choice against a set of sentences')
-    parser.add_argument('service', choices=['twm', 'nex'], help='Entity linking service to use. Allowed values are "twm" (the Wiki Machine) or "nex" (dataTXT NEX)')
+    parser.add_argument('service', choices=['twm', 'nex'], help='Entity linking service to use. Allowed values are "twm" (the Wiki Machine) or "nex" (Dandelion APIs)')
     parser.add_argument('input_dir', help='Input directory with sentences to link, one per file')
     parser.add_argument('output_dir', help='Linked files will be placed here')
     parser.add_argument('-d', '--disambiguation', action='store_true', help='Toggle disambiguation (twm ONLY)')
