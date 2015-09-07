@@ -35,7 +35,7 @@ def plot(obj, confusion_matrix, first_row, first_col, last_row, last_col):
 
 @plot.command()
 @click.pass_obj
-def precall(obj):
+def precall_scatter(obj):
     """ precision-recall plot """
     for i in range(len(obj['confmat'])):
         p, r = calc_precision_recall(i, obj['confmat'])
@@ -50,8 +50,8 @@ def precall(obj):
 
 @plot.command()
 @click.pass_obj
-def confpr(obj):
-    """ plots the confusion matrix and precision/recall bars for each class """
+def precall_bars(obj):
+    """ plots precision/recall bars for each class """
     normalized = []
     for row in obj['confmat']:
         count = sum(row)
@@ -60,7 +60,7 @@ def confpr(obj):
     precisions, recalls = zip(*(calc_precision_recall(i, obj['confmat'])
                                 for i in range(len(obj['confmat']))))
 
-    fig, (ax1, ax2) = plt.subplots(1, 2)
+    fig, ax1 = plt.subplots(1, 1)
 
     num_classes, width = len(obj['confmat']), 0.4
     ax1.set_title('Precision/Recall')
@@ -73,18 +73,31 @@ def confpr(obj):
     ax1.set_xlim((-width, num_classes + width - 1))
     ax1.grid()
     ax1.legend()
+    plt.show()
 
 
-    ax2.set_title('Normalized Confusion Matrix')
-    ax2.set_xlabel('Actual Class'); ax2.set_ylabel('Predicted Class')
-    ax2.set_xticks(range(len(obj['labels'])))
-    ax2.set_xticklabels(obj['labels'], rotation=90)
-    ax2.set_yticklabels(obj['labels'])
-    ax2.set_yticks(range(len(obj['labels'])))
-    im2 = ax2.imshow(normalized, interpolation='nearest')
-    plt.colorbar(im2, ax=ax2, fraction=0.046, pad=0.04)
+@plot.command()
+@click.pass_obj
+def confmat(obj):
+    """ plots the confusion matrix """
+    normalized = []
+    for row in obj['confmat']:
+        count = sum(row)
+        normalized.append([float(x) / count if count > 0 else 0 for x in row])
 
-    plt.tight_layout()
+    precisions, recalls = zip(*(calc_precision_recall(i, obj['confmat'])
+                                for i in range(len(obj['confmat']))))
+
+    fig, ax1 = plt.subplots(1, 1)
+    ax1.set_title('Normalized Confusion Matrix')
+    ax1.set_xlabel('Actual Class'); ax1.set_ylabel('Predicted Class')
+    ax1.set_xticks(range(len(obj['labels'])))
+    ax1.set_xticklabels(obj['labels'], rotation=90)
+    ax1.set_yticklabels(obj['labels'])
+    ax1.set_yticks(range(len(obj['labels'])))
+    im2 = ax1.imshow(normalized, interpolation='nearest')
+    plt.colorbar(im2, ax=ax1, fraction=0.046, pad=0.04)
+
     plt.show()
     
 
