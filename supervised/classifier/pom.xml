@@ -109,7 +109,7 @@
                 <version>2.3.1</version>
                 <executions>
                     <execution>
-                        <id>install-or.gfbk.cit.hlt.core</id>
+                        <id>install-org.fbk.cit.hlt.core</id>
                         <phase>validate</phase>
                         <goals>
                             <goal>install-file</goal>
