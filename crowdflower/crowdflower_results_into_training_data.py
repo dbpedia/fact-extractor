@@ -114,6 +114,9 @@ def merge_tokens(sentence_id, annotations, lines):
 
 
 def process_sentence(sentence_id, annotations, lines):
+    """
+    process a single sentence by mergind the tokens and normalizing numerical expressions
+    """
     merged = merge_tokens(sentence_id, annotations, lines)
     normalized = normalize_numerical_fes(sentence_id, merged)
 

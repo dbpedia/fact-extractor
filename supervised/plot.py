@@ -4,6 +4,7 @@ from mpl_toolkits.axes_grid1 import make_axes_locatable
 
 
 def calc_precision_recall(n, confmat):
+    """ calculates precision and recall for class n given the confusion matrix """
     tp = float(confmat[n][n])
     cond_positive = sum(confmat[n])
     test_positive = sum(confmat[i][n] for i in range(len(confmat)))

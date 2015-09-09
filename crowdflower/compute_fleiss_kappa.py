@@ -6,6 +6,10 @@ from os import sys
 
 
 def compute_matrix(cf_results, num_judgments):
+    """
+    given the results from crowdflower creates the matrix necessary to compute the
+    fleiss agreement
+    """
     categories = set()
     for sentence_id, data in cf_results.iteritems():
         for key, value in data.iteritems():

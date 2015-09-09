@@ -1,10 +1,5 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
-"""
-given the corpus directory, in which there is one file per article,
-extracts al the files containing an article whose wikipedia id
-is contained in the input list (one id per like)
-"""
 
 import os
 import re
@@ -21,6 +16,11 @@ def load_wiki_ids(filein):
 
 
 def extract_soccer_articles(soccer_ids, corpus_dir, output_dir):
+    """
+    given the corpus directory, in which there is one file per article,
+    extracts al the files containing an article whose wikipedia id
+    is contained in the input list (one id per like)
+    """
     for path, subdirs, files in os.walk(corpus_dir):
         for name in files:
             f = os.path.join(path, name)

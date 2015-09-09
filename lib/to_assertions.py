@@ -156,6 +156,9 @@ def to_assertions(labeled_results, id_to_title, outfile='dataset.nt',
 
 
 def serialize_fe(fe, reified, wiki_title, add_triple, format):
+    """
+    serializes a frame element into triples
+    """
     # The FE predicate takes the FE label
     p1 = _uri_for('FE', 'predicate', fe['FE'])
 
@@ -191,6 +194,11 @@ def serialize_fe(fe, reified, wiki_title, add_triple, format):
 
 
 def triple_adder(graph, format):
+    """
+    returns a function which adds triples to the given graph in the
+    given format. call this function with parameters subject,
+    predicate and object
+    """
     def add_triple(subject, predicate, object):
         try:
             s = _to_nt_term(subject)
@@ -208,6 +216,11 @@ def triple_adder(graph, format):
 
 
 def _to_nt_term(x):
+    """
+    converts a string into a format suitable to be serialized as triple element
+    urls are sorrounded by <>, and literals have the italian language tag added
+    unicode strings are encoded into plain strs
+    """
     if type(x) == unicode:
         x = x.encode('utf8')
     if x.startswith('http://'):
@@ -219,6 +232,11 @@ def _to_nt_term(x):
 
 
 def _uri_for(_type, _triple_term, term):
+    """
+    gets the uri to use for encoding the given term.
+    _triple_term is predicate or object and _type
+    is the type of term, either frame or FE
+    """
     dbpo = FRAME_DBPO_MAP.get(_type, {}).get(term)
     if dbpo:
         if _triple_term == 'predicate':

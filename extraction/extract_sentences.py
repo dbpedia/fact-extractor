@@ -53,6 +53,11 @@ def process_article(content, tokens, sentence_wid, output_dir, min_words, max_wo
 @click.option('--min-words', default=5)
 @click.option('--max-words', default=25)
 def main(input_file, token_list,sentence_to_wid, output_dir, min_words, max_words):
+    """
+    this script extracts all the sentences of a certain length from a file
+    containing wikipedia articles one after the other contained
+    inside <doc>...</doc> xml tags
+    """
     tokens = {row.strip().decode('utf8') for row in token_list}
 
     mapping, count = {}, 0

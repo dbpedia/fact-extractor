@@ -16,6 +16,10 @@ CHUNKER_GRAMMAR = r"""
 
 
 def load_pos_data(dir):
+    """
+    walks the directory and loads the sentence's POS tagged data
+    returns a map file name -> list of (token, POS)
+    """
     pos_data = defaultdict(list)
     for path, subdirs, files in os.walk(dir):
         for name in files:
@@ -46,6 +50,10 @@ def filter_sentences_by_chunk(pos_data, tokens):
 
 
 def save_sentences(sentences, outdir):
+    """
+    saves the sentences (dictionary id -> text) one per file
+    into the given directory
+    """
     for sentence_id, text in sentences.iteritems():
         with open(os.path.join(outdir, sentence_id), 'w') as f:
             f.write(text.encode('utf8'))
@@ -56,6 +64,9 @@ def save_sentences(sentences, outdir):
 @click.argument('tokens', type=click.File('r'))
 @click.argument('outdir', default='gold', type=click.Path(exists=True, file_okay=False))
 def main(tagged_dir, tokens, outdir):
+    """
+    this script extracts meaningful sentences based on a simple grammar
+    """
     pos_data = load_pos_data(tagged_dir)
     tokens = [l.strip().decode('utf8') for l in tokens]
     sentences = filter_sentences_by_chunk(pos_data, tokens)

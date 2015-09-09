@@ -1,10 +1,3 @@
-"""
-this script extracts all the articles whose id is contained in the input list
-(one id per line) and saves each article in a file whose name is the id of
-the article itself.
-the input of this script is a single big file with all the articles
-in the usual format <doc id=.. title=.. url=..> .. </doc>
-"""
 
 import click
 import re
@@ -22,7 +15,12 @@ def iter_split(iterator, split):
             acc = []
 
 
-def process_article(content, soccer_ids, mapping, output_dir, max_words):
+def process_article(content, soccer_ids, mapping, output_dir):
+    """
+    given a single article as a string checks if its id is contained
+    in the soccer_ids set, if so updates the soccer ids and the mappings
+    and saves the article in a new file named as the article id
+    """
     attrs = dict(re.findall(r'([^\s=]+)="([^"]+)"', content))
     print >> sys.stderr, 'Processing [%s]...\r' % attrs['id'],
 
@@ -44,14 +42,20 @@ def process_article(content, soccer_ids, mapping, output_dir, max_words):
 @click.argument('input_file', type=click.File('r'))
 @click.argument('output_dir', type=click.Path(exists=True, file_okay=False))
 @click.argument('output_mapping', type=click.File('w'))
-@click.option('--max-words', default=25)
-def main(soccer_ids, input_file, output_dir, output_mapping, max_words):
+def main(soccer_ids, input_file, output_dir, output_mapping):
+    """
+    this script extracts all the articles whose id is contained in the input list
+    (one id per line) and saves each article in a file whose name is the id of
+    the article itself.
+    the input of this script is a single big file with all the articles
+    in the usual format <doc id=.. title=.. url=..> .. </doc>
+    """
     soccer_ids = {row.strip().decode('utf8') for row in soccer_ids}
 
     mapping = {}
     for i, rows in enumerate(iter_split(input_file, lambda row: '</doc>' in row)):
         article = '\n'.join(rows).decode('utf8')
-        process_article(article, soccer_ids, mapping, output_dir, max_words)
+        process_article(article, soccer_ids, mapping, output_dir)
 
         if len(soccer_ids) == 0:
             break

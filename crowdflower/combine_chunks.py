@@ -20,6 +20,7 @@ DEBUG = True
 
 # From https://en.wikibooks.org/wiki/Algorithm_Implementation/Strings/Longest_common_substring#Python2
 def longest_common_substring(s1, s2):
+    """ finds the longest common substring between two strings """
     m = [[0] * (1 + len(s2)) for i in xrange(1 + len(s1))]
     longest, x_longest = 0, 0
     for x in xrange(1, 1 + len(s1)):
@@ -35,6 +36,7 @@ def longest_common_substring(s1, s2):
 
 
 def read_twm_links(f):
+    """ reads the links produced by the wiki machine """
     links = json.load(codecs.open(f, 'rb', 'utf-8'))
     sentence, val = links.items()[0]
 
@@ -51,6 +53,7 @@ def read_twm_links(f):
 
 
 def read_ngrams(f):
+    """ read the ngrams from the json file """
     ngrams = json.load(codecs.open(f, 'rb', 'utf-8'))
 
     ngram_chunks = dict()
@@ -67,6 +70,7 @@ def read_ngrams(f):
 
 
 def read_tp_chunks(f):
+    """ reads the chunks produced by textpro """
     with codecs.open(f, 'rb', 'utf-8') as i:
         tp = [l.strip() for l in i.readlines()]
 

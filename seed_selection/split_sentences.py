@@ -14,6 +14,12 @@ from nltk.tokenize.punkt import PunktSentenceTokenizer
 @click.argument('output-dir', type=click.Path(exists=True, file_okay=False))
 @click.option('--min-length', '-l', default=25, help='Min length in chars')
 def main(serialized_tokenizer, input_dir, output_dir, min_length):
+    """
+    this script walks a directory and splits the articles found into sentences
+    using the nltk punkt tokenizer
+    assumes one article per file, the sentences are saved one per file
+    with name 'original_article_file_name.incremental_id'
+    """
     tokenizer = pickle.load(serialized_tokenizer)
     for path, subdirs, files in os.walk(input_dir):
         for name in files:
