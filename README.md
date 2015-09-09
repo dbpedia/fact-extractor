@@ -44,12 +44,20 @@ $ pip install -r requirements.txt
 - Install the third party dependencies:
     - [TreeTagger](http://www.cis.uni-muenchen.de/~schmid/tools/TreeTagger/)
     - [libsvm](http://www.csie.ntu.edu.tw/~cjlin/libsvm/)
-- [Request access to The Wiki Machine API](mailto:giuliano@fbk.eu);
+- Request access to a supported entity linking API:
+    - [The Wiki Machine](mailto:giuliano@fbk.eu)
+    - [Dandelion](https://dandelion.eu/accounts/register/?next=/docs/api/datatxt/nex/getting-started/)
 - Put your API credentials into a new file `lib/secrets.py` as follows:
 ```
+# For The Wiki Machine
 TWM_URL = 'your service URL'
 TWM_APPID = 'your app ID'
 TWM_APPKEY = 'your app key'
+
+# For Dandelion
+NEX_URL = 'https://api.dandelion.eu/datatxt/nex/v1'
+NEX_APPID = 'your app ID'
+NEX_APPKEY = 'your app key'
 ```
 
 ## Get Started
@@ -66,10 +74,9 @@ Done!
 ## Development Policy
 Contributors should follow the standard team development practices:
 
-1. Start working on a task
-2. Branch out of master
-3. Commit **frequently** with **clear** messages
-4. Make a pull request
+1. Branch out of master;
+2. Commit **frequently** with **clear** messages;
+3. Make a pull request.
 
 ## Coding Style
 Pull requests not complying to these guidelines will be ignored.
