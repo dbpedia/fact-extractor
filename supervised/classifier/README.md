@@ -1,119 +1,57 @@
-**Installation**
- 1. Install the required offline dependency `mvn install:install-file -Dfile=jcore-alone.jar -DgroupId=org.fbk.cit.hlt -DartifactId=core -Dversion=1.0 -Dpackaging=jar -DgeneratePom=true`
- 2. Compile and build fat jar `mvn compile assembly:assembly`
+# Supervised classifier
+The [Makefile](../../blob/master/Makefile) is responsible for handling all the tasks, from compilation to evaluation.
+Just make sure you are in the project root directory!
 
-**Frames and annotation guidelines**
+## Installation
+First check if you have installed [libsvm](http://www.csie.ntu.edu.tw/~cjlin/libsvm/), then:
+```
+make supervised-build-classifier
+```
 
-Frames and annotation guidelines available at https://docs.google.com/spreadsheet/ccc?key=0AoGh3TWKyYNPdHN3bmNTVmZuRGo5M0lYZlRzNDlVZHc&usp=drive_web#gid=15
+## Training set format
+A TSV file as per [the sample](resources/training.sample):
+```
+1200	0	Cresciuto	VER:pper	crescere	Attività	O
+1200	1	nel	PRE:det	nel	Attività	O
+1200	2	Como	NPR	Como	Attività	Squadra
+1200	3	dove	PRO:rela	dove	Attività	O
+1200	4	esordisce	VER:pres	esordire	Attività	LU
+1200	5	in	PRE	in	Attività	O
+1200	6	Serie C1	ENT	Serie C1	Attività	Competizione
+1200	7	a	PRE	a	Attività	O
+1200	8	17	NUM	@card@	Attività	O
+1200	9	anni	NOM	anno	Attività	O
+1200	10	nella	PRE:det	nel	Attività	O
+1200	11	stagione	NOM	stagione	Attività	O
+1200	12	1999-2000	NUM	@card@	Attività	O
+1200	13	.	SENT	.	Attività	O
+```
 
-**Training and test data**
+## Train
+**N.B.:** If no training set file is specified with the `CL_TRAINING_SET` variable, it will train with [this sample](resources/training.sample)
 
-train.tab 550 annotated sentences
+1. Learn roles
+```
+make supervised-learn-roles
+```
+2. Learn frames
+```
+make supervised-learn-frames
+```
 
-test.tab  365 annotated sentences
-- clean: `dirha_commands_audio_uniq.txt`
-- noisy: `dirha_commands_audio_rec_output_example.txt` and `DIRHA_cmd_rev_noise_ov_Livingroom_SNR_*.out`
+## Run
+**N.B.:** If no training set file is specified with the `CL_TRAINING_SET` variable, it will use the model trained with [this sample](resources/training.sample)
+1. Interactive mode: type a sentence and classify it
+```
+make supervised-run-interactive
+```
 
+2. Batch mode: classify a set of sentences, given one per line in a plain text file
+```
+make supervised-run-batch CL_SENTENCES_FILE=your_sentences_file_here
+```
 
-**Training**
-
-train.tab + test.tab = 915 annotated sentences
-
-
-**Sentences to spreadsheet**
-
-This class takes as input a file with a sentence per line and returns
-a file with the sentences tokenized/pos tagged/lemmatized that can be
-annotated with the guidelines described at https://docs.google.com/spreadsheet/ccc?key=0AoGh3TWKyYNPdHN3bmNTVmZuRGo5M0lYZlRzNDlVZHc&usp=drive_web#gid=6
-
-`java -Dfile.encoding=UTF-8 -Dtreetagger.home=${TREETAGGER_HOME} -Dtreetagger.model={TREETAGGER_MODEL_FILE} -cp target/fatJar.jar org.fbk.cit.hlt.dirha.SentencesToSpreadSheet fin fout start size`
-
-**Sentences to mysql**
-
-This class takes as input a file with a sentence per line and returns
-a file with the sentences tokenized/pos tagged/lemmatized that can be
-annotated with the guidelines described at https://docs.google.com/spreadsheet/ccc?key=0AoGh3TWKyYNPdHN3bmNTVmZuRGo5M0lYZlRzNDlVZHc&usp=drive_web#gid=6
-using the Web interface designed by Alessio Palmero Aprosio.
-
-`java -Dfile.encoding=UTF-8 -cp target/fatJar.jar org.fbk.cit.hlt.dirha.SentencesToMysql fin fout start size`
-
-
-**Role Training**
-
-This class takes as input a hand-crafted annotated file (*.tab) and returns a
-file annotated in IOB2 format (4 columns: term POS lemma label) to train a role annotator.
-
-`java -Dfile.encoding=UTF-8 -cp target/fatJar.jar org.fbk.cit.hlt.dirha.SpreadSheetToRoleTrainingSet -t data/whole-train/whole-train.tab`
-
-This class takes as input a file in IOB2 format and a gazetteer and returns
-3 files: (1) the example file in svmlib format; (2) the feature
-file in tsv format; (c) the label file in tsv format
-
-`java -Dfile.encoding=UTF-8 -cp target/fatJar.jar org.fbk.cit.hlt.dirha.RoleTrainingSetToLibSvm -t data/whole-train/whole-train.tab.iob2 -g resources/gazetteer.tsv`
-
-Train the svm:
-
-`time ~/Applications/libsvm-2.82/svm-train -t 0 -m 10000 data/whole-train/whole-train.tab.iob2.svm data/whole-train/whole-train.tab.iob2.model`
-
-**Frame Training**
-
-This class takes as input a hand-crafted annotated file (*.tab) and returns a
-file annotated in text categorization format (4 colums: label tokenized and lemmatized sentence roles) to train a frame annotator.
-
-`java -Dfile.encoding=UTF-8 -cp target/fatJar.jar org.fbk.cit.hlt.dirha.SpreadSheetToFrameTrainingSet -t data/whole-train/whole-train.tab`
-
-This class takes as input a file in text categorization format and a gazetteer and returns
-3 files: (1) the example file in svmlib format; (2) the feature
-file in tsv format; (c) the label file in tsv format
-
-`java -Dfile.encoding=UTF-8 -cp target/fatJar.jar org.fbk.cit.hlt.dirha.FrameTrainingSetToLibSvm -t data/whole-train/whole-train.tab.frame -g resources/gazetteer.tsv`
-
-
-Train the svm:
-`time ~/Applications/libsvm-2.82/svm-train -t 0 -m 10000 frasi-complete-0-100-400-100-claudio.tab.frame.svm frasi-complete-0-100-400-100-claudio.tab.frame.mdl`
-
-
-**Classification and evaluation**
-
-This class can annotate sentences using the two models (role and frame) learnt in the previous steps
-It can be used in interactive mode (shell), batch (process a file one sentence per line)
-
-`java -Dfile.encoding=UTF-8 -cp target/fatJar.jar org.fbk.cit.hlt.dirha.Annotator -a dirha/data-train-test/dirha_commands_audio_uniq.txt -g gazetteer.tsv -o nuova-prova.tsv -m dirha/data-train-test/train.tab`
-
-# Italian, interactive
-`java -Dfile.encoding=UTF-8 -Dtreetagger.home=${TREETAGGER_HOME} -cp target/fatJar.jar org.fbk.cit.hlt.dirha.Annotator -g resources/it/gazetteer.tsv -m data/whole-train/201406/whole-train.tab -i -l it`
-
-Client/server polibio:
-
-- dirha `java -Dtreetagger.home=/home/giuliano/Applications/treetagger/ -Dfile.encoding=UTF-8 -cp target/fatJar.jar org.fbk.cit.hlt.dirha.Annotator -g resources/gazetteer.tsv -m data/whole-train/whole-train.tab --trace -s`
-
-- dirha-2.0 `java -Dtreetagger.home=/home/giuliano/Applications/treetagger/ -Dfile.encoding=UTF-8 -cp target/fatJar.jar org.fbk.cit.hlt.dirha.Annotator -g resources/gazetteer.tsv -m data/whole-train/20140313/whole-train.tab --trace -s --host polibio --port 8080`
-
-(su hlt-services6)
-
-`java -Dtreetagger.home=/data/dirha/treetagger/ -Dfile.encoding=UTF-8 -cp target/fatJar.jar org.fbk.cit.hlt.dirha.Annotator -g resources/gazetteer.tsv -m data/whole-train/20140616/whole-train.tab --trace -s --port 9999 &> logs-20140617.log &`
-
-
-de:
-
-`java -Dfile.encoding=UTF-8 -cp target/fatJar.jar org.fbk.cit.hlt.dirha.Annotator -g resources/de/gazetteer.tsv -i -m data/annotation-migration/de/20140930/whole-training.tsv --trace -l de`
-
-pos
-`java -Dfile.encoding=UTF-8 -Dtreetagger.home=/data/dirha/treetagger/ -cp target/fatJar.jar org.fbk.cit.hlt.dirha.PosTagger "Noi siamo persone pulite" it`
-
-
-**Annotation Migration**
-
-`java -Dfile.encoding=UTF-8 -cp target/fatJar.jar org.fbk.cit.hlt.dirha.SpreadSheetToSentencesToBeTranslated ...`
-en:
-
-`java -Dfile.encoding=UTF-8 -cp target/fatJar.jar org.fbk.cit.hlt.dirha.TranslatedSentencesToSpreadSheet data/annotation-migration/de/de-sentences-fixed-martin.tsv data/annotation-migration/en/en-unlabelled-whole-training-fixed-claudio.tsv en`
-
-`java -Dfile.encoding=UTF-8 -cp target/fatJar.jar org.fbk.cit.hlt.dirha.AnnotationMigration -l data/annotation-migration/from-it.reference-annotation.tsv -o /dev/null -r data/annotation-migration/en/it-en-terms.tsv -u data/annotation-migration/en/en-unlabelled-whole-training-fixed-claudio.tsv`
-
-
-de:
-
-`java -Dfile.encoding=UTF-8 -cp target/fatJar.jar org.fbk.cit.hlt.dirha.TranslatedSentencesToSpreadSheet data/annotation-migration/de/de-sentences-fixed-martin.tsv data/annotation-migration/de/de-unlabelled-whole-training-fixed-martin.tsv de`
-
-`java -Dfile.encoding=UTF-8 -cp target/fatJar.jar org.fbk.cit.hlt.dirha.AnnotationMigration -l data/annotation-migration/from-it.reference-annotation.tsv -o data/annotation-migration/de/de-whole-training-fixed-martin.tsv -r data/annotation-migration/de/it-de-terms.tsv -u data/annotation-migration/de/de-unlabelled-whole-training-fixed-martin.tsv --info`
+## Evaluate against the [gold-standard](../../blob/master/resources/gold-standard.final)
+```
+make supervised-evaluate
+```
