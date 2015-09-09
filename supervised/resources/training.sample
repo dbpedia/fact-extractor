@@ -4,7 +4,7 @@
 1200	3	dove	PRO:rela	dove	Attività	O
 1200	4	esordisce	VER:pres	esordire	Attività	LU
 1200	5	in	PRE	in	Attività	O
-1200	6	Serie_C1	ENT	Serie_C1	Attività	Competizione
+1200	6	Serie C1	ENT	Serie C1	Attività	Competizione
 1200	7	a	PRE	a	Attività	O
 1200	8	17	NUM	@card@	Attività	O
 1200	9	anni	NOM	anno	Attività	O
@@ -20,7 +20,7 @@
 344	5	il	DET:def	il	Attività	O
 344	6	Legnano	NOM	Legnano	Attività	Squadra
 344	7	in	PRE	in	Attività	O
-344	8	Lega_Pro_Seconda_Divisione	ENT	Lega_Pro_Seconda_Divisione	Attività	Competizione
+344	8	Lega Pro Seconda Divisione	ENT	Lega Pro Seconda Divisione	Attività	Competizione
 344	9	.	SENT	.	Attività	O
 345	0	Con	PRE	con	Trofeo	O
 345	1	lui	PRO:pers	lui	Trofeo	O
@@ -48,13 +48,13 @@
 346	9	a	PRE	a	Trofeo	O
 346	10	vincere	VER:infi	vincere	Trofeo	LU
 346	11	il	DET:def	il	Trofeo	O
-346	12	Campionato_Giovanissimi	ENT	Campionato_Giovanissimi	Trofeo	Competizione
+346	12	Campionato Giovanissimi	ENT	Campionato Giovanissimi	Trofeo	Competizione
 346	13	di	PRE	di	Trofeo	O
 346	14	Pescara	NPR	Pescara	Trofeo	Luogo
 346	15	.	SENT	.	Trofeo	O
 347	0	Debuttò	VER:remo	debuttare	Sconfitta	O
 347	1	in	PRE	in	Sconfitta	O
-347	2	Prima_Categoria	ENT	Prima_Categoria	Sconfitta	Competizione
+347	2	Prima Categoria	ENT	Prima Categoria	Sconfitta	Competizione
 347	3	con	PRE	con	Sconfitta	O
 347	4	la	DET:def	il	Sconfitta	O
 347	5	maglia	NOM	maglia	Sconfitta	O
@@ -82,7 +82,7 @@
 340	5	esordito	VER:pper	esordire	Sconfitta	O
 340	6	con	PRE	con	Sconfitta	O
 340	7	la	DET:def	il	Sconfitta	O
-340	8	Nazionale_maggiore	ENT	Nazionale_maggiore	Sconfitta	Perdente
+340	8	Nazionale maggiore	ENT	Nazionale maggiore	Sconfitta	Perdente
 340	9	nell'	PRE:det	nel	Sconfitta	O
 340	10	amichevole	NOM	amichevole	Sconfitta	O
 340	11	persa	VER:pper	perdere	Sconfitta	LU
