@@ -1,5 +1,5 @@
 # Supervised classifier
-The [Makefile](../../blob/master/Makefile) is responsible for handling all the tasks, from compilation to evaluation.
+The [Makefile](../../Makefile) is responsible for handling all the tasks, from compilation to evaluation.
 Just make sure you are in the project root directory!
 
 ## Installation
@@ -9,7 +9,7 @@ make supervised-build-classifier
 ```
 
 ## Training set format
-A TSV file as per [the sample](resources/training.sample):
+A TSV file as per [the sample](../resources/training.sample):
 ```
 1200	0	Cresciuto	VER:pper	crescere	Attività	O
 1200	1	nel	PRE:det	nel	Attività	O
@@ -28,7 +28,7 @@ A TSV file as per [the sample](resources/training.sample):
 ```
 
 ## Train
-**N.B.:** If no training set file is specified with the `CL_TRAINING_SET` variable, it will train with [this sample](resources/training.sample)
+**N.B.:** If no training set file is specified with the `CL_TRAINING_SET` variable, it will train with [this sample](../resources/training.sample).
 
 1. Learn roles
 ```
@@ -40,7 +40,7 @@ make supervised-learn-frames
 ```
 
 ## Run
-**N.B.:** If no training set file is specified with the `CL_TRAINING_SET` variable, it will use the model trained with [this sample](resources/training.sample)
+**N.B.:** If no training set file is specified with the `CL_TRAINING_SET` variable, it will use the model trained with [this sample](../resources/training.sample).
 1. Interactive mode: type a sentence and classify it
 ```
 make supervised-run-interactive
@@ -51,7 +51,7 @@ make supervised-run-interactive
 make supervised-run-batch CL_SENTENCES_FILE=your_sentences_file_here
 ```
 
-## Evaluate against the [gold-standard](../../blob/master/resources/gold-standard.final)
+## Evaluate against the [gold-standard](../../resources/gold-standard.final)
 ```
 make supervised-evaluate
 ```
