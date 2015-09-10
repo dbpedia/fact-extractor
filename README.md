@@ -46,7 +46,7 @@ $ pip install -r requirements.txt
     - [libsvm](http://www.csie.ntu.edu.tw/~cjlin/libsvm/)
 - Request access to a supported entity linking API:
     - [The Wiki Machine](mailto:giuliano@fbk.eu)
-    - [Dandelion](https://dandelion.eu/accounts/register/?next=/docs/api/datatxt/nex/getting-started/)
+    - [Dandelion API](https://dandelion.eu/accounts/register/?next=/docs/api/datatxt/nex/getting-started/)
 - Put your API credentials into a new file `lib/secrets.py` as follows:
 ```
 # For The Wiki Machine
