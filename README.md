@@ -54,7 +54,7 @@ TWM_URL = 'your service URL'
 TWM_APPID = 'your app ID'
 TWM_APPKEY = 'your app key'
 
-# For Dandelion
+# For Dandelion API
 NEX_URL = 'https://api.dandelion.eu/datatxt/nex/v1'
 NEX_APPID = 'your app ID'
 NEX_APPKEY = 'your app key'
