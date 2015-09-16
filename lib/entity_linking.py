@@ -64,7 +64,13 @@ NEX_DATA = {
 
 
 def twm_link_articles(raw_articles):
-  """Run Machine Linking on a list of raw text articles"""
+  """Run Machine Linking on a list of raw text articles
+  :param list raw_articles: List of dictionaries with info about each article
+                            should have keys url, title and text
+  :return: The articles with the TWM linked entities, a new list of dictionaries
+           with the same keys as raw_articles plus an 'entitites' list
+  :rtype: list
+  """
   articles = []
   for raw in raw_articles:
     linked = {'url': raw['url'], 'title': raw['title']}
@@ -81,7 +87,13 @@ def twm_link_articles(raw_articles):
 
 
 def twm_extract_entities(twm_json, disambiguation, debug):
-    """Extract the list of entities from a Machine Linking JSON response"""
+    """Extract the list of entities from a Machine Linking JSON response
+    :param dict twm_json: The response from TWM
+    :param bool disambiguation: Include disambiguation
+    :param bool debug: Print debug aids
+    :return: The entities extracted
+    :rtype: list
+    """
     entities = []
     for keyword in twm_json['annotation']['keyword']:
         entity = {}
@@ -106,7 +118,13 @@ def twm_extract_entities(twm_json, disambiguation, debug):
 
 
 def twm_link(text, disambiguation, debug):
-    """Run Machine linking on raw text"""
+    """Run Machine linking on raw text
+    :param str text: The text in which to extract entities
+    :param bool disambiguation: Perform entity disambiguation
+    :param bool debug: Print debugging aids
+    :return: The entities extracted
+    :rtype: list
+    """
     #  Constrain the context to the soccer domain by appending dummy words
     text += SOCCER_WORDS
     TWM_DATA['text'] = text
@@ -130,7 +148,11 @@ def twm_link(text, disambiguation, debug):
 
 
 def nex_link(text):
-    """Run using the Dandelion APIs on raw text"""
+    """Run using the Dandelion APIs on raw text
+    :param str text: The text used to perform linking
+    :return: The entities extracted
+    :rtype: list
+    """
     NEX_DATA['text'] = text
     r = requests.post(NEX_URL, data=NEX_DATA)
     print r.json()
@@ -139,7 +161,11 @@ def nex_link(text):
 
 
 def nex_extract_entities(nex_response_json):
-    """Extract the list of entities from the Dandelion APIs JSON response"""
+    """Extract the list of entities from the Dandelion APIs JSON response
+    :param dict nex_response_json: The response of The Dandelion APIs
+    :return: The extracted entities, containing uri, types, start and end
+    :rtype: list
+    """
     entities = []
     for annotation in nex_response_json['annotations']:
         entities.append({k: v for k, v in annotation.iteritems() if k in ['uri', 'types', 'start', 'end']})

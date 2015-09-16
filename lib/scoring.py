@@ -2,7 +2,11 @@ AVAILABLE_SCORES = ['arithmetic-mean', 'weighted-mean', 'f-score']
 
 
 def compute_score(sentence, score, core_fes_weight):
-    """ computes the confidency score for a sentence based on FE scores """
+    """ Computes the confidency score for a sentence based on FE scores
+    :param dict sentence: Data of the sentence, containing FEs
+    :param str score: Type of score: arithmetic-mean, weighted-mean, f-score
+    :param float core_fes_weight: Weight of core FEs wrt extra FEs
+    """
 
     assert score in AVAILABLE_SCORES, 'unknown scoring measure'
     scored_fes = [fe for fe in sentence['FEs'] if fe.get('score') is not None]

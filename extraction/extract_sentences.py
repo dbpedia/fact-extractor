@@ -18,8 +18,15 @@ def process_article(content, tokens, sentence_wid, output_dir, min_words, max_wo
     """
     processes an article with format <doc id=... title=... url=...> ... </doc>
     and extracts all the sentences whose length is between min_words and max_words
+    and contains at least one token in the specified set
 
     sentences are split by a dot followed by at least one space
+    :param str content: Text of the article including start and end doc tags
+    :param set token: Set of tokens
+    :param dict sentence_wid: Mapping between sentence and wikipedia ID
+    :param str output_dir: Directory where to save the sentences
+    :param int min_words: Only consider sentences longer than this
+    :param int max_words: Only consider sentence shorter than this
     """
     attrs = dict(re.findall(r'([^\s=]+)="([^"]+)"', content))
 

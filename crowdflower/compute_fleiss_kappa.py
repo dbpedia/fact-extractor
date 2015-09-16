@@ -7,8 +7,12 @@ from os import sys
 
 def compute_matrix(cf_results, num_judgments):
     """
-    given the results from crowdflower creates the matrix necessary to compute the
+    Given the results from crowdflower creates the matrix necessary to compute the
     fleiss agreement
+    :param dict cf_results: Results from crowdflower for each sentence
+    :param int num_judgments: Consider only the first # answers, skip if not enough
+    :return: The matrix as list of lists of ints
+    :rtype: list
     """
     categories = set()
     for sentence_id, data in cf_results.iteritems():
@@ -35,11 +39,14 @@ def compute_matrix(cf_results, num_judgments):
 
 @click.command()
 @click.argument('crowdflower-output', type=click.File('r'))
-@click.option('--num-judgments', default=3)
+@click.option('--num-judgments', default=3,
+              help='Consider only this number of results, skip if not enough')
 def main(crowdflower_output, num_judgments):
     """
     this script computes the agreement of judgments given in the crowdflower
     job using a metric called Fleiss kappa
+    :param file crowdflower_output: CSV file containing the results from crowdflower
+    :param int num_judgments: Consider only this number of results, skip if not enough
     """
     cf_results = read_full_results(crowdflower_output)
     mat = compute_matrix(cf_results, num_judgments)

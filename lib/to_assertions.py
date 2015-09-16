@@ -33,27 +33,32 @@ def to_assertions(labeled_results, id_to_title, outfile='dataset.nt',
                   score_dataset=None, format='nt'):
     """
     Serialize the labeled results into RDF NTriples
-
-    Schema of labeled results:
-
-    [
-      {
-        'id': '',
-        'frame': '',
-        'lu': '',
-        'sentence': '',
-        'score': float  # optional
-        'FEs': [
-          {
-            'chunk': '',
-            'type': '',
-            'uri/literal': '',  # specify either uri or literal
-            'FE': '',
-            'score': float  # optional
-          },
-        ]
-      },
-    ]
+    :param dict id_to_title: Mapping between wiki id and article title
+    :param str outfile: Path to file in which to save the triples
+    :param score_dataset: If and where to save triples' scores
+    :type score_dataset: str or None
+    :param str format: Format of the triples
+    :param dict labeled_results: Data for each sentence
+                                 Schema of labeled results:
+ 
+                                 [
+                                   {
+                                     'id': '',
+                                     'frame': '',
+                                     'lu': '',
+                                     'sentence': '',
+                                     'score': float  # optional
+                                     'FEs': [
+                                        {
+                                         'chunk': '',
+                                         'type': '',
+                                         'uri/literal': '',  # specify either uri or literal
+                                         'FE': '',
+                                         'score': float  # optional
+                                        },
+                                     ]
+                                   },
+                                 ]
 
     """
 

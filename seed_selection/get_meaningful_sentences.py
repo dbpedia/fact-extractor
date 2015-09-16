@@ -18,7 +18,10 @@ CHUNKER_GRAMMAR = r"""
 def load_pos_data(dir):
     """
     walks the directory and loads the sentence's POS tagged data
-    returns a map file name -> list of (token, POS)
+
+    :param str dir: The directory with the POS data
+    :return: Dictionary with POS data for each file
+    :rtype: dict
     """
     pos_data = defaultdict(list)
     for path, subdirs, files in os.walk(dir):
@@ -53,6 +56,9 @@ def save_sentences(sentences, outdir):
     """
     saves the sentences (dictionary id -> text) one per file
     into the given directory
+    :param dict sentences: Dictionary with sentence ID and sentence text
+    :param str outdir: Where to save the sentences
+    :return: None
     """
     for sentence_id, text in sentences.iteritems():
         with open(os.path.join(outdir, sentence_id), 'w') as f:

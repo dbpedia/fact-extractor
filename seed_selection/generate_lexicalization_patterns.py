@@ -26,7 +26,12 @@ QUERY = """
 
 
 def query_endpoint(query, entity_type):
-    """Run a query to a Virtuoso SPARQL endpoint"""
+    """Run a query to a Virtuoso SPARQL endpoint
+    :param str query: Template of the query with type, offset and limit as parameters
+    :param str entity_type: Type of the entity
+    :return: The bindings returned
+    :rtype: list
+    """
     print 'Getting data for', entity_type
     bindings = []
     finished, offset = False, 0
@@ -45,7 +50,11 @@ def query_endpoint(query, entity_type):
 
 
 def process_response(bindings):
-    """Process the query result set from the endpoint JSON response"""
+    """Process the query result set from the endpoint JSON response
+    :param list bindings: Bindings of entities returned by the endpoint
+    :return: Data for each entity
+    :rtype: dict
+    """
     processed = {}
     for result in bindings:
         # Get rid of URI namespace

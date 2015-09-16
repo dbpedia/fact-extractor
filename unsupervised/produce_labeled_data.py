@@ -22,7 +22,14 @@ NORMALIZER = DateNormalizer()
 
 
 def label_sentence(entity_linking_results, debug, numerical):
-    """Produce a labeled sentence by comparing the linked entities to the frame definition"""
+    """Produce a labeled sentence by comparing the linked entities to the frame definition
+    :param str entity_linking_results: path to JSON file containing the results of the
+                                       entity linking
+    :param bool debug: Print debugging information
+    :param bool numerical: Normalize numerical FEs
+    :return: labeled data for each sentence
+    :rtype: dict
+    """
     labeled = {}
     links = json.load(codecs.open(entity_linking_results, 'rb', 'utf-8'))
     sentence, val = links.items()[0]
@@ -164,8 +171,16 @@ def label_sentence(entity_linking_results, debug, numerical):
     return labeled
 
 
-def process_dir(indir, score_fes, debug, numerical):
-    """Walk into the input directory and process all the entity linking results"""
+def process_dir(indir, debug, numerical):
+    """Walk into the input directory and process all the entity linking results,
+    creating the labeled data
+
+    :param str indir: Path to the directory with the entity linking results
+    :param bool debug: Print debugging information
+    :param bool numerical: Normalize numerical FEs
+    :return: The labeled data
+    :rtype: dict
+    """
     processed = []
     for path, subdirs, files in os.walk(indir):
         for name in files:

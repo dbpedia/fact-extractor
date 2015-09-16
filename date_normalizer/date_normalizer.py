@@ -38,7 +38,10 @@ class DateNormalizer(object):
                                       for pattern, result in regexes]
 
     def _meta_init(self, specs):
-        """ reads the meta variables and the meta functions from the specification """
+        """ Reads the meta variables and the meta functions from the specification
+        :param dict specs: The specifications loaded from the file
+        :return: None
+        """
         self.meta_vars = specs.pop('__meta_vars__')
 
         # compile meta functions in a dictionary
@@ -53,7 +56,11 @@ class DateNormalizer(object):
         self.globals.update(self.meta_vars)
 
     def normalize_one(self, expression):
-        """ find the first matching part in the given expression """
+        """ Find the first matching part in the given expression
+        :param str expression: The expression in which to search the match
+        :return: Tuple with (start, end), category, result
+        :rtype: tuple
+        """
         expression = expression.lower()
         for category, regexes in self.regexes.iteritems():
             for regex, transform in regexes:
@@ -64,7 +71,10 @@ class DateNormalizer(object):
             return (-1, -1), None, None
 
     def normalize_many(self, expression):
-        """ find all the matching entities in the given expression expression """
+        """ Find all the matching entities in the given expression expression
+        :param str expression: The expression in which to look for
+        :return: Generator of tuples (start, end), category, result
+        """
         expression = expression.lower()
         position = 0  # start matching from here, and move forward as new matches
                       # are found so to avoid overlapping matches and return
@@ -86,7 +96,13 @@ class DateNormalizer(object):
 
 _normalizer = DateNormalizer()
 def normalize_numerical_fes(sentence_id, tokens):
-    """ normalize numerical FEs such as dates, durations, etc """
+    """ Normalize numerical FEs in a sentence such as dates, durations, etc
+    :param str sentence_id: The ID of the sentence currently processed
+    :param list tokens: The list of tokens of the sentence, containing POS tag,
+                        frame and IOB tag information
+    :return: The list of tokens with normalized results
+    :rtype: list
+    """
     sentence = ' '.join(x[2] for x in tokens)
 
     for (start, end), _, _ in _normalizer.normalize_many(sentence):

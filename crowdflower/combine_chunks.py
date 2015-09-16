@@ -166,7 +166,11 @@ def combine_priority(link_chunks, ngram_chunks, tp_chunks):
 
 
 def combine_overlapping(chunks):
-    """ combine overlapping chunks """
+    """ Combine overlapping chunks
+    :param list chunks: List of string with all the chunks
+    :return: The list with overlapping chunks combined
+    :rtype: list
+    """
     pairs = itertools.combinations(chunks, 2)
     for p1, p2 in pairs:
         if not p1 in chunks or not p2 in chunks:
@@ -200,8 +204,11 @@ def combine_overlapping(chunks):
     return chunks 
 
 
-def combine_contiguous(sentence, combined):
-    """ combine contiguous chunks """
+def combine_contiguous(combined):
+    """ Combine contiguous chunks
+    :param list combined: List of the combined chunks
+    :return: A list with combined chunks merged
+    """
 
     def contiguous(c1, c2):
         return c1['end'] + 1 == c2['start']
@@ -246,6 +253,10 @@ def combine_chunks(sentence_id, values):
     if chunks still overlap after this merge them, i.e. "la Nazionale" and
     "Nazionale Under-21" would be merged into "la Nazionale Under-21"
     finally, merge contiguous chunks into a single bigger one
+    :param str sentence_id: ID of the sentence being processed
+    :param dict values: Chunks coming from different sources
+    :return: Dictionary with combined chunks, keys: id, sentence, chunks
+    :rtype: dict
     """
 
     link_chunks = values.get('twm-links', dict())

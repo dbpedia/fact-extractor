@@ -20,6 +20,10 @@ def process_article(content, soccer_ids, mapping, output_dir):
     given a single article as a string checks if its id is contained
     in the soccer_ids set, if so updates the soccer ids and the mappings
     and saves the article in a new file named as the article id
+    :param str content: Text of the article including start and end doc tags
+    :param set soccer_ids: Set of wikipedia ID
+    :param dict mapping: Mapping between wiki ID and title, will be updated
+    :return: None
     """
     attrs = dict(re.findall(r'([^\s=]+)="([^"]+)"', content))
     print >> sys.stderr, 'Processing [%s]...\r' % attrs['id'],

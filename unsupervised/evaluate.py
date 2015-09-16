@@ -35,12 +35,22 @@ def setup_logger(level='info'):
 
 
 def load_labeled_data(filein):
-    """Load labeled data JSON from a file"""
+    """Load labeled data JSON from a file
+    :param file filein: Open file with the labeled data
+    :return: The labeled data
+    :rtype: dict
+    """
     return json.load(filein, 'utf-8')
 
 
 def load_full_gold_standard(full_gold_standard, logger):
-    """Read a full annotation to evaluate against from a TSV open stream"""
+    """Read a full annotation to evaluate against from a TSV open stream
+    :param list full_gold_standard: Rows of the gold standard file
+    :param logger: Logger used to write information
+    :return: The parsed data
+    :rtype: dict
+    :raises ValueError: if it is not possible to correctly split a line
+    """
     annotations = []
     loaded = defaultdict(list)
     for line in full_gold_standard:
@@ -80,6 +90,12 @@ def evaluate_against_gold(labeled_data, gold_standard, logger, exact):
     FE chunks checking:
     exact = exact string matching
     partial = substring matching
+    :param dict labeled_data: Labeled data for each sentence coming from the unsupervised
+    :param dict gold_standard: Gold standard data for each sentence
+    :param logger: Logger used to write information
+    :param bol exact: To perform exact substring matching
+    :return: Tuple with two tuples: precision, recall and f1 for frames and for roles
+    :rtype: tuple
     """
     if exact:
         logger.info("FE chunks EXACT checking enabled")
@@ -209,17 +225,32 @@ def evaluate_against_gold(labeled_data, gold_standard, logger, exact):
 
 
 def precision(tp, fp):
-    """Standard precision measure"""
+    """Standard precision measure
+    :param int tp: True Positives
+    :param int fp: False Positives
+    :return: The Precision
+    :rtype: float
+    """
     return float(tp) / float(tp + fp)
 
 
 def recall(tp, fn):
-    """Standard recall measure"""
+    """Standard recall measure
+    :param int tp: True Poitives
+    :param int fn: False Negatives
+    :return: The Recall
+    :rtype: float
+    """
     return float(tp) / float(tp + fn)
 
 
 def f1(p, r):
-    """Standard F1 measure"""
+    """Standard F1 measure
+    :param float p: Precision
+    :param float r: Recall
+    :return: The F1 score
+    :rtype: float
+    """
     return 2 * ((p * r) / (p + r))
 
 

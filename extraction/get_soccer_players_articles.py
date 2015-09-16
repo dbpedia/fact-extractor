@@ -19,7 +19,10 @@ def extract_soccer_articles(soccer_ids, corpus_dir, output_dir):
     """
     given the corpus directory, in which there is one file per article,
     extracts al the files containing an article whose wikipedia id
-    is contained in the input list (one id per like)
+    is contained in the input set
+    :param set soccer_ids: Set of wikipedia IDs
+    :param str corpus_dir: Directory with the articles
+    :param str output_dir: Where to save the articles
     """
     for path, subdirs, files in os.walk(corpus_dir):
         for name in files:
