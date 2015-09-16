@@ -100,9 +100,10 @@ class DateNormalizer(object):
 _normalizer = DateNormalizer()
 def normalize_numerical_fes(sentence_id, tokens):
     """ Normalize numerical FEs in a sentence such as dates, durations, etc
+
     :param str sentence_id: The ID of the sentence currently processed
     :param list tokens: The list of tokens of the sentence, containing POS tag,
-                        frame and IOB tag information
+     frame and IOB tag information
     :return: The list of tokens with normalized results
     :rtype: list
     """

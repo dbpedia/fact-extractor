@@ -34,24 +34,25 @@
 """Wikipedia Extractor:
 Extracts and cleans text from Wikipedia database dump and stores output in a
 number of files of similar size in a given directory.
-Each file contains several documents in Tanl document format:
+Each file contains several documents in Tanl document format::
+
 	<doc id="" url="" title="">
         ...
-        </doc>
+    </doc>
 
 Usage:
   WikiExtractor.py [options]
 
 Options:
   -c, --compress        : compress output files using bzip
-  -b, --bytes= n[KM]    : put specified bytes per output file (default 500K)
-  -B, --base= URL       : base URL for the Wikipedia pages
+  -b, --bytes=n         : put specified bytes per output file (default 500K)
+  -B, --base=URL        : base URL for the Wikipedia pages
   -l, --link            : preserve links
   -n NS, --ns NS        : accepted namespaces (separated by commas)
-  -o, --output= dir     : place output files in specified directory (default
-                          current)
-  -s, --sections	: preserve sections
+  -o, --output=dir      : place output files in specified directory (default current)
+  -s, --sections	    : preserve sections
   -h, --help            : display this help and exit
+
 """
 
 import sys
