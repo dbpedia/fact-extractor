@@ -5,7 +5,7 @@ import json
 import sys
 
 
-def iter_split(iterator, split):
+def _iter_split(iterator, split):
     acc = []
     for item in iterator:
         acc.append(item)
@@ -19,8 +19,8 @@ def process_article(content, tokens, sentence_wid, output_dir, min_words, max_wo
     processes an article with format <doc id=... title=... url=...> ... </doc>
     and extracts all the sentences whose length is between min_words and max_words
     and contains at least one token in the specified set
-
     sentences are split by a dot followed by at least one space
+
     :param str content: Text of the article including start and end doc tags
     :param set token: Set of tokens
     :param dict sentence_wid: Mapping between sentence and wikipedia ID
@@ -68,7 +68,7 @@ def main(input_file, token_list,sentence_to_wid, output_dir, min_words, max_word
     tokens = {row.strip().decode('utf8') for row in token_list}
 
     mapping, count = {}, 0
-    for i, rows in enumerate(iter_split(input_file, lambda row: '</doc>' in row)):
+    for i, rows in enumerate(_iter_split(input_file, lambda row: '</doc>' in row)):
         article = '\n'.join(rows).decode('utf8')
         count += process_article(article, tokens, mapping, output_dir,
                                  min_words, max_words)

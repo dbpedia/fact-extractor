@@ -36,7 +36,12 @@ def longest_common_substring(s1, s2):
 
 
 def read_twm_links(f):
-    """ reads the links produced by the wiki machine """
+    """ reads the links produced by the wiki machine, filtering out italian stopwords
+
+    :param str f: Path of the file containing the links
+    :return: Sentence ID and linked chunks
+    :rtype: tuple
+    """
     links = json.load(codecs.open(f, 'rb', 'utf-8'))
     sentence, val = links.items()[0]
 
@@ -53,7 +58,12 @@ def read_twm_links(f):
 
 
 def read_ngrams(f):
-    """ read the ngrams from the json file """
+    """ read the ngrams from the json file filtering out italian stopwords
+
+    :param file f: Path to the file containing the ngrmams
+    :return: the ngram chunks
+    :rtype: dict
+    """
     ngrams = json.load(codecs.open(f, 'rb', 'utf-8'))
 
     ngram_chunks = dict()
@@ -70,7 +80,12 @@ def read_ngrams(f):
 
 
 def read_tp_chunks(f):
-    """ reads the chunks produced by textpro """
+    """ reads the chunks produced by textpro
+
+    :param str f: Path to the file containing the chunks
+    :return: The loaded chunks as map ngram -> {}
+    :rtype: dict 
+    """
     with codecs.open(f, 'rb', 'utf-8') as i:
         tp = [l.strip() for l in i.readlines()]
 
@@ -104,10 +119,13 @@ def read_tp_chunks(f):
 def load_chunks(path):
     """
     loads all chunks contained in the given path
-
     chunk type is determined only from the path of the file, 'twm-links',
     'twm-ngrams' and 'textpro-chunks', the name of the file must be a
     two digits number (the sentence id) and an optional extension
+
+    :param str path: Path containing all the files
+    :return: The chunks for each sentence
+    :rtype: dict
     """
     all_chunks = defaultdict(lambda: dict())
 
@@ -138,6 +156,10 @@ def priority_update(first, second):
     """
     removes from second all the chunks which completely include,
     or is completely included in, some other chunk first
+
+    :param set first: First set of chunks
+    :param set second: Second set of chunks
+    :return: None
     """
     to_remove = set()
 
@@ -152,7 +174,14 @@ def priority_update(first, second):
 
 
 def combine_priority(link_chunks, ngram_chunks, tp_chunks):
-    """ combine chunks according to priority link_chunks > ngram_chunks > tp_chunks """
+    """ combine chunks according to priority link_chunks > ngram_chunks > tp_chunks
+    
+    :param set link_chunks: Set of chunks coming from entity linking
+    :param set ngram_chunks: Set of ngram chunks
+    :param set tp_chunks: Set of chunks coming from textpro
+    :return: The combined chunks
+    :rtype: set
+    """
     priority_update(link_chunks, ngram_chunks)
     priority_update(link_chunks, tp_chunks)
     priority_update(ngram_chunks, tp_chunks)
@@ -167,6 +196,7 @@ def combine_priority(link_chunks, ngram_chunks, tp_chunks):
 
 def combine_overlapping(chunks):
     """ Combine overlapping chunks
+
     :param list chunks: List of string with all the chunks
     :return: The list with overlapping chunks combined
     :rtype: list
@@ -206,6 +236,7 @@ def combine_overlapping(chunks):
 
 def combine_contiguous(combined):
     """ Combine contiguous chunks
+
     :param list combined: List of the combined chunks
     :return: A list with combined chunks merged
     """
@@ -253,6 +284,7 @@ def combine_chunks(sentence_id, values):
     if chunks still overlap after this merge them, i.e. "la Nazionale" and
     "Nazionale Under-21" would be merged into "la Nazionale Under-21"
     finally, merge contiguous chunks into a single bigger one
+
     :param str sentence_id: ID of the sentence being processed
     :param dict values: Chunks coming from different sources
     :return: Dictionary with combined chunks, keys: id, sentence, chunks
@@ -286,8 +318,7 @@ def combine_chunks(sentence_id, values):
 @click.argument('combined_out')
 @click.option('--debug/--no-debug', default=False)
 def main(chunks_path, combined_out, debug):
-    """
-    combines the chunks found by three different chunking strategies
+    """ combines the chunks found by three different chunking strategies
     """
     global DEBUG
     DEBUG = debug

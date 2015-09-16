@@ -33,32 +33,33 @@ def to_assertions(labeled_results, id_to_title, outfile='dataset.nt',
                   score_dataset=None, format='nt'):
     """
     Serialize the labeled results into RDF NTriples
+
     :param dict id_to_title: Mapping between wiki id and article title
     :param str outfile: Path to file in which to save the triples
     :param score_dataset: If and where to save triples' scores
     :type score_dataset: str or None
     :param str format: Format of the triples
     :param dict labeled_results: Data for each sentence
-                                 Schema of labeled results:
- 
-                                 [
-                                   {
-                                     'id': '',
-                                     'frame': '',
-                                     'lu': '',
-                                     'sentence': '',
-                                     'score': float  # optional
-                                     'FEs': [
-                                        {
-                                         'chunk': '',
-                                         'type': '',
-                                         'uri/literal': '',  # specify either uri or literal
-                                         'FE': '',
-                                         'score': float  # optional
-                                        },
-                                     ]
-                                   },
-                                 ]
+
+    Schema of labeled results:
+    [
+      {
+        'id': '',
+        'frame': '',
+        'lu': '',
+        'sentence': '',
+        'score': float  # optional
+        'FEs': [
+           {
+            'chunk': '',
+            'type': '',
+            'uri/literal': '',  # specify either uri or literal
+            'FE': '',
+            'score': float  # optional
+           },
+        ]
+      },
+    ]
 
     """
 
@@ -161,8 +162,17 @@ def to_assertions(labeled_results, id_to_title, outfile='dataset.nt',
 
 
 def serialize_fe(fe, reified, wiki_title, add_triple, format):
-    """
-    serializes a frame element into triples
+    """ Serializes a frame element into triples
+
+    :param dict fe: The data about the FE
+    :param str reified: The subject term describing the reified object
+    :param str wiki_title: Title of the wikipedia page
+    :param triple_adder add_triple: Function called to add the triple,
+    see :func:triple_adder
+    :param str format: Format in which to save the triple
+    :return: Whether the triple could be successfully serialized
+    :rtype: bool
+    :raises Exception: If it was not possible to serialize the triple
     """
     # The FE predicate takes the FE label
     p1 = _uri_for('FE', 'predicate', fe['FE'])
@@ -203,6 +213,10 @@ def triple_adder(graph, format):
     returns a function which adds triples to the given graph in the
     given format. call this function with parameters subject,
     predicate and object
+
+    :param graph: The graph in which to add the triple
+    :type graph: See :py:class:`rdflib.Graph`
+    :param str format: The format in which to serialize the triple
     """
     def add_triple(subject, predicate, object):
         try:
@@ -225,6 +239,9 @@ def _to_nt_term(x):
     converts a string into a format suitable to be serialized as triple element
     urls are sorrounded by <>, and literals have the italian language tag added
     unicode strings are encoded into plain strs
+
+    :param str x: The term to serialize
+    :return: The formatted term
     """
     if type(x) == unicode:
         x = x.encode('utf8')
@@ -239,8 +256,14 @@ def _to_nt_term(x):
 def _uri_for(_type, _triple_term, term):
     """
     gets the uri to use for encoding the given term.
-    _triple_term is predicate or object and _type
-    is the type of term, either frame or FE
+
+    :param str _type: What does the term refer to, either frame or FE
+    :param str _triple_term: What is the role of the term in the triple; either
+    predicate or object
+    :param str term: The actual triple term
+    :return: The uri
+    :rtype: str
+    :raises ValueError: if `_triple_term` is not predicate or object
     """
     dbpo = FRAME_DBPO_MAP.get(_type, {}).get(term)
     if dbpo:

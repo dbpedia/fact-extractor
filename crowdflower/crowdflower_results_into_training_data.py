@@ -24,6 +24,7 @@ from utils import read_full_results
 
 def set_majority_vote_answer(results_json):
     """ Determine the correct entity which corresponds to a given FE
+
     :param dict results_json: a dictionary with the FEs of each sentence
     :return: None, but sets a new key 'majority' in each FE
     """
@@ -49,6 +50,7 @@ def set_majority_vote_answer(results_json):
 
 def tag_entities(results):
     """ Creates the IOB tag for each entity found.
+
     :param dict results: a dictionary with the FEs of each sentence
     :return: None, but sets a new 'entities' key for each sentence
     """
@@ -71,6 +73,7 @@ def tag_entities(results):
 
 def merge_tokens(sentence_id, annotations, lines):
     """ Merge tagged words, LU and FEs
+
     :param str sentence_id: The ID of the sentence
     :param dict annotations: The data about this sentence
     :param list lines: The POS tagging of the sentence
@@ -127,6 +130,7 @@ def merge_tokens(sentence_id, annotations, lines):
 
 def process_sentence(sentence_id, annotations, lines):
     """ process a single sentence by merging the tokens and normalizing numerical expressions
+
     :param str sentence_id: The ID of this sentence
     :param dict annotations: The data about this sentence's FEs
     :param list lines: The POS tagging of this sentence
@@ -149,6 +153,7 @@ def process_sentence(sentence_id, annotations, lines):
 
 def produce_training_data(annotations, pos_tagged_sentences_dir, debug):
     """ Adds to the treetagger output information about frames
+
     :param dict annotations: Annotation data for each sentence
     :param str pos_tagged_sentences_dir: path of directory containing POS tagging results
     :param bool debug: Print debugging information?
@@ -185,6 +190,7 @@ def produce_training_data(annotations, pos_tagged_sentences_dir, debug):
 
 def main(crowdflower_csv, pos_data_dir, output_file, debug):
     """ Transform the crowdflower results into training data
+
     :param file crowdflower_csv: The CSV containing crowdflower data
     :param str pos_data_dir: The directory containing POS tagging for each sentence
     :param file output_file: The file in which to write the training data

@@ -27,6 +27,7 @@ QUERY = """
 
 def query_endpoint(query, entity_type):
     """Run a query to a Virtuoso SPARQL endpoint
+
     :param str query: Template of the query with type, offset and limit as parameters
     :param str entity_type: Type of the entity
     :return: The bindings returned
@@ -51,6 +52,7 @@ def query_endpoint(query, entity_type):
 
 def process_response(bindings):
     """Process the query result set from the endpoint JSON response
+
     :param list bindings: Bindings of entities returned by the endpoint
     :return: Data for each entity
     :rtype: dict

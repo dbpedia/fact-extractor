@@ -39,6 +39,7 @@ FE_TEMPLATE = '''
 
 def generate_crowdflower_interface_template(input_csv, output_html=None):
     """ Generate CrowFlower interface template based on input data spredsheet
+
     :param file input_csv: CSV file with the input data
     :param output_html: File in which to write the output or None to return it as str
     :type output_html: file or None

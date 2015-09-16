@@ -65,10 +65,11 @@ NEX_DATA = {
 
 def twm_link_articles(raw_articles):
   """Run Machine Linking on a list of raw text articles
-  :param list raw_articles: List of dictionaries with info about each article
-                            should have keys url, title and text
+
+  :param list raw_articles: List of dictionaries with info about each article,
+   should have keys url, title and text
   :return: The articles with the TWM linked entities, a new list of dictionaries
-           with the same keys as raw_articles plus an 'entitites' list
+   with the same keys as raw_articles plus an 'entitites' list
   :rtype: list
   """
   articles = []
@@ -88,6 +89,7 @@ def twm_link_articles(raw_articles):
 
 def twm_extract_entities(twm_json, disambiguation, debug):
     """Extract the list of entities from a Machine Linking JSON response
+
     :param dict twm_json: The response from TWM
     :param bool disambiguation: Include disambiguation
     :param bool debug: Print debug aids
@@ -119,6 +121,7 @@ def twm_extract_entities(twm_json, disambiguation, debug):
 
 def twm_link(text, disambiguation, debug):
     """Run Machine linking on raw text
+
     :param str text: The text in which to extract entities
     :param bool disambiguation: Perform entity disambiguation
     :param bool debug: Print debugging aids
@@ -149,6 +152,7 @@ def twm_link(text, disambiguation, debug):
 
 def nex_link(text):
     """Run using the Dandelion APIs on raw text
+
     :param str text: The text used to perform linking
     :return: The entities extracted
     :rtype: list
@@ -162,6 +166,7 @@ def nex_link(text):
 
 def nex_extract_entities(nex_response_json):
     """Extract the list of entities from the Dandelion APIs JSON response
+
     :param dict nex_response_json: The response of The Dandelion APIs
     :return: The extracted entities, containing uri, types, start and end
     :rtype: list

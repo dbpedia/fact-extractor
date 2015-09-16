@@ -23,6 +23,7 @@ NORMALIZER = DateNormalizer()
 
 def label_sentence(entity_linking_results, debug, numerical):
     """Produce a labeled sentence by comparing the linked entities to the frame definition
+
     :param str entity_linking_results: path to JSON file containing the results of the
                                        entity linking
     :param bool debug: Print debugging information

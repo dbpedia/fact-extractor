@@ -39,6 +39,7 @@ class DateNormalizer(object):
 
     def _meta_init(self, specs):
         """ Reads the meta variables and the meta functions from the specification
+
         :param dict specs: The specifications loaded from the file
         :return: None
         """
@@ -57,6 +58,7 @@ class DateNormalizer(object):
 
     def normalize_one(self, expression):
         """ Find the first matching part in the given expression
+
         :param str expression: The expression in which to search the match
         :return: Tuple with (start, end), category, result
         :rtype: tuple
@@ -72,6 +74,7 @@ class DateNormalizer(object):
 
     def normalize_many(self, expression):
         """ Find all the matching entities in the given expression expression
+
         :param str expression: The expression in which to look for
         :return: Generator of tuples (start, end), category, result
         """

@@ -17,6 +17,7 @@ from resources.soccer_lu2frame_dbtypes import LU_FRAME_MAP
 _frame_map = defaultdict(dict)
 def _get_fe_type(frame_name, fe_name):
     """ Given a frame and a frame element returns the type of the fe (code/extra)
+
     :param str frame_name: Name of the frame
     :param str fe_name: Name of the FE
     :return: The type of the FE
@@ -32,6 +33,7 @@ def _get_fe_type(frame_name, fe_name):
 
 def read_sentences(rows):
     """ Aggregates a sequence of rows of tab-separated fields by its first value
+
     :param list rows: List of rows
     :return: A dictionary with first field -> all rows with that field as first
     :rtype: dict
@@ -45,8 +47,8 @@ def read_sentences(rows):
 
 
 def score_fe(fe_format, fe_score_type, frame_conf, role_conf, link_conf):
-    """
-    computes the score for the given frame element
+    """ computes the score for the given frame element
+
     :param str fe_format: Format of the FE, uri or literal
     :param float role_conf: Confidence for the role (coming from the SVM)
     :param float frame_conf: Confidence for the frame (coming from the SVM)
@@ -69,6 +71,7 @@ def score_fe(fe_format, fe_score_type, frame_conf, role_conf, link_conf):
 
 def to_labeled(sentences, fe_score_type):
     """ Transform the sentences into labeled data ready to be serialized into triples
+
     :param dict sentences: Labeled data for each sentence
     :param str fe_score_type: Which score to use for uris: svm, link or both (f1)
     """

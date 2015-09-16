@@ -5,6 +5,7 @@ import re
 
 def read_full_results(results_file):
     """ Reads and aggregates the results
+
     :param file results_file: an open file with the CSV data
     :return: a dictionary with data for every sentence
     :rtype: dict

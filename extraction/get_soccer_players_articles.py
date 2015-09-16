@@ -11,15 +11,21 @@ DEBUG = True
 
 
 def load_wiki_ids(filein):
+    """ Loads the wikipedia IDs
+
+    :param str filein: Path to the file with the wikipedia IDs, one per line
+    :return: The wikipedia IDs
+    :rtype: set
+    """
     with open(filein) as i:
         return {l.strip() for l in i}
 
 
 def extract_soccer_articles(soccer_ids, corpus_dir, output_dir):
-    """
-    given the corpus directory, in which there is one file per article,
+    """ given the corpus directory, in which there is one file per article,
     extracts al the files containing an article whose wikipedia id
     is contained in the input set
+
     :param set soccer_ids: Set of wikipedia IDs
     :param str corpus_dir: Directory with the articles
     :param str output_dir: Where to save the articles

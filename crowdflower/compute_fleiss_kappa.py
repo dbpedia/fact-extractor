@@ -6,9 +6,9 @@ from os import sys
 
 
 def compute_matrix(cf_results, num_judgments):
-    """
-    Given the results from crowdflower creates the matrix necessary to compute the
+    """ Given the results from crowdflower creates the matrix necessary to compute the
     fleiss agreement
+
     :param dict cf_results: Results from crowdflower for each sentence
     :param int num_judgments: Consider only the first # answers, skip if not enough
     :return: The matrix as list of lists of ints
