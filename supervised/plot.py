@@ -1,4 +1,13 @@
 import click
+import matplotlib as mpl
+# Matplotlib setup for LaTeX plots generation
+mpl.use("pgf")
+config = {
+    "pgf.texsystem": "pdflatex",
+    "font.family": "serif",
+    "font.serif": [],                   # use latex default serif font
+}
+mpl.rcParams.update(config)
 import matplotlib.pyplot as plt
 from mpl_toolkits.axes_grid1 import make_axes_locatable
 
@@ -46,7 +55,9 @@ def precall_scatter(obj):
 
     plt.xlabel('Precision');
     plt.ylabel('Recall')
-    plt.tight_layout(); plt.grid(); plt.show()
+    plt.grid()
+    plt.tight_layout()
+    plt.savefig('precall_scatter.pdf')
 
 
 @plot.command()
@@ -64,7 +75,6 @@ def precall_bars(obj):
     fig, ax1 = plt.subplots(1, 1)
 
     num_classes, width = len(obj['confmat']), 0.4
-    ax1.set_title('Precision/Recall')
     ax1.bar([x - width for x in range(num_classes)], precisions, width,
             label='Precision', color='b')
     ax1.bar(range(num_classes), recalls, width, label='Recall', color='r')
@@ -74,7 +84,9 @@ def precall_bars(obj):
     ax1.set_xlim((-width, num_classes + width - 1))
     ax1.grid()
     ax1.legend()
-    plt.show()
+    
+    plt.tight_layout()
+    plt.savefig('precall_bars.pdf')
 
 
 @plot.command()
@@ -90,7 +102,6 @@ def confmat(obj):
                                 for i in range(len(obj['confmat']))))
 
     fig, ax1 = plt.subplots(1, 1)
-    ax1.set_title('Normalized Confusion Matrix')
     ax1.set_xlabel('Actual Class'); ax1.set_ylabel('Predicted Class')
     ax1.set_xticks(range(len(obj['labels'])))
     ax1.set_xticklabels(obj['labels'], rotation=90)
@@ -99,7 +110,8 @@ def confmat(obj):
     im2 = ax1.imshow(normalized, interpolation='nearest')
     plt.colorbar(im2, ax=ax1, fraction=0.046, pad=0.04)
 
-    plt.show()
+    plt.tight_layout()
+    plt.savefig('confmat.pdf')
     
 
 if __name__ == '__main__':
