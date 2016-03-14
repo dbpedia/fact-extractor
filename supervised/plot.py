@@ -1,13 +1,5 @@
 import click
 import matplotlib as mpl
-# Matplotlib setup for LaTeX plots generation
-mpl.use("pgf")
-config = {
-    "pgf.texsystem": "pdflatex",
-    "font.family": "serif",
-    "font.serif": [],                   # use latex default serif font
-}
-mpl.rcParams.update(config)
 import matplotlib.pyplot as plt
 from mpl_toolkits.axes_grid1 import make_axes_locatable
 
@@ -34,13 +26,23 @@ def calc_precision_recall(n, confmat):
               help='First column of the confusion matrix (labels excluded)')
 @click.option('--last-col', default=-4,
               help='Last column of the confusion matrix')
+@click.option('--latex/--show')
 @click.pass_obj
-def plot(obj, confusion_matrix, first_row, first_col, last_row, last_col):
+def plot(obj, confusion_matrix, first_row, first_col, last_row, last_col, latex):
     """ graphical plots of some classification related metrics """
     data = [r[:-1].decode('utf8').split(';') for r in confusion_matrix]
     obj['confmat']= [[int(x) if x else 0 for x in row[first_col:last_col]]
                              for row in data[first_row:last_row]]
     obj['labels'] = data[first_row-1][first_col:last_col]
+    
+    obj['latex'] = latex
+    if latex:
+        mpl.use("pgf")  # Matplotlib setup for LaTeX plots generation
+        mpl.rcParams.update({
+            "pgf.texsystem": "pdflatex",
+            "font.family": "serif",
+            "font.serif": [],                   # use latex default serif font
+        })
 
 
 @plot.command()
@@ -57,7 +59,11 @@ def precall_scatter(obj):
     plt.ylabel('Recall')
     plt.grid()
     plt.tight_layout()
-    plt.savefig('precall_scatter.pdf')
+
+    if obj['latex']:
+        plt.savefig('precall_scatter.pdf')
+    else:
+        plt.show()
 
 
 @plot.command()
@@ -84,19 +90,26 @@ def precall_bars(obj):
     ax1.set_xlim((-width, num_classes + width - 1))
     ax1.grid()
     ax1.legend()
-    
     plt.tight_layout()
-    plt.savefig('precall_bars.pdf')
+
+    if obj['latex']:
+        plt.savefig('precall_bars.pdf')
+    else:
+        plt.show()
 
 
 @plot.command()
+@click.option('--normalized', '-n', is_flag=True)
 @click.pass_obj
-def confmat(obj):
+def confmat(obj, normalized):
     """ plots the confusion matrix """
-    normalized = []
-    for row in obj['confmat']:
-        count = sum(row)
-        normalized.append([float(x) / count if count > 0 else 0 for x in row])
+    if normalized:
+        matrix = []
+        for row in obj['confmat']:
+            count = sum(row)
+            matrix.append([float(x) / count if count > 0 else 0 for x in row])
+    else:
+        matrix = obj['confmat']
 
     precisions, recalls = zip(*(calc_precision_recall(i, obj['confmat'])
                                 for i in range(len(obj['confmat']))))
@@ -107,11 +120,14 @@ def confmat(obj):
     ax1.set_xticklabels(obj['labels'], rotation=90)
     ax1.set_yticklabels(obj['labels'])
     ax1.set_yticks(range(len(obj['labels'])))
-    im2 = ax1.imshow(normalized, interpolation='nearest')
+    im2 = ax1.imshow(matrix, interpolation='nearest')
     plt.colorbar(im2, ax=ax1, fraction=0.046, pad=0.04)
-
     plt.tight_layout()
-    plt.savefig('confmat.pdf')
+
+    if obj['latex']:
+        plt.savefig('confmat.pdf')
+    else:
+        plt.show()
     
 
 if __name__ == '__main__':
