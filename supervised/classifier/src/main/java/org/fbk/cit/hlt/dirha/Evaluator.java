@@ -1,15 +1,12 @@
 package org.fbk.cit.hlt.dirha;
 
-import net.razorvine.pickle.objects.SetConstructor;
 import org.apache.commons.cli.*;
 import org.apache.log4j.Logger;
 import org.apache.log4j.PropertyConfigurator;
-import org.fbk.cit.hlt.dirha.kernel.SysGoldAligner;
 
 import java.io.*;
 import java.text.DecimalFormat;
 import java.util.*;
-import java.util.List;
 
 /*
  * Licensed to the Apache Software Foundation (ASF) under one
@@ -39,132 +36,10 @@ import java.util.List;
  */
 public class Evaluator {
 
-    /**
-     * Keeps track of true positives/false positives/false negatives
-     * and computes precision/recall/f1
-     */
-    class Evaluation {
-        private int tp;
-        private int fp;
-        private int fn;
-
-        Evaluation( ) {
-            this( 0, 0, 0 );
-        }
-
-        Evaluation( int tp, int fp, int fn ) {
-            this.tp = tp;
-            this.fp = fp;
-            this.fn = fn;
-        }
-
-        void incTp( ) {
-            tp++;
-        }
-
-        void incFp( ) {
-            fp++;
-        }
-
-        void incFn( ) {
-            fn++;
-        }
-
-        void addTp( int n ) {
-            tp += n;
-        }
-
-        void addFn( int n ) {
-            fn += n;
-        }
-
-        void addFp( int n ) {
-            fp += n;
-        }
-
-        int getFn( ) {
-            return fn;
-        }
-
-        void setFn( int fn ) {
-            this.fn = fn;
-        }
-
-        int getFp( ) {
-            return fp;
-        }
-
-        void setFp( int fp ) {
-            this.fp = fp;
-        }
-
-        int getTp( ) {
-            return tp;
-        }
-
-        void setTp( int tp ) {
-            this.tp = tp;
-        }
-
-        double precision( ) {
-            return ( double ) tp / ( tp + fp );
-        }
-
-        double recall( ) {
-            return ( double ) tp / ( tp + fn );
-        }
-
-        double f1( ) {
-            return ( 2 * precision( ) * recall( ) ) / ( precision( ) + recall( ) );
-        }
-
-        @Override
-        public String toString( ) {
-            return tp + "\t" + fp + "\t" + fn + "\t" + ( tp + fn ) + "\t" +
-                    df.format( precision( ) ) + "\t" + df.format( recall( ) ) + "\t" + df.format( f1( ) );
-        }
-    }
-
-    /**
-     * Used to check whether two FEs should be considered the same using sets
-     * wraps Role instances
-     */
-    class RoleComparer {
-        Role role;
-        boolean strict;
-
-        public RoleComparer( Role role, boolean strict ) {
-            this.role = role;
-            this.strict = strict;
-        }
-
-        public boolean equals( Object otherComparer ) {
-            Role other = ( ( RoleComparer ) otherComparer ).role;
-
-            if ( strict ) {
-                return role.getName( ).equals( other.getName( ) ) &&
-                        role.getValue( ).toLowerCase( ).equals( other.getValue( ).toLowerCase( ) );
-            }
-            else {
-                String val1 = role.getValue( ).toLowerCase( ),
-                        val2 = other.getValue( ).toLowerCase( );
-
-                return role.getName( ).equals( other.getName( ) ) &&
-                        ( val1.contains( val2 ) || val2.contains( val1 ) );
-            }
-        }
-
-        public int hashCode( ) {
-            return 0;
-        }
-    }
-
     static Logger logger = Logger.getLogger( Evaluator.class.getName( ) );
 
     private File goldFile;
     private File testFile;
-
-    protected static DecimalFormat df = new DecimalFormat( "0.00" );
 
     Evaluation frameEvaluation;
     Evaluation roleEvaluation;
@@ -177,12 +52,12 @@ public class Evaluator {
 
     boolean strict;
 
-    public Evaluator( File goldFile, File testFile, File frameLabelsFile, File roleLabelsFile, boolean strict )
+    public Evaluator( File goldFile, File testFile, File frameLabelsFile, File roleLabelsFile, boolean isStrict )
             throws IOException {
 
         this.goldFile = goldFile;
         this.testFile = testFile;
-        this.strict = strict;
+        this.strict = isStrict;
 
         frameLabels = InputReader.ReadFeatureIndex( frameLabelsFile, false );
         roleLabels = InputReader.ReadFeatureIndex( roleLabelsFile, false );
@@ -217,7 +92,7 @@ public class Evaluator {
                 continue;
             }
             evaluateFrame( goldSentence, testSentence, frameEvaluation, framesConfusionMatrix );
-            evaluateRoles( goldSentence, testSentence, roleEvaluation, rolesConfusionMatrix, strict );
+            evaluateRoles( goldSentence, testSentence, roleEvaluation, rolesConfusionMatrix, isStrict );
         }
 
         System.out.println( "gold: " + goldFile.getAbsolutePath( ) );
@@ -239,39 +114,51 @@ public class Evaluator {
     }
 
     void evaluateRoles( Sentence goldSentence, Sentence testSentence, Evaluation roleEvaluation,
-                        ConfusionMatrix confusionMatrix, boolean strict ) {
+                        ConfusionMatrix confusionMatrix, boolean isStrict ) {
 
-        Set<RoleComparer> goldRoles = new HashSet<>( ),
-                testRoles = new HashSet<>( );
+        Map<ChunkRoleMatcher, Role> goldRoles = new HashMap<>( ),
+                testRoles = new HashMap<>( );
 
         for ( Role r : goldSentence.getAllRoles( ) )
-            goldRoles.add( new RoleComparer( r, strict ) );
+            goldRoles.put( new ChunkRoleMatcher( r, isStrict ), r );
 
         for ( Role r : testSentence.getAllRoles( ) )
-            testRoles.add( new RoleComparer( r, strict ) );
+            testRoles.put( new ChunkRoleMatcher( r, isStrict ), r );
 
-        Set<RoleComparer> truePositives = new HashSet<>( goldRoles );
-        truePositives.retainAll( testRoles );
-        for ( RoleComparer tp : truePositives ) {
-            roleEvaluation.incTp( );
-            confusionMatrix.AddResult( roleLabels.getIndex( tp.role.getName( ) ),
-                                       roleLabels.getIndex( tp.role.getName( ) ) );
+        // chunks matching in the content but not necessarily in the role
+        Set<ChunkRoleMatcher> matchingChunks = new HashSet<>( goldRoles.keySet( ) );
+        matchingChunks.retainAll( testRoles.keySet( ) );
+        for ( ChunkRoleMatcher m : matchingChunks ) {
+            int predicted = roleLabels.getIndex( testRoles.get( m ).getName( ) ),
+                    actual = roleLabels.getIndex( goldRoles.get( m ).getName( ) );
+
+            confusionMatrix.AddResult( predicted, actual );
+
+            if ( predicted == actual )
+                roleEvaluation.incTp( );
+            else {
+                roleEvaluation.incFp( );
+                roleEvaluation.incFn( );
+            }
         }
 
-        Set<RoleComparer> falsePositives = new HashSet<>( testRoles );
-        falsePositives.removeAll( goldRoles );
-        for ( RoleComparer fp : falsePositives ) {
+        // chunks which were O in the gold but were assigned a role by the classifier
+        int emptyRole = roleLabels.getIndex( "O" );
+        Set<ChunkRoleMatcher> actualOs = new HashSet<>( testRoles.keySet( ) );
+        actualOs.removeAll( goldRoles.keySet( ) );
+        for ( ChunkRoleMatcher m : actualOs ) {
+            int predicted = roleLabels.getIndex( testRoles.get( m ).getName( ) );
+            confusionMatrix.AddResult( predicted, emptyRole );
             roleEvaluation.incFp( );
-            confusionMatrix.AddResult( roleLabels.getIndex( fp.role.getName( ) ),
-                                       roleLabels.getIndex( "O" ) );
         }
 
-        Set<RoleComparer> falseNegatives = new HashSet<>( goldRoles );
-        falseNegatives.removeAll( testRoles );
-        for ( RoleComparer fn : falseNegatives ) {
+        // chunks ignored by the classifier which shouldn't have been
+        Set<ChunkRoleMatcher> predictedOs = new HashSet<>( goldRoles.keySet( ) );
+        predictedOs.removeAll( testRoles.keySet( ) );
+        for ( ChunkRoleMatcher m : predictedOs ) {
+            int actual = roleLabels.getIndex(  goldRoles.get( m ).getName());
+            confusionMatrix.AddResult( emptyRole, actual );
             roleEvaluation.incFn( );
-            confusionMatrix.AddResult( roleLabels.getIndex( "O" ),
-                                       roleLabels.getIndex( fn.role.getName( ) ) );
         }
     }
 
@@ -386,7 +273,7 @@ public class Evaluator {
             Option testFileOpt = OptionBuilder.withArgName( "file" ).hasArg( ).withDescription( "file from which to read the test file in tsv format" ).isRequired( ).withLongOpt( "test" ).create( "t" );
             Option roleLabelFileOpt = OptionBuilder.withArgName( "file" ).hasArg( ).withDescription( "file from which to read the gold file in tsv format" ).isRequired( ).withLongOpt( "role-labels" ).create( "r" );
             Option frameLabelFileOpt = OptionBuilder.withArgName( "file" ).hasArg( ).withDescription( "file from which to read the gold file in tsv format" ).isRequired( ).withLongOpt( "frame-labels" ).create( "f" );
-            Option strictEvaluation = OptionBuilder.withDescription( "exactly match evaluated FEs" ).withLongOpt("strict-evaluation").create("s");
+            Option strictEvaluation = OptionBuilder.withDescription( "exactly match evaluated FEs" ).withLongOpt( "strict-evaluation" ).create( "s" );
 
             options.addOption( "h", "help", false, "print this message" );
             options.addOption( "v", "version", false, "output version information and exit" );
@@ -418,5 +305,125 @@ public class Evaluator {
         catch ( IOException e ) {
             logger.error( e );
         }
+    }
+}
+
+/**
+ * Keeps track of true positives/false positives/false negatives
+ * and computes precision/recall/f1
+ */
+class Evaluation {
+    protected static DecimalFormat df = new DecimalFormat( "0.00" );
+
+    private int tp;
+    private int fp;
+    private int fn;
+
+    Evaluation( ) {
+        this( 0, 0, 0 );
+    }
+
+    Evaluation( int tp, int fp, int fn ) {
+        this.tp = tp;
+        this.fp = fp;
+        this.fn = fn;
+    }
+
+    void incTp( ) {
+        tp++;
+    }
+
+    void incFp( ) {
+        fp++;
+    }
+
+    void incFn( ) {
+        fn++;
+    }
+
+    void addTp( int n ) {
+        tp += n;
+    }
+
+    void addFn( int n ) {
+        fn += n;
+    }
+
+    void addFp( int n ) {
+        fp += n;
+    }
+
+    int getFn( ) {
+        return fn;
+    }
+
+    void setFn( int fn ) {
+        this.fn = fn;
+    }
+
+    int getFp( ) {
+        return fp;
+    }
+
+    void setFp( int fp ) {
+        this.fp = fp;
+    }
+
+    int getTp( ) {
+        return tp;
+    }
+
+    void setTp( int tp ) {
+        this.tp = tp;
+    }
+
+    double precision( ) {
+        return ( double ) tp / ( tp + fp );
+    }
+
+    double recall( ) {
+        return ( double ) tp / ( tp + fn );
+    }
+
+    double f1( ) {
+        return ( 2 * precision( ) * recall( ) ) / ( precision( ) + recall( ) );
+    }
+
+    @Override
+    public String toString( ) {
+        return tp + "\t" + fp + "\t" + fn + "\t" + ( tp + fn ) + "\t" +
+                df.format( precision( ) ) + "\t" + df.format( recall( ) ) + "\t" + df.format( f1( ) );
+    }
+}
+
+/**
+ * Wraps a Role instance and defines equality so to match role chunks
+ */
+class ChunkRoleMatcher {
+    Role role;
+    boolean strict;
+
+    public ChunkRoleMatcher( Role role, boolean isStrict ) {
+        this.role = role;
+        this.strict = isStrict;
+    }
+
+    @Override
+    public boolean equals( Object otherComparer ) {
+        Role other = ( ( ChunkRoleMatcher ) otherComparer ).role;
+
+        if ( strict ) {
+            return role.getValue( ).toLowerCase( ).equals( other.getValue( ).toLowerCase( ) );
+        }
+        else {
+            String val1 = role.getValue( ).toLowerCase( ),
+                    val2 = other.getValue( ).toLowerCase( );
+
+            return val1.contains( val2 ) || val2.contains( val1 );
+        }
+    }
+
+    public int hashCode( ) {
+        return 0;
     }
 }
