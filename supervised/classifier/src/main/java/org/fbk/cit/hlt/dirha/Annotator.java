@@ -417,6 +417,7 @@ public class Annotator {
 			options.addOption(OptionBuilder.withDescription("trace mode").withLongOpt("trace").create());
 			options.addOption(OptionBuilder.withDescription("debug mode").withLongOpt("debug").create());
             Option normalizeNumOpt = OptionBuilder.withDescription("normalize numerical FEs").withLongOpt("normalize-fes").create("n");
+            Option strictEvaluation = OptionBuilder.withDescription("exactly match evaluated FEs").withLongOpt("strict-evaluation").create("s");
 
 			options.addOption("h", "help", false, "print this message");
 			options.addOption("v", "version", false, "output version information and exit");
@@ -430,6 +431,7 @@ public class Annotator {
 			options.addOption(reportFileOpt);
 			options.addOption(langOpt);
             options.addOption( normalizeNumOpt );
+            options.addOption( strictEvaluation );
 
 			CommandLineParser parser = new PosixParser();
 			CommandLine line = parser.parse(options, args);
@@ -476,9 +478,11 @@ public class Annotator {
                 annotator.write(list, fout);
 
 				if (line.hasOption("eval")) {
+                    boolean strict = line.hasOption( "strict-evaluation" );
+
 					File evalFile = new File(line.getOptionValue("eval"));
 					Evaluator evaluator = new Evaluator(evalFile, fout, new File(line.getOptionValue("model") + ".frame.label"),
-                                                        new File(line.getOptionValue("model") + ".iob2.label"));
+                                                        new File(line.getOptionValue("model") + ".iob2.label"), strict);
 					evaluator.write(evaluationReportFile);
 				}
 			}
