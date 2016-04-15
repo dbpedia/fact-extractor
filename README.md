@@ -71,6 +71,10 @@ $ make unsupervised-run
 ```
 Done!
 
+### Note: Wikipedia Dump Pre-processing
+Wikipedia dumps are packaged as XML documents and contain text formatted according to the [Mediawiki markup syntax](https://www.mediawiki.org/wiki/Help:Formatting), with [templates](https://www.mediawiki.org/wiki/Help:Templates) to be transcluded.
+To obtain a raw text corpus, we use the [WikiExtractor](https://github.com/attardi/wikiextractor), integrated in a frozen version [here](lib/WikiExtractor.py).
+
 ## Development Policy
 Contributors should follow the standard team development practices:
 
